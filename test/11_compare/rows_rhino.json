@@ -1,0 +1,77 @@
+[
+ {
+  "task": "T1_overview",
+  "system": "nextra",
+  "tool": "query",
+  "in": 0,
+  "out": 106,
+  "sec": 0.01
+ },
+ {
+  "task": "T1_overview",
+  "system": "mcneel",
+  "tool": "list_objects",
+  "in": 0,
+  "out": 929
+ },
+ {
+  "task": "T2_inspect",
+  "system": "nextra",
+  "tool": "query",
+  "in": 16,
+  "out": 81,
+  "sec": 0.05
+ },
+ {
+  "task": "T2_inspect",
+  "system": "mcneel",
+  "tool": "list_objects",
+  "in": 9,
+  "out": 39
+ },
+ {
+  "task": "T3_view",
+  "system": "nextra",
+  "tool": "view",
+  "in": 3,
+  "out": 683,
+  "sec": 0.08
+ },
+ {
+  "task": "T3_view",
+  "system": "mcneel",
+  "tool": "get_viewport_image",
+  "in": 19,
+  "out": 610
+ },
+ {
+  "task": "T4_build",
+  "system": "nextra",
+  "tool": "run",
+  "in": 498,
+  "out": 88,
+  "sec": 0.27
+ },
+ {
+  "task": "T4_build",
+  "system": "mcneel",
+  "tool": "run_python",
+  "in": 512,
+  "out": 21
+ },
+ {
+  "task": "T5_add_storey",
+  "system": "nextra",
+  "tool": "run",
+  "in": 14,
+  "out": 107,
+  "sec": 0.19
+ },
+ {
+  "task": "T5_add_storey",
+  "system": "mcneel",
+  "tool": "run_python",
+  "in": 512,
+  "out": 21
+ }
+]

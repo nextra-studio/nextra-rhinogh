@@ -1,0 +1,21 @@
+{"scope": "gh", "filter": "all"}
+---
+14 object(s):
+## Inputs #DBABFF (g15)
+g3 = Number Slider {v=20, r=5..40, nick="Width"}
+g2 = Number Slider {v=3.5, r=2.5..5, nick="Floor h"}
+g1 = Number Slider {v=12, r=2..40, int, nick="Floors"}
+g4 = Number Slider {v=45, r=0..180, int, nick="Twist"}
+## Floors #DBABFF (g16)
+g5 = Series (N=g2, C=g1)
+g6 = Construct Point (Z=g5)
+g7 = XY Plane (O=g6)
+g19 = Circle @Curve (P=g7, R=g3^e(x/2))
+## Twist #ABDBFF (g17)
+g9 = Range (N=g1^e(x-1))
+g10 = Multiplication (A=g9, B=g4)
+g11 = Radians (D=g10)
+g12 = Rotate @Transform (G=g19, A=g11, P=g7)
+## Massing #FFD6AB (g18)
+g13 = Loft (C=g12.G^f)
+g14 = Cap Holes (B=g13)

@@ -1,0 +1,11 @@
+{"lib": "frame_building", "args": {"storeys": 1, "z0": 60}}
+---
+ok py 175ms, checkpoint c105
+stdout:
+storeys 1..1 done
+rhino delta +30:
++ [Beams] polysurface 6000x450x300 linear horizontal ×17 r127-r143 z 2860..3310
++ [Columns] polysurface 3250x400x400 linear vertical ×12 r144-r155 z 60..3310
++ [Slabs] polysurface 18600x12600x250 planar ×1 r156 z 3310..3560
+(details: query filter:'r12 r13' or 'layer:X')
+(library C:\Users\tatsu\AppData\Roaming\Nextra\memory\library\frame_building.py)

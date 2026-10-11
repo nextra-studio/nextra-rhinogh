@@ -1,0 +1,781 @@
+[
+ {
+  "name": "close_doc",
+  "title": "Close Document",
+  "description": "Close the current Rhino document. If path is given, save to that .3dm path first; otherwise discard unsaved changes.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "path": {
+     "type": "string",
+     "description": "Optional absolute .3dm path to save to before closing. Omit to close without saving."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Close Document",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "get_commands",
+  "title": "List Rhino Commands",
+  "description": "Discover Rhino command names available to run_command. Returns English names from all registered plugins (including those not yet loaded; invoking such a command may trigger plugin load). Test commands are excluded. Use filter to narrow the list before calling run_command.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "filter": {
+     "type": "string",
+     "description": "Substring filter (case-insensitive). Strongly recommended \u2014 unfiltered results can exceed 1000 commands."
+    }
+   }
+  },
+  "annotations": {
+   "title": "List Rhino Commands",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_selection",
+  "title": "Get Selection",
+  "description": "Return all currently selected objects in Rhino.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {}
+  },
+  "annotations": {
+   "title": "Get Selection",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_viewport_image",
+  "title": "Capture Viewport Image",
+  "description": "Capture the active Rhino viewport as JPG. Returns the image plus a JSON metadata block describing the resulting camera, display mode, framed scene bounds, and on-screen object count \u2014 use the metadata to diagnose empty/off-screen captures without re-shooting.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "width": {
+     "type": "integer",
+     "description": "Image width pixels (default 480) (max 1280) increase sparingly"
+    },
+    "height": {
+     "type": "integer",
+     "description": "Image height pixels (default 270) (max 720) increase sparingly"
+    },
+    "view": {
+     "type": "string",
+     "description": "Standard view: top, bottom, left, right, front, back, perspective"
+    },
+    "displayMode": {
+     "type": "string",
+     "description": "Display mode by English name: Wireframe, Shaded, Rendered, Ghosted, X-Ray, Technical, Artistic, Pen, Monochrome, Arctic, Raytraced"
+    },
+    "cameraLocation": {
+     "type": "object",
+     "description": "Camera position {x,y,z}"
+    },
+    "target": {
+     "type": "object",
+     "description": "Camera look-at point {x,y,z}"
+    },
+    "boxMin": {
+     "type": "object",
+     "description": "Frame this bounding box (min corner). Pair with boxMax. Replaces zoom \u2014 agent supplies what to frame, tool computes how far back to stand."
+    },
+    "boxMax": {
+     "type": "object",
+     "description": "Frame this bounding box (max corner). Pair with boxMin."
+    },
+    "zoom": {
+     "type": "number",
+     "description": "Magnification factor: >1 zoom in, 0<x<1 zoom out. Applied after boxMin/boxMax if both supplied."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Capture Viewport Image",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_apply_graph",
+  "title": "Apply GH1 Graph",
+  "description": "Place sliders + components and wire them in one call. References between objects use caller-supplied 'key' strings; the tool returns the key\u2192Guid map. Failures in any step do not abort the rest; results report per-step status. Wire src/dst use the same selector semantics as 'g1_connect'.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "sliders": {
+     "type": "array",
+     "description": "Sliders to place: {Key, Min, Value, Max, Type, Name?, X, Y}. Type \u2208 'float'|'int'|'even'|'odd'."
+    },
+    "components": {
+     "type": "array",
+     "description": "Components to place: {Key, Selector, X, Y}. Selector is a Guid (preferred \u2014 avoids name ambiguity) or component Name."
+    },
+    "wires": {
+     "type": "array",
+     "description": "Wires to create: {SrcKey, Src, DstKey, Dst}. Keys must match a slider or component key above."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution at the end."
+    }
+   },
+   "required": [
+    "sliders",
+    "components",
+    "wires"
+   ]
+  },
+  "annotations": {
+   "title": "Apply GH1 Graph",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_clear_canvas",
+  "title": "Clear GH1 Canvas",
+  "description": "Remove every object from the active GH1 canvas. Destructive \u2014 requires confirm=true.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "confirm": {
+     "type": "boolean",
+     "description": "Must be true to actually wipe the canvas. Defaults to false as a safety guard."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution after clearing. Set false to batch multiple operations and solve once at the end."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Clear GH1 Canvas",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "g1_connect_many",
+  "title": "Connect GH1 Wires (Batch)",
+  "description": "Wire multiple output\u2192input connections in one call. Same selector semantics as 'g1_connect' (numeric index or Name/NickName; '' or '0' for pure params). A failed wire does not stop later ones; per-wire results are returned. solve runs once at the end.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "wires": {
+     "type": "array",
+     "description": "Array of {SrcId, Src, DstId, Dst} wire descriptors."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution after wiring. Set false to batch further."
+    }
+   },
+   "required": [
+    "wires"
+   ]
+  },
+  "annotations": {
+   "title": "Connect GH1 Wires (Batch)",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_connect",
+  "title": "Connect GH1 Wire",
+  "description": "Wire an output parameter to an input parameter on the active GH1 canvas. 'src' and 'dst' may be a numeric index or a Name/NickName. For pure params (e.g. a slider) pass '' or '0'.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "src_id": {
+     "type": "string",
+     "description": "Guid of the source IGH_DocumentObject."
+    },
+    "src": {
+     "type": "string",
+     "description": "Output identifier: numeric index, output Name, or output NickName. Use '' or '0' for pure params."
+    },
+    "dst_id": {
+     "type": "string",
+     "description": "Guid of the destination IGH_DocumentObject."
+    },
+    "dst": {
+     "type": "string",
+     "description": "Input identifier: numeric index, input Name, or input NickName. Use '' or '0' for pure params."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution after wiring. Set false to batch multiple operations and solve once at the end."
+    }
+   },
+   "required": [
+    "src_id",
+    "src",
+    "dst_id",
+    "dst"
+   ]
+  },
+  "annotations": {
+   "title": "Connect GH1 Wire",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_describe_component",
+  "title": "Describe GH1 Component",
+  "description": "Look up a Grasshopper component by name and return its category, description, and input/output parameter list. Useful before placing or wiring components.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "name": {
+     "type": "string",
+     "description": "Component name as it appears in the component library (e.g. 'Number Slider', 'Addition'). Case-insensitive."
+    }
+   },
+   "required": [
+    "name"
+   ]
+  },
+  "annotations": {
+   "title": "Describe GH1 Component",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_get_canvas_graph",
+  "title": "Get GH1 Canvas Graph",
+  "description": "Return a structured snapshot of the active GH1 canvas: objects (with messages, inputs/outputs and optional volatile data summaries) and wires between them.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "include_data": {
+     "type": "boolean",
+     "description": "Include per-param volatile data summaries (branches/items/sample)."
+    },
+    "sample_size": {
+     "type": "integer",
+     "description": "How many items to include in each data sample."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Get GH1 Canvas Graph",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_place_component",
+  "title": "Place GH1 Component",
+  "description": "Place a Grasshopper component onto the active GH1 canvas. 'selector' may be a Guid (proxy id) or a component name. If multiple components share the name, returns an ambiguity payload listing candidates.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "selector": {
+     "type": "string",
+     "description": "Component Guid (proxy id) or component Name (case-insensitive)."
+    },
+    "x": {
+     "type": "number",
+     "description": "Canvas X position in pixels."
+    },
+    "y": {
+     "type": "number",
+     "description": "Canvas Y position in pixels."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution after placing. Set false to batch multiple operations and solve once at the end."
+    }
+   },
+   "required": [
+    "selector"
+   ]
+  },
+  "annotations": {
+   "title": "Place GH1 Component",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_place_slider",
+  "title": "Place GH1 Number Slider",
+  "description": "Place a Number Slider on the active GH1 canvas with the given range and current value. type: 'float' | 'int' | 'even' | 'odd'.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "min": {
+     "type": "number",
+     "description": "Minimum slider value."
+    },
+    "value": {
+     "type": "number",
+     "description": "Initial slider value."
+    },
+    "max": {
+     "type": "number",
+     "description": "Maximum slider value."
+    },
+    "x": {
+     "type": "number",
+     "description": "Canvas X position in pixels."
+    },
+    "y": {
+     "type": "number",
+     "description": "Canvas Y position in pixels."
+    },
+    "type": {
+     "type": "string",
+     "description": "Slider accuracy: 'float', 'int', 'even', or 'odd'."
+    },
+    "name": {
+     "type": "string",
+     "description": "Optional NickName for the slider."
+    },
+    "solve": {
+     "type": "boolean",
+     "description": "If true, trigger a new solution after placing. Set false to batch multiple operations and solve once at the end."
+    }
+   },
+   "required": [
+    "min",
+    "value",
+    "max"
+   ]
+  },
+  "annotations": {
+   "title": "Place GH1 Number Slider",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_search_components",
+  "title": "Search GH1 Components",
+  "description": "Search the Grasshopper component library by substring. Matches Name, NickName, and Description (case-insensitive). Optional exact-match category/subcategory filters. Returns up to 'limit' matches.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "query": {
+     "type": "string",
+     "description": "Substring to match against component Name, NickName, and Description. Case-insensitive."
+    },
+    "category": {
+     "type": "string",
+     "description": "Optional exact-match category filter (e.g. 'Maths', 'Params')."
+    },
+    "subcategory": {
+     "type": "string",
+     "description": "Optional exact-match subcategory filter (e.g. 'Operators')."
+    },
+    "limit": {
+     "type": "integer",
+     "description": "Maximum number of results to return."
+    }
+   },
+   "required": [
+    "query"
+   ]
+  },
+  "annotations": {
+   "title": "Search GH1 Components",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_solve_graph",
+  "title": "Solve GH1 Graph",
+  "description": "Solves the active GH canvas. zoom_views controls whether Rhino viewports zoom to the new preview: true=always, false=never, null=auto (zoom only when nothing was previewed before the solve).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "zoom_views": {
+     "type": "boolean",
+     "description": "Auto-zoom every Rhino viewport to the GH preview after solving. true=always, false=never, null=zoom only when nothing was visible pre-solve."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Solve GH1 Graph",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "g1_start",
+  "title": "Start Grasshopper 1",
+  "description": "Starts Grasshopper",
+  "inputSchema": {
+   "type": "object",
+   "properties": {}
+  },
+  "annotations": {
+   "title": "Start Grasshopper 1",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "list_objects",
+  "title": "List Document Objects",
+  "description": "List objects in the active document. Filter by name, layer, or geometry type. Pure query \u2014 does not change selection or viewport.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "names": {
+     "type": "array",
+     "description": "Object names to match"
+    },
+    "layer": {
+     "type": "string",
+     "description": "Layer full path"
+    },
+    "geometryType": {
+     "type": "string",
+     "description": "Filter by type: point, pointset, curve, surface, brep, mesh, annotation, light, block"
+    },
+    "includeHidden": {
+     "type": "boolean",
+     "description": "Include hidden objects (default false)"
+    },
+    "includeLocked": {
+     "type": "boolean",
+     "description": "Include locked objects (default true)"
+    },
+    "limit": {
+     "type": "integer",
+     "description": "Maximum number of objects to return (default 1000)"
+    }
+   }
+  },
+  "annotations": {
+   "title": "List Document Objects",
+   "readOnlyHint": true,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "open_doc",
+  "title": "Open / Import Document",
+  "description": "Import a .3dm (or other supported) file into the current document. Headless \u2014 no dialogs. Optionally clear the document first to make this behave like an open-in-place.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "path": {
+     "type": "string",
+     "description": "Absolute path to the file to import"
+    },
+    "clearFirst": {
+     "type": "boolean",
+     "description": "If true, delete all objects in the current document before importing"
+    }
+   },
+   "required": [
+    "path"
+   ]
+  },
+  "annotations": {
+   "title": "Open / Import Document",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "run_command",
+  "title": "Run Rhino Command",
+  "description": "Execute any Rhino command string and return command window output. Example: \"_Box 0,0,0 10,10,10\"",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "command": {
+     "type": "string",
+     "description": "Rhino command string to execute"
+    }
+   },
+   "required": [
+    "command"
+   ]
+  },
+  "annotations": {
+   "title": "Run Rhino Command",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "run_csharp",
+  "title": "Run C# Script",
+  "description": "Execute a C# script targeted at this slot's document. The script editor injects `__rhino_doc__` (type `RhinoDoc`) \u2014 use it as your document handle instead of `RhinoDoc.ActiveDoc` or anything else. Returns JSON with stdout and error fields; error is null on success.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "script": {
+     "type": "string",
+     "description": "Script"
+    }
+   },
+   "required": [
+    "script"
+   ]
+  },
+  "annotations": {
+   "title": "Run C# Script",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "run_python",
+  "title": "Run Python Script",
+  "description": "Execute a Python 3 script targeted at this slot's document. The script editor injects `__rhino_doc__` \u2014 use it as your document handle. Do NOT trust `scriptcontext.doc` or `rhinoscriptsyntax` calls. Returns JSON with stdout and error fields; error is null on success.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "script": {
+     "type": "string",
+     "description": "Script"
+    }
+   },
+   "required": [
+    "script"
+   ]
+  },
+  "annotations": {
+   "title": "Run Python Script",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "save_doc",
+  "title": "Save Document",
+  "description": "Write the current document to the given .3dm path. Headless \u2014 no dialogs. Overwrites any existing file at the path.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "path": {
+     "type": "string",
+     "description": "Absolute path to write the .3dm file to"
+    }
+   },
+   "required": [
+    "path"
+   ]
+  },
+  "annotations": {
+   "title": "Save Document",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "set_camera",
+  "title": "Set Camera",
+  "description": "Set the active viewport camera. Any subset of position, target, up vector, lens length, projection, or framing bounding-box may be supplied.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "location": {
+     "type": "object",
+     "description": "Camera position {x,y,z}"
+    },
+    "target": {
+     "type": "object",
+     "description": "Camera look-at point {x,y,z}"
+    },
+    "up": {
+     "type": "object",
+     "description": "Camera up vector {x,y,z}"
+    },
+    "lensLength": {
+     "type": "number",
+     "description": "35mm-equivalent lens length (perspective only)"
+    },
+    "projection": {
+     "type": "string",
+     "description": "Projection: 'parallel' or 'perspective'"
+    },
+    "boxMin": {
+     "type": "object",
+     "description": "Frame this bounding box (min corner). Pair with boxMax. Applied last so it dominates location/target if both supplied."
+    },
+    "boxMax": {
+     "type": "object",
+     "description": "Frame this bounding box (max corner). Pair with boxMin."
+    }
+   }
+  },
+  "annotations": {
+   "title": "Set Camera",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "set_layer_material",
+  "title": "Set Layer Material",
+  "description": "Set the render material on a layer. Accepts diffuse color, transparency, and gloss. Optionally also sets the layer display color.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "layer": {
+     "type": "string",
+     "description": "Layer full path"
+    },
+    "color": {
+     "type": "string",
+     "description": "Diffuse color hex like '#FF0000' or known color name"
+    },
+    "transparency": {
+     "type": "number",
+     "description": "Transparency 0.0 (opaque) to 1.0 (fully transparent)"
+    },
+    "gloss": {
+     "type": "number",
+     "description": "Glossiness 0.0 (matte) to 1.0 (mirror)"
+    },
+    "applyToLayerColor": {
+     "type": "boolean",
+     "description": "Also apply color as the layer display (wireframe) color"
+    }
+   },
+   "required": [
+    "layer"
+   ]
+  },
+  "annotations": {
+   "title": "Set Layer Material",
+   "readOnlyHint": false,
+   "destructiveHint": true
+  }
+ },
+ {
+  "name": "set_selection",
+  "title": "Set Selection",
+  "description": "Select objects by filter (IDs, names, layer, geometry type). Clears existing selection.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ids": {
+     "type": "array",
+     "description": "Object GUIDs"
+    },
+    "names": {
+     "type": "array",
+     "description": "Object names"
+    },
+    "layer": {
+     "type": "string",
+     "description": "Layer full path \u2014 selects all objects on layer"
+    },
+    "geometryType": {
+     "type": "string",
+     "description": "Filter by type: point, pointset, curve, surface, brep, mesh, annotation, light, block"
+    }
+   }
+  },
+  "annotations": {
+   "title": "Set Selection",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "zoom_to_layer",
+  "title": "Zoom To Layer",
+  "description": "Zoom the active viewport to fit all objects on a layer (full path).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "layer": {
+     "type": "string",
+     "description": "Layer full path"
+    }
+   },
+   "required": [
+    "layer"
+   ]
+  },
+  "annotations": {
+   "title": "Zoom To Layer",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "zoom_to_object",
+  "title": "Zoom To Object",
+  "description": "Zoom the active viewport to fit one or more objects by GUID.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ids": {
+     "type": "array",
+     "description": "Object GUIDs to zoom to"
+    }
+   },
+   "required": [
+    "ids"
+   ]
+  },
+  "annotations": {
+   "title": "Zoom To Object",
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "_router_spawn_listener",
+  "description": "Router-internal: create a new RhinoDoc and start an MCP listener bound to it. Returns { port }.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {}
+  },
+  "annotations": {
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "_router_close_listener",
+  "description": "Router-internal: stop the MCP listener on the given port and close its associated doc without saving.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "port": {
+     "type": "integer"
+    }
+   },
+   "required": [
+    "port"
+   ]
+  },
+  "annotations": {
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "_router_quit_app",
+  "description": "Router-internal: schedule a graceful Rhino exit via _Exit. Returns immediately; the actual quit fires shortly after on the UI thread.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {}
+  },
+  "annotations": {
+   "readOnlyHint": false,
+   "destructiveHint": false
+  }
+ }
+]

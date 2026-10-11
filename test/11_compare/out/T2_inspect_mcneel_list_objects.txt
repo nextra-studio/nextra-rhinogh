@@ -1,0 +1,3 @@
+{"layer": "ARCH::Columns", "limit": 1}
+---
+{"count":1,"truncated":true,"warning":null,"objects":[{"id":"a7d03cbb-b1f4-4692-9f6f-b277845752a0","name":"C_8_3_L2","layer":"ARCH::Columns","type":"Brep"}]}

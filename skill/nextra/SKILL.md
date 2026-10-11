@@ -7,6 +7,9 @@ description: Drive Rhino 8 and Grasshopper through the Nextra MCP tools (view, q
 
 Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints, layout, errors); you decide *what* and *where*.
 
+## Several Rhino instances
+The bridge binds a session to one Rhino. If more than one is open it refuses until you choose: `query {scope:'instances'}` → `query {instance:'house.3dm'}` (file name or pid; sticky). Or set `NEXTRA_FILE` in the MCP config. It never falls back to another instance.
+
 ## Session start
 1. `memory {action:'list'}` → user prefs, learned rules (obey them), script library index.
 2. Look before you edit: `query` (text, cheap) then `view` only when shape/position matters.

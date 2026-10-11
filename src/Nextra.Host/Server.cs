@@ -48,21 +48,43 @@ namespace Nextra.Host
             }
             if (_listener == null) throw new Exception("no free port in " + basePort + ".." + (basePort + 19));
 
-            var info = new JsonObject
-            {
-                ["port"] = Port,
-                ["token"] = Token,
-                ["pid"] = Environment.ProcessId,
-                ["started"] = DateTime.Now.ToString("s"),
-            };
-            // latest instance wins server.json; per-pid file lets a bridge pick a specific Rhino
-            File.WriteAllText(Path.Combine(AppDir, "server.json"), info.ToJsonString());
-            File.WriteAllText(Path.Combine(AppDir, $"server-{Environment.ProcessId}.json"), info.ToJsonString());
+            _started = DateTime.Now.ToString("s");
+            WriteInfo();
+            // keep the published file name current so clients can bind to "the Rhino that has house.3dm open"
+            RhinoDoc.EndOpenDocument += (s, e) => WriteInfo();
+            RhinoDoc.EndSaveDocument += (s, e) => WriteInfo();
+            RhinoDoc.NewDocument += (s, e) => WriteInfo();
+            RhinoDoc.ActiveDocumentChanged += (s, e) => WriteInfo();
 
             _running = true;
             _thread = new Thread(AcceptLoop) { IsBackground = true, Name = "NextraServer" };
             _thread.Start();
             RhinoApp.WriteLine($"Nextra: listening on 127.0.0.1:{Port}");
+        }
+
+        static string _started;
+
+        /// server-<pid>.json: port, token, pid, start time and the open file (name + path) of this Rhino.
+        public static void WriteInfo()
+        {
+            if (Port == 0) return;
+            string name = null, path = null;
+            try { var d = RhinoDoc.ActiveDoc; path = d?.Path; name = d?.Name; } catch { }
+            var info = new JsonObject
+            {
+                ["port"] = Port,
+                ["token"] = Token,
+                ["pid"] = Environment.ProcessId,
+                ["started"] = _started,
+                ["file"] = name ?? "untitled",
+                ["path"] = path ?? "",
+            };
+            try
+            {
+                File.WriteAllText(Path.Combine(AppDir, $"server-{Environment.ProcessId}.json"), info.ToJsonString());
+                File.WriteAllText(Path.Combine(AppDir, "server.json"), info.ToJsonString());   // legacy single-instance pointer
+            }
+            catch { }
         }
 
         public static void Stop()

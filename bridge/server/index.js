@@ -30,7 +30,8 @@ const TOOLS = [
     name: "query",
     description: "Text answers, cheapest first. rhino: level summary→list(one line + oriented box per object)→detail→verts. gh: summary→list(shorthand)→detail(state,code,data)→data. components: search installed GH components with ports. docs: skill docs. library: saved scripts. status: busy/dialog state (works while Rhino is blocked).",
     inputSchema: { type: "object", properties: {
-      scope: { type: "string", enum: ["rhino", "gh", "components", "docs", "library", "status"] },
+      scope: { type: "string", enum: ["rhino", "gh", "components", "docs", "library", "status", "instances"] },
+      instance: { type: "string", description: "bind this session to the Rhino that has this file open (or pid); also accepted by every tool; sticky" },
       filter: { type: "string", description: "rhino: 'r3 r4' 'layer:X type:curve name:C* sel cells:C3:E5 bbox:x0,y0,z0,x1,y1,z1'; gh: 'g12 group:X type:Loft errors sel near:g12:2 cells:..'; components: 'extrude' '@Karamba3D'; docs: 'shorthand'" },
       level: { type: "string", enum: ["summary", "list", "detail", "verts", "data"] },
       limit: { type: "integer" }, offset: { type: "integer" },
@@ -77,15 +78,41 @@ const TOOLS = [
   },
 ].filter(t => MODE !== "ask" || t.name === "view" || t.name === "query");
 
+// ---- instance binding (no cross-talk between Rhino instances) ----
+// Every Rhino publishes server-<pid>.json {port, token, pid, started, file, path}. A session is bound to ONE instance:
+// NEXTRA_FILE="house.3dm" (or NEXTRA_PID) in the MCP config, or `instance:"house.3dm"` on any call (sticky afterwards).
+// Several instances and no binding → refuse and list them; bound instance gone → error, never another Rhino.
+function alive(pid) { try { process.kill(pid, 0); return true; } catch (e) { return e.code === "EPERM"; } }
+function instances() {
+  const out = [];
+  try {
+    for (const f of fs.readdirSync(APPDIR)) {
+      if (!/^server-\d+\.json$/.test(f)) continue;
+      try { const c = JSON.parse(fs.readFileSync(path.join(APPDIR, f), "utf8")); if (alive(c.pid)) out.push(c); } catch {}
+    }
+  } catch {}
+  return out.sort((a, b) => String(b.started).localeCompare(String(a.started)));
+}
+let BOUND = process.env.NEXTRA_PID ? { pid: process.env.NEXTRA_PID } : process.env.NEXTRA_FILE ? { file: process.env.NEXTRA_FILE } : null;
+const fileMatch = (c, f) => { f = String(f).toLowerCase(); return String(c.file || "").toLowerCase() === f || String(c.file || "").toLowerCase().includes(f) || String(c.path || "").toLowerCase().includes(f); };
+const describe = list => list.map(c => `pid ${c.pid}: ${c.file || "untitled"}${c.path ? " (" + c.path + ")" : ""}`).join("; ");
 function serverInfo() {
-  const p = path.join(APPDIR, "server.json");
-  return JSON.parse(fs.readFileSync(p, "utf8"));
+  const all = instances();
+  if (all.length === 0) throw new Error("no running Rhino with Nextra");
+  if (BOUND) {
+    const hit = all.filter(c => BOUND.pid ? String(c.pid) === String(BOUND.pid) : fileMatch(c, BOUND.file));
+    if (hit.length === 1) { BOUND = { pid: hit[0].pid, file: hit[0].file }; return hit[0]; }
+    if (hit.length > 1) throw new Error(`"${BOUND.file}" matches several Rhino instances (${describe(hit)}); pass instance:"<pid>"`);
+    throw new Error(`bound Rhino (${BOUND.file || "pid " + BOUND.pid}) is not running. Open instances: ${describe(all)}. Pass instance:"<file or pid>" to rebind.`);
+  }
+  if (all.length === 1) return all[0];
+  throw new Error(`${all.length} Rhino instances are open — choose one with instance:"<file name or pid>" (sticky for this session): ${describe(all)}`);
 }
 
 function post(urlPath, body, timeoutMs) {
   return new Promise((resolve, reject) => {
     let info;
-    try { info = serverInfo(); } catch (e) { return reject(new Error("no server.json")); }
+    try { info = serverInfo(); } catch (e) { return reject(e); }
     const data = Buffer.from(JSON.stringify(body));
     const req = http.request({ host: "127.0.0.1", port: info.port, path: urlPath, method: "POST", timeout: timeoutMs,
       headers: { "Content-Type": "application/json", "Content-Length": data.length, "X-Nextra-Token": info.token } }, res => {
@@ -102,12 +129,26 @@ function post(urlPath, body, timeoutMs) {
 const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 with the Nextra plug-in (a green/amber dot sits at the bottom-right of the Rhino window; red = click it to restart; command NextraOn if it is off). Do not retry in a loop.";
 
 async function callTool(name, args) {
+  args = args || {};
+  if (args.instance !== undefined) {           // (re)bind this session to one Rhino instance
+    const v = String(args.instance); delete args.instance;
+    BOUND = /^\d+$/.test(v) ? { pid: v } : { file: v };
+  }
+  if (name === "query" && args.scope === "instances") {
+    const all = instances();
+    let cur = null; try { cur = serverInfo(); } catch {}
+    return { content: [{ type: "text", text: (all.length ? describe(all) : "no Rhino with Nextra running") + (cur ? `\nbound: pid ${cur.pid} ${cur.file}` : "\nnot bound") }] };
+  }
   const timeout = Math.min(Math.max(Number(args && args.timeout) || 90, 5), 1800);
   if (args) delete args.timeout;
   let res;
   try { res = await post("/call", { tool: name, args: args || {}, timeout }, (timeout + 20) * 1000); }
-  catch (e) { return { content: [{ type: "text", text: NOT_REACHABLE + " (" + e.message + ")" }], isError: true }; }
-  const content = [{ type: "text", text: res.text || "" }];
+  catch (e) {
+    const msg = /instances|bound|matches/.test(e.message) ? e.message : NOT_REACHABLE + " (" + e.message + ")";
+    return { content: [{ type: "text", text: msg }], isError: true };
+  }
+  let info = null; try { info = serverInfo(); } catch {}
+  const content = [{ type: "text", text: (res.text || "") }];
   for (const img of res.images || []) {
     try { content.push({ type: "image", data: fs.readFileSync(img).toString("base64"), mimeType: "image/png" }); }
     catch (e) { content.push({ type: "text", text: "(image unreadable: " + img + ")" }); }
@@ -132,7 +173,7 @@ rl.on("line", async line => {
         protocolVersion: (params && params.protocolVersion) || "2025-06-18",
         capabilities: { tools: {} },
         serverInfo: { name: "nextra-rhinogh", version: VERSION },
-        instructions: "Rhino 8 + Grasshopper via 6 tools. Start with memory {action:'list'}, then query/view before editing. Grasshopper edits use shorthand (query {scope:'docs', filter:'shorthand'}). Prefer shorthand > library script > free code.",
+        instructions: "Several Rhino windows? query {scope:'instances'} then pass instance:'file.3dm' once (sticky); the bridge never talks to an unbound instance. Rhino 8 + Grasshopper via 6 tools. Start with memory {action:'list'}, then query/view before editing. Grasshopper edits use shorthand (query {scope:'docs', filter:'shorthand'}). Prefer shorthand > library script > free code.",
       } });
     } else if (method === "tools/list") {
       send({ jsonrpc: "2.0", id, result: { tools: TOOLS } });

@@ -1,0 +1,12 @@
+{}
+---
+doc 'untitled' units meters tol 0.001; 36 objects
+extents (-0.1,-0.15,0)..(8.15,6.1,6) size 8.25x6.25x6
+[ARCH::Beams]: 4 polysurface (r1-r4)
+[ARCH::Columns]: 6 polysurface (r5-r10)
+[ARCH::Slabs]: 2 polysurface (r11 r12)
+[ARCH::Walls]: 4 polysurface (r13-r16)
+[FE::Lines]: 14 line
+[FE::Shells]: 6 surface (r31-r36)
+empty layers: Default, FE
+next: query filter:'layer:X' (list) → level:'detail' → level:'verts'; or view.

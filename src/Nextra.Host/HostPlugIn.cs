@@ -20,6 +20,10 @@ namespace Nextra.Host
 
         protected override LoadReturnCode OnLoad(ref string errorMessage)
         {
+            // never start inside headless hosts (Rhino.Compute / Hops compute.geometry.exe also load plug-ins)
+            var proc = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+            if (RhinoApp.IsRunningHeadless || !proc.StartsWith("Rhino", StringComparison.OrdinalIgnoreCase))
+                return LoadReturnCode.Success;
             if (Config.GetBool("enabled", true)) RhinoApp.Idle += StartOnce;
             else RhinoApp.WriteLine("Nextra: off (run NextraOn to start)");
             return LoadReturnCode.Success;

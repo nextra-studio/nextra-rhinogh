@@ -11,7 +11,31 @@ APP = os.path.join(os.environ["APPDATA"], "Nextra")
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def _alive(pid):
+    try:
+        import subprocess
+        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"], capture_output=True, text=True).stdout
+        return "Rhino" in out
+    except Exception:
+        return True
+
+
 def server():
+    # one file per Rhino process; prefer NEXTRA_PID, else the newest live Rhino (headless/dead processes are skipped)
+    import glob
+    cands = []
+    for p in glob.glob(os.path.join(APP, "server-*.json")):
+        try:
+            with open(p, encoding="utf-8") as f: s = json.load(f)
+            cands.append(s)
+        except Exception: pass
+    want = os.environ.get("NEXTRA_PID")
+    if want: cands = [c for c in cands if str(c.get("pid")) == want]
+    wf = os.environ.get("NEXTRA_FILE")
+    if wf: cands = [c for c in cands if wf.lower() in (str(c.get("file", "")) + str(c.get("path", ""))).lower()]
+    cands = sorted(cands, key=lambda c: c.get("started", ""), reverse=True)
+    for c in cands:
+        if _alive(c["pid"]): return c
     with open(os.path.join(APP, "server.json"), encoding="utf-8") as f:
         return json.load(f)
 
