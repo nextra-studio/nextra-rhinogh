@@ -15,7 +15,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] A2 Status dot (Rhino status-bar corner + GH canvas corner; green/amber/red; NextraOn/Off; verified by screenshot): minimal movable floating dot (green = client active, amber = idle, red = down; click red → restart/retry ports)
 - [x] A3 Engine hot-reload, state bag survives reload
 - [x] A4 MCP bridge (stdio) + `.mcpb` manifest + `nx` CLI for testing
-- [ ] A5 Meaningful replies everywhere: what worked, what failed, why, what to do next; fallback instead of repeated errors
+- [x] A5 Meaningful replies everywhere: what worked, what failed, why, what to do next; fallback instead of repeated errors
 - [x] A6 Reference folder (`reference/`) with copied old code / vision / OBB refs  ✅ copied
 
 ## B. Rhino
@@ -42,9 +42,9 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] C10 Unbaked GH geometry view in Rhino (preview bbox zoom, conduit tags, doc untouched)
 
 ## D. Skill & memory
-- [ ] D1 SKILL.md (short entry) + shorthand.md + workflows.md + api cheat sheets + profiles (karamba)
-- [ ] D2 Memory: prefs.md, rules.md (token-capped, always loaded), mistakes.log (auto + manual), library index
-- [ ] D3 Recurring-mistake detection → hint to compact into rules (user approves); shorthand itself NOT self-modified
+- [x] D1 SKILL.md (short entry) + shorthand.md + workflows.md + api cheat sheets + profiles (karamba)
+- [x] D2 Memory: prefs.md, rules.md (token-capped, always loaded), mistakes.log (auto + manual), library index
+- [x] D3 Recurring-mistake detection → hint to compact into rules (user approves); shorthand itself NOT self-modified
 - [x] D4 `query scope:docs` serves the same docs for non-Claude LLMs
 
 ## E. Test cases (each: run live, save images + notes in `test/<nn>_<name>/`)
@@ -58,11 +58,11 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] 08 GH Python component with Karamba-style radio buttons on the component (custom attributes), visually verified
 - [x] 09 Rhino python save (library)
 - [x] 10 Rhino use existing python in a folder
-- [ ] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/REPORT.md`
+- [x] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/REPORT.md`
 - [x] 12 GH Karamba simple model
-- [ ] 13 Rhino Marina Bay Sands
+- [x] 13 Rhino Marina Bay Sands
 - [ ] 14 Architecture house → centerlines → FE model → GH Karamba analysis
-- [ ] 15 GH non-shorthand stuff via python fallback
+- [x] 15 GH non-shorthand stuff via python fallback
 - [ ] 16 Messy spaghetti GH → tidy (visual check, better than before)
 
 ## G. Added during build (user requests)
@@ -72,6 +72,6 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] G4 Plugin component layout repair (Karamba collapsible inputs: stray grips / stretched bounds)
 
 ## F. Packaging
-- [ ] F1 Yak-style package folder (`.rhp` + engine), install script
-- [ ] F2 README (setup, tools, token comparison summary)
-- [ ] F3 GitHub push
+- [x] F1 Yak-style package folder (`.rhp` + engine), install script
+- [x] F2 README (setup, tools, token comparison summary)
+- [ ] F3 GitHub push — waiting for `gh auth login` (local git history complete)
