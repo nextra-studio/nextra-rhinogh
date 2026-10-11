@@ -8,3 +8,8 @@ test/calls.jsonl
 *.bak
 test/_tmp/
 dist/
+test/regress/out/
+test/regress/_mem/
+test/regress/_tmp/
+test/regress/*.log
+.claude/scheduled_tasks.lock
