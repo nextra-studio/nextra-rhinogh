@@ -35,10 +35,17 @@ namespace Nextra.Engine.Gh.Shorthand
 
         public static string TypeName(IGH_DocumentObject o)
         {
-            var name = o.Name;
+            var name = o.Name.Trim();
+            var clean = System.Text.RegularExpressions.Regex.Replace(name, @"\s*\([^)]*\)\s*$", "").Trim();
+            if (clean.Length == 0) clean = name;
             int same = 0;
-            try { same = Instances.ComponentServer.ObjectProxies.Count(p => !p.Obsolete && p.Desc.Name == name); } catch { }
-            return same > 1 ? $"{name} @{o.Category}" : name;
+            try
+            {
+                string Norm(string s) => System.Text.RegularExpressions.Regex.Replace(s ?? "", @"\s*\([^)]*\)\s*$", "").Trim();
+                same = Instances.ComponentServer.ObjectProxies.Count(p => !p.Obsolete && (p.Desc.Name.Trim() == clean || Norm(p.Desc.Name) == clean));
+            }
+            catch { }
+            return same > 1 || clean != name ? $"{clean} @{o.Category}" : clean;
         }
 
         public static string Write(GH_Document d, IEnumerable<IGH_DocumentObject> objsIn, WriteOptions opt)

@@ -234,6 +234,16 @@ namespace Nextra.Engine.Gh.Shorthand
                 n.Id = l.Substring(0, eq).Trim();
                 n.Create = true;
                 i = eq + 1;
+                while (i < l.Length && char.IsWhiteSpace(l[i])) i++;
+                if (i < l.Length && l[i] == '"')
+                {   // quoted type name, may contain parentheses: id = "Support (Karamba3D)" (…)
+                    n.Type = ReadString(l, ref i);
+                    int at2 = l.IndexOf('@', i);
+                    int nb = FirstTopBracket(l, i);
+                    if (at2 >= 0 && (nb < 0 || at2 < nb)) { int e2 = nb < 0 ? l.Length : nb; n.Category = l.Substring(at2 + 1, e2 - at2 - 1).Trim(); i = e2; }
+                    if (!IdRx.IsMatch(n.Id)) throw new FormatException($"bad id '{n.Id}' (letters, digits, _)");
+                    goto body;
+                }
                 int end = FirstTopBracket(l, i);
                 int arrow = l.IndexOf("->", i, StringComparison.Ordinal);
                 if (arrow >= 0 && (end < 0 || arrow < end)) end = arrow;
@@ -257,6 +267,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 if (i >= l.Length) n.BareMember = true;
             }
 
+            body:
             while (i < l.Length)
             {
                 char ch = l[i];

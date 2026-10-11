@@ -49,7 +49,7 @@ namespace Nextra.Engine.Gh
                 var anchor = Bounds(old);
                 // seed new members right of the group so the layered layout has a sane start
                 float x0 = anchor.Right + MicroX;
-                foreach (var o in add) { o.Attributes.Pivot = new PointF(x0, anchor.Y); o.Attributes.ExpireLayout(); o.Attributes.PerformLayout(); }
+                foreach (var o in add) SetPivot(o, new PointF(x0, anchor.Y));
                 Arrange(d, members, out var blk);
                 Shift(members, anchor.X - blk.X, anchor.Y - blk.Y);
                 foreach (var o in add) joined.Add(o.InstanceGuid);
@@ -57,8 +57,9 @@ namespace Nextra.Engine.Gh
                 PushAway(d, g, members);
             }
             var moving = created.Where(o => !joined.Contains(o.InstanceGuid)).ToList();
-            if (moving.Count == 0) return null;
-            return PlaceBlock(d, moving);
+            if (moving.Count > 0) PlaceBlock(d, moving);
+            RepairBounds(d);
+            return null;
         }
 
         /// Shift every other group / loose object that overlaps group g downwards (cascading).
@@ -144,6 +145,7 @@ namespace Nextra.Engine.Gh
         {
             var objs = scope.Where(o => !(o is GH_Group) && o.Attributes != null).ToList();
             if (objs.Count == 0) return "nothing to tidy";
+            int repaired = RepairBounds(d);
             var before = Bounds(objs);
             Arrange(d, objs, out var block);
             Shift(objs, before.X - block.X, before.Y - block.Y);
@@ -163,7 +165,7 @@ namespace Nextra.Engine.Gh
             }
             ExpireGroups(d, new HashSet<Guid>(objs.Select(o => o.InstanceGuid)));
             var after = Bounds(objs);
-            return $"tidied {objs.Count} objects ({Fmt.N(before.Width)}x{Fmt.N(before.Height)} → {Fmt.N(after.Width)}x{Fmt.N(after.Height)} canvas units)";
+            return (repaired > 0 ? $"repaired {repaired} stretched component(s); " : "") + $"tidied {objs.Count} objects ({Fmt.N(before.Width)}x{Fmt.N(before.Height)} → {Fmt.N(after.Width)}x{Fmt.N(after.Height)} canvas units)";
         }
 
         // ---------- core ----------
@@ -212,8 +214,7 @@ namespace Nextra.Engine.Gh
             {
                 var b = byId[blockOf[o.InstanceGuid]];
                 var l = local[o.InstanceGuid];
-                o.Attributes.Pivot = new PointF(b.X + l.X, b.Y + l.Y);
-                o.Attributes.ExpireLayout(); o.Attributes.PerformLayout();
+                SetPivot(o, new PointF(b.X + l.X, b.Y + l.Y));
             }
             block = Bounds(objs);
         }
@@ -316,8 +317,7 @@ namespace Nextra.Engine.Gh
             {
                 var b = i.Obj.Attributes.Bounds; var p = i.Obj.Attributes.Pivot;
                 // pivot-to-bounds offset differs per object type; keep bounds top-left at (x,y)
-                i.Obj.Attributes.Pivot = new PointF(p.X + (x - b.X), p.Y + (y - b.Y));
-                i.Obj.Attributes.ExpireLayout(); i.Obj.Attributes.PerformLayout();
+                SetPivot(i.Obj, new PointF(p.X + (x - b.X), p.Y + (y - b.Y)));
                 var nb = i.Obj.Attributes.Bounds; i.W = nb.Width; i.H = nb.Height; i.X = nb.X; i.Y = nb.Y;
             }
         }
@@ -339,6 +339,77 @@ namespace Nextra.Engine.Gh
 
         static float OutOffset(Item s, int port, bool micro) => OutY(s, port, micro) - s.Y;
         static float InOffset(Item t, int port, bool micro) => InY(t, port, micro) - t.Y;
+
+        /// Move an object. Child parameter attributes move by the same delta first: some plug-ins
+        /// (Karamba's collapsible inputs) do not re-place hidden params in PerformLayout, and stale
+        /// param rects would otherwise stretch the component's bounds across the canvas.
+        public static void SetPivot(IGH_DocumentObject o, PointF target)
+        {
+            var a = o.Attributes;
+            float dx = target.X - a.Pivot.X, dy = target.Y - a.Pivot.Y;
+            if (o is IGH_Component c && (Math.Abs(dx) > 0.01f || Math.Abs(dy) > 0.01f))
+                foreach (var p in c.Params.Input.Concat(c.Params.Output))
+                {
+                    var pa = p.Attributes;
+                    if (pa == null) continue;
+                    pa.Pivot = new PointF(pa.Pivot.X + dx, pa.Pivot.Y + dy);
+                    var pb = pa.Bounds; pb.Offset(dx, dy); pa.Bounds = pb;
+                }
+            a.Pivot = target;
+            a.ExpireLayout();
+            a.PerformLayout();
+        }
+
+        static readonly Dictionary<Guid, List<PointF>> FreshOffsets = new Dictionary<Guid, List<PointF>>();
+
+        /// Repair components whose child params drifted from where the component itself puts them
+        /// (stretched bounds, stray grips floating above): snap every param back to the offset it has
+        /// on a fresh instance, then let the component lay out its visible params again.
+        public static int RepairBounds(GH_Document d)
+        {
+            int fixedN = 0;
+            foreach (var c in d.Objects.OfType<IGH_Component>())
+            {
+                var a = c.Attributes;
+                if (a == null) continue;
+                if (!FreshOffsets.TryGetValue(c.ComponentGuid, out var offs))
+                {
+                    offs = null;
+                    try
+                    {
+                        var fresh = Grasshopper.Instances.ComponentServer.EmitObjectProxy(c.ComponentGuid)?.CreateInstance() as IGH_Component;
+                        if (fresh != null)
+                        {
+                            fresh.CreateAttributes(); fresh.Attributes.Pivot = PointF.Empty; fresh.Attributes.PerformLayout();
+                            offs = fresh.Params.Input.Concat(fresh.Params.Output).Select(p => p.Attributes?.Pivot ?? PointF.Empty).ToList();
+                        }
+                    }
+                    catch { }
+                    FreshOffsets[c.ComponentGuid] = offs;
+                }
+                var ps = c.Params.Input.Concat(c.Params.Output).ToList();
+                if (offs == null || offs.Count != ps.Count) continue;     // variable-param components: nothing to compare
+                bool drift = false;
+                for (int i = 0; i < ps.Count; i++)
+                {
+                    var pa = ps[i].Attributes; if (pa == null) continue;
+                    float ox = pa.Pivot.X - a.Pivot.X, oy = pa.Pivot.Y - a.Pivot.Y;
+                    if (Math.Abs(ox - offs[i].X) > 3 || Math.Abs(oy - offs[i].Y) > 3) { drift = true; break; }
+                }
+                if (!drift) continue;
+                for (int i = 0; i < ps.Count; i++)
+                {
+                    var pa = ps[i].Attributes; if (pa == null) continue;
+                    var target = new PointF(a.Pivot.X + offs[i].X, a.Pivot.Y + offs[i].Y);
+                    float dx = target.X - pa.Pivot.X, dy = target.Y - pa.Pivot.Y;
+                    pa.Pivot = target;
+                    var pb = pa.Bounds; pb.Offset(dx, dy); pa.Bounds = pb;
+                }
+                a.ExpireLayout(); a.PerformLayout();
+                fixedN++;
+            }
+            return fixedN;
+        }
 
         // ---------- graph helpers ----------
 
@@ -414,8 +485,7 @@ namespace Nextra.Engine.Gh
             foreach (var o in objs)
             {
                 var p = o.Attributes.Pivot;
-                o.Attributes.Pivot = new PointF(p.X + dx, p.Y + dy);
-                o.Attributes.ExpireLayout(); o.Attributes.PerformLayout();
+                SetPivot(o, new PointF(p.X + dx, p.Y + dy));
             }
         }
 

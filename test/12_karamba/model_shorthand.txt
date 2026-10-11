@@ -1,0 +1,15 @@
+10 object(s):
+## Beam geometry #DBABFF (g6)
+g1 = Point {set={0,0,0}}
+g2 = Point {set={10,0,0}}
+g3 = Line @Curve (A=g1, B=g2)
+g15 = Shatter (C=g3^p, t=0.5)
+## Karamba model #ABDBFF (g7)
+g12 = Support @Karamba3D (Pos|Ind=[{0,0,0},{10,0,0}], Dofs=[0,1,2,3]) {hide}
+g4 = Create Linear Element @Karamba3D (Line=g15)
+g10 = Loads @Karamba3D (Force={0,0,-10}, Local?=false, Pos|Ind={5,0,0}, LCase="LC0") {hide, $ActiveUnit/unitname="Point"}
+g13 = Assemble Model @Karamba3D (Elem=g4.Elem, Support=g12, Load=g10) {hide}
+g14 = Analyse @Karamba3D (Model=g13.Model) {hide}
+## Results #B2FAB4 (g8)
+g5 = Panel (=g14.MaxDisp)
+--- ok=True 0.09s ~in 8 tok / out 155 tok

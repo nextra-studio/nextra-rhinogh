@@ -47,9 +47,14 @@ namespace Nextra.Engine.Gh
                 return r;
             }
 
-            var exact = Filter(all.Where(p => p.Desc.Name.Equals(name, StringComparison.OrdinalIgnoreCase))).ToList();
-            if (exact.Count == 0) exact = Filter(all.Where(p => p.Desc.NickName.Equals(name, StringComparison.OrdinalIgnoreCase))).ToList();
-            if (exact.Count == 0) exact = Filter(all.Where(p => Norm(p.Desc.Name) == Norm(name))).ToList();
+            // candidates from every naming strategy at once (plug-ins decorate names, params share names with components)
+            var exact = Filter(all.Where(p => p.Desc.Name.Trim().Equals(name, StringComparison.OrdinalIgnoreCase)
+                                             || p.Desc.NickName.Equals(name, StringComparison.OrdinalIgnoreCase)
+                                             || Norm(p.Desc.Name) == Norm(name)
+                                             || Norm(StripSuffix(p.Desc.Name)) == Norm(StripSuffix(name)))).ToList();
+            // a real name match beats a nickname-only match
+            var byName = exact.Where(p => Norm(StripSuffix(p.Desc.Name)) == Norm(StripSuffix(name)) || Norm(p.Desc.Name) == Norm(name)).ToList();
+            if (byName.Count > 0) exact = byName;
             var live = exact.Where(p => !p.Obsolete).ToList();
             if (live.Count > 0) exact = live;
             if (exact.Count == 1) return exact[0];
@@ -62,9 +67,20 @@ namespace Nextra.Engine.Gh
             }
             if (exact.Count > 1)
             {
+                // components before params, visible before hidden (legacy duplicates are usually hidden)
+                var comps = exact.Where(p => IsComponent(p)).ToList();
+                if (comps.Count > 0 && comps.Count < exact.Count) exact = comps;
+                var shown = exact.Where(p => p.Exposure != GH_Exposure.hidden).ToList();
+                if (shown.Count == 1) { note = $"'{name}': {exact.Count} versions installed; used the visible one ({shown[0].Desc.Category}/{shown[0].Desc.SubCategory})"; return shown[0]; }
+                if (exact.Count == 1) return exact[0];
                 var bi = exact.Where(p => Builtin.Contains(p.Desc.Category)).ToList();
                 if (bi.Count == 1) { note = $"'{name}' is ambiguous; used {bi[0].Desc.Category}/{bi[0].Desc.SubCategory} (others: {string.Join(", ", exact.Except(bi).Select(p => p.Desc.Category).Distinct())})"; return bi[0]; }
-                throw new NxError($"'{name}' is ambiguous", "add @Category: " + string.Join("; ", exact.Take(6).Select(p => $"{p.Desc.Name} @{p.Desc.Category}/{p.Desc.SubCategory}")));
+                if (exact.Select(p => p.Desc.Category + "/" + p.Desc.SubCategory).Distinct().Count() == 1)
+                {   // same place, same name: identical duplicates from one plug-in → take the first, say so
+                    note = $"'{name}': {exact.Count} identical entries in {exact[0].Desc.Category}; used the first";
+                    return exact[0];
+                }
+                throw new NxError($"'{name}' is ambiguous", "add @Category: " + string.Join("; ", exact.Take(6).Select(p => $"{StripSuffix(p.Desc.Name)} @{p.Desc.Category}/{p.Desc.SubCategory}")));
             }
             // fuzzy
             var scored = all.Where(p => !p.Obsolete).Select(p => (p, s: Score(p, name))).Where(x => x.s > 0).OrderByDescending(x => x.s).Take(6).ToList();
@@ -74,6 +90,12 @@ namespace Nextra.Engine.Gh
         }
 
         static readonly Dictionary<Guid, IGH_DocumentObject> Probe = new Dictionary<Guid, IGH_DocumentObject>();
+
+        static bool IsComponent(IGH_ObjectProxy p)
+        {
+            if (!Probe.TryGetValue(p.Guid, out var o)) { try { o = p.CreateInstance(); } catch { o = null; } Probe[p.Guid] = o; }
+            return o is IGH_Component;
+        }
 
         static bool PortsMatch(IGH_ObjectProxy p, IList<string> hints)
         {
@@ -86,6 +108,8 @@ namespace Nextra.Engine.Gh
             }
             return true;
         }
+
+        static string StripSuffix(string s) => System.Text.RegularExpressions.Regex.Replace(s ?? "", @"\s*\([^)]*\)\s*$", "").Trim();
 
         static string Norm(string s) => new string(s.Where(char.IsLetterOrDigit).ToArray()).ToLowerInvariant();
 

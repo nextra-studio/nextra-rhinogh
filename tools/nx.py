@@ -65,11 +65,16 @@ if __name__ == "__main__":
     rest = sys.argv[2:]
     if "--timeout" in rest:
         i = rest.index("--timeout"); timeout = int(rest[i + 1]); del rest[i:i + 2]
+    code_file = None
+    if "--code" in rest:
+        i = rest.index("--code"); code_file = rest[i + 1]; del rest[i:i + 2]
     if rest:
         a = rest[0]
         if a.startswith("@"):
             with open(a[1:], encoding="utf-8") as f: a = f.read()
         args = json.loads(a)
+    if code_file:
+        with open(code_file, encoding="utf-8") as f: args["code"] = f.read()
     res, ti, to, dt = call(tool, args, timeout)
     print(res.get("text", ""))
     for p in res.get("images", []): print("IMAGE:", p)

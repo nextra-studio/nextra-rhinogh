@@ -25,6 +25,9 @@ namespace Nextra.Engine.Gh
             "Attributes", "param_input", "param_output", "PersistentData", "ParameterData", "InputParam", "OutputParam", "Script", "CodeContent",
         };
 
+        const string Unstable = "\u0001unstable";
+        static bool Noise(string k) => k.IndexOf("Seed", StringComparison.OrdinalIgnoreCase) >= 0 || k.EndsWith("/count") || k.IndexOf("Parallel", StringComparison.OrdinalIgnoreCase) >= 0;
+
         static readonly Dictionary<Guid, Dictionary<string, string>> Defaults = new Dictionary<Guid, Dictionary<string, string>>();
 
         static GH_Chunk Serialize(IGH_DocumentObject o)
@@ -90,13 +93,20 @@ namespace Nextra.Engine.Gh
                 try
                 {
                     var proxy = Instances.ComponentServer.EmitObjectProxy(o.ComponentGuid);
-                    var fresh = proxy?.CreateInstance();
-                    if (fresh != null) def = Read(fresh);
+                    var f1 = proxy?.CreateInstance(); var f2 = proxy?.CreateInstance();
+                    if (f1 != null && f2 != null)
+                    {
+                        f1.CreateAttributes(); f2.CreateAttributes();
+                        var d1 = Read(f1); var d2 = Read(f2);
+                        foreach (var kv in d1)
+                            def[kv.Key] = d2.TryGetValue(kv.Key, out var v2) && v2 == kv.Value ? kv.Value : Unstable;
+                    }
                 }
                 catch { }
                 Defaults[o.ComponentGuid] = def;
             }
-            return cur.Where(kv => !def.TryGetValue(kv.Key, out var dv) || dv != kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+            return cur.Where(kv => !Noise(kv.Key) && (!def.TryGetValue(kv.Key, out var dv) || (dv != kv.Value && dv != Unstable)) && !(def.Count > 0 && !def.ContainsKey(kv.Key) && kv.Key.Contains("/count")))
+                      .ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
         /// Set "$key" values and read the archive back into the object.
@@ -111,27 +121,31 @@ namespace Nextra.Engine.Gh
                 for (int i = 0; i < path.Length - 1; i++)
                 {
                     var (cn, ci) = SplitIndex(path[i]);
-                    var next = c.Chunks.FirstOrDefault(x => x.Name.Equals(cn, StringComparison.OrdinalIgnoreCase) && x.Index == ci);
+                    var next = c.Chunks.FirstOrDefault(x => x.Name.Equals(cn, StringComparison.OrdinalIgnoreCase) && (x.Index == ci || ci == -1 && x.Index <= 0));
                     if (next == null) throw new NxError($"state chunk '{path[i]}' not found on {o.Name}", "known keys: " + string.Join(", ", Read(o).Keys.Take(25)));
                     c = next;
                 }
                 var (name, idx) = SplitIndex(path[path.Length - 1]);
-                var item = c.Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && x.Index == idx);
+                var item = c.Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && (x.Index == idx || idx == -1 && x.Index <= 0));
                 if (item == null) throw new NxError($"state key '{kv.Key}' not found on {o.Name}", "known keys: " + string.Join(", ", Read(o).Keys.Take(25)));
                 var w = (GH_IWriter)c;
                 var v = kv.Value.Trim();
                 if (v.Length >= 2 && v.StartsWith("\"") && v.EndsWith("\"")) v = v.Substring(1, v.Length - 2);
                 try
                 {
+                    // GH_IO setters append; remove the old item first so the value is replaced, not duplicated
+                    var chunk = (GH_Chunk)c;
+                    if (item.Index >= 0) chunk.RemoveItem(item.Name, item.Index); else chunk.RemoveItem(item.Name);
+                    int ix = item.Index;
                     switch (item.Type)
                     {
-                        case GH_Types.gh_bool: w.SetBoolean(item.Name, item.Index, v == "true" || v == "1"); break;
-                        case GH_Types.gh_int32: w.SetInt32(item.Name, item.Index, int.Parse(v, CultureInfo.InvariantCulture)); break;
-                        case GH_Types.gh_int64: w.SetInt64(item.Name, item.Index, long.Parse(v, CultureInfo.InvariantCulture)); break;
-                        case GH_Types.gh_double: w.SetDouble(item.Name, item.Index, double.Parse(v, CultureInfo.InvariantCulture)); break;
-                        case GH_Types.gh_single: w.SetSingle(item.Name, item.Index, float.Parse(v, CultureInfo.InvariantCulture)); break;
-                        case GH_Types.gh_decimal: w.SetDecimal(item.Name, item.Index, decimal.Parse(v, CultureInfo.InvariantCulture)); break;
-                        case GH_Types.gh_string: w.SetString(item.Name, item.Index, v.Replace("\\n", "\n")); break;
+                        case GH_Types.gh_bool: { bool x = v == "true" || v == "1"; if (ix >= 0) w.SetBoolean(item.Name, ix, x); else w.SetBoolean(item.Name, x); break; }
+                        case GH_Types.gh_int32: { int x = int.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetInt32(item.Name, ix, x); else w.SetInt32(item.Name, x); break; }
+                        case GH_Types.gh_int64: { long x = long.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetInt64(item.Name, ix, x); else w.SetInt64(item.Name, x); break; }
+                        case GH_Types.gh_double: { double x = double.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetDouble(item.Name, ix, x); else w.SetDouble(item.Name, x); break; }
+                        case GH_Types.gh_single: { float x = float.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetSingle(item.Name, ix, x); else w.SetSingle(item.Name, x); break; }
+                        case GH_Types.gh_decimal: { decimal x = decimal.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetDecimal(item.Name, ix, x); else w.SetDecimal(item.Name, x); break; }
+                        case GH_Types.gh_string: { var x = v.Replace("\\n", "\n"); if (ix >= 0) w.SetString(item.Name, ix, x); else w.SetString(item.Name, x); break; }
                         default: throw new NxError($"state key '{kv.Key}' has type {item.Type}, not editable as text");
                     }
                 }
@@ -148,7 +162,7 @@ namespace Nextra.Engine.Gh
         static (string, int) SplitIndex(string s)
         {
             var m = System.Text.RegularExpressions.Regex.Match(s, @"^(.*)\[(\d+)\]$");
-            return m.Success ? (m.Groups[1].Value, int.Parse(m.Groups[2].Value)) : (s, 0);
+            return m.Success ? (m.Groups[1].Value, int.Parse(m.Groups[2].Value)) : (s, -1);   // GH_IO: unindexed = -1
         }
     }
 }
