@@ -1,0 +1,14 @@
+Downloading pywin32 (6.7MiB)
+Downloading pydantic-core (2.1MiB)
+ Downloaded pydantic-core
+ Downloaded pywin32
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 39 packages in 2.36s
+2026-10-11 23:44:37,225 - RhinoMCPServer - INFO - RhinoMCP server starting up
+2026-10-11 23:44:39,247 - RhinoMCPServer - ERROR - Failed to connect to Rhino: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-10-11 23:44:39,247 - RhinoMCPServer - ERROR - Failed to connect to Rhino
+2026-10-11 23:44:39,248 - RhinoMCPServer - WARNING - Could not connect to Rhino on startup: Could not connect to Rhino at 127.0.0.1:1999. Please start Rhino, run the Rhino command `mcpstart`, then retry the MCP request.
+2026-10-11 23:44:39,249 - RhinoMCPServer - WARNING - Could not connect to Rhino at 127.0.0.1:1999. Please start Rhino, run the Rhino command `mcpstart`, then retry the MCP request.
+2026-10-11 23:44:39,263 - RhinoMCPServer - INFO - RhinoMCP server shut down

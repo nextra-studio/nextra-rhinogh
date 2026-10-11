@@ -168,6 +168,97 @@ namespace Nextra.Engine.Gh
             return (repaired > 0 ? $"repaired {repaired} stretched component(s); " : "") + $"tidied {objs.Count} objects ({Fmt.N(before.Width)}x{Fmt.N(before.Height)} → {Fmt.N(after.Width)}x{Fmt.N(after.Height)} canvas units)";
         }
 
+        // ---------- group interface relays (idea from reference/shiba_tidy) ----------
+
+        public const string RelayTag = "nextra-relay";
+        public static bool IsRelay(IGH_DocumentObject o) => o is IGH_Param p && !(o is IGH_Component) && p.Description == RelayTag;
+        static bool IsRelayIn(IGH_DocumentObject o) => IsRelay(o) && o.NickName.EndsWith("_In");
+        static bool IsRelayOut(IGH_DocumentObject o) => IsRelay(o) && o.NickName.EndsWith("_Out");
+
+        /// Every wire that crosses a group boundary gets a typed relay param: "<input>_In" inside the receiving group,
+        /// "<output>_Out" inside the sending group. Groups become blocks with all inputs left and outputs right.
+        /// Idempotent: existing relays are never relayed again.
+        public static int AddRelays(GH_Document d, List<IGH_DocumentObject> scope)
+        {
+            var groups = d.Objects.OfType<GH_Group>().ToList();
+            var owner = new Dictionary<Guid, GH_Group>();
+            foreach (var g in groups.OrderByDescending(g => g.ObjectIDs.Count)) foreach (var id in g.ObjectIDs) owner[id] = g;   // smallest group wins
+            Guid G(IGH_DocumentObject o) => o != null && owner.TryGetValue(o.InstanceGuid, out var g) ? g.InstanceGuid : Guid.Empty;
+            var set = new HashSet<Guid>(scope.Select(o => o.InstanceGuid));
+            int made = 0;
+            var inMap = new Dictionary<string, IGH_Param>(); var outMap = new Dictionary<string, IGH_Param>();
+
+            IGH_Param MakeRelay(IGH_Param like, string nick, GH_Group grp, PointF near)
+            {
+                var r = RelayFor(like.TypeName);
+                r.NickName = nick; r.Name = nick; r.Description = RelayTag;
+                r.CreateAttributes(); r.Attributes.Pivot = near;
+                d.AddObject(r, false);
+                grp?.AddObject(r.InstanceGuid);
+                if (grp != null) owner[r.InstanceGuid] = grp;
+                made++;
+                return r;
+            }
+
+            // inputs
+            foreach (var o in scope.ToList())
+            {
+                if (IsRelay(o) || !(o is IGH_Component c)) continue;
+                var gid = G(o); if (gid == Guid.Empty) continue;
+                var grp = owner[o.InstanceGuid];
+                foreach (var ip in c.Params.Input)
+                    foreach (var src in ip.Sources.ToList())
+                    {
+                        var so = Top(src);
+                        if (so == null || G(so) == gid || IsRelayIn(so) && G(so) == gid) continue;
+                        var key = gid + "_" + src.InstanceGuid;
+                        if (!inMap.TryGetValue(key, out var relay))
+                        {
+                            // the relay carries the SOURCE's data: its type and name come from the source, not the input
+                            var srcNick = so is IGH_Component ? src.NickName : so.NickName;
+                            relay = MakeRelay(src, srcNick + "_In", grp, new PointF(o.Attributes.Bounds.Left - 120, ip.Attributes?.InputGrip.Y ?? o.Attributes.Pivot.Y));
+                            relay.AddSource(src);
+                            inMap[key] = relay;
+                        }
+                        ip.RemoveSource(src); ip.AddSource(relay);
+                    }
+            }
+            // outputs
+            foreach (var o in scope.ToList())
+            {
+                if (IsRelay(o)) continue;
+                var gid = G(o); if (gid == Guid.Empty) continue;
+                var grp = owner[o.InstanceGuid];
+                foreach (var op in OutputsOf(o).ToList())
+                {
+                    var ext = op.Recipients.Where(rc => { var t = Top(rc); return t != null && G(t) != gid && !IsRelayOut(t); }).ToList();
+                    if (ext.Count == 0) continue;
+                    var key = gid + "_" + op.InstanceGuid;
+                    if (!outMap.TryGetValue(key, out var relay))
+                    {
+                        var nick = (o is IGH_Component ? op.NickName : o.NickName) + "_Out";
+                        relay = MakeRelay(op, nick, grp, new PointF(o.Attributes.Bounds.Right + 60, o.Attributes.Pivot.Y));
+                        relay.AddSource(op);
+                        outMap[key] = relay;
+                    }
+                    foreach (var rc in ext) { rc.RemoveSource(op); rc.AddSource(relay); }
+                }
+            }
+            foreach (var g in groups) g.ExpireCaches();
+            return made;
+        }
+
+        static IGH_Param RelayFor(string typeName)
+        {
+            var srv = Grasshopper.Instances.ComponentServer;
+            var t = typeName == "Generic Data" ? "Data" : typeName;
+            var proxy = srv.ObjectProxies.FirstOrDefault(p => p.Desc.Category == "Params" && p.Desc.Name.Equals(t, StringComparison.OrdinalIgnoreCase) && !p.Obsolete)
+                        ?? srv.ObjectProxies.FirstOrDefault(p => p.Desc.Category == "Params" && p.Desc.Name.Equals("Data", StringComparison.OrdinalIgnoreCase));
+            var o = proxy?.CreateInstance() as IGH_Param;
+            if (o == null || o is GH_NumberSlider || o is GH_Panel) o = new Grasshopper.Kernel.Parameters.Param_GenericObject();
+            return o;
+        }
+
         // ---------- core ----------
 
         static void Arrange(GH_Document d, List<IGH_DocumentObject> objs, out RectangleF block)
@@ -240,6 +331,17 @@ namespace Nextra.Engine.Gh
                 foreach (var e in edges)
                     if (byId[e.From].Rank < byId[e.To].Rank + 1) { byId[e.From].Rank = byId[e.To].Rank + 1; changed = true; }
                 if (!changed) break;
+            }
+            if (micro)
+            {
+                int hi = std.Max(i => i.Rank), lo = 0;
+                foreach (var i in std)
+                {
+                    if (i.Obj != null && IsRelayIn(i.Obj)) i.Rank = hi + 1;
+                    else if (i.Obj != null && IsRelayOut(i.Obj)) i.Rank = lo - 1;
+                }
+                int min = std.Min(i => i.Rank);
+                if (min < 0) foreach (var i in std) i.Rank -= min;
             }
             int maxR = std.Max(i => i.Rank);
             var colX = new Dictionary<int, float>();

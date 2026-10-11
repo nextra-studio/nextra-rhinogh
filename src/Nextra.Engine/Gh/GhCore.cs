@@ -64,10 +64,20 @@ namespace Nextra.Engine.Gh
             return d.FindObject(g, true);
         }
 
-        public static string OpenFile(string path, bool solve, out GH_Document doc)
+        public static string OpenFile(string path, bool solve, out GH_Document doc, bool reload = false)
         {
             if (!System.IO.File.Exists(path)) throw new NxError("file not found: " + path);
             EnsureEditor();
+            // already open: switch to it (GH throws when the same file is assigned twice)
+            var full = System.IO.Path.GetFullPath(path);
+            var open = Instances.DocumentServer.FirstOrDefault(x => x.IsFilePathDefined && string.Equals(System.IO.Path.GetFullPath(x.FilePath), full, StringComparison.OrdinalIgnoreCase));
+            if (open != null && !reload)
+            {
+                if (Instances.ActiveCanvas.Document != open) Instances.ActiveCanvas.Document = open;
+                doc = open;
+                return $"{System.IO.Path.GetFileName(path)} is already open: switched to it ({open.ObjectCount} objects). reload:true re-reads it from disk";
+            }
+            if (open != null) { Instances.DocumentServer.RemoveDocument(open); }
             GH_Document.EnableSolutions = false;
             var sb = new StringBuilder();
             try

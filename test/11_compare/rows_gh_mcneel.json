@@ -1,0 +1,72 @@
+[
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_search_components",
+  "in": 5,
+  "out": 1310
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_search_components",
+  "in": 4,
+  "out": 1218
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_apply_graph",
+  "in": 543,
+  "out": 737
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_apply_graph",
+  "in": 80,
+  "out": 70
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_connect_many",
+  "in": 223,
+  "out": 311
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "run_python",
+  "in": 292,
+  "out": 7
+ },
+ {
+  "task": "G1_build",
+  "system": "mcneel",
+  "tool": "g1_get_canvas_graph",
+  "in": 5,
+  "out": 2618
+ },
+ {
+  "task": "G2_modify",
+  "system": "mcneel",
+  "tool": "run_python",
+  "in": 185,
+  "out": 7
+ },
+ {
+  "task": "G2_modify",
+  "system": "mcneel",
+  "tool": "g1_get_canvas_graph",
+  "in": 5,
+  "out": 2484
+ },
+ {
+  "task": "G3_readback",
+  "system": "mcneel",
+  "tool": "g1_get_canvas_graph",
+  "in": 10,
+  "out": 3027
+ }
+]

@@ -82,6 +82,7 @@ Colours (default palette): inputs `#DBABFF`, logic `#ABDBFF`, geometry `#FFD6AB`
 
 ## Behaviour you can rely on
 - Lines apply independently. A failed line is reported as `L7 \`…\`: reason — valid alternatives`; everything else stays applied. Fix only failed lines (`atomic:true` = all-or-nothing).
+- `layout:'tidy', relays:true` adds interface params at every group boundary (`<name>_In` in the left column, `<name>_Out` in the right column, typed like the data they carry; re-running adds none). Use when the user wants groups as movable/replaceable blocks.
 - Layout is automatic: new nodes are placed next to their upstream nodes; nodes added to an existing group re-layout that group in place and push neighbours aside. `layout:'tidy'` (whole) or `layout:'tidy:group:Name'`.
 - One solve after all lines; runtime errors of affected nodes (and anything newly broken downstream) are listed; `results:` shows what the sinks produced (counts, types, tree paths).
 

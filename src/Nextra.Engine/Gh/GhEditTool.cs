@@ -20,7 +20,7 @@ namespace Nextra.Engine.Gh
             // document-level actions first
             if (a.Has("open"))
             {
-                r.Line(GhCore.OpenFile(a.Str("open"), a.Bool("solve", true), out _));
+                r.Line(GhCore.OpenFile(a.Str("open"), a.Bool("solve", true), out _, a.Bool("reload", false)));
             }
             if (a.Bool("new", false))
             {
@@ -91,6 +91,12 @@ namespace Nextra.Engine.Gh
             if (layout.StartsWith("tidy"))
             {
                 var scope = layout == "tidy" ? d.Objects.ToList() : GhQuery.Select(d, layout.Substring(5), out _);
+                if (a.Bool("relays", false))
+                {
+                    int n = Layout.AddRelays(d, scope.Where(o => !(o is GH_Group)).ToList());
+                    r.Line($"relays: {n} boundary params added (<name>_In left / <name>_Out right of each group)");
+                    scope = layout == "tidy" ? d.Objects.ToList() : scope.Concat(d.Objects.Where(Layout.IsRelay)).Distinct().ToList();
+                }
                 r.Line(Layout.Tidy(d, scope));
             }
 

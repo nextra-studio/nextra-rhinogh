@@ -29,7 +29,7 @@ summary → list (oriented box `LxWxH linear|planar|block`, axis) → detail (fa
 ## GH: messy definition → tidy
 1. `query {scope:'gh'}` (groups, ungrouped, errors) + `view {target:'gh'}`.
 2. Decide stages; regroup with ops: `## Inputs #DBABFF` + bare handles, `## g40 "Profile"`.
-3. `gh_edit {layout:'tidy'}` → `view` to confirm. Delete dead ends (`- gN`) only when the user agrees.
+3. `gh_edit {layout:'tidy'}` (or `{layout:'tidy', relays:true}` for block-style groups with _In/_Out params) → `view` to confirm. Delete dead ends (`- gN`) only when the user agrees.
 
 ## Rhino ↔ GH
 - Rhino → GH: `crv = Curve {ref=[r3,r4]}` or `(C=r3)` on an input.
