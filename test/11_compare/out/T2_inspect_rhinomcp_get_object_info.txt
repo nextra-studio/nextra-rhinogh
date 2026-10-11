@@ -1,0 +1,5 @@
+{"name": "C_8_3_L2"}
+---
+{
+  "error": "Communication error with Rhino: Multiple objects with name 'C_8_3_L2' found."
+}

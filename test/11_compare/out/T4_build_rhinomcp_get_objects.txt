@@ -1,0 +1,877 @@
+{"layer_filter": "Columns", "limit": 50}
+---
+{
+  "objects": [
+    {
+      "id": "2b6c6cd5-48a4-4daf-b72f-87097219b785",
+      "name": "C32_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          11800.0,
+          7080.0
+        ],
+        [
+          18200.0,
+          12200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "25aa424d-1ea9-4277-8e9b-2c5994513d13",
+      "name": "C31_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          5800.0,
+          7080.0
+        ],
+        [
+          18200.0,
+          6200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "b238ac25-2ee8-4e1e-ac3d-10979ea2ddfa",
+      "name": "C30_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          -200.0,
+          7080.0
+        ],
+        [
+          18200.0,
+          200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "f8dd8af6-d0ae-4a54-afcd-3130def4b080",
+      "name": "C22_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          11800.0,
+          7080.0
+        ],
+        [
+          12200.0,
+          12200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "b4264a83-424d-459a-9a95-24bf17a5ceea",
+      "name": "C21_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          5800.0,
+          7080.0
+        ],
+        [
+          12200.0,
+          6200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "0a8d31bc-b9c4-44ff-930b-0728bd8c425a",
+      "name": "C20_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          -200.0,
+          7080.0
+        ],
+        [
+          12200.0,
+          200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "bb75a73a-00d6-4536-b01a-aa862dc24cf0",
+      "name": "C12_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          11800.0,
+          7080.0
+        ],
+        [
+          6200.0,
+          12200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "e8c701e8-fdc8-4972-a942-ed5f6eab4e3b",
+      "name": "C11_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          5800.0,
+          7080.0
+        ],
+        [
+          6200.0,
+          6200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "c663692a-d864-4d67-81d6-16b0ca27b406",
+      "name": "C10_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          -200.0,
+          7080.0
+        ],
+        [
+          6200.0,
+          200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "90f90ada-0696-4d90-8210-d3e1bff7c0cd",
+      "name": "C02_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          11800.0,
+          7080.0
+        ],
+        [
+          200.0,
+          12200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "ee81a345-4e87-41a0-ac2a-f7ee60761aff",
+      "name": "C01_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          5800.0,
+          7080.0
+        ],
+        [
+          200.0,
+          6200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "d807a8e8-742d-46a6-b309-b693526299c9",
+      "name": "C00_L3",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          -200.0,
+          7080.0
+        ],
+        [
+          200.0,
+          200.0,
+          10330.0
+        ]
+      ]
+    },
+    {
+      "id": "411cea1e-318b-43fe-8273-a791caa18327",
+      "name": "C32_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          11800.0,
+          3580.0
+        ],
+        [
+          18200.0,
+          12200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "9432852c-b0fa-45bb-85aa-cd35d612e910",
+      "name": "C31_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          5800.0,
+          3580.0
+        ],
+        [
+          18200.0,
+          6200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "3c3accc6-25ca-4f7c-8962-537d441d0183",
+      "name": "C30_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          -200.0,
+          3580.0
+        ],
+        [
+          18200.0,
+          200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "2d344bba-c74b-496d-974c-bec5e3c5503a",
+      "name": "C22_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          11800.0,
+          3580.0
+        ],
+        [
+          12200.0,
+          12200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "ecbf61f9-9031-49d7-9cd0-33a840c0d303",
+      "name": "C21_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          5800.0,
+          3580.0
+        ],
+        [
+          12200.0,
+          6200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "b25c42c7-86c6-4023-aebd-1e5694069af4",
+      "name": "C20_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          -200.0,
+          3580.0
+        ],
+        [
+          12200.0,
+          200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "d1fcd42c-3996-416b-a9ac-1896a02e5c9e",
+      "name": "C12_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          11800.0,
+          3580.0
+        ],
+        [
+          6200.0,
+          12200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "075c2c2d-b77f-4873-ba57-30ce2979c34e",
+      "name": "C11_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          5800.0,
+          3580.0
+        ],
+        [
+          6200.0,
+          6200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "554593a6-3598-4f13-9d6f-18448e8e0233",
+      "name": "C10_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          -200.0,
+          3580.0
+        ],
+        [
+          6200.0,
+          200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "44142085-dd9b-41dc-b44c-dcfe591b680e",
+      "name": "C02_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          11800.0,
+          3580.0
+        ],
+        [
+          200.0,
+          12200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "f334afde-622c-4c95-904d-704cf33a8a44",
+      "name": "C01_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          5800.0,
+          3580.0
+        ],
+        [
+          200.0,
+          6200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "31abd67a-6b2f-4918-9316-1413790ed016",
+      "name": "C00_L2",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          -200.0,
+          3580.0
+        ],
+        [
+          200.0,
+          200.0,
+          6830.0
+        ]
+      ]
+    },
+    {
+      "id": "6768d056-f04e-4f9c-925b-61a6ab8534bb",
+      "name": "C32_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          11800.0,
+          80.0
+        ],
+        [
+          18200.0,
+          12200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "9e2727df-747b-48ae-b6a1-6a3598c481ea",
+      "name": "C31_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          5800.0,
+          80.0
+        ],
+        [
+          18200.0,
+          6200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "9509b149-4228-43ce-9ae4-853f25fc9c34",
+      "name": "C30_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          17800.0,
+          -200.0,
+          80.0
+        ],
+        [
+          18200.0,
+          200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "753ce972-6f81-4acf-b98b-1fa392cfa1ff",
+      "name": "C22_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          11800.0,
+          80.0
+        ],
+        [
+          12200.0,
+          12200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "65ae16f1-c641-45c4-92e0-92bb427dbe1d",
+      "name": "C21_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          5800.0,
+          80.0
+        ],
+        [
+          12200.0,
+          6200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "26bbc7ae-2298-49c7-92f5-f49efbc3224c",
+      "name": "C20_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          11800.0,
+          -200.0,
+          80.0
+        ],
+        [
+          12200.0,
+          200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "4e370326-695b-4b0c-afe7-3b557973a43c",
+      "name": "C12_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          11800.0,
+          80.0
+        ],
+        [
+          6200.0,
+          12200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "1fa5da6f-bbd1-4f6d-a0c4-1a0fcf7d530f",
+      "name": "C11_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          5800.0,
+          80.0
+        ],
+        [
+          6200.0,
+          6200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "796c8752-2c63-4351-be87-9668d842fd0d",
+      "name": "C10_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          5800.0,
+          -200.0,
+          80.0
+        ],
+        [
+          6200.0,
+          200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "02780fbc-090e-46a7-9ab2-cc3fc31b32eb",
+      "name": "C02_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          11800.0,
+          80.0
+        ],
+        [
+          200.0,
+          12200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "dc0bd946-141b-488b-a7d1-e8a08836246b",
+      "name": "C01_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          5800.0,
+          80.0
+        ],
+        [
+          200.0,
+          6200.0,
+          3330.0
+        ]
+      ]
+    },
+    {
+      "id": "8281b6bb-d994-4e38-a12d-3f2d921e1ca0",
+      "name": "C00_L1",
+      "type": "Brep",
+      "layer": "Columns",
+      "material": "-1",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "bounding_box": [
+        [
+          -200.0,
+          -200.0,
+          80.0
+        ],
+        [
+          200.0,
+          200.0,
+          3330.0
+        ]
+      ]
+    }
+  ],
+  "total_matching": 36,
+  "offset": 0,
+  "limit": 50,
+  "has_more": false,
+  "filters": {
+    "layer": "Columns"
+  }
+}

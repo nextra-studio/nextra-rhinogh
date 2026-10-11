@@ -1,0 +1,162 @@
+{}
+---
+{
+  "meta_data": {
+    "name": "house_with_fe.3dm",
+    "date_created": "2026-10-11T18:57:00",
+    "date_modified": "2026-10-11T19:00:00",
+    "tolerance": 0.001,
+    "angle_tolerance": 1.0,
+    "path": "C:\\Users\\tatsu\\OneDrive\\Digitalization\\nextra.zero\\RhinoGh\\test\\14_house_to_fe\\house_with_fe.3dm",
+    "units": "Meters"
+  },
+  "object_count": 36,
+  "objects_by_type": {
+    "BREP": 22,
+    "LINE": 14
+  },
+  "objects_by_layer": {
+    "Lines": 14,
+    "Shells": 6,
+    "ARCH::Columns": 6,
+    "ARCH::Beams": 4,
+    "ARCH::Walls": 4,
+    "ARCH::Slabs": 2
+  },
+  "model_bounding_box": [
+    [
+      -0.10000000149011612,
+      -0.15000000596046448,
+      0.0
+    ],
+    [
+      8.15,
+      6.1,
+      6.0
+    ]
+  ],
+  "layer_count": 8,
+  "layer_hierarchy": [
+    {
+      "id": "a8bff1ec-eb4f-41c2-8d29-38073b425cf1",
+      "name": "Default",
+      "full_path": "Default",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 0,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "941e4a87-31a9-4c64-8de1-f3bb6e6541cd",
+      "name": "ARCH::Walls",
+      "full_path": "ARCH::Walls",
+      "color": {
+        "r": 211,
+        "g": 211,
+        "b": 211
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 4,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "78f314a7-3498-43a6-8630-e1f52c890fc9",
+      "name": "ARCH::Slabs",
+      "full_path": "ARCH::Slabs",
+      "color": {
+        "r": 128,
+        "g": 128,
+        "b": 128
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 2,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "0425ad44-8cb3-4baf-abf7-c94f3141a26f",
+      "name": "ARCH::Columns",
+      "full_path": "ARCH::Columns",
+      "color": {
+        "r": 205,
+        "g": 92,
+        "b": 92
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 6,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "8e93aff7-1506-4166-90ea-ba2794993c04",
+      "name": "ARCH::Beams",
+      "full_path": "ARCH::Beams",
+      "color": {
+        "r": 70,
+        "g": 130,
+        "b": 180
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 4,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "e9c17fd2-72a1-44e2-ab5b-43749bff0af6",
+      "name": "FE",
+      "full_path": "FE",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 0,
+      "parent_id": null,
+      "children": [
+        {
+          "id": "3129f4d1-d45a-471f-b877-a48bd1d5c321",
+          "name": "Lines",
+          "full_path": "FE::Lines",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 255
+          },
+          "visible": true,
+          "locked": false,
+          "object_count": 14,
+          "parent_id": "e9c17fd2-72a1-44e2-ab5b-43749bff0af6",
+          "children": []
+        },
+        {
+          "id": "d30b4615-c497-4465-9846-68e90d6894fe",
+          "name": "Shells",
+          "full_path": "FE::Shells",
+          "color": {
+            "r": 255,
+            "g": 165,
+            "b": 0
+          },
+          "visible": true,
+          "locked": false,
+          "object_count": 6,
+          "parent_id": "e9c17fd2-72a1-44e2-ab5b-43749bff0af6",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

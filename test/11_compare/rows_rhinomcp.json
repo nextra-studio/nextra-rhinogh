@@ -1,0 +1,66 @@
+[
+ {
+  "task": "T1_overview",
+  "system": "rhinomcp",
+  "tool": "get_document_summary",
+  "in": 0,
+  "out": 876,
+  "sec": 0.7
+ },
+ {
+  "task": "T2_inspect",
+  "system": "rhinomcp",
+  "tool": "get_object_info",
+  "in": 5,
+  "out": 23,
+  "sec": 0.05
+ },
+ {
+  "task": "T3_view",
+  "system": "rhinomcp",
+  "tool": "capture_viewport",
+  "in": 14,
+  "out": 480,
+  "sec": 0.21
+ },
+ {
+  "task": "T4_build",
+  "system": "rhinomcp",
+  "tool": "execute_rhinoscript_python_code",
+  "in": 515,
+  "out": 18,
+  "sec": 0.22
+ },
+ {
+  "task": "T4_build",
+  "system": "rhinomcp",
+  "tool": "get_objects",
+  "in": 10,
+  "out": 3758,
+  "sec": 0.24
+ },
+ {
+  "task": "T5_add_storey",
+  "system": "rhinomcp",
+  "tool": "execute_rhinoscript_python_code",
+  "in": 515,
+  "out": 18,
+  "sec": 0.05
+ },
+ {
+  "task": "G1_build",
+  "system": "rhinomcp",
+  "tool": "gh_build_graph",
+  "in": 642,
+  "out": 45,
+  "sec": 0.09
+ },
+ {
+  "task": "G3_readback",
+  "system": "rhinomcp",
+  "tool": "gh_get_canvas_state",
+  "in": 0,
+  "out": 13606,
+  "sec": 0.09
+ }
+]
