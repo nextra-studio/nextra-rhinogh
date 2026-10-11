@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading;
+using System.Text.RegularExpressions;
 using Rhino;
 
 namespace Nextra.Host
@@ -204,17 +205,29 @@ namespace Nextra.Host
         static string Text(IntPtr h) { var t = new StringBuilder(512); GetWindowText(h, t, 512); return t.ToString(); }
         static string Cls(IntPtr h) { var c = new StringBuilder(128); GetClassName(h, c, 128); return c.ToString(); }
 
-        /// The blocking popups: last active popup of each disabled top-level window of this process.
+        /// Blocking popups: (a) last active popup of each disabled top-level window, (b) any other visible,
+        /// titled top-level window of this process that is not Rhino's main window or the GH editor
+        /// (plug-in message boxes are often non-modal top-levels that still stop the script).
         static List<IntPtr> Modals()
         {
             var res = new List<IntPtr>();
             uint me = (uint)Environment.ProcessId;
+            IntPtr main = IntPtr.Zero;
+            try { main = RhinoApp.MainWindowHandle(); } catch { }
             EnumWindows((h, l) =>
             {
                 GetWindowThreadProcessId(h, out uint pid);
-                if (pid != me || !IsWindowVisible(h) || IsWindowEnabled(h)) return true;   // only disabled owners
-                var pop = GetLastActivePopup(h);
-                if (pop != IntPtr.Zero && pop != h && IsWindowVisible(pop) && !res.Contains(pop)) res.Add(pop);
+                if (pid != me || !IsWindowVisible(h)) return true;
+                if (!IsWindowEnabled(h))
+                {
+                    var pop = GetLastActivePopup(h);
+                    if (pop != IntPtr.Zero && pop != h && IsWindowVisible(pop) && !res.Contains(pop)) res.Add(pop);
+                    return true;
+                }
+                var title = Text(h);
+                if (h != main && title.Length > 0 && !title.StartsWith("Grasshopper") && !title.Contains("Rhino 8") && !res.Contains(h)
+                    && (Cls(h) == "#32770" || Regex.IsMatch(title, "error|warning|problem|exception|save|confirm|license|update", RegexOptions.IgnoreCase)))
+                    res.Add(h);
                 return true;
             }, IntPtr.Zero);
             return res;

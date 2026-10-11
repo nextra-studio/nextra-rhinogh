@@ -1,0 +1,38 @@
+30 object(s):
+## Inputs #DBABFF (g31)
+g1 = Number Slider {v=30, r=5..60, nick="W"}
+g2 = Number Slider {v=12, r=3..40, nick="H"}
+g3 = Number Slider {v=12, r=2..40, int, nick="U"}
+g4 = Number Slider {v=6, r=2..20, int, nick="V"}
+g6 = Number Slider {v=2, r=0.5..6, nick="Freq"}
+g5 = Number Slider {v=0.6, r=0..2, nick="Amp"}
+g7 = Number Slider {v=0.8, r=0.1..2, nick="Depth"}
+g8 = Point {set={0,0,0}}
+## Base surface #ABDBFF (g32)
+g9 = XZ Plane (O=g8)
+g10 = Rectangle @Curve (P=g9, X=g1, Y=g2)
+g11 = Boundary Surfaces (E=g10.R)
+## Panel grid #ABDBFF (g33)
+g12 = Divide Domain² (I=g11, U=g3, V=g4)
+g13 = Isotrim (S=g11, D=g12)
+g29 = List Length (L=g13)
+g30 = Panel (=g29)
+g14 = Area (G=g13)
+## Wave scaling #FFD6AB (g34)
+g15 = Deconstruct @Vector (P=g14.C)
+g16 = Multiplication (A=g15.X, B=g6)
+g17 = Sine (x=g16)
+g18 = Multiplication (A=g17, B=g5)
+g19 = Absolute (x=g18)
+g20 = Addition @Maths (A=g19, B=0.2)
+g21 = Scale (G=g13, C=g14.C, F=g20)
+## Fins #FFD6AB (g35)
+g22 = Brep Edges (B=g21.G)
+g23 = Join Curves (C=g22.En)
+g24 = Unit Y (F=g7)
+g25 = Extrude (B=g23, D=g24)
+g26 = Cap Holes (B=g25)
+## Display #B2FAB4 (g36)
+g27 = Colour Swatch {c=#5A8CB4}
+g28 = Custom Preview (G=g26, M=g27)
+--- ok=True 0.07s ~in 8 tok / out 304 tok

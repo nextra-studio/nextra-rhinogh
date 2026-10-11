@@ -174,6 +174,7 @@ namespace Nextra.Engine.Gh
         {
             var set = new HashSet<Guid>(objs.Select(o => o.InstanceGuid));
             foreach (var o in objs) { o.Attributes.ExpireLayout(); o.Attributes.PerformLayout(); }
+            SnapshotConsumers(objs);
             var edges = Edges(objs, set);
 
             // macro membership: smallest group containing the object
@@ -279,6 +280,18 @@ namespace Nextra.Engine.Gh
             }
             Resolve(sinks, yGap, micro);
 
+            // members with no wires inside this block (e.g. a group of sliders): pack them tightly in their current
+            // order instead of keeping scattered gaps
+            // order by where their consumers sit (left→right, top→bottom) so wires leave the block uncrossed
+            var loose = std.Where(i => !edges.Any(e => e.From == i.Id || e.To == i.Id)).OrderBy(i => ConsumerKey(i).x).ThenBy(i => ConsumerKey(i).y).ThenBy(i => i.Y).ToList();
+            if (loose.Count > 1)
+            {
+                float cy = loose[0].Y;
+                foreach (var i in loose) { Move(i, i.X, cy, micro); cy = i.Y + i.H + yGap; }
+                foreach (var grp in std.Where(i => !loose.Contains(i)).GroupBy(i => i.Rank)) Resolve(grp.ToList(), yGap, micro);
+                foreach (var grp in std.GroupBy(i => i.Rank)) Resolve(grp.ToList(), yGap, micro);
+            }
+
             // normalise top to original top
             float top = std.Min(i => i.Y);
             foreach (var i in std) Move(i, i.X, i.Y - top + y0, micro);
@@ -298,6 +311,23 @@ namespace Nextra.Engine.Gh
         }
 
         static Edge e0(List<Edge> l) => l[0];
+
+        static Dictionary<Guid, (float x, float y)> _consumerKeys = new Dictionary<Guid, (float, float)>();
+
+        static (float x, float y) ConsumerKey(Item i) =>
+            i.Obj != null && _consumerKeys.TryGetValue(i.Obj.InstanceGuid, out var k) ? k : (float.MaxValue, i.Y);
+
+        /// consumer positions BEFORE anything moves (layout moves blocks one by one)
+        static void SnapshotConsumers(List<IGH_DocumentObject> objs)
+        {
+            _consumerKeys = new Dictionary<Guid, (float, float)>();
+            foreach (var o in objs)
+            {
+                var rec = OutputsOf(o).SelectMany(p => p.Recipients).Select(r => r.Attributes).Where(a => a != null).ToList();
+                // the recipient input grip's own canvas rect = where the wire lands
+                if (rec.Count > 0) _consumerKeys[o.InstanceGuid] = (rec.Min(a => (float)Math.Round(a.Bounds.X / 50f)), rec.Min(a => a.Bounds.Y));
+            }
+        }
 
         static void Resolve(List<Item> col, float gap, bool micro)
         {

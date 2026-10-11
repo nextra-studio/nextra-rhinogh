@@ -88,8 +88,28 @@ namespace Nextra.Engine.Gh.Shorthand
             return sb.ToString().TrimEnd();
         }
 
-        static IEnumerable<IGH_DocumentObject> Order(IEnumerable<IGH_DocumentObject> objs) =>
-            objs.OrderBy(o => Math.Round((o.Attributes?.Pivot.X ?? 0) / 60f)).ThenBy(o => o.Attributes?.Pivot.Y ?? 0);
+        /// Data-flow order (sources first), ties by canvas position — readable even for messy canvases.
+        static IEnumerable<IGH_DocumentObject> Order(IEnumerable<IGH_DocumentObject> objsIn)
+        {
+            var objs = objsIn.ToList();
+            var set = new HashSet<Guid>(objs.Select(o => o.InstanceGuid));
+            var indeg = objs.ToDictionary(o => o.InstanceGuid, o => Upstream(o).Count(u => set.Contains(u.InstanceGuid) && u != o));
+            var byPos = objs.OrderBy(o => Math.Round((o.Attributes?.Pivot.X ?? 0) / 60f)).ThenBy(o => o.Attributes?.Pivot.Y ?? 0).ToList();
+            var outL = new List<IGH_DocumentObject>(); var done = new HashSet<Guid>();
+            while (outL.Count < objs.Count)
+            {
+                var next = byPos.FirstOrDefault(o => !done.Contains(o.InstanceGuid) && indeg[o.InstanceGuid] <= 0) ?? byPos.First(o => !done.Contains(o.InstanceGuid)); // cycle: take next by position
+                outL.Add(next); done.Add(next.InstanceGuid);
+                foreach (var dn in objs.Where(x => !done.Contains(x.InstanceGuid) && Upstream(x).Contains(next))) indeg[dn.InstanceGuid]--;
+            }
+            return outL;
+        }
+
+        static List<IGH_DocumentObject> Upstream(IGH_DocumentObject o)
+        {
+            var ps = o is IGH_Component c ? c.Params.Input : o is IGH_Param p ? new List<IGH_Param> { p } : new List<IGH_Param>();
+            return ps.SelectMany(p => p.Sources).Select(s => s.Attributes?.GetTopLevel?.DocObject).Where(x => x != null).Distinct().ToList();
+        }
 
         public static string Ref(GH_Document d, IGH_Param src)
         {
@@ -163,6 +183,7 @@ namespace Nextra.Engine.Gh.Shorthand
             var pd = p.GetType().GetProperty("PersistentData")?.GetValue(p) as Grasshopper.Kernel.Data.IGH_Structure;
             if (pd == null || pd.DataCount == 0) return null;
             var items = pd.AllData(true).ToList();
+            if (pd.PathCount > 1) return $"<tree: {pd.PathCount} branches, {items.Count} items>";   // flat set=[…] would hide the paths
             if (items.Count == 1) return Lit(items[0]);
             var shown = items.Take(max).Select(Lit).ToList();
             return "[" + string.Join(",", shown) + (items.Count > max ? $",…+{items.Count - max}" : "") + "]";
@@ -287,7 +308,7 @@ namespace Nextra.Engine.Gh.Shorthand
             }
             if (o is IGH_PreviewObject po && po.IsPreviewCapable && po.Hidden) cfg.Add("hide");
             if (o is IGH_ActiveObject ao && ao.Locked) cfg.Add("lock");
-            if (!(o is GH_NumberSlider) && !(o is GH_Panel) && !(o is GH_Scribble) && !(o is GH_ValueList) && !(o is GH_BooleanToggle) && !Scripts.IsScript(o))
+            if (!(o is GH_NumberSlider) && !(o is GH_Panel) && !(o is GH_Scribble) && !(o is GH_ValueList) && !(o is GH_BooleanToggle) && !(o is GH_ColourSwatch) && !Scripts.IsScript(o))
             {
                 var st = opt.FullState ? StateIO.Read(o) : StateIO.Diff(o);
                 var all = StateIO.Read(o).Keys.ToList();

@@ -175,9 +175,13 @@ namespace Nextra.Engine.Gh
             if (hasBake) Bake(d, a, r);
             if (a.Has("save"))
             {
-                var path = a.Str("save");
-                var io = new GH_DocumentIO(d);
-                if (!io.SaveQuiet(path)) throw new NxError("save failed: " + path);
+                // archive write: no GH UI (SaveQuiet shows a modal box on a bad path)
+                var path = Path.GetFullPath(a.Str("save"));
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                var arc = new GH_IO.Serialization.GH_Archive();
+                if (!arc.AppendObject(d, "Definition")) throw new NxError("could not serialise the GH document");
+                if (!arc.WriteToFile(path, true, false)) throw new NxError("save failed: " + path, "check the path is writable / not open elsewhere");
+                d.FilePath = path;
                 r.Line("saved " + path);
             }
             var hint = Memory.RecurringHint();
