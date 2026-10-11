@@ -39,4 +39,4 @@ On partial: fix **only** the failed lines, using the new handles. `undo {checkpo
 - `shorthand.md` — GH shorthand grammar + examples (read before the first gh_edit of a session)
 - `workflows.md` — recipes: Rhino from scratch / modify, GH build / modify / tidy, Rhino↔GH, scripts, Karamba
 - `api/rhino-python.md`, `api/rhino-csharp.md`, `api/gh-python.md`, `api/gh-csharp.md` — cheat sheets
-- `profiles/karamba.md` — Karamba3D components, ports, typical chain
+- `plugins/<Category>.md` — plug-in guides (Karamba3D, …). **Loaded only when that plug-in is used**: the first time its components appear in gh_edit/query, the guide's `## Rules` are attached to the reply once per session (mode `auto`; `hint` = pointer only; `off`) — set `"plugin_docs"` in `%APPDATA%/Nextra/config.json` or `gh_edit {plugin_docs:'hint'}`. Add your own in `%APPDATA%/Nextra/memory/plugins/` using `plugins/_TEMPLATE.md`.

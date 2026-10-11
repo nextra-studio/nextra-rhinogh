@@ -167,6 +167,11 @@ namespace Nextra.Engine.Gh
                 if (ck != null && br != null && br.LinesOk == 0 && br.Deleted == 0 && scriptComp == null) Checkpoints.Discard(ck);
             }
 
+            // plug-in guides: categories of touched nodes + categories named in the ops (@Karamba3D)
+            var cats = touched.Select(o => o.Category).ToList();
+            if (hasOps) cats.AddRange(Regex.Matches(a.Str("ops") ?? "", @"@([\w\.\- ]+?)(?=[\s(/{]|$)").Select(m => m.Groups[1].Value.Trim()));
+            PluginDocs.Check(cats, r, a.Str("plugin_docs", null));
+
             if (hasBake) Bake(d, a, r);
             if (a.Has("save"))
             {

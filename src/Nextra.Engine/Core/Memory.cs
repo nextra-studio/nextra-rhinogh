@@ -296,8 +296,13 @@ namespace Nextra.Engine
             }
             string section = null;
             if (topic.Contains('#')) { section = topic.Substring(topic.IndexOf('#') + 1); topic = topic.Substring(0, topic.IndexOf('#')); }
-            var file = files.FirstOrDefault(f => Path.GetFileNameWithoutExtension(f).Equals(topic, StringComparison.OrdinalIgnoreCase))
-                       ?? files.FirstOrDefault(f => Path.GetRelativePath(dir, f).Replace('\\', '/').Equals(topic, StringComparison.OrdinalIgnoreCase));
+            // user plug-in guides (memory/plugins) shadow the bundled ones
+            var userPlugins = Path.Combine(Memory.Dir, "plugins");
+            if (Directory.Exists(userPlugins)) files.InsertRange(0, Directory.EnumerateFiles(userPlugins, "*.md"));
+            string Rel(string f) => (f.StartsWith(userPlugins, StringComparison.OrdinalIgnoreCase) ? "plugins/" + Path.GetFileName(f) : Path.GetRelativePath(dir, f)).Replace('\\', '/');
+            var t2 = topic.EndsWith(".md") ? topic : topic + ".md";
+            var file = files.FirstOrDefault(f => Rel(f).Equals(t2, StringComparison.OrdinalIgnoreCase))
+                       ?? files.FirstOrDefault(f => Path.GetFileNameWithoutExtension(f).Equals(topic, StringComparison.OrdinalIgnoreCase));
             if (file != null && section == null) { r.Line(File.ReadAllText(file)); return; }
             // section or keyword search across files
             string kw = section ?? topic;

@@ -177,6 +177,7 @@ namespace Nextra.Engine.Gh
                 foreach (var g in list.GroupBy(p => p.Desc.SubCategory))
                     r.Line($"[{g.Key}] " + string.Join(", ", g.Select(p => p.Desc.Name)));
                 r.Line("ports: query {scope:'components', filter:'<exact name>'}");
+                PluginDocs.Check(new[] { parts[0] }.Concat(list.Select(p => p.Desc.Category)).Distinct(), r);
                 return;
             }
             var terms = q.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0).ToList();

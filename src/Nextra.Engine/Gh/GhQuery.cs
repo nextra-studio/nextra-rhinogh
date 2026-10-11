@@ -114,6 +114,7 @@ namespace Nextra.Engine.Gh
                         r.Line($"{objs.Count} object(s){(objs.Count > page.Count ? $", {offset + 1}-{offset + page.Count}" : "")}:");
                         r.Line(Writer.Write(d, page, new WriteOptions { Messages = true, Data = a.Bool("data", false), MaxObjects = limit }));
                         if (objs.Count > offset + page.Count) r.Line($"more: offset:{offset + page.Count}");
+                        PluginDocs.Check(page, r);
                         break;
                     }
                 case "detail":
