@@ -12,7 +12,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 
 ## A. Infrastructure
 - [x] A1 Host plugin: 127.0.0.1-only server, token, server.json, timeout + late results, dialog detect/dismiss
-- [~] A2 Status dot (built: follows Rhino window, GH canvas dot, NextraOn/Off; host redeploy pending restart): minimal movable floating dot (green = client active, amber = idle, red = down; click red → restart/retry ports)
+- [x] A2 Status dot (Rhino status-bar corner + GH canvas corner; green/amber/red; NextraOn/Off; verified by screenshot): minimal movable floating dot (green = client active, amber = idle, red = down; click red → restart/retry ports)
 - [x] A3 Engine hot-reload, state bag survives reload
 - [x] A4 MCP bridge (stdio) + `.mcpb` manifest + `nx` CLI for testing
 - [ ] A5 Meaningful replies everywhere: what worked, what failed, why, what to do next; fallback instead of repeated errors
