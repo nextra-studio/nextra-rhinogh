@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Nextra.Engine</AssemblyName>
+    <RootNamespace>Nextra.Engine</RootNamespace>
+    <Version>0.1.0</Version>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Grasshopper"><HintPath>$(RhinoDir)\Plug-ins\Grasshopper\Grasshopper.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="GH_IO"><HintPath>$(RhinoDir)\Plug-ins\Grasshopper\GH_IO.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Rhino.Runtime.Code"><HintPath>$(RhinoDir)\System\Rhino.Runtime.Code.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

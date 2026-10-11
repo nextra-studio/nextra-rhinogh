@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RhinoDir>C:\Program Files\Rhino 8</RhinoDir>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>CS1591;CA1416;NU1701;CS0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RhinoCommon"><HintPath>$(RhinoDir)\System\RhinoCommon.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Eto"><HintPath>$(RhinoDir)\System\Eto.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

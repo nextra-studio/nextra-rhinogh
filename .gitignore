@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+.vs/
+__pycache__/
+test/captures/
+test/calls.jsonl
+*.bak

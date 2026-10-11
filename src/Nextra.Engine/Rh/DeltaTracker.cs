@@ -1,0 +1,157 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Rhino;
+using Rhino.DocObjects;
+using Rhino.Geometry;
+
+namespace Nextra.Engine.Rh
+{
+    /// Records Rhino doc changes during one call: what was added / modified / deleted, plus copies of the
+    /// "before" state so the call can be reverted exactly (independent of the user's undo stack).
+    public class DeltaTracker : IDisposable
+    {
+        static readonly List<DeltaTracker> Active = new List<DeltaTracker>();
+
+        public readonly HashSet<Guid> Added = new HashSet<Guid>();
+        public readonly HashSet<Guid> Modified = new HashSet<Guid>();
+        public readonly HashSet<Guid> Deleted = new HashSet<Guid>();
+        public readonly Dictionary<Guid, object[]> Before = new Dictionary<Guid, object[]>(); // id → {geometry, attributes, RhinoObject}
+        readonly RhinoDoc _doc;
+
+        public DeltaTracker(RhinoDoc doc)
+        {
+            _doc = doc;
+            RhinoDoc.AddRhinoObject += OnAdd;
+            RhinoDoc.UndeleteRhinoObject += OnAdd;
+            RhinoDoc.DeleteRhinoObject += OnDelete;
+            RhinoDoc.ReplaceRhinoObject += OnReplace;
+            RhinoDoc.ModifyObjectAttributes += OnAttr;
+            Active.Add(this);
+        }
+
+        public static void DetachAll()
+        {
+            foreach (var t in Active.ToList()) t.Dispose();
+        }
+
+        public void Dispose()
+        {
+            RhinoDoc.AddRhinoObject -= OnAdd;
+            RhinoDoc.UndeleteRhinoObject -= OnAdd;
+            RhinoDoc.DeleteRhinoObject -= OnDelete;
+            RhinoDoc.ReplaceRhinoObject -= OnReplace;
+            RhinoDoc.ModifyObjectAttributes -= OnAttr;
+            Active.Remove(this);
+        }
+
+        void Remember(RhinoObject o)
+        {
+            if (o == null || Added.Contains(o.Id) || Before.ContainsKey(o.Id)) return;
+            Before[o.Id] = new object[] { o.Geometry?.Duplicate(), o.Attributes?.Duplicate(), o };
+        }
+
+        void OnAdd(object s, RhinoObjectEventArgs e)
+        {
+            if (e.TheObject?.Document != _doc) return;
+            var id = e.ObjectId;
+            if (Deleted.Remove(id)) { Modified.Add(id); return; }  // replace = delete + add
+            if (!Before.ContainsKey(id)) Added.Add(id);
+        }
+
+        void OnDelete(object s, RhinoObjectEventArgs e)
+        {
+            if (e.TheObject?.Document != _doc) return;
+            var id = e.ObjectId;
+            if (Added.Remove(id)) return;                          // created and deleted in the same call
+            Remember(e.TheObject);
+            Modified.Remove(id);
+            Deleted.Add(id);
+        }
+
+        void OnReplace(object s, RhinoReplaceObjectEventArgs e)
+        {
+            if (e.Document != _doc) return;
+            if (Added.Contains(e.ObjectId)) return;
+            Remember(e.OldRhinoObject);
+            Modified.Add(e.ObjectId);
+        }
+
+        void OnAttr(object s, RhinoModifyObjectAttributesEventArgs e)
+        {
+            if (e.Document != _doc || Added.Contains(e.RhinoObject.Id)) return;
+            if (!Before.ContainsKey(e.RhinoObject.Id))
+                Before[e.RhinoObject.Id] = new object[] { e.RhinoObject.Geometry?.Duplicate(), e.OldAttributes?.Duplicate(), e.RhinoObject };
+            Modified.Add(e.RhinoObject.Id);
+        }
+
+        public bool Empty => Added.Count == 0 && Modified.Count == 0 && Deleted.Count == 0;
+
+        /// Compact delta text: one line per object (handles + description), capped.
+        public void Report(Reply r, int max = 40)
+        {
+            if (Empty) { r.Line("rhino: no changes"); return; }
+            var parts = new List<string>();
+            if (Added.Count > 0) parts.Add($"+{Added.Count}");
+            if (Modified.Count > 0) parts.Add($"~{Modified.Count}");
+            if (Deleted.Count > 0) parts.Add($"-{Deleted.Count}");
+            r.Line("rhino delta " + string.Join(" ", parts) + ":");
+            int n = 0;
+            foreach (var id in Added.Concat(Modified))
+            {
+                var o = _doc.Objects.FindId(id);
+                if (o == null) continue;
+                if (n++ >= max) { r.Line($"  … ({Added.Count + Modified.Count - max} more; query filter:'…' to list)"); break; }
+                r.Line((Added.Contains(id) ? "+ " : "~ ") + Geo.Describe(o));
+            }
+            if (Deleted.Count > 0) r.Line("- " + ViewTool.Ranges(Deleted.Select(Handles.Rh)));
+        }
+
+        /// Undo this delta (used by checkpoints).
+        public static string Revert(RhinoDoc doc, IEnumerable<Guid> added, Dictionary<Guid, object[]> before)
+        {
+            int del = 0, rest = 0, fail = 0;
+            foreach (var id in added) if (doc.Objects.Delete(id, true)) del++;
+            foreach (var kv in before)
+            {
+                var geo = kv.Value[0] as GeometryBase;
+                var attrs = kv.Value[1] as ObjectAttributes;
+                var obj = kv.Value[2] as RhinoObject;
+                var cur = doc.Objects.FindId(kv.Key);
+                bool ok;
+                if (cur != null)
+                {
+                    ok = geo == null || doc.Objects.Replace(kv.Key, geo, true) || ReplaceAny(doc, kv.Key, geo);
+                    if (attrs != null) doc.Objects.ModifyAttributes(kv.Key, attrs, true);
+                }
+                else
+                {
+                    ok = obj != null && doc.Objects.Undelete(obj);
+                    if (!ok && geo != null)
+                    {
+                        var a2 = attrs?.Duplicate() ?? new ObjectAttributes();
+                        a2.ObjectId = kv.Key;
+                        ok = doc.Objects.Add(geo, a2) != Guid.Empty;
+                    }
+                }
+                if (ok) rest++; else fail++;
+            }
+            doc.Views.Redraw();
+            return $"rhino: removed {del} added, restored {rest}" + (fail > 0 ? $", {fail} failed" : "");
+        }
+
+        static bool ReplaceAny(RhinoDoc doc, Guid id, GeometryBase g)
+        {
+            switch (g)
+            {
+                case Brep b: return doc.Objects.Replace(id, b);
+                case Curve c: return doc.Objects.Replace(id, c);
+                case Mesh m: return doc.Objects.Replace(id, m);
+                case Point p: return doc.Objects.Replace(id, p.Location);
+                case Extrusion x: return doc.Objects.Replace(id, x);
+                case SubD s: return doc.Objects.Replace(id, s);
+                default: return false;
+            }
+        }
+    }
+}
