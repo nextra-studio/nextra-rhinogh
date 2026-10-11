@@ -8,11 +8,19 @@ namespace Nextra.Host
 {
     /// Minimal movable status light, owned by the Rhino window (floats over Rhino and the GH editor).
     /// green = an LLM bridge talked to us in the last 90 s, amber = server up but no client, red = server down.
-    /// Drag to move (position is remembered). Click: red → restart server (tries the next free port); otherwise shows status.
+    /// Follows the Rhino window; drag to move (offset is remembered). Click: red → restart server (tries the next free port); otherwise shows status.
     class StatusDot : Form
     {
         static StatusDot _instance;
-        readonly Timer _timer = new Timer { Interval = 1000 };
+        readonly Timer _timer = new Timer { Interval = 300 };
+        IntPtr _owner;
+        Point _offset;     // from the owner window's bottom-right corner
+        int _tick;
+
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        struct RECT { public int L, T, R, B; }
+        [System.Runtime.InteropServices.DllImport("user32.dll")] static extern bool GetWindowRect(IntPtr h, out RECT r);
+        [System.Runtime.InteropServices.DllImport("user32.dll")] static extern bool IsIconic(IntPtr h);
         Color _color = Color.Gray;
         Point _down;
         bool _dragged;
@@ -21,7 +29,7 @@ namespace Nextra.Host
         public static void Show(IntPtr owner)
         {
             if (_instance != null) return;
-            _instance = new StatusDot();
+            _instance = new StatusDot { _owner = owner };
             var nw = new NativeWindow();
             try { nw.AssignHandle(owner); } catch { }
             _instance.Show(nw);
@@ -42,13 +50,26 @@ namespace Nextra.Host
             BackColor = Color.Magenta;
             TransparencyKey = Color.Magenta;
             DoubleBuffered = true;
-            Location = LoadPos();
-            _timer.Tick += (s, e) => Tick();
+            _offset = LoadOffset();
+            _timer.Tick += (s, e) => { Follow(); if (_tick++ % 3 == 0) Tick(); };
             _timer.Start();
             Tick();
         }
 
         protected override bool ShowWithoutActivation => true;
+
+        /// Stick to the Rhino window: bottom-right corner + remembered offset; hide while Rhino is minimised.
+        void Follow()
+        {
+            if (_owner == IntPtr.Zero || Capture) return;
+            if (IsIconic(_owner)) { if (Visible) Hide(); return; }
+            if (!Visible) Show();
+            if (!GetWindowRect(_owner, out var r)) return;
+            var p = new Point(r.R + _offset.X, r.B + _offset.Y);
+            if (p != Location) Location = p;
+        }
+
+        Point OwnerBottomRight() => GetWindowRect(_owner, out var r) ? new Point(r.R, r.B) : Point.Empty;
 
         public static void CurrentState(out Color c, out string t)
         {
@@ -87,7 +108,13 @@ namespace Nextra.Host
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (_dragged) { SavePos(Location); return; }
+            if (_dragged)
+            {
+                var br = OwnerBottomRight();
+                _offset = new Point(Location.X - br.X, Location.Y - br.Y);
+                SaveOffset(_offset);
+                return;
+            }
             ClickAction();
             Tick();
         }
@@ -103,19 +130,13 @@ namespace Nextra.Host
 
         static string PosFile => Path.Combine(Server.AppDir, "dot.txt");
 
-        static Point LoadPos()
+        // default: just inside the bottom-right corner of Rhino (near the status bar)
+        static Point LoadOffset()
         {
-            try
-            {
-                var s = File.ReadAllText(PosFile).Split(',');
-                var p = new Point(int.Parse(s[0]), int.Parse(s[1]));
-                foreach (var scr in Screen.AllScreens) if (scr.WorkingArea.Contains(p)) return p;
-            }
-            catch { }
-            var wa = Screen.PrimaryScreen.WorkingArea;
-            return new Point(wa.Right - 40, wa.Bottom - 40);
+            try { var t = File.ReadAllText(PosFile).Split(','); if (t.Length == 3 && t[0] == "off") return new Point(int.Parse(t[1]), int.Parse(t[2])); } catch { }
+            return new Point(-46, -34);
         }
 
-        static void SavePos(Point p) { try { File.WriteAllText(PosFile, $"{p.X},{p.Y}"); } catch { } }
+        static void SaveOffset(Point p) { try { File.WriteAllText(PosFile, $"off,{p.X},{p.Y}"); } catch { } }
     }
 }

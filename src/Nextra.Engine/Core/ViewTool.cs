@@ -84,7 +84,32 @@ namespace Nextra.Engine
             public HashSet<Guid> Show;
             public Transform W2S = Transform.Unset;
             public int VW, VH;
-            public List<(Point3d pt, string text, Color color)> Extra; // GH preview tags drawn in-image
+            public List<GeometryBase> Geometry;   // unbaked GH preview geometry drawn only during capture
+            readonly DisplayMaterial _mat = new DisplayMaterial(Color.FromArgb(200, 70, 70), 0.35);
+
+            protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
+            {
+                if (Geometry == null) return;
+                foreach (var g in Geometry) e.IncludeBoundingBox(g.GetBoundingBox(false));
+            }
+
+            protected override void PostDrawObjects(DrawEventArgs e)
+            {
+                if (Geometry == null) return;
+                var wire = Color.FromArgb(150, 20, 20);
+                foreach (var g in Geometry)
+                {
+                    switch (g)
+                    {
+                        case Brep b: e.Display.DrawBrepShaded(b, _mat); e.Display.DrawBrepWires(b, wire, 0); break;
+                        case Extrusion x: { var b2 = x.ToBrep(); e.Display.DrawBrepShaded(b2, _mat); e.Display.DrawBrepWires(b2, wire, 0); break; }
+                        case Mesh m: e.Display.DrawMeshShaded(m, _mat); e.Display.DrawMeshWires(m, wire); break;
+                        case Curve c: e.Display.DrawCurve(c, wire, 2); break;
+                        case Point pt: e.Display.DrawPoint(pt.Location, PointStyle.X, 4, wire); break;
+                        case Surface s: { var b3 = s.ToBrep(); e.Display.DrawBrepShaded(b3, _mat); e.Display.DrawBrepWires(b3, wire, 0); break; }
+                    }
+                }
+            }
 
             protected override void ObjectCulling(CullObjectEventArgs e)
             {
@@ -217,7 +242,8 @@ namespace Nextra.Engine
                         vp.SetCameraDirection(new Vector3d(-1, 1, -1), false);
                         vp.CameraUp = Vector3d.ZAxis;
                     }
-                    if (!string.IsNullOrEmpty(focus) && focus != "all" && focus != "extents" && focus != "keep")
+                    if (ctx.ZoomBox.HasValue) { vp.ZoomBoundingBox(ctx.ZoomBox.Value); how = "zoom to GH preview"; }
+                    else if (!string.IsNullOrEmpty(focus) && focus != "all" && focus != "extents" && focus != "keep")
                     {
                         var objs = Filter.Parse(focus).Apply(doc);
                         if (objs.Count == 0) throw new NxError($"focus '{focus}' matched nothing", "use handles from query/view, a filter like 'layer:Walls', or cells like C3:E5");
@@ -234,6 +260,7 @@ namespace Nextra.Engine
                     if (isolate && focusIds != null) conduit.Show = focusIds;
                 }
                 if (isolate && focusIds != null) conduit.Show = focusIds;
+                conduit.Geometry = ctx.Geometry;
 
                 var cam = new ViewportInfo(vp);
                 // capture at the viewport's own aspect so the frustum is unchanged and the mapping is exact
@@ -360,6 +387,7 @@ namespace Nextra.Engine
             public string Text;
             public BoundingBox? ZoomBox;
             public bool SkipRhinoTags;
+            public List<GeometryBase> Geometry;
         }
 
         static Color ColorFor(GeometryBase g) => g switch

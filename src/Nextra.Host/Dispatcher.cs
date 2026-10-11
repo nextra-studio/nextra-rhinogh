@@ -40,18 +40,33 @@ namespace Nextra.Host
             // status is answered from the server thread so it works while the UI thread is blocked
             if (tool == "query" && IsStatusQuery(argsJson, out bool dismiss)) return Status(dismiss);
 
+            // parallel calls from one client are queued (one at a time on the UI thread);
+            // only a call stuck past its own timeout makes later calls fail fast
             Pending p;
-            lock (Gate)
+            var deadline = DateTime.Now.AddMilliseconds(timeoutMs);
+            while (true)
             {
-                if (_running != null && !_running.Done)
+                Pending prev;
+                lock (Gate)
                 {
-                    var dlg = DialogProbe.Describe();
-                    return Reply(false, $"busy: previous '{_running.Tool}' still running ({(DateTime.Now - _running.Start).TotalSeconds:0}s). " +
-                        (dlg ?? "No dialog detected: probably a long computation.") +
-                        " Wait and call again, or query {scope:'status', dismiss_dialog:true} to press Esc on a dialog.");
+                    prev = _running;
+                    if (prev == null || prev.Done)
+                    {
+                        p = new Pending { Tool = tool };
+                        _running = p;
+                        break;
+                    }
+                    if (prev.TimedOut)
+                    {
+                        var dlg = DialogProbe.Describe();
+                        return Reply(false, $"busy: earlier '{prev.Tool}' still running ({(DateTime.Now - prev.Start).TotalSeconds:0}s, past its timeout). " +
+                            (dlg ?? "No dialog detected: long computation.") +
+                            " Wait and call again; query {scope:'status'} shows progress; dismiss_dialog:true cancels a blocking dialog.");
+                    }
                 }
-                p = new Pending { Tool = tool };
-                _running = p;
+                var left = deadline - DateTime.Now;
+                if (left <= TimeSpan.Zero) return Reply(false, $"timeout: waited for earlier '{prev.Tool}' to finish; retry");
+                prev.Event.Wait(left);
             }
 
             RhinoApp.InvokeOnUiThread(new Action(() =>
@@ -71,7 +86,7 @@ namespace Nextra.Host
                     p.Result = res;
                     p.Done = true;
                     if (p.TimedOut)
-                        Late.Add($"[late] '{tool}' finished after {(DateTime.Now - p.Start).TotalSeconds:0}s:\n" + TextOf(res, 1500));
+                        Late.Add($"[late] '{tool}' finished after {(DateTime.Now - p.Start).TotalSeconds:0}s:\n" + TextOf(res, 6000));
                 }
                 p.Event.Set();
             }));
@@ -169,68 +184,78 @@ namespace Nextra.Host
         public static string Reply(bool ok, string text) => JsonSerializer.Serialize(new { ok, text });
     }
 
-    /// Detects modal dialogs owned by this Rhino process (Win32), and can press Esc on them.
+    /// Detects the modal dialog blocking Rhino (the main window's last active popup), reads its text,
+    /// and can cancel it. Never sends keystrokes (Esc would also interrupt a running GH solution).
     static class DialogProbe
     {
         delegate bool EnumProc(IntPtr h, IntPtr l);
         [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc cb, IntPtr l);
+        [DllImport("user32.dll")] static extern bool EnumChildWindows(IntPtr parent, EnumProc cb, IntPtr l);
         [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
         [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr h);
         [DllImport("user32.dll")] static extern bool IsWindowEnabled(IntPtr h);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr h, StringBuilder s, int n);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetClassName(IntPtr h, StringBuilder s, int n);
-        [DllImport("user32.dll")] static extern IntPtr GetWindow(IntPtr h, uint cmd);
+        [DllImport("user32.dll")] static extern IntPtr GetLastActivePopup(IntPtr h);
         [DllImport("user32.dll")] static extern bool PostMessage(IntPtr h, uint msg, IntPtr w, IntPtr l);
-        const uint GW_OWNER = 4, WM_KEYDOWN = 0x0100, WM_KEYUP = 0x0101, WM_CLOSE = 0x0010;
+        const uint WM_CLOSE = 0x0010, WM_COMMAND = 0x0111;
+        const int IDCANCEL = 2;
 
-        static List<(IntPtr h, string title, string cls)> Dialogs()
+        static string Text(IntPtr h) { var t = new StringBuilder(512); GetWindowText(h, t, 512); return t.ToString(); }
+        static string Cls(IntPtr h) { var c = new StringBuilder(128); GetClassName(h, c, 128); return c.ToString(); }
+
+        /// The blocking popups: last active popup of each disabled top-level window of this process.
+        static List<IntPtr> Modals()
         {
-            var list = new List<(IntPtr, string, string)>();
+            var res = new List<IntPtr>();
             uint me = (uint)Environment.ProcessId;
-            IntPtr main = IntPtr.Zero;
-            try { main = RhinoApp.MainWindowHandle(); } catch { }
             EnumWindows((h, l) =>
             {
                 GetWindowThreadProcessId(h, out uint pid);
-                if (pid != me || h == main || !IsWindowVisible(h)) return true;
-                var t = new StringBuilder(256); GetWindowText(h, t, 256);
-                var c = new StringBuilder(128); GetClassName(h, c, 128);
-                string title = t.ToString(), cls = c.ToString();
-                bool owned = GetWindow(h, GW_OWNER) != IntPtr.Zero;
-                // modal candidates: classic dialogs, or owned windows while the main window is disabled
-                if (cls == "#32770" || (owned && main != IntPtr.Zero && !IsWindowEnabled(main)))
-                    list.Add((h, title, cls));
+                if (pid != me || !IsWindowVisible(h) || IsWindowEnabled(h)) return true;   // only disabled owners
+                var pop = GetLastActivePopup(h);
+                if (pop != IntPtr.Zero && pop != h && IsWindowVisible(pop) && !res.Contains(pop)) res.Add(pop);
                 return true;
             }, IntPtr.Zero);
-            return list;
+            return res;
+        }
+
+        static string Body(IntPtr dlg)
+        {
+            var parts = new List<string>();
+            EnumChildWindows(dlg, (c, l) =>
+            {
+                if (!IsWindowVisible(c)) return true;
+                var t = Text(c).Trim();
+                if (t.Length > 1 && !parts.Contains(t)) parts.Add(t);
+                return true;
+            }, IntPtr.Zero);
+            var s = string.Join(" | ", parts);
+            return s.Length > 400 ? s.Substring(0, 400) + "…" : s;
         }
 
         public static string Describe()
         {
             try
             {
-                var d = Dialogs();
-                IntPtr main = IntPtr.Zero;
-                try { main = RhinoApp.MainWindowHandle(); } catch { }
-                bool mainDisabled = main != IntPtr.Zero && !IsWindowEnabled(main);
-                if (d.Count == 0) return mainDisabled ? "Rhino main window is disabled (a modal dialog is probably open)." : null;
+                var m = Modals();
+                if (m.Count == 0) return null;
                 var parts = new List<string>();
-                foreach (var x in d) parts.Add($"'{(x.title.Length > 0 ? x.title : "(untitled)")}'");
-                return "Dialog open: " + string.Join(", ", parts) + (mainDisabled ? " (modal)" : "");
+                foreach (var h in m) parts.Add($"'{Text(h)}': {Body(h)}");
+                return "Modal dialog open: " + string.Join(" ; ", parts);
             }
             catch (Exception e) { return "dialog probe failed: " + e.Message; }
         }
 
         public static string Dismiss()
         {
-            var d = Dialogs();
-            foreach (var x in d)
+            var m = Modals();
+            foreach (var h in m)
             {
-                PostMessage(x.h, WM_KEYDOWN, (IntPtr)0x1B, IntPtr.Zero);
-                PostMessage(x.h, WM_KEYUP, (IntPtr)0x1B, IntPtr.Zero);
-                PostMessage(x.h, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                if (Cls(h) == "#32770") PostMessage(h, WM_COMMAND, (IntPtr)IDCANCEL, IntPtr.Zero);
+                PostMessage(h, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
-            return d.Count == 0 ? "nothing dismissed" : $"sent Esc/close to {d.Count} dialog(s)";
+            return m.Count == 0 ? "nothing dismissed" : $"cancelled/closed {m.Count} dialog(s): " + string.Join(", ", m.ConvertAll(Text));
         }
     }
 }

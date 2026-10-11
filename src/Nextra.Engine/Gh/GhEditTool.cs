@@ -198,18 +198,17 @@ namespace Nextra.Engine.Gh
             else if (a.Bool("mirror", false)) return "mirror: " + Scripts.Mirror(d, comp) + " (edit the file, then script {handle, from_mirror:true})";
             else throw new NxError("script needs code | patch [{find,replace}] | file | from_mirror | mirror");
             code = code.Replace("\r\n", "\n");
-            Scripts.SetCode(comp, code);
-            if (Scripts.Lang(comp) == "cs" || a.Bool("params_from_code", false)) Scripts.ParamsFromScript(comp);
+            var pnote = Scripts.SetCodeSmart(comp, code);
             var mirror = Scripts.Mirror(d, comp);
             int n = code.Split('\n').Length;
-            return $"script {h}: {n} lines set ({Scripts.Lang(comp)}), mirrored to {Path.GetFileName(mirror)}; ports {ComponentSearch.Describe(comp, false)} | {ComponentSearch.Describe(comp, true)}";
+            return $"script {h}: {n} lines set ({Scripts.Lang(comp)}){(pnote != null ? "; " + pnote : "")}, mirrored to {Path.GetFileName(mirror)}; ports {ComponentSearch.Describe(comp, false)} | {ComponentSearch.Describe(comp, true)}";
         }
 
         public static string ScriptLineContext(IGH_Component c, string msg)
         {
-            var m = Regex.Match(msg ?? "", @"line (\d+)|\((\d+),\d+\)");
+            var m = Regex.Match(msg ?? "", @"line (\d+)|\((\d+),\d+\)|\[(\d+):\d+\]");
             if (!m.Success) return null;
-            int ln = int.Parse(m.Groups[1].Success ? m.Groups[1].Value : m.Groups[2].Value);
+            int ln = int.Parse(m.Groups[1].Success ? m.Groups[1].Value : m.Groups[2].Success ? m.Groups[2].Value : m.Groups[3].Value);
             try { return RunTool.Context(Scripts.GetCode(c), new List<int> { ln }); } catch { return null; }
         }
 

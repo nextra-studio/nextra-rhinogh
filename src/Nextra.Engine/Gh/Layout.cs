@@ -31,10 +31,74 @@ namespace Nextra.Engine.Gh
 
         // ---------- public entry points ----------
 
-        public static string Place(GH_Document d, List<IGH_DocumentObject> moving)
+        /// Modification placement. New nodes that joined an existing group: that group is re-laid out in
+        /// place (top-left kept) and anything it now overlaps is pushed down. Other new nodes: placed as a
+        /// block next to their existing neighbours.
+        public static string Place(GH_Document d, List<IGH_DocumentObject> created)
         {
-            moving = moving.Where(o => !(o is GH_Group) && o.Attributes != null).ToList();
+            created = created.Where(o => !(o is GH_Group) && o.Attributes != null).ToList();
+            if (created.Count == 0) return null;
+            var newSet = new HashSet<Guid>(created.Select(o => o.InstanceGuid));
+            var joined = new HashSet<Guid>();
+            foreach (var g in d.Objects.OfType<GH_Group>())
+            {
+                var members = g.ObjectIDs.Select(id => d.FindObject(id, false)).Where(o => o != null && !(o is GH_Group) && o.Attributes != null).ToList();
+                var old = members.Where(o => !newSet.Contains(o.InstanceGuid)).ToList();
+                var add = members.Where(o => newSet.Contains(o.InstanceGuid)).ToList();
+                if (old.Count == 0 || add.Count == 0) continue;
+                var anchor = Bounds(old);
+                // seed new members right of the group so the layered layout has a sane start
+                float x0 = anchor.Right + MicroX;
+                foreach (var o in add) { o.Attributes.Pivot = new PointF(x0, anchor.Y); o.Attributes.ExpireLayout(); o.Attributes.PerformLayout(); }
+                Arrange(d, members, out var blk);
+                Shift(members, anchor.X - blk.X, anchor.Y - blk.Y);
+                foreach (var o in add) joined.Add(o.InstanceGuid);
+                g.ExpireCaches(); g.Attributes?.ExpireLayout();
+                PushAway(d, g, members);
+            }
+            var moving = created.Where(o => !joined.Contains(o.InstanceGuid)).ToList();
             if (moving.Count == 0) return null;
+            return PlaceBlock(d, moving);
+        }
+
+        /// Shift every other group / loose object that overlaps group g downwards (cascading).
+        static void PushAway(GH_Document d, GH_Group g, List<IGH_DocumentObject> members)
+        {
+            var fixedSet = new HashSet<Guid>(members.Select(o => o.InstanceGuid));
+            var queue = new Queue<RectangleF>();
+            queue.Enqueue(Inflate(GroupRect(d, g), 15));
+            int safety = 0;
+            while (queue.Count > 0 && safety++ < 200)
+            {
+                var r = queue.Dequeue();
+                // blocks = other groups (as units) + loose objects
+                var blocks = new List<List<IGH_DocumentObject>>();
+                var seen = new HashSet<Guid>(fixedSet);
+                foreach (var og in d.Objects.OfType<GH_Group>())
+                {
+                    if (og == g) continue;
+                    var ms = og.ObjectIDs.Select(id => d.FindObject(id, false)).Where(o => o != null && !(o is GH_Group) && o.Attributes != null && !seen.Contains(o.InstanceGuid)).ToList();
+                    if (ms.Count == 0) continue;
+                    foreach (var m in ms) seen.Add(m.InstanceGuid);
+                    blocks.Add(ms);
+                }
+                foreach (var o in d.Objects.Where(o => !(o is GH_Group) && o.Attributes != null && !seen.Contains(o.InstanceGuid))) blocks.Add(new List<IGH_DocumentObject> { o });
+                foreach (var b in blocks)
+                {
+                    var br = Inflate(Bounds(b), GroupPad + 4); br.Y -= GroupTitle;
+                    if (!br.IntersectsWith(r)) continue;
+                    float dy = r.Bottom + 10 - br.Y;
+                    Shift(b, 0, dy);
+                    foreach (var m in b) fixedSet.Add(m.InstanceGuid);
+                    br.Y += dy;
+                    queue.Enqueue(br);
+                }
+            }
+            ExpireGroups(d, new HashSet<Guid>(d.Objects.Select(o => o.InstanceGuid)));
+        }
+
+        static string PlaceBlock(GH_Document d, List<IGH_DocumentObject> moving)
+        {
             var before = Bounds(moving);
             Arrange(d, moving, out var block);
             // anchor
@@ -174,12 +238,6 @@ namespace Nextra.Engine.Gh
                 foreach (var e in edges)
                     if (byId[e.From].Rank < byId[e.To].Rank + 1) { byId[e.From].Rank = byId[e.To].Rank + 1; changed = true; }
                 if (!changed) break;
-            }
-            // pull pure sources right next to their first consumer (avoids long wires from far-left sliders)
-            foreach (var i in std)
-            {
-                var outs = edges.Where(e => e.From == i.Id).ToList();
-                if (outs.Count > 0 && !edges.Any(e => e.To == i.Id)) i.Rank = outs.Min(e => byId[e.To].Rank) + 1;
             }
             int maxR = std.Max(i => i.Rank);
             var colX = new Dictionary<int, float>();

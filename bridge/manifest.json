@@ -1,0 +1,36 @@
+{
+  "manifest_version": "0.2",
+  "name": "nextra-rhinogh",
+  "display_name": "Nextra for Rhino + Grasshopper",
+  "version": "0.1.0",
+  "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
+  "long_description": "Talks to the Nextra plug-in running inside Rhino 8 over 127.0.0.1 with a per-session token. Install the Nextra-zero Yak package in Rhino first.",
+  "author": { "name": "Tatsuki" },
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": { "NEXTRA_MODE": "${user_config.mode}" }
+    }
+  },
+  "user_config": {
+    "mode": {
+      "type": "string",
+      "title": "Mode",
+      "description": "full = all 6 tools, ask = read-only (view + query)",
+      "default": "full",
+      "required": false
+    }
+  },
+  "tools": [
+    { "name": "view", "description": "Grid image with handle tags of Rhino or the GH canvas" },
+    { "name": "query", "description": "Text answers: Rhino objects, GH shorthand, components, docs, library, status" },
+    { "name": "run", "description": "Run Python 3 / C# in Rhino with delta + checkpoint" },
+    { "name": "gh_edit", "description": "Shorthand diff edits of the Grasshopper canvas" },
+    { "name": "undo", "description": "Revert to a checkpoint" },
+    { "name": "memory", "description": "Preferences, learned rules, script library" }
+  ],
+  "compatibility": { "platforms": ["win32"] }
+}

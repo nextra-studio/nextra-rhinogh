@@ -203,6 +203,9 @@ namespace Nextra.Engine.Gh.Shorthand
                 }
             }
 
+            if (!(o is IGH_Component) && o is IGH_Param fp && fp.SourceCount > 0)
+                line.Append(" (=").Append(string.Join("+", fp.Sources.Select(s => Ref(d, s)))).Append(Flags(fp)).Append(')');
+
             var cfg = Config(d, o, opt);
             if (cfg.Count > 0) line.Append(" {").Append(string.Join(", ", cfg)).Append('}');
             sb.AppendLine(line.ToString());
@@ -288,8 +291,9 @@ namespace Nextra.Engine.Gh.Shorthand
         public static string DataSummary(IGH_Param p)
         {
             var data = p.VolatileData;
-            if (data == null || data.DataCount == 0) return p is IGH_Param && p.Kind != GH_ParamKind.output && p.SourceCount == 0 ? null : "empty";
-            var types = data.AllData(true).Where(x => x != null).GroupBy(x => x.TypeName).Select(g => $"{g.Count()} {g.Key}");
+            if (data == null || data.DataCount == 0) return "empty";
+            var types = data.AllData(true).Where(x => x != null).GroupBy(x => x.TypeName).Select(g => $"{g.Count()} {g.Key}").ToList();
+            if (types.Count == 0) return $"{data.DataCount} null";
             var tree = data.PathCount == 1 ? $"{data.get_Path(0)}" : $"{data.PathCount} branches";
             var sample = "";
             var first = data.AllData(true).FirstOrDefault(x => x != null);

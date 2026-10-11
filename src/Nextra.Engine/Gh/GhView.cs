@@ -63,6 +63,12 @@ namespace Nextra.Engine.Gh
                 how = "whole canvas";
             }
             region.Inflate(30, 30);
+            if (!a.Has("size"))
+            {   // no size given: fit the image aspect to the content so long graphs stay readable
+                float ca = region.Width / Math.Max(1, region.Height);
+                w = 1000; h = (int)Math.Clamp(1000 / ca, 260, 750);
+                if (ca < 1000f / 750) { h = 750; w = (int)Math.Clamp(750 * ca, 400, 1000); }
+            }
             // keep the output aspect: grow the region to w:h
             float aspect = w / (float)h;
             if (region.Width / region.Height > aspect) { float nh = region.Width / aspect; region.Y -= (nh - region.Height) / 2; region.Height = nh; }
@@ -243,8 +249,22 @@ namespace Nextra.Engine.Gh
             if (prev.Count == 0) throw new NxError("no visible GH preview geometry for that focus", "check preview is on (not hidden) and the component produced geometry");
             var bb = BoundingBox.Empty;
             foreach (var p in prev) bb.Union(p.ClippingBox);
+            // GH only draws previews while its editor is visible, so draw the output geometry ourselves
+            var geo = new List<GeometryBase>();
+            foreach (var p in prev)
+            {
+                var outs = p is IGH_Component c ? c.Params.Output : p is IGH_Param pp ? new[] { pp } : Enumerable.Empty<IGH_Param>();
+                foreach (var op in outs)
+                    foreach (var goo in op.VolatileData.AllData(true))
+                    {
+                        if (geo.Count > 5000) break;
+                        var g = Grasshopper.Kernel.GH_Convert.ToGeometryBase(goo);
+                        if (g != null) geo.Add(g);
+                    }
+            }
             ViewTool.RhinoCapture(a, r, (doc, ctx) =>
             {
+                ctx.Geometry = geo;
                 if (!ViewTool.IsCells(focus)) ctx.ZoomBox = bb;
                 ctx.SkipRhinoTags = !a.Bool("rhino_tags", false);
                 ctx.Tags = prev.Select(p => (p.ClippingBox.Center, GhCore.Handle(d, (IGH_DocumentObject)p), Color.FromArgb(0, 120, 60))).ToList();

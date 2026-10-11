@@ -143,12 +143,76 @@ namespace Nextra.Engine.Gh
             {
                 p.Access = access.StartsWith("l") ? GH_ParamAccess.list : access.StartsWith("t") ? GH_ParamAccess.tree : GH_ParamAccess.item;
             }
-            if (!string.IsNullOrEmpty(hint))
+            if (!string.IsNullOrEmpty(hint)) SetHint(p, hint);
+        }
+
+        static readonly Dictionary<string, string> HintAlias = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Int32"] = "int", ["Integer"] = "int", ["Double"] = "double", ["Number"] = "double", ["float"] = "double", ["Boolean"] = "bool",
+            ["String"] = "string", ["str"] = "string", ["Point"] = "Point3d", ["Vector"] = "Vector3d", ["Rectangle"] = "Rectangle3d",
+            ["object"] = "No Type Hint", ["Any"] = "No Type Hint", ["var"] = "No Type Hint", ["dynamic"] = "No Type Hint",
+            ["NurbsCurve"] = "Curve", ["PolylineCurve"] = "Curve", ["LineCurve"] = "Curve", ["ArcCurve"] = "Curve", ["Color"] = "Color",
+        };
+
+        /// Rhino 8 script params: TypeHints.Select("Curve" | "int" | …). Returns false if unknown.
+        public static bool SetHint(IGH_Param p, string hint)
+        {
+            var hs = p.GetType().GetProperty("TypeHints", F)?.GetValue(p);
+            if (hs == null) return false;
+            if (HintAlias.TryGetValue(hint, out var al)) hint = al;
+            var sel = hs.GetType().GetMethod("Select", new[] { typeof(string) });
+            try { var r = sel?.Invoke(hs, new object[] { hint }); return r != null; } catch { return false; }
+        }
+
+        /// C# `RunScript(Curve crv, List<Point3d> pts, ref object a)` → inputs (name, access, hint) and outputs.
+        public static bool ParseRunScript(string code, out List<PortOp> inputs, out List<OutDecl> outputs)
+        {
+            inputs = new List<PortOp>(); outputs = new List<OutDecl>();
+            var m = System.Text.RegularExpressions.Regex.Match(code ?? "", @"void\s+RunScript\s*\(([^)]*)\)", System.Text.RegularExpressions.RegexOptions.Singleline);
+            if (!m.Success) return false;
+            foreach (var raw in SplitArgs(m.Groups[1].Value))
             {
-                // Rhino 8 script params expose a settable type hint via "Converter"/"TypeHint"; best effort
-                var th = p.GetType().GetProperty("TypeHint", F) ?? p.GetType().GetProperty("TypeHintName", F);
-                try { if (th != null && th.CanWrite && th.PropertyType == typeof(string)) th.SetValue(p, hint); } catch { }
+                var a = raw.Trim();
+                if (a.Length == 0) continue;
+                bool isOut = a.StartsWith("ref ") || a.StartsWith("out ");
+                if (isOut) a = a.Substring(4).Trim();
+                int sp = a.LastIndexOf(' ');
+                if (sp < 0) continue;
+                var type = a.Substring(0, sp).Trim(); var name = a.Substring(sp + 1).Trim();
+                if (isOut) { outputs.Add(new OutDecl { Name = name }); continue; }
+                string access = "item", hint = type;
+                var g = System.Text.RegularExpressions.Regex.Match(type, @"^(List|IList|IEnumerable|DataTree)<(.+)>$");
+                if (g.Success) { access = g.Groups[1].Value == "DataTree" ? "tree" : "list"; hint = g.Groups[2].Value; }
+                inputs.Add(new PortOp { Port = name, Access = access, TypeHint = hint });
             }
+            return true;
+        }
+
+        static IEnumerable<string> SplitArgs(string s)
+        {
+            int depth = 0, last = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '<') depth++; else if (s[i] == '>') depth--;
+                else if (s[i] == ',' && depth == 0) { yield return s.Substring(last, i - last); last = i + 1; }
+            }
+            yield return s.Substring(last);
+        }
+
+        /// Set code; for C# first make the params match the RunScript signature (Rhino 8 regenerates the
+        /// signature from params, so params must be right before the source is applied).
+        public static string SetCodeSmart(IGH_Component c, string code)
+        {
+            string note = null;
+            if (Lang(c) == "cs" && ParseRunScript(code, out var ins, out var outs))
+            {
+                SetInputs(c, ins);
+                if (outs.Count > 0) SetOutputs(c, outs);
+                var bad = ins.Where(i => i.TypeHint != null && c.Params.Input.FirstOrDefault(x => x.NickName == i.Port) is IGH_Param pp && !SetHint(pp, i.TypeHint)).Select(i => i.TypeHint).ToList();
+                note = $"ports from RunScript: in {string.Join(",", ins.Select(i => i.Port))} out {string.Join(",", outs.Select(o => o.Name))}" + (bad.Count > 0 ? $"; unknown type hints {string.Join(",", bad)} (left as object)" : "");
+            }
+            SetCode(c, code);
+            return note;
         }
 
         // ---------- file mirror ----------

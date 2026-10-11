@@ -27,12 +27,14 @@ namespace Nextra.Engine.Gh.Shorthand
     /// handles immediately so a fix can reference them.
     public static class Builder
     {
+        [ThreadStatic] public static List<string> LastNotes;
         static readonly CultureInfo C = CultureInfo.InvariantCulture;
         static readonly string[] Palette = { "#DBABFF", "#ABDBFF", "#FFD6AB", "#B2FAB4", "#FFABAB", "#E6E6A0", "#C8C8FF" };
 
         public static BuildResult Apply(GH_Document d, List<Op> ops)
         {
             var res = new BuildResult { Lines = ops.Count(o => !(o is GroupOp)) };
+            LastNotes = res.Notes;
             var locals = new Dictionary<string, IGH_DocumentObject>(StringComparer.Ordinal);
 
             void Fail(Op op, string msg) { res.Errors.Add($"L{op.Line} `{Fmt.Trunc(op.Raw.Split('\n')[0], 50)}`: {msg}"); res.FailedLines.Add(op.Line); }
@@ -69,7 +71,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 if (locals.ContainsKey(n.Id)) { Fail(n, $"id '{n.Id}' defined twice"); continue; }
                 try
                 {
-                    var proxy = ComponentSearch.Resolve(n.Type, n.Category, out var note);
+                    var proxy = ComponentSearch.Resolve(n.Type, n.Category, out var note, n.Inputs.Select(x => x.Port).Where(x => x != null).ToList());
                     if (note != null) res.Notes.Add($"L{n.Line}: {note}");
                     var obj = proxy.CreateInstance() ?? throw new NxError($"could not instantiate {n.Type}");
                     obj.CreateAttributes();
@@ -94,7 +96,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 bool lineOk = true;
                 try { ScriptParams(obj, n); }
                 catch (NxError e) { Fail(n, e.Message); lineOk = false; }
-                foreach (var kv in n.Config)
+                foreach (var kv in n.Config.OrderBy(kv => ConfigOrder(kv.Key)))
                 {
                     try { ApplyConfig(d, obj, kv.Key, kv.Value, n); }
                     catch (NxError e) { Fail(n, e.Message + (e.Hint != null ? " — " + e.Hint : "")); lineOk = false; }
@@ -188,7 +190,8 @@ namespace Nextra.Engine.Gh.Shorthand
                 map[key] = grp;
                 res.IdMap["## " + (g.Name ?? g.Handle)] = GhCore.Handle(d, grp);
             }
-            foreach (var n in ops.OfType<NodeOp>().Where(n => n.Group != null))
+            // only created nodes and bare handle lines join the section's group (a modify line does not move a node)
+            foreach (var n in ops.OfType<NodeOp>().Where(n => n.Group != null && (n.Create || n.BareMember)))
             {
                 if (!map.TryGetValue(n.Group, out var grp)) continue;
                 IGH_DocumentObject o;
@@ -228,6 +231,14 @@ namespace Nextra.Engine.Gh.Shorthand
         }
 
         // ---------- config ----------
+
+        /// limits/types first, then values (so v=12 is not clamped by the default 0..1 range), code last
+        static int ConfigOrder(string k) => k switch
+        {
+            "r" or "range" or "min" or "max" or "int" or "even" or "odd" or "d" or "items" or "mode" => 0,
+            "code" => 2,
+            _ => 1,
+        };
 
         static string Keys(IGH_DocumentObject o) => o switch
         {
@@ -338,8 +349,8 @@ namespace Nextra.Engine.Gh.Shorthand
                 {
                     var code = s;
                     if (code.StartsWith("@")) { var path = code.Substring(1); if (!File.Exists(path)) throw new NxError("code file not found: " + path); code = File.ReadAllText(path); }
-                    Scripts.SetCode(c, code.Replace("\r\n", "\n"));
-                    if (Scripts.Lang(c) == "cs" && !n.Inputs.Any()) Scripts.ParamsFromScript(c);
+                    var note = Scripts.SetCodeSmart(c, code.Replace("\r\n", "\n"));
+                    if (note != null) Builder.LastNotes.Add($"L{n.Line}: {note}");
                     return;
                 }
             }
@@ -444,7 +455,8 @@ namespace Nextra.Engine.Gh.Shorthand
             foreach (var s in srcs)
             {
                 var st = s.TypeName;
-                if (st == tt || st == "Generic Data" || st == "Data") continue;
+                if (st == tt || st == "Generic Data" || st == "Data" || st == "Geometry") continue;
+                if ((tt == "Domain" || tt == "Interval") && (st == "Number" || st == "Integer")) continue;
                 bool okPair = (tt == "Number" && st == "Integer") || (tt == "Integer" && st == "Number") || (tt == "Geometry") ||
                               (tt == "Curve" && (st == "Line" || st == "Arc" || st == "Circle" || st == "Rectangle" || st == "Polyline")) ||
                               (tt == "Brep" && (st == "Surface" || st == "Box")) || (tt == "Surface" && st == "Brep") ||
@@ -522,6 +534,10 @@ namespace Nextra.Engine.Gh.Shorthand
             var vals = Values(v, p).ToArray();
             var m = p.GetType().GetMethod("SetPersistentData", new[] { typeof(object[]) });
             if (m == null) throw new NxError($"{p.Name} ({p.TypeName}) cannot store values", "wire a component or param into it instead");
+            // SetPersistentData appends to the default value; clear first
+            var clear = p.GetType().GetMethod("Script_ClearPersistentData");
+            if (clear != null) clear.Invoke(p, null);
+            else (p.GetType().GetProperty("PersistentData")?.GetValue(p) as Grasshopper.Kernel.Data.IGH_Structure)?.Clear();
             m.Invoke(p, new object[] { vals });
             int got = (p.GetType().GetProperty("PersistentDataCount")?.GetValue(p) as int?) ?? vals.Length;
             if (got < vals.Length) throw new NxError($"{p.NickName} ({p.TypeName}) accepted {got}/{vals.Length} values from {v}", $"give values of type {p.TypeName}");

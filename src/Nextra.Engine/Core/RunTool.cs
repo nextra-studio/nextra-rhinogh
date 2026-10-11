@@ -22,6 +22,7 @@ namespace Nextra.Engine
         const string PyPrelude =
 "import System, Rhino, scriptcontext as sc, Rhino.Geometry as rg\n" +
 "doc = sc.doc\n" +
+"try:\n    import Grasshopper\nexcept Exception:\n    pass\n" +
 "_nx = System.AppDomain.CurrentDomain\n" +
 "def h(x): return _nx.GetData('nextra.resolve').Invoke(str(x))\n" +
 "def handle(o): return _nx.GetData('nextra.handle').Invoke(o)\n" +

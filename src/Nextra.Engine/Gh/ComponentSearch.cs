@@ -28,7 +28,7 @@ namespace Nextra.Engine.Gh
 
         public static IEnumerable<IGH_ObjectProxy> All => Instances.ComponentServer.ObjectProxies;
 
-        public static IGH_ObjectProxy Resolve(string name, string cat, out string note)
+        public static IGH_ObjectProxy Resolve(string name, string cat, out string note, IList<string> portHints = null)
         {
             note = null;
             name = name.Trim();
@@ -53,6 +53,13 @@ namespace Nextra.Engine.Gh
             var live = exact.Where(p => !p.Obsolete).ToList();
             if (live.Count > 0) exact = live;
             if (exact.Count == 1) return exact[0];
+            if (exact.Count > 1 && portHints != null && portHints.Count > 0)
+            {
+                // pick the candidate whose ports match the ports used on this line
+                var fit = exact.Where(p => PortsMatch(p, portHints)).ToList();
+                if (fit.Count == 1) { note = $"'{name}' is ambiguous; used {fit[0].Desc.Category}/{fit[0].Desc.SubCategory} because its ports match {string.Join(",", portHints)}"; return fit[0]; }
+                if (fit.Count > 1) exact = fit;
+            }
             if (exact.Count > 1)
             {
                 var bi = exact.Where(p => Builtin.Contains(p.Desc.Category)).ToList();
@@ -64,6 +71,20 @@ namespace Nextra.Engine.Gh
             var sugg = scored.Select(x => $"{x.p.Desc.Name} @{x.p.Desc.Category}").ToList();
             throw new NxError($"no component named '{name}'" + (cat != null ? " in " + cat : ""),
                 sugg.Count > 0 ? "did you mean: " + string.Join("; ", sugg) + " · query {scope:'components', filter:'…'} shows ports" : "query {scope:'components', filter:'keyword'}");
+        }
+
+        static readonly Dictionary<Guid, IGH_DocumentObject> Probe = new Dictionary<Guid, IGH_DocumentObject>();
+
+        static bool PortsMatch(IGH_ObjectProxy p, IList<string> hints)
+        {
+            if (!Probe.TryGetValue(p.Guid, out var o)) { try { o = p.CreateInstance(); } catch { o = null; } Probe[p.Guid] = o; }
+            if (!(o is IGH_Component c)) return false;
+            foreach (var h in hints)
+            {
+                if (int.TryParse(h, out var i)) { if (i >= c.Params.Input.Count) return false; continue; }
+                if (!c.Params.Input.Any(x => x.NickName.Equals(h, StringComparison.OrdinalIgnoreCase) || x.Name.Equals(h, StringComparison.OrdinalIgnoreCase))) return false;
+            }
+            return true;
         }
 
         static string Norm(string s) => new string(s.Where(char.IsLetterOrDigit).ToArray()).ToLowerInvariant();
