@@ -85,6 +85,16 @@ namespace Nextra.Engine.Rh
             Modified.Add(e.RhinoObject.Id);
         }
 
+        string Summary(RhinoObject o)
+        {
+            var l = _doc.Layers[o.Attributes.LayerIndex]?.FullPath ?? "?";
+            var obb = Geo.ComputeObb(o.Geometry);
+            string dims = obb == null ? "" : " " + Fmt.Dims(R(obb.L), R(obb.W), R(obb.H)) + " " + obb.Shape + (obb.Shape == "linear" ? (Math.Abs(obb.LongAxis.Z) > 0.98 ? " vertical" : " horizontal") : "");
+            return (Added.Contains(o.Id) ? "+ " : "~ ") + $"[{l}] {Geo.TypeWord(o.Geometry)}{dims}";
+        }
+
+        static double R(double v) { double m = Math.Pow(10, Math.Floor(Math.Log10(Math.Max(Math.Abs(v), 1e-9))) - 2); return Math.Round(v / m) * m; }
+
         public bool Empty => Added.Count == 0 && Modified.Count == 0 && Deleted.Count == 0;
 
         /// Compact delta text: one line per object (handles + description), capped.
@@ -96,13 +106,21 @@ namespace Nextra.Engine.Rh
             if (Modified.Count > 0) parts.Add($"~{Modified.Count}");
             if (Deleted.Count > 0) parts.Add($"-{Deleted.Count}");
             r.Line("rhino delta " + string.Join(" ", parts) + ":");
-            int n = 0;
-            foreach (var id in Added.Concat(Modified))
+            var objs = Added.Concat(Modified).Select(id => _doc.Objects.FindId(id)).Where(o => o != null).ToList();
+            if (objs.Count <= 12)
             {
-                var o = _doc.Objects.FindId(id);
-                if (o == null) continue;
-                if (n++ >= max) { r.Line($"  … ({Added.Count + Modified.Count - max} more; query filter:'…' to list)"); break; }
-                r.Line((Added.Contains(id) ? "+ " : "~ ") + Geo.Describe(o));
+                foreach (var o in objs) r.Line((Added.Contains(o.Id) ? "+ " : "~ ") + Geo.Describe(o));
+            }
+            else
+            {
+                // many objects: one line per (change, layer, type, shape, size) group with handle ranges
+                foreach (var g in objs.GroupBy(o => Summary(o)).OrderBy(g => g.Key))
+                {
+                    var hs = g.Select(o => Handles.Rh(o.Id)).ToList();
+                    var bb = BoundingBox.Empty; foreach (var o in g) bb.Union(o.Geometry.GetBoundingBox(true));
+                    r.Line($"{g.Key} ×{g.Count()} {ViewTool.Ranges(hs)} z {Fmt.N(bb.Min.Z)}..{Fmt.N(bb.Max.Z)}");
+                }
+                r.Line("(details: query filter:'r12 r13' or 'layer:X')");
             }
             if (Deleted.Count > 0) r.Line("- " + ViewTool.Ranges(Deleted.Select(Handles.Rh)));
         }

@@ -137,6 +137,13 @@ namespace Nextra.Engine.Gh
                 var tset = new HashSet<Guid>(touched.Select(o => o.InstanceGuid));
                 var relevant = msgs.Where(m => tset.Contains(m.o.InstanceGuid) || (m.level == "error" && !errBefore.Contains(m.o.InstanceGuid))).ToList();
                 r.Line(solve ? $"solved {ms}ms" + (relevant.Count == 0 ? ", no errors/warnings on affected nodes" : ":") : "not solved (solve:false)");
+                // "Input parameter X failed to collect data" is a consequence, not a cause: collapse it
+                var noData = relevant.Where(m => m.level == "warn" && m.msg.Contains("failed to collect data")).ToList();
+                if (noData.Count > 1)
+                {
+                    relevant = relevant.Except(noData).ToList();
+                    r.Line($" no input data downstream ({noData.Select(m => m.o).Distinct().Count()}): {ViewTool.Ranges(noData.Select(m => GhCore.Handle(d, m.o)).Distinct())}");
+                }
                 foreach (var m in relevant.Take(15))
                 {
                     var line = $" {GhCore.Handle(d, m.o)} {m.o.Name} {(m.level == "error" ? "!" : "?")} {Fmt.Trunc(m.msg.Replace("\n", " "), 170)}";

@@ -27,6 +27,7 @@ namespace Nextra.Engine
 "def h(x): return _nx.GetData('nextra.resolve').Invoke(str(x))\n" +
 "def handle(o): return _nx.GetData('nextra.handle').Invoke(o)\n" +
 "def ghdoc(): return _nx.GetData('nextra.ghdoc').Invoke()\n" +
+"def q(f): return list(_nx.GetData('nextra.select').Invoke(str(f)))\n" +
 "import json as _json; args = _json.loads(str(_nx.GetData('nextra.args') or '{}'))\n";
 
         const string CsPrelude =
@@ -35,6 +36,7 @@ namespace Nextra.Engine
 "object h(string x) => ((Func<string, object>)AppDomain.CurrentDomain.GetData(\"nextra.resolve\"))(x);\n" +
 "string handle(object o) => ((Func<object, string>)AppDomain.CurrentDomain.GetData(\"nextra.handle\"))(o);\n" +
 "object ghdoc() => ((Func<object>)AppDomain.CurrentDomain.GetData(\"nextra.ghdoc\"))();\n" +
+"List<RhinoObject> q(string f) => ((Func<string, List<RhinoObject>>)AppDomain.CurrentDomain.GetData(\"nextra.select\"))(f);\n" +
 "var args = (string)AppDomain.CurrentDomain.GetData(\"nextra.args\") ?? \"{}\";\n";
 
         public static void Run(Args a, Reply r)
@@ -182,6 +184,7 @@ namespace Nextra.Engine
             dom.SetData("nextra.resolve", new Func<string, object>(Resolve));
             dom.SetData("nextra.handle", new Func<object, string>(HandleOf));
             dom.SetData("nextra.ghdoc", new Func<object>(() => GhCore.Doc(true)));
+            dom.SetData("nextra.select", new Func<string, List<Rhino.DocObjects.RhinoObject>>(f => Filter.Parse(f).Apply(RhinoDoc.ActiveDoc)));
         }
 
         public static object Resolve(string h)
@@ -227,16 +230,36 @@ namespace Nextra.Engine
             var sb = new StringBuilder();
             if (e != null)
             {
+                // an Nextra helper (h, q, …) failing inside user code: report just its message + hint
+                for (var y = e; y != null; y = y.InnerException)
+                    if (y is NxError nx) { sb.Append(nx.Message); if (nx.Hint != null) sb.Append(" (hint: ").Append(nx.Hint).Append(')'); err = PyOnly(err); goto done; }
                 var x = e;
                 while (x.InnerException != null && (x is System.Reflection.TargetInvocationException || x.Message.Length < 5)) x = x.InnerException;
                 sb.Append(x.Message);
-                if (x is ExecuteException ee && ee.StackTrace != null && !x.Message.Contains("line")) sb.Append(" | ").Append(Fmt.Trunc(ee.StackTrace, 600));
+                if (x is ExecuteException ee && ee.StackTrace != null && !x.Message.Contains("line")) sb.Append(" | ").Append(Fmt.Trunc(PyOnly(ee.StackTrace), 600));
             }
+            done:
             if (!string.IsNullOrWhiteSpace(err)) { if (sb.Length > 0) sb.Append('\n'); sb.Append(err.Trim()); }
             var s = sb.ToString();
             // drop noisy frames from the prelude / runtime
             s = Regex.Replace(s, @"\s*File ""[^""]*(site-packages|lib[\\/]python)[^""]*"", line \d+[^\n]*\n?", "");
+            s = PyOnly(s);
             return s.Trim();
+        }
+
+        /// strip .NET stack frames ("   at X.Y()" and "---> " chains) — only the script-level traceback matters
+        static string PyOnly(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            var keep = s.Split('\n').Where(l => !Regex.IsMatch(l, @"^\s+at |^\s*--- End of|^\s*---> ")).ToList();
+            // collapse duplicated traceback blocks
+            var outL = new List<string>();
+            foreach (var l in keep) if (outL.Count == 0 || outL[outL.Count - 1] != l) outL.Add(l);
+            var text = string.Join("\n", outL);
+            int dup = text.IndexOf("Traceback (most recent call last):", StringComparison.Ordinal);
+            int dup2 = dup < 0 ? -1 : text.IndexOf("Traceback (most recent call last):", dup + 10, StringComparison.Ordinal);
+            if (dup2 > 0) text = text.Substring(0, dup2).TrimEnd();
+            return text;
         }
 
         static List<int> ErrorLines(string msg, Exception e, int prelude)

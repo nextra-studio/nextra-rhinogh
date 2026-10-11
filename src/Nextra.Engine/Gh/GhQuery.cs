@@ -20,7 +20,7 @@ namespace Nextra.Engine.Gh
             IEnumerable<IGH_DocumentObject> cur = all;
             var handles = new List<IGH_DocumentObject>();
             bool anyHandle = false;
-            foreach (var tok in filter.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var tok in System.Text.RegularExpressions.Regex.Split(filter.Trim(), @"\s+").SelectMany(t => t.Contains(':') ? new[] { t } : t.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)))
             {
                 var t = tok.Trim();
                 int c = t.IndexOf(':');

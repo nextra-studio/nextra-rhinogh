@@ -359,7 +359,8 @@ namespace Nextra.Engine
                 };
 
                 r.Line($"rhino view '{view.ActiveViewport.Name}' {iw}x{ih}, {how}{(conduit.Show != null ? ", isolated" : "")}. Grid A-H x 1-8.");
-                r.Line($"{inFrame.Count} object(s) in frame" + (doTags ? $", tagged: {Ranges(placed.Where(Handles.IsRhHandle))}" : "."));
+                if (ctx.SkipRhinoTags) { doTags = true; placed = new List<string>(); }   // GH preview: Rhino object stats are noise
+                else r.Line($"{inFrame.Count} object(s) in frame" + (doTags ? $", tagged: {Ranges(placed.Where(Handles.IsRhHandle))}" : "."));
                 if (behind.Count > 0) r.Line($"behind other geometry (faded, '*'): {Ranges(behind.Where(Handles.IsRhHandle))}");
                 if (unplaced.Count > 0) r.Line($"no room for tags: {Ranges(unplaced.Where(Handles.IsRhHandle))} (zoom with focus:cells)");
                 if (!doTags && inFrame.Count > 0)

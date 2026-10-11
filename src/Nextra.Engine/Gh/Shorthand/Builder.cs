@@ -511,10 +511,11 @@ namespace Nextra.Engine.Gh.Shorthand
                     {
                         if (!Handles.IsRhHandle(id)) throw new NxError($"'{id}' is not a Rhino handle (r12) — only Rhino objects can be referenced as values");
                         if (!Handles.TryRh(id, out var g) || Rhino.RhinoDoc.ActiveDoc.Objects.FindId(g) == null) throw new NxError($"Rhino object {id} not found");
-                        var goo = GH_Convert.ObjRefToGeometry(new Rhino.DocObjects.ObjRef(Rhino.RhinoDoc.ActiveDoc, g));
-                        if (goo == null) throw new NxError($"{id} cannot be referenced in Grasshopper");
-                        yield return goo;
+                        yield return Reference(p, g, id);
                     }
+                    break;
+                case VK.Ident when Handles.IsRhHandle(v.Str):
+                    foreach (var x in Values(new Val { Kind = VK.Ref, Refs = new List<(string, string)> { (v.Str, null) } }, p)) yield return x;
                     break;
                 case VK.Ident:
                     switch (v.Str.ToUpperInvariant())
@@ -527,6 +528,25 @@ namespace Nextra.Engine.Gh.Shorthand
                     break;
                 default: throw new NxError($"value {v} not supported here");
             }
+        }
+
+        /// A referenced Rhino object as the param's own goo type (ReferenceID + LoadGeometry), like GH's "Set one…".
+        static object Reference(IGH_Param p, Guid id, string handle)
+        {
+            Type t = p.GetType(), gooType = null;
+            while (t != null) { if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(GH_PersistentParam<>)) { gooType = t.GetGenericArguments()[0]; break; } t = t.BaseType; }
+            var doc = Rhino.RhinoDoc.ActiveDoc;
+            if (gooType != null && !gooType.IsAbstract && !gooType.IsInterface && typeof(IGH_GeometricGoo).IsAssignableFrom(gooType))
+            {
+                var goo = (IGH_GeometricGoo)Activator.CreateInstance(gooType);
+                goo.ReferenceID = id;
+                if (goo.LoadGeometry(doc)) return goo;
+                var obj = doc.Objects.FindId(id);
+                throw new NxError($"{handle} ({(obj == null ? "missing" : Rh.Geo.TypeWord(obj.Geometry))}) cannot be referenced as {p.TypeName}", "use a param of the matching type (Curve, Brep, Mesh, Point, Geometry)");
+            }
+            var any = GH_Convert.ObjRefToGeometry(new Rhino.DocObjects.ObjRef(doc, id));
+            if (any == null) throw new NxError($"{handle} cannot be referenced in Grasshopper");
+            return any;
         }
 
         public static void SetPersistent(IGH_Param p, Val v)
