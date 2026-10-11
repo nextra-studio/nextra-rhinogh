@@ -39,7 +39,7 @@ namespace Nextra.Engine.Rh
     public static class Geo
     {
         /// Minimum-volume box over a few cheap candidate frames (world, dominant face, PCA).
-        /// Same idea as reference/structural_utils/analyse_oriented_bbox.py but without mass properties.
+        /// Same idea as dev/reference/rhino_tools/structural_utils/analyse_oriented_bbox.py but without mass properties.
         public static Obb ComputeObb(GeometryBase g)
         {
             if (g == null) return null;

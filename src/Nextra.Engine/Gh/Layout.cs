@@ -168,7 +168,7 @@ namespace Nextra.Engine.Gh
             return (repaired > 0 ? $"repaired {repaired} stretched component(s); " : "") + $"tidied {objs.Count} objects ({Fmt.N(before.Width)}x{Fmt.N(before.Height)} → {Fmt.N(after.Width)}x{Fmt.N(after.Height)} canvas units)";
         }
 
-        // ---------- group interface relays (idea from reference/shiba_tidy) ----------
+        // ---------- group interface relays (idea from dev/reference/shiba_tidy) ----------
 
         public const string RelayTag = "nextra-relay";
         public static bool IsRelay(IGH_DocumentObject o) => o is IGH_Param p && !(o is IGH_Component) && p.Description == RelayTag;

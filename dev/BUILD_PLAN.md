@@ -1,6 +1,6 @@
 # Nextra RhinoGh — Build Plan & Checklist
 
-Source of truth for scope: `Nextra.zero_RhinoGh_Plan.md` + the user's requests (2026-10-11).
+Source of truth for scope: `dev/Nextra.zero_RhinoGh_Plan.md` + the user's requests (2026-10-11).
 Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 
 ## Decisions (agreed)
@@ -16,7 +16,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] A3 Engine hot-reload, state bag survives reload
 - [x] A4 MCP bridge (stdio) + `.mcpb` manifest + `nx` CLI for testing
 - [x] A5 Meaningful replies everywhere: what worked, what failed, why, what to do next; fallback instead of repeated errors
-- [x] A6 Reference folder (`reference/`) with copied old code / vision / OBB refs  ✅ copied
+- [x] A6 Reference folder (`dev/reference/`) with copied old code / vision / OBB refs  ✅ copied
 
 ## B. Rhino
 - [x] B1 Handles r1.. (session), delta replies (added/modified/deleted)

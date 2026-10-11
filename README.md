@@ -33,8 +33,7 @@ bridge/             MCP stdio bridge (zero-dependency Node) + .mcpb manifest
 skill/nextra/       SKILL.md, shorthand.md, workflows.md, api/*, plugins/<Category>.md (auto-attached plug-in guides)
 tools/              build.py, deploy_dev.ps1 (dev install with hot reload), package.ps1 (yak + mcpb), nx.py (test client), mcp_http.py
 test/               evidence per case (images, .gh/.3dm, reports); 11_compare = benchmark harness + REPORT.md
-reference/          code the design learned from (nextra.gh, rhino_tools vision/OBB, Shiba Tidy)
-BUILD_PLAN.md       checklist of everything requested and its status
+dev/                developer guide, original plan, build checklist, reference code the design learned from (not part of the skill)
 ```
 
 ## Develop
