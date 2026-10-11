@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "nextra-rhinogh": {
+      "command": "node",
+      "args": ["bridge/server/index.js"],
+      "env": { "NEXTRA_MODE": "full" }
+    }
+  }
+}

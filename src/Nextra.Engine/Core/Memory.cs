@@ -275,7 +275,10 @@ namespace Nextra.Engine
             var d = EngineConfig.Str("skill_dir", null);
             if (!string.IsNullOrEmpty(d) && Directory.Exists(d)) return d;
             var p = Path.Combine(Entry.AppDir, "skill");
-            return Directory.Exists(p) ? p : null;
+            if (Directory.Exists(p)) return p;
+            // installed package: skill/ sits next to the plug-in
+            if (Entry.State != null && Entry.State.TryGetValue("host.dir", out var hd) && hd is string hs && Directory.Exists(Path.Combine(hs, "skill"))) return Path.Combine(hs, "skill");
+            return null;
         }
 
         public static void Query(Args a, Reply r)

@@ -98,6 +98,7 @@ namespace Nextra.Host
             var init = entry.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
             State["host.port"] = Server.Port;
             State["host.appdir"] = Server.AppDir;
+            State["host.dir"] = Path.GetDirectoryName(typeof(EngineLoader).Assembly.Location);
             State["host.generation"] = _generation;
             init?.Invoke(null, new object[] { State });
             _stamp = stamp;

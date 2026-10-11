@@ -17,6 +17,7 @@ namespace Nextra.Engine.Gh
         {
             var dirs = new List<string>();
             var skill = EngineConfig.Str("skill_dir", null) ?? System.IO.Path.Combine(Entry.AppDir, "skill");
+            if (!Directory.Exists(skill) && Entry.State.TryGetValue("host.dir", out var hd) && hd is string hs) skill = System.IO.Path.Combine(hs, "skill");
             dirs.Add(System.IO.Path.Combine(Memory.Dir, "plugins"));   // user guides first: they win
             dirs.Add(System.IO.Path.Combine(skill, "plugins"));
             var res = new List<Guide>();

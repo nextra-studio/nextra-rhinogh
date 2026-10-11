@@ -39,3 +39,9 @@ $conf["capture_copy_dir"] = "$repo\test\captures"
 if (-not $conf.ContainsKey("enabled")) { $conf["enabled"] = $true }
 $conf | ConvertTo-Json | Set-Content -Encoding utf8 $cfgPath
 Write-Output "installed $pkg; config $cfgPath"
+
+# keep the project-scope Claude Code skill in sync with skill/nextra (source of truth)
+$sk = Join-Path $repo ".claude\skills\nextra-rhinogh"
+Remove-Item $sk -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force (Split-Path $sk) | Out-Null
+Copy-Item "$repo\skill\nextra" $sk -Recurse
