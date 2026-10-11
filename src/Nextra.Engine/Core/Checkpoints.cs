@@ -84,15 +84,15 @@ namespace Nextra.Engine
 
             var doc = RhinoDoc.ActiveDoc;
             var lines = new List<string>();
-            byte[] ghRestore = null; Guid ghDoc = Guid.Empty; string ghFrom = null;
+            var ghRestore = new Dictionary<Guid, (byte[] data, string from)>();   // oldest archive per GH document
             for (int i = l.Count - 1; i >= idx; i--)
             {
                 var c = l[i];
                 if (c.ContainsKey("rh_added") && doc != null && Equals(c["rh_doc"], doc.RuntimeSerialNumber))
                     lines.Add($"{c["id"]}: " + DeltaTracker.Revert(doc, (List<Guid>)c["rh_added"], (Dictionary<Guid, object[]>)c["rh_before"]));
-                if (c.ContainsKey("gh")) { ghRestore = (byte[])c["gh"]; ghDoc = (Guid)c["ghdoc"]; ghFrom = (string)c["id"]; } // oldest wins
+                if (c.ContainsKey("gh")) ghRestore[(Guid)c["ghdoc"]] = ((byte[])c["gh"], (string)c["id"]);   // iterating newest→oldest: oldest wins
             }
-            if (ghRestore != null) lines.Add($"{ghFrom}: " + GhCore.Restore(ghRestore, ghDoc));
+            foreach (var kv in ghRestore) lines.Add($"{kv.Value.from}: " + GhCore.Restore(kv.Value.data, kv.Key));
             int removed = l.Count - idx;
             l.RemoveRange(idx, removed);
             if (lines.Count == 0) lines.Add("nothing changed in those checkpoints");

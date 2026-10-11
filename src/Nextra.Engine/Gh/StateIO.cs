@@ -18,11 +18,11 @@ namespace Nextra.Engine.Gh
         {
             "Name", "NickName", "Description", "InstanceGuid", "IconDisplay", "IconOverride", "Hidden", "Locked", "Enabled",
             "Message", "ComponentGuid", "Optional", "SourceCount", "Source", "Mapping", "Reverse", "Simplify", "Access",
-            "Bounds", "Pivot", "Selected", "ParameterData", "InputCount", "OutputCount", "InputId", "OutputId",
+            "Bounds", "Pivot", "Selected", "ParameterData", "Expanded", "InputCount", "OutputCount", "InputId", "OutputId",
         };
         static readonly HashSet<string> SkipChunks = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            "Attributes", "param_input", "param_output", "PersistentData", "ParameterData", "InputParam", "OutputParam", "Script", "CodeContent",
+            "param_input", "param_output", "PersistentData", "ParameterData", "InputParam", "OutputParam", "Script", "CodeContent",
         };
 
         const string Unstable = "\u0001unstable";
@@ -56,7 +56,7 @@ namespace Nextra.Engine.Gh
                 if (v == null) continue;
                 res[prefix + it.Name + (it.Index > 0 || c.Items.Count(x => x.Name == it.Name) > 1 ? $"[{it.Index}]" : "")] = v;
             }
-            if (depth >= 2) return;
+            if (depth >= 7) return;
             foreach (var ch in c.Chunks)
             {
                 if (SkipChunks.Contains(ch.Name)) continue;
@@ -110,12 +110,36 @@ namespace Nextra.Engine.Gh
         }
 
         /// Set "$key" values and read the archive back into the object.
+        /// Shortest suffix of a key that is still unique among the object's keys ("Active/button[2]" → "button[2]").
+        public static string ShortKey(string key, List<string> all)
+        {
+            var parts = key.Split('/');
+            for (int n = 1; n <= parts.Length; n++)
+            {
+                var suf = string.Join("/", parts.Skip(parts.Length - n));
+                if (all.Count(k => k == suf || k.EndsWith("/" + suf, StringComparison.OrdinalIgnoreCase)) == 1) return suf;
+            }
+            return key;
+        }
+
+        /// "$button[2]" or "$Active/button[2]" → the unique full key that ends with it.
+        static string Expand(IGH_DocumentObject o, string key)
+        {
+            var keys = Read(o).Keys.ToList();
+            if (keys.Contains(key)) return key;
+            var hits = keys.Where(k => k.EndsWith("/" + key, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (hits.Count == 1) return hits[0];
+            if (hits.Count > 1) throw new NxError($"state key '{key}' is ambiguous", "use a longer suffix: " + string.Join(", ", hits.Take(6)));
+            return key;
+        }
+
         public static string Write(IGH_DocumentObject o, List<KeyValuePair<string, string>> sets)
         {
             var root = Serialize(o);
             var notes = new List<string>();
-            foreach (var kv in sets)
+            foreach (var kv0 in sets)
             {
+                var kv = new KeyValuePair<string, string>(Expand(o, kv0.Key), kv0.Value);
                 var path = kv.Key.Split('/');
                 GH_IChunk c = root;
                 for (int i = 0; i < path.Length - 1; i++)
@@ -152,7 +176,9 @@ namespace Nextra.Engine.Gh
                 catch (FormatException) { throw new NxError($"value '{v}' does not fit {item.Type} for '{kv.Key}'"); }
                 notes.Add(kv.Key);
             }
+            var piv = o.Attributes?.Pivot;
             if (!o.Read(root)) throw new NxError($"{o.Name} rejected the new state", "the component may validate values; check allowed options with query level:'detail'");
+            if (piv.HasValue && o.Attributes != null) o.Attributes.Pivot = piv.Value;
             if (o is IGH_Component comp) { comp.Params.OnParametersChanged(); }
             o.Attributes?.ExpireLayout();
             if (o is IGH_ActiveObject ao) ao.ExpireSolution(false);

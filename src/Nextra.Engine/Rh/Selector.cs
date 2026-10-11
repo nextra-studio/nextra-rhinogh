@@ -24,7 +24,7 @@ namespace Nextra.Engine.Rh
         {
             var f = new Filter();
             if (string.IsNullOrWhiteSpace(s)) return f;
-            foreach (var raw in System.Text.RegularExpressions.Regex.Split(s.Trim(), @"\s+").SelectMany(t => t.Contains(':') ? new[] { t } : t.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)))
+            foreach (var raw in Fmt.FilterTokens(s, "sel", "selected", "hidden", "all", "*"))
             {
                 var t = raw.Trim();
                 int c = t.IndexOf(':');

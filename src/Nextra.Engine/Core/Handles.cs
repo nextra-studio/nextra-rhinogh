@@ -101,6 +101,25 @@ namespace Nextra.Engine
             return s.Length <= max ? s : s.Substring(0, max) + "…";
         }
 
+        /// Filter tokens: whitespace separated; "quoted values" kept; words after `key:value` that are not
+        /// keys/handles/keywords continue that value (so `type:Bounding Box` and `layer:My Layer` work).
+        public static List<string> FilterTokens(string s, params string[] keywords)
+        {
+            var res = new List<string>();
+            var rx = new System.Text.RegularExpressions.Regex(@"(\w+:""[^""]*"")|(""[^""]*"")|(\S+)");
+            foreach (System.Text.RegularExpressions.Match m in rx.Matches(s ?? ""))
+            {
+                var t = m.Value.Replace("\"", "");
+                bool keyed = System.Text.RegularExpressions.Regex.IsMatch(t, @"^\w+:");
+                bool handle = Handles.IsGhHandle(t) || Handles.IsRhHandle(t) || t.Contains(',') || Guid.TryParse(t, out _);
+                bool kw = keywords.Contains(t.ToLowerInvariant());
+                if (!keyed && !handle && !kw && res.Count > 0 && System.Text.RegularExpressions.Regex.IsMatch(res[res.Count - 1], @"^\w+:"))
+                    res[res.Count - 1] += " " + t;
+                else res.Add(t);
+            }
+            return res.SelectMany(t => t.Contains(':') ? new[] { t } : t.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
+        }
+
         /// Wildcard match (* and ?), case-insensitive.
         public static bool Like(string text, string pattern)
         {

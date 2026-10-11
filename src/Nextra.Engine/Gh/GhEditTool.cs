@@ -237,6 +237,7 @@ namespace Nextra.Engine.Gh
                 if (li < 0) li = doc.Layers.Add(layer, System.Drawing.Color.Black);
                 attrs.LayerIndex = li;
             }
+            var ck = Checkpoints.Begin("bake " + string.Join(" ", a.List("bake")), false);
             using var delta = new DeltaTracker(doc);
             foreach (var spec in a.List("bake"))
             {
@@ -253,7 +254,9 @@ namespace Nextra.Engine.Gh
                 else { r.Line($"bake: {parts[0]} has nothing bakeable"); continue; }
             }
             doc.Views.Redraw();
+            Checkpoints.Complete(ck, delta);
             delta.Report(r);
+            r.Line("checkpoint " + ck["id"]);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Nextra.Engine.Gh
             IEnumerable<IGH_DocumentObject> cur = all;
             var handles = new List<IGH_DocumentObject>();
             bool anyHandle = false;
-            foreach (var tok in System.Text.RegularExpressions.Regex.Split(filter.Trim(), @"\s+").SelectMany(t => t.Contains(':') ? new[] { t } : t.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)))
+            foreach (var tok in Fmt.FilterTokens(filter, "errors", "warnings", "sel", "selected", "scripts", "all", "*"))
             {
                 var t = tok.Trim();
                 int c = t.IndexOf(':');
@@ -121,6 +121,8 @@ namespace Nextra.Engine.Gh
                     foreach (var o in objs.Skip(offset).Take(limit))
                     {
                         r.Line(Writer.Write(d, new[] { o }, new WriteOptions { Messages = true, Data = true, Compact = false, FullState = true }).Replace("## ", "# in group: "));
+                        var menuDesc = MenuIO.Describe(o);
+                        if (menuDesc != null) r.Line("  menu: " + menuDesc);
                         if (o is IGH_Component c)
                         {
                             r.Line("  " + ComponentSearch.Describe(c, false));

@@ -13,7 +13,7 @@ description: Karamba3D 3 in shorthand — units, component names, ports, dropdow
 ## On-component controls
 | control | how |
 |---|---|
-| Support check-boxes Tx…Rz | input `Dofs=[0,1,2]` = **indices** of fixed DOFs (0 Tx, 1 Ty, 2 Tz, 3 Rx, 4 Ry, 5 Rz); added to the check-boxes. Pinned: `[0,1,2]`, fixed: `[0,1,2,3,4,5]`, roller: `[1,2]` (+ Rx `3` once per model to stop torsion modes) |
+| Support check-boxes Tx…Rz | the boxes themselves: `{$button[0]=true, $button[1]=true, $button[2]=true}` (0 Tx … 5 Rz) — visible on the component. Or input `Dofs=[0,1,2]` = **indices** of extra fixed DOFs (added to the boxes). Pinned 0-2, fixed 0-5, roller 1-2 (+ Rx 3 on one support to stop torsion) |
 | Loads dropdown (type of load) | `{$ActiveUnit/unitname="Point"}` — units: Gravity, Point, PointDisplacement, InitialStrain, Temperature, MeshLoad -Const., MeshLoad -Variable. Inputs change with the unit (Point: Force, Moment, Local?, Pos\|Ind, LCase) |
 | any other dropdown | `query {scope:'gh', filter:'g10', level:'detail'}` lists `$` keys; set with `{$Key=value}` |
 
@@ -26,7 +26,7 @@ ln = Line (A=a, B=b)
 sh = Shatter (C=ln^p, t=0.5)
 ## Karamba #ABDBFF
 el = Create Linear Element @Karamba3D (Line=sh)
-sup = Support @Karamba3D (Pos|Ind=[{0,0,0},{10,0,0}], Dofs=[0,1,2,3])
+sup = Support @Karamba3D (Pos|Ind=[{0,0,0},{10,0,0}]) {$button[0]=true, $button[1]=true, $button[2]=true, $button[3]=true}
 ld = Loads @Karamba3D (Pos|Ind={5,0,0}, Force={0,0,-10}) {$ActiveUnit/unitname="Point"}
 asm = Assemble Model @Karamba3D (Elem=el.Elem, Support=sup, Load=ld)
 an = Analyse @Karamba3D (Model=asm.Model)

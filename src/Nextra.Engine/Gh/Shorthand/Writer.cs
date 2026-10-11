@@ -290,7 +290,8 @@ namespace Nextra.Engine.Gh.Shorthand
             if (!(o is GH_NumberSlider) && !(o is GH_Panel) && !(o is GH_Scribble) && !(o is GH_ValueList) && !(o is GH_BooleanToggle) && !Scripts.IsScript(o))
             {
                 var st = opt.FullState ? StateIO.Read(o) : StateIO.Diff(o);
-                foreach (var kv in st.Take(opt.FullState ? 40 : 8)) cfg.Add($"${kv.Key}={kv.Value}");
+                var all = StateIO.Read(o).Keys.ToList();
+                foreach (var kv in st.Where(kv => !kv.Key.EndsWith("/Count")).Take(opt.FullState ? 40 : 8)) cfg.Add($"${StateIO.ShortKey(kv.Key, all)}={kv.Value}");
             }
             return cfg;
         }

@@ -250,7 +250,7 @@ namespace Nextra.Engine.Gh.Shorthand
             GH_Scribble _ => "text, size",
             _ when Scripts.IsScript(o) => "code=\"…\" or code=@path",
             _ => "set=…, ref=[r1,…] (params), expr=\"…\" (expression comps), graph=…",
-        } + ", nick, hide, show, lock, unlock, $stateKey=value";
+        } + ", nick, hide, show, lock, unlock, menu=\"Item\" (right-click menu), click=\"fx,fy\", $stateKey=value";
 
         static void ApplyConfig(GH_Document d, IGH_DocumentObject o, string key, Val v, NodeOp n)
         {
@@ -258,6 +258,13 @@ namespace Nextra.Engine.Gh.Shorthand
             string s = v?.Kind == VK.Str ? v.Str : v?.ToString();
             switch (key)
             {
+                case "menu":
+                    foreach (var m in (v.Kind == VK.List ? v.Items.Select(x => x.Kind == VK.Str ? x.Str : x.ToString()) : new[] { s }))
+                        LastNotes?.Add($"L{n.Line}: " + MenuIO.Click(o, m));
+                    return;
+                case "click":
+                    LastNotes?.Add($"L{n.Line}: " + MenuIO.ClickAt(o, s));
+                    return;
                 case "nick": o.NickName = s; return;
                 case "hide": if (o is IGH_PreviewObject po) po.Hidden = true; return;
                 case "show": if (o is IGH_PreviewObject po2) po2.Hidden = false; return;

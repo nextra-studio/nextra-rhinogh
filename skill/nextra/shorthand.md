@@ -54,7 +54,9 @@ Output port flags: `(>R=^g)`.
 | Param (Point, Curve, Number…) | `set=[…]` stored values, `ref=[r3,r4]` Rhino references |
 | script components | `code="""…"""` or `code=@C:/path/file.py` |
 | any | `nick="Name"`, `hide`/`show` (preview), `lock`/`unlock` |
-| **any plug-in component** | `$Key=value` — the component's own saved settings (dropdowns, modes, toggles on the component, e.g. Karamba). `query level:'detail'` lists its `$` keys; normal listings show only non-default ones. |
+| **any component: saved settings** | `$Key=value` — everything the component saves: dropdowns, modes, check-boxes drawn on the component (Karamba Support `$button[2]=true`), right-click toggles (`$UnionBox=true`). Keys may be shortened to any unique suffix. `query level:'detail'` lists all `$` keys; normal listings show only non-default ones. |
+| **any component: right-click menu** | `menu="Union Box"` (toggle) · `menu="Union Box:on"` (only if needed) · `menu="Mode>Linear"` (sub-menu) · `menu=["A","B"]`. `level:'detail'` shows `menu: [x] Union Box | …`. Items ending in "…" open dialogs and are refused. |
+| **any component: click** | `click="0.73,0.92"` = mouse click at that fraction of the component box (x→right, y→down). Last resort for custom widgets: first `view {target:'gh', focus:'gN'}`, read the position, click, then check with `query`/`view`. |
 
 ## Script components
 ```
