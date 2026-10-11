@@ -26,7 +26,8 @@ namespace Nextra.Engine.Gh
         };
 
         const string Unstable = "\u0001unstable";
-        static bool Noise(string k) => k.IndexOf("Seed", StringComparison.OrdinalIgnoreCase) >= 0 || k.EndsWith("/count") || k.IndexOf("Parallel", StringComparison.OrdinalIgnoreCase) >= 0;
+        static bool Noise(string k) => k.IndexOf("Seed", StringComparison.OrdinalIgnoreCase) >= 0 || k.EndsWith("/count") || k.EndsWith("/Count") || k.EndsWith("/index")
+            || k.IndexOf("Parallel", StringComparison.OrdinalIgnoreCase) >= 0 || k.Contains("/params/") || k.StartsWith("EvalUnits/");
 
         static readonly Dictionary<Guid, Dictionary<string, string>> Defaults = new Dictionary<Guid, Dictionary<string, string>>();
 
@@ -54,7 +55,8 @@ namespace Nextra.Engine.Gh
                 if (Skip.Contains(it.Name)) continue;
                 var v = Show(it);
                 if (v == null) continue;
-                res[prefix + it.Name + (it.Index > 0 || c.Items.Count(x => x.Name == it.Name) > 1 ? $"[{it.Index}]" : "")] = v;
+                var key = prefix + it.Name + (it.Index > 0 || c.Items.Count(x => x.Name == it.Name) > 1 ? $"[{it.Index}]" : "");
+                if (!Noise(key)) res[key] = v;
             }
             if (depth >= 7) return;
             foreach (var ch in c.Chunks)

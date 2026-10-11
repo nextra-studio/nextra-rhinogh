@@ -506,6 +506,13 @@ namespace Nextra.Engine.Gh.Shorthand
                 case VK.List: foreach (var x in v.Items) foreach (var y in Values(x, p)) yield return y; break;
                 case VK.Num: yield return v.Num; break;
                 case VK.Bool: yield return v.Str == "true"; break;
+                case VK.Str when IsGeoParam(p) && System.Text.RegularExpressions.Regex.IsMatch(v.Str, @"^(layer|type|name|sel|bbox|cells):|^sel$"):
+                    {   // reference every Rhino object matching a filter: {ref="layer:FE::Lines"}
+                        var objs = Rh.Filter.Parse(v.Str).Apply(Rhino.RhinoDoc.ActiveDoc);
+                        if (objs.Count == 0) throw new NxError($"Rhino filter '{v.Str}' matched nothing");
+                        foreach (var ro in objs) yield return Reference(p, ro.Id, Handles.Rh(ro.Id));
+                        break;
+                    }
                 case VK.Str: yield return v.Str; break;
                 case VK.Point:
                     if (p.TypeName == "Vector") yield return new Vector3d(v.Xyz[0], v.Xyz[1], v.Xyz[2]);
@@ -535,6 +542,14 @@ namespace Nextra.Engine.Gh.Shorthand
                     break;
                 default: throw new NxError($"value {v} not supported here");
             }
+        }
+
+        static bool IsGeoParam(IGH_Param p)
+        {
+            for (var t = p.GetType(); t != null; t = t.BaseType)
+                if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(GH_PersistentParam<>))
+                    return typeof(IGH_GeometricGoo).IsAssignableFrom(t.GetGenericArguments()[0]) || t.GetGenericArguments()[0] == typeof(IGH_GeometricGoo);
+            return false;
         }
 
         /// A referenced Rhino object as the param's own goo type (ReferenceID + LoadGeometry), like GH's "Set one…".

@@ -28,6 +28,7 @@ namespace Nextra.Engine
 "def handle(o): return _nx.GetData('nextra.handle').Invoke(o)\n" +
 "def ghdoc(): return _nx.GetData('nextra.ghdoc').Invoke()\n" +
 "def q(f): return list(_nx.GetData('nextra.select').Invoke(str(f)))\n" +
+"def obb(o):\n    d = _nx.GetData('nextra.obb').Invoke(o)\n    return None if d is None else {k: d[k] for k in d.Keys}\n" +
 "import json as _json; args = _json.loads(str(_nx.GetData('nextra.args') or '{}'))\n";
 
         const string CsPrelude =
@@ -184,7 +185,18 @@ namespace Nextra.Engine
             dom.SetData("nextra.resolve", new Func<string, object>(Resolve));
             dom.SetData("nextra.handle", new Func<object, string>(HandleOf));
             dom.SetData("nextra.ghdoc", new Func<object>(() => GhCore.Doc(true)));
+            dom.SetData("nextra.obb", new Func<object, Dictionary<string, object>>(ObbOf));
             dom.SetData("nextra.select", new Func<string, List<Rhino.DocObjects.RhinoObject>>(f => Filter.Parse(f).Apply(RhinoDoc.ActiveDoc)));
+        }
+
+        /// obb(obj | handle | GeometryBase) → {shape, L, W, H, axis (long), short, center, box}
+        public static Dictionary<string, object> ObbOf(object o)
+        {
+            if (o is string s) o = Resolve(s);
+            var g = o is Rhino.DocObjects.RhinoObject ro ? ro.Geometry : o as Rhino.Geometry.GeometryBase;
+            var b = Geo.ComputeObb(g);
+            if (b == null) return null;
+            return new Dictionary<string, object> { ["shape"] = b.Shape, ["L"] = b.L, ["W"] = b.W, ["H"] = b.H, ["axis"] = b.LongAxis, ["short"] = b.ShortAxis, ["center"] = b.Center, ["box"] = b.Box };
         }
 
         public static object Resolve(string h)

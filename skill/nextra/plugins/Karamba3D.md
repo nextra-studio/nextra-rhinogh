@@ -7,6 +7,9 @@ description: Karamba3D 3 in shorthand — units, component names, ports, dropdow
 ## Rules
 - **Karamba works in metres, kN, cm results — whatever the Rhino unit is.** If the doc is in mm, scale geometry ×0.001 before Karamba (`Scale (G=…, F=0.001)`) or model the analysis geometry in metres. Check: `Assemble.Mass` must be plausible (10 m CHS 114.3×4 ≈ 109 kg).
 - **Loads need nodes.** A point load at a point that is not a node gives `Info: "Could not find node at …"` and zero results. Split lines first (`Shatter`, `Divide`→`Polyline`→`Explode`, or connect members at intersections).
+- Several element sources (beams + shells) → **flatten** into Assemble: `Elem=el.Elem+se.Elem^f`, `Support=sup^f`, `Load=ld^f`; otherwise you get one model per branch (check: `Assemble.Model` count = 1).
+- Trial licence: max 50 shell elements ("maximum number of shell elements in the trial-version") → coarser `Mesh Breps` MRes, or tell the user.
+- Sections/materials: `mat = Material Selection @Karamba3D (Name|Ind="C30/37")`; `cs = Cross-section @Karamba3D (Mat=mat) {menu="Units>Trapezoid"}` then `(Height=30, UpperWidth=30, LowerWidth=30)` [cm]; shells `{menu="Units>Shell - Const"}` + `Height=20`. Wire `CroSec=` into Create Linear/Surface Element. Defaults are thin steel (unrealistic deflections).
 - Use current components: `Analyse @Karamba3D` (not `AnalyzeThI` — Karamba itself warns "newer version available").
 - Write plug-in components without the "(Karamba3D)" suffix and add `@Karamba3D`: `Support @Karamba3D`, `Assemble Model @Karamba3D`. Two `Assemble Model` versions exist; the engine picks the visible one.
 

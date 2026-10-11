@@ -1,0 +1,31 @@
+22 object(s):
+## Sections #E6E6A0 (g26)
+g27 = Material Selection @Karamba3D (Name|Ind="C30/37") {hide}
+g28 = Cross-section @Karamba3D (Mat=g27, Height=30, UpperWidth=30, LowerWidth=30) {hide, $unitname="Trapezoid"}
+g29 = Cross-section @Karamba3D (Mat=g27, Height=20) {hide, $unitname="Shell - Const"}
+## FE geometry from Rhino #DBABFF (g20)
+g1 = Curve {ref=[r19,r18,r17,r30,r29,r23,…+8], nick="FE lines"}
+g2 = Brep {ref=[r31,r33,r36,r32,r34,r35], nick="FE shells"}
+g3 = Number Slider {v=3.5, r=0.2..6, d=2, nick="Mesh size m"}
+## Elements #ABDBFF (g21)
+g4 = Create Linear Element @Karamba3D (Line=g1, CroSec=g28)
+g5 = Mesh Breps @Karamba3D (Brep=g2, IPts=g4.Pts^f, MRes=g3)
+g6 = Create Surface Element @Karamba3D (Mesh=g5.Mesh, CroSec=g29)
+## Supports at z=0 #ABDBFF (g22)
+g7 = Deconstruct Mesh (M=g5.Mesh)
+g8 = Merge @Sets (D1=g4.Pts^f, D2=g7.V^f)
+g9 = Deconstruct @Vector (P=g8)
+g10 = Smaller Than (A=g9.Z, B=0.01)
+g11 = Cull Pattern (L=g8, P=g10.<)
+g12 = Support @Karamba3D (Pos|Ind=g11) {hide, $button[0]=true, $button[1]=true, $button[2]=true, $button[3]=true, $button[4]=true, $button[5]=true}
+## Model + analysis #FFD6AB (g23)
+g13 = Loads @Karamba3D
+g14 = Assemble Model @Karamba3D (Elem=g4.Elem+g6.Elem^f, Support=g12^f, Load=g13^f) {hide}
+  ? Support with index 10: Dof Tx is fixed by more than one support. In case you sum up the reactions o… Support with index 10: Dof Ty is fixed …
+g15 = Analyse @Karamba3D (Model=g14.Model) {hide}
+g16 = Model View @Karamba3D (Model=g15.Model) {$Menu/Panel/Checkbox[2]/Active=false}
+## Results #B2FAB4 (g24)
+g17 = Panel (=g14.Mass) {nick="Mass kg"}
+g18 = Panel (=g15.MaxDisp) {nick="Max disp cm"}
+g19 = Panel (=g14.Info) {nick="Assemble info"}
+--- ok=True 0.14s ~in 8 tok / out 429 tok
