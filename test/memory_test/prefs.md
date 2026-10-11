@@ -1,0 +1,2 @@
+- units: model in metres for structural work, mm for architecture
+- layers: structural FE geometry on FE::Lines / FE::Shells

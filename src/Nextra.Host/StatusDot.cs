@@ -21,6 +21,8 @@ namespace Nextra.Host
         struct RECT { public int L, T, R, B; }
         [System.Runtime.InteropServices.DllImport("user32.dll")] static extern bool GetWindowRect(IntPtr h, out RECT r);
         [System.Runtime.InteropServices.DllImport("user32.dll")] static extern bool IsIconic(IntPtr h);
+        [System.Runtime.InteropServices.DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+        [System.Runtime.InteropServices.DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
         Color _color = Color.Gray;
         Point _down;
         bool _dragged;
@@ -43,7 +45,9 @@ namespace Nextra.Host
 
         StatusDot()
         {
+            AutoScaleMode = AutoScaleMode.None;          // no DPI auto-scaling of the 16 px dot
             FormBorderStyle = FormBorderStyle.None;
+            MinimumSize = new Size(16, 16); MaximumSize = new Size(16, 16);
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
             Size = new Size(16, 16);
@@ -65,6 +69,10 @@ namespace Nextra.Host
             if (IsIconic(_owner)) { if (Visible) Hide(); return; }
             if (!Visible) Show();
             if (!GetWindowRect(_owner, out var r)) return;
+            // above Rhino AND the Grasshopper editor while either is the active app; never above other programs
+            GetWindowThreadProcessId(GetForegroundWindow(), out uint fg);
+            bool ours = fg == (uint)Environment.ProcessId;
+            if (TopMost != ours) TopMost = ours;
             var p = new Point(r.R + _offset.X, r.B + _offset.Y);
             if (p != Location) Location = p;
         }

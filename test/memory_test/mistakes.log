@@ -1,0 +1,40 @@
+{"t":"2026-10-11T20:18:00","kind":"run.py","sig":"RhinoCode language *.*.python@N.* not available"}
+{"t":"2026-10-11T20:25:21","kind":"gh_edit","sig":"\u0027\u2026\u0027 is ambiguous \u2014 add @Category: Rectangle @Params/Geometry; Rectangle @Curve/Primitive"}
+{"t":"2026-10-11T20:25:21","kind":"gh_edit","sig":"\u0027\u2026\u0027 is ambiguous \u2014 add @Category: Rotate @Vector/Vector; Rotate @Transform/Euclidean"}
+{"t":"2026-10-11T20:25:21","kind":"gh_edit","sig":"unknown id \u0027\u2026\u0027 \u2014 use a handle (gN) or an id defined with \u0060id = Type\u0060; strings need quotes"}
+{"t":"2026-10-11T20:26:27","kind":"gh.runtime.Loft","sig":"Loft could not be constructed."}
+{"t":"2026-10-11T20:34:14","kind":"gh.runtime.Python 3 Script","sig":"Error running script: name \u0027\u2026\u0027 is not defined [N:N]"}
+{"t":"2026-10-11T20:34:43","kind":"gh_edit","sig":"no input \u0027\u2026\u0027 on C# Script; inputs: x?:Any y?:Any"}
+{"t":"2026-10-11T20:34:43","kind":"gh_edit","sig":"no input \u0027\u2026\u0027 on C# Script; inputs: x?:Any y?:Any"}
+{"t":"2026-10-11T20:34:43","kind":"gh_edit","sig":"no input \u0027\u2026\u0027 on C# Script; inputs: x?:Any y?:Any"}
+{"t":"2026-10-11T20:34:43","kind":"gh.runtime.C# Script","sig":"The name \u0027\u2026\u0027 does not exist in the current context [N:N]"}
+{"t":"2026-10-11T20:34:43","kind":"gh.runtime.C# Script","sig":"The name \u0027\u2026\u0027 does not exist in the current context [N:N]"}
+{"t":"2026-10-11T20:34:43","kind":"gh.runtime.C# Script","sig":"The name \u0027\u2026\u0027 does not exist in the current context [N:N]"}
+{"t":"2026-10-11T20:34:43","kind":"gh.runtime.C# Script","sig":"The name \u0027\u2026\u0027 does not exist in the current context [N:N]"}
+{"t":"2026-10-11T20:34:43","kind":"gh.runtime.C# Script","sig":"The name \u0027\u2026\u0027 does not exist in the current context [N:N]"}
+{"t":"2026-10-11T20:38:08","kind":"gh.runtime.Python 3 Script","sig":"Error building script: Unable to cast object of type \u0027NextraRadioVN.Grasshopper.Kernel.Attributes.GH_ComponentAttributes\u2026"}
+{"t":"2026-10-11T20:38:09","kind":"gh.runtime.Python 3 Script","sig":"Error building script: Unable to cast object of type \u0027NextraRadioVN.Grasshopper.Kernel.Attributes.GH_ComponentAttributes\u2026"}
+{"t":"2026-10-11T20:38:20","kind":"run.py","sig":"NameError: name \u0027\u2026\u0027 is not defined"}
+{"t":"2026-10-11T20:38:21","kind":"run.py","sig":"AttributeError: \u0027\u2026\u0027 object has no attribute \u0027\u2026\u0027"}
+{"t":"2026-10-11T20:39:04","kind":"gh.runtime.IronPython 2 Script","sig":"Error running script: Access is denied: \u0027RhinoCodePluginGH.Components.BaseScriptComponent\u0060N\u002BComponentAttributes[RhinoCod\u2026"}
+{"t":"2026-10-11T20:39:12","kind":"run.py","sig":"NameError: name \u0027\u2026\u0027 is not defined"}
+{"t":"2026-10-11T20:41:50","kind":"run.py","sig":"NameError: name \u0027\u2026\u0027 is not defined"}
+{"t":"2026-10-11T20:42:14","kind":"run.py","sig":"Rhino.Runtime.Code.Execution.ExecuteException: bbox needs N numbers: xN,yN,zN,xN,yN,zN"}
+{"t":"2026-10-11T20:42:43","kind":"run.py","sig":"Rhino.Runtime.Code.Execution.ExecuteException: bbox needs N numbers: xN,yN,zN,xN,yN,zN"}
+{"t":"2026-10-11T20:43:03","kind":"gh_edit","sig":"Brep (Brep) accepted N/N values from [rN] \u2014 give values of type Brep"}
+{"t":"2026-10-11T20:43:28","kind":"gh_edit","sig":"Top slab (Brep) accepted N/N values from [rN] \u2014 give values of type Brep"}
+{"t":"2026-10-11T20:45:00","kind":"gh_edit","sig":"LN: parse error: input \u0027\u2026\u0027 needs Port=value"}
+{"t":"2026-10-11T20:45:00","kind":"gh_edit","sig":"LN: parse error: input \u0027\u2026\u0027 needs Port=value"}
+{"t":"2026-10-11T20:45:00","kind":"gh_edit","sig":"LN: parse error: input \u0027\u2026\u0027 needs Port=value"}
+{"t":"2026-10-11T20:45:00","kind":"gh_edit","sig":"LN: parse error: input \u0027\u2026\u0027 needs Port=value"}
+{"t":"2026-10-11T20:45:00","kind":"gh_edit","sig":"unknown id \u0027\u2026\u0027 \u2014 use a handle (gN) or an id defined with \u0060id = Type\u0060; strings need quotes"}
+{"t":"2026-10-11T20:45:39","kind":"gh_edit","sig":"\u0027\u2026\u0027 is ambiguous \u2014 add @Category:  Assemble Model (KarambaND) @KarambaND/N.Model;  Assemble Model (KarambaND) @KarambaND\u2026"}
+{"t":"2026-10-11T20:45:39","kind":"gh_edit","sig":"Support (KarambaND) is a parameter with one port; drop \u0027\u2026\u0027"}
+{"t":"2026-10-11T20:45:39","kind":"gh_edit","sig":"unknown id \u0027\u2026\u0027 \u2014 use a handle (gN) or an id defined with \u0060id = Type\u0060; strings need quotes"}
+{"t":"2026-10-11T20:46:12","kind":"gh.runtime.AnalyzeThI (Karamba3D)","sig":"For this component a newer version is available. Please use that. Outdated Karamba-components may show strange behavior."}
+{"t":"2026-10-11T20:46:18","kind":"gh_edit","sig":"source an: no output \u0027\u2026\u0027 on  Analyse (KarambaND); outputs: Model(Analysed Model:Model) MaxDisp(Maximum Displacement [cm]\u2026"}
+{"t":"2026-10-11T20:47:02","kind":"gh_edit","sig":"state chunk \u0027\u2026\u0027 not found on  Loads (KarambaND) \u2014 known keys: ExecuteParallel, ActiveUnit/unitname, EvalUnits/count"}
+{"t":"2026-10-11T20:49:04","kind":"gh.runtime. Analyse (Karamba3D)","sig":"Model can not be calculated: there are no load cases."}
+{"t":"2026-10-11T20:59:11","kind":"gh.runtime. Analyse (Karamba3D)","sig":"The maximum number of shell elements in the trial-version of KarambaND is N. Currently there are N shell elements in the\u2026"}
+{"t":"2026-10-11T23:52:10","kind":"gh.runtime.Isotrim","sig":"Data conversion failed from Domain\u00B2 to Surface"}
+{"t":"2026-10-11T23:56:23","kind":"manual","sig":"Karamba lengths read as metres in a mm doc","fix":"scale x0.001 or model in m; check Assemble.Mass"}

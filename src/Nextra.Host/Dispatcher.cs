@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
@@ -92,7 +93,16 @@ namespace Nextra.Host
                 p.Event.Set();
             }));
 
-            if (!p.Event.Wait(timeoutMs))
+            // wait in 1 s slices so known-harmless notices (config "auto_dismiss") can be closed while we wait
+            var until = DateTime.Now.AddMilliseconds(timeoutMs);
+            var autoNotes = new List<string>();
+            while (!p.Event.Wait(1000))
+            {
+                if (DateTime.Now >= until) break;
+                var closed = DialogProbe.AutoDismiss();
+                if (closed != null) autoNotes.Add(closed);
+            }
+            if (!p.Done)
             {
                 lock (Gate)
                 {
@@ -106,7 +116,15 @@ namespace Nextra.Host
                     }
                 }
             }
-            return AttachLate(p.Result);
+            var res0 = AttachLate(p.Result);
+            if (autoNotes.Count == 0) return res0;
+            try
+            {
+                var j = JsonNode.Parse(res0) as JsonObject;
+                j["text"] = (string)j["text"] + "\n(" + string.Join("; ", autoNotes) + ")";
+                return j.ToJsonString();
+            }
+            catch { return res0; }
         }
 
         public static string Reload()
@@ -258,6 +276,30 @@ namespace Nextra.Host
                 return "Modal dialog open: " + string.Join(" ; ", parts);
             }
             catch (Exception e) { return "dialog probe failed: " + e.Message; }
+        }
+
+        /// Close dialogs whose title matches config "auto_dismiss" (default: Karamba's EPPlus compatibility notice).
+        public static string AutoDismiss()
+        {
+            var list = new List<string>();
+            try
+            {
+                var p = System.IO.Path.Combine(Server.AppDir, "config.json");
+                var cfg = System.IO.File.Exists(p) ? JsonNode.Parse(System.IO.File.ReadAllText(p)) as JsonObject : null;
+                if (cfg?["auto_dismiss"] is JsonArray arr) foreach (var x in arr) list.Add((string)x);
+                else list.Add("Karamba3D compatibility problem");
+            }
+            catch { list.Add("Karamba3D compatibility problem"); }
+            var closed = new List<string>();
+            foreach (var h in Modals())
+            {
+                var t = Text(h);
+                if (!list.Any(x => t.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)) continue;
+                if (Cls(h) == "#32770") PostMessage(h, WM_COMMAND, (IntPtr)IDCANCEL, IntPtr.Zero);
+                PostMessage(h, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                closed.Add(t);
+            }
+            return closed.Count == 0 ? null : "auto-dismissed: " + string.Join(", ", closed);
         }
 
         public static string Dismiss()

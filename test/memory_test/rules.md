@@ -1,0 +1,3 @@
+- Karamba: model in metres; check Assemble.Mass is plausible.
+- GH C# scripts: write the RunScript signature; ports follow it.
+- Range returns N+1 values: N=n^e(x-1).
