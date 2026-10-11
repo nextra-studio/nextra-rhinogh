@@ -109,6 +109,16 @@ namespace Nextra.Engine.Gh
             c.Params.OnParametersChanged();
         }
 
+        /// Remove unwired inputs whose name the code never mentions (the x/y defaults of a new script).
+        public static void DropUnusedInputs(IGH_Component c)
+        {
+            var code = GetCode(c) ?? "";
+            if (code.Trim().Length == 0) return;
+            foreach (var p in c.Params.Input.ToList())
+                if (p.SourceCount == 0 && !System.Text.RegularExpressions.Regex.IsMatch(code, @"\b" + System.Text.RegularExpressions.Regex.Escape(p.NickName) + @"\b"))
+                    RemoveInput(c, p.NickName);
+        }
+
         public static void RemoveInput(IGH_Component c, string name)
         {
             var p = c.Params.Input.FirstOrDefault(x => x.NickName == name || x.Name == name) ?? throw new NxError($"no input '{name}' on {c.Name}");

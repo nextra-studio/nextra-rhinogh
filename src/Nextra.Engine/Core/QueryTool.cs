@@ -23,8 +23,9 @@ namespace Nextra.Engine
                 case "components": case "plugins": case "gh_types": ComponentSearch.Run(a, r); break;
                 case "docs": DocsStore.Query(a, r); break;
                 case "library": Library.Query(a, r); break;
+                case "api": case "sdk": case "rhinocommon": ApiDocs.Query(a, r); break;
                 case "status": r.Line("engine ok; " + (RhinoDoc.ActiveDoc?.Name ?? "untitled") + "; gh " + (GhCore.Doc(false) != null ? "open" : "not open")); break;
-                default: throw new NxError($"scope '{scope}' unknown", "scope: rhino | gh | components | docs | library | status");
+                default: throw new NxError($"scope '{scope}' unknown", "scope: rhino | gh | components | api | docs | library | status");
             }
         }
 

@@ -158,7 +158,7 @@ namespace Nextra.Engine.Gh
                     if (Scripts.IsScript(m.o)) { var ctx = ScriptLineContext((IGH_Component)m.o, m.msg); if (ctx != null) r.Line(ctx); }
                 }
                 // results of the affected sinks
-                var sinks = touched.Where(o => !(o is GH_Group) && !(o is GH_Scribble)).Where(o => !Downstream(o).Any(x => tset.Contains(x.InstanceGuid))).Take(6).ToList();
+                var sinks = ResultNodes(touched);
                 if (solve && sinks.Count > 0)
                 {
                     var outs = new List<string>();
@@ -193,6 +193,37 @@ namespace Nextra.Engine.Gh
             var hint = Memory.RecurringHint();
             if (hint != null) r.Line(hint);
             if (r.Length == 0) r.Line("nothing to do: give ops, script, layout:'tidy', open, new, save or bake");
+        }
+
+        static bool IsDisplay(IGH_DocumentObject o) => o is GH_Panel || o is GH_Scribble || o is GH_Group;
+        static bool IsInput(IGH_DocumentObject o) => o is GH_NumberSlider || o is GH_BooleanToggle || o is GH_ValueList || o is GH_ColourSwatch || o is GH_Panel;
+
+        /// Where to show the effect of an edit: the touched nodes whose data goes nowhere else that was touched
+        /// (display nodes like panels do not count as consumers). If such a node is only an input (slider, toggle…)
+        /// or its data flows on to untouched nodes, follow the wires to the end nodes of that branch instead.
+        static List<IGH_DocumentObject> ResultNodes(List<IGH_DocumentObject> touched)
+        {
+            var tset = new HashSet<Guid>(touched.Select(o => o.InstanceGuid));
+            var res = new List<IGH_DocumentObject>();
+            void Add(IGH_DocumentObject o) { if (!IsDisplay(o) && !IsInput(o) && !res.Contains(o)) res.Add(o); }
+            foreach (var o in touched.Where(o => !IsDisplay(o)).Distinct())
+            {
+                var down = Downstream(o).Where(x => !IsDisplay(x)).Distinct().ToList();
+                if (down.Any(x => tset.Contains(x.InstanceGuid))) continue;
+                if (down.Count == 0) { Add(o); continue; }
+                // walk to the ends of the branch (bounded)
+                var seen = new HashSet<Guid>();
+                var queue = new Queue<IGH_DocumentObject>(down);
+                int guard = 0;
+                while (queue.Count > 0 && guard++ < 400)
+                {
+                    var x = queue.Dequeue();
+                    if (!seen.Add(x.InstanceGuid)) continue;
+                    var next = Downstream(x).Where(y => !IsDisplay(y)).ToList();
+                    if (next.Count == 0) Add(x); else foreach (var y in next) queue.Enqueue(y);
+                }
+            }
+            return res.Take(6).ToList();
         }
 
         static IEnumerable<IGH_DocumentObject> Downstream(IGH_DocumentObject o)

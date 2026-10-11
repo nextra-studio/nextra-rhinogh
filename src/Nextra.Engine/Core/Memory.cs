@@ -72,8 +72,9 @@ namespace Nextra.Engine
             var sb = new StringBuilder();
             var prefs = Read("prefs.md").Trim();
             var rules = Read("rules.md").Trim();
-            sb.AppendLine("## prefs\n" + (prefs.Length > 0 ? prefs : "(none)"));
-            sb.AppendLine("## rules (learned)\n" + (rules.Length > 0 ? rules : "(none)"));
+            try { sb.AppendLine(UserDocs.Session()); } catch (Exception e) { sb.AppendLine("(user folder unreadable: " + e.Message + ")"); }
+            sb.AppendLine("## prefs saved by the AI\n" + (prefs.Length > 0 ? prefs : "(none)"));
+            sb.AppendLine("## rules (learned, user-approved)\n" + (rules.Length > 0 ? rules : "(none)"));
             sb.AppendLine("## library");
             sb.AppendLine(Library.Index(null, 40));
             var groups = Mistakes().GroupBy(m => (string)m["sig"]).Where(g => g.Count() >= 2 && !rules.Contains(g.Key)).OrderByDescending(g => g.Count()).Take(5).ToList();
@@ -142,6 +143,10 @@ namespace Nextra.Engine
                     r.Line("logged");
                     break;
                 case "compact": r.Line(Memory.Compact()); break;
+                case "init": r.Line("user folder " + UserDocs.Dir); break;   // host at startup / NextraFolder command
+                // the user's own folder: only when the user asks ("save this as my workflow / my Karamba rules")
+                case "save_workflow": r.Line(UserDocs.SaveWorkflow(Req(a, "name"), Req(a, "text"), a.Str("when", null))); break;
+                case "save_guide": r.Line(UserDocs.SaveGuide(Req(a, "name"), Req(a, "text"))); break;
                 case "save_script":
                     r.Line(Library.Save(Req(a, "name"), Req(a, "code"), a.Str("lang", "py"), a.Str("doc", null)));
                     break;
@@ -165,7 +170,7 @@ namespace Nextra.Engine
                     }
                 default:
                     throw new NxError($"memory action '{action}' unknown",
-                        "actions: list | save_pref | set_prefs | log_mistake | compact | set_rules | save_script | read_script | delete_script");
+                        "actions: list | save_pref | set_prefs | log_mistake | compact | set_rules | save_script | read_script | delete_script | save_workflow | save_guide");
             }
         }
 
@@ -179,6 +184,7 @@ namespace Nextra.Engine
         public static List<string> Dirs()
         {
             var dirs = new List<string> { Path.Combine(Memory.Dir, "library") };
+            try { dirs.Add(UserDocs.Scripts); } catch { }
             dirs.AddRange(EngineConfig.List("library_dirs"));
             var docPath = Rhino.RhinoDoc.ActiveDoc?.Path;
             if (!string.IsNullOrEmpty(docPath))
@@ -285,24 +291,35 @@ namespace Nextra.Engine
         {
             var dir = Dir() ?? throw new NxError("docs folder not found", "set skill_dir in %APPDATA%/Nextra/config.json");
             var files = Directory.EnumerateFiles(dir, "*.md", SearchOption.AllDirectories).ToList();
+            // the user's folder (Documents\Nextra) comes first: its plug-in guides shadow the bundled ones
+            var user = new List<(string file, string rel)>();
+            try
+            {
+                if (File.Exists(UserDocs.Preferences)) user.Add((UserDocs.Preferences, "preferences.md"));
+                user.AddRange(UserDocs.WorkflowFiles().Select(f => (f, "workflows/" + Path.GetFileName(f))));
+                user.AddRange(UserDocs.PluginFiles().Select(f => (f, "plugins/" + Path.GetFileName(f))));
+            }
+            catch { }
+            var legacy = Path.Combine(Memory.Dir, "plugins");
+            if (Directory.Exists(legacy)) user.AddRange(Directory.EnumerateFiles(legacy, "*.md").Select(f => (f, "plugins/" + Path.GetFileName(f))));
+            var relOf = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var (f, rel) in user) relOf[f] = rel;
+            files.InsertRange(0, user.Select(u => u.file));
+            string Rel(string f) => relOf.TryGetValue(f, out var rr) ? rr : Path.GetRelativePath(dir, f).Replace('\\', '/');
             var topic = a.Str("filter", a.Str("topic", null));
             if (string.IsNullOrEmpty(topic))
             {
-                foreach (var f in files)
+                foreach (var f in files.Where(f => !Path.GetFileName(f).StartsWith("_")))
                 {
-                    var rel = Path.GetRelativePath(dir, f).Replace('\\', '/');
-                    var head = File.ReadLines(f).FirstOrDefault(l => l.StartsWith("description:")) ?? File.ReadLines(f).FirstOrDefault(l => l.StartsWith("# ")) ?? "";
-                    r.Line($"- {rel}: {Fmt.Trunc(head.Replace("description:", "").TrimStart('#', ' '), 100)}");
+                    var text = File.ReadAllText(f);
+                    var head = UserDocs.Meta(text, "description") ?? UserDocs.Meta(text, "when") ?? text.Split('\n').FirstOrDefault(l => l.StartsWith("# ")) ?? "";
+                    r.Line($"- {Rel(f)}{(relOf.ContainsKey(f) ? " (yours)" : "")}: {Fmt.Trunc(head.TrimStart('#', ' '), 100)}");
                 }
-                r.Line("read: query {scope:'docs', filter:'shorthand'} or 'shorthand#Slider' or a keyword");
+                r.Line("read: query {scope:'docs', filter:'shorthand'} or 'shorthand#Slider' or a keyword · API reference: query {scope:'api'}");
                 return;
             }
             string section = null;
             if (topic.Contains('#')) { section = topic.Substring(topic.IndexOf('#') + 1); topic = topic.Substring(0, topic.IndexOf('#')); }
-            // user plug-in guides (memory/plugins) shadow the bundled ones
-            var userPlugins = Path.Combine(Memory.Dir, "plugins");
-            if (Directory.Exists(userPlugins)) files.InsertRange(0, Directory.EnumerateFiles(userPlugins, "*.md"));
-            string Rel(string f) => (f.StartsWith(userPlugins, StringComparison.OrdinalIgnoreCase) ? "plugins/" + Path.GetFileName(f) : Path.GetRelativePath(dir, f)).Replace('\\', '/');
             var t2 = topic.EndsWith(".md") ? topic : topic + ".md";
             var file = files.FirstOrDefault(f => Rel(f).Equals(t2, StringComparison.OrdinalIgnoreCase))
                        ?? files.FirstOrDefault(f => Path.GetFileNameWithoutExtension(f).Equals(topic, StringComparison.OrdinalIgnoreCase));

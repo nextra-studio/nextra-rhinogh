@@ -18,7 +18,8 @@ namespace Nextra.Engine.Gh
             var dirs = new List<string>();
             var skill = EngineConfig.Str("skill_dir", null) ?? System.IO.Path.Combine(Entry.AppDir, "skill");
             if (!Directory.Exists(skill) && Entry.State.TryGetValue("host.dir", out var hd) && hd is string hs) skill = System.IO.Path.Combine(hs, "skill");
-            dirs.Add(System.IO.Path.Combine(Memory.Dir, "plugins"));   // user guides first: they win
+            try { dirs.Add(UserDocs.Plugins); } catch { }                   // the user's folder first: their guides win
+            dirs.Add(System.IO.Path.Combine(Memory.Dir, "plugins"));        // older location, still read
             dirs.Add(System.IO.Path.Combine(skill, "plugins"));
             var res = new List<Guide>();
             var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -29,8 +30,8 @@ namespace Nextra.Engine.Gh
                     if (name.StartsWith("_")) continue;
                     var text = File.ReadAllText(f);
                     var g = new Guide { Path = f, Name = name };
-                    var pl = text.Split('\n').FirstOrDefault(l => l.StartsWith("plugin:"));
-                    if (pl != null) g.Categories.AddRange(pl.Substring(7).Split(',').Select(x => x.Trim()).Where(x => x.Length > 0));
+                    var pl = UserDocs.Meta(text, "plugin");
+                    if (pl != null) g.Categories.AddRange(pl.Split(',').Select(x => x.Trim()).Where(x => x.Length > 0));
                     if (g.Categories.Count == 0) g.Categories.Add(name);
                     if (g.Categories.All(c => seen.Contains(c))) continue;
                     foreach (var c in g.Categories) seen.Add(c);

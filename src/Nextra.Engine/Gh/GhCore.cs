@@ -161,8 +161,14 @@ namespace Nextra.Engine.Gh
             if (o is GH_Panel pn) sb.Append('=').Append(pn.UserText);
             if (o is GH_BooleanToggle t) sb.Append('=').Append(t.Value);
             if (o is GH_Group g) sb.Append('#').Append(string.Join(",", g.ObjectIDs));
+            // position after a separator: a pure move is reported as a count, not as shorthand lines
+            var piv = o.Attributes?.Pivot ?? System.Drawing.PointF.Empty;
+            sb.Append(MoveSep).Append((int)piv.X).Append(',').Append((int)piv.Y);
             return sb.ToString();
         }
+
+        const char MoveSep = '\u0001';
+        static string Semantic(string sig) { int i = sig.LastIndexOf(MoveSep); return i < 0 ? sig : sig.Substring(0, i); }
 
         public static bool Changed(Dictionary<Guid, string> before)
         {
@@ -179,9 +185,11 @@ namespace Nextra.Engine.Gh
             var now = Snapshot();
             var added = now.Keys.Where(k => k != Guid.Empty && !before.ContainsKey(k)).ToList();
             var removed = before.Keys.Where(k => k != Guid.Empty && !now.ContainsKey(k)).ToList();
-            var changed = now.Keys.Where(k => k != Guid.Empty && before.TryGetValue(k, out var s) && s != now[k]).ToList();
-            if (added.Count + removed.Count + changed.Count == 0) { r.Line("gh: no changes"); return; }
-            r.Line($"gh delta +{added.Count} ~{changed.Count} -{removed.Count}:");
+            var changedAny = now.Keys.Where(k => k != Guid.Empty && before.TryGetValue(k, out var s) && s != now[k]).ToList();
+            var changed = changedAny.Where(k => Semantic(before[k]) != Semantic(now[k])).ToList();
+            int moved = changedAny.Count - changed.Count;
+            if (added.Count + removed.Count + changedAny.Count == 0) { r.Line("gh: no changes"); return; }
+            r.Line($"gh delta +{added.Count} ~{changed.Count} -{removed.Count}" + (moved > 0 ? $", {moved} moved" : "") + (added.Count + changed.Count + removed.Count > 0 ? ":" : ""));
             var objs = added.Concat(changed).Select(g => d.FindObject(g, false)).Where(o => o != null).ToList();
             if (objs.Count > 0) r.Line(Shorthand.Writer.Write(d, objs, new Shorthand.WriteOptions { Messages = true, Compact = true, MaxObjects = 40 }));
             if (removed.Count > 0) r.Line("- " + string.Join(" ", removed.Select(g => Handles.GhPeek(d.DocumentID, g) ?? g.ToString().Substring(0, 8))));

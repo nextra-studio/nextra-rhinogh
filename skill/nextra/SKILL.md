@@ -11,13 +11,15 @@ Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints,
 The bridge binds a session to one Rhino. If more than one is open it refuses until you choose: `query {scope:'instances'}` → `query {instance:'house.3dm'}` (file name or pid; sticky). Or set `NEXTRA_FILE` in the MCP config. It never falls back to another instance.
 
 ## Session start
-1. `memory {action:'list'}` → user prefs, learned rules (obey them), script library index.
+1. `memory {action:'list'}` → the user's own preferences and workflow list (from their Nextra folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
 2. Look before you edit: `query` (text, cheap) then `view` only when shape/position matters.
+3. User says "remember / save this as my workflow / my Karamba rules" → `memory {action:'save_pref'|'save_workflow' (name, when, text)|'save_guide' (name = plug-in category, text)}`. These write to the user's folder (Rhino command `NextraFolder` opens it).
 
 ## Priority (always)
 1. **GH canvas work → `gh_edit` shorthand** (`shorthand.md`).
 2. **A library script fits → `run {lib:'name', args}`** (`query {scope:'library'}` lists them; user folders included).
 3. **Otherwise → `run` code** (Python 3 default; `cs` for C#). Fixes are `patch:[{find,replace}]`, never a full resend.
+   Unsure of an API? Search the installed version's reference instead of guessing: `query {scope:'api', filter:'loft curves'}` (ranked one-liners) → `filter:'Brep.CreateFromLoft'` (full doc) · `filter:'Brep'` (type overview) · `'rs.AddLoftSrf'` · `'src:gh GH_Document'`.
 
 ## Handles & regions
 - Rhino objects are `r12`, GH objects `g4`, GH groups `g9` too. Session-stable; new objects get new numbers. Use them everywhere (filters, `h('r12')` in code, shorthand refs).
@@ -42,4 +44,5 @@ On partial: fix **only** the failed lines, using the new handles. `undo {checkpo
 - `shorthand.md` — GH shorthand grammar + examples (read before the first gh_edit of a session)
 - `workflows.md` — recipes: Rhino from scratch / modify, GH build / modify / tidy, Rhino↔GH, scripts, Karamba
 - `api/rhino-python.md`, `api/rhino-csharp.md`, `api/gh-python.md`, `api/gh-csharp.md` — cheat sheets
-- `plugins/<Category>.md` — plug-in guides (Karamba3D, …). **Loaded only when that plug-in is used**: the first time its components appear in gh_edit/query, the guide's `## Rules` are attached to the reply once per session (mode `auto`; `hint` = pointer only; `off`) — set `"plugin_docs"` in `%APPDATA%/Nextra/config.json` or `gh_edit {plugin_docs:'hint'}`. Add your own in `%APPDATA%/Nextra/memory/plugins/` using `plugins/_TEMPLATE.md`.
+- `plugins/<Category>.md` — plug-in guides (Karamba3D, …). **Loaded only when that plug-in is used**: the first time its components appear in gh_edit/query, the guide's `## Rules` are attached to the reply once per session (mode `auto`; `hint` = pointer only; `off`) — set `"plugin_docs"` in `%APPDATA%/Nextra/config.json` or `gh_edit {plugin_docs:'hint'}`. The user's own guides (their Nextra folder, `plugins/`) replace the built-in one for the same plug-in.
+- These docs are also served by the plug-in (`query {scope:'docs'}`), so they work even when this skill was uploaded as a .zip.

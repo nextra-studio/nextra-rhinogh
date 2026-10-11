@@ -37,10 +37,26 @@ namespace Nextra.Host
 
         public static void TurnOn()
         {
+            try { DialogProbe.MainHandle = RhinoApp.MainWindowHandle(); } catch { }   // cached: the probe runs off the UI thread
             try { Server.Start(); }
             catch (Exception e) { RhinoApp.WriteLine("Nextra: server failed to start: " + e.Message); }
             try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("Nextra: status dot failed: " + ex.Message); }
             GhDotHook.Start();
+            InitUserFolder();
+        }
+
+        /// Creates the user folder with its default files right after install (first start), via the engine.
+        /// Returns its path, or null if the engine could not be reached.
+        public static string InitUserFolder()
+        {
+            try
+            {
+                EngineLoader.EnsureFresh();
+                var res = System.Text.Json.Nodes.JsonNode.Parse(EngineLoader.Call("memory", "{\"action\":\"init\"}"));
+                var text = (string)res?["text"];
+                return text != null && text.StartsWith("user folder ") ? text.Substring(12).Trim() : null;
+            }
+            catch (Exception e) { RhinoApp.WriteLine("Nextra: user folder not created: " + e.Message); return null; }
         }
 
         public static void TurnOff()
@@ -73,6 +89,21 @@ namespace Nextra.Host
             else if (i == iOff) NextraOffCommand.Do();
             else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("Nextra: engine reloaded: " + EngineLoader.Describe()); }
             else if (i == iRestart) { Server.Stop(); Server.Start(); }
+            return Result.Success;
+        }
+    }
+
+    /// Opens the user's Nextra folder (preferences.md, workflows/, plugins/, scripts/) in Explorer;
+    /// the engine creates it with default files on first use.
+    public class NextraFolderCommand : Command
+    {
+        public override string EnglishName => "NextraFolder";
+        protected override Result RunCommand(RhinoDoc doc, RunMode mode)
+        {
+            var dir = NextraHostPlugIn.InitUserFolder() ?? System.IO.Path.Combine(Server.AppDir, "user");
+            System.IO.Directory.CreateDirectory(dir);
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", "\"" + dir + "\"") { UseShellExecute = true });
+            RhinoApp.WriteLine("Nextra: your folder " + dir + " (preferences.md, workflows, plugins, scripts — see README.md there)");
             return Result.Success;
         }
     }

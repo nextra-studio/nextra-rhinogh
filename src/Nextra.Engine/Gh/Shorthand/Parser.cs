@@ -254,7 +254,9 @@ namespace Nextra.Engine.Gh.Shorthand
                 n.Type = typePart.Trim('"');
                 if (n.Type.Length == 0) throw new FormatException("missing component type after '='");
                 if (!IdRx.IsMatch(n.Id)) throw new FormatException($"bad id '{n.Id}' (letters, digits, _)");
-                if (Handles.IsGhHandle(n.Id) || Handles.IsRhHandle(n.Id)) throw new FormatException($"id '{n.Id}' looks like a handle; pick another local id (e.g. 'pt1')");
+                // `g12 = Type …` is allowed (it is what query prints, so definitions can be copied to another canvas);
+                // the builder refuses it only when g12 already exists on this canvas
+                if (Handles.IsRhHandle(n.Id)) throw new FormatException($"id '{n.Id}' looks like a Rhino handle; pick another local id (e.g. 'pt1')");
             }
             else
             {

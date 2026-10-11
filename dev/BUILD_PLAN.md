@@ -75,3 +75,15 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] F1 Yak-style package folder (`.rhp` + engine), install script
 - [x] F2 README (setup, tools, token comparison summary)
 - [ ] F3 GitHub push — waiting for `gh auth login` (local git history complete)
+
+## H. Re-verification + additions (2026-10-12) — resume point after a usage-limit pause
+State: Rhino running with dev build; old Nextra-gh/-rhino packages are in %APPDATA%/Nextra/disabled_packages (restore at the end);
+config.json has a test memory_dir (restore from config.json.bak at the end); user's library/frame_building.py still has the L1-naming bug (fix copy from test/regress/scripts).
+- [x] H1 Regression suite `test/regress/regress.py` (all cases, one session, checks) — pass 2: 150/157
+- [x] H2 Fixed: dialog probe blocked on UI thread (timeouts/status hung), WPF dialog text+dismiss, run error line numbers (prelude offset), undo error order, GH moves in run delta, results follow data to end nodes, round-trip (`gN = …` paste into new canvas), $Expression duplicate, unused x/y on new py scripts
+- [x] H3 API reference: Core/ApiDocs.cs, `query {scope:'api'}` (RhinoCommon + GH SDK + rhinoscriptsyntax, cleaned, ranked, cached per Rhino version, Markdown in %APPDATA%/Nextra/api/md)
+- [~] H4 User folder Documents\Nextra (preferences.md, workflows/, plugins/, scripts/) — Core/UserDocs.cs written + memory/docs/library wired; TODO: PluginDocs dirs, bridge schema (scope api, memory save_workflow/save_guide, when), SKILL.md + shorthand/workflows docs, dev/ docs, package skill .zip for claude.ai upload
+- [ ] H5 Regression pass 3 (+ api + user folder cases), fix remaining: round-trip L3/L13 (pasted ids colliding with live handles in NEW doc → handle table per doc?), timeout test (host now fixed: verify), set_rules test expectation (ok=False expected; forbid ERROR wrong)
+- [ ] H6 Code review of every engine/host file from scratch (bugs/refactor), rerun regression until clean
+- [ ] H7 Benchmark v2: input+output tokens per task (schema+instructions+skill docs loaded+tool results = input; tool-call args = output; cumulative context), tasks T1-T5,G1-G3 + detailed: Rhino 4-storey office+3 edits, GH attractor facade+3 edits, organic gridshell (GH)+edits; Nextra vs McNeel vs RhinoMCP (reinstall RhinoMCP temporarily, uninstall after) → REPORT v2
+- [ ] H8 Restore env, update README/dev docs/test README, commit

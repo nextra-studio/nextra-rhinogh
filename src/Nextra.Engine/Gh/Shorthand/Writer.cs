@@ -312,7 +312,9 @@ namespace Nextra.Engine.Gh.Shorthand
             {
                 var st = opt.FullState ? StateIO.Read(o) : StateIO.Diff(o);
                 var all = StateIO.Read(o).Keys.ToList();
-                foreach (var kv in st.Where(kv => !kv.Key.EndsWith("/Count")).Take(opt.FullState ? 40 : 8)) cfg.Add($"${StateIO.ShortKey(kv.Key, all)}={kv.Value}");
+                bool hasExpr = cfg.Any(x => x.StartsWith("expr="));
+                foreach (var kv in st.Where(kv => !kv.Key.EndsWith("/Count") && !(hasExpr && kv.Key.EndsWith("Expression"))).Take(opt.FullState ? 40 : 8))
+                    cfg.Add($"${StateIO.ShortKey(kv.Key, all)}={kv.Value}");
             }
             return cfg;
         }

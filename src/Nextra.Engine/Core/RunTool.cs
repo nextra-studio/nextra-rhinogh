@@ -148,7 +148,7 @@ namespace Nextra.Engine
             if (!string.IsNullOrWhiteSpace(outText)) r.Line("stdout:\n" + Clip(outText, 2500));
             if (!ok)
             {
-                var msg = ErrorText(failure, errText);
+                var msg = Remap(ErrorText(failure, errText), preludeLines);
                 r.Line("error: " + Clip(msg, 1200));
                 var lines = ErrorLines(msg, failure, preludeLines);
                 if (lines.Count > 0) r.Line(Context(code, lines));
@@ -274,16 +274,33 @@ namespace Nextra.Engine
             return text;
         }
 
+        /// Line numbers in RhinoCode messages count the hidden prelude and name a staged temp file:
+        /// rewrite them to the user's own line numbers ("line 1"), and drop repeated headers.
+        static string Remap(string s, int prelude)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+            int U(string n) => Math.Max(1, int.Parse(n) - prelude);
+            s = Regex.Replace(s, @"file:///\S*?:\[(\d+):(\d+)\]", m => $"[line {U(m.Groups[1].Value)}:{m.Groups[2].Value}]");
+            s = Regex.Replace(s, @"File ""[^""]*(?:stage|<string>)[^""]*"", line (\d+)", m => $"line {U(m.Groups[1].Value)}");
+            s = Regex.Replace(s, @"\((\d+),(\d+)\)(?=:? ?(?:error|warning) CS)", m => $"(line {U(m.Groups[1].Value)},{m.Groups[2].Value})");
+            var outL = new List<string>();
+            foreach (var l in s.Split('\n').Select(x => x.TrimEnd(' ', '|')))
+                if (l.Trim().Length > 0 && !outL.Contains(l)) outL.Add(l);
+            return string.Join("\n", outL);
+        }
+
+        /// User line numbers named in an (already remapped) error message, most specific last.
         static List<int> ErrorLines(string msg, Exception e, int prelude)
         {
             var res = new List<int>();
             if (e is ExecuteException ce)
             {
-                try { var ln = ce.Position.LineNumber; if (ln > 0) res.Add(ln - prelude); } catch { }
+                try { var ln = ce.Position.LineNumber; if (ln > prelude) res.Add(ln - prelude); } catch { }
             }
-            foreach (Match m in Regex.Matches(msg ?? "", @"line (\d+)|\((\d+),\d+\)"))
+            foreach (Match m in Regex.Matches(msg ?? "", @"\[line (\d+):\d+\]|\bline (\d+)|\(line (\d+),\d+\)"))
             {
-                int n = int.Parse(m.Groups[1].Success ? m.Groups[1].Value : m.Groups[2].Value) - prelude;
+                var g = m.Groups[1].Success ? m.Groups[1] : m.Groups[2].Success ? m.Groups[2] : m.Groups[3];
+                int n = int.Parse(g.Value);
                 if (n > 0 && !res.Contains(n)) res.Add(n);
             }
             return res.Where(n => n > 0).Distinct().TakeLast(2).ToList();

@@ -107,8 +107,9 @@ namespace Nextra.Engine
             if (a.Bool("list", false)) { r.Line(Checkpoints.Describe()); return; }
             var id = a.Str("checkpoint", a.Str("checkpoint_id", null));
             int steps = a.Int("steps", 1);
+            var done = Checkpoints.RevertTo(id, steps);   // throws (nothing reverted) before any output
             r.Line("reverted:");
-            r.Line(Checkpoints.RevertTo(id, steps));
+            r.Line(done);
         }
     }
 }

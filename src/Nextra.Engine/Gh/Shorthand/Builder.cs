@@ -69,6 +69,10 @@ namespace Nextra.Engine.Gh.Shorthand
             foreach (var n in nodeOps.Where(x => x.Create))
             {
                 if (locals.ContainsKey(n.Id)) { Fail(n, $"id '{n.Id}' defined twice"); continue; }
+                // refuse only if gN names a node that existed before this call (in a pasted definition the new
+                // nodes get fresh handles that may coincide with ids still to come)
+                if (Handles.IsGhHandle(n.Id) && Handles.TryGh(d.DocumentID, n.Id, out var live) && d.FindObject(live, true) is IGH_DocumentObject lo && !res.Created.Contains(lo))
+                { Fail(n, $"{n.Id} already exists on this canvas — change it with `{n.Id} (…) {{…}}`, or give a new node another id"); continue; }
                 try
                 {
                     var proxy = ComponentSearch.Resolve(n.Type, n.Category, out var note, n.Inputs.Select(x => x.Port).Where(x => x != null).ToList());
@@ -106,6 +110,12 @@ namespace Nextra.Engine.Gh.Shorthand
                 {
                     try { StateIO.Write(obj, states); }
                     catch (NxError e) { Fail(n, e.Message + (e.Hint != null ? " — " + e.Hint : "")); lineOk = false; }
+                }
+                // a new Python script with no declared inputs: drop GH's default x/y unless the code uses them
+                if (n.Create && obj is IGH_Component sc && Scripts.IsScript(obj) && Scripts.Lang(sc) != "cs"
+                    && !n.Inputs.Any(p => p.Port != null && !int.TryParse(p.Port, out _)))
+                {
+                    try { Scripts.DropUnusedInputs(sc); } catch { }
                 }
                 foreach (var p in n.Inputs)
                 {
@@ -161,9 +171,10 @@ namespace Nextra.Engine.Gh.Shorthand
                 if (g.Handle != null)
                 {
                     grp = (Handles.TryGh(d.DocumentID, g.Handle, out var gid) ? d.FindObject(gid, false) : null) as GH_Group;
-                    if (grp == null) { fail(g, $"{g.Handle} is not a group"); continue; }
+                    // "## Name #c (g40)" copied from another canvas: the handle is stale there, the name still works
+                    if (grp == null && g.Name == null) { fail(g, $"{g.Handle} is not a group"); continue; }
                 }
-                else
+                if (grp == null)
                 {
                     var same = d.Objects.OfType<GH_Group>().Where(x => x.NickName == g.Name).ToList();
                     if (same.Count == 1) grp = same[0];
@@ -181,7 +192,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 else
                 {
                     if (g.Color != null) grp.Colour = ParseColor(g.Color, grp.Colour.A);
-                    if (g.Handle != null && g.Name != null) grp.NickName = g.Name;
+                    if (g.Handle != null && g.Name != null && grp.NickName != g.Name && GhCore.Handle(d, grp) == g.Handle) grp.NickName = g.Name;
                 }
                 foreach (var rm in g.Remove)
                 {

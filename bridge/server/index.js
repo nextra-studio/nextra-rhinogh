@@ -28,11 +28,11 @@ const TOOLS = [
   },
   {
     name: "query",
-    description: "Text answers, cheapest first. rhino: level summary→list(one line + oriented box per object)→detail→verts. gh: summary→list(shorthand)→detail(state,code,data)→data. components: search installed GH components with ports. docs: skill docs. library: saved scripts. status: busy/dialog state (works while Rhino is blocked).",
+    description: "Text answers, cheapest first. rhino: level summary→list(one line + oriented box per object)→detail→verts. gh: summary→list(shorthand)→detail(state,code,data)→data. components: search installed GH components with ports. api: search RhinoCommon / GH SDK / rhinoscriptsyntax reference. docs: skill docs + user's workflows. library: saved scripts. status: busy/dialog state (works while Rhino is blocked).",
     inputSchema: { type: "object", properties: {
-      scope: { type: "string", enum: ["rhino", "gh", "components", "docs", "library", "status", "instances"] },
+      scope: { type: "string", enum: ["rhino", "gh", "components", "api", "docs", "library", "status", "instances"] },
       instance: { type: "string", description: "bind this session to the Rhino that has this file open (or pid); also accepted by every tool; sticky" },
-      filter: { type: "string", description: "rhino: 'r3 r4' 'layer:X type:curve name:C* sel cells:C3:E5 bbox:x0,y0,z0,x1,y1,z1'; gh: 'g12 group:X type:Loft errors sel near:g12:2 cells:..'; components: 'extrude' '@Karamba3D'; docs: 'shorthand'" },
+      filter: { type: "string", description: "rhino: 'r3 r4' 'layer:X type:curve name:C* sel cells:C3:E5 bbox:x0,y0,z0,x1,y1,z1'; gh: 'g12 group:X type:Loft errors sel near:g12:2 cells:..'; components: 'extrude' '@Karamba3D'; api: 'loft curves' 'Brep.CreateFromLoft' 'rs.AddLoftSrf'; docs: 'shorthand' 'workflows/x'" },
       level: { type: "string", enum: ["summary", "list", "detail", "verts", "data"] },
       limit: { type: "integer" }, offset: { type: "integer" },
       name: { type: "string", description: "library: script name to read" },
@@ -70,10 +70,10 @@ const TOOLS = [
   },
   {
     name: "memory",
-    description: "User memory. list (prefs, learned rules, library index, recurring mistakes: call at session start) | save_pref {text} | log_mistake {text, fix} | compact (then ask the user, then set_rules {text}) | save_script {name, code, doc} | read_script {name}.",
+    description: "User memory. list (user's preferences + workflows, learned rules, library, recurring mistakes: call at session start) | save_pref {text} | log_mistake {text, fix} | compact (then ask the user, then set_rules {text}) | save_script {name, code, doc} | read_script {name} | save_workflow {name, when, text} / save_guide {name=plug-in category, text}: only when the user asks.",
     inputSchema: { type: "object", properties: {
-      action: { type: "string", enum: ["list", "save_pref", "set_prefs", "log_mistake", "compact", "set_rules", "save_script", "read_script", "delete_script"] },
-      text: { type: "string" }, fix: { type: "string" }, name: { type: "string" }, code: { type: "string" }, doc: { type: "string" }, lang: { type: "string" },
+      action: { type: "string", enum: ["list", "save_pref", "set_prefs", "log_mistake", "compact", "set_rules", "save_script", "read_script", "delete_script", "save_workflow", "save_guide"] },
+      text: { type: "string" }, fix: { type: "string" }, name: { type: "string" }, code: { type: "string" }, doc: { type: "string" }, lang: { type: "string" }, when: { type: "string" },
     } },
   },
 ].filter(t => MODE !== "ask" || t.name === "view" || t.name === "query");

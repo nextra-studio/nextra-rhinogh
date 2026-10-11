@@ -4,6 +4,7 @@
     <RootNamespace>Nextra.Host</RootNamespace>
     <TargetExt>.rhp</TargetExt>
     <Version>0.1.0</Version>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Grasshopper"><HintPath>$(RhinoDir)\Plug-ins\Grasshopper\Grasshopper.dll</HintPath><Private>false</Private></Reference>
