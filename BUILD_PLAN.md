@@ -61,9 +61,9 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/REPORT.md`
 - [x] 12 GH Karamba simple model
 - [x] 13 Rhino Marina Bay Sands
-- [ ] 14 Architecture house → centerlines → FE model → GH Karamba analysis
+- [x] 14 Architecture house → centerlines → FE model → GH Karamba analysis
 - [x] 15 GH non-shorthand stuff via python fallback
-- [ ] 16 Messy spaghetti GH → tidy (visual check, better than before)
+- [x] 16 Messy spaghetti GH → tidy (visual check, better than before)
 
 ## G. Added during build (user requests)
 - [x] G1 NextraOn / NextraOff commands (server + dots in Rhino and GH)
