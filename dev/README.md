@@ -11,6 +11,7 @@ The user-facing docs are elsewhere: `README.md` covers install and the tool over
 | [04_shorthand.md](04_shorthand.md) | the GH shorthand in depth: grammar, how Parser → Builder → Writer work, worked examples, `.ghs` files |
 | [05_internals.md](05_internals.md) | the subsystems behind the tools: handles, deltas, checkpoints, oriented boxes, vision, layout, component state, scripts, memory, plug-in guides |
 | [06_workflow.md](06_workflow.md) | building, hot reload, testing with `nx.py`, packaging, adding features, debugging, known pitfalls |
+| [07_plugins_and_marketplaces.md](07_plugins_and_marketplaces.md) | Claude and OpenAI folder rules, marketplace discovery, ZIP layout, workspace settings, and implementation audit |
 | [Nextra.zero_RhinoGh_Plan.md](Nextra.zero_RhinoGh_Plan.md) | the original plan the build started from |
 | [BUILD_PLAN.md](BUILD_PLAN.md) | checklist of every requested item and its status |
 | [reference/](reference/) | earlier code the design learned from: old nextra.gh, rhino_tools vision/OBB, Shiba Tidy |

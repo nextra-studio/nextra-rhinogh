@@ -41,6 +41,9 @@ python "$repo\tools\make_skill_zip.py"
 
 # plug-in folder for Claude Code + Codex / ChatGPT desktop (bridge + skill in one install)
 python "$repo\tools\make_plugin.py"
+if ($LASTEXITCODE -ne 0) { throw "Plugin generation failed" }
+python "$repo\tools\verify_plugin.py"
+if ($LASTEXITCODE -ne 0) { throw "Plugin verification failed" }
 
 # .mcpb = zip of bridge (manifest.json + server/), forward-slash entries
 python "$repo\tools\make_mcpb.py"

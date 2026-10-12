@@ -19,7 +19,7 @@
   "mcpServers": "./codex.mcp.json",
   "interface": {
     "displayName": "Nextra for Rhino",
-    "shortDescription": "Build and edit Rhino 8 + Grasshopper models",
+    "shortDescription": "Rhino + Grasshopper tools",
     "longDescription": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper. Needs Rhino 8 running with the Nextra-RhinoGh plug-in (Rhino Package Manager).",
     "developerName": "Tatsuki",
     "category": "Design",
@@ -29,8 +29,8 @@
     ],
     "websiteURL": "https://github.com/Tatsuki0123/nextra-rhinogh",
     "defaultPrompt": [
-      "Create a simple timber house in Rhino",
-      "Show my Grasshopper definition"
+      "Create a  timber skyscraper in Rhino",
+      "Create a parametric skyscraper in Grasshopper"
     ],
     "brandColor": "#1A7F37",
     "composerIcon": "./assets/icon.svg",
