@@ -1,0 +1,52 @@
+{
+ "query": "Line",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Line",
+  "category": null,
+  "components": [
+    {
+      "name": "Line",
+      "nickname": "Line",
+      "category": "Params",
+      "subcategory": "Geometry",
+      "guid": "8529dbdf-9b6f-42e9-8e1f-c7a2bde56a70",
+      "description": "Contains a collection of line segments"
+    },
+    {
+      "name": "Line",
+      "nickname": "Ln",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "guid": "4c4e56eb-2f04-43f9-95a3-cc46a14f495a",
+      "description": "Create a line between two points."
+    },
+    {
+      "name": "Line SDL",
+      "nickname": "Line",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "guid": "4c619bc9-39fd-4717-82a6-1e07ea237bbe",
+      "description": "Create a line segment defined by start point, tangent and length.}"
+    },
+    {
+      "name": "  Model View (Karamba3D)",
+      "nickname": "ModelView",
+      "category": "Karamba3D",
+      "subcategory": "7.Results",
+      "guid": "9d80a84e-fd16-4443-bacb-36997a977226",
+      "description": "Lets you inspect the current state of the model. Plug it into the data pipeline in front of 'Beam View' or 'Shell View' to control the overall model display."
+    },
+    {
+      "name": "  Model View (Karamba3D)",
+      "nickname": "ModelView",
+      "category": "Karamba3D",
+      "subcategory": "7.Results",
+      "guid": "da96c763-b6f8-466c-afff-2a421f737dca",
+      "description": "Lets you inspect the current state of the model.\nPlug it into the data pipeline in front of 'Beam View' or 'Shell View' to control the overall model display."
+    }
+  ]
+}

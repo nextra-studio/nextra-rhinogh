@@ -1,0 +1,22 @@
+{
+ "new": true,
+ "ops": "## Beam geometry #DBABFF\npa = Construct Point\npb = Construct Point (X=10)\nln = Line (A=pa, B=pb)\nsh = Shatter (C=ln^p, t=0.5)\n## Karamba model #ABDBFF\nel = Create Linear Element @Karamba3D (Line=sh)\nsup = Support @Karamba3D (Pos|Ind=pa+pb) {$button[0]=true, $button[1]=true, $button[2]=true, $button[3]=true}\npm = Construct Point (X=5)\nfv = Vector XYZ (Z=-10)\nld = Loads @Karamba3D (Pos|Ind=pm, Force=fv.V) {$unitname=\"Point\"}\nasm = Assemble Model @Karamba3D (Elem=el.Elem, Support=sup, Load=ld)\nan = Analyse @Karamba3D (Model=asm.Model)"
+}
+---
+new GH document
+ok: 11/11 lines applied (+11 nodes, 12 wires, 4 values, +2 groups), checkpoint c27
+ids: pa=g1 pb=g2 ln=g3 sh=g4 el=g5 sup=g6 pm=g7 fv=g8 ld=g9 asm=g10 an=g11
+groups: Beam geometry=g12 Karamba model=g13
+note: L4: 'Line' is ambiguous; used Curve/Primitive because its ports match A,B
+note: L8: 'Support' is ambiguous; used Karamba3D/1.Support because its ports match Pos|Ind
+note: L12: 'Assemble Model': 2 versions installed; used the visible one (Karamba3D/0.Model)
+solved 14ms, no errors/warnings on affected nodes
+results: g11.Model: 1 Model {0;0;0} · g11.MaxDisp: 1 Number {0;0;0;0} e.g. 47.038
+plugin rules (Karamba3D, shown once; full guide: query {scope:'docs', filter:'plugins/Karamba3D'}):
+- **Karamba works in metres, kN, cm results — whatever the Rhino unit is.** If the doc is in mm, scale geometry ×0.001 before Karamba (`Scale (G=…, F=0.001)`) or model the analysis geometry in metres. Check: `Assemble.Mass` must be plausible (10 m CHS 114.3×4 ≈ 109 kg).
+- **Loads need nodes.** A point load at a point that is not a node gives `Info: "Could not find node at …"` and zero results. Split lines first (`Shatter`, `Divide`→`Polyline`→`Explode`, or connect members at intersections).
+- Several element sources (beams + shells) → **flatten** into Assemble: `Elem=el.Elem+se.Elem^f`, `Support=sup^f`, `Load=ld^f`; otherwise you get one model per branch (check: `Assemble.Model` count = 1).
+- Trial licence: max 50 shell elements ("maximum number of shell elements in the trial-version") → coarser `Mesh Breps` MRes, or tell the user.
+- Sections/materials: `mat = Material Selection @Karamba3D (Name|Ind="C30/37")`; `cs = Cross-section @Karamba3D (Mat=mat) {menu="Units>Trapezoid"}` then `(Height=30, UpperWidth=30, LowerWidth=30)` [cm]; shells `{menu="Units>Shell - Const"}` + `Height=20`. Wire `CroSec=` into Create Linear/Surface Element. Defaults are thin steel (unrealistic deflections).
+- Use current components: `Analyse @Karamba3D` (not `AnalyzeThI` — Karamba itself warns "newer version available").
+- Write plug-in components without the "(Karamba3D)" suffix and add `@Karamba3D`: `Support @Karamba3D`, `Assemble Model @Karamba3D`. Two `Assemble Model` versions exist; the engine picks the visible one.

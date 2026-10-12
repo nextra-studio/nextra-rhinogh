@@ -1,0 +1,9 @@
+{
+ "ops": "## Py demo #ABDBFF\ncnt = Number Slider {v=8, r=3..30, int} \"Count\"\nrad = Number Slider {v=5000, r=1000..20000, int} \"Radius\"\npy = Python 3 Script (n=cnt, r=rad) -> (pts, crv) {code=\"\"\"\nimport math\nimport Rhino.Geometry as rg\npts = [rg.Point3d(r*math.cos(2*math.pi*i/n), r*math.sin(2*math.pi*i/n), 0) for i in range(int(n))]\ncrv = rg.Polyline(pts + [pts[0]]).ToNurbsCurve()\nprint('made', len(pts))\n\"\"\"}"
+}
+---
+ok: 3/3 lines applied (+3 nodes, 2 wires, +1 groups), checkpoint c222
+ids: cnt=g1 rad=g2 py=g3
+groups: Py demo=g4
+solved 11ms, no errors/warnings on affected nodes
+results: g3.pts: 8 Point {0;0} · g3.crv: 1 Curve {0}

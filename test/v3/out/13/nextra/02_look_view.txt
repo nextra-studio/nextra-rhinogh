@@ -1,0 +1,6 @@
+{
+ "view": "iso"
+}
+---
+rhino view 'Top' 777x600, zoom extents. Grid A-H x 1-8.
+8 object(s) in frame, tagged: r5010-r5017

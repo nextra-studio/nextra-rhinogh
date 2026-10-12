@@ -1,0 +1,18 @@
+{
+ "action": "list"
+}
+---
+## your preferences (C:\Users\tatsu\AppData\Roaming\Nextra\user\preferences.md)
+(none yet)
+## prefs saved by the AI
+(none)
+## rules (learned, user-approved)
+(none)
+## library
+- frame_building.py: Concrete frame: grid of columns, perimeter+grid beams and slabs per storey. args: nx, ny, …
+- hello_pts.py: Points on a line. args: n
+- marina_bay_sands.py: Marina Bay Sands massing: 3 towers (straight + curved leg each), skypark ship with cantile…
+- solids_to_fe.py: Solids -> FE geometry: linear members -> centre lines, planar members -> mid-surfaces, sna…
+## recurring mistakes not yet in rules
+- 2x IndexError: list index out of range
+- 2x Error running script: name '…' is not defined [N:N]

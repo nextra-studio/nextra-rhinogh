@@ -1,0 +1,8 @@
+{
+ "action": "save_script",
+ "name": "hello_pts",
+ "code": "\"\"\"Points on a line. args: n\"\"\"\nfor i in range(args.get(\"n\", 3)):\n    doc.Objects.AddPoint(rg.Point3d(i * 1000, 0, 0))\n",
+ "doc": "points on a line"
+}
+---
+updated library script 'hello_pts.py'

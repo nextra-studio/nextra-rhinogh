@@ -1,0 +1,5 @@
+{
+ "command": "_Undo"
+}
+---
+Undoing ScriptEditor

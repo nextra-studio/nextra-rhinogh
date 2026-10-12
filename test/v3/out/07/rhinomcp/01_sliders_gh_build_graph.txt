@@ -1,0 +1,219 @@
+{
+ "components": [
+  {
+   "alias": "cnt",
+   "component_name": "Number Slider",
+   "value": 8,
+   "min": 1,
+   "max": 30,
+   "decimals": 0,
+   "nickname": "Count"
+  },
+  {
+   "alias": "h",
+   "component_name": "Number Slider",
+   "value": 9000,
+   "min": 1000,
+   "max": 30000,
+   "decimals": 0,
+   "nickname": "Tower h"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "component_count": 2,
+  "created_component_count": 2,
+  "created_group_count": 0,
+  "connection_count": 0,
+  "value_count": 0,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012055536594",
+  "mutation_duration_ms": 6,
+  "solution_duration_ms": 4,
+  "verification_duration_ms": 0,
+  "duration_ms": 46,
+  "aliases": {
+    "cnt": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+    "h": "d8332034-2037-410e-af27-fc777001fbca"
+  },
+  "components": [
+    {
+      "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+      "name": "Number Slider",
+      "nickname": "Count",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+      "name": "Number Slider",
+      "nickname": "Tower h",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        260.0,
+        40.0
+      ]
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 2,
+    "output_count": 2,
+    "outputs_with_data": 2,
+    "total_output_data_count": 2,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "alias": "cnt",
+        "graph_id": "MCPGraph_20261012055536594",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Count",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 1.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "alias": "h",
+        "graph_id": "MCPGraph_20261012055536594",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Tower h",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Tower h",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 9000.0,
+        "min": 1000.0,
+        "max": 30000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 0,
+    "preview_enabled_object_count": 0,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": false,
+    "rhino_document_object_count": 4811,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012055536594",
+    "object_count": 2,
+    "controls": [
+      {
+        "alias": "cnt",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 1.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "h",
+        "name": "Number Slider",
+        "nickname": "Tower h",
+        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 9000.0,
+        "min": 1000.0,
+        "max": 30000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "cnt",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 1.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "h",
+        "name": "Number Slider",
+        "nickname": "Tower h",
+        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 9000.0,
+        "min": 1000.0,
+        "max": 30000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 2 component(s) and 0 connection(s)"
+}

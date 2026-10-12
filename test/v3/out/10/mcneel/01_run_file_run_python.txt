@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nargs = {'storeys': 2}\nexec(open(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/scripts/frame_building.py\").read())\nfrom collections import Counter\nprint(dict(Counter(doc.Layers[o.Attributes.LayerIndex].Name for o in doc.Objects)))\n"
+}
+---
+{"stdout":"storeys 1..2 done\n{\u0027Slabs\u0027: 2, \u0027Beams\u0027: 34, \u0027Columns\u0027: 24}\nCreating meshes... Press Esc to cancel\n","error":null}

@@ -1,0 +1,187 @@
+{
+ "operations": [
+  {
+   "op": "connect",
+   "source": "pm",
+   "target": "ld",
+   "target_input_name": "Pos|Ind"
+  },
+  {
+   "op": "connect",
+   "source": "fv",
+   "source_output_name": "V",
+   "target": "ld",
+   "target_input_name": "Force"
+  },
+  {
+   "op": "recompute"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012074620672",
+  "operation_count": 3,
+  "created_count": 0,
+  "created_component_count": 0,
+  "created_group_count": 0,
+  "deleted_count": 0,
+  "deleted_component_count": 0,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 73,
+  "solution_duration_ms": 4,
+  "verification_duration_ms": 0,
+  "duration_ms": 169,
+  "operations": [
+    {
+      "op": "connect",
+      "source_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+      "target_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "source_param": "Point",
+      "target_param": "Pos|Ind"
+    },
+    {
+      "op": "connect",
+      "source_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+      "target_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "source_param": "Vector",
+      "target_param": "Force Vector"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 3,
+    "output_count": 4,
+    "outputs_with_data": 4,
+    "total_output_data_count": 4,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "alias": "pm",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "alias": "ld",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "category": "Karamba3D",
+        "subcategory": "2.Load",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Load",
+            "nickname": "Load",
+            "type": "Load",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "alias": "fv",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Vector XYZ",
+        "nickname": "Vec",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 11,
+    "preview_enabled_object_count": 7,
+    "preview_disabled_object_count": 4,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 0,
+    "has_baked_rhino_objects": false,
+    "viewport_warning": "Grasshopper preview is live but not baked. Use gh_capture_preview to frame live Grasshopper preview bounds without baking."
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012074620672",
+    "object_count": 3,
+    "controls": [],
+    "adjustable_parameters": [],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 3 operation(s)"
+}

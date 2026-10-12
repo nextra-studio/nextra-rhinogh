@@ -1,0 +1,219 @@
+{
+ "components": [
+  {
+   "alias": "cnt",
+   "component_name": "Number Slider",
+   "value": 8,
+   "min": 3,
+   "max": 30,
+   "decimals": 0,
+   "nickname": "Count"
+  },
+  {
+   "alias": "rad",
+   "component_name": "Number Slider",
+   "value": 5000,
+   "min": 1000,
+   "max": 20000,
+   "decimals": 0,
+   "nickname": "Radius"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "component_count": 2,
+  "created_component_count": 2,
+  "created_group_count": 0,
+  "connection_count": 0,
+  "value_count": 0,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012055435308",
+  "mutation_duration_ms": 8,
+  "solution_duration_ms": 7,
+  "verification_duration_ms": 0,
+  "duration_ms": 52,
+  "aliases": {
+    "cnt": "ff6802d7-d1dd-44d2-a7ca-5e75bd0270fe",
+    "rad": "0f125cc9-a6a7-4601-bb0e-de5099982e13"
+  },
+  "components": [
+    {
+      "instance_id": "ff6802d7-d1dd-44d2-a7ca-5e75bd0270fe",
+      "name": "Number Slider",
+      "nickname": "Count",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "0f125cc9-a6a7-4601-bb0e-de5099982e13",
+      "name": "Number Slider",
+      "nickname": "Radius",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        260.0,
+        40.0
+      ]
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 2,
+    "output_count": 2,
+    "outputs_with_data": 2,
+    "total_output_data_count": 2,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "ff6802d7-d1dd-44d2-a7ca-5e75bd0270fe",
+        "alias": "cnt",
+        "graph_id": "MCPGraph_20261012055435308",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Count",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "0f125cc9-a6a7-4601-bb0e-de5099982e13",
+        "alias": "rad",
+        "graph_id": "MCPGraph_20261012055435308",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Radius",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Radius",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 5000.0,
+        "min": 1000.0,
+        "max": 20000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 0,
+    "preview_enabled_object_count": 0,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": false,
+    "rhino_document_object_count": 4811,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012055435308",
+    "object_count": 2,
+    "controls": [
+      {
+        "alias": "cnt",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "instance_id": "ff6802d7-d1dd-44d2-a7ca-5e75bd0270fe",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "rad",
+        "name": "Number Slider",
+        "nickname": "Radius",
+        "instance_id": "0f125cc9-a6a7-4601-bb0e-de5099982e13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 5000.0,
+        "min": 1000.0,
+        "max": 20000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "cnt",
+        "name": "Number Slider",
+        "nickname": "Count",
+        "instance_id": "ff6802d7-d1dd-44d2-a7ca-5e75bd0270fe",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 8.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "rad",
+        "name": "Number Slider",
+        "nickname": "Radius",
+        "instance_id": "0f125cc9-a6a7-4601-bb0e-de5099982e13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 5000.0,
+        "min": 1000.0,
+        "max": 20000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 2 component(s) and 0 connection(s)"
+}

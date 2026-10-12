@@ -1,0 +1,8 @@
+{
+ "ops": "g1 {click=\"0.5,0.80\"}"
+}
+---
+ok: 1/1 lines applied (), checkpoint c242
+note: L1: clicked Python 3 Script at (0.5,0.8) → Handled/Ignore
+solved 11ms, no errors/warnings on affected nodes
+results: g1.choice: 1 Text {0} e.g. "Timber" · g1.index: 1 Integer {0} e.g. 1

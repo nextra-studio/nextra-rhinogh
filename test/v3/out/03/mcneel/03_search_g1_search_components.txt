@@ -1,0 +1,6 @@
+{
+ "query": "Rotate",
+ "limit": 5
+}
+---
+[{"Guid":"135808b5-4a79-4c5a-8348-f1e29313e323","Name":"ggIFC CTRotate","NickName":"ggIFCCTR","Category":"GeomGymIFC","SubCategory":"IFC Geometry","Kind":"Component","Description":"Create IFC Cartesian Transformation Operator Rotate"},{"Guid":"1eb70a8d-59b7-4ec2-98fe-1b4491452cc5","Name":"Rotate Euler","NickName":"RotEuler","Category":"Pufferfish","SubCategory":"Transform","Kind":"Component","Description":"Rotate an object by three plane axes and three angles in degrees, each axis derived from the plane previous."},{"Guid":"28772f41-06a2-4f35-a0b0-5cd409200448","Name":"Rotate Plane Euler","NickName":"RotEuler","Category":"Pufferfish","SubCategory":"Plane","Kind":"Component","Description":"Rotate an object by three plane axes and three angles in degrees, each axis derived from the plane previous."},{"Guid":"2e4333cd-70bf-494a-854a-942908fe8887","Name":"Rotate Plane XYZ","NickName":"RotXYZ","Category":"Pufferfish","SubCategory":"Plane","Kind":"Component","Description":"Rotate an object by three plane axes and three angles in degrees, each axis derived from the initial base plane."},{"Guid":"357d5cef-228b-4448-b7fb-c4e8514465d8","Name":"Rotate Field","NickName":"FRotate","Category":"Heteroptera","SubCategory":"Vectors","Kind":"Component","Description":"Rotate a field\u0027s tensors by other fields"}]

@@ -1,0 +1,16 @@
+{
+ "file": "C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/scripts/frame_building.py",
+ "args": {
+  "storeys": 2
+ }
+}
+---
+ok py 247ms, checkpoint c251
+stdout:
+storeys 1..2 done
+rhino delta +60:
++ [Beams] polysurface 6000x450x300 linear horizontal ×34 r4830-r4863 z 2800..6750
++ [Columns] polysurface 3250x400x400 linear vertical ×24 r4864-r4887 z 0..6750
++ [Slabs] polysurface 18600x12600x250 planar ×2 r4888 r4889 z 3250..7000
+(details: query filter:'r12 r13' or 'layer:X')
+(file C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/scripts/frame_building.py)

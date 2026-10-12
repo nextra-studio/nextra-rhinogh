@@ -1,0 +1,9 @@
+{
+ "ops": "## Material picker #FFD6AB\nradio = Python 3 Script -> (choice, index) {code=@C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/regress/scripts/radio_component.py}"
+}
+---
+ok: 1/1 lines applied (+1 nodes, +1 groups), checkpoint c241
+ids: radio=g1
+groups: Material picker=g2
+solved 14ms, no errors/warnings on affected nodes
+results: g1.choice: 1 Text {0} e.g. "Steel" · g1.index: 1 Integer {0} e.g. 0

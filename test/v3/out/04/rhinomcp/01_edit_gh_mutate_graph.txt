@@ -1,0 +1,282 @@
+{
+ "operations": [
+  {
+   "op": "delete",
+   "target": "rec"
+  },
+  {
+   "op": "create",
+   "alias": "cir",
+   "component_guid": "807b86e3-be8d-4970-92b5-f8cdcb45b06b"
+  },
+  {
+   "op": "connect",
+   "source": "pl",
+   "target": "cir",
+   "target_input_name": "P"
+  },
+  {
+   "op": "connect",
+   "source": "w",
+   "target": "cir",
+   "target_input_name": "R"
+  },
+  {
+   "op": "connect",
+   "source": "cir",
+   "target": "rot",
+   "target_input_name": "G"
+  },
+  {
+   "op": "recompute"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012055349363",
+  "operation_count": 6,
+  "created_count": 1,
+  "created_component_count": 1,
+  "created_group_count": 0,
+  "deleted_count": 1,
+  "deleted_component_count": 1,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 92,
+  "solution_duration_ms": 7,
+  "verification_duration_ms": 0,
+  "duration_ms": 205,
+  "operations": [
+    {
+      "op": "delete",
+      "target_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+      "target": "Rectangle",
+      "rollback": "limited"
+    },
+    {
+      "op": "create",
+      "alias": "cir",
+      "instance_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "name": "Circle",
+      "nickname": "Cir"
+    },
+    {
+      "op": "connect",
+      "source_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+      "target_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "source_param": "Plane",
+      "target_param": "Plane"
+    },
+    {
+      "op": "connect",
+      "source_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+      "target_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "source_param": "Number Slider",
+      "target_param": "Radius"
+    },
+    {
+      "op": "connect",
+      "source_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "target_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+      "source_param": "Circle",
+      "target_param": "Geometry"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 4,
+    "output_count": 5,
+    "outputs_with_data": 5,
+    "total_output_data_count": 49,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+        "alias": "cir",
+        "graph_id": "MCPGraph_20261012055349363",
+        "role": "",
+        "name": "Circle",
+        "nickname": "Cir",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Circle",
+            "nickname": "C",
+            "type": "Circle",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "alias": "pl",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "category": "Vector",
+        "subcategory": "Plane",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Plane",
+            "nickname": "P",
+            "type": "Plane",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "alias": "w",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Width",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "alias": "rot",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Rotate",
+        "nickname": "Rotate",
+        "category": "Transform",
+        "subcategory": "Euclidean",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Geometry",
+            "nickname": "G",
+            "type": "Geometry",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Transform",
+            "nickname": "X",
+            "type": "Transform",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 10,
+    "preview_enabled_object_count": 10,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 4736,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012055349363",
+    "object_count": 4,
+    "controls": [
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 6 operation(s)"
+}

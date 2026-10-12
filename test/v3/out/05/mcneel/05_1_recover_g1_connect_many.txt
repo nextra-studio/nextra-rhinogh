@@ -1,0 +1,25 @@
+{
+ "wires": [
+  {
+   "SrcId": "b3c47a5f-5ae3-4fa8-bcaf-9d54406b2fcc",
+   "Src": "C",
+   "DstId": "272b8938-493d-466f-b4a8-ac022bdff4bc",
+   "Dst": "C"
+  },
+  {
+   "SrcId": "c2fe4372-d84b-437a-84b8-ca3e85a1d974",
+   "Src": "t",
+   "DstId": "272b8938-493d-466f-b4a8-ac022bdff4bc",
+   "Dst": "t"
+  },
+  {
+   "SrcId": "272b8938-493d-466f-b4a8-ac022bdff4bc",
+   "Src": "T",
+   "DstId": "7bf6c329-62f3-4909-bd0c-41e92a973c6a",
+   "Dst": "A"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":3,"OkCount":3,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"b3c47a5f-5ae3-4fa8-bcaf-9d54406b2fcc","Param":"Curves"},"Dst":{"Id":"272b8938-493d-466f-b4a8-ac022bdff4bc","Param":"Curve"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"c2fe4372-d84b-437a-84b8-ca3e85a1d974","Param":"Tangents"},"Dst":{"Id":"272b8938-493d-466f-b4a8-ac022bdff4bc","Param":"Parameter"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"272b8938-493d-466f-b4a8-ac022bdff4bc","Param":"Tangent"},"Dst":{"Id":"7bf6c329-62f3-4909-bd0c-41e92a973c6a","Param":"Vector A"},"Error":null}]}

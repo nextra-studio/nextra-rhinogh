@@ -174,11 +174,15 @@ def check_rhino():
 
 
 def resolve(spec):
-    comps = [(n["t"], n.get("cat")) for n in spec["nodes"] if not n.get("slider")]
+    """key → {guid, name, ambiguous, in, out, in_types}; the input ports each node is wired with pick the right variant."""
+    wires = spec["wires"] + spec.get("late", [])
+    ports = {n["k"]: sorted({dp for s, sp, d, dp, fl in wires if d == n["k"]} | {p for d, p, v in spec.get("values", []) if d == n["k"]})
+             for n in spec["nodes"]}
+    comps = [[n["t"], n.get("cat"), ports[n["k"]]] for n in spec["nodes"] if not n.get("slider")]
     tmp = os.path.join(HERE, "_resolve.json")
     nx.call("run", {"code": code("resolve_comps.py"), "args": {"comps": comps, "out": tmp}}, 60, log=False)
     raw = json.load(open(tmp, encoding="utf-8"))
-    return {n["k"]: raw[n["t"] + "|" + str(n.get("cat"))] for n in spec["nodes"] if not n.get("slider")}
+    return {n["k"]: raw[n["t"] + "|" + str(n.get("cat")) + "|" + ",".join(ports[n["k"]])] for n in spec["nodes"] if not n.get("slider")}
 
 
 def check_gh(spec):

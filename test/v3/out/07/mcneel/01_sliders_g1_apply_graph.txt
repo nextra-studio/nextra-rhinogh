@@ -1,0 +1,29 @@
+{
+ "sliders": [
+  {
+   "Key": "cnt",
+   "Min": 1,
+   "Value": 8,
+   "Max": 30,
+   "Type": "int",
+   "Name": "Count",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "h",
+   "Min": 1000,
+   "Value": 9000,
+   "Max": 30000,
+   "Type": "int",
+   "Name": "Tower h",
+   "X": 0,
+   "Y": 60
+  }
+ ],
+ "components": [],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"cnt","Id":"4e12bbb5-fa97-45f6-ad86-13dc6b3dcdc6","Kind":"Slider"},{"Key":"h","Id":"96cf842a-c0cf-402f-bcf3-48513cd0c15c","Kind":"Slider"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

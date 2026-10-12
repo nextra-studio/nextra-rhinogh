@@ -13,7 +13,10 @@ def inp(i, nick): return [p for p in o(i).Params.Input if p.NickName == nick][0]
 
 # set a saved setting anywhere in a component's archive (dropdowns, on-component buttons, modes)
 STATE = """def set_state(i, name, index, value):
-    from GH_IO.Serialization import GH_Archive
+    try:
+        from GH_IO.Serialization import GH_Archive
+    except ImportError:                    # IronPython: load the assembly first
+        import clr; clr.AddReference('GH_IO'); from GH_IO.Serialization import GH_Archive
     obj = o(i); a = GH_Archive(); a.CreateNewRoot(True); root = a.GetRootNode; obj.Write(root)
     def walk(c):
         for it in list(c.Items):
@@ -25,7 +28,14 @@ STATE = """def set_state(i, name, index, value):
                 return True
         return any(walk(ch) for ch in c.Chunks)
     if not walk(root): raise Exception('state %s not found' % name)
-    obj.Read(root); obj.Params.OnParametersChanged(); obj.ExpireSolution(False)
+    # re-reading the archive drops existing wires: remember them and reconnect by input name
+    wired = [(p.NickName, list(p.Sources)) for p in obj.Params.Input]
+    obj.Read(root)
+    for nick, srcs in wired:
+        tgt = [p for p in obj.Params.Input if p.NickName == nick]
+        for s in srcs:
+            if tgt and not tgt[0].Sources.Contains(s): tgt[0].AddSource(s)
+    obj.Params.OnParametersChanged(); obj.ExpireSolution(False)
 """
 
 MENU = """def menu(i, path):
@@ -55,7 +65,7 @@ def ref_ids(i, ids):
 
 FLAGS = """def flag(i, nick, f):
     p = inp(i, nick)
-    p.DataMapping = {'f': GH_DataMapping.Flatten, 'g': GH_DataMapping.Graft, 'x': GH_DataMapping.None}[f]
+    p.DataMapping = GH_DataMapping.Flatten if f == 'f' else GH_DataMapping.Graft if f == 'g' else System.Enum.ToObject(GH_DataMapping, 0)
     o(i).ExpireSolution(False)
 def literal(i, nick, v):
     p = inp(i, nick); p.PersistentData.Clear()
@@ -84,7 +94,7 @@ BAKE = """def bake(i, layer):
 # script component (Rhino 8): place it, set exact inputs/outputs, set code. C# needs ports before code.
 SCRIPT = """def script(kind, x, y, ins, outs, code):
     import System.Reflection as R
-    guid = {'py': '719467e6-7cf5-4848-99b0-c5dd57e5442c', 'cs': 'a9a8ebd2-fff5-4c44-a8f5-739736d129ba'}[kind]
+    guid = {'py': '719467e6-7cf5-4848-99b0-c5dd57e5442c', 'cs': 'b6ba1144-02d6-4a2d-b53c-ec62e290eeb7'}[kind]
     c = Grasshopper.Instances.ComponentServer.EmitObjectProxy(System.Guid(guid)).CreateInstance()
     c.CreateAttributes(); c.Attributes.Pivot = System.Drawing.PointF(x, y); gd.AddObject(c, False)
     for p in list(c.Params.Input): c.Params.UnregisterInputParameter(p, True)
@@ -99,8 +109,11 @@ SCRIPT = """def script(kind, x, y, ins, outs, code):
     return c
 def set_code(c, code):
     import System.Reflection as R
-    m = c.GetType().GetMethod('SetSource', R.BindingFlags.Public | R.BindingFlags.NonPublic | R.BindingFlags.Instance, None, [System.String], None)
-    m.Invoke(c, [code]); c.ExpireSolution(False)
+    flags = R.BindingFlags.Public | R.BindingFlags.NonPublic | R.BindingFlags.Instance
+    t, m = c.GetType(), None
+    while t is not None and m is None:          # SetSource may live on a base class
+        m = t.GetMethod('SetSource', flags, None, System.Array[System.Type]([System.String]), None); t = t.BaseType
+    m.Invoke(c, System.Array[System.Object]([code])); c.ExpireSolution(False)
 def errors(c):
     return [str(m) for m in c.RuntimeMessages(GH_RuntimeMessageLevel.Error)]
 """

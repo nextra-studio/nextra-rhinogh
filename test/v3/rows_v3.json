@@ -1,0 +1,292 @@
+{
+ "fixed": {
+  "nextra": {
+   "schema": 1406,
+   "instructions": 91,
+   "skill": 1259
+  },
+  "mcneel": {
+   "schema": 4779,
+   "instructions": 0,
+   "skill": 0
+  },
+  "rhinomcp": {
+   "schema": 22935,
+   "instructions": 94,
+   "skill": 0
+  }
+ },
+ "rows": [
+  {
+   "system": "nextra",
+   "scenario": "00",
+   "task": "session",
+   "n": 1,
+   "tool": "memory",
+   "out": 4,
+   "in": 175,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 143,
+   "in": 560,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 272,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 333,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 4,
+   "tool": "g1_search_components",
+   "out": 11,
+   "in": 108,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 5,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 346,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 6,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 279,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 7,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 318,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "build",
+   "n": 8,
+   "tool": "g1_apply_graph",
+   "out": 368,
+   "in": 612,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "1_recover",
+   "n": 9,
+   "tool": "g1_apply_graph",
+   "out": 99,
+   "in": 89,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "1_recover",
+   "n": 10,
+   "tool": "g1_connect_many",
+   "out": 167,
+   "in": 225,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "fix",
+   "n": 11,
+   "tool": "run_python",
+   "out": 947,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "late",
+   "n": 12,
+   "tool": "g1_connect_many",
+   "out": 71,
+   "in": 96,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "verify",
+   "n": 13,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 5929,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 331,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 481,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 4,
+   "tool": "gh_search_components",
+   "out": 11,
+   "in": 141,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 5,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 397,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 6,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 352,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 7,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 393,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "build",
+   "n": 8,
+   "tool": "gh_build_graph",
+   "out": 442,
+   "in": 4900,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "fix",
+   "n": 9,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 705,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "late",
+   "n": 10,
+   "tool": "gh_mutate_graph",
+   "out": 57,
+   "in": 1134,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "verify",
+   "n": 11,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 19041,
+   "ok": true
+  }
+ ],
+ "checks": {
+  "12/nextra": {
+   "max_disp_cm": "VAL ['47.037724']"
+  },
+  "12/mcneel": {
+   "max_disp_cm": "VAL ['47.037724']"
+  },
+  "12/rhinomcp": {
+   "max_disp_cm": "VAL ['47.037724']"
+  }
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "new": true,
+ "ops": "## Fins input #DBABFF\nslab = Brep {ref=\"layer:Slab\"} \"Top slab\"\nnf = Number Slider {v=24, r=4..80, int} \"Fins\"\nfd = Number Slider {v=900, r=200..2000, int} \"Fin depth\"\nfh = Number Slider {v=3200, r=1000..6000, int} \"Fin height\"\n## Fins #FFD6AB\nzp = Construct Point (Z=13875)\npz = XY Plane (O=zp)\nsec = Brep | Plane (B=slab, P=pz)\njn = Join Curves (C=sec.C^f)\ndv = Divide Curve (C=jn, N=nf)\nev = Evaluate Curve (C=jn, t=dv.t)\nu1 = Unit Z\ncp = Cross Product (A=ev.T, B=u1)\nln = Line SDL (S=dv.P, D=cp.V, L=fd)\nuz = Unit Z (F=fh^e(-x))\next = Extrude (B=ln, D=uz)"
+}
+---
+new GH document
+ok: 15/15 lines applied (+15 nodes, 16 wires, 1 values, +2 groups), checkpoint c197
+ids: slab=g1 nf=g2 fd=g3 fh=g4 zp=g5 pz=g6 sec=g7 jn=g8 dv=g9 ev=g10 u1=g11 cp=g12 ln=g13 uz=g14 ext=g15
+groups: Fins input=g16 Fins=g17
+solved 6ms, no errors/warnings on affected nodes
+results: g15.E: 24 Surface {0;0;0}

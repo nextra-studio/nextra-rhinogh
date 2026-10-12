@@ -1,0 +1,19 @@
+{
+ "script": {
+  "handle": "g3",
+  "patch": [
+   {
+    "find": "print('made', len(pts))",
+    "replace": "print('made', len(pts))\nlen_total = crv.GetLength() / undefined_var"
+   }
+  ]
+ }
+}
+---
+script g3: 6 lines set (py), mirrored to unsaved-6135f294_g3.py; ports inputs: n?:Any r?:Any | outputs: out:Text pts:Any crv:Any
+solved 51ms:
+ g3 Python 3 Script ! Error running script: name 'undefined_var' is not defined [6:1]
+    4| crv = rg.Polyline(pts + [pts[0]]).ToNurbsCurve()
+    5| print('made', len(pts))
+>   6| len_total = crv.GetLength() / undefined_var
+results: g3.pts: 1 null · g3.crv: 1 null

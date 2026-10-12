@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nimport os\nd = os.path.dirname(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/_tmp/hello_pts_mcneel.py\")\nif not os.path.isdir(d): os.makedirs(d)\nopen(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/_tmp/hello_pts_mcneel.py\", 'w').write(\"\\\"\\\"\\\"Points on a line. args: n\\\"\\\"\\\"\\nfor i in range(args.get(\\\"n\\\", 3)):\\n    doc.Objects.AddPoint(rg.Point3d(i * 1000, 0, 0))\\n\")\nprint('saved')"
+}
+---
+{"stdout":"saved\n","error":null}

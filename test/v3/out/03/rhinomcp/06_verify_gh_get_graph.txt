@@ -1,0 +1,2000 @@
+{
+ "graph_id": "MCPGraph_20261012055348256",
+ "include_values": true,
+ "max_items": 3
+}
+---
+{
+  "graph_id": "MCPGraph_20261012055348256",
+  "object_count": 18,
+  "component_count": 10,
+  "standalone_parameter_count": 4,
+  "group_count": 4,
+  "components": [
+    {
+      "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+      "name": "Series",
+      "nickname": "Series",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Start",
+          "nickname": "S",
+          "description": "First number in the series",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Step",
+          "nickname": "N",
+          "description": "Step size for each successive number",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+              "param_name": "Number Slider",
+              "param_nickname": "Floor h"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  3500.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Count",
+          "nickname": "C",
+          "description": "Number of values in the series",
+          "type": "Integer",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+              "param_name": "Number Slider",
+              "param_nickname": "Floors"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  12
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Series",
+          "nickname": "S",
+          "description": "Series of numbers",
+          "type": "Number",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+              "param_name": "Z coordinate",
+              "param_nickname": "Z"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  3500.0,
+                  7000.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "ser",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "ser",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        480.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "X coordinate",
+          "nickname": "X",
+          "description": "{x} coordinate",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Y coordinate",
+          "nickname": "Y",
+          "description": "{y} coordinate",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Z coordinate",
+          "nickname": "Z",
+          "description": "{z} coordinate",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+              "param_name": "Series",
+              "param_nickname": "S"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  3500.0,
+                  7000.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Point",
+          "nickname": "Pt",
+          "description": "Point coordinate",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+              "param_name": "Origin",
+              "param_nickname": "O"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    3500.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    7000.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "pt",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "pt",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+      "name": "XY Plane",
+      "nickname": "XY",
+      "category": "Vector",
+      "subcategory": "Plane",
+      "position": [
+        700.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Origin",
+          "nickname": "O",
+          "description": "Origin of plane",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+              "param_name": "Point",
+              "param_nickname": "Pt"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    3500.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    7000.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Plane",
+          "nickname": "P",
+          "description": "World XY plane",
+          "type": "Plane",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 2,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            },
+            {
+              "component_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      3500.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      7000.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "pl",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "pl",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        920.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Plane",
+          "nickname": "P",
+          "description": "Rectangle base plane",
+          "type": "Plane",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      3500.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      7000.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "X Size",
+          "nickname": "X",
+          "description": "Dimensions of rectangle in plane X direction.",
+          "type": "Domain",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+              "param_name": "Number Slider",
+              "param_nickname": "Width"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Domain",
+                    "description": "0 To 20000"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Y Size",
+          "nickname": "Y",
+          "description": "Dimensions of rectangle in plane Y direction.",
+          "type": "Domain",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+              "param_name": "Number Slider",
+              "param_nickname": "Width"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Domain",
+                    "description": "0 To 20000"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Radius",
+          "nickname": "R",
+          "description": "Rectangle corner fillet radius",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Rectangle",
+          "nickname": "R",
+          "description": "Rectangle",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+              "param_name": "Geometry",
+              "param_nickname": "G"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Length",
+          "nickname": "L",
+          "description": "Length of rectangle curve",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  80000.0,
+                  80000.0,
+                  80000.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "rec",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "rec",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+      "name": "Range",
+      "nickname": "Range",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        130.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Domain",
+          "nickname": "D",
+          "description": "Domain of numeric range",
+          "type": "Domain",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Domain",
+                    "description": "0 To 1"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Steps",
+          "nickname": "N",
+          "description": "Number of steps",
+          "type": "Integer",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+              "param_name": "Number Slider",
+              "param_nickname": "Floors"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  11
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Range",
+          "nickname": "R",
+          "description": "Range of numbers",
+          "type": "Number",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+              "param_name": "A",
+              "param_nickname": "A"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  0.09090909090909091,
+                  0.18181818181818182
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "ang",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "ang",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+      "name": "Multiplication",
+      "nickname": "A×B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        480.0,
+        130.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "A",
+          "nickname": "A",
+          "description": "First item for multiplication",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+              "param_name": "Range",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  0.09090909090909091,
+                  0.18181818181818182
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "nickname": "B",
+          "description": "Second item for multiplication",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "67175ded-407e-4291-922f-ebed2a70319f",
+              "param_name": "Number Slider",
+              "param_nickname": "Twist"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  45.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Result",
+          "nickname": "R",
+          "description": "Result of multiplication",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+              "param_name": "Degrees",
+              "param_nickname": "D"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0,
+                  4.090909090909091,
+                  8.181818181818182
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "mul",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "mul",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+      "name": "Radians",
+      "nickname": "Rad",
+      "category": "Maths",
+      "subcategory": "Trig",
+      "position": [
+        700.0,
+        130.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Degrees",
+          "nickname": "D",
+          "description": "Angle in degrees",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+              "param_name": "Result",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  4.090909090909091,
+                  8.181818181818182
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Radians",
+          "nickname": "R",
+          "description": "Angle in radians",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+              "param_name": "Angle",
+              "param_nickname": "A"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  0.07139983303613166,
+                  0.14279966607226333
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "rad",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "rad",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+      "name": "Rotate",
+      "nickname": "Rotate",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "position": [
+        1140.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Geometry",
+          "nickname": "G",
+          "description": "Base geometry",
+          "type": "Geometry",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+              "param_name": "Rectangle",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Angle",
+          "nickname": "A",
+          "description": "Rotation angle in radians",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+              "param_name": "Radians",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  0.0,
+                  0.07139983303613166,
+                  0.14279966607226333
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 2,
+          "name": "Plane",
+          "nickname": "P",
+          "description": "Rotation plane",
+          "type": "Plane",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      3500.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  },
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      7000.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Geometry",
+          "nickname": "G",
+          "description": "Rotated geometry",
+          "type": "Geometry",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+              "param_name": "Curves",
+              "param_nickname": "C"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000.0, h=20000.0)"
+                  },
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=20000, h=20000)"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Transform",
+          "nickname": "X",
+          "description": "Transformation data",
+          "type": "Transform",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Transform",
+                    "description": "Rotate (0.0°) about +Z"
+                  },
+                  {
+                    "type": "Transform",
+                    "description": "Rotate (4.09°) about +Z"
+                  },
+                  {
+                    "type": "Transform",
+                    "description": "Rotate (8.18°) about +Z"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "rot",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "rot",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+      "name": "Loft",
+      "nickname": "Loft",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        40.0,
+        490.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Curves",
+          "nickname": "C",
+          "description": "Section curves",
+          "type": "Curve",
+          "access": "list",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 12,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+              "param_name": "Geometry",
+              "param_nickname": "G"
+            }
+          ],
+          "value": {
+            "data_count": 12,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Curve",
+                    "is_closed": true,
+                    "length": 80000.0
+                  },
+                  {
+                    "type": "Curve",
+                    "is_closed": true,
+                    "length": 80000.00000000001
+                  },
+                  {
+                    "type": "Curve",
+                    "is_closed": true,
+                    "length": 80000.0
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Options",
+          "nickname": "O",
+          "description": "Loft options",
+          "type": "Loft Options",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Loft Options",
+                    "description": " Loft"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Loft",
+          "nickname": "L",
+          "description": "Resulting Loft surfaces",
+          "type": "Brep",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+              "param_name": "Brep",
+              "param_nickname": "B"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Brep",
+                    "is_solid": false,
+                    "faces": 4
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "lft",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "lft",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    },
+    {
+      "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+      "name": "Cap Holes",
+      "nickname": "Cap",
+      "category": "Surface",
+      "subcategory": "Util",
+      "position": [
+        260.0,
+        490.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Brep",
+          "nickname": "B",
+          "description": "Brep to cap",
+          "type": "Brep",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+              "param_name": "Loft",
+              "param_nickname": "L"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Brep",
+                    "is_solid": false,
+                    "faces": 4
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Brep",
+          "nickname": "B",
+          "description": "Capped Brep",
+          "type": "Brep",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Brep",
+                    "is_solid": true,
+                    "faces": 6
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "cap",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "cap",
+        "graph_id": "MCPGraph_20261012055348256"
+      }
+    }
+  ],
+  "standalone_parameters": [
+    {
+      "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+      "name": "Number Slider",
+      "nickname": "Floors",
+      "type": "Number",
+      "position": [
+        40.0,
+        40.0
+      ],
+      "source_count": 0,
+      "recipient_count": 2,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 12.0,
+      "min": 2.0,
+      "max": 40.0,
+      "decimals": 0,
+      "expression": null,
+      "alias": "n",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "n",
+        "graph_id": "MCPGraph_20261012055348256"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              12.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+      "name": "Number Slider",
+      "nickname": "Floor h",
+      "type": "Number",
+      "position": [
+        40.0,
+        130.0
+      ],
+      "source_count": 0,
+      "recipient_count": 1,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 3500.0,
+      "min": 2500.0,
+      "max": 5000.0,
+      "decimals": 0,
+      "expression": null,
+      "alias": "fh",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "fh",
+        "graph_id": "MCPGraph_20261012055348256"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              3500.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+      "name": "Number Slider",
+      "nickname": "Width",
+      "type": "Number",
+      "position": [
+        40.0,
+        220.0
+      ],
+      "source_count": 0,
+      "recipient_count": 2,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 20000.0,
+      "min": 5000.0,
+      "max": 40000.0,
+      "decimals": 0,
+      "expression": null,
+      "alias": "w",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "w",
+        "graph_id": "MCPGraph_20261012055348256"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              20000.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+      "name": "Number Slider",
+      "nickname": "Twist",
+      "type": "Number",
+      "position": [
+        40.0,
+        310.0
+      ],
+      "source_count": 0,
+      "recipient_count": 1,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 45.0,
+      "min": 0.0,
+      "max": 180.0,
+      "decimals": 0,
+      "expression": null,
+      "alias": "tw",
+      "graph_id": "MCPGraph_20261012055348256",
+      "metadata": {
+        "alias": "tw",
+        "graph_id": "MCPGraph_20261012055348256"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              45.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "47cd6a8d-4c01-4b67-8719-574f6ab41f5f",
+      "nickname": "Inputs",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "aaf98ea8-4ec7-47d1-88fb-7929c9a11391",
+      "nickname": "Floors",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "e9b33e4d-72ce-43f0-9b7b-7b098c52ca0a",
+      "nickname": "Twist",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "8357a0fc-96c3-4201-b143-7d08a81f31da",
+      "nickname": "Massing",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    }
+  ],
+  "summary": {
+    "graph_id": "MCPGraph_20261012055348256",
+    "object_count": 18,
+    "controls": [
+      {
+        "alias": "n",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 2.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3500.0,
+        "min": 2500.0,
+        "max": 5000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "tw",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 45.0,
+        "min": 0.0,
+        "max": 180.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "n",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 2.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3500.0,
+        "min": 2500.0,
+        "max": 5000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "tw",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 45.0,
+        "min": 0.0,
+        "max": 180.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  }
+}

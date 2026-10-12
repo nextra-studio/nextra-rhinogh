@@ -1,0 +1,10 @@
+{
+ "ops": "- g8\n## Floors\ncir = Circle (P=g7, R=g3^e(x/2))\ng12 (G=cir)"
+}
+---
+ok: 3/3 lines applied (+1 nodes, 3 wires, -1 deleted), checkpoint c186
+ids: cir=g19
+groups: Floors=g16
+note: L3: 'Circle' is ambiguous; used Curve/Primitive because its ports match P,R
+solved 16ms, no errors/warnings on affected nodes
+results: g14.B: 1 Brep {0}

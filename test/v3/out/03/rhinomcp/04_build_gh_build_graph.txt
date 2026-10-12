@@ -1,0 +1,1171 @@
+{
+ "components": [
+  {
+   "alias": "n",
+   "component_name": "Number Slider",
+   "value": 12,
+   "min": 2,
+   "max": 40,
+   "decimals": 0,
+   "nickname": "Floors"
+  },
+  {
+   "alias": "fh",
+   "component_name": "Number Slider",
+   "value": 3500,
+   "min": 2500,
+   "max": 5000,
+   "decimals": 0,
+   "nickname": "Floor h"
+  },
+  {
+   "alias": "w",
+   "component_name": "Number Slider",
+   "value": 20000,
+   "min": 5000,
+   "max": 40000,
+   "decimals": 0,
+   "nickname": "Width"
+  },
+  {
+   "alias": "tw",
+   "component_name": "Number Slider",
+   "value": 45,
+   "min": 0,
+   "max": 180,
+   "decimals": 0,
+   "nickname": "Twist"
+  },
+  {
+   "alias": "ser",
+   "component_name": "Series"
+  },
+  {
+   "alias": "pt",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "pl",
+   "component_name": "XY Plane"
+  },
+  {
+   "alias": "rec",
+   "component_guid": "d93100b6-d50b-40b2-831a-814659dc38e3"
+  },
+  {
+   "alias": "ang",
+   "component_name": "Range"
+  },
+  {
+   "alias": "mul",
+   "component_name": "Multiplication"
+  },
+  {
+   "alias": "rad",
+   "component_name": "Radians"
+  },
+  {
+   "alias": "rot",
+   "component_guid": "b7798b74-037e-4f0c-8ac7-dc1043d093e0"
+  },
+  {
+   "alias": "lft",
+   "component_name": "Loft"
+  },
+  {
+   "alias": "cap",
+   "component_name": "Cap Holes"
+  }
+ ],
+ "connections": [
+  {
+   "source": "fh",
+   "target": "ser",
+   "target_input_index": 1
+  },
+  {
+   "source": "n",
+   "target": "ser",
+   "target_input_index": 2
+  },
+  {
+   "source": "ser",
+   "target": "pt",
+   "target_input_index": 2
+  },
+  {
+   "source": "pt",
+   "target": "pl",
+   "target_input_index": 0
+  },
+  {
+   "source": "pl",
+   "target": "rec",
+   "target_input_index": 0
+  },
+  {
+   "source": "w",
+   "target": "rec",
+   "target_input_index": 1
+  },
+  {
+   "source": "w",
+   "target": "rec",
+   "target_input_index": 2
+  },
+  {
+   "source": "n",
+   "target": "ang",
+   "target_input_index": 1
+  },
+  {
+   "source": "ang",
+   "target": "mul",
+   "target_input_index": 0
+  },
+  {
+   "source": "tw",
+   "target": "mul",
+   "target_input_index": 1
+  },
+  {
+   "source": "mul",
+   "target": "rad",
+   "target_input_index": 0
+  },
+  {
+   "source": "rec",
+   "target": "rot",
+   "target_input_index": 0
+  },
+  {
+   "source": "rad",
+   "target": "rot",
+   "target_input_index": 1
+  },
+  {
+   "source": "pl",
+   "target": "rot",
+   "target_input_index": 2
+  },
+  {
+   "source": "rot",
+   "target": "lft",
+   "target_input_index": 0
+  },
+  {
+   "source": "lft",
+   "target": "cap",
+   "target_input_index": 0
+  }
+ ],
+ "values": [
+  {
+   "target": "ser",
+   "input_index": 0,
+   "value": 0
+  }
+ ],
+ "groups": [
+  {
+   "name": "Inputs",
+   "members": [
+    "n",
+    "fh",
+    "w",
+    "tw"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Floors",
+   "members": [
+    "ser",
+    "pt",
+    "pl",
+    "rec"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Twist",
+   "members": [
+    "ang",
+    "mul",
+    "rad",
+    "rot"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Massing",
+   "members": [
+    "lft",
+    "cap"
+   ],
+   "color": [
+    255,
+    214,
+    171
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 14,
+  "created_component_count": 14,
+  "created_group_count": 4,
+  "connection_count": 16,
+  "value_count": 1,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012055348256",
+  "mutation_duration_ms": 236,
+  "solution_duration_ms": 5,
+  "verification_duration_ms": 0,
+  "duration_ms": 584,
+  "aliases": {
+    "n": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+    "fh": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+    "w": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+    "tw": "67175ded-407e-4291-922f-ebed2a70319f",
+    "ser": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+    "pt": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+    "pl": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+    "rec": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+    "ang": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+    "mul": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+    "rad": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+    "rot": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+    "lft": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+    "cap": "0d34bd65-dd37-4d52-a845-768adba54572"
+  },
+  "components": [
+    {
+      "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+      "name": "Number Slider",
+      "nickname": "Floors",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+      "name": "Number Slider",
+      "nickname": "Floor h",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+      "name": "Number Slider",
+      "nickname": "Width",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+      "name": "Number Slider",
+      "nickname": "Twist",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+      "name": "Series",
+      "nickname": "Series",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+      "name": "XY Plane",
+      "nickname": "XY",
+      "category": "Vector",
+      "subcategory": "Plane",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+      "name": "Range",
+      "nickname": "Range",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+      "name": "Multiplication",
+      "nickname": "A×B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        480.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+      "name": "Radians",
+      "nickname": "Rad",
+      "category": "Maths",
+      "subcategory": "Trig",
+      "position": [
+        700.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+      "name": "Rotate",
+      "nickname": "Rotate",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+      "name": "Loft",
+      "nickname": "Loft",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        40.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+      "name": "Cap Holes",
+      "nickname": "Cap",
+      "category": "Surface",
+      "subcategory": "Util",
+      "position": [
+        260.0,
+        490.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "47cd6a8d-4c01-4b67-8719-574f6ab41f5f",
+      "name": "Inputs",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "aaf98ea8-4ec7-47d1-88fb-7929c9a11391",
+      "name": "Floors",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "e9b33e4d-72ce-43f0-9b7b-7b098c52ca0a",
+      "name": "Twist",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "8357a0fc-96c3-4201-b143-7d08a81f31da",
+      "name": "Massing",
+      "object_count": 14,
+      "graph_id": "MCPGraph_20261012055348256",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 14,
+    "edge_count": 15,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+        "name": "Series",
+        "nickname": "Series",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+        "name": "Rectangle",
+        "nickname": "Rectangle",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+        "name": "Range",
+        "nickname": "Range",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+        "name": "Multiplication",
+        "nickname": "A×B",
+        "position": [
+          480.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+        "name": "Radians",
+        "nickname": "Rad",
+        "position": [
+          700.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "name": "Rotate",
+        "nickname": "Rotate",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+        "name": "Loft",
+        "nickname": "Loft",
+        "position": [
+          40.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+        "name": "Cap Holes",
+        "nickname": "Cap",
+        "position": [
+          260.0,
+          490.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 14,
+    "output_count": 16,
+    "outputs_with_data": 16,
+    "total_output_data_count": 131,
+    "warning_count": 0,
+    "error_count": 1,
+    "objects": [
+      {
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "alias": "n",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Floors",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 2.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "alias": "fh",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Floor h",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3500.0,
+        "min": 2500.0,
+        "max": 5000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "alias": "w",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Width",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "alias": "tw",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Twist",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 45.0,
+        "min": 0.0,
+        "max": 180.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+        "alias": "ser",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Series",
+        "nickname": "Series",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Series",
+            "nickname": "S",
+            "type": "Number",
+            "access": "list",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+        "alias": "pt",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "alias": "pl",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "category": "Vector",
+        "subcategory": "Plane",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Plane",
+            "nickname": "P",
+            "type": "Plane",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+        "alias": "rec",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Rectangle",
+        "nickname": "Rectangle",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Rectangle",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 12,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+        "alias": "ang",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Range",
+        "nickname": "Range",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Range",
+            "nickname": "R",
+            "type": "Number",
+            "access": "list",
+            "has_data": true,
+            "data_count": 13,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+        "alias": "mul",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Multiplication",
+        "nickname": "A×B",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 13,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+        "alias": "rad",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Radians",
+        "nickname": "Rad",
+        "category": "Maths",
+        "subcategory": "Trig",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Radians",
+            "nickname": "R",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 13,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "alias": "rot",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Rotate",
+        "nickname": "Rotate",
+        "category": "Transform",
+        "subcategory": "Euclidean",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Geometry",
+            "nickname": "G",
+            "type": "Geometry",
+            "access": "item",
+            "has_data": true,
+            "data_count": 13,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Transform",
+            "nickname": "X",
+            "type": "Transform",
+            "access": "item",
+            "has_data": true,
+            "data_count": 13,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+        "alias": "lft",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Loft",
+        "nickname": "Loft",
+        "category": "Surface",
+        "subcategory": "Freeform",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Loft could not be constructed."
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Loft",
+            "nickname": "L",
+            "type": "Brep",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+        "alias": "cap",
+        "graph_id": "MCPGraph_20261012055348256",
+        "role": "",
+        "name": "Cap Holes",
+        "nickname": "Cap",
+        "category": "Surface",
+        "subcategory": "Util",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Brep",
+            "nickname": "B",
+            "type": "Brep",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 10,
+    "preview_enabled_object_count": 10,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 4736,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012055348256",
+    "object_count": 18,
+    "controls": [
+      {
+        "alias": "n",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 2.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3500.0,
+        "min": 2500.0,
+        "max": 5000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "tw",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 45.0,
+        "min": 0.0,
+        "max": 180.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "n",
+        "name": "Number Slider",
+        "nickname": "Floors",
+        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 2.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Floor h",
+        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3500.0,
+        "min": 2500.0,
+        "max": 5000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "w",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20000.0,
+        "min": 5000.0,
+        "max": 40000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "tw",
+        "name": "Number Slider",
+        "nickname": "Twist",
+        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 45.0,
+        "min": 0.0,
+        "max": 180.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 14 component(s) and 16 connection(s)"
+}

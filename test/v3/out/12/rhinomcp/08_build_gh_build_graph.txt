@@ -1,0 +1,886 @@
+{
+ "components": [
+  {
+   "alias": "pa",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "pb",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "ln",
+   "component_guid": "4c4e56eb-2f04-43f9-95a3-cc46a14f495a"
+  },
+  {
+   "alias": "sh",
+   "component_name": "Shatter"
+  },
+  {
+   "alias": "el",
+   "component_name": "Create Linear Element (Karamba3D)"
+  },
+  {
+   "alias": "sup",
+   "component_guid": "ca9eab02-e4ea-4126-9755-1c24b6e74176"
+  },
+  {
+   "alias": "pm",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "fv",
+   "component_name": "Vector XYZ"
+  },
+  {
+   "alias": "ld",
+   "component_name": " Loads (Karamba3D)"
+  },
+  {
+   "alias": "asm",
+   "component_guid": "ddcf0ef4-e8bb-4231-8302-ded99046e49c"
+  },
+  {
+   "alias": "an",
+   "component_name": " Analyse (Karamba3D)"
+  }
+ ],
+ "connections": [
+  {
+   "source": "pa",
+   "target": "ln",
+   "target_input_index": 0
+  },
+  {
+   "source": "pb",
+   "target": "ln",
+   "target_input_index": 1
+  },
+  {
+   "source": "ln",
+   "target": "sh",
+   "target_input_index": 0
+  },
+  {
+   "source": "sh",
+   "target": "el",
+   "target_input_index": 0
+  },
+  {
+   "source": "pa",
+   "target": "sup",
+   "target_input_index": 0
+  },
+  {
+   "source": "pb",
+   "target": "sup",
+   "target_input_index": 0
+  },
+  {
+   "source": "el",
+   "target": "asm",
+   "target_input_index": 0
+  },
+  {
+   "source": "sup",
+   "target": "asm",
+   "target_input_index": 1
+  },
+  {
+   "source": "ld",
+   "target": "asm",
+   "target_input_index": 2
+  },
+  {
+   "source": "asm",
+   "target": "an",
+   "target_input_index": 0
+  }
+ ],
+ "values": [
+  {
+   "target": "pb",
+   "input_index": 0,
+   "value": 10
+  },
+  {
+   "target": "sh",
+   "input_index": 1,
+   "value": 0.5
+  },
+  {
+   "target": "pm",
+   "input_index": 0,
+   "value": 5
+  },
+  {
+   "target": "fv",
+   "input_index": 2,
+   "value": -10
+  }
+ ],
+ "groups": [
+  {
+   "name": "Beam geometry",
+   "members": [
+    "pa",
+    "pb",
+    "ln",
+    "sh"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Karamba model",
+   "members": [
+    "el",
+    "sup",
+    "pm",
+    "fv",
+    "ld",
+    "asm",
+    "an"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 11,
+  "created_component_count": 11,
+  "created_group_count": 2,
+  "connection_count": 10,
+  "value_count": 4,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012074619981",
+  "mutation_duration_ms": 262,
+  "solution_duration_ms": 3,
+  "verification_duration_ms": 0,
+  "duration_ms": 602,
+  "aliases": {
+    "pa": "d019e42a-b0a2-497a-8362-9b1338cac048",
+    "pb": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+    "ln": "dac9e929-6736-46b4-9103-56c7568cad05",
+    "sh": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+    "el": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+    "sup": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+    "pm": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+    "fv": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+    "ld": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+    "asm": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+    "an": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6"
+  },
+  "components": [
+    {
+      "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+      "name": "Line",
+      "nickname": "Ln",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+      "name": "Shatter",
+      "nickname": "Shatter",
+      "category": "Curve",
+      "subcategory": "Division",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+      "name": "Create Linear Element (Karamba3D)",
+      "nickname": "LineElem",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+      "name": "Support (Karamba3D)",
+      "nickname": "Supp",
+      "category": "Karamba3D",
+      "subcategory": "1.Support",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+      "name": "Vector XYZ",
+      "nickname": "Vec",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "position": [
+        40.0,
+        400.0
+      ]
+    },
+    {
+      "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+      "name": " Analyse (Karamba3D)",
+      "nickname": "Analyse",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "601f1cc0-4637-4ba6-9c87-95a9bfc8cbfe",
+      "name": "Beam geometry",
+      "object_count": 11,
+      "graph_id": "MCPGraph_20261012074619981",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "a1ff74c6-0ab3-492a-938f-e6e8abedf81a",
+      "name": "Karamba model",
+      "object_count": 11,
+      "graph_id": "MCPGraph_20261012074619981",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 11,
+    "edge_count": 10,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+        "name": "Line",
+        "nickname": "Ln",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+        "name": "Shatter",
+        "nickname": "Shatter",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+        "name": "Create Linear Element (Karamba3D)",
+        "nickname": "LineElem",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "name": "Vector XYZ",
+        "nickname": "Vec",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "position": [
+          40.0,
+          400.0
+        ]
+      },
+      {
+        "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 11,
+    "output_count": 21,
+    "outputs_with_data": 21,
+    "total_output_data_count": 26,
+    "warning_count": 1,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+        "alias": "pa",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+        "alias": "pb",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+        "alias": "ln",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Line",
+        "nickname": "Ln",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Line",
+            "nickname": "L",
+            "type": "Line",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+        "alias": "sh",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Shatter",
+        "nickname": "Shatter",
+        "category": "Curve",
+        "subcategory": "Division",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Segments",
+            "nickname": "S",
+            "type": "Curve",
+            "access": "list",
+            "has_data": true,
+            "data_count": 2,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+        "alias": "el",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Create Linear Element (Karamba3D)",
+        "nickname": "LineElem",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Element",
+            "nickname": "Elem",
+            "type": "Element",
+            "access": "item",
+            "has_data": true,
+            "data_count": 2,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Points",
+            "nickname": "Pts",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 3,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+        "alias": "sup",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "category": "Karamba3D",
+        "subcategory": "1.Support",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Support",
+            "nickname": "Supp",
+            "type": "Support",
+            "access": "item",
+            "has_data": true,
+            "data_count": 2,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "alias": "pm",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "alias": "fv",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": "Vector XYZ",
+        "nickname": "Vec",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "alias": "ld",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "category": "Karamba3D",
+        "subcategory": "2.Load",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Load",
+            "nickname": "Load",
+            "type": "Load",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+        "alias": "asm",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 5,
+        "outputs_with_data": 5,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Mass [kg]",
+            "nickname": "Mass",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Centre of Gravity",
+            "nickname": "COG",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 4,
+            "name": "Load Case Names",
+            "nickname": "LCNames",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+        "alias": "an",
+        "graph_id": "MCPGraph_20261012074619981",
+        "role": "",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "category": "Karamba3D",
+        "subcategory": "6.Algorithms",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "There are 6 rigid body modes in the system. This means some parts can move freely without causing deformation.\n Try to use the 'Eigen Modes'-component and activate the display of local coordinate axes: The first eigen-mode will be the rigid body motion.\n If this does not help, check whether you have a pinned support directly attached to a hinge. A hinge introduces an extra node which may cause the problem.\n When analyzing a flat shell structure one has to lock the rotation perpendicular to the plate in at least one node.\n\n"
+          }
+        ],
+        "output_count": 4,
+        "outputs_with_data": 4,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Analysed Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Maximum Displacement [cm]",
+            "nickname": "MaxDisp",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Resulting force [kN]",
+            "nickname": "Force",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Change of elastic energy [kNm]",
+            "nickname": "Energy",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 11,
+    "preview_enabled_object_count": 7,
+    "preview_disabled_object_count": 4,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 0,
+    "has_baked_rhino_objects": false,
+    "viewport_warning": "Grasshopper preview is live but not baked. Use gh_capture_preview to frame live Grasshopper preview bounds without baking."
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012074619981",
+    "object_count": 13,
+    "controls": [],
+    "adjustable_parameters": [],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 11 component(s) and 10 connection(s)"
+}

@@ -1,0 +1,9 @@
+{
+ "code": "li = doc.Layers.Add('Slab', System.Drawing.Color.Gray)\na = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = li\ndoc.Objects.AddBrep(rg.Box(rg.Plane.WorldXY, rg.Interval(-300,18300), rg.Interval(-300,12300), rg.Interval(13750,14000)).ToBrep(), a)\nprint('slab')"
+}
+---
+ok py 69ms, checkpoint c196
+stdout:
+slab
+rhino delta +1:
++ r4755 polysurface solid [Slab] 18600x12600x250 planar n+z @(9000,6000,13875)

@@ -1,0 +1,136 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "pa",
+   "Selector": "Construct Point",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "pb",
+   "Selector": "Construct Point",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "ln",
+   "Selector": "4c4e56eb-2f04-43f9-95a3-cc46a14f495a",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "sh",
+   "Selector": "Shatter",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "el",
+   "Selector": "Create Linear Element (Karamba3D)",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "sup",
+   "Selector": "ca9eab02-e4ea-4126-9755-1c24b6e74176",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "pm",
+   "Selector": "Construct Point",
+   "X": 0,
+   "Y": 140
+  },
+  {
+   "Key": "fv",
+   "Selector": "Vector XYZ",
+   "X": 0,
+   "Y": 210
+  },
+  {
+   "Key": "ld",
+   "Selector": " Loads (Karamba3D)",
+   "X": 170,
+   "Y": 140
+  },
+  {
+   "Key": "asm",
+   "Selector": "ddcf0ef4-e8bb-4231-8302-ded99046e49c",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "an",
+   "Selector": " Analyse (Karamba3D)",
+   "X": 850,
+   "Y": 0
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "pa",
+   "Src": "Pt",
+   "DstKey": "ln",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "pb",
+   "Src": "Pt",
+   "DstKey": "ln",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ln",
+   "Src": "L",
+   "DstKey": "sh",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "sh",
+   "Src": "S",
+   "DstKey": "el",
+   "Dst": "Line"
+  },
+  {
+   "SrcKey": "pa",
+   "Src": "Pt",
+   "DstKey": "sup",
+   "Dst": "Pos|Ind"
+  },
+  {
+   "SrcKey": "pb",
+   "Src": "Pt",
+   "DstKey": "sup",
+   "Dst": "Pos|Ind"
+  },
+  {
+   "SrcKey": "el",
+   "Src": "Elem",
+   "DstKey": "asm",
+   "Dst": "Elem"
+  },
+  {
+   "SrcKey": "sup",
+   "Src": "Supp",
+   "DstKey": "asm",
+   "Dst": "Support"
+  },
+  {
+   "SrcKey": "ld",
+   "Src": "Load",
+   "DstKey": "asm",
+   "Dst": "Load"
+  },
+  {
+   "SrcKey": "asm",
+   "Src": "Model",
+   "DstKey": "an",
+   "Dst": "Model"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"ln","Id":"25fe8007-aad3-458e-a019-56a2fc6b9626","Kind":"Component"},{"Key":"sh","Id":"b9d0473a-33cf-4767-991f-f04ffe1bd789","Kind":"Component"},{"Key":"el","Id":"2537623d-5e36-4c38-8314-4fa4e03935f0","Kind":"Component"},{"Key":"sup","Id":"aebd00e1-3f62-4205-b660-ba256926a5bf","Kind":"Component"},{"Key":"fv","Id":"e807b22f-00a8-4eef-bf7e-fa59fa094469","Kind":"Component"},{"Key":"asm","Id":"3485392b-6849-48f1-aa97-c9a94b252f4d","Kind":"Component"},{"Key":"an","Id":"33bd0b78-0706-4829-8f2a-99ddfb3ce806","Kind":"Component"}],"PlaceErrors":[{"Key":"pa","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"pb","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"pm","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"ld","Error":"Component name \u0027 Loads (Karamba3D)\u0027 is ambiguous (8 matches): 3598d812-0d6c-4a7c-8d89-19d487862572 (Karamba3D/2.Load), 495f7fb4-13db-400b-bbe5-3da9bc7188ff (Karamba3D/2.Load), 92877431-5279-4438-8305-e7329cc090b4 (Karamba3D/2.Load), a425fcab-03b5-474b-a422-2646ed230dfc (Karamba3D/2.Load), b6038fdf-fd8e-4d79-b857-bb909169cd80 (Karamba3D/2.Load), c9b09174-e927-4a64-9e0f-b934faa71b97 (Karamba3D/2.Load), e68f8859-a7b6-42ee-aab0-1ba14b455f6a (Karamba3D/2.Load), f0b8c266-6d81-485c-b696-4980071ba603 (Karamba3D/2.Load). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":false,"Error":"src_key \u0027pa\u0027 did not match a placed object"},{"Index":1,"Ok":false,"Error":"src_key \u0027pb\u0027 did not match a placed object"},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":false,"Error":"src_key \u0027pa\u0027 did not match a placed object"},{"Index":5,"Ok":false,"Error":"src_key \u0027pb\u0027 did not match a placed object"},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":false,"Error":"src_key \u0027ld\u0027 did not match a placed object"},{"Index":9,"Ok":true,"Error":null}],"WiresOk":5}

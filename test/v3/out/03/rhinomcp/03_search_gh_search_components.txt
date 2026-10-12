@@ -1,0 +1,52 @@
+{
+ "query": "Rotate",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Rotate",
+  "category": null,
+  "components": [
+    {
+      "name": "Rotate",
+      "nickname": "Rotate",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "guid": "b661519d-43fd-4e5a-b244-d54d9fae2bde",
+      "description": "Rotate an object in a plane."
+    },
+    {
+      "name": "Rotate",
+      "nickname": "Rotate",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "guid": "b7798b74-037e-4f0c-8ac7-dc1043d093e0",
+      "description": "Rotate an object in a plane."
+    },
+    {
+      "name": "Rotate",
+      "nickname": "VRot",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "guid": "b6d7ba20-cf74-4191-a756-2216a36e30a7",
+      "description": "Rotate a vector around an axis."
+    },
+    {
+      "name": "Rotate Direction",
+      "nickname": "Rotate",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "guid": "5edaea74-32cb-4586-bd72-66694eb73160",
+      "description": "Rotate an object from one direction to another."
+    },
+    {
+      "name": "ggIFC CTRotate",
+      "nickname": "ggIFCCTR",
+      "category": "GeomGymIFC",
+      "subcategory": "IFC Geometry",
+      "guid": "135808b5-4a79-4c5a-8348-f1e29313e323",
+      "description": "Create IFC Cartesian Transformation Operator Rotate"
+    }
+  ]
+}

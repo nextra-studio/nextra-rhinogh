@@ -1,0 +1,29 @@
+{
+ "sliders": [
+  {
+   "Key": "cnt",
+   "Min": 3,
+   "Value": 8,
+   "Max": 30,
+   "Type": "int",
+   "Name": "Count",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "rad",
+   "Min": 1000,
+   "Value": 5000,
+   "Max": 20000,
+   "Type": "int",
+   "Name": "Radius",
+   "X": 0,
+   "Y": 60
+  }
+ ],
+ "components": [],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"cnt","Id":"3ee01b8a-1d5e-42d2-afc8-71b72384998d","Kind":"Slider"},{"Key":"rad","Id":"9892ca20-bc5a-48a6-afb5-af86c4fe7f65","Kind":"Slider"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

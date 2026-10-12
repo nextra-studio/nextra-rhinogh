@@ -1,0 +1,207 @@
+{
+ "sliders": [
+  {
+   "Key": "n",
+   "Min": 2,
+   "Value": 12,
+   "Max": 40,
+   "Type": "int",
+   "Name": "Floors",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "fh",
+   "Min": 2500,
+   "Value": 3500,
+   "Max": 5000,
+   "Type": "int",
+   "Name": "Floor h",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "w",
+   "Min": 5000,
+   "Value": 20000,
+   "Max": 40000,
+   "Type": "int",
+   "Name": "Width",
+   "X": 0,
+   "Y": 140
+  },
+  {
+   "Key": "tw",
+   "Min": 0,
+   "Value": 45,
+   "Max": 180,
+   "Type": "int",
+   "Name": "Twist",
+   "X": 0,
+   "Y": 210
+  }
+ ],
+ "components": [
+  {
+   "Key": "ser",
+   "Selector": "Series",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "pt",
+   "Selector": "Construct Point",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "pl",
+   "Selector": "XY Plane",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "rec",
+   "Selector": "d93100b6-d50b-40b2-831a-814659dc38e3",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "ang",
+   "Selector": "Range",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "mul",
+   "Selector": "Multiplication",
+   "X": 340,
+   "Y": 70
+  },
+  {
+   "Key": "rad",
+   "Selector": "Radians",
+   "X": 510,
+   "Y": 70
+  },
+  {
+   "Key": "rot",
+   "Selector": "b7798b74-037e-4f0c-8ac7-dc1043d093e0",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "lft",
+   "Selector": "Loft",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "cap",
+   "Selector": "Cap Holes",
+   "X": 1190,
+   "Y": 0
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "fh",
+   "Src": "0",
+   "DstKey": "ser",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "n",
+   "Src": "0",
+   "DstKey": "ser",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "ser",
+   "Src": "S",
+   "DstKey": "pt",
+   "Dst": "Z"
+  },
+  {
+   "SrcKey": "pt",
+   "Src": "Pt",
+   "DstKey": "pl",
+   "Dst": "O"
+  },
+  {
+   "SrcKey": "pl",
+   "Src": "P",
+   "DstKey": "rec",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "w",
+   "Src": "0",
+   "DstKey": "rec",
+   "Dst": "X"
+  },
+  {
+   "SrcKey": "w",
+   "Src": "0",
+   "DstKey": "rec",
+   "Dst": "Y"
+  },
+  {
+   "SrcKey": "n",
+   "Src": "0",
+   "DstKey": "ang",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "ang",
+   "Src": "R",
+   "DstKey": "mul",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "tw",
+   "Src": "0",
+   "DstKey": "mul",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "mul",
+   "Src": "R",
+   "DstKey": "rad",
+   "Dst": "D"
+  },
+  {
+   "SrcKey": "rec",
+   "Src": "R",
+   "DstKey": "rot",
+   "Dst": "G"
+  },
+  {
+   "SrcKey": "rad",
+   "Src": "R",
+   "DstKey": "rot",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "pl",
+   "Src": "P",
+   "DstKey": "rot",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "rot",
+   "Src": "G",
+   "DstKey": "lft",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "lft",
+   "Src": "L",
+   "DstKey": "cap",
+   "Dst": "B"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"n","Id":"33cfb281-60aa-4159-8b50-b6664d29261e","Kind":"Slider"},{"Key":"fh","Id":"05570a56-d4ac-4dc1-8e6e-4efe5dfd8105","Kind":"Slider"},{"Key":"w","Id":"33b8fe2f-4925-492e-b0dd-5b537668976c","Kind":"Slider"},{"Key":"tw","Id":"89f0ece2-3aa5-43c0-89f7-6d98be4325af","Kind":"Slider"},{"Key":"ser","Id":"703aba5b-2815-4cd1-984c-4054e10f7079","Kind":"Component"},{"Key":"pl","Id":"e016f19b-6b0b-41f3-b8c7-be0e815fae96","Kind":"Component"},{"Key":"rec","Id":"f7a8edb5-95c1-4651-bc8d-9625b360ccc5","Kind":"Component"},{"Key":"ang","Id":"2103a4ca-b322-4f57-80ac-326158eb0b51","Kind":"Component"},{"Key":"rad","Id":"ec67c562-d1d7-48a0-9510-7b08d88f29d3","Kind":"Component"},{"Key":"rot","Id":"0c38c7f9-e4af-4cd8-ae34-4583e96364f5","Kind":"Component"},{"Key":"lft","Id":"ea90c702-26c2-483b-8dda-036114a32f2b","Kind":"Component"},{"Key":"cap","Id":"0f90c41a-2eff-424d-a90b-8c59f871f979","Kind":"Component"}],"PlaceErrors":[{"Key":"pt","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"mul","Error":"Component name \u0027Multiplication\u0027 is ambiguous (5 matches): 035bf8a7-b9e0-4e37-b031-4567bc60d047 (Vector/Colour), 2f643ab6-b9a4-4923-b3da-f9d52b0cba14 (Complex/Operators), 3e6383e9-af39-427b-801a-19ca916160fa (Scalar/Operators), b8963bb1-aa57-476e-a20e-ed6cf635a49c (Maths/Operators), ce46b74e-00c9-43c4-805a-193b69ea4a11 (Maths/Operators). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":false,"Error":"dst_key \u0027pt\u0027 did not match a placed object"},{"Index":3,"Ok":false,"Error":"src_key \u0027pt\u0027 did not match a placed object"},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":false,"Error":"dst_key \u0027mul\u0027 did not match a placed object"},{"Index":9,"Ok":false,"Error":"dst_key \u0027mul\u0027 did not match a placed object"},{"Index":10,"Ok":false,"Error":"src_key \u0027mul\u0027 did not match a placed object"},{"Index":11,"Ok":true,"Error":null},{"Index":12,"Ok":true,"Error":null},{"Index":13,"Ok":true,"Error":null},{"Index":14,"Ok":true,"Error":null},{"Index":15,"Ok":true,"Error":null}],"WiresOk":11}

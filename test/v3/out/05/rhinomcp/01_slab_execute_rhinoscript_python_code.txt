@@ -1,0 +1,8 @@
+{
+ "code": "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\nli = doc.Layers.Add('Slab', System.Drawing.Color.Gray)\na = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = li\ndoc.Objects.AddBrep(rg.Box(rg.Plane.WorldXY, rg.Interval(-300,18300), rg.Interval(-300,12300), rg.Interval(13750,14000)).ToBrep(), a)\nprint('slab')"
+}
+---
+{
+  "success": true,
+  "output": "slab\nslab\n"
+}

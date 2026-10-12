@@ -1,0 +1,17 @@
+{
+ "code": "\"\"\"Marina Bay Sands massing: 3 towers (straight + curved leg each), skypark ship with cantilever, podium. Units: m.\nargs: towers (3), spacing (80), height (194), lean (24)\"\"\"\nimport math\n\ndoc.ModelUnitSystem = Rhino.UnitSystem.Meters\nN = args.get(\"towers\", 3)\nS = args.get(\"spacing\", 80.0)\nH = args.get(\"height\", 194.0)\nLEAN = args.get(\"lean\", 24.0)\nLEG_W, LEG_L, GAP = 11.0, 62.0, 4.0\ntol = doc.ModelAbsoluteTolerance\n\n\ndef layer(name, rgb):\n    i = doc.Layers.FindByFullPath(name, -1)\n    return i if i >= 0 else doc.Layers.Add(name, System.Drawing.Color.FromArgb(*rgb))\n\n\nL = {\"Towers\": layer(\"MBS::Towers\", (225, 225, 220)), \"Skypark\": layer(\"MBS::Skypark\", (90, 140, 120)),\n     \"Podium\": layer(\"MBS::Podium\", (180, 170, 150))}\n\n\ndef add(geo, lay, name):\n    a = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = L[lay]; a.Name = name\n    return doc.Objects.Add(geo, a)\n\n\ndef rect(x0, x1, y0, y1, z):\n    return rg.Polyline([rg.Point3d(x0, y0, z), rg.Point3d(x1, y0, z), rg.Point3d(x1, y1, z), rg.Point3d(x0, y1, z), rg.Point3d(x0, y0, z)]).ToNurbsCurve()\n\n\nfor t in range(N):\n    cx = t * S\n    # straight (east) leg\n    straight = rg.Box(rg.Plane.WorldXY, rg.Interval(cx - GAP / 2 - LEG_W, cx - GAP / 2), rg.Interval(-LEG_L / 2, LEG_L / 2), rg.Interval(0, H)).ToBrep()\n    add(straight, \"Towers\", \"T%d_leg_straight\" % (t + 1))\n    # curved (west) leg: sections lofted, leaning onto the straight leg at the top\n    secs = []\n    for k in range(9):\n        z = H * k / 8.0\n        off = LEAN * (1 - z / H) ** 2\n        secs.append(rect(cx + GAP / 2 + off, cx + GAP / 2 + LEG_W + off * 0.6, -LEG_L / 2, LEG_L / 2, z))\n    loft = rg.Brep.CreateFromLoft(secs, rg.Point3d.Unset, rg.Point3d.Unset, rg.LoftType.Normal, False)\n    if loft:\n        leg = loft[0].CapPlanarHoles(tol) or loft[0]\n        add(leg, \"Towers\", \"T%d_leg_curved\" % (t + 1))\n\n# skypark: long ship with rounded ends, cantilever past the first tower\nx0, x1 = -72.0, (N - 1) * S + 40.0\nhull = rect(x0, x1, -19.0, 19.0, H)\nhull = rg.Curve.CreateFilletCornersCurve(hull, 15.0, tol, tol) or hull\nship = rg.Extrusion.Create(hull, 9.0, True)\nif ship:\n    add(ship.ToBrep(), \"Skypark\", \"Skypark\")\n\n# podium\npod = rg.Box(rg.Plane.WorldXY, rg.Interval(-40, (N - 1) * S + 40), rg.Interval(-110, -45), rg.Interval(0, 22)).ToBrep()\nadd(pod, \"Podium\", \"Podium\")\nprint(\"MBS: %d towers, skypark %.0f m long, cantilever %.0f m\" % (N, x1 - x0, -x0 - GAP / 2 - LEG_W))\n",
+ "args": {}
+}
+---
+ok py 209ms, checkpoint c262
+stdout:
+MBS: 3 towers, skypark 272 m long, cantilever 59 m
+rhino delta +8:
++ r5010 polysurface solid [MBS::Towers] "T1_leg_straight" 194x62x11 block @(-7.5,0,97)
++ r5011 polysurface solid [MBS::Towers] "T1_leg_curved" 195.559x62x14.78 block @(15.185,0,97.048)
++ r5012 polysurface solid [MBS::Towers] "T2_leg_straight" 194x62x11 block @(72.5,0,97)
++ r5013 polysurface solid [MBS::Towers] "T2_leg_curved" 195.559x62x14.78 block @(95.185,0,97.048)
++ r5014 polysurface solid [MBS::Towers] "T3_leg_straight" 194x62x11 block @(152.5,0,97)
++ r5015 polysurface solid [MBS::Towers] "T3_leg_curved" 195.559x62x14.78 block @(175.185,0,97.048)
++ r5016 polysurface solid [MBS::Skypark] "Skypark" 272x38x9 linear horiz+x @(64,0,198.5)
++ r5017 polysurface solid [MBS::Podium] "Podium" 240x65x22 block @(80,-77.5,11)

@@ -1,0 +1,8 @@
+{
+ "code": "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\nargs = {'storeys': 2}\nexec(open(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/scripts/frame_building.py\").read())\nfrom collections import Counter\nprint(dict(Counter(doc.Layers[o.Attributes.LayerIndex].Name for o in doc.Objects)))\n"
+}
+---
+{
+  "success": true,
+  "output": "storeys 1..2 done\n{'Columns': 24, 'Beams': 34, 'Slabs': 2}\nstoreys 1..2 done\n\n{'Columns': 24, 'Beams': 34, 'Slabs': 2}\n"
+}

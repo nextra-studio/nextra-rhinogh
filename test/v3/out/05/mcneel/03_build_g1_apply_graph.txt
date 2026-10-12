@@ -1,0 +1,209 @@
+{
+ "sliders": [
+  {
+   "Key": "nf",
+   "Min": 4,
+   "Value": 24,
+   "Max": 80,
+   "Type": "int",
+   "Name": "Fins",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "fd",
+   "Min": 200,
+   "Value": 900,
+   "Max": 2000,
+   "Type": "int",
+   "Name": "Fin depth",
+   "X": 0,
+   "Y": 140
+  },
+  {
+   "Key": "fh",
+   "Min": 1000,
+   "Value": 3200,
+   "Max": 6000,
+   "Type": "int",
+   "Name": "Fin height",
+   "X": 0,
+   "Y": 210
+  }
+ ],
+ "components": [
+  {
+   "Key": "slab",
+   "Selector": "Brep",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "zp",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 0,
+   "Y": 280
+  },
+  {
+   "Key": "pz",
+   "Selector": "XY Plane",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "sec",
+   "Selector": "Brep | Plane",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "jn",
+   "Selector": "Join Curves",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "dv",
+   "Selector": "Divide Curve",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "ev",
+   "Selector": "Evaluate Curve",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "u1",
+   "Selector": "Unit Z",
+   "X": 0,
+   "Y": 350
+  },
+  {
+   "Key": "cp",
+   "Selector": "Cross Product",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "ln",
+   "Selector": "Line SDL",
+   "X": 1190,
+   "Y": 0
+  },
+  {
+   "Key": "uz",
+   "Selector": "Unit Z",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "ext",
+   "Selector": "Extrude",
+   "X": 1360,
+   "Y": 0
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "zp",
+   "Src": "Pt",
+   "DstKey": "pz",
+   "Dst": "O"
+  },
+  {
+   "SrcKey": "slab",
+   "Src": "0",
+   "DstKey": "sec",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "pz",
+   "Src": "P",
+   "DstKey": "sec",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "sec",
+   "Src": "C",
+   "DstKey": "jn",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "jn",
+   "Src": "C",
+   "DstKey": "dv",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "nf",
+   "Src": "0",
+   "DstKey": "dv",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "jn",
+   "Src": "C",
+   "DstKey": "ev",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "dv",
+   "Src": "t",
+   "DstKey": "ev",
+   "Dst": "t"
+  },
+  {
+   "SrcKey": "ev",
+   "Src": "T",
+   "DstKey": "cp",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "u1",
+   "Src": "V",
+   "DstKey": "cp",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "dv",
+   "Src": "P",
+   "DstKey": "ln",
+   "Dst": "S"
+  },
+  {
+   "SrcKey": "cp",
+   "Src": "V",
+   "DstKey": "ln",
+   "Dst": "D"
+  },
+  {
+   "SrcKey": "fd",
+   "Src": "0",
+   "DstKey": "ln",
+   "Dst": "L"
+  },
+  {
+   "SrcKey": "fh",
+   "Src": "0",
+   "DstKey": "uz",
+   "Dst": "F"
+  },
+  {
+   "SrcKey": "ln",
+   "Src": "L",
+   "DstKey": "ext",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "uz",
+   "Src": "V",
+   "DstKey": "ext",
+   "Dst": "D"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"nf","Id":"c5960c7d-892d-43d6-ab06-038138c2a45f","Kind":"Slider"},{"Key":"fd","Id":"81b484d0-3a64-4b6a-9f6a-dd1a51956f3b","Kind":"Slider"},{"Key":"fh","Id":"037c58ca-3867-4f6f-9d1c-3aa4e7f14fb8","Kind":"Slider"},{"Key":"slab","Id":"d1128ebf-4d1a-483c-a25f-8f10c8737270","Kind":"Param"},{"Key":"zp","Id":"e0eadc69-3ef6-4f08-9312-b3e516df5364","Kind":"Component"},{"Key":"pz","Id":"104c39ec-61db-4b9d-867e-6ab6aeacaa8e","Kind":"Component"},{"Key":"sec","Id":"dd98c937-736b-4265-9d7b-4f5211f5bd37","Kind":"Component"},{"Key":"jn","Id":"b3c47a5f-5ae3-4fa8-bcaf-9d54406b2fcc","Kind":"Component"},{"Key":"dv","Id":"c2fe4372-d84b-437a-84b8-ca3e85a1d974","Kind":"Component"},{"Key":"u1","Id":"82c6db93-4759-4a10-a763-26c0df8a4d1e","Kind":"Component"},{"Key":"cp","Id":"7bf6c329-62f3-4909-bd0c-41e92a973c6a","Kind":"Component"},{"Key":"ln","Id":"89bcab51-d323-4365-8fa1-5cd1e1610d82","Kind":"Component"},{"Key":"uz","Id":"5eb09e4a-5fba-4bce-a8fc-3cbefd4b366d","Kind":"Component"},{"Key":"ext","Id":"9d2a97f1-6944-43a0-9578-2b0a6ed6e489","Kind":"Component"}],"PlaceErrors":[{"Key":"ev","Error":"Component name \u0027Evaluate Curve\u0027 is ambiguous (3 matches): 164d0429-e5f5-4292-aa80-3f88d43cdac2 (Curve/Analysis), fc6979e4-7e91-4508-8e05-37c680779751 (Curve/Analysis), fdf09135-fae5-4e5f-b427-b1f384ca3009 (Curve/Analysis). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":false,"Error":"dst_key \u0027ev\u0027 did not match a placed object"},{"Index":7,"Ok":false,"Error":"dst_key \u0027ev\u0027 did not match a placed object"},{"Index":8,"Ok":false,"Error":"src_key \u0027ev\u0027 did not match a placed object"},{"Index":9,"Ok":true,"Error":null},{"Index":10,"Ok":true,"Error":null},{"Index":11,"Ok":true,"Error":null},{"Index":12,"Ok":true,"Error":null},{"Index":13,"Ok":true,"Error":null},{"Index":14,"Ok":true,"Error":null},{"Index":15,"Ok":true,"Error":null}],"WiresOk":13}

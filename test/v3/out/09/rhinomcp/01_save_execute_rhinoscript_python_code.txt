@@ -1,0 +1,8 @@
+{
+ "code": "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\nimport os\nd = os.path.dirname(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/_tmp/hello_pts_rhinomcp.py\")\nif not os.path.isdir(d): os.makedirs(d)\nopen(\"C:/Users/tatsu/OneDrive/Digitalization/nextra.zero/RhinoGh/test/v3/_tmp/hello_pts_rhinomcp.py\", 'w').write(\"\\\"\\\"\\\"Points on a line. args: n\\\"\\\"\\\"\\nfor i in range(args.get(\\\"n\\\", 3)):\\n    doc.Objects.AddPoint(rg.Point3d(i * 1000, 0, 0))\\n\")\nprint('saved')"
+}
+---
+{
+  "success": true,
+  "output": "saved\nsaved\n"
+}

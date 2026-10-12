@@ -1,0 +1,1232 @@
+{
+ "components": [
+  {
+   "alias": "slab",
+   "component_name": "Brep"
+  },
+  {
+   "alias": "nf",
+   "component_name": "Number Slider",
+   "value": 24,
+   "min": 4,
+   "max": 80,
+   "decimals": 0,
+   "nickname": "Fins"
+  },
+  {
+   "alias": "fd",
+   "component_name": "Number Slider",
+   "value": 900,
+   "min": 200,
+   "max": 2000,
+   "decimals": 0,
+   "nickname": "Fin depth"
+  },
+  {
+   "alias": "fh",
+   "component_name": "Number Slider",
+   "value": 3200,
+   "min": 1000,
+   "max": 6000,
+   "decimals": 0,
+   "nickname": "Fin height"
+  },
+  {
+   "alias": "zp",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "pz",
+   "component_name": "XY Plane"
+  },
+  {
+   "alias": "sec",
+   "component_name": "Brep | Plane"
+  },
+  {
+   "alias": "jn",
+   "component_name": "Join Curves"
+  },
+  {
+   "alias": "dv",
+   "component_name": "Divide Curve"
+  },
+  {
+   "alias": "ev",
+   "component_name": "Evaluate Curve"
+  },
+  {
+   "alias": "u1",
+   "component_name": "Unit Z"
+  },
+  {
+   "alias": "cp",
+   "component_name": "Cross Product"
+  },
+  {
+   "alias": "ln",
+   "component_name": "Line SDL"
+  },
+  {
+   "alias": "uz",
+   "component_name": "Unit Z"
+  },
+  {
+   "alias": "ext",
+   "component_name": "Extrude"
+  }
+ ],
+ "connections": [
+  {
+   "source": "zp",
+   "target": "pz",
+   "target_input_index": 0
+  },
+  {
+   "source": "slab",
+   "target": "sec",
+   "target_input_index": 0
+  },
+  {
+   "source": "pz",
+   "target": "sec",
+   "target_input_index": 1
+  },
+  {
+   "source": "sec",
+   "target": "jn",
+   "target_input_index": 0
+  },
+  {
+   "source": "jn",
+   "target": "dv",
+   "target_input_index": 0
+  },
+  {
+   "source": "nf",
+   "target": "dv",
+   "target_input_index": 1
+  },
+  {
+   "source": "jn",
+   "target": "ev",
+   "target_input_index": 0
+  },
+  {
+   "source": "dv",
+   "target": "ev",
+   "target_input_index": 1,
+   "source_output_index": 2
+  },
+  {
+   "source": "ev",
+   "target": "cp",
+   "target_input_index": 0,
+   "source_output_index": 1
+  },
+  {
+   "source": "u1",
+   "target": "cp",
+   "target_input_index": 1
+  },
+  {
+   "source": "dv",
+   "target": "ln",
+   "target_input_index": 0
+  },
+  {
+   "source": "cp",
+   "target": "ln",
+   "target_input_index": 1
+  },
+  {
+   "source": "fd",
+   "target": "ln",
+   "target_input_index": 2
+  },
+  {
+   "source": "fh",
+   "target": "uz",
+   "target_input_index": 0
+  },
+  {
+   "source": "ln",
+   "target": "ext",
+   "target_input_index": 0
+  },
+  {
+   "source": "uz",
+   "target": "ext",
+   "target_input_index": 1
+  }
+ ],
+ "values": [
+  {
+   "target": "zp",
+   "input_index": 2,
+   "value": 13875
+  }
+ ],
+ "groups": [
+  {
+   "name": "Fins input",
+   "members": [
+    "slab",
+    "nf",
+    "fd",
+    "fh"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Fins",
+   "members": [
+    "zp",
+    "pz",
+    "sec",
+    "jn",
+    "dv",
+    "ev",
+    "u1",
+    "cp",
+    "ln",
+    "uz",
+    "ext"
+   ],
+   "color": [
+    255,
+    214,
+    171
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 15,
+  "created_component_count": 15,
+  "created_group_count": 2,
+  "connection_count": 16,
+  "value_count": 1,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012055355027",
+  "mutation_duration_ms": 110,
+  "solution_duration_ms": 9,
+  "verification_duration_ms": 0,
+  "duration_ms": 226,
+  "aliases": {
+    "slab": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+    "nf": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+    "fd": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+    "fh": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+    "zp": "1fa93958-6f11-4fde-8749-415cc389979f",
+    "pz": "845069df-21cc-4af9-825b-72df1a49d625",
+    "sec": "3825016f-9219-4218-8c15-fcaad2d89d15",
+    "jn": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+    "dv": "6936b917-8be4-44d7-8c75-1165579a250a",
+    "ev": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+    "u1": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+    "cp": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+    "ln": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+    "uz": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+    "ext": "da6e7446-2339-4fdc-8a00-2111823666c3"
+  },
+  "components": [
+    {
+      "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+      "name": "Brep",
+      "nickname": "Brep",
+      "category": "Params",
+      "subcategory": "Geometry",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+      "name": "Number Slider",
+      "nickname": "Fins",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+      "name": "Number Slider",
+      "nickname": "Fin depth",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+      "name": "Number Slider",
+      "nickname": "Fin height",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        40.0,
+        400.0
+      ]
+    },
+    {
+      "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+      "name": "XY Plane",
+      "nickname": "XY",
+      "category": "Vector",
+      "subcategory": "Plane",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+      "name": "Brep | Plane",
+      "nickname": "Sec",
+      "category": "Intersect",
+      "subcategory": "Mathematical",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+      "name": "Join Curves",
+      "nickname": "Join",
+      "category": "Curve",
+      "subcategory": "Util",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+      "name": "Divide Curve",
+      "nickname": "Divide",
+      "category": "Curve",
+      "subcategory": "Division",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+      "name": "Evaluate Curve",
+      "nickname": "Eval",
+      "category": "Curve",
+      "subcategory": "Analysis",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+      "name": "Unit Z",
+      "nickname": "Z",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "position": [
+        40.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+      "name": "Cross Product",
+      "nickname": "XProd",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "position": [
+        40.0,
+        670.0
+      ]
+    },
+    {
+      "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+      "name": "Line SDL",
+      "nickname": "Line",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        260.0,
+        670.0
+      ]
+    },
+    {
+      "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+      "name": "Unit Z",
+      "nickname": "Z",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+      "name": "Extrude",
+      "nickname": "Extr",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        480.0,
+        670.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "fe414788-49a4-4dc4-9874-4bc47189a4cd",
+      "name": "Fins input",
+      "object_count": 15,
+      "graph_id": "MCPGraph_20261012055355027",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "93d1994f-9f55-4a61-863f-1fdbc66d22f9",
+      "name": "Fins",
+      "object_count": 15,
+      "graph_id": "MCPGraph_20261012055355027",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 15,
+    "edge_count": 16,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+        "name": "Brep",
+        "nickname": "Brep",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "name": "Number Slider",
+        "nickname": "Fins",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "name": "Number Slider",
+        "nickname": "Fin depth",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "name": "Number Slider",
+        "nickname": "Fin height",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          400.0
+        ]
+      },
+      {
+        "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+        "name": "Brep | Plane",
+        "nickname": "Sec",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+        "name": "Join Curves",
+        "nickname": "Join",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+        "name": "Divide Curve",
+        "nickname": "Divide",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+        "name": "Evaluate Curve",
+        "nickname": "Eval",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "position": [
+          40.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+        "name": "Cross Product",
+        "nickname": "XProd",
+        "position": [
+          40.0,
+          670.0
+        ]
+      },
+      {
+        "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+        "name": "Line SDL",
+        "nickname": "Line",
+        "position": [
+          260.0,
+          670.0
+        ]
+      },
+      {
+        "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+        "name": "Extrude",
+        "nickname": "Extr",
+        "position": [
+          480.0,
+          670.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 15,
+    "output_count": 21,
+    "outputs_with_data": 7,
+    "total_output_data_count": 7,
+    "warning_count": 10,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+        "alias": "slab",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Brep",
+        "nickname": "Brep",
+        "category": "Params",
+        "subcategory": "Geometry",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Floating parameter Brep failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Brep",
+            "nickname": "Brep",
+            "type": "Brep",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "alias": "nf",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Fins",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Fins",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 24.0,
+        "min": 4.0,
+        "max": 80.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "alias": "fd",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Fin depth",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Fin depth",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 900.0,
+        "min": 200.0,
+        "max": 2000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "alias": "fh",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Fin height",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Fin height",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3200.0,
+        "min": 1000.0,
+        "max": 6000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+        "alias": "zp",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+        "alias": "pz",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "category": "Vector",
+        "subcategory": "Plane",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Plane",
+            "nickname": "P",
+            "type": "Plane",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+        "alias": "sec",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Brep | Plane",
+        "nickname": "Sec",
+        "category": "Intersect",
+        "subcategory": "Mathematical",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter B failed to collect data"
+          }
+        ],
+        "output_count": 2,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Curves",
+            "nickname": "C",
+            "type": "Curve",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Points",
+            "nickname": "P",
+            "type": "Point",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+        "alias": "jn",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Join Curves",
+        "nickname": "Join",
+        "category": "Curve",
+        "subcategory": "Util",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter C failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Curves",
+            "nickname": "C",
+            "type": "Curve",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+        "alias": "dv",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Divide Curve",
+        "nickname": "Divide",
+        "category": "Curve",
+        "subcategory": "Division",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter C failed to collect data"
+          }
+        ],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Points",
+            "nickname": "P",
+            "type": "Point",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Tangents",
+            "nickname": "T",
+            "type": "Vector",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Parameters",
+            "nickname": "t",
+            "type": "Number",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+        "alias": "ev",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Evaluate Curve",
+        "nickname": "Eval",
+        "category": "Curve",
+        "subcategory": "Analysis",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter C failed to collect data"
+          },
+          {
+            "level": "Warning",
+            "message": "Input parameter t failed to collect data"
+          }
+        ],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "P",
+            "type": "Point",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Tangent",
+            "nickname": "T",
+            "type": "Vector",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Angle",
+            "nickname": "A",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+        "alias": "u1",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Unit vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+        "alias": "cp",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Cross Product",
+        "nickname": "XProd",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter A failed to collect data"
+          }
+        ],
+        "output_count": 2,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+        "alias": "ln",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Line SDL",
+        "nickname": "Line",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter S failed to collect data"
+          },
+          {
+            "level": "Warning",
+            "message": "Input parameter D failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Line",
+            "nickname": "L",
+            "type": "Line",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+        "alias": "uz",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Unit vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+        "alias": "ext",
+        "graph_id": "MCPGraph_20261012055355027",
+        "role": "",
+        "name": "Extrude",
+        "nickname": "Extr",
+        "category": "Surface",
+        "subcategory": "Freeform",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter B failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Extrusion",
+            "nickname": "E",
+            "type": "Geometry",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 12,
+    "preview_enabled_object_count": 12,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 4787,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012055355027",
+    "object_count": 17,
+    "controls": [
+      {
+        "alias": "nf",
+        "name": "Number Slider",
+        "nickname": "Fins",
+        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 24.0,
+        "min": 4.0,
+        "max": 80.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fd",
+        "name": "Number Slider",
+        "nickname": "Fin depth",
+        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 900.0,
+        "min": 200.0,
+        "max": 2000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Fin height",
+        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3200.0,
+        "min": 1000.0,
+        "max": 6000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "nf",
+        "name": "Number Slider",
+        "nickname": "Fins",
+        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 24.0,
+        "min": 4.0,
+        "max": 80.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fd",
+        "name": "Number Slider",
+        "nickname": "Fin depth",
+        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 900.0,
+        "min": 200.0,
+        "max": 2000.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "fh",
+        "name": "Number Slider",
+        "nickname": "Fin height",
+        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3200.0,
+        "min": 1000.0,
+        "max": 6000.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 15 component(s) and 16 connection(s)"
+}

@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nxf = rg.Transform.Translation(3000, 0, 0)\nn = 0\nfor o in list(doc.Objects):\n    if (o.Attributes.Name or '').endswith('_L4'):\n        doc.Objects.Transform(o, xf, True); n += 1\nprint('moved', n)"
+}
+---
+{"stdout":"moved 30\n","error":null}

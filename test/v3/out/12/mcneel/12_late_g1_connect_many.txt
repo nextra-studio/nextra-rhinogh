@@ -1,0 +1,19 @@
+{
+ "wires": [
+  {
+   "SrcId": "1f6268c0-3246-470a-8c4f-8e0a66e33c57",
+   "Src": "Pt",
+   "DstId": "876d8640-a71b-464b-b67b-ca28fd002e05",
+   "Dst": "Pos|Ind"
+  },
+  {
+   "SrcId": "e807b22f-00a8-4eef-bf7e-fa59fa094469",
+   "Src": "V",
+   "DstId": "876d8640-a71b-464b-b67b-ca28fd002e05",
+   "Dst": "Force"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":2,"OkCount":2,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"1f6268c0-3246-470a-8c4f-8e0a66e33c57","Param":"Point"},"Dst":{"Id":"876d8640-a71b-464b-b67b-ca28fd002e05","Param":"Pos|Ind"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"e807b22f-00a8-4eef-bf7e-fa59fa094469","Param":"Vector"},"Dst":{"Id":"876d8640-a71b-464b-b67b-ca28fd002e05","Param":"Force Vector"},"Error":null}]}

@@ -1,0 +1,9 @@
+{
+ "view": "perspective",
+ "displayMode": "Shaded",
+ "width": 800,
+ "height": 600
+}
+---
+{"error":null,"metadata":{"viewport":{"name":"Perspective","displayMode":"Shaded","projection":"perspective","width":800,"height":600},"camera":{"location":[16.113779860438626,-17.650258740595746,16.716839208079364],"target":[-6518.920399827066,11301.360969677364,-7529.290646403893],"up":[-0.25000000000000006,0.4330127018922194,0.8660254037844387],"lensLength":50.000000000000085},"scene":{"boundingBox":{"min":[-300,-300,0],"max":[18300,12300,10500]},"visibleObjectCount":2,"totalObjectCount":90}}}
+[image]

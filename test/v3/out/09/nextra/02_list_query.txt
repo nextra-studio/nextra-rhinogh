@@ -1,0 +1,8 @@
+{
+ "scope": "library",
+ "filter": "hello"
+}
+---
+library dirs: C:\Users\tatsu\AppData\Roaming\Nextra\memory\library; C:\Users\tatsu\AppData\Roaming\Nextra\user\scripts
+- hello_pts.py: Points on a line. args: n
+run one: run {lib:'name', args:{…}} · read: query {scope:'library', name}

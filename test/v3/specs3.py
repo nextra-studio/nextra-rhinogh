@@ -247,7 +247,7 @@ def rhinomcp_graph(spec, info):
             comps.append({"alias": k, "component_name": "Number Slider", "value": s["v"], "min": s["min"], "max": s["max"], **({"decimals": 0} if s.get("int") else {}), "nickname": n.get("nick", k)})
         else:
             i = info[k]
-            comps.append({"alias": k, **({"component_guid": i["guid"]} if i["ambiguous"] else {"component_name": n["t"]})})
+            comps.append({"alias": k, **({"component_guid": i["guid"]} if i["ambiguous"] else {"component_name": i["name"]})})
     for s, sp, d, dp, fl in spec["wires"]:
         c = {"source": s, "target": d, "target_input_index": info[d]["in"].index(dp)}
         if sp and not nodes[s].get("slider") and not special(info, s):

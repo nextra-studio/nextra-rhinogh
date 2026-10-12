@@ -1,0 +1,13 @@
+{
+ "new": true,
+ "ops": "## Inputs #DBABFF\nn = Number Slider {v=12, r=2..40, int} \"Floors\"\nfh = Number Slider {v=3500, r=2500..5000, int} \"Floor h\"\nw = Number Slider {v=20000, r=5000..40000, int} \"Width\"\ntw = Number Slider {v=45, r=0..180, int} \"Twist\"\n## Floors #ABDBFF\nser = Series (N=fh, C=n, S=0)\npt = Construct Point (Z=ser)\npl = XY Plane (O=pt)\nrec = Rectangle (P=pl, X=w, Y=w)\n## Twist #ABDBFF\nang = Range (N=n^e(x-1))\nmul = Multiplication (A=ang, B=tw)\nrad = Radians (D=mul)\nrot = Rotate (G=rec.R, A=rad, P=pl)\n## Massing #FFD6AB\nlft = Loft (C=rot.G^f)\ncap = Cap Holes (B=lft)"
+}
+---
+new GH document
+ok: 14/14 lines applied (+14 nodes, 16 wires, 1 values, +4 groups), checkpoint c184
+ids: n=g1 fh=g2 w=g3 tw=g4 ser=g5 pt=g6 pl=g7 rec=g8 ang=g9 mul=g10 rad=g11 rot=g12 lft=g13 cap=g14
+groups: Inputs=g15 Floors=g16 Twist=g17 Massing=g18
+note: L10: 'Rectangle' is ambiguous; used Curve/Primitive because its ports match P,X,Y
+note: L15: 'Rotate' is ambiguous; used Transform/Euclidean because its ports match G,A,P
+solved 18ms, no errors/warnings on affected nodes
+results: g14.B: 1 Brep {0}

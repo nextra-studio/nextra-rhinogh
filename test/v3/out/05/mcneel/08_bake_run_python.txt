@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\nfrom Grasshopper.Kernel import GH_DataMapping, GH_ParameterSide, GH_ParamAccess, GH_RuntimeMessageLevel\nfrom Grasshopper.Kernel.Special import GH_Group\nfrom Grasshopper.Kernel.Types import GH_Number, GH_Integer\ngd = Grasshopper.Instances.ActiveCanvas.Document\ndef o(i): return gd.FindObject(System.Guid(i), True)\ndef inp(i, nick): return [p for p in o(i).Params.Input if p.NickName == nick][0]\ndef bake(i, layer):\n    import Rhino\n    rd = Rhino.RhinoDoc.ActiveDoc\n    li = rd.Layers.FindByFullPath(layer, -1)\n    if li < 0: li = rd.Layers.Add(layer, System.Drawing.Color.Black)\n    a = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = li\n    ids = System.Collections.Generic.List[System.Guid]()\n    o(i).BakeGeometry(rd, a, ids)\n    print('baked', ids.Count)\nbake('9d2a97f1-6944-43a0-9578-2b0a6ed6e489', 'Fins')\ngd.NewSolution(True)\nprint('ok')"
+}
+---
+{"stdout":"baked 24\nok\n","error":null}

@@ -1,0 +1,10 @@
+{
+ "ops": "## C# demo #FFD6AB\ncnt = Number Slider {v=8, r=1..30, int} \"Count\"\nh = Number Slider {v=9000, r=1000..30000, int} \"Tower h\"\ncs = C# Script (count=cnt, height=h) {code=\"\"\"\nusing System;\nusing System.Collections.Generic;\nusing Rhino.Geometry;\nusing Grasshopper.Kernel;\n\npublic class Script_Instance : GH_ScriptInstance\n{\n    private void RunScript(int count, double height, ref object towers)\n    {\n        var res = new List<Brep>();\n        for (int i = 0; i < count; i++)\n        {\n            var c = new Circle(new Plane(new Point3d(i * 3000, 0, 0), Vector3d.ZAxis), 600);\n            res.Add(Extrusion.Create(c.ToNurbsCurve(), height, true).ToBrep());\n        }\n        towers = res;\n    }\n}\n\"\"\"}"
+}
+---
+ok: 3/3 lines applied (+3 nodes, 2 wires, +1 groups), checkpoint c246
+ids: cnt=g1 h=g2 cs=g3
+groups: C# demo=g4
+note: L4: ports from RunScript: in count,height out towers
+solved 19ms, no errors/warnings on affected nodes
+results: g3.towers: 8 Brep {0;0}

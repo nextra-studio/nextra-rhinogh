@@ -51,8 +51,8 @@ def counts():
 
 def gh_counts(names):
     t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\nres = {}\n"
-             f"for o in d.Objects:\n    if o.Name.split(' (')[0] in {json.dumps(names)} and hasattr(o, 'Params'):\n"
-             "        res[o.Name.split(' (')[0]] = res.get(o.Name.split(' (')[0], 0) + sum(p.VolatileDataCount for p in o.Params.Output)\n"
+             f"for o in d.Objects:\n    if o.Name.strip().split(' (')[0] in {json.dumps(names)} and hasattr(o, 'Params'):\n"
+             "        res[o.Name.strip().split(' (')[0]] = res.get(o.Name.strip().split(' (')[0], 0) + sum(p.VolatileDataCount for p in o.Params.Output)\n"
              "print('groups', sum(1 for o in d.Objects if o.GetType().Name == 'GH_Group'), 'errors', sum(1 for o in d.Objects if hasattr(o, 'RuntimeMessageLevel') and str(o.RuntimeMessageLevel) == 'Error'), json.dumps(res))\n".replace("json.dumps", "str"))
     return next((l for l in t.splitlines() if l.startswith("groups")), t[:200])
 
@@ -60,7 +60,7 @@ def gh_counts(names):
 def gh_value(comp_name, port):
     """first value of an output (neutral), e.g. Karamba MaxDisp"""
     t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\n"
-             f"vals = [str(p.VolatileData.AllData(True).__iter__().__next__()) for o in d.Objects if o.Name.split(' (')[0] == '{comp_name}' and hasattr(o, 'Params') for p in o.Params.Output if p.NickName == '{port}' and p.VolatileDataCount > 0]\n"
+             f"vals = [str(p.VolatileData.AllData(True).__iter__().__next__()) for o in d.Objects if o.Name.strip().split(' (')[0] == '{comp_name}' and hasattr(o, 'Params') for p in o.Params.Output if p.NickName == '{port}' and p.VolatileDataCount > 0]\n"
              "print('VAL', vals)")
     return next((l for l in t.splitlines() if l.startswith("VAL")), t[:200])
 
@@ -93,13 +93,14 @@ def gh_build(S, spec, case, docs=False):
         if docs: c(case, "docs", "query", {"scope": "docs", "filter": "shorthand"})
         t = c(case, "build", "gh_edit", {"new": True, "ops": SP.shorthand(spec)})
         return ids_line(t)
-    ambiguous = sorted({SP.by_key(spec)[k]["t"] for k, i in info.items() if i and i["ambiguous"]})
+    # names the model must look up first: ambiguous ones (to get a GUID) and plug-in ones whose real name carries a suffix
+    ambiguous = sorted({SP.by_key(spec)[k]["t"] for k, i in info.items() if i and (i["ambiguous"] or i["name"].strip() != SP.by_key(spec)[k]["t"])})
     late = spec.get("late", [])
     if S.name == "mcneel":
         c(case, "build", "g1_clear_canvas", {"confirm": True})
         for a in ambiguous:
             if a not in V2.LEARNED: c(case, "search", "g1_search_components", {"query": a, "limit": 5})
-        sel = lambda n, i: V2.LEARNED.get(n["t"], i["guid"] if i["ambiguous"] else n["t"])
+        sel = lambda n, i: V2.LEARNED.get(n["t"], i["guid"] if i["ambiguous"] else i["name"])
         graph = SP.mcneel_graph(spec, info, sel)
         t = c(case, "build", "g1_apply_graph", graph)
         ids = V2.ids_from(t, [n["k"] for n in spec["nodes"]])
@@ -273,7 +274,9 @@ def c06(S):
                 f"c.Params.Input[0].AddSource(o('{sid['cnt']}')); c.Params.Input[1].AddSource(o('{sid['rad']}'))\n"
                 "gd.NewSolution(True)\nprint(str(c.InstanceGuid), [p.NickName + ':' + str(p.VolatileDataCount) for p in c.Params.Output], errors(c))")
         t = gh_py(S, "06", "build", PY.gh(PY.SCRIPT, body=body))
-        cid = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t).group(1)
+        m = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t)
+        if not m: return {"failed": t[:200]}
+        cid = m.group(1)
         chk = f"\ngd.NewSolution(True)\nprint([p.NickName + ':' + str(p.VolatileDataCount) for p in o('{cid}').Params.Output], errors(o('{cid}')))"
         gh_py(S, "06", "break", PY.gh(PY.SCRIPT, body=f"set_code(o('{cid}'), {json.dumps(PY_BROKEN)})" + chk))
         gh_py(S, "06", "fix", PY.gh(PY.SCRIPT, body=f"set_code(o('{cid}'), {json.dumps(PY_FIXED)})" + chk))
@@ -310,8 +313,16 @@ def c07(S):
         sid = sliders_native(S, "07", [("cnt", 8, 1, 30, "Count"), ("h", 9000, 1000, 30000, "Tower h")])
         body = (f"c = script('cs', 400, 0, [('count', 'item'), ('height', 'item')], ['towers'], {json.dumps(CS_CODE)})\n"
                 f"c.Params.Input[0].AddSource(o('{sid['cnt']}')); c.Params.Input[1].AddSource(o('{sid['h']}'))\n"
-                "gd.NewSolution(True)\nprint([p.NickName + ':' + str(p.VolatileDataCount) for p in c.Params.Output], errors(c))")
-        gh_py(S, "07", "build", PY.gh(PY.SCRIPT, body=body))
+                "gd.NewSolution(True)\nprint(str(c.InstanceGuid), [p.NickName + ':' + str(p.VolatileDataCount) for p in c.Params.Output], errors(c))")
+        t = gh_py(S, "07", "build", PY.gh(PY.SCRIPT, body=body))
+        # Rhino 8 regenerates RunScript from the params: untyped inputs become `object` → compile errors
+        # ("operator '<' cannot be applied to int and object"). The model must add type hints and set the code again.
+        m = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t)
+        if m:
+            cid = m.group(1)
+            fix = (f"c = o('{cid}')\nc.Params.Input[0].TypeHints.Select('int'); c.Params.Input[1].TypeHints.Select('double')\n"
+                   f"set_code(c, {json.dumps(CS_CODE)})\ngd.NewSolution(True)\nprint([p.NickName + ':' + str(p.VolatileDataCount) for p in c.Params.Output], errors(c))")
+            gh_py(S, "07", "type_hints", PY.gh(PY.SCRIPT, body=fix))
     return {"gh": gh_counts(["C# Script"])}
 
 
@@ -334,9 +345,11 @@ def c08(S):
         S.call("08", "click", "gh_edit", {"ops": f'{rid} {{click="0.5,0.80"}}'})
     else:
         body = (f"c = script('py', 300, 0, [], ['choice', 'index'], {json.dumps(RADIO)})\ngd.NewSolution(True)\n"
-                "print(str(c.InstanceGuid), [str(p.VolatileData.AllData(True).__iter__().__next__()) for p in c.Params.Output if p.VolatileDataCount > 0], errors(c))")
+                "print(str(c.InstanceGuid), [str(list(p.VolatileData.AllData(True))[0]) for p in c.Params.Output if p.VolatileDataCount > 0], errors(c))")
         t = gh_py(S, "08", "build", PY.gh(PY.SCRIPT, body=body))
-        cid = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t).group(1)
+        m = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t)
+        if not m: return {"failed": t[:200]}
+        cid = m.group(1)
         gh_py(S, "08", "click", PY.gh(CLICK_PY, body=f"click('{cid}', 0.5, 0.80)\ngd.NewSolution(True)\nprint([str(x) for p in o('{cid}').Params.Output for x in p.VolatileData.AllData(True)][:3])"))
     return {"choice": gh_value("Python 3 Script", "choice")}
 
@@ -351,7 +364,7 @@ def c09(S):
         S.call("09", "save", "memory", {"action": "save_script", "name": "hello_pts", "code": HELLO, "doc": "points on a line"})
         S.call("09", "list", "query", {"scope": "library", "filter": "hello"})
         return {"saved": "hello_pts" in nquery({"scope": "library", "filter": "hello"})}
-    py_call(S, "09", "save", f"import os\nos.makedirs(os.path.dirname({json.dumps(path)}), exist_ok=True)\nopen({json.dumps(path)}, 'w').write({json.dumps(HELLO)})\nprint('saved')")
+    py_call(S, "09", "save", f"import os\nd = os.path.dirname({json.dumps(path)})\nif not os.path.isdir(d): os.makedirs(d)\nopen({json.dumps(path)}, 'w').write({json.dumps(HELLO)})\nprint('saved')")
     return {"saved": os.path.exists(path)}
 
 
