@@ -1,0 +1,267 @@
+{
+ "sliders": [
+  {
+   "Key": "mr",
+   "Min": 0.2,
+   "Value": 3.5,
+   "Max": 6,
+   "Type": "float",
+   "Name": "Mesh size m",
+   "X": 0,
+   "Y": 140
+  }
+ ],
+ "components": [
+  {
+   "Key": "lns",
+   "Selector": "Curve",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "shs",
+   "Selector": "Brep",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "mat",
+   "Selector": "Material Selection (Karamba3D)",
+   "X": 0,
+   "Y": 210
+  },
+  {
+   "Key": "csb",
+   "Selector": "f201e873-4df8-400f-9d75-92e1963ad371",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "css",
+   "Selector": "f201e873-4df8-400f-9d75-92e1963ad371",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "el",
+   "Selector": "Create Linear Element (Karamba3D)",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "mb",
+   "Selector": "c9bf8fd5-cff5-41e8-b957-d9338b581e0f",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "se",
+   "Selector": "Create Surface Element (Karamba3D)",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "mv",
+   "Selector": "Deconstruct Mesh",
+   "X": 680,
+   "Y": 70
+  },
+  {
+   "Key": "all",
+   "Selector": "3cadddef-1e2b-4c09-9390-0e8f78f7609f",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "cd",
+   "Selector": "Cull Duplicates",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "dz",
+   "Selector": "9abae6b7-fa1d-448c-9209-4a8155345841",
+   "X": 1190,
+   "Y": 0
+  },
+  {
+   "Key": "lt",
+   "Selector": "Smaller Than",
+   "X": 1360,
+   "Y": 0
+  },
+  {
+   "Key": "base",
+   "Selector": "Cull Pattern",
+   "X": 1530,
+   "Y": 0
+  },
+  {
+   "Key": "sup",
+   "Selector": "ca9eab02-e4ea-4126-9755-1c24b6e74176",
+   "X": 1700,
+   "Y": 0
+  },
+  {
+   "Key": "g",
+   "Selector": " Loads (Karamba3D)",
+   "X": 0,
+   "Y": 280
+  },
+  {
+   "Key": "asm",
+   "Selector": "ddcf0ef4-e8bb-4231-8302-ded99046e49c",
+   "X": 1870,
+   "Y": 0
+  },
+  {
+   "Key": "an",
+   "Selector": " Analyse (Karamba3D)",
+   "X": 2040,
+   "Y": 0
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "mat",
+   "Src": "Mat",
+   "DstKey": "csb",
+   "Dst": "Mat"
+  },
+  {
+   "SrcKey": "mat",
+   "Src": "Mat",
+   "DstKey": "css",
+   "Dst": "Mat"
+  },
+  {
+   "SrcKey": "lns",
+   "Src": "0",
+   "DstKey": "el",
+   "Dst": "Line"
+  },
+  {
+   "SrcKey": "csb",
+   "Src": "CroSec",
+   "DstKey": "el",
+   "Dst": "CroSec"
+  },
+  {
+   "SrcKey": "shs",
+   "Src": "0",
+   "DstKey": "mb",
+   "Dst": "Brep"
+  },
+  {
+   "SrcKey": "el",
+   "Src": "Pts",
+   "DstKey": "mb",
+   "Dst": "IPts"
+  },
+  {
+   "SrcKey": "mr",
+   "Src": "0",
+   "DstKey": "mb",
+   "Dst": "MRes"
+  },
+  {
+   "SrcKey": "mb",
+   "Src": "Mesh",
+   "DstKey": "se",
+   "Dst": "Mesh"
+  },
+  {
+   "SrcKey": "css",
+   "Src": "CroSec",
+   "DstKey": "se",
+   "Dst": "CroSec"
+  },
+  {
+   "SrcKey": "mb",
+   "Src": "Mesh",
+   "DstKey": "mv",
+   "Dst": "M"
+  },
+  {
+   "SrcKey": "el",
+   "Src": "Pts",
+   "DstKey": "all",
+   "Dst": "D1"
+  },
+  {
+   "SrcKey": "mv",
+   "Src": "V",
+   "DstKey": "all",
+   "Dst": "D2"
+  },
+  {
+   "SrcKey": "all",
+   "Src": "R",
+   "DstKey": "cd",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "cd",
+   "Src": "P",
+   "DstKey": "dz",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "dz",
+   "Src": "Z",
+   "DstKey": "lt",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "cd",
+   "Src": "P",
+   "DstKey": "base",
+   "Dst": "L"
+  },
+  {
+   "SrcKey": "lt",
+   "Src": "<",
+   "DstKey": "base",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "base",
+   "Src": "L",
+   "DstKey": "sup",
+   "Dst": "Pos|Ind"
+  },
+  {
+   "SrcKey": "el",
+   "Src": "Elem",
+   "DstKey": "asm",
+   "Dst": "Elem"
+  },
+  {
+   "SrcKey": "se",
+   "Src": "Elem",
+   "DstKey": "asm",
+   "Dst": "Elem"
+  },
+  {
+   "SrcKey": "sup",
+   "Src": "Supp",
+   "DstKey": "asm",
+   "Dst": "Support"
+  },
+  {
+   "SrcKey": "g",
+   "Src": "Load",
+   "DstKey": "asm",
+   "Dst": "Load"
+  },
+  {
+   "SrcKey": "asm",
+   "Src": "Model",
+   "DstKey": "an",
+   "Dst": "Model"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"mr","Id":"82b5fd90-c069-4bfa-b37e-4179d7cd912d","Kind":"Slider"},{"Key":"lns","Id":"7f680a5e-a554-44ea-b17e-431f7b7e16ab","Kind":"Param"},{"Key":"shs","Id":"893c661e-a788-4022-b924-43cb671baf98","Kind":"Param"},{"Key":"csb","Id":"983b9946-fc3e-4868-9e88-fc9a2199146f","Kind":"Component"},{"Key":"css","Id":"ea4b3bfd-631b-4620-9308-6b082c482285","Kind":"Component"},{"Key":"el","Id":"ef0a0ac7-464e-44ac-9141-732806071b4a","Kind":"Component"},{"Key":"mb","Id":"b54e8ea8-129e-46d4-ad37-6cd6dab093df","Kind":"Component"},{"Key":"se","Id":"1c3e5cc2-7685-4fb1-be9d-c874a5d196d6","Kind":"Component"},{"Key":"mv","Id":"6e2496fa-0364-4446-a458-e75ed55e2aa7","Kind":"Component"},{"Key":"all","Id":"0f39129a-691b-4d79-aac6-34092071b0ea","Kind":"Component"},{"Key":"cd","Id":"99415d0b-063f-47bc-921c-210544a2c23c","Kind":"Component"},{"Key":"dz","Id":"b8762802-81db-418c-ae70-c2e66accc2cb","Kind":"Component"},{"Key":"lt","Id":"39c0b8bc-1496-4fda-9837-2b55eb42452a","Kind":"Component"},{"Key":"base","Id":"debe809a-a31f-4b23-bd8e-d03a8c56db5a","Kind":"Component"},{"Key":"sup","Id":"766a1001-aa00-4ecd-9cab-c79e9b48264c","Kind":"Component"},{"Key":"asm","Id":"fe27f834-40cf-4bf9-a4c8-c226aba635fc","Kind":"Component"},{"Key":"an","Id":"276bc394-a4b6-49dc-abf1-3ef0beaf1919","Kind":"Component"}],"PlaceErrors":[{"Key":"mat","Error":"Component name \u0027Material Selection (Karamba3D)\u0027 is ambiguous (5 matches): 0d5c0b69-ad54-435b-a6cf-ed43d63a4699 (Karamba3D/5.Material), 3e34dc4c-d070-4a32-a9b9-a62c93377696 (Karamba3D/5.Material), 7b1af747-acc1-4bc5-a466-902d8caf2eb4 (Karamba3D/5.Material), e6cd1f96-72f2-4dd0-8ef0-2be9329f66b8 (Karamba3D/5.Material), f44a3275-3c70-43de-ad89-591bf9daa9f6 (Karamba3D/5.Material). Pass a Guid to disambiguate."},{"Key":"g","Error":"Component name \u0027 Loads (Karamba3D)\u0027 is ambiguous (8 matches): 3598d812-0d6c-4a7c-8d89-19d487862572 (Karamba3D/2.Load), 495f7fb4-13db-400b-bbe5-3da9bc7188ff (Karamba3D/2.Load), 92877431-5279-4438-8305-e7329cc090b4 (Karamba3D/2.Load), a425fcab-03b5-474b-a422-2646ed230dfc (Karamba3D/2.Load), b6038fdf-fd8e-4d79-b857-bb909169cd80 (Karamba3D/2.Load), c9b09174-e927-4a64-9e0f-b934faa71b97 (Karamba3D/2.Load), e68f8859-a7b6-42ee-aab0-1ba14b455f6a (Karamba3D/2.Load), f0b8c266-6d81-485c-b696-4980071ba603 (Karamba3D/2.Load). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":false,"Error":"src_key \u0027mat\u0027 did not match a placed object"},{"Index":1,"Ok":false,"Error":"src_key \u0027mat\u0027 did not match a placed object"},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":true,"Error":null},{"Index":9,"Ok":true,"Error":null},{"Index":10,"Ok":true,"Error":null},{"Index":11,"Ok":true,"Error":null},{"Index":12,"Ok":true,"Error":null},{"Index":13,"Ok":true,"Error":null},{"Index":14,"Ok":true,"Error":null},{"Index":15,"Ok":true,"Error":null},{"Index":16,"Ok":true,"Error":null},{"Index":17,"Ok":true,"Error":null},{"Index":18,"Ok":true,"Error":null},{"Index":19,"Ok":true,"Error":null},{"Index":20,"Ok":true,"Error":null},{"Index":21,"Ok":false,"Error":"src_key \u0027g\u0027 did not match a placed object"},{"Index":22,"Ok":true,"Error":null}],"WiresOk":20}

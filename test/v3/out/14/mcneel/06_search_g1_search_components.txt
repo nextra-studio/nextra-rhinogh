@@ -1,0 +1,6 @@
+{
+ "query": "Create Linear Element",
+ "limit": 5
+}
+---
+[{"Guid":"c1d40dde-986c-4f30-9e48-bc3a0afc8e50","Name":"Create Linear Element (Karamba3D)","NickName":"LineElem","Category":"Karamba3D","SubCategory":"0.Model","Kind":"Component","Description":"Geometry is assumed to be given in [m]. Creates beams with default properties from given lines, indexes or connectivity diagrams. Lines that meet at a common point are thus connected with each other. Karamba3D assumes input to be in [m]."}]

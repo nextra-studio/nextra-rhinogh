@@ -1,0 +1,11 @@
+{
+ "code": "\"\"\"Number param with an explicit data tree: {0;0}: 1,2,3  {0;1}: 10,20  (shorthand set=[...] only makes flat lists)\"\"\"\nimport System\nfrom Grasshopper.Kernel.Parameters import Param_Number\nfrom Grasshopper.Kernel.Data import GH_Path, GH_Structure\nfrom Grasshopper.Kernel.Types import GH_Number\nd = ghdoc()\np = Param_Number(); p.NickName = \"Tree data\"; p.CreateAttributes()\np.Attributes.Pivot = System.Drawing.PointF(0, 900)\ntree = GH_Structure[GH_Number]()\nfor path, vals in [((0, 0), [1, 2, 3]), ((0, 1), [10, 20])]:\n    for v in vals:\n        tree.Append(GH_Number(v), GH_Path(System.Array[int](path)))\np.SetPersistentData(tree)\nd.AddObject(p, False)\nd.NewSolution(False)\nprint(handle(p), p.VolatileData.PathCount, \"branches\")\n",
+ "label": "explicit data tree"
+}
+---
+ok py 57ms, checkpoint c84
+stdout:
+g1 2 branches
+rhino: no changes
+gh delta +1 ~0 -0:
+g1 = Number {set=<tree: 2 branches, 5 items>, nick="Tree data"}

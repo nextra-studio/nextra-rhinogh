@@ -50,7 +50,8 @@ def counts():
 
 
 def gh_counts(names):
-    t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\nres = {}\n"
+    # one solve first: a tool may leave the canvas expired (GH would solve on the next canvas event anyway)
+    t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\nd.NewSolution(False)\nres = {}\n"
              f"for o in d.Objects:\n    if o.Name.strip().split(' (')[0] in {json.dumps(names)} and hasattr(o, 'Params'):\n"
              "        res[o.Name.strip().split(' (')[0]] = res.get(o.Name.strip().split(' (')[0], 0) + sum(p.VolatileDataCount for p in o.Params.Output)\n"
              "print('groups', sum(1 for o in d.Objects if o.GetType().Name == 'GH_Group'), 'errors', sum(1 for o in d.Objects if hasattr(o, 'RuntimeMessageLevel') and str(o.RuntimeMessageLevel) == 'Error'), json.dumps(res))\n".replace("json.dumps", "str"))
@@ -391,10 +392,27 @@ def c13(S):
     return {"model": counts()}
 
 
+# The FE script uses Nextra's run helpers q() (filter selection) and obb() (oriented box + shape class).
+# On the other systems the model has to write substitutes first; for this axis-aligned house a world-box version is enough.
+PLAIN_HELPERS = '''def q(f):
+    pat = f.split(":", 1)[1].rstrip("*")
+    return [o for o in doc.Objects if doc.Layers[o.Attributes.LayerIndex].FullPath.startswith(pat)]
+def obb(o):
+    bb = o.Geometry.GetBoundingBox(True); d = bb.Diagonal
+    axes = sorted([(d.X, rg.Vector3d.XAxis), (d.Y, rg.Vector3d.YAxis), (d.Z, rg.Vector3d.ZAxis)], key=lambda a: -a[0])
+    L, W, H = axes[0][0], axes[1][0], axes[2][0]
+    shape = "linear" if W < 0.25 * L and H < 0.25 * L else "planar" if H < 0.15 * W else "block"
+    return {"shape": shape, "L": L, "W": W, "H": H, "axis": axes[0][1], "short": axes[2][1], "center": bb.Center}
+def handle(o):
+    return str(o.Id)[:8]
+'''
+
+
 def c14(S):
     reset_rhino(); new_canvas()
     rhino_code(S, "14", "house", read(RS, "house_input.py"), {})
-    rhino_code(S, "14", "solids_to_fe", read(RS, "solids_to_fe.py"), {})
+    fe = read(RS, "solids_to_fe.py")
+    rhino_code(S, "14", "solids_to_fe", fe if S.name == "nextra" else PLAIN_HELPERS + fe, {})
     gh_build(S, SP.HOUSE, "14")
     return {"mass_kg": gh_value("Assemble Model", "Mass"), "max_disp_cm": gh_value("Analyse", "MaxDisp"), "model": counts()}
 
@@ -413,7 +431,10 @@ def c15(S):
         t = gh_py(S, "15", "tree", "import Grasshopper\n" + code)
         pid = re.search(r"([0-9a-f]{8}-[0-9a-f-]{27})", t).group(1)
         if S.name == "mcneel":
-            t2 = S.call("15", "wire", "g1_apply_graph", {"sliders": [], "components": [{"Key": "ml", "Selector": "Mass Addition", "X": 300, "Y": 900}], "wires": [], "solve": False})
+            if "Mass Addition" not in V2.LEARNED:      # ambiguous name: the model looks up the GUID first
+                S.call("15", "search", "g1_search_components", {"query": "Mass Addition", "limit": 5})
+                V2.LEARNED["Mass Addition"] = V2.info_guid("Mass Addition", "Maths")
+            t2 = S.call("15", "wire", "g1_apply_graph", {"sliders": [], "components": [{"Key": "ml", "Selector": V2.LEARNED["Mass Addition"], "X": 300, "Y": 900}], "wires": [], "solve": False})
             ml = V2.ids_from(t2, ["ml"])["ml"]
             S.call("15", "wire", "g1_connect_many", {"wires": [{"SrcId": pid, "Src": "0", "DstId": ml, "Dst": "I"}], "solve": True})
         else:
@@ -464,8 +485,9 @@ def c16(S):
         S.call("16", "regroup+tidy", "run_python", {"script": PY.gh(PY.GROUP, PY.LAYOUT, body=body)})
     else:
         S.call("16", "read", "gh_get_canvas_state", {})
-        rgb = lambda h: [int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16)]
-        S.call("16", "regroup", "gh_mutate_graph", {"operations": [{"op": "recompute"}], "groups": [{"name": n, "members": [guids[k] for k in ks], "color": rgb(c)} for n, c, ks in GROUPS16]})
+        # its gh_mutate_graph accepted a groups list but created none, so groups go through its Python tool
+        body = "\n".join(f"group('{n}', '{c}', {json.dumps([guids[k] for k in ks])})" for n, c, ks in GROUPS16)
+        S.call("16", "regroup", "execute_rhinoscript_python_code", {"code": PY.gh(PY.GROUP, body=body)})
         S.call("16", "tidy", "gh_layout_components", {"include_groups": True})
     return {"gh": gh_counts(["Cap Holes"]), "overlaps": overlaps()}
 

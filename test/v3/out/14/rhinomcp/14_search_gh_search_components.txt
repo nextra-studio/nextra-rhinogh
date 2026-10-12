@@ -1,0 +1,52 @@
+{
+ "query": "Support",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Support",
+  "category": null,
+  "components": [
+    {
+      "name": "Support",
+      "nickname": "Support",
+      "category": "Kangaroo2",
+      "subcategory": "Goals-6dof",
+      "guid": "0b3b7956-f88b-4ca3-99f6-b6508a8dac3f",
+      "description": "Set support conditions for a beam end or rigid body"
+    },
+    {
+      "name": "Support",
+      "nickname": "Support",
+      "category": "Kangaroo2",
+      "subcategory": "Goals-6dof",
+      "guid": "c41696fc-e8e8-42c9-89b2-a5a6aac030b0",
+      "description": "Set support conditions for a beam end or rigid body"
+    },
+    {
+      "name": "Support",
+      "nickname": "Supp",
+      "category": "Nextra.fem",
+      "subcategory": "06.Support",
+      "guid": "11111111-2222-3333-4444-6b57b1929482",
+      "description": "Creates a nodal Boundary Condition Support fixing or springing specific Degrees of Freedom (DoF) at a given spatial point. Connect to Assemble Model."
+    },
+    {
+      "name": "Support (Karamba3D)",
+      "nickname": "Support",
+      "category": "Karamba3D",
+      "subcategory": " Params",
+      "guid": "bfa32b4d-f295-4b19-99a9-f969f6d7cdc8",
+      "description": "Support with or without prescribed displacements"
+    },
+    {
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "guid": "36cefb8a-a36a-4f35-8351-f83e9c20dc38",
+      "description": "Creates a finite element model from given entities (points, beams, supports, loads, cross sections, materials,... )."
+    }
+  ]
+}

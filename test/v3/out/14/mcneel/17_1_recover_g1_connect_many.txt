@@ -1,0 +1,25 @@
+{
+ "wires": [
+  {
+   "SrcId": "2a5e0c34-131a-4bf9-a175-88e84f01b1da",
+   "Src": "Mat",
+   "DstId": "983b9946-fc3e-4868-9e88-fc9a2199146f",
+   "Dst": "Mat"
+  },
+  {
+   "SrcId": "2a5e0c34-131a-4bf9-a175-88e84f01b1da",
+   "Src": "Mat",
+   "DstId": "ea4b3bfd-631b-4620-9308-6b082c482285",
+   "Dst": "Mat"
+  },
+  {
+   "SrcId": "83f6ebb0-3f4b-414e-b450-81db01249464",
+   "Src": "Load",
+   "DstId": "fe27f834-40cf-4bf9-a4c8-c226aba635fc",
+   "Dst": "Load"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":3,"OkCount":3,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"2a5e0c34-131a-4bf9-a175-88e84f01b1da","Param":"Material"},"Dst":{"Id":"983b9946-fc3e-4868-9e88-fc9a2199146f","Param":"Material"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"2a5e0c34-131a-4bf9-a175-88e84f01b1da","Param":"Material"},"Dst":{"Id":"ea4b3bfd-631b-4620-9308-6b082c482285","Param":"Material"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"83f6ebb0-3f4b-414e-b450-81db01249464","Param":"Load"},"Dst":{"Id":"fe27f834-40cf-4bf9-a4c8-c226aba635fc","Param":"Load"},"Error":null}]}

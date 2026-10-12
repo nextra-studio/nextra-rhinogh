@@ -1,0 +1,6 @@
+{
+ "query": "Mass Addition",
+ "limit": 5
+}
+---
+[{"Guid":"5b850221-b527-4bd6-8c62-e94168cd6efa","Name":"Mass Addition","NickName":"MA","Category":"Maths","SubCategory":"Operators","Kind":"Component","Description":"Perform mass addition of a list of items"},{"Guid":"63f79e72-36c0-4489-a0c2-9ded0b9ca41f","Name":"Mass Addition","NickName":"MassAdd","Category":"Vector","SubCategory":"Vector","Kind":"Component","Description":"Perform mass addition on a collection of vectors."},{"Guid":"74d95062-0bec-4a4e-9026-5141fca954a6","Name":"Mass Addition","NickName":"MA","Category":"Scalar","SubCategory":"Util","Kind":"Component","Description":"Perform mass addition of a list of numbers"},{"Guid":"b7f1178f-4222-47fd-9766-5d06e869362b","Name":"Mass Addition","NickName":"MassAdd","Category":"Vector","SubCategory":"Vector","Kind":"Component","Description":"Perform mass addition on a collection of vectors."},{"Guid":"bb64b2fb-f87a-432f-86f8-393f4ee21310","Name":"Mass Addition","NickName":"MA","Category":"Scalar","SubCategory":"Util","Kind":"Component","Description":"Perform mass addition of a list of numbers"}]

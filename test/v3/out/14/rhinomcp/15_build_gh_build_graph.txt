@@ -1,0 +1,1591 @@
+{
+ "components": [
+  {
+   "alias": "lns",
+   "component_name": "Curve"
+  },
+  {
+   "alias": "shs",
+   "component_name": "Brep"
+  },
+  {
+   "alias": "mr",
+   "component_name": "Number Slider",
+   "value": 3.5,
+   "min": 0.2,
+   "max": 6,
+   "nickname": "Mesh size m"
+  },
+  {
+   "alias": "mat",
+   "component_name": "Material Selection (Karamba3D)"
+  },
+  {
+   "alias": "csb",
+   "component_guid": "f201e873-4df8-400f-9d75-92e1963ad371"
+  },
+  {
+   "alias": "css",
+   "component_guid": "f201e873-4df8-400f-9d75-92e1963ad371"
+  },
+  {
+   "alias": "el",
+   "component_name": "Create Linear Element (Karamba3D)"
+  },
+  {
+   "alias": "mb",
+   "component_guid": "c9bf8fd5-cff5-41e8-b957-d9338b581e0f"
+  },
+  {
+   "alias": "se",
+   "component_name": "Create Surface Element (Karamba3D)"
+  },
+  {
+   "alias": "mv",
+   "component_name": "Deconstruct Mesh"
+  },
+  {
+   "alias": "all",
+   "component_guid": "3cadddef-1e2b-4c09-9390-0e8f78f7609f"
+  },
+  {
+   "alias": "cd",
+   "component_name": "Cull Duplicates"
+  },
+  {
+   "alias": "dz",
+   "component_guid": "9abae6b7-fa1d-448c-9209-4a8155345841"
+  },
+  {
+   "alias": "lt",
+   "component_name": "Smaller Than"
+  },
+  {
+   "alias": "base",
+   "component_name": "Cull Pattern"
+  },
+  {
+   "alias": "sup",
+   "component_guid": "ca9eab02-e4ea-4126-9755-1c24b6e74176"
+  },
+  {
+   "alias": "g",
+   "component_name": " Loads (Karamba3D)"
+  },
+  {
+   "alias": "asm",
+   "component_guid": "ddcf0ef4-e8bb-4231-8302-ded99046e49c"
+  },
+  {
+   "alias": "an",
+   "component_name": " Analyse (Karamba3D)"
+  }
+ ],
+ "connections": [
+  {
+   "source": "mat",
+   "target": "csb",
+   "target_input_index": 4
+  },
+  {
+   "source": "mat",
+   "target": "css",
+   "target_input_index": 4
+  },
+  {
+   "source": "lns",
+   "target": "el",
+   "target_input_index": 0
+  },
+  {
+   "source": "csb",
+   "target": "el",
+   "target_input_index": 3
+  },
+  {
+   "source": "shs",
+   "target": "mb",
+   "target_input_index": 0
+  },
+  {
+   "source": "el",
+   "target": "mb",
+   "target_input_index": 1,
+   "source_output_index": 1
+  },
+  {
+   "source": "mr",
+   "target": "mb",
+   "target_input_index": 2
+  },
+  {
+   "source": "mb",
+   "target": "se",
+   "target_input_index": 0
+  },
+  {
+   "source": "css",
+   "target": "se",
+   "target_input_index": 3
+  },
+  {
+   "source": "mb",
+   "target": "mv",
+   "target_input_index": 0
+  },
+  {
+   "source": "el",
+   "target": "all",
+   "target_input_index": 0,
+   "source_output_index": 1
+  },
+  {
+   "source": "mv",
+   "target": "all",
+   "target_input_index": 1
+  },
+  {
+   "source": "all",
+   "target": "cd",
+   "target_input_index": 0
+  },
+  {
+   "source": "cd",
+   "target": "dz",
+   "target_input_index": 0
+  },
+  {
+   "source": "dz",
+   "target": "lt",
+   "target_input_index": 0,
+   "source_output_index": 2
+  },
+  {
+   "source": "cd",
+   "target": "base",
+   "target_input_index": 0
+  },
+  {
+   "source": "lt",
+   "target": "base",
+   "target_input_index": 1
+  },
+  {
+   "source": "base",
+   "target": "sup",
+   "target_input_index": 0
+  },
+  {
+   "source": "el",
+   "target": "asm",
+   "target_input_index": 0
+  },
+  {
+   "source": "se",
+   "target": "asm",
+   "target_input_index": 0
+  },
+  {
+   "source": "sup",
+   "target": "asm",
+   "target_input_index": 1
+  },
+  {
+   "source": "g",
+   "target": "asm",
+   "target_input_index": 2
+  },
+  {
+   "source": "asm",
+   "target": "an",
+   "target_input_index": 0
+  }
+ ],
+ "values": [
+  {
+   "target": "cd",
+   "input_index": 1,
+   "value": 0.001
+  },
+  {
+   "target": "lt",
+   "input_index": 1,
+   "value": 0.01
+  }
+ ],
+ "groups": [
+  {
+   "name": "FE geometry from Rhino",
+   "members": [
+    "lns",
+    "shs",
+    "mr"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Sections",
+   "members": [
+    "mat",
+    "csb",
+    "css"
+   ],
+   "color": [
+    230,
+    230,
+    160
+   ]
+  },
+  {
+   "name": "Elements",
+   "members": [
+    "el",
+    "mb",
+    "se"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Supports at z=0",
+   "members": [
+    "mv",
+    "all",
+    "cd",
+    "dz",
+    "lt",
+    "base",
+    "sup"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Model + analysis",
+   "members": [
+    "g",
+    "asm",
+    "an"
+   ],
+   "color": [
+    255,
+    214,
+    171
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 19,
+  "created_component_count": 19,
+  "created_group_count": 5,
+  "connection_count": 23,
+  "value_count": 2,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012074847430",
+  "mutation_duration_ms": 438,
+  "solution_duration_ms": 4,
+  "verification_duration_ms": 0,
+  "duration_ms": 1154,
+  "aliases": {
+    "lns": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+    "shs": "256f27e5-9853-4803-b174-63f7f602ce48",
+    "mr": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+    "mat": "f9257150-269e-4595-a568-ab7c04092746",
+    "csb": "b9528df3-b879-401b-b646-94f9224ae6dc",
+    "css": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+    "el": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+    "mb": "553bc968-9788-4bf0-87b8-d75b044754f8",
+    "se": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+    "mv": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+    "all": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+    "cd": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+    "dz": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+    "lt": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+    "base": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+    "sup": "432b682a-d86f-450a-9979-b0b34fa8c685",
+    "g": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+    "asm": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+    "an": "6c17e2dd-600f-4987-b494-720a5952e883"
+  },
+  "components": [
+    {
+      "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+      "name": "Curve",
+      "nickname": "Crv",
+      "category": "Params",
+      "subcategory": "Geometry",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+      "name": "Brep",
+      "nickname": "Brep",
+      "category": "Params",
+      "subcategory": "Geometry",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+      "name": "Number Slider",
+      "nickname": "Mesh size m",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+      "name": "Cross-section (Karamba3D)",
+      "nickname": "CroSec",
+      "category": "Karamba3D",
+      "subcategory": "3.Cross Section",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+      "name": "Cross-section (Karamba3D)",
+      "nickname": "CroSec",
+      "category": "Karamba3D",
+      "subcategory": "3.Cross Section",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+      "name": "Create Linear Element (Karamba3D)",
+      "nickname": "LineElem",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+      "name": " Mesh Breps (Karamba3D)",
+      "nickname": "Mesh Breps",
+      "category": "Karamba3D",
+      "subcategory": "9.Utilities",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+      "name": "Create Surface Element (Karamba3D)",
+      "nickname": "SurfElem",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+      "name": "Deconstruct Mesh",
+      "nickname": "DeMesh",
+      "category": "Mesh",
+      "subcategory": "Analysis",
+      "position": [
+        920.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+      "name": "Merge",
+      "nickname": "Merge",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+      "name": "Cull Duplicates",
+      "nickname": "CullPt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        40.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+      "name": "Deconstruct",
+      "nickname": "pDecon",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        260.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+      "name": "Smaller Than",
+      "nickname": "Smaller",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        480.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+      "name": "Cull Pattern",
+      "nickname": "Cull",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        700.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+      "name": "Support (Karamba3D)",
+      "nickname": "Supp",
+      "category": "Karamba3D",
+      "subcategory": "1.Support",
+      "position": [
+        920.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "position": [
+        40.0,
+        400.0
+      ]
+    },
+    {
+      "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        1140.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+      "name": " Analyse (Karamba3D)",
+      "nickname": "Analyse",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "position": [
+        40.0,
+        760.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "ebccfa97-3854-4122-8082-e67226f370c6",
+      "name": "FE geometry from Rhino",
+      "object_count": 19,
+      "graph_id": "MCPGraph_20261012074847430",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "c85280b9-9d44-4b62-ad04-2e4fed8ab7af",
+      "name": "Sections",
+      "object_count": 19,
+      "graph_id": "MCPGraph_20261012074847430",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "98c8490c-af1b-440a-850a-ca7f7467aeae",
+      "name": "Elements",
+      "object_count": 19,
+      "graph_id": "MCPGraph_20261012074847430",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "1cffde38-28c9-4b20-9a5b-b06e691b56d1",
+      "name": "Supports at z=0",
+      "object_count": 19,
+      "graph_id": "MCPGraph_20261012074847430",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "f788667c-53f7-4a8e-b442-a32d891a85bf",
+      "name": "Model + analysis",
+      "object_count": 19,
+      "graph_id": "MCPGraph_20261012074847430",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 19,
+    "edge_count": 23,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+        "name": "Curve",
+        "nickname": "Crv",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+        "name": "Brep",
+        "nickname": "Brep",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "name": "Number Slider",
+        "nickname": "Mesh size m",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+        "name": "Material Selection (Karamba3D)",
+        "nickname": "MatSelect",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+        "name": "Create Linear Element (Karamba3D)",
+        "nickname": "LineElem",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+        "name": " Mesh Breps (Karamba3D)",
+        "nickname": "Mesh Breps",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+        "name": "Create Surface Element (Karamba3D)",
+        "nickname": "SurfElem",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+        "name": "Deconstruct Mesh",
+        "nickname": "DeMesh",
+        "position": [
+          920.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+        "name": "Merge",
+        "nickname": "Merge",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+        "name": "Cull Duplicates",
+        "nickname": "CullPt",
+        "position": [
+          40.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "position": [
+          260.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+        "name": "Smaller Than",
+        "nickname": "Smaller",
+        "position": [
+          480.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+        "name": "Cull Pattern",
+        "nickname": "Cull",
+        "position": [
+          700.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "position": [
+          920.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "position": [
+          40.0,
+          400.0
+        ]
+      },
+      {
+        "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "position": [
+          1140.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "position": [
+          40.0,
+          760.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 19,
+    "output_count": 39,
+    "outputs_with_data": 14,
+    "total_output_data_count": 947,
+    "warning_count": 3,
+    "error_count": 1,
+    "objects": [
+      {
+        "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+        "alias": "lns",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Curve",
+        "nickname": "Crv",
+        "category": "Params",
+        "subcategory": "Geometry",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Floating parameter Crv failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Curve",
+            "nickname": "Crv",
+            "type": "Curve",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+        "alias": "shs",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Brep",
+        "nickname": "Brep",
+        "category": "Params",
+        "subcategory": "Geometry",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Floating parameter Brep failed to collect data"
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Brep",
+            "nickname": "Brep",
+            "type": "Brep",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "alias": "mr",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Mesh size m",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Mesh size m",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3.5,
+        "min": 0.2,
+        "max": 6.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+        "alias": "mat",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Material Selection (Karamba3D)",
+        "nickname": "MatSelect",
+        "category": "Karamba3D",
+        "subcategory": "5.Material",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Material",
+            "nickname": "Mat",
+            "type": "Material",
+            "access": "item",
+            "has_data": true,
+            "data_count": 312,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+        "alias": "csb",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "category": "Karamba3D",
+        "subcategory": "3.Cross Section",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Cross-section",
+            "nickname": "CroSec",
+            "type": "CrossSection",
+            "access": "item",
+            "has_data": true,
+            "data_count": 312,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+        "alias": "css",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "category": "Karamba3D",
+        "subcategory": "3.Cross Section",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Cross-section",
+            "nickname": "CroSec",
+            "type": "CrossSection",
+            "access": "item",
+            "has_data": true,
+            "data_count": 312,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+        "alias": "el",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Create Linear Element (Karamba3D)",
+        "nickname": "LineElem",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "Input parameter Line failed to collect data"
+          }
+        ],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Element",
+            "nickname": "Elem",
+            "type": "Element",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Points",
+            "nickname": "Pts",
+            "type": "Point",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+        "alias": "mb",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": " Mesh Breps (Karamba3D)",
+        "nickname": "Mesh Breps",
+        "category": "Karamba3D",
+        "subcategory": "9.Utilities",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Mesh",
+            "nickname": "Mesh",
+            "type": "Mesh",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+        "alias": "se",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Create Surface Element (Karamba3D)",
+        "nickname": "SurfElem",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Element",
+            "nickname": "Elem",
+            "type": "Element",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Points",
+            "nickname": "Pts",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+        "alias": "mv",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Deconstruct Mesh",
+        "nickname": "DeMesh",
+        "category": "Mesh",
+        "subcategory": "Analysis",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 4,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Vertices",
+            "nickname": "V",
+            "type": "Point",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Faces",
+            "nickname": "F",
+            "type": "Mesh face",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Colours",
+            "nickname": "C",
+            "type": "Colour",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Normals",
+            "nickname": "N",
+            "type": "Vector",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+        "alias": "all",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Merge",
+        "nickname": "Merge",
+        "category": "Sets",
+        "subcategory": "Tree",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "tree",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+        "alias": "cd",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Cull Duplicates",
+        "nickname": "CullPt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Points",
+            "nickname": "P",
+            "type": "Point",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Indices",
+            "nickname": "I",
+            "type": "Integer",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Valence",
+            "nickname": "V",
+            "type": "Integer",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+        "alias": "dz",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "X component",
+            "nickname": "X",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Y component",
+            "nickname": "Y",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Z component",
+            "nickname": "Z",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+        "alias": "lt",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Smaller Than",
+        "nickname": "Smaller",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Smaller than",
+            "nickname": "<",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "… or Equal to",
+            "nickname": "<=",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+        "alias": "base",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Cull Pattern",
+        "nickname": "Cull",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "List",
+            "nickname": "L",
+            "type": "Generic Data",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+        "alias": "sup",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "category": "Karamba3D",
+        "subcategory": "1.Support",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Support",
+            "nickname": "Supp",
+            "type": "Support",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+        "alias": "g",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "category": "Karamba3D",
+        "subcategory": "2.Load",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Load",
+            "nickname": "Load",
+            "type": "Load",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+        "alias": "asm",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 5,
+        "outputs_with_data": 5,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Mass [kg]",
+            "nickname": "Mass",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Centre of Gravity",
+            "nickname": "COG",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 4,
+            "name": "Load Case Names",
+            "nickname": "LCNames",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+        "alias": "an",
+        "graph_id": "MCPGraph_20261012074847430",
+        "role": "",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "category": "Karamba3D",
+        "subcategory": "6.Algorithms",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Model can not be calculated: there are no elements."
+          }
+        ],
+        "output_count": 4,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Analysed Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Maximum Displacement [cm]",
+            "nickname": "MaxDisp",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Resulting force [kN]",
+            "nickname": "Force",
+            "type": "Vector",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 3,
+            "name": "Change of elastic energy [kNm]",
+            "nickname": "Energy",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 18,
+    "preview_enabled_object_count": 11,
+    "preview_disabled_object_count": 7,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 244,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012074847430",
+    "object_count": 24,
+    "controls": [
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh size m",
+        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3.5,
+        "min": 0.2,
+        "max": 6.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh size m",
+        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 3.5,
+        "min": 0.2,
+        "max": 6.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 19 component(s) and 23 connection(s)"
+}

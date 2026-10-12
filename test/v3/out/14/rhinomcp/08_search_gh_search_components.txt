@@ -1,0 +1,52 @@
+{
+ "query": "Cross-section",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Cross-section",
+  "category": null,
+  "components": [
+    {
+      "name": "AXISVM Cross-Section",
+      "nickname": "AxCS",
+      "category": "AXISVM",
+      "subcategory": " Params",
+      "guid": "60868c2a-d8b2-4d7d-bc9d-7b1cdc80482e",
+      "description": "AXISVM Cross-Section Parameter"
+    },
+    {
+      "name": "AXISVM Cross-Section",
+      "nickname": "AxCS",
+      "category": "AXISVM",
+      "subcategory": "1. Elements",
+      "guid": "748ab023-eb11-4f09-b14c-ed7aabf2c440",
+      "description": "Component for selecting cross-section(s). Double-click the icon on the left side of the component in order to open the AXISVM Cross-Section Library."
+    },
+    {
+      "name": "AXISVM Cross-Section - Parametric",
+      "nickname": "AxCS_Par",
+      "category": "AXISVM",
+      "subcategory": "1. Elements",
+      "guid": "91711397-4aad-4099-9ef1-48fa01fefc5b",
+      "description": "Component to define parametric cross-sections"
+    },
+    {
+      "name": "AXISVM Cross-Section - Thick Polygon",
+      "nickname": "AxCS_ThP",
+      "category": "AXISVM",
+      "subcategory": " Params",
+      "guid": "0dd3f1b7-9c31-4f8b-82ea-fe7616a70896",
+      "description": "AXISVM Cross-Section - Thick Polygon Parameter"
+    },
+    {
+      "name": "AXISVM Cross-Section - Thick Polygon",
+      "nickname": "AxCS_ThP",
+      "category": "AXISVM",
+      "subcategory": "1. Elements",
+      "guid": "7fc4d34d-d9eb-44fd-b9d6-37ebf3d8931a",
+      "description": "Creates thick polygon cross-sections from polylines"
+    }
+  ]
+}

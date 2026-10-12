@@ -1,0 +1,6 @@
+{
+ "query": "Mesh Breps",
+ "limit": 5
+}
+---
+[{"Guid":"44c83400-7b84-4bdb-8607-a5bde0faa77e","Name":" Mesh Breps II (Karamba3D)","NickName":"Mesh Breps II","Category":"Karamba3D","SubCategory":"9.Utilities","Kind":"Component","Description":"Meshes breps using mmgtools, surface version."},{"Guid":"c9bf8fd5-cff5-41e8-b957-d9338b581e0f","Name":" Mesh Breps (Karamba3D)","NickName":"Mesh Breps","Category":"Karamba3D","SubCategory":"9.Utilities","Kind":"Component","Description":"Meshes multiple breps. Allows to include manifold edges and points."},{"Guid":"d8ce9ea4-cff5-41e8-b957-d9338b581e0f","Name":" Mesh Breps (Karamba3D) (WIP)","NickName":"Mesh Breps","Category":"Karamba3D","SubCategory":"9.Utilities","Kind":"Component","Description":"Meshes multiple breps. This will consider breps intersections and accept optional curves."}]

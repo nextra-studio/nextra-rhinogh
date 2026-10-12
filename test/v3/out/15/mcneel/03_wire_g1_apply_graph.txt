@@ -1,0 +1,15 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "ml",
+   "Selector": "5b850221-b527-4bd6-8c62-e94168cd6efa",
+   "X": 300,
+   "Y": 900
+  }
+ ],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"ml","Id":"c9541d15-06c1-4956-b92d-d87c63d514a6","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

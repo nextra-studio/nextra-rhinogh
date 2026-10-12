@@ -1,0 +1,156 @@
+{
+ "operations": [
+  {
+   "op": "create",
+   "alias": "ml",
+   "component_name": "Mass Addition"
+  },
+  {
+   "op": "connect",
+   "source": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
+   "target": "ml",
+   "target_input_name": "I"
+  },
+  {
+   "op": "recompute"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012074751347",
+  "operation_count": 3,
+  "created_count": 1,
+  "created_component_count": 1,
+  "created_group_count": 0,
+  "deleted_count": 0,
+  "deleted_component_count": 0,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 12,
+  "solution_duration_ms": 3,
+  "verification_duration_ms": 0,
+  "duration_ms": 39,
+  "operations": [
+    {
+      "op": "create",
+      "alias": "ml",
+      "instance_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+      "name": "Mass Addition",
+      "nickname": "MA"
+    },
+    {
+      "op": "connect",
+      "source_id": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
+      "target_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+      "source_param": "Number",
+      "target_param": "Input"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 2,
+    "output_count": 3,
+    "outputs_with_data": 3,
+    "total_output_data_count": 12,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+        "alias": "ml",
+        "graph_id": "MCPGraph_20261012074751347",
+        "role": "",
+        "name": "Mass Addition",
+        "nickname": "MA",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 2,
+            "branch_count": 2
+          },
+          {
+            "index": 1,
+            "name": "Partial Results",
+            "nickname": "Pr",
+            "type": "Generic Data",
+            "access": "list",
+            "has_data": true,
+            "data_count": 5,
+            "branch_count": 2
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
+        "alias": "",
+        "graph_id": "",
+        "role": "",
+        "name": "Number",
+        "nickname": "Tree data",
+        "category": "Params",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number",
+            "nickname": "Tree data",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 5,
+            "branch_count": 2
+          }
+        ],
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 1,
+    "preview_enabled_object_count": 1,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 136,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012074751347",
+    "object_count": 2,
+    "controls": [],
+    "adjustable_parameters": [],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 3 operation(s)"
+}

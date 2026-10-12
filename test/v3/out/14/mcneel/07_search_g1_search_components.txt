@@ -1,0 +1,6 @@
+{
+ "query": "Create Surface Element",
+ "limit": 5
+}
+---
+[{"Guid":"998f463c-a613-45f4-93cf-2aeaaa7d0492","Name":"Create Surface Element (Karamba3D)","NickName":"SurfElem","Category":"Karamba3D","SubCategory":"0.Model","Kind":"Component","Description":"Creates shells or membranes with default properties from given meshes. Mesh edges that meet at a common point are thus connected with each other. Karamba3D assumes input to be in [m]."}]

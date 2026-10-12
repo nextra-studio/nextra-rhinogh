@@ -1,0 +1,26 @@
+{
+ "new": true,
+ "ops": "## FE geometry from Rhino #DBABFF\nlns = Curve {ref=\"layer:FE::Lines\"} \"FE lines\"\nshs = Brep {ref=\"layer:FE::Shells\"} \"FE shells\"\nmr = Number Slider {v=3.5, r=0.2..6} \"Mesh size m\"\n## Sections #E6E6A0\nmat = Material Selection @Karamba3D (Name|Ind=\"C30/37\")\ncsb = Cross-section @Karamba3D (Mat=mat, Height=30, UpperWidth=30, LowerWidth=30) {menu=\"Units>Trapezoid\"}\ncss = Cross-section @Karamba3D (Mat=mat, Height=20) {menu=\"Units>Shell - Const\"}\n## Elements #ABDBFF\nel = Create Linear Element @Karamba3D (Line=lns, CroSec=csb)\nmb = Mesh Breps @Karamba3D (Brep=shs, IPts=el.Pts^f, MRes=mr)\nse = Create Surface Element @Karamba3D (Mesh=mb.Mesh, CroSec=css)\n## Supports at z=0 #ABDBFF\nmv = Deconstruct Mesh (M=mb.Mesh)\nall = Merge (D1=el.Pts^f, D2=mv.V^f)\ncd = Cull Duplicates (P=all, T=0.001)\ndz = Deconstruct @Vector (P=cd.P)\nlt = Smaller Than (A=dz.Z, B=0.01)\nbase = Cull Pattern (L=cd.P, P=lt.<)\nsup = Support @Karamba3D (Pos|Ind=base) {$button[0]=true, $button[1]=true, $button[2]=true, $button[3]=true, $button[4]=true, $button[5]=true}\n## Model + analysis #FFD6AB\ng = Loads @Karamba3D\nasm = Assemble Model @Karamba3D (Elem=el.Elem+se.Elem^f, Support=sup^f, Load=g^f)\nan = Analyse @Karamba3D (Model=asm.Model)"
+}
+---
+new GH document
+ok: 19/19 lines applied (+19 nodes, 23 wires, 7 values, +5 groups), checkpoint c107
+ids: lns=g1 shs=g2 mr=g3 mat=g4 csb=g5 css=g6 el=g7 mb=g8 se=g9 mv=g10 all=g11 cd=g12 dz=g13 lt=g14 base=g15 sup=g16 g=g17 asm=g18 an=g19
+groups: FE geometry from Rhino=g20 Sections=g21 Elements=g22 Supports at z=0=g23 Model + analysis=g24
+note: L7: 'Cross-section': 1 versions installed; used the visible one (Karamba3D/3.Cross Section)
+note: L8: 'Cross-section' is ambiguous; used Karamba3D/3.Cross Section because its ports match Mat,Height
+note: L15: 'Merge' is ambiguous; used Sets/Tree because its ports match D1,D2
+note: L20: 'Support' is ambiguous; used Karamba3D/1.Support because its ports match Pos|Ind
+note: L23: 'Assemble Model': 2 versions installed; used the visible one (Karamba3D/0.Model)
+note: L7: menu 'Units>Trapezoid' clicked
+note: L8: menu 'Units>Shell - Const' clicked
+solved 16ms, no errors/warnings on affected nodes
+results: g19.Model: 1 Model {0} · g19.MaxDisp: 1 Number {0;0} e.g. 0.0967
+plugin rules (Karamba3D, shown once; full guide: query {scope:'docs', filter:'plugins/Karamba3D'}):
+- **Karamba works in metres, kN, cm results — whatever the Rhino unit is.** If the doc is in mm, scale geometry ×0.001 before Karamba (`Scale (G=…, F=0.001)`) or model the analysis geometry in metres. Check: `Assemble.Mass` must be plausible (10 m CHS 114.3×4 ≈ 109 kg).
+- **Loads need nodes.** A point load at a point that is not a node gives `Info: "Could not find node at …"` and zero results. Split lines first (`Shatter`, `Divide`→`Polyline`→`Explode`, or connect members at intersections).
+- Several element sources (beams + shells) → **flatten** into Assemble: `Elem=el.Elem+se.Elem^f`, `Support=sup^f`, `Load=ld^f`; otherwise you get one model per branch (check: `Assemble.Model` count = 1).
+- Trial licence: max 50 shell elements ("maximum number of shell elements in the trial-version") → coarser `Mesh Breps` MRes, or tell the user.
+- Sections/materials: `mat = Material Selection @Karamba3D (Name|Ind="C30/37")`; `cs = Cross-section @Karamba3D (Mat=mat) {menu="Units>Trapezoid"}` then `(Height=30, UpperWidth=30, LowerWidth=30)` [cm]; shells `{menu="Units>Shell - Const"}` + `Height=20`. Wire `CroSec=` into Create Linear/Surface Element. Defaults are thin steel (unrealistic deflections).
+- Use current components: `Analyse @Karamba3D` (not `AnalyzeThI` — Karamba itself warns "newer version available").
+- Write plug-in components without the "(Karamba3D)" suffix and add `@Karamba3D`: `Support @Karamba3D`, `Assemble Model @Karamba3D`. Two `Assemble Model` versions exist; the engine picks the visible one.

@@ -1,0 +1,6 @@
+{
+ "query": "Merge",
+ "limit": 5
+}
+---
+[{"Guid":"0b6c5dac-6c93-4158-b8d1-ca3187d45f25","Name":"Merge Multiple","NickName":"Merge","Category":"Sets","SubCategory":"Tree","Kind":"Component","Description":"Merge multiple input streams into one"},{"Guid":"14ecd90a-e55d-4aac-82b4-1b54d6e16540","Name":"Union Intervals","NickName":"Dom\u002B","Category":"Heteroptera","SubCategory":"Maths","Kind":"Component","Description":"Merge and union a set of domains"},{"Guid":"15204c6d-bba8-403d-9e8f-6660ab8e0df5","Name":"Merge Group","NickName":"GMerge","Category":"Transform","SubCategory":"Util","Kind":"Component","Description":"Merge two geometry sets"},{"Guid":"22f66ff6-d281-453c-bd8c-36ed24026783","Name":"Merge 10","NickName":"M10","Category":"Sets","SubCategory":"Tree","Kind":"Component","Description":"Merge ten streams into one."},{"Guid":"3cadddef-1e2b-4c09-9390-0e8f78f7609f","Name":"Merge","NickName":"Merge","Category":"Sets","SubCategory":"Tree","Kind":"Component","Description":"Merge a bunch of data streams"}]

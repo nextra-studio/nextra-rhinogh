@@ -1,0 +1,6 @@
+{
+ "query": "Loads",
+ "limit": 5
+}
+---
+[{"Guid":"013d9fd4-39d0-4e91-987a-f9b72e982118","Name":"AXISVM Influence Line","NickName":"AxIL","Category":"AXISVM","SubCategory":"2. Loads","Kind":"Component","Description":"Component to define Influence Line Loads"},{"Guid":"128acee6-7b38-479b-aff6-d795c5981d00","Name":"AXISVM Snow Load","NickName":"AxSL","Category":"AXISVM","SubCategory":"2. Loads","Kind":"Component","Description":"Component to define Snow Loads on Load Panels"},{"Guid":"1451c936-c8c8-41d5-8fad-0f62f12b0544","Name":"AXISVM Concentrated Line Load","NickName":"AxCLL","Category":"AXISVM","SubCategory":"2. Loads","Kind":"Component","Description":"Component to define Concentrated Line Loads"},{"Guid":"1ba751ba-0a27-44b2-aedf-a966655368a1","Name":"AXISVM Wind Load","NickName":"AxWL","Category":"AXISVM","SubCategory":"2. Loads","Kind":"Component","Description":"Component to define the parameters of Wind Loads"},{"Guid":"1db689bf-0e11-4fb0-b7c5-89bd53f2d5af","Name":"AXISVM Distributed Line Load","NickName":"AxDLL","Category":"AXISVM","SubCategory":"2. Loads","Kind":"Component","Description":"Component to define Distributed Line Loads"}]

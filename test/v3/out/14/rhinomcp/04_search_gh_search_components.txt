@@ -1,0 +1,44 @@
+{
+ "query": "Analyse",
+ "limit": 5
+}
+---
+{
+  "count": 4,
+  "query": "Analyse",
+  "category": null,
+  "components": [
+    {
+      "name": " Analyse (Karamba3D)",
+      "nickname": "Analyse",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "guid": "e2831209-f0ee-42f4-8891-a68065e55134",
+      "description": "Calculates the deflections of a given model."
+    },
+    {
+      "name": " AnalyseThII (Karamba3D)",
+      "nickname": "AnalyseThII",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "guid": "2221d238-1279-439b-af6f-383da9946823",
+      "description": "Calculates the deflections of a given model using second order theory for small deflections."
+    },
+    {
+      "name": " AnalyseThII (Karamba3D)",
+      "nickname": "AnalyseThII",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "guid": "f47421fa-2d57-43a1-87f2-8541a48999a6",
+      "description": "Calculates the deflections of a given model using second order theory for small deflections."
+    },
+    {
+      "name": "Analyse Nonlinear WIP (Karamba3D)",
+      "nickname": "AnalyseNonlin WIP",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "guid": "625e5b05-04e8-4014-a0eb-31ca6e735d8f",
+      "description": "Calculates the nonlinear response of the model. Is work in progress (WIP)."
+    }
+  ]
+}
