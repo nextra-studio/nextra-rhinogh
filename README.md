@@ -158,3 +158,7 @@ dev/                developer guide, original plan, build checklist, reference c
 4. Try calls with `python tools/nx.py query '{}'`, and check everything with `python test/regress/regress.py`.
 
 See [dev/](dev/README.md) for the full developer guide.
+
+## License
+
+[Apache License 2.0](LICENSE). Free to use, including commercially. Keep the copyright and license notice ([NOTICE](NOTICE)) and mark any changes you make. The license also grants a patent right to use the code.
