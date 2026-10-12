@@ -55,30 +55,16 @@ svg("rhino-package-manager.svg", 720, 250,
     + '<text class="t" x="124" y="162">Nextra-RhinoGh</text><text class="s" x="124" y="184">by Tatsuki · AI tools for Rhino 8 + Grasshopper</text>'
     + button(560, 150, 96, "Install", n=2))
 
-# 2 Claude Desktop: double-click .mcpb → install dialog
-svg("claude-desktop.svg", 720, 260,
-    '<rect class="win" x="24" y="40" width="190" height="180" rx="10"/>'
-    + '<path d="M94 72h36l18 18v58h-54z" fill="#bf8700"/><path d="M130 72v18h18" fill="#e3b341"/>'
-    + '<text class="bt" x="121" y="128" text-anchor="middle">.mcpb</text>'
-    + '<text class="m" x="119" y="176" text-anchor="middle">nextra-rhinogh</text><text class="m" x="119" y="194" text-anchor="middle">-0.1.2.mcpb</text>'
-    + badge(200, 58, 1) + '<text class="s" x="119" y="240" text-anchor="middle">double-click the file</text>'
-    + '<path d="M232 130h48" stroke="#57606a" stroke-width="2"/><path d="M280 124l10 6-10 6z" fill="#57606a"/>'
-    + window(304, 24, 392, 212, "Claude")
-    + '<text class="t" x="328" y="88">Install extension?</text>'
-    + '<text class="s" x="328" y="114">Nextra for Rhino + Grasshopper</text><text class="s" x="328" y="134">view · query · run · gh_edit · undo · memory</text>'
-    + button(560, 170, 110, "Install", n=2)
-    + '<text class="s" x="328" y="192">then quit Claude fully</text><text class="s" x="328" y="210">(tray icon) and reopen</text>')
-
-# 3 Claude: upload the skill
-svg("claude-skill.svg", 720, 250,
-    window(20, 16, 680, 218, "Claude — Settings")
-    + '<rect class="nav" x="21" y="51" width="170" height="182"/>'
-    + '<text class="s" x="40" y="80">General</text><rect class="navsel" x="30" y="94" width="152" height="28" rx="6"/>'
-    + '<text class="t" x="40" y="113">Capabilities</text><text class="s" x="40" y="146">Extensions</text><text class="s" x="40" y="178">Connectors</text>'
-    + badge(176, 108, 1)
-    + '<text class="t" x="216" y="84">Skills</text><text class="s" x="216" y="106">Upload a .zip that contains SKILL.md — do not unzip it</text>'
-    + '<rect class="f" x="216" y="126" width="300" height="40" rx="8"/><text class="m" x="230" y="151">nextra-rhinogh-skill.zip</text>'
-    + button(536, 130, 130, "Upload skill", n=2))
+# 2 Claude Desktop: Customize > Plugins > + Add > Add marketplace (labels as in the app, Oct 2026)
+svg("claude-desktop-plugin.svg", 720, 300,
+    window(20, 16, 680, 268, "Claude — Customize")
+    + '<text class="s" x="44" y="76">Skills</text><text class="s" x="98" y="76">Connectors</text>'
+    + '<rect class="navsel" x="178" y="58" width="70" height="28" rx="6"/><text class="t" x="188" y="77">Plugins</text>' + badge(254, 60, 1)
+    + button(560, 56, 110, "+ Add", ring=False)
+    + '<rect class="win" x="470" y="98" width="200" height="40" rx="8"/><text class="t" x="490" y="123">Add marketplace</text>'
+    + '<rect class="ring" x="464" y="92" width="212" height="52" rx="10"/>' + badge(680, 96, 2)
+    + field(44, 168, 400, "Marketplace", "Tatsuki0123/nextra-rhinogh") + badge(452, 194, 3)
+    + '<text class="s" x="44" y="242">then open  nextra-rhinogh  in the list →  Add / Install</text>' + badge(400, 237, 4))
 
 # 4 Claude Code / terminal
 svg("claude-code.svg", 720, 170,
@@ -97,14 +83,4 @@ svg("chatgpt-prompt.svg", 720, 210,
     + badge(676, 66, 1)
     + '<text class="s" x="44" y="170">The agent runs both commands. Then restart the app.</text>' + badge(400, 165, 2))
 
-# 6 ChatGPT / Codex desktop: add the server by hand
-svg("chatgpt-settings.svg", 720, 330,
-    window(20, 16, 680, 298, "ChatGPT / Codex desktop — Settings › MCP servers › Add server")
-    + field(44, 72, 300, "Name", "nextra-rhinogh") + badge(352, 98, 1)
-    + '<text class="s" x="380" y="72">Type</text><circle cx="392" cy="98" r="7" fill="#1f883d"/><text class="t" x="406" y="103">STDIO</text>'
-    + '<circle cx="482" cy="98" r="7" fill="none" stroke="#57606a"/><text class="s" x="496" y="103">Streamable HTTP</text>' + badge(640, 98, 2)
-    + field(44, 140, 120, "Command", "node") + badge(172, 166, 3)
-    + field(44, 202, 560, "Argument", "C:\\Users\\&lt;you&gt;\\AppData\\Roaming\\Nextra\\bridge\\index.js") + badge(612, 228, 4)
-    + '<text class="s" x="44" y="282">Tip: in Rhino run  Nextra › CopyBridgePath  and paste.</text>'
-    + button(560, 262, 110, "Save", n=5))
 print("written to", out)

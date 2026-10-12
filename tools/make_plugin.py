@@ -59,5 +59,14 @@ write("/.agents/plugins/marketplace.json", {
     "plugins": [{"name": name, "source": {"source": "local", "path": f"./plugin/{name}"},
                  "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Design"}],
 })
-print(f"{root}: plug-in {ver}")
+# dist/nextra-rhinogh-plugin.zip: the same folder as one file, for Claude's "Customize > Plugins > Add > Upload plugin"
+import zipfile
+zp = os.path.join(repo, "dist", f"{name}-plugin.zip")
+os.makedirs(os.path.dirname(zp), exist_ok=True)
+with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
+    for d, _, files in os.walk(root):
+        for f in sorted(files):
+            full = os.path.join(d, f)
+            z.write(full, os.path.relpath(full, root).replace(os.sep, "/"))
+print(f"{root}: plug-in {ver}  ->  {zp}")
 sys.exit(0)
