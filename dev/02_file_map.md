@@ -114,7 +114,7 @@ Project files: `Nextra.Engine.csproj`, `Nextra.Host.csproj`, and `src/Directory.
 One folder per requested case (`01_rhino_from_scratch` … `16_messy_tidy`), plus `extra_component_controls`, `status_dot` and `memory_test`.
 Each holds the images the LLM received and the produced `.3dm` / `.gh` / scripts.
 - `test/regress/regress.py` — **the regression suite**: every case in one Rhino session, in order, with checks (194 steps). Scripts it runs are in `test/regress/scripts/`. Outputs go to `test/regress/out/` (git-ignored); each run uses a fresh memory folder.
-- `11_compare/` — the benchmark: `REPORT.md`, v1 harness `bench_*.py`, and v2 in `11_compare/v2/` (`bench_v2.py` live harness, `ghspec.py` neutral GH specs + per-system emitters, `office.py`, `gen_report.py`, raw calls in `v2/out/`).
+- `11_compare/` — the benchmark: `REPORT.md`, v1 harness `bench_*.py`, and v2 in `test/v2/` (`bench_v2.py` live harness, `ghspec.py` neutral GH specs + per-system emitters, `office.py`, `gen_report.py`, raw calls in `v2/out/`).
 - `test/README.md` — the results table.
 
 ## Which file do I open for…

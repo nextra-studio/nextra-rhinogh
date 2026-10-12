@@ -1,0 +1,62 @@
+
+##### nextra
+  nextra    1_build            gh_edit                            out    250  in    225
+  nextra    3_params           gh_edit                            out      7  in     32
+  nextra    4_edge_beams       gh_edit                            out     18  in     67
+  nextra    9_look             view                               out      4  in    416
+
+##### mcneel
+  mcneel    1_search           g1_search_components               out      8  in    257
+  mcneel    1_search           g1_search_components               out      9  in    103
+  mcneel    1_search           g1_search_components               out      7  in    244
+  mcneel    1_build            g1_apply_graph                     out    974  in   1558
+  mcneel    1_recover          g1_apply_graph                     out    230  in    203
+  mcneel    1_recover          g1_connect_many                    out    720  in   1015
+  mcneel    1_fix              run_python                         out    742  in      7
+  mcneel    1_verify           g1_get_canvas_graph                out     10  in   5932
+  mcneel    3_params           run_python                         out     86  in      7
+  mcneel    4_edge_beams       g1_apply_graph                     out     73  in     59
+  mcneel    4_edge_beams       g1_connect_many                    out     37  in     50
+  mcneel    4_edge_beams       run_python                         out     93  in      7
+  mcneel    9_look             get_viewport_image                 out     19  in    770
+
+##### rhinomcp
+  rhinomcp  1_search           gh_search_components               out      8  in    301
+  rhinomcp  1_search           gh_search_components               out      9  in    145
+  rhinomcp  1_search           gh_search_components               out      7  in    318
+  rhinomcp  1_build            gh_build_graph                     out   1134  in  11667
+  rhinomcp  1_fix              execute_rhinoscript_python_code    out    147  in     11
+  rhinomcp  3_params           gh_set_parameter_value             out      8  in     41
+  rhinomcp  3_params           gh_set_parameter_value             out      7  in     40
+  rhinomcp  4_edge_beams       gh_mutate_graph                    out     92  in   1247
+  rhinomcp  4_edge_beams       gh_set_parameter_value             out     22  in     37
+  rhinomcp  9_look             gh_capture_preview                 out      0  in    642
+{
+ "C/nextra": {
+  "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ },
+ "C/mcneel": {
+  "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ },
+ "C/rhinomcp": {
+  "built": "objects 32 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 34 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ }
+}

@@ -12,7 +12,7 @@ usage: python bench_v2.py [A] [B] [C]       (scenarios; default all)
 import base64, io, json, os, queue, subprocess, sys, threading, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, os.path.join(REPO, "tools")); sys.path.insert(0, HERE)
 import nx  # noqa: E402
 import ghspec  # noqa: E402

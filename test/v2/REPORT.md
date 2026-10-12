@@ -29,7 +29,7 @@ Raven V2 is covered in the capability table only (§4), because it is not an MCP
 
 **Estimation and evidence**
 - Tokens are estimated as text ÷ 4 characters and image width × height ÷ 750, the same for every system. One run.
-- Harness: [v2/bench_v2.py](v2/bench_v2.py) and [v2/ghspec.py](v2/ghspec.py). Raw requests and replies: `v2/out/<scenario>/<system>/`. Numbers: `v2/rows_v2.json`.
+- Harness: [bench_v2.py](bench_v2.py) and [ghspec.py](ghspec.py). Raw requests and replies: `out/<scenario>/<system>/`. Numbers: `rows_v2.json`, tables: `tables_v2.md`.
 
 ## 2. Results
 
@@ -132,7 +132,7 @@ The gridshell is built from three arches with a wave crown, lofted, divided into
 
 ### Results of the earlier, simpler benchmark (v1)
 
-The v1 tasks were a 36-object frame and a 16-node twisting tower, with output and input counted together and without billing estimates. Nextra came to about 3.4k tokens, McNeel about 24k and RhinoMCP about 52k. The raw data is in `out/` and `rows_*.json`.
+The v1 tasks were a 36-object frame and a 16-node twisting tower, with output and input counted together and without billing estimates. Nextra came to about 3.4k tokens, McNeel about 24k and RhinoMCP about 52k. The raw data is in [../11_compare/](../11_compare/).
 
 ## 3. Things that went wrong on the way (all systems)
 
@@ -148,7 +148,7 @@ The v1 tasks were a 36-object frame and a 16-node twisting tower, with output an
 **Undo, McNeel and RhinoMCP**
 - Both use Rhino's own undo stack. In one long-lived Rhino session it answered "Nothing to undo" for both.
 - In a fresh session both undid correctly. That is the run reported above.
-- A separate probe ([v2/undo_probe.py](v2/undo_probe.py)) showed that Nextra's activity (queries, runs, GH edits) does not disturb other tools' undo.
+- A separate probe ([undo_probe.py](undo_probe.py)) showed that Nextra's activity (queries, runs, GH edits) does not disturb other tools' undo.
 - Nextra's own `undo` restores from its checkpoints, so it does not depend on that stack.
 
 **Nextra**

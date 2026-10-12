@@ -58,7 +58,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] 08 GH Python component with Karamba-style radio buttons on the component (custom attributes), visually verified
 - [x] 09 Rhino python save (library)
 - [x] 10 Rhino use existing python in a folder
-- [x] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/REPORT.md`
+- [x] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/` (v1) and `test/v2/REPORT.md` (v2)
 - [x] 12 GH Karamba simple model
 - [x] 13 Rhino Marina Bay Sands
 - [x] 14 Architecture house → centerlines → FE model → GH Karamba analysis
@@ -85,5 +85,5 @@ config.json has a test memory_dir (restore from config.json.bak at the end); use
 - [x] H4 User folder %APPDATA%\Nextra\user (plug-in creates it at first start with README + templates; Rhino command NextraFolder opens it): preferences.md, workflows/ (`when:` line), plugins/ (`plugin:` line + `## Rules`), scripts/. Wired into memory list, docs, library, plug-in guides, bridge schema, SKILL.md. TODO (H8): dev docs + README mention; package a skill .zip for claude.ai upload
 - [x] H5 Regression pass 3 → all 177 steps pass (host: InternalGetWindowText so status/timeouts never wait for a busy UI thread; round-trip id collision; rs docs order)
 - [x] H6 Code review (engine + host) → fixed: per-document handle tables, exact layer/name/group selectors (+ `inside:`), symbol ports (`g10.<`) + XZ/YZ plane literals round-trip, mirror file names per document, plug-in rules reset per conversation, GH solutions-disabled respected on open, StateIO bool parsing, menu disposal, capture pruning (7 days), server stop never re-publishes a dead port / no duplicate doc hooks, engine reload keeps the old engine if the new dll fails. Regression 194/194 on a fresh Rhino, and 194/194 again in the same session.
-- [x] H7 Benchmark v2 (test/11_compare/v2, REPORT.md): A office 548 objects + edits + undo, B attractor facade + 3 edits, C organic gridshell + 2 edits; output / input / fixed / billed tokens per task; all 9 system×scenario results checked correct. Whole session: Nextra ≈9.1k, McNeel ≈32.9k (3.6×), RhinoMCP ≈64.9k (7.1×); billed input no cache 122k / 625k / 1.06M. Found + fixed: results through Custom Preview, false conversion notes, phantom checkpoint ids.
+- [x] H7 Benchmark v2 (test/v2, REPORT.md): A office 548 objects + edits + undo, B attractor facade + 3 edits, C organic gridshell + 2 edits; output / input / fixed / billed tokens per task; all 9 system×scenario results checked correct. Whole session: Nextra ≈9.1k, McNeel ≈32.9k (3.6×), RhinoMCP ≈64.9k (7.1×); billed input no cache 122k / 625k / 1.06M. Found + fixed: results through Custom Preview, false conversion notes, phantom checkpoint ids.
 - [x] H8 Environment restored (old Nextra-gh/-rhino packages back, RhinoMCP uninstalled, test memory_dir removed from config, user's frame_building.py naming fixed with .bak), README / dev docs / test README updated, claude.ai skill zip in package.ps1. Final regression in the normal environment: 194/194.

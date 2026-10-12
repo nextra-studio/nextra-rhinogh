@@ -1,6 +1,6 @@
 """Does McNeel's run_python + _Undo work, and does Nextra activity in between change that? (diagnostic, not counted)"""
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "tools"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
 from mcp_http import Client
 import nx
 

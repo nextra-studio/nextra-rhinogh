@@ -11,7 +11,7 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 | `undo` | Exact revert to any checkpoint (Rhino objects + GH document), independent of Rhino's own undo stack. |
 | `memory` | Your preferences and workflows, learned rules (user-approved), mistake log, script library. |
 
-**Tokens.** Measured live in the same Rhino on three detailed scenarios: a 548-object office with edits, a GH attractor facade with edits, and a GH gridshell with edits. Input and output are counted separately, including schemas and docs; details in [test/11_compare/REPORT.md](test/11_compare/REPORT.md).
+**Tokens.** Measured live in the same Rhino on three detailed scenarios: a 548-object office with edits, a GH attractor facade with edits, and a GH gridshell with edits. Input and output are counted separately, including schemas and docs; details in [test/v2/REPORT.md](test/v2/REPORT.md).
 
 | one session | Nextra | McNeel Rhino-MCP-Platform | RhinoMCP |
 |---|---|---|---|
@@ -66,7 +66,7 @@ src/Nextra.Engine   all Rhino/GH logic (hot-reloaded on rebuild): tools, shortha
 bridge/             MCP stdio bridge (zero-dependency Node) + .mcpb manifest
 skill/nextra/       SKILL.md, shorthand.md, workflows.md, api/*, plugins/<Category>.md (auto-attached plug-in guides)
 tools/              build.py, deploy_dev.ps1 (dev install with hot reload), package.ps1 (yak + mcpb + skill zip), nx.py (test client), mcp_http.py
-test/               evidence per case; regress/ = full regression suite; 11_compare/ = benchmark harness + REPORT.md
+test/               evidence per case; regress/ = full regression suite; v2/ = benchmark v2 with report and all raw results (11_compare/ = first benchmark)
 dev/                developer guide, original plan, build checklist, reference code (information only, not part of the skill)
 ```
 

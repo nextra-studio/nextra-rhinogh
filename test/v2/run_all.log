@@ -1,0 +1,143 @@
+
+##### nextra
+  nextra    0_session          memory                             out      4  in    193
+  nextra    1_build            run                                out    891  in    171
+  nextra    2_look             view                               out      3  in    735
+  nextra    3_inspect_core     query                              out      6  in    341
+  nextra    4_add_storey       run                                out     13  in    191
+  nextra    5_move_core        run                                out     28  in     61
+  nextra    6_delete_south     run                                out     19  in     24
+  nextra    7_undo             undo                               out      5  in     12
+  nextra    0_docs             query                              out     10  in   1514
+  nextra    1_build            gh_edit                            out    270  in    191
+  nextra    3_attractor_curve  gh_edit                            out     49  in     76
+  nextra    4_open_scale       gh_edit                            out     34  in     49
+  nextra    5_tidy             gh_edit                            out      4  in     25
+  nextra    9_look             view                               out      4  in    417
+  nextra    1_build            gh_edit                            out    250  in    225
+  nextra    3_params           gh_edit                            out      7  in     31
+  nextra    4_edge_beams       gh_edit                            out     18  in     67
+  nextra    9_look             view                               out      4  in    416
+
+##### mcneel
+  mcneel    1_build            run_python                         out    934  in     49
+  mcneel    2_look             get_viewport_image                 out     19  in    774
+  mcneel    3_inspect_core     list_objects                       out      4  in    374
+  mcneel    4_add_storey       run_python                         out    940  in     49
+  mcneel    5_move_core        run_python                         out     61  in      9
+  mcneel    6_delete_south     run_python                         out     64  in      9
+  mcneel    7_undo             run_command                        out      5  in      5
+  mcneel    1_search           g1_search_components               out      8  in    326
+  mcneel    1_build            g1_apply_graph                     out    956  in   1101
+  mcneel    1_recover          g1_apply_graph                     out    100  in     89
+  mcneel    1_recover          g1_connect_many                    out    378  in    537
+  mcneel    1_fix              run_python                         out    610  in      7
+  mcneel    1_verify           g1_get_canvas_graph                out     10  in   5274
+  mcneel    3_attractor_curve  g1_apply_graph                     out    141  in    115
+  mcneel    3_attractor_curve  g1_connect_many                    out    192  in    278
+  mcneel    3_attractor_curve  run_python                         out     71  in      7
+  mcneel    4_open_scale       g1_apply_graph                     out     77  in     58
+  mcneel    4_open_scale       g1_connect_many                    out     68  in     93
+  mcneel    4_open_scale       run_python                         out    107  in      7
+  mcneel    5_tidy             run_python                         out    218  in      7
+  mcneel    9_look             get_viewport_image                 out     19  in    771
+  mcneel    1_search           g1_search_components               out      8  in    257
+  mcneel    1_search           g1_search_components               out      9  in    103
+  mcneel    1_search           g1_search_components               out      7  in    244
+  mcneel    1_build            g1_apply_graph                     out    974  in   1558
+  mcneel    1_recover          g1_apply_graph                     out    230  in    203
+  mcneel    1_recover          g1_connect_many                    out    720  in   1015
+  mcneel    1_fix              run_python                         out    742  in      7
+  mcneel    1_verify           g1_get_canvas_graph                out     10  in   5932
+  mcneel    3_params           run_python                         out     86  in      7
+  mcneel    4_edge_beams       g1_apply_graph                     out     73  in     59
+  mcneel    4_edge_beams       g1_connect_many                    out     37  in     50
+  mcneel    4_edge_beams       run_python                         out     93  in      7
+  mcneel    9_look             get_viewport_image                 out     19  in    771
+
+##### rhinomcp
+  rhinomcp  1_build            execute_rhinoscript_python_code    out    937  in     65
+  rhinomcp  2_look             capture_viewport                   out     14  in    642
+  rhinomcp  3_inspect_core     get_objects                        out      6  in   1682
+  rhinomcp  4_add_storey       execute_rhinoscript_python_code    out    943  in     66
+  rhinomcp  5_move_core        execute_rhinoscript_python_code    out     64  in     16
+  rhinomcp  6_delete_south     execute_rhinoscript_python_code    out     67  in     18
+  rhinomcp  7_undo             undo                               out      3  in      5
+  rhinomcp  1_search           gh_search_components               out      8  in    354
+  rhinomcp  1_build            gh_build_graph                     out   1080  in  11477
+  rhinomcp  3_attractor_curve  gh_mutate_graph                    out    320  in   4236
+  rhinomcp  4_open_scale       gh_mutate_graph                    out    156  in   1751
+  rhinomcp  5_tidy             gh_layout_components               out      0  in   1482
+  rhinomcp  9_look             gh_capture_preview                 out      0  in    642
+  rhinomcp  1_search           gh_search_components               out      8  in    301
+  rhinomcp  1_search           gh_search_components               out      9  in    145
+  rhinomcp  1_search           gh_search_components               out      7  in    318
+  rhinomcp  1_build            gh_build_graph                     out   1134  in  11667
+  rhinomcp  1_fix              execute_rhinoscript_python_code    out    147  in     11
+  rhinomcp  3_params           gh_set_parameter_value             out      8  in     41
+  rhinomcp  3_params           gh_set_parameter_value             out      7  in     40
+  rhinomcp  4_edge_beams       gh_mutate_graph                    out     92  in   1247
+  rhinomcp  4_edge_beams       gh_set_parameter_value             out     22  in     37
+  rhinomcp  9_look             gh_capture_preview                 out      0  in    642
+{
+ "A/nextra": {
+  "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+  "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+ },
+ "B/nextra": {
+  "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+  "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+  "ambiguous": [
+   "Rectangle"
+  ]
+ },
+ "C/nextra": {
+  "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ },
+ "A/mcneel": {
+  "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+  "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+ },
+ "B/mcneel": {
+  "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+  "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+  "ambiguous": [
+   "Rectangle"
+  ]
+ },
+ "C/mcneel": {
+  "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ },
+ "A/rhinomcp": {
+  "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+  "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+ },
+ "B/rhinomcp": {
+  "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+  "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+  "ambiguous": [
+   "Rectangle"
+  ]
+ },
+ "C/rhinomcp": {
+  "built": "objects 32 groups 4 sink {'Pipe': 32} errors 0",
+  "after_edits": "objects 34 groups 4 sink {'Pipe': 42} errors 0",
+  "ambiguous": [
+   "Addition",
+   "Loft Options",
+   "Merge"
+  ]
+ }
+}
