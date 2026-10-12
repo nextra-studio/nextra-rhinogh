@@ -492,6 +492,30 @@ namespace Nextra.Engine.Gh
             a.PerformLayout();
         }
 
+        /// Params whose attributes hang off another (orphaned) attributes object than their component's:
+        /// they do not move or deselect with it (stretched bounds, a wire that stays highlighted).
+        /// Definitions built before the Builder fix have these; relink them to the live attributes.
+        public static int RelinkParams(GH_Document d)
+        {
+            int n = 0;
+            foreach (var c in d.Objects.OfType<IGH_Component>())
+            {
+                var a = c.Attributes;
+                if (a == null) continue;
+                bool any = false;
+                foreach (var p in c.Params.Input.Concat(c.Params.Output))
+                {
+                    if (p.Attributes != null && ReferenceEquals(p.Attributes.Parent, a)) continue;
+                    p.Attributes = new Grasshopper.Kernel.Attributes.GH_LinkedParamAttributes(p, a);
+                    any = true;
+                }
+                if (!any) continue;
+                a.ExpireLayout(); a.PerformLayout();
+                n++;
+            }
+            return n;
+        }
+
         static readonly Dictionary<Guid, List<PointF>> FreshOffsets = new Dictionary<Guid, List<PointF>>();
 
         /// Repair components whose child params drifted from where the component itself puts them
@@ -499,7 +523,7 @@ namespace Nextra.Engine.Gh
         /// on a fresh instance, then let the component lay out its visible params again.
         public static int RepairBounds(GH_Document d)
         {
-            int fixedN = 0;
+            int fixedN = RelinkParams(d);
             foreach (var c in d.Objects.OfType<IGH_Component>())
             {
                 var a = c.Attributes;
@@ -512,7 +536,8 @@ namespace Nextra.Engine.Gh
                         var fresh = Grasshopper.Instances.ComponentServer.EmitObjectProxy(c.ComponentGuid)?.CreateInstance() as IGH_Component;
                         if (fresh != null)
                         {
-                            fresh.CreateAttributes(); fresh.Attributes.Pivot = PointF.Empty; fresh.Attributes.PerformLayout();
+                            if (fresh.Attributes == null) fresh.CreateAttributes();
+                            fresh.Attributes.Pivot = PointF.Empty; fresh.Attributes.PerformLayout();
                             offs = fresh.Params.Input.Concat(fresh.Params.Output).Select(p => p.Attributes?.Pivot ?? PointF.Empty).ToList();
                         }
                     }

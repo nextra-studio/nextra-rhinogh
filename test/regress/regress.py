@@ -337,6 +337,9 @@ pm = Panel (=asm.Mass) "Mass kg"
     v = num_after(d, r"MaxDisp: .*?e\.g\. ([\d.]+)")
     c.check(v is not None and abs(v - 47.04) < 0.2, "max displacement = 47.04 cm (PL³/48EI)", f"got {v}")
     c.call("query", {"scope": "gh", "filter": m["sup"], "level": "detail"}, expect=[r"\$|menu"])
+    # params must hang off their component's live attributes, or they do not move / deselect with it
+    # (stretching Assemble, wires that stay highlighted); hidden Karamba params must match a native instance
+    c.call("run", {"code": script("param_attrs.py")}, expect=[r"orphaned: 0", r"assemble native: True"])
     # component controls: right-click toggle on a built-in component
     t = c.call("gh_edit", {"ops": f"## Menu test #E6E6A0\nbb = Bounding Box (C={m['sh']})"}, expect=[r"2 Box"])
     bb = ids(t)["bb"]

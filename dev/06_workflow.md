@@ -11,7 +11,7 @@ powershell tools/deploy_dev.ps1
 ```
 This does four things:
 - builds both projects;
-- copies the `.rhp` and the engine into `%APPDATA%/McNeel/Rhinoceros/packages/8.0/Nextra-zero/0.1.0/`;
+- copies the `.rhp` and the engine into `%APPDATA%/McNeel/Rhinoceros/packages/8.0/Nextra-RhinoGh/0.1.1/`;
 - writes `config.json` with `engine_path` pointing at `src/Nextra.Engine/bin/Debug/Nextra.Engine.dll` (this enables hot reload) and `skill_dir` pointing at the repo's `skill/nextra`;
 - re-syncs `.claude/skills/nextra-rhinogh`.
 
@@ -76,8 +76,8 @@ python test/regress/regress.py 03 04      # only cases whose id starts with thes
 powershell tools/package.ps1
 ```
 Produces in `dist/`:
-- `nextra-zero-0.1.0-rh8_35-win.yak`: Rhino package with the `.rhp`, engine, `skill/` and `bridge/`.
-- `nextra-rhinogh-0.1.0.mcpb`: the Claude Desktop bundle (bridge + manifest).
+- `nextra-rhinogh-0.1.1-rh8_35-win.yak`: Rhino package with the `.rhp`, engine, `skill/` and `bridge/`.
+- `nextra-rhinogh-0.1.1.mcpb`: the Claude Desktop bundle (bridge + manifest).
 
 Bump the version in `deploy_dev.ps1`, `package.ps1`, `bridge/server/index.js` (`VERSION`) and `bridge/manifest.json` together.
 

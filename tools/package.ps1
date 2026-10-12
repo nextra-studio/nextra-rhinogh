@@ -1,7 +1,7 @@
 # Release packaging: Yak package (Rhino) + .mcpb (Claude Desktop). Output in dist/.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
-$ver = "0.1.0"
+$ver = "0.1.1"
 $dist = Join-Path $repo "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue
@@ -23,7 +23,7 @@ version: $ver
 authors:
 - Tatsuki
 description: Nextra for Rhino 8 + Grasshopper. Six token-lean tools (view, query, run, gh_edit, undo, memory) for any MCP client.
-url: https://github.com/Tatsuki0123/nextra-rhinogh
+url: https://github.com/Tatsuki0123/nextra-rhinogh-releases
 keywords: [mcp, llm, ai, grasshopper]
 "@ | Set-Content -Encoding utf8 (Join-Path $stage "manifest.yml")
 
@@ -39,9 +39,6 @@ Get-ChildItem $stage -Filter *.yak | Move-Item -Destination $dist -Force
 # in here: they live in the user's Nextra folder and reach the model through the tools, so the uploaded skill stays generic.
 python "$repo\tools\make_skill_zip.py"
 
-# .mcpb = zip of bridge (manifest.json + server/)
-$mcpb = Join-Path $dist "nextra-rhinogh-$ver.mcpb"
-Remove-Item $mcpb -ErrorAction SilentlyContinue
-Compress-Archive -Path "$repo\bridge\manifest.json", "$repo\bridge\server" -DestinationPath ($mcpb + ".zip")
-Move-Item ($mcpb + ".zip") $mcpb -Force
+# .mcpb = zip of bridge (manifest.json + server/), forward-slash entries
+python "$repo\tools\make_mcpb.py"
 Get-ChildItem $dist -File | Select Name, Length

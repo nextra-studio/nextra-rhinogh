@@ -82,7 +82,9 @@ namespace Nextra.Engine.Gh.Shorthand
                     var proxy = ComponentSearch.Resolve(n.Type, n.Category, out var note, n.Inputs.Select(x => x.Port).Where(x => x != null).ToList());
                     if (note != null) res.Notes.Add($"L{n.Line}: {note}");
                     var obj = proxy.CreateInstance() ?? throw new NxError($"could not instantiate {n.Type}");
-                    obj.CreateAttributes();
+                    // CreateInstance already made attributes with the params linked to them; a second
+                    // CreateAttributes orphans the params (stretching bounds, wires that stay highlighted)
+                    if (obj.Attributes == null) obj.CreateAttributes();
                     obj.Attributes.Pivot = new PointF(0, 0);
                     d.AddObject(obj, false);
                     locals[n.Id] = obj;

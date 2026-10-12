@@ -32,11 +32,15 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-1. **Rhino plug-in.** In Package Manager, install `Nextra-RhinoGh` (search it in Package Manager, or drag `dist/nextra-rhinogh-0.1.0-rh8_35-win.yak` onto Rhino / run `Yak.exe install <file>`), then restart Rhino.
+**For other people:** send them to the public page **https://github.com/Tatsuki0123/nextra-rhinogh-releases**. It has the install guide and the downloads (`.mcpb` bridge, skill zip, `.yak`). This repo is private. All three parts are needed: Rhino plug-in (Package Manager), bridge (`.mcpb`) and skill (`.zip`). Without the bridge, Claude has no tools and says Nextra isn't connected.
+
+**New release:** `tools/package.ps1`, then `gh release create v<ver> --repo Tatsuki0123/nextra-rhinogh-releases dist/*.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-*.yak`.
+
+1. **Rhino plug-in.** In Package Manager, install `Nextra-RhinoGh` (search it in Package Manager, or drag `dist/nextra-rhinogh-0.1.1-rh8_35-win.yak` onto Rhino / run `Yak.exe install <file>`), then restart Rhino.
    - **Status dot:** a small dot appears at the bottom-right of the Rhino window and of the GH canvas. Green = an LLM is connected, amber = ready, red = click to restart.
    - **Commands:** `Nextra`, `NextraOn`, `NextraOff`, `NextraFolder`.
 2. **LLM side**
-   - **Claude Desktop:** open `dist/nextra-rhinogh-0.1.0.mcpb`.
+   - **Claude Desktop:** open `dist/nextra-rhinogh-0.1.1.mcpb`.
    - **Claude Code:** open this folder (`.mcp.json` and `.claude/skills/nextra-rhinogh` are project-scoped). Elsewhere, add the server with `claude mcp add nextra-rhinogh -- node <repo>/bridge/server/index.js`.
    - **claude.ai skills:** upload `dist/nextra-rhinogh-skill.zip`.
    - **Any other MCP client:** run `node bridge/server/index.js` over stdio (Node ≥ 18, no dependencies). LLMs other than Claude read the same docs through `query {scope:'docs'}`.
