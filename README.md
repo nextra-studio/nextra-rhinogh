@@ -1,6 +1,8 @@
 # Nextra for Rhino 8 + Grasshopper
 
-Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from Claude Code, Claude Desktop or any MCP client. Replies say exactly what changed, images carry tags the model can point at, and every edit can be undone.
+Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say exactly what changed, images carry tags the model can point at, and every edit can be undone.
+
+**[Installation guide](#install)** · **[Claude plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[ChatGPT / Codex ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip)**
 
 | tool | what it does |
 |---|---|
@@ -32,106 +34,153 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-Windows · Rhino 8 · Node 18+ · one AI app. Two steps:
+**Windows · Rhino 8 · Node.js 18+ · your preferred AI desktop app.**
 
-![Step 1: Rhino plug-in. Step 2: download one zip and load it in your AI app](docs/img/overview.svg)
+Install the Rhino plug-in once, then choose **one** installation method for your AI app below. Each AI plugin includes both the tools and the skill.
 
-### 1 · Rhino plug-in
+### 1. Install in Rhino
 
-In Rhino type **`PackageManager`**, search **`Nextra-RhinoGh`**, click **Install**, then **restart Rhino**.
+1. In Rhino, run **`PackageManager`**.
+2. Search **`Nextra-RhinoGh`**, click **Install**, and restart Rhino.
+3. Look for the status dot in the bottom-right corner.
 
 ![Rhino Package Manager: search Nextra-RhinoGh, click Install](docs/img/install/rhino-package-manager.svg)
-
-A dot in the bottom-right corner of Rhino means it works:
 
 ![Status dot in the bottom-right corner of Rhino](docs/img/status-dot-real.png)
 
 ![Green = connected, amber = ready, red = click to restart](docs/img/dot-states.svg)
 
-### 2 · Download from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest)
+### 2. Install in your AI app
 
-<details open>
-<summary><b>Claude Desktop</b> → <code>nextra-rhinogh-plugin.zip</code></summary>
+| Your app | One-click download | What to do with the download |
+|---|---|---|
+| **Claude Desktop / Cowork** | **[Download plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** | Upload the ZIP in **Customize → Plugins → Add → Upload plugin**. |
+| **ChatGPT desktop / Codex** | **[Download agent kit ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip)** | Extract it, then paste the installation prompt below into Codex. |
 
-**Customize → Plugins → + Add → Upload plugin** → pick the zip (don't unzip it).
+**The links download the ready-made packages.** A GitHub download cannot complete installation inside another app: follow the short steps for your app. You can also add the marketplace without downloading a ZIP.
 
-![Claude Desktop: Customize, Plugins, Add, Upload plugin](docs/img/install/claude-desktop-plugin.svg)
+#### Claude Desktop
 
-Use it in a **Cowork** session. Plain *chat* can't start local tools: for chat, double-click `nextra-rhinogh-<version>.mcpb` from the same release instead.
+Use **Cowork** for the plugin's local Rhino tools. For the Chat tab, use the desktop extension described below.
 
-</details>
+**Way A — Add the marketplace**
 
-<details open>
-<summary><b>ChatGPT / Codex desktop</b> → <code>nextra-rhinogh-agent-kit.zip</code></summary>
+1. Open **Customize → Plugins → Add → Add marketplace → Add from a repository**.
+2. Paste this repository name:
 
-This app has no "upload a zip" button, so unzip it anywhere, switch to **Codex** or **Work** mode and paste (with your folder path). Then restart the app.
+   ```text
+   Tatsuki0123/nextra-rhinogh
+   ```
 
-```
-Run: codex plugin marketplace add C:/Users/you/nextra-rhinogh-kit
-then: codex plugin add nextra-rhinogh@nextra
-```
+3. Sync/add the marketplace, open **nextra-rhinogh**, and click **Install**.
+4. Start a new Cowork session with Rhino open.
 
-![Paste the prompt in Codex or Work mode](docs/img/install/chatgpt-prompt.svg)
+![Claude Desktop: add the Nextra marketplace](docs/img/install/claude-desktop-marketplace.svg)
 
-</details>
+**Way B — Download and upload**
 
-<details>
-<summary><b>Claude Code</b></summary>
+1. **[Download the Claude plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)**.
+2. Open **Customize → Plugins → Add → Upload plugin**.
+3. Select **`nextra-rhinogh-plugin.zip`** without extracting it, then complete the installation.
+4. Start a new Cowork session with Rhino open.
 
-```
-/plugin install nextra-rhinogh --marketplace Tatsuki0123/nextra-rhinogh
-```
-
-![Claude Code: one install command](docs/img/install/claude-code.svg)
-
-</details>
+![Claude Desktop: upload the plugin ZIP](docs/img/install/claude-desktop-plugin.svg)
 
 <details>
-<summary><b>Any other agent</b> (Cursor, Cline, Gemini CLI, …) → <code>nextra-rhinogh-agent-kit.zip</code></summary>
+<summary>Claude Desktop Chat tab: use the desktop extension</summary>
 
-Unzip it and **open the folder as the agent's workspace**. It is one folder with the skill and the MCP server inside:
-
-```
-nextra-rhinogh-kit/
-├─ AGENTS.md          ← the agent reads this first: what it is and how to connect
-├─ server/index.js    ← the tools (MCP server, Node, no dependencies)
-├─ skills/nextra-rhinogh/SKILL.md   ← the skill (also under .agents/ and .claude/)
-├─ .mcp.json          ← Claude Code picks the server up from here
-└─ .codex/config.toml ← Codex picks the server up from here
-```
-
-If your agent doesn't read those files, register the server by hand: command `node`, argument `<folder>/server/index.js`. Then tell it to read `AGENTS.md`.
+Download the **`.mcpb`** file from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest), double-click it, and complete Claude's installation prompts. Restart Claude. This installs the local MCP tools for chat; the plugin's bundled skill is a separate install in this route. The tools also serve the Nextra instructions through `query`.
 
 </details>
 
-### Try it
+#### ChatGPT desktop / Codex
 
-With Rhino open, ask: ***"Create a simple timber house in Rhino."*** The dot turns green while the AI works.
+Open **Codex** in the desktop app to run the installation prompt. Node.js and the `codex` CLI must be available on your computer.
+
+**Way A — Add the marketplace**
+
+Copy this entire prompt into Codex:
+
+```text
+Install Nextra for Rhino from its public GitHub marketplace. Run:
+codex plugin marketplace add Tatsuki0123/nextra-rhinogh
+codex plugin add nextra-rhinogh@nextra
+```
+
+Restart the desktop app and start a new chat. If the plugin is listed but disabled, enable **Nextra for Rhino** in the **Plugins Directory**.
+
+![ChatGPT / Codex: install from the Nextra marketplace](docs/img/install/chatgpt-marketplace.svg)
+
+**Way B — Download and install from a folder**
+
+1. **[Download the agent kit ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip)**.
+2. Right-click the ZIP → **Extract All**. Keep the extracted folder.
+3. Copy this prompt into Codex, replacing the example path with the folder containing **`AGENTS.md`**:
+
+   ```text
+   Install Nextra for Rhino from my downloaded folder. Run:
+   codex plugin marketplace add "C:/Users/you/Downloads/nextra-rhinogh-kit"
+   codex plugin add nextra-rhinogh@nextra
+   ```
+
+4. Restart the desktop app and start a new chat.
+
+![ChatGPT / Codex: install from the extracted agent kit](docs/img/install/chatgpt-prompt.svg)
+
+If `codex` is unavailable, open the extracted **`nextra-rhinogh-kit`** folder as a Codex project, trust the project, restart the app, and select **Nextra → Nextra for Rhino → Install** in the **Plugins Directory**. The folder includes the local marketplace and MCP configuration.
+
+<details>
+<summary>Claude Code and other MCP clients</summary>
+
+**Claude Code:** run these two commands, then start a new session:
+
+```text
+/plugin marketplace add Tatsuki0123/nextra-rhinogh
+/plugin install nextra-rhinogh@nextra
+```
+
+![Claude Code: add the marketplace and install Nextra](docs/img/install/claude-code.svg)
+
+**Other agents (Cursor, Cline, Gemini CLI, …):** [download the agent kit](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip), extract it, and open **`nextra-rhinogh-kit`** as your workspace. Ask the agent to read **`AGENTS.md`** for setup. If your client needs manual MCP configuration, use command **`node`**, argument **`<full path to the kit>/server/index.js`**, and read **`skills/nextra-rhinogh/SKILL.md`**.
+
+</details>
+
+### 3. Try it
+
+Keep Rhino open and ask: **“Create a simple timber house in Rhino.”** The dot turns green when the AI connects.
 
 ### Troubleshooting
 
-| You see | Do |
+| You see | What to do |
 |---|---|
-| AI says "Nextra isn't connected" / no Rhino tools | Step 2 is missing, or Claude Desktop is in plain chat (use Cowork or the `.mcpb`). Restart the app after installing. |
-| `Unknown command: NextraOn` | Restart Rhino. Still missing: `PlugInManager` → **Nextra.Host** → right-click **Load**. |
-| `Blocking plug-in Nextra.Host` | Close **all** Rhino windows, start Rhino again. |
-| No dot / red dot | Type `NextraOn` / click the dot. |
-| Several Rhino windows | Tell the AI which file, e.g. *"use house.3dm"*. |
+| `node` or `codex` is not recognized | Install [Node.js](https://nodejs.org/en/download). For Codex, use the folder/Plugins Directory method above or [install the Codex CLI](https://developers.openai.com/codex/cli). |
+| No Rhino tools in the AI app | Finish step 2, restart the app, and start a new session. In Claude, use Cowork for the plugin or the `.mcpb` for chat. |
+| `Unknown command: NextraOn` | Restart Rhino. If still missing: **`PlugInManager` → Nextra.Host → Load**. |
+| `Blocking plug-in Nextra.Host` | Close all Rhino windows, then start Rhino again. |
+| No dot / red dot | Run **`NextraOn`** / click the dot. |
+| Several Rhino windows | Tell the AI which file to use, for example **“Use house.3dm.”** |
 
-*The app pictures are simplified drawings; labels can differ slightly between app versions.*
+The app pictures are simplified illustrations; labels and plugin availability can vary by app version and workspace settings. Installation references: [OpenAI plugin setup](https://developers.openai.com/plugins/build/plugins) · [Claude plugin setup](https://support.claude.com/en/articles/13837440-use-plugins-in-claude).
 
 <details>
-<summary>Maintainers: making a release</summary>
+<summary>Maintainers: publish from this public repository</summary>
 
-Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js` and both `.csproj` files, then:
+Source, marketplaces, and release downloads live together in **`Tatsuki0123/nextra-rhinogh`**.
 
+Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js`, and both `.csproj` files. Then build:
+
+```powershell
+./tools/package.ps1
 ```
-tools/package.ps1          # .yak, plugin zip, agent-kit zip, .mcpb (and the plugin/ folder)
+
+Commit the generated `plugin/`, `.claude-plugin/marketplace.json`, and `.agents/plugins/marketplace.json` along with the source changes. Both marketplaces must list `nextra-rhinogh`. Publish the packages to this repository (replace `<ver>`):
+
+```powershell
 yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
-gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak
+gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo Tatsuki0123/nextra-rhinogh
 ```
 
-Commit `plugin/`, `.claude-plugin/` and `.agents/plugins/`: the GitHub repo is also a marketplace. Images: `python tools/make_install_images.py`.
+Keep the two ZIP filenames stable so the download links above keep working. Regenerate illustrations with `python tools/make_install_images.py`.
 
 </details>
 

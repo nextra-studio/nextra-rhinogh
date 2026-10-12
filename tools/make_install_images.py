@@ -66,12 +66,32 @@ svg("claude-desktop-plugin.svg", 720, 280,
     + '<rect class="f" x="44" y="168" width="400" height="44" rx="8"/><text class="m" x="60" y="196">nextra-rhinogh-plugin.zip</text>' + badge(452, 170, 3)
     + '<text class="s" x="44" y="248">pick the zip (do not unzip it), then Add</text>')
 
+# 2b Claude Desktop: Add marketplace
+svg("claude-desktop-marketplace.svg", 720, 280,
+    window(20, 16, 680, 248, "Claude — Customize")
+    + '<text class="s" x="44" y="76">Skills</text><text class="s" x="98" y="76">Connectors</text>'
+    + '<rect class="navsel" x="178" y="58" width="70" height="28" rx="6"/><text class="t" x="188" y="77">Plugins</text>' + badge(254, 60, 1)
+    + button(560, 56, 110, "+ Add", ring=False)
+    + '<rect class="win" x="470" y="98" width="200" height="40" rx="8"/><text class="t" x="490" y="123">Add marketplace</text>'
+    + '<rect class="ring" x="464" y="92" width="212" height="52" rx="10"/>' + badge(680, 96, 2)
+    + field(44, 160, 400, "Marketplace", "Tatsuki0123/nextra-rhinogh") + badge(452, 186, 3)
+    + '<text class="s" x="44" y="238">then open  nextra-rhinogh  in the list and add it</text>' + badge(340, 233, 4))
+
+# 5b ChatGPT / Codex desktop: add the GitHub marketplace
+svg("chatgpt-marketplace.svg", 720, 210,
+    window(20, 16, 680, 178, "ChatGPT / Codex desktop — Codex or Work mode")
+    + '<rect class="f" x="44" y="66" width="632" height="76" rx="14"/>'
+    + '<text class="m" x="62" y="94">Run: codex plugin marketplace add Tatsuki0123/nextra-rhinogh</text>'
+    + '<text class="m" x="62" y="118">codex plugin add nextra-rhinogh@nextra</text>'
+    + badge(676, 66, 1)
+    + '<text class="s" x="44" y="170">The agent runs both commands. Then restart the app.</text>' + badge(400, 165, 2))
+
 # 4 Claude Code / terminal
 svg("claude-code.svg", 720, 170,
     '<rect class="term" x="20" y="16" width="680" height="138" rx="10"/>'
     + '<circle cx="38" cy="33" r="5" fill="#ff5f57"/><circle cx="54" cy="33" r="5" fill="#febc2e"/><circle cx="70" cy="33" r="5" fill="#28c840"/>'
-    + '<text class="tp" x="40" y="68">&gt;</text><text class="tt" x="56" y="68">/plugin install nextra-rhinogh --marketplace Tatsuki0123/nextra-rhinogh</text>'
-    + '<text class="tg" x="40" y="98">✔ Installed nextra-rhinogh (MCP server + skill)</text>'
+    + '<text class="tp" x="40" y="68">&gt;</text><text class="tt" x="56" y="68">/plugin marketplace add Tatsuki0123/nextra-rhinogh</text>'
+    + '<text class="tg" x="40" y="98">/plugin install nextra-rhinogh@nextra</text>'
     + '<text class="tp" x="40" y="126">  restart Claude Code, then ask: "Create a simple timber house in Rhino"</text>')
 
 # 5 ChatGPT / Codex desktop: unzip, then paste one prompt
@@ -79,7 +99,7 @@ svg("chatgpt-prompt.svg", 720, 240,
     window(20, 16, 680, 208, "ChatGPT / Codex desktop — Codex or Work mode")
     + '<text class="s" x="44" y="70">After unzipping nextra-rhinogh-agent-kit.zip, paste (use your folder path):</text>' + badge(676, 62, 1)
     + '<rect class="f" x="44" y="82" width="632" height="76" rx="14"/>'
-    + '<text class="m" x="62" y="110">Run: codex plugin marketplace add C:/Users/you/nextra-rhinogh-kit</text>'
-    + '<text class="m" x="62" y="134">then: codex plugin add nextra-rhinogh@nextra</text>'
+    + '<text class="m" x="62" y="110">codex plugin marketplace add &quot;C:/Downloads/nextra-rhinogh-kit&quot;</text>'
+    + '<text class="m" x="62" y="134">codex plugin add nextra-rhinogh@nextra</text>'
     + '<text class="s" x="44" y="190">The agent runs both commands. Then restart the app.</text>' + badge(400, 185, 2))
 print("written to", out)
