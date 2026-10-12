@@ -25,21 +25,21 @@
   <!-- step 2 -->
   <rect class="box" x="392" y="30" width="488" height="240" rx="14"/>
   <circle cx="424" cy="62" r="16" fill="#0969da"/><text class="n" x="424" y="67" text-anchor="middle">2</text>
-  <text class="t" x="450" y="68">Add the Nextra plugin to your AI app</text>
+  <text class="t" x="450" y="68">Download one zip, load it in your AI app</text>
 
   <rect class="app" x="414" y="92" width="144" height="160" rx="10"/>
   <text class="t" x="486" y="120" text-anchor="middle" font-size="15">Claude Desktop</text>
   <rect x="428" y="138" width="116" height="68" rx="6" fill="#8250df"/><text class="n" x="486" y="166" text-anchor="middle" font-size="13">plugin</text><text class="n" x="486" y="186" text-anchor="middle" font-size="12">tools + skill</text>
-  <text class="s" x="486" y="232" text-anchor="middle">Add marketplace</text>
+  <text class="s" x="486" y="232" text-anchor="middle">plugin.zip → Upload</text>
 
   <rect class="app" x="568" y="92" width="144" height="160" rx="10"/>
   <text class="t" x="640" y="120" text-anchor="middle" font-size="15">Claude Code</text>
   <rect x="582" y="138" width="116" height="68" rx="6" fill="#8250df"/><text class="n" x="640" y="166" text-anchor="middle" font-size="13">plugin</text><text class="n" x="640" y="186" text-anchor="middle" font-size="12">tools + skill</text>
-  <text class="s" x="640" y="232" text-anchor="middle">1 command</text>
+  <text class="s" x="640" y="232" text-anchor="middle">1 command or kit.zip</text>
 
   <rect class="app" x="722" y="92" width="144" height="160" rx="10"/>
   <text class="t" x="794" y="114" text-anchor="middle" font-size="15">ChatGPT / Codex</text>
   <text class="s" x="794" y="130" text-anchor="middle">desktop app</text>
   <rect x="736" y="138" width="116" height="68" rx="6" fill="#8250df"/><text class="n" x="794" y="166" text-anchor="middle" font-size="13">plugin</text><text class="n" x="794" y="186" text-anchor="middle" font-size="12">tools + skill</text>
-  <text class="s" x="794" y="232" text-anchor="middle">1 prompt</text>
+  <text class="s" x="794" y="232" text-anchor="middle">agent-kit.zip + prompt</text>
 </svg>

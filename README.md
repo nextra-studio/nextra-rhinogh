@@ -32,9 +32,9 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-Windows · Rhino 8 · one AI app. Two steps:
+Windows · Rhino 8 · Node 18+ · one AI app. Two steps:
 
-![Step 1: Rhino plug-in. Step 2: the Nextra plugin in your AI app](docs/img/overview.svg)
+![Step 1: Rhino plug-in. Step 2: download one zip and load it in your AI app](docs/img/overview.svg)
 
 ### 1 · Rhino plug-in
 
@@ -48,18 +48,30 @@ A dot in the bottom-right corner of Rhino means it works:
 
 ![Green = connected, amber = ready, red = click to restart](docs/img/dot-states.svg)
 
-### 2 · Nextra plugin (tools + skill in one)
+### 2 · Download from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest)
 
-One plugin, same for every app. Its marketplace is this repo: **`Tatsuki0123/nextra-rhinogh`**.
+<details open>
+<summary><b>Claude Desktop</b> → <code>nextra-rhinogh-plugin.zip</code></summary>
 
-<details>
-<summary><b>Claude Desktop</b></summary>
+**Customize → Plugins → + Add → Upload plugin** → pick the zip (don't unzip it).
 
-**Customize → Plugins → + Add → Add marketplace** → `Tatsuki0123/nextra-rhinogh` → add **nextra-rhinogh**.
+![Claude Desktop: Customize, Plugins, Add, Upload plugin](docs/img/install/claude-desktop-plugin.svg)
 
-![Claude Desktop: Customize, Plugins, Add marketplace](docs/img/install/claude-desktop-plugin.svg)
+Use it in a **Cowork** session. Plain *chat* can't start local tools: for chat, double-click `nextra-rhinogh-<version>.mcpb` from the same release instead.
 
-Use it in a **Cowork** session. Plain *chat* doesn't start local tools: for chat, also double-click `nextra-rhinogh-<version>.mcpb` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest).
+</details>
+
+<details open>
+<summary><b>ChatGPT / Codex desktop</b> → <code>nextra-rhinogh-agent-kit.zip</code></summary>
+
+This app has no "upload a zip" button, so unzip it anywhere, switch to **Codex** or **Work** mode and paste (with your folder path). Then restart the app.
+
+```
+Run: codex plugin marketplace add C:/Users/you/nextra-rhinogh-kit
+then: codex plugin add nextra-rhinogh@nextra
+```
+
+![Paste the prompt in Codex or Work mode](docs/img/install/chatgpt-prompt.svg)
 
 </details>
 
@@ -75,26 +87,20 @@ Use it in a **Cowork** session. Plain *chat* doesn't start local tools: for chat
 </details>
 
 <details>
-<summary><b>ChatGPT / Codex desktop</b></summary>
+<summary><b>Any other agent</b> (Cursor, Cline, Gemini CLI, …) → <code>nextra-rhinogh-agent-kit.zip</code></summary>
 
-In **Codex** or **Work** mode, paste this, let the agent run it, then restart the app:
+Unzip it and **open the folder as the agent's workspace**. It is one folder with the skill and the MCP server inside:
 
 ```
-Run: codex plugin marketplace add Tatsuki0123/nextra-rhinogh
-then: codex plugin add nextra-rhinogh@nextra
+nextra-rhinogh-kit/
+├─ AGENTS.md          ← the agent reads this first: what it is and how to connect
+├─ server/index.js    ← the tools (MCP server, Node, no dependencies)
+├─ skills/nextra-rhinogh/SKILL.md   ← the skill (also under .agents/ and .claude/)
+├─ .mcp.json          ← Claude Code picks the server up from here
+└─ .codex/config.toml ← Codex picks the server up from here
 ```
 
-![Paste the prompt in Codex or Work mode](docs/img/install/chatgpt-prompt.svg)
-
-The plugin then shows under **Plugins** with 1 MCP server and 1 skill.
-
-</details>
-
-<details>
-<summary><b>Other agents</b> (skill + MCP server separately)</summary>
-
-- **Skill:** `nextra-rhinogh-skill.zip` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) (a folder with `SKILL.md`).
-- **MCP server:** `node %APPDATA%\Nextra\bridge\index.js` over stdio (Node 18+, no dependencies). In Rhino, **`Nextra` → `CopyBridgePath`** copies the full path.
+If your agent doesn't read those files, register the server by hand: command `node`, argument `<folder>/server/index.js`. Then tell it to read `AGENTS.md`.
 
 </details>
 
@@ -120,12 +126,12 @@ With Rhino open, ask: ***"Create a simple timber house in Rhino."*** The dot tur
 Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js` and both `.csproj` files, then:
 
 ```
-tools/package.ps1          # .yak, plugin/ + plugin zip, skill zip, .mcpb
+tools/package.ps1          # .yak, plugin zip, agent-kit zip, .mcpb (and the plugin/ folder)
 yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
-gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak
+gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak
 ```
 
-Commit `plugin/`, `.claude-plugin/` and `.agents/plugins/`: the GitHub repo is the marketplace. Images: `python tools/make_install_images.py`.
+Commit `plugin/`, `.claude-plugin/` and `.agents/plugins/`: the GitHub repo is also a marketplace. Images: `python tools/make_install_images.py`.
 
 </details>
 

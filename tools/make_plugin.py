@@ -69,4 +69,53 @@ with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
             full = os.path.join(d, f)
             z.write(full, os.path.relpath(full, root).replace(os.sep, "/"))
 print(f"{root}: plug-in {ver}  ->  {zp}")
+
+# ---- dist/nextra-rhinogh-agent-kit.zip: ONE folder with skill + MCP server for ChatGPT/Codex desktop (as a local
+# marketplace: `codex plugin marketplace add <folder>`), Claude Code and any other agent that is pointed at the folder.
+KIT = f"{name}-kit"
+kit = os.path.join(repo, "dist", KIT)
+shutil.rmtree(kit, ignore_errors=True)
+skill_src = os.path.join(repo, "skill", "nextra")
+for rel in (f".agents/skills/{name}", f".claude/skills/{name}", f"skills/{name}"):
+    shutil.copytree(skill_src, os.path.join(kit, rel), dirs_exist_ok=True)
+shutil.copytree(os.path.join(repo, "bridge", "server"), os.path.join(kit, "server"), dirs_exist_ok=True)
+shutil.copytree(root, os.path.join(kit, "plugin", name), dirs_exist_ok=True)
+for rel in (".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json"):
+    os.makedirs(os.path.dirname(os.path.join(kit, rel)), exist_ok=True)
+    shutil.copy(os.path.join(repo, rel), os.path.join(kit, rel))
+
+
+def kwrite(rel, text):
+    p = os.path.join(kit, rel)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    with open(p, "w", encoding="utf-8", newline="\n") as f: f.write(text)
+
+
+kwrite(".mcp.json", json.dumps({"mcpServers": {name: {"command": "node", "args": ["server/index.js"], "env": {"NEXTRA_MODE": "full"}}}}, indent=2) + "\n")
+kwrite(".codex/config.toml", f'[mcp_servers.{name}]\ncommand = "node"\nargs = ["server/index.js"]\n\n[mcp_servers.{name}.env]\nNEXTRA_MODE = "full"\n')
+AGENTS = f"""# Nextra for Rhino 8 + Grasshopper (agent kit {ver})
+
+This folder lets an AI agent drive Rhino 8 and Grasshopper. Everything is already here.
+
+1. **Needs Rhino.** Rhino 8 must be running with the Nextra-RhinoGh plug-in (Rhino Package Manager). A dot in the
+   bottom-right corner of the Rhino window means it works. Node 18+ must be installed.
+2. **Tools (MCP server):** `node server/index.js` over stdio, run from this folder. It is already registered for
+   Claude Code (`.mcp.json`) and Codex (`.codex/config.toml`) when this folder is the workspace. For any other client,
+   register command `node` with argument `<this folder>/server/index.js`.
+3. **Skill:** read `skills/{name}/SKILL.md` before using the tools (also at `.agents/skills/` and `.claude/skills/`).
+4. Six tools: view, query, run, gh_edit, undo, memory. Start with `memory {{action:'list'}}`, then `query` / `view`.
+
+ChatGPT / Codex desktop: `codex plugin marketplace add <this folder>` then `codex plugin add {name}@nextra`, then restart.
+Claude Code: `/plugin marketplace add <this folder>` then `/plugin install {name}@nextra`.
+"""
+kwrite("AGENTS.md", AGENTS)
+kwrite("CLAUDE.md", "@AGENTS.md\n")
+kz = os.path.join(repo, "dist", f"{name}-agent-kit.zip")
+with zipfile.ZipFile(kz, "w", zipfile.ZIP_DEFLATED) as z:
+    for d, _, files in os.walk(kit):
+        for f in sorted(files):
+            full = os.path.join(d, f)
+            z.write(full, KIT + "/" + os.path.relpath(full, kit).replace(os.sep, "/"))
+shutil.rmtree(kit, ignore_errors=True)
+print(f"agent kit {ver}  ->  {kz}")
 sys.exit(0)
