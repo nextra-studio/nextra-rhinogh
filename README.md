@@ -32,19 +32,84 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-**For other people:** send them to this page and its [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) (`.mcpb` bridge, skill zip, `.yak`). All three parts are needed: Rhino plug-in (Package Manager, search `Nextra-RhinoGh`), bridge (`.mcpb`) and skill (`.zip`). Without the bridge, Claude has no tools and says Nextra isn't connected.
+**Requirements:** Windows, Rhino 8 (a recent service release), and Claude Desktop (or another MCP client, see [other clients](#other-clients)).
 
-**New release:** `tools/package.ps1`, then `gh release create v<ver> dist/*.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-*.yak`.
+Nextra has **three parts**, and all three are needed:
 
-1. **Rhino plug-in.** In Package Manager, install `Nextra-RhinoGh` (search it in Package Manager, or drag `dist/nextra-rhinogh-0.1.1-rh8_35-win.yak` onto Rhino / run `Yak.exe install <file>`), then restart Rhino.
-   - **Status dot:** a small dot appears at the bottom-right of the Rhino window and of the GH canvas. Green = an LLM is connected, amber = ready, red = click to restart.
-   - **Commands:** `Nextra`, `NextraOn`, `NextraOff`, `NextraFolder`.
-2. **LLM side**
-   - **Claude Desktop:** open `dist/nextra-rhinogh-0.1.1.mcpb`.
-   - **Claude Code:** open this folder (`.mcp.json` and `.claude/skills/nextra-rhinogh` are project-scoped). Elsewhere, add the server with `claude mcp add nextra-rhinogh -- node <repo>/bridge/server/index.js`.
-   - **claude.ai skills:** upload `dist/nextra-rhinogh-skill.zip`.
-   - **Any other MCP client:** run `node bridge/server/index.js` over stdio (Node ≥ 18, no dependencies). LLMs other than Claude read the same docs through `query {scope:'docs'}`.
-3. **Several Rhino windows.** The bridge binds to one (`NEXTRA_FILE=house.3dm`, or `query {instance:'house.3dm'}`) and never talks to another.
+![The three parts: Rhino plug-in, bridge, skill](docs/img/overview.svg)
+
+| # | Part | Where to get it |
+|---|---|---|
+| 1 | **Rhino plug-in** | Rhino Package Manager, search `Nextra-RhinoGh` |
+| 2 | **Bridge** (`nextra-rhinogh-<version>.mcpb`) | [Latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) |
+| 3 | **Skill** (`nextra-rhinogh-skill.zip`) | [Latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) |
+
+### Step 1: Rhino plug-in
+
+1. In Rhino, type **`PackageManager`** in the command line and press Enter.
+2. Search for **`Nextra-RhinoGh`** and click **Install**.
+3. **Close and restart Rhino.** The plug-in only loads at startup.
+4. Look at the bottom-right corner of the Rhino window. A small dot means it works:
+
+   ![The status dot in the bottom-right corner of Rhino](docs/img/status-dot-real.png)
+
+   ![Dot colours: green = connected, amber = ready, red = restart](docs/img/dot-states.svg)
+
+   If there is no dot, type `NextraOn`. If Rhino says `Unknown command: NextraOn`, see [Troubleshooting](#troubleshooting).
+
+> **No Package Manager?** Download `nextra-rhinogh-<version>-rh8_35-win.yak` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest), drag it onto the Rhino window, and restart Rhino.
+
+Other Rhino commands: `Nextra`, `NextraOff`, `NextraFolder` (opens your own instructions folder, see [below](#your-own-instructions)).
+
+### Step 2: Bridge (gives Claude the tools)
+
+1. Download `nextra-rhinogh-<version>.mcpb` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest).
+2. **Double-click the file.** Claude Desktop opens an install dialog; confirm it. (Or open Claude Desktop → **Settings → Extensions → Advanced settings → Install Extension…** and pick the file.)
+3. **Fully quit Claude Desktop**, including its icon in the system tray, and start it again.
+4. In a new chat, **nextra-rhinogh** should appear in the list of tools/connectors.
+
+### Step 3: Skill (teaches Claude how to use the tools)
+
+1. Download `nextra-rhinogh-skill.zip` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest). **Do not unzip it.**
+2. In Claude, open **Settings → Capabilities → Skills** and upload the zip. (Menu names can differ slightly between Claude versions.)
+
+### Step 4: Try it
+
+Keep Rhino open with the dot showing and ask Claude:
+
+> *Create a simple timber house in Rhino.*
+
+Claude should call the `nextra-rhinogh` tools, and the dot turns green while it works.
+
+### Troubleshooting
+
+| What you see | What to do |
+|---|---|
+| Claude says **"Nextra isn't connected"** or can't find any Rhino tools | The bridge (step 2) is missing. The skill alone has no tools. Install the `.mcpb` and fully restart Claude Desktop. |
+| `Unknown command: NextraOn` in Rhino | The plug-in isn't loaded. Restart Rhino after installing. Still missing? Run `PlugInManager`, find **Nextra.Host**, right-click → **Load**. |
+| `Blocking plug-in Nextra.Host` | Usually after uninstalling and reinstalling in one session. Close **all** Rhino windows and start Rhino again. |
+| No dot in Rhino | Type `NextraOn`. |
+| Dot is **red** | Click it to restart the server. |
+| Claude says **"Rhino is not reachable"** | Rhino isn't running, or the plug-in is off (`NextraOn`). Don't let Claude retry in a loop. |
+| Several Rhino windows open | The bridge binds to one file. Tell Claude which (for example *"use house.3dm"*), or set `NEXTRA_FILE=house.3dm`. It never talks to another window. |
+
+### Other clients
+
+- **Claude Code:** open this repo folder (`.mcp.json` and `.claude/skills/nextra-rhinogh` are project-scoped). Elsewhere: `claude mcp add nextra-rhinogh -- node <repo>/bridge/server/index.js`.
+- **Any other MCP client:** run `node bridge/server/index.js` over stdio (Node 18 or later, no dependencies). LLMs other than Claude read the same docs through `query {scope:'docs'}`.
+
+<details>
+<summary>Maintainers: making a release</summary>
+
+Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js` and both `.csproj` files, then:
+
+```
+tools/package.ps1
+yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
+gh release create v<ver> dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-rh8_35-win.yak
+```
+
+</details>
 
 ## Your own instructions
 

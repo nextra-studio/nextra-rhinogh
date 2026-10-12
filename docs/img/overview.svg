@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    .t{font-size:17px;font-weight:700;fill:#1f2328}
+    .s{font-size:13px;fill:#57606a}
+    .n{font-size:15px;font-weight:700;fill:#fff}
+    .box{fill:#fff;stroke:#d0d7de;stroke-width:1.5}
+    .arrow{stroke:#57606a;stroke-width:2;fill:none;marker-end:url(#a)}
+    @media (prefers-color-scheme: dark){.t{fill:#e6edf3}.s{fill:#9da7b3}.box{fill:#161b22;stroke:#3d444d}.arrow{stroke:#9da7b3}}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#57606a"/></marker></defs>
+
+  <!-- Claude -->
+  <rect class="box" x="20" y="40" width="250" height="190" rx="12"/>
+  <text class="t" x="145" y="72" text-anchor="middle">Claude</text>
+  <text class="s" x="145" y="92" text-anchor="middle">Desktop / claude.ai</text>
+  <rect x="42" y="112" width="206" height="44" rx="8" fill="#0969da"/>
+  <circle cx="64" cy="134" r="12" fill="#fff"/><text x="64" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#0969da">3</text>
+  <text class="n" x="84" y="139">Skill (.zip)</text>
+  <text class="s" x="145" y="180" text-anchor="middle">tells Claude how to use</text>
+  <text class="s" x="145" y="198" text-anchor="middle">the tools well</text>
+
+  <!-- Bridge -->
+  <rect class="box" x="325" y="40" width="250" height="190" rx="12"/>
+  <text class="t" x="450" y="72" text-anchor="middle">Bridge</text>
+  <text class="s" x="450" y="92" text-anchor="middle">runs on your PC</text>
+  <rect x="347" y="112" width="206" height="44" rx="8" fill="#bf8700"/>
+  <circle cx="369" cy="134" r="12" fill="#fff"/><text x="369" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#bf8700">2</text>
+  <text class="n" x="389" y="139">Bridge (.mcpb)</text>
+  <text class="s" x="450" y="180" text-anchor="middle">gives Claude the 6 tools</text>
+  <text class="s" x="450" y="198" text-anchor="middle">view, query, run, gh_edit, undo, memory</text>
+
+  <!-- Rhino -->
+  <rect class="box" x="630" y="40" width="250" height="190" rx="12"/>
+  <text class="t" x="755" y="72" text-anchor="middle">Rhino 8 + Grasshopper</text>
+  <text class="s" x="755" y="92" text-anchor="middle">on the same PC</text>
+  <rect x="652" y="112" width="206" height="44" rx="8" fill="#1a7f37"/>
+  <circle cx="674" cy="134" r="12" fill="#fff"/><text x="674" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#1a7f37">1</text>
+  <text class="n" x="694" y="139">Plug-in (Yak)</text>
+  <text class="s" x="755" y="180" text-anchor="middle">local server inside Rhino</text>
+  <text class="s" x="755" y="198" text-anchor="middle">shows the status dot</text>
+
+  <path class="arrow" d="M270 135 H323"/>
+  <path class="arrow" d="M575 135 H628"/>
+
+  <text class="t" x="450" y="275" text-anchor="middle" font-size="15">All three are needed. The skill alone has no tools; the bridge alone has no Rhino to talk to.</text>
+  <text class="s" x="450" y="298" text-anchor="middle">Install in the order 1 → 2 → 3.</text>
+</svg>

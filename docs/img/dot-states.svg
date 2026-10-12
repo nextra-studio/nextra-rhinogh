@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 150" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    .t{font-size:16px;font-weight:700;fill:#1f2328}
+    .s{font-size:13px;fill:#57606a}
+    .box{fill:#fff;stroke:#d0d7de;stroke-width:1.5}
+    @media (prefers-color-scheme: dark){.t{fill:#e6edf3}.s{fill:#9da7b3}.box{fill:#161b22;stroke:#3d444d}}
+  </style>
+  <rect class="box" x="10"  y="10" width="280" height="130" rx="12"/>
+  <circle cx="150" cy="52" r="16" fill="#2da44e" stroke="#7e3a9e" stroke-width="2"/>
+  <text class="t" x="150" y="94" text-anchor="middle">Green</text>
+  <text class="s" x="150" y="116" text-anchor="middle">Claude is connected and working</text>
+
+  <rect class="box" x="310" y="10" width="280" height="130" rx="12"/>
+  <circle cx="450" cy="52" r="16" fill="#f0a500" stroke="#7e3a9e" stroke-width="2"/>
+  <text class="t" x="450" y="94" text-anchor="middle">Amber</text>
+  <text class="s" x="450" y="116" text-anchor="middle">Ready, waiting for Claude</text>
+
+  <rect class="box" x="610" y="10" width="280" height="130" rx="12"/>
+  <circle cx="750" cy="52" r="16" fill="#d1242f" stroke="#7e3a9e" stroke-width="2"/>
+  <text class="t" x="750" y="94" text-anchor="middle">Red</text>
+  <text class="s" x="750" y="116" text-anchor="middle">Server is down — click the dot to restart</text>
+</svg>
