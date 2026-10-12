@@ -35,6 +35,7 @@ $conf = @{}
 if (Test-Path $cfgPath) { (Get-Content $cfgPath -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $conf[$_.Name] = $_.Value } }
 $conf["engine_path"] = "$repo\src\Nextra.Engine\bin\$cfg\Nextra.Engine.dll"
 $conf["skill_dir"] = "$repo\skill\nextra"
+$conf["guides_dir"] = "$repo\guides\plugins"
 $conf["capture_copy_dir"] = "$repo\test\captures"
 if (-not $conf.ContainsKey("enabled")) { $conf["enabled"] = $true }
 $conf | ConvertTo-Json | Set-Content -Encoding utf8 $cfgPath

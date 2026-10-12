@@ -145,7 +145,7 @@ namespace Nextra.Engine
 
             r.Ok = ok;
             // a run that changed nothing keeps no checkpoint: do not hand out an id that undo would not find
-            bool keep = !(delta.Empty && (ghBefore == null || !GhCore.Changed(ghBefore)) && ok);
+            bool keep = !(delta.Empty && (ghBefore == null || !GhCore.Changed(ghBefore)));   // failed or not: nothing changed → nothing to undo
             r.Line($"{(ok ? "ok" : "FAILED")} {lang} {sw.ElapsedMilliseconds}ms" + (keep ? $", checkpoint {ck["id"]}" : ""));
             if (!string.IsNullOrWhiteSpace(outText)) r.Line("stdout:\n" + Clip(outText, 2500));
             if (!ok)

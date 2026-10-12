@@ -6,7 +6,8 @@ using Grasshopper.Kernel;
 
 namespace Nextra.Engine.Gh
 {
-    /// Plug-in specific guides (skill/plugins/<Category>.md, user overrides in memory/plugins/).
+    /// Plug-in specific guides: the user's folder (plugins/), then the guides shipped with the Rhino plug-in
+    /// (guides/plugins/<Category>.md). They come with the installation, not with the skill.
     /// When a component of a plug-in category shows up for the first time in a session, the guide's
     /// "## Rules" section is attached to the reply (mode auto), or just pointed to (hint), or nothing (off).
     public static class PluginDocs
@@ -20,7 +21,8 @@ namespace Nextra.Engine.Gh
             if (!Directory.Exists(skill) && Entry.State.TryGetValue("host.dir", out var hd) && hd is string hs) skill = System.IO.Path.Combine(hs, "skill");
             try { dirs.Add(UserDocs.Plugins); } catch { }                   // the user's folder first: their guides win
             dirs.Add(System.IO.Path.Combine(Memory.Dir, "plugins"));        // older location, still read
-            dirs.Add(System.IO.Path.Combine(skill, "plugins"));
+            try { var b = UserDocs.BundledGuides; if (b != null) dirs.Add(b); } catch { }
+            dirs.Add(System.IO.Path.Combine(skill, "plugins"));              // older builds kept them in the skill
             var res = new List<Guide>();
             var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var d in dirs.Where(Directory.Exists))

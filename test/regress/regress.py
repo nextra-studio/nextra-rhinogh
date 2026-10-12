@@ -365,7 +365,7 @@ def c14():
     t = c.call("gh_edit", {"new": True, "ops": """## FE geometry from Rhino #DBABFF
 ln = Curve {ref="layer:FE::Lines"} "FE lines"
 sh = Brep {ref="layer:FE::Shells"} "FE shells"
-mr = Number Slider {v=0.5, r=0.2..2, d=2} "Mesh size m"
+mr = Number Slider {v=3.5, r=0.2..6, d=2} "Mesh size m"
 ## Sections #E6E6A0
 mat = Material Selection @Karamba3D (Name|Ind="C30/37")
 csb = Cross-section @Karamba3D (Mat=mat, Height=30, UpperWidth=30, LowerWidth=30) {menu="Units>Trapezoid"}
@@ -395,6 +395,9 @@ pd = Panel (=an.MaxDisp) "Max disp cm"
     mass = num_after(d, r"Mass: .*?e\.g\. ([\d.]+)")
     c.check(mass is not None and 95000 < mass < 104000, "mass ≈ 99.5 t (hand check)", f"got {mass}")
     c.check("more than one support" not in d, "no duplicate supports")
+    # the analysis must really run (the Karamba trial allows 50 shells: a fine mesh fails silently in Assemble)
+    disp = num_after(d, r"MaxDisp: .*?e\.g\. ([\d.]+)")
+    c.check(disp is not None and disp > 0 and "maximum number of shell" not in d, "analysis ran (max displacement > 0, within trial limit)", f"got {disp}")
     c.call("view", {"target": "gh"}, expect=[r"gh canvas"])
     c.call("view", {"target": "gh_preview", "view": "iso"}, expect=[r"GH preview"])
     os.makedirs(TMP, exist_ok=True)

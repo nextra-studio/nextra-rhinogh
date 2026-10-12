@@ -1,0 +1,30 @@
+w = Number Slider {v=30, r=5..60} "W"
+h = Number Slider {v=12, r=3..40} "H"
+nu = Number Slider {v=12, r=2..40, int} "U"
+nv = Number Slider {v=6, r=2..20, int} "V"
+amp = Number Slider {v=0.6, r=0..2} "Amp"
+fq = Number Slider {v=2, r=0.5..6} "Freq"
+d = Number Slider {v=0.8, r=0.1..2} "Depth"
+o = Point {set={0,0,0}}
+pl = XZ Plane (O=o)
+rc = Rectangle (P=pl, X=w, Y=h)
+bs = Boundary Surfaces (E=rc.R)
+dv = Divide Domain² (I=bs, U=nu, V=nv)
+iso = Isotrim (S=bs, D=dv)
+ar = Area (G=iso)
+cp = Deconstruct @Vector (P=ar.C)
+m1 = Multiplication (A=cp.X, B=fq)
+sn = Sine (x=m1)
+m2 = Multiplication (A=sn, B=amp)
+ab = Absolute (x=m2)
+ad = Addition (A=ab, B=0.2)
+sc = Scale (G=iso, C=ar.C, F=ad)
+ed = Brep Edges (B=sc.G)
+jn = Join Curves (C=ed.En)
+nv2 = Unit Y (F=d)
+ex = Extrude (B=jn, D=nv2)
+cap = Cap Holes (B=ex)
+col = Colour Swatch {c=#5A8CB4}
+pv = Custom Preview (G=cap, M=col)
+lst = List Length (L=iso)
+pn = Panel (=lst)
