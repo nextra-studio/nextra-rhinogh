@@ -4,6 +4,6 @@
 }
 ---
 tidied 30 objects (1380x865 → 3626x314 canvas units)
-ok: 30/30 lines applied (+6 groups), checkpoint c125
+ok: 30/30 lines applied (+6 groups), checkpoint c452
 groups: Inputs=g31 Base surface=g32 Panel grid=g33 Wave scaling=g34 Fins=g35 Display=g36
-solved 24ms, no errors/warnings on affected nodes
+solved 30ms, no errors/warnings on affected nodes

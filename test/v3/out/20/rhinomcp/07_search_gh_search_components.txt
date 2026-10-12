@@ -1,0 +1,52 @@
+{
+ "query": "Loads",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Loads",
+  "category": null,
+  "components": [
+    {
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "guid": "3598d812-0d6c-4a7c-8d89-19d487862572",
+      "description": "Creates all types of loads for a structural model."
+    },
+    {
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "guid": "495f7fb4-13db-400b-bbe5-3da9bc7188ff",
+      "description": "Creates all types of loads for a structural model."
+    },
+    {
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "guid": "92877431-5279-4438-8305-e7329cc090b4",
+      "description": "Creates all types of loads for a structural model."
+    },
+    {
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "guid": "a425fcab-03b5-474b-a422-2646ed230dfc",
+      "description": "Creates all types of loads for a structural model."
+    },
+    {
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "guid": "b6038fdf-fd8e-4d79-b857-bb909169cd80",
+      "description": "Creates all types of loads for a structural model."
+    }
+  ]
+}

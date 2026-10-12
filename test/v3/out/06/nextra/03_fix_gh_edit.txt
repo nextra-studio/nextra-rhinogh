@@ -10,6 +10,6 @@
  }
 }
 ---
-script g3: 6 lines set (py), mirrored to unsaved-6135f294_g3.py; ports inputs: n?:Any r?:Any | outputs: out:Text pts:Any crv:Any
-solved 72ms, no errors/warnings on affected nodes
+script g3: 6 lines set (py), mirrored to unsaved-64169457_g3.py; ports inputs: n?:Any r?:Any | outputs: out:Text pts:Any crv:Any
+solved 51ms, no errors/warnings on affected nodes
 results: g3.pts: 8 Point {0;0} · g3.crv: 1 Curve {0}

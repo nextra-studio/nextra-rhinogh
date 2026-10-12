@@ -237,30 +237,30 @@
   "value_count": 1,
   "recomputed": true,
   "rolled_back": false,
-  "graph_id": "MCPGraph_20261012055348256",
-  "mutation_duration_ms": 236,
-  "solution_duration_ms": 5,
+  "graph_id": "MCPGraph_20261012075654405",
+  "mutation_duration_ms": 2,
+  "solution_duration_ms": 0,
   "verification_duration_ms": 0,
-  "duration_ms": 584,
+  "duration_ms": 6,
   "aliases": {
-    "n": "7f54637c-ede7-4e9f-b741-828f51d471dc",
-    "fh": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
-    "w": "54a7be16-2dde-4b72-9e03-56cb60e60531",
-    "tw": "67175ded-407e-4291-922f-ebed2a70319f",
-    "ser": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
-    "pt": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
-    "pl": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
-    "rec": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
-    "ang": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
-    "mul": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
-    "rad": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
-    "rot": "394786a8-896d-4572-b1c0-5f2168bb33fc",
-    "lft": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
-    "cap": "0d34bd65-dd37-4d52-a845-768adba54572"
+    "n": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
+    "fh": "13f45beb-49e5-4e03-9749-7a3561d9115c",
+    "w": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
+    "tw": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
+    "ser": "959e2b0e-64ee-4d64-a4ea-88a11a471963",
+    "pt": "c582f185-d14a-498f-a6d1-9c44d0147df5",
+    "pl": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
+    "rec": "9b9b8174-a09f-4171-a003-17b707f87617",
+    "ang": "2598ecfd-0b7a-478b-98af-23b2db066dc5",
+    "mul": "eb76ff36-3b1d-474b-8a49-5e5551dd61a3",
+    "rad": "8a69cb8f-ed85-4147-9638-27ecbb21e408",
+    "rot": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
+    "lft": "999405c6-d918-4038-b834-112de2580570",
+    "cap": "ba01ff86-cca7-40ca-b319-8ccb191f0bb7"
   },
   "components": [
     {
-      "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+      "instance_id": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
       "name": "Number Slider",
       "nickname": "Floors",
       "category": "Params",
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+      "instance_id": "13f45beb-49e5-4e03-9749-7a3561d9115c",
       "name": "Number Slider",
       "nickname": "Floor h",
       "category": "Params",
@@ -282,7 +282,7 @@
       ]
     },
     {
-      "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+      "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
       "name": "Number Slider",
       "nickname": "Width",
       "category": "Params",
@@ -293,7 +293,7 @@
       ]
     },
     {
-      "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+      "instance_id": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
       "name": "Number Slider",
       "nickname": "Twist",
       "category": "Params",
@@ -304,7 +304,7 @@
       ]
     },
     {
-      "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+      "instance_id": "959e2b0e-64ee-4d64-a4ea-88a11a471963",
       "name": "Series",
       "nickname": "Series",
       "category": "Sets",
@@ -315,7 +315,7 @@
       ]
     },
     {
-      "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+      "instance_id": "c582f185-d14a-498f-a6d1-9c44d0147df5",
       "name": "Construct Point",
       "nickname": "Pt",
       "category": "Vector",
@@ -326,7 +326,7 @@
       ]
     },
     {
-      "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+      "instance_id": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
       "name": "XY Plane",
       "nickname": "XY",
       "category": "Vector",
@@ -337,7 +337,7 @@
       ]
     },
     {
-      "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+      "instance_id": "9b9b8174-a09f-4171-a003-17b707f87617",
       "name": "Rectangle",
       "nickname": "Rectangle",
       "category": "Curve",
@@ -348,7 +348,7 @@
       ]
     },
     {
-      "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+      "instance_id": "2598ecfd-0b7a-478b-98af-23b2db066dc5",
       "name": "Range",
       "nickname": "Range",
       "category": "Sets",
@@ -359,7 +359,7 @@
       ]
     },
     {
-      "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+      "instance_id": "eb76ff36-3b1d-474b-8a49-5e5551dd61a3",
       "name": "Multiplication",
       "nickname": "A×B",
       "category": "Maths",
@@ -370,7 +370,7 @@
       ]
     },
     {
-      "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+      "instance_id": "8a69cb8f-ed85-4147-9638-27ecbb21e408",
       "name": "Radians",
       "nickname": "Rad",
       "category": "Maths",
@@ -381,7 +381,7 @@
       ]
     },
     {
-      "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+      "instance_id": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
       "name": "Rotate",
       "nickname": "Rotate",
       "category": "Transform",
@@ -392,7 +392,7 @@
       ]
     },
     {
-      "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+      "instance_id": "999405c6-d918-4038-b834-112de2580570",
       "name": "Loft",
       "nickname": "Loft",
       "category": "Surface",
@@ -403,7 +403,7 @@
       ]
     },
     {
-      "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+      "instance_id": "ba01ff86-cca7-40ca-b319-8ccb191f0bb7",
       "name": "Cap Holes",
       "nickname": "Cap",
       "category": "Surface",
@@ -416,46 +416,46 @@
   ],
   "groups": [
     {
-      "instance_id": "47cd6a8d-4c01-4b67-8719-574f6ab41f5f",
+      "instance_id": "ca476315-4698-4b65-97aa-a7c0d2f3ad49",
       "name": "Inputs",
       "object_count": 14,
-      "graph_id": "MCPGraph_20261012055348256",
+      "graph_id": "MCPGraph_20261012075654405",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "group"
       }
     },
     {
-      "instance_id": "aaf98ea8-4ec7-47d1-88fb-7929c9a11391",
+      "instance_id": "d8636fd9-2c70-48e2-aa90-9f49f4f9f4c0",
       "name": "Floors",
       "object_count": 14,
-      "graph_id": "MCPGraph_20261012055348256",
+      "graph_id": "MCPGraph_20261012075654405",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "group"
       }
     },
     {
-      "instance_id": "e9b33e4d-72ce-43f0-9b7b-7b098c52ca0a",
+      "instance_id": "f47138e9-d87f-4eb4-a577-b7c5d2c39bbd",
       "name": "Twist",
       "object_count": 14,
-      "graph_id": "MCPGraph_20261012055348256",
+      "graph_id": "MCPGraph_20261012075654405",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "group"
       }
     },
     {
-      "instance_id": "8357a0fc-96c3-4201-b143-7d08a81f31da",
+      "instance_id": "84da0a9b-57d4-4255-8461-e391d1a5b057",
       "name": "Massing",
       "object_count": 14,
-      "graph_id": "MCPGraph_20261012055348256",
+      "graph_id": "MCPGraph_20261012075654405",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "group"
       }
     }
@@ -467,7 +467,7 @@
     "style": "graph_depth_wrapped",
     "positions": [
       {
-        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "instance_id": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
         "name": "Number Slider",
         "nickname": "Floors",
         "position": [
@@ -476,7 +476,7 @@
         ]
       },
       {
-        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "instance_id": "13f45beb-49e5-4e03-9749-7a3561d9115c",
         "name": "Number Slider",
         "nickname": "Floor h",
         "position": [
@@ -485,7 +485,7 @@
         ]
       },
       {
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "name": "Number Slider",
         "nickname": "Width",
         "position": [
@@ -494,7 +494,7 @@
         ]
       },
       {
-        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "instance_id": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
         "name": "Number Slider",
         "nickname": "Twist",
         "position": [
@@ -503,7 +503,7 @@
         ]
       },
       {
-        "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+        "instance_id": "959e2b0e-64ee-4d64-a4ea-88a11a471963",
         "name": "Series",
         "nickname": "Series",
         "position": [
@@ -512,7 +512,7 @@
         ]
       },
       {
-        "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+        "instance_id": "c582f185-d14a-498f-a6d1-9c44d0147df5",
         "name": "Construct Point",
         "nickname": "Pt",
         "position": [
@@ -521,7 +521,7 @@
         ]
       },
       {
-        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "instance_id": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
         "name": "XY Plane",
         "nickname": "XY",
         "position": [
@@ -530,7 +530,7 @@
         ]
       },
       {
-        "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+        "instance_id": "9b9b8174-a09f-4171-a003-17b707f87617",
         "name": "Rectangle",
         "nickname": "Rectangle",
         "position": [
@@ -539,7 +539,7 @@
         ]
       },
       {
-        "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+        "instance_id": "2598ecfd-0b7a-478b-98af-23b2db066dc5",
         "name": "Range",
         "nickname": "Range",
         "position": [
@@ -548,7 +548,7 @@
         ]
       },
       {
-        "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+        "instance_id": "eb76ff36-3b1d-474b-8a49-5e5551dd61a3",
         "name": "Multiplication",
         "nickname": "A×B",
         "position": [
@@ -557,7 +557,7 @@
         ]
       },
       {
-        "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+        "instance_id": "8a69cb8f-ed85-4147-9638-27ecbb21e408",
         "name": "Radians",
         "nickname": "Rad",
         "position": [
@@ -566,7 +566,7 @@
         ]
       },
       {
-        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "instance_id": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
         "name": "Rotate",
         "nickname": "Rotate",
         "position": [
@@ -575,7 +575,7 @@
         ]
       },
       {
-        "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+        "instance_id": "999405c6-d918-4038-b834-112de2580570",
         "name": "Loft",
         "nickname": "Loft",
         "position": [
@@ -584,7 +584,7 @@
         ]
       },
       {
-        "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+        "instance_id": "ba01ff86-cca7-40ca-b319-8ccb191f0bb7",
         "name": "Cap Holes",
         "nickname": "Cap",
         "position": [
@@ -604,9 +604,9 @@
     "error_count": 1,
     "objects": [
       {
-        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "instance_id": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
         "alias": "n",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Number Slider",
         "nickname": "Floors",
@@ -637,9 +637,9 @@
         "expression": null
       },
       {
-        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "instance_id": "13f45beb-49e5-4e03-9749-7a3561d9115c",
         "alias": "fh",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Number Slider",
         "nickname": "Floor h",
@@ -670,9 +670,9 @@
         "expression": null
       },
       {
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "alias": "w",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Number Slider",
         "nickname": "Width",
@@ -703,9 +703,9 @@
         "expression": null
       },
       {
-        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "instance_id": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
         "alias": "tw",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Number Slider",
         "nickname": "Twist",
@@ -736,9 +736,9 @@
         "expression": null
       },
       {
-        "instance_id": "07e0a2d2-a4d0-4265-81ed-ead3ca742d91",
+        "instance_id": "959e2b0e-64ee-4d64-a4ea-88a11a471963",
         "alias": "ser",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Series",
         "nickname": "Series",
@@ -764,9 +764,9 @@
         "enabled": true
       },
       {
-        "instance_id": "9d6e7bf8-fa17-4023-9f16-25af6e42e399",
+        "instance_id": "c582f185-d14a-498f-a6d1-9c44d0147df5",
         "alias": "pt",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -792,9 +792,9 @@
         "enabled": true
       },
       {
-        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "instance_id": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
         "alias": "pl",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "XY Plane",
         "nickname": "XY",
@@ -820,9 +820,9 @@
         "enabled": true
       },
       {
-        "instance_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+        "instance_id": "9b9b8174-a09f-4171-a003-17b707f87617",
         "alias": "rec",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Rectangle",
         "nickname": "Rectangle",
@@ -858,9 +858,9 @@
         "enabled": true
       },
       {
-        "instance_id": "2611dd70-477c-4f8c-af9d-2b1787485f2c",
+        "instance_id": "2598ecfd-0b7a-478b-98af-23b2db066dc5",
         "alias": "ang",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Range",
         "nickname": "Range",
@@ -886,9 +886,9 @@
         "enabled": true
       },
       {
-        "instance_id": "0b69ddfd-1b3f-4ce3-9134-07420f78a6f9",
+        "instance_id": "eb76ff36-3b1d-474b-8a49-5e5551dd61a3",
         "alias": "mul",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Multiplication",
         "nickname": "A×B",
@@ -914,9 +914,9 @@
         "enabled": true
       },
       {
-        "instance_id": "ed4633d5-cd4c-4ac2-88a3-a15d338f8d04",
+        "instance_id": "8a69cb8f-ed85-4147-9638-27ecbb21e408",
         "alias": "rad",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Radians",
         "nickname": "Rad",
@@ -942,9 +942,9 @@
         "enabled": true
       },
       {
-        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "instance_id": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
         "alias": "rot",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Rotate",
         "nickname": "Rotate",
@@ -980,9 +980,9 @@
         "enabled": true
       },
       {
-        "instance_id": "0bf46cc7-f31a-4e3d-981e-9ee2574de917",
+        "instance_id": "999405c6-d918-4038-b834-112de2580570",
         "alias": "lft",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Loft",
         "nickname": "Loft",
@@ -1013,9 +1013,9 @@
         "enabled": true
       },
       {
-        "instance_id": "0d34bd65-dd37-4d52-a845-768adba54572",
+        "instance_id": "ba01ff86-cca7-40ca-b319-8ccb191f0bb7",
         "alias": "cap",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Cap Holes",
         "nickname": "Cap",
@@ -1049,19 +1049,19 @@
     "preview_enabled_object_count": 10,
     "preview_disabled_object_count": 0,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 4736,
+    "rhino_document_object_count": 13006,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012055348256",
+    "graph_id": "MCPGraph_20261012075654405",
     "object_count": 18,
     "controls": [
       {
         "alias": "n",
         "name": "Number Slider",
         "nickname": "Floors",
-        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "instance_id": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
         "enabled": true,
         "special_type": "number_slider",
         "value": 12.0,
@@ -1074,7 +1074,7 @@
         "alias": "fh",
         "name": "Number Slider",
         "nickname": "Floor h",
-        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "instance_id": "13f45beb-49e5-4e03-9749-7a3561d9115c",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3500.0,
@@ -1087,7 +1087,7 @@
         "alias": "w",
         "name": "Number Slider",
         "nickname": "Width",
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "enabled": true,
         "special_type": "number_slider",
         "value": 20000.0,
@@ -1100,7 +1100,7 @@
         "alias": "tw",
         "name": "Number Slider",
         "nickname": "Twist",
-        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "instance_id": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
         "enabled": true,
         "special_type": "number_slider",
         "value": 45.0,
@@ -1115,7 +1115,7 @@
         "alias": "n",
         "name": "Number Slider",
         "nickname": "Floors",
-        "instance_id": "7f54637c-ede7-4e9f-b741-828f51d471dc",
+        "instance_id": "1ff40560-a90c-4764-862f-e3b65d36cbe1",
         "enabled": true,
         "special_type": "number_slider",
         "value": 12.0,
@@ -1128,7 +1128,7 @@
         "alias": "fh",
         "name": "Number Slider",
         "nickname": "Floor h",
-        "instance_id": "b72ee2a6-b145-4f25-95ad-7fc1d73dca13",
+        "instance_id": "13f45beb-49e5-4e03-9749-7a3561d9115c",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3500.0,
@@ -1141,7 +1141,7 @@
         "alias": "w",
         "name": "Number Slider",
         "nickname": "Width",
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "enabled": true,
         "special_type": "number_slider",
         "value": 20000.0,
@@ -1154,7 +1154,7 @@
         "alias": "tw",
         "name": "Number Slider",
         "nickname": "Twist",
-        "instance_id": "67175ded-407e-4291-922f-ebed2a70319f",
+        "instance_id": "6193f849-fbed-4e0d-a00b-8fed6a5c2c75",
         "enabled": true,
         "special_type": "number_slider",
         "value": 45.0,

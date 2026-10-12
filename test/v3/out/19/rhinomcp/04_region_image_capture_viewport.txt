@@ -1,0 +1,9 @@
+{
+ "viewport": "top",
+ "width": 800,
+ "height": 600,
+ "zoom_to_fit": true
+}
+---
+
+[image]

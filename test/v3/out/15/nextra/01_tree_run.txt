@@ -3,7 +3,7 @@
  "label": "explicit data tree"
 }
 ---
-ok py 57ms, checkpoint c84
+ok py 63ms, checkpoint c442
 stdout:
 g1 2 branches
 rhino: no changes

@@ -1,18 +1,18 @@
 {
- "graph_id": "MCPGraph_20261012074847430",
+ "graph_id": "MCPGraph_20261012075730047",
  "include_values": true,
  "max_items": 3
 }
 ---
 {
-  "graph_id": "MCPGraph_20261012074847430",
+  "graph_id": "MCPGraph_20261012075730047",
   "object_count": 24,
   "component_count": 16,
   "standalone_parameter_count": 3,
   "group_count": 5,
   "components": [
     {
-      "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+      "instance_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
       "name": "Material Selection (Karamba3D)",
       "nickname": "MatSelect",
       "category": "Karamba3D",
@@ -127,12 +127,12 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+              "component_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
               "param_name": "Material",
               "param_nickname": "Mat"
             },
             {
-              "component_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+              "component_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
               "param_name": "Material",
               "param_nickname": "Mat"
             }
@@ -159,14 +159,14 @@
       "preview": false,
       "enabled": true,
       "alias": "mat",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "mat",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+      "instance_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
       "name": "Cross-section (Karamba3D)",
       "nickname": "CroSec",
       "category": "Karamba3D",
@@ -286,7 +286,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "f9257150-269e-4595-a568-ab7c04092746",
+              "component_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
               "param_name": "Material",
               "param_nickname": "Mat"
             }
@@ -426,7 +426,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+              "component_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
               "param_name": "Cross-section",
               "param_nickname": "CroSec"
             }
@@ -453,14 +453,14 @@
       "preview": false,
       "enabled": true,
       "alias": "csb",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "csb",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+      "instance_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
       "name": "Cross-section (Karamba3D)",
       "nickname": "CroSec",
       "category": "Karamba3D",
@@ -580,7 +580,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "f9257150-269e-4595-a568-ab7c04092746",
+              "component_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
               "param_name": "Material",
               "param_nickname": "Mat"
             }
@@ -646,7 +646,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+              "component_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
               "param_name": "Cross-section",
               "param_nickname": "CroSec"
             }
@@ -673,14 +673,14 @@
       "preview": false,
       "enabled": true,
       "alias": "css",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "css",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+      "instance_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
       "name": "Create Linear Element (Karamba3D)",
       "nickname": "LineElem",
       "category": "Karamba3D",
@@ -706,7 +706,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+              "component_id": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
               "param_name": "Curve",
               "param_nickname": "Crv"
             }
@@ -801,7 +801,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+              "component_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
               "param_name": "Cross-section",
               "param_nickname": "CroSec"
             }
@@ -1150,7 +1150,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+              "component_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
               "param_name": "Elem",
               "param_nickname": "Elem"
             }
@@ -1195,12 +1195,12 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+              "component_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
               "param_name": "Inclusion Points",
               "param_nickname": "IPts"
             },
             {
-              "component_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+              "component_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
               "param_name": "Data 1",
               "param_nickname": "D1"
             }
@@ -1265,14 +1265,14 @@
       "preview": true,
       "enabled": true,
       "alias": "el",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "el",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+      "instance_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
       "name": " Mesh Breps (Karamba3D)",
       "nickname": "Mesh Breps",
       "category": "Karamba3D",
@@ -1298,7 +1298,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+              "component_id": "c79658de-0460-4580-a504-e732fcc3895b",
               "param_name": "Brep",
               "param_nickname": "Brep"
             }
@@ -1346,7 +1346,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+              "component_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
               "param_name": "Points",
               "param_nickname": "Pts"
             }
@@ -1394,7 +1394,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+              "component_id": "e755d009-6942-4873-b3f5-45efb63745c6",
               "param_name": "Number Slider",
               "param_nickname": "Mesh size m"
             }
@@ -1538,12 +1538,12 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+              "component_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
               "param_name": "Mesh",
               "param_nickname": "Mesh"
             },
             {
-              "component_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+              "component_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
               "param_name": "Mesh",
               "param_nickname": "M"
             }
@@ -1608,14 +1608,14 @@
       "preview": true,
       "enabled": true,
       "alias": "mb",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "mb",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+      "instance_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
       "name": "Create Surface Element (Karamba3D)",
       "nickname": "SurfElem",
       "category": "Karamba3D",
@@ -1641,7 +1641,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+              "component_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
               "param_name": "Mesh",
               "param_nickname": "Mesh"
             }
@@ -1736,7 +1736,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+              "component_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
               "param_name": "Cross-section",
               "param_nickname": "CroSec"
             }
@@ -1849,7 +1849,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+              "component_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
               "param_name": "Elem",
               "param_nickname": "Elem"
             }
@@ -1952,14 +1952,14 @@
       "preview": true,
       "enabled": true,
       "alias": "se",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "se",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+      "instance_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
       "name": "Deconstruct Mesh",
       "nickname": "DeMesh",
       "category": "Mesh",
@@ -1985,7 +1985,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+              "component_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
               "param_name": "Mesh",
               "param_nickname": "Mesh"
             }
@@ -2035,7 +2035,7 @@
           "branch_count": 6,
           "recipients": [
             {
-              "component_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+              "component_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
               "param_name": "Data 2",
               "param_nickname": "D2"
             }
@@ -2197,14 +2197,14 @@
       "preview": true,
       "enabled": true,
       "alias": "mv",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "mv",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+      "instance_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
       "name": "Merge",
       "nickname": "Merge",
       "category": "Sets",
@@ -2230,7 +2230,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+              "component_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
               "param_name": "Points",
               "param_nickname": "Pts"
             }
@@ -2278,7 +2278,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+              "component_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
               "param_name": "Vertices",
               "param_nickname": "V"
             }
@@ -2348,7 +2348,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+              "component_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
               "param_name": "Points",
               "param_nickname": "P"
             }
@@ -2386,14 +2386,14 @@
       "preview": true,
       "enabled": true,
       "alias": "all",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "all",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+      "instance_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
       "name": "Cull Duplicates",
       "nickname": "CullPt",
       "category": "Vector",
@@ -2419,7 +2419,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+              "component_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
               "param_name": "Result",
               "param_nickname": "R"
             }
@@ -2496,12 +2496,12 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+              "component_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
               "param_name": "Point",
               "param_nickname": "P"
             },
             {
-              "component_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+              "component_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
               "param_name": "List",
               "param_nickname": "L"
             }
@@ -2597,14 +2597,14 @@
       "preview": true,
       "enabled": true,
       "alias": "cd",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "cd",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+      "instance_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
       "name": "Deconstruct",
       "nickname": "pDecon",
       "category": "Vector",
@@ -2630,7 +2630,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+              "component_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
               "param_name": "Points",
               "param_nickname": "P"
             }
@@ -2738,7 +2738,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+              "component_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
               "param_name": "First Number",
               "param_nickname": "A"
             }
@@ -2764,14 +2764,14 @@
       "preview": true,
       "enabled": true,
       "alias": "dz",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "dz",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+      "instance_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
       "name": "Smaller Than",
       "nickname": "Smaller",
       "category": "Maths",
@@ -2797,7 +2797,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+              "component_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
               "param_name": "Z component",
               "param_nickname": "Z"
             }
@@ -2862,7 +2862,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+              "component_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
               "param_name": "Cull Pattern",
               "param_nickname": "P"
             }
@@ -2917,14 +2917,14 @@
       "preview": true,
       "enabled": true,
       "alias": "lt",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "lt",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+      "instance_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
       "name": "Cull Pattern",
       "nickname": "Cull",
       "category": "Sets",
@@ -2950,7 +2950,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+              "component_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
               "param_name": "Points",
               "param_nickname": "P"
             }
@@ -2998,7 +2998,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+              "component_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
               "param_name": "Smaller than",
               "param_nickname": "<"
             }
@@ -3036,7 +3036,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+              "component_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
               "param_name": "Pos|Ind",
               "param_nickname": "Pos|Ind"
             }
@@ -3074,14 +3074,14 @@
       "preview": true,
       "enabled": true,
       "alias": "base",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "base",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+      "instance_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
       "name": "Support (Karamba3D)",
       "nickname": "Supp",
       "category": "Karamba3D",
@@ -3100,329 +3100,14 @@
           "type": "Generic Data",
           "access": "item",
           "optional": false,
-          "source_count": 64,
+          "source_count": 1,
           "recipient_count": 0,
           "has_data": true,
           "data_count": 10,
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "114f71b3-6c33-4bc5-ac92-580a1c16318b",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ea2a337a-f858-4008-b7df-c51d927cbe7c",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "4e97a6ea-3d8b-4bdf-b779-3275920bdefd",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "fbeaa419-869e-4ff6-bf59-8e9825848cf7",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "62a29c7b-91c3-4e23-a3a1-7482f49aabc7",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "98443848-94a9-48eb-b150-14bfc023b195",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "2d258758-7e38-4edb-ba33-6eecdc99fcbd",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "26e32a48-4d79-408f-b273-59dfcf9d9190",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "4076dd10-fcfd-4eab-9272-d1cad0893b6a",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "3d595344-0ce8-4123-b1c5-3e00bbb8cac3",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "1fd4e9d9-a417-493b-83c9-09d0280af9ff",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "43fb1c16-247b-4218-b03d-cabbc7f898c7",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "31be70bf-4dc3-4538-bea9-a75d443fe9f5",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "e6b1c13d-98e0-403f-9e82-20e939774741",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "f5b366c5-b50b-47b9-a21d-c7c17238efc0",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "86c8b7b8-c086-424d-a50d-6bc20847e4e2",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "4b1ea604-451a-45a8-a67b-97c83b729acd",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "28901375-7af4-4067-9265-a0f449fe55fb",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "65bdd190-687f-4845-aade-917f5666dc8c",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "d9b0f12a-3c3a-4a12-95a5-91108f4b6471",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "8040c940-8c8b-408e-a0bc-dc0f3e8cc299",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "9a0d17e5-9652-4932-a707-5b1cbacb2197",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ba8247d1-3467-4ae8-ae26-82acd54056e0",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "5bbff52c-66ae-4663-ad6f-f4afc521ca78",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "c95e4746-89a9-4138-b6d8-c6d1e29597e8",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "66830974-cf0e-4315-a173-ba87086dc490",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "5a0168b5-4a57-4c81-9818-778a696a263d",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "a938573d-dbe6-483c-b10c-d6d83f351ba0",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ca8a5cc0-f1e4-45a4-a5f4-405977b04833",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "31f0c0ec-d727-4ce9-92c1-eda7287ec3d3",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "733e1272-6f2e-4ef6-bc7b-f7748432400a",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "d6e80a6e-7162-4cb4-995e-74819ae8177f",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "d7517846-1c03-45b2-a2d4-79f7f6a4fe11",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "77a4a3f1-0ee7-4bf0-93e0-b9055afc19b4",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ee9ed10f-9592-4bbb-85a6-acf409e2906b",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "3588160e-d67a-4c90-a76e-7b5de51ca806",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "964d5048-0aa7-4476-96bc-c9c070e0f281",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "035fe6b9-5427-475f-a322-a4ed5cbcea5e",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "62e0062c-15a4-4295-ae2f-7fae3c6787b7",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "91b1d369-6045-42b1-a004-92d9fca957d4",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "4e8de3c2-e8f6-40fa-8ec1-03baecbcacd0",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "b9fa1a1c-66e4-4857-bdaf-ebc29e4c49f2",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "6f1faed5-f7ba-448a-a134-53961dfea18b",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "796f97ed-164e-4efd-bfca-ff2c438ee0c3",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "7426d7cf-ec69-4415-8547-a77dad675124",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "20960994-a8c8-48df-abb6-a1db7203521a",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "9d127d9c-6486-4e69-948a-7494e9d30929",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "29adcfe5-1a1c-4b4b-ac70-f681e8556830",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "a0145eec-a2d3-49f4-ac05-cc8410ab3f80",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "9731c31c-8946-4a40-83dc-a17c54e831e2",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "314933ec-f43c-449c-b4d1-35a78bf34028",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "6e1b9833-bf99-4890-ae44-4b7e638aba9f",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "72193d27-c016-4fd9-a5f3-31c6ba25ed98",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ab8d564d-6a3f-4dc3-a855-4694bc71513c",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "ae611ef8-1d80-4785-b823-7d3a72a68ca2",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "2c470e5e-9030-443c-a802-de7e72f463b8",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "65532e1e-a256-436e-9b62-7dbbe429ee36",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "adabbf82-5a2b-4caa-b350-2dd3c043f144",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "b8adefa2-ef1f-4fe5-846a-103055c2db33",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "dc0b6adc-2105-4b5b-89cc-98f7e86a61da",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "1c790bb3-4d09-481f-96a3-1c5f695a2214",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "3ca6b17e-31e7-4e23-ad90-100816c0d985",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "431d77a7-e3b9-45df-9b25-9a60f7f542e5",
-              "param_name": "Unresolved Proxy",
-              "param_nickname": "~"
-            },
-            {
-              "component_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+              "component_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
               "param_name": "List",
               "param_nickname": "L"
             }
@@ -3574,7 +3259,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+              "component_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
               "param_name": "Support",
               "param_nickname": "Support"
             }
@@ -3609,14 +3294,14 @@
       "preview": false,
       "enabled": true,
       "alias": "sup",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "sup",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+      "instance_id": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
       "name": " Loads (Karamba3D)",
       "nickname": "Loads",
       "category": "Karamba3D",
@@ -3702,7 +3387,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+              "component_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
               "param_name": "Load",
               "param_nickname": "Load"
             }
@@ -3729,14 +3414,14 @@
       "preview": false,
       "enabled": true,
       "alias": "g",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "g",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+      "instance_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
       "name": " Assemble Model (Karamba3D)",
       "nickname": "Assemble",
       "category": "Karamba3D",
@@ -3762,12 +3447,12 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+              "component_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
               "param_name": "Element",
               "param_nickname": "Elem"
             },
             {
-              "component_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+              "component_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
               "param_name": "Element",
               "param_nickname": "Elem"
             }
@@ -3812,7 +3497,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+              "component_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
               "param_name": "Support",
               "param_nickname": "Supp"
             }
@@ -3857,7 +3542,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+              "component_id": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
               "param_name": "Load",
               "param_nickname": "Load"
             }
@@ -4023,7 +3708,7 @@
           "branch_count": 1,
           "recipients": [
             {
-              "component_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+              "component_id": "aeb2f1d1-fbe7-4956-82db-63171d282954",
               "param_name": "Model",
               "param_nickname": "Model"
             }
@@ -4162,14 +3847,14 @@
       "preview": false,
       "enabled": true,
       "alias": "asm",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "asm",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     },
     {
-      "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+      "instance_id": "aeb2f1d1-fbe7-4956-82db-63171d282954",
       "name": " Analyse (Karamba3D)",
       "nickname": "Analyse",
       "category": "Karamba3D",
@@ -4195,7 +3880,7 @@
           "branch_count": 1,
           "sources": [
             {
-              "component_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+              "component_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
               "param_name": "Model",
               "param_nickname": "Model"
             }
@@ -4359,16 +4044,16 @@
       "preview": false,
       "enabled": true,
       "alias": "an",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "an",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       }
     }
   ],
   "standalone_parameters": [
     {
-      "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+      "instance_id": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
       "name": "Curve",
       "nickname": "Crv",
       "type": "Curve",
@@ -4381,10 +4066,10 @@
       "preview": true,
       "enabled": true,
       "alias": "lns",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "lns",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       },
       "value_data": {
         "data_count": 14,
@@ -4415,7 +4100,7 @@
       }
     },
     {
-      "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+      "instance_id": "c79658de-0460-4580-a504-e732fcc3895b",
       "name": "Brep",
       "nickname": "Brep",
       "type": "Brep",
@@ -4428,10 +4113,10 @@
       "preview": true,
       "enabled": true,
       "alias": "shs",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "shs",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       },
       "value_data": {
         "data_count": 6,
@@ -4462,7 +4147,7 @@
       }
     },
     {
-      "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+      "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
       "name": "Number Slider",
       "nickname": "Mesh size m",
       "type": "Number",
@@ -4480,10 +4165,10 @@
       "decimals": 2,
       "expression": null,
       "alias": "mr",
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "metadata": {
         "alias": "mr",
-        "graph_id": "MCPGraph_20261012074847430"
+        "graph_id": "MCPGraph_20261012075730047"
       },
       "value_data": {
         "data_count": 1,
@@ -4502,70 +4187,70 @@
   ],
   "groups": [
     {
-      "instance_id": "ebccfa97-3854-4122-8082-e67226f370c6",
+      "instance_id": "5e3a0233-d6f2-453f-b373-38b6b2c6991c",
       "nickname": "FE geometry from Rhino",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "c85280b9-9d44-4b62-ad04-2e4fed8ab7af",
+      "instance_id": "719c93d2-32f2-455b-890c-f22a5756799d",
       "nickname": "Sections",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "98c8490c-af1b-440a-850a-ca7f7467aeae",
+      "instance_id": "78a759dc-3402-4499-9b78-2dfdd27ee130",
       "nickname": "Elements",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "1cffde38-28c9-4b20-9a5b-b06e691b56d1",
+      "instance_id": "d04a4373-d66a-4533-8503-f1f602dc0a14",
       "nickname": "Supports at z=0",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "f788667c-53f7-4a8e-b442-a32d891a85bf",
+      "instance_id": "68c3da74-a312-44d7-a7bc-2d63b88f5fd3",
       "nickname": "Model + analysis",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     }
   ],
   "summary": {
-    "graph_id": "MCPGraph_20261012074847430",
+    "graph_id": "MCPGraph_20261012075730047",
     "object_count": 24,
     "controls": [
       {
         "alias": "mr",
         "name": "Number Slider",
         "nickname": "Mesh size m",
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3.5,
@@ -4580,7 +4265,7 @@
         "alias": "mr",
         "name": "Number Slider",
         "nickname": "Mesh size m",
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3.5,

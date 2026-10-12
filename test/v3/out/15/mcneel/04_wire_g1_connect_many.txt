@@ -1,13 +1,13 @@
 {
  "wires": [
   {
-   "SrcId": "5c960ca3-4a19-44f1-a3f9-dc4a4d2d08e9",
+   "SrcId": "f8a67f4a-ba10-45f0-a204-86134124a949",
    "Src": "0",
-   "DstId": "c9541d15-06c1-4956-b92d-d87c63d514a6",
+   "DstId": "c7cabe0c-895c-472f-8dfa-66db5a98c432",
    "Dst": "I"
   }
  ],
  "solve": true
 }
 ---
-{"Count":1,"OkCount":1,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"5c960ca3-4a19-44f1-a3f9-dc4a4d2d08e9","Param":"Number"},"Dst":{"Id":"c9541d15-06c1-4956-b92d-d87c63d514a6","Param":"Input"},"Error":null}]}
+{"Count":1,"OkCount":1,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"f8a67f4a-ba10-45f0-a204-86134124a949","Param":"Number"},"Dst":{"Id":"c7cabe0c-895c-472f-8dfa-66db5a98c432","Param":"Input"},"Error":null}]}

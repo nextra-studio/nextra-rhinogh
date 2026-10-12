@@ -1,0 +1,52 @@
+{
+ "query": "Interpolate",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Interpolate",
+  "category": null,
+  "components": [
+    {
+      "name": "Interpolate",
+      "nickname": "IntCrv",
+      "category": "Curve",
+      "subcategory": "Spline",
+      "guid": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33",
+      "description": "Create an interpolated curve through a set of points."
+    },
+    {
+      "name": "Interpolate",
+      "nickname": "IntCrv",
+      "category": "Curve",
+      "subcategory": "Spline",
+      "guid": "f5ea9d41-f062-487e-8dbf-7666ca53fbcd",
+      "description": "Create an interpolated curve through a set of points."
+    },
+    {
+      "name": "Blend Colours",
+      "nickname": "BlendCol",
+      "category": "Vector",
+      "subcategory": "Colour",
+      "guid": "8b4da37d-1124-436a-9de2-952e4224a220",
+      "description": "Interpolate (blend) between two colours."
+    },
+    {
+      "name": "Curve Edit Points",
+      "nickname": "CrvEditPts",
+      "category": "Pufferfish",
+      "subcategory": "Point",
+      "guid": "763065db-0fe1-4d1c-99fe-a37a67f57b3d",
+      "description": "Extract the edit points on a curve at knot averages, the points an interpolated curve interpolated through."
+    },
+    {
+      "name": "Curve Edit Points",
+      "nickname": "CrvEditPts",
+      "category": "Pufferfish",
+      "subcategory": "Point",
+      "guid": "ad013215-63f3-46da-8b16-ce3bf593a0c0",
+      "description": "Extract the edit points on a curve at knot averages, the points an interpolated curve interpolated through."
+    }
+  ]
+}

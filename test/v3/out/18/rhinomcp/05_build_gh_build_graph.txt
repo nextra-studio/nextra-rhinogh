@@ -1,0 +1,1386 @@
+{
+ "components": [
+  {
+   "alias": "nx",
+   "component_name": "Number Slider",
+   "value": 10,
+   "min": 3,
+   "max": 30,
+   "decimals": 0,
+   "nickname": "Nx"
+  },
+  {
+   "alias": "ny",
+   "component_name": "Number Slider",
+   "value": 6,
+   "min": 2,
+   "max": 20,
+   "decimals": 0,
+   "nickname": "Ny"
+  },
+  {
+   "alias": "sp",
+   "component_name": "Number Slider",
+   "value": 2,
+   "min": 0.5,
+   "max": 5,
+   "nickname": "Spacing"
+  },
+  {
+   "alias": "amp",
+   "component_name": "Number Slider",
+   "value": 1.5,
+   "min": 0,
+   "max": 5,
+   "nickname": "Amp"
+  },
+  {
+   "alias": "sx",
+   "component_name": "Series"
+  },
+  {
+   "alias": "sy",
+   "component_name": "Series"
+  },
+  {
+   "alias": "pt",
+   "component_name": "Construct Point"
+  },
+  {
+   "alias": "dc",
+   "component_guid": "9abae6b7-fa1d-448c-9209-4a8155345841"
+  },
+  {
+   "alias": "ad",
+   "component_guid": "a0d62394-a118-422d-abb3-6af115c75b25"
+  },
+  {
+   "alias": "sn",
+   "component_name": "Sine"
+  },
+  {
+   "alias": "mz",
+   "component_name": "Multiplication"
+  },
+  {
+   "alias": "uz",
+   "component_name": "Unit Z"
+  },
+  {
+   "alias": "mv",
+   "component_name": "Move"
+  },
+  {
+   "alias": "rows",
+   "component_guid": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33"
+  },
+  {
+   "alias": "fm",
+   "component_name": "Flip Matrix"
+  },
+  {
+   "alias": "cols",
+   "component_guid": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33"
+  },
+  {
+   "alias": "lf",
+   "component_name": "Loft"
+  }
+ ],
+ "connections": [
+  {
+   "source": "sp",
+   "target": "sx",
+   "target_input_index": 1
+  },
+  {
+   "source": "nx",
+   "target": "sx",
+   "target_input_index": 2
+  },
+  {
+   "source": "sp",
+   "target": "sy",
+   "target_input_index": 1
+  },
+  {
+   "source": "ny",
+   "target": "sy",
+   "target_input_index": 2
+  },
+  {
+   "source": "sx",
+   "target": "pt",
+   "target_input_index": 0
+  },
+  {
+   "source": "sy",
+   "target": "pt",
+   "target_input_index": 1
+  },
+  {
+   "source": "pt",
+   "target": "dc",
+   "target_input_index": 0
+  },
+  {
+   "source": "dc",
+   "target": "ad",
+   "target_input_index": 0
+  },
+  {
+   "source": "dc",
+   "target": "ad",
+   "target_input_index": 1,
+   "source_output_index": 1
+  },
+  {
+   "source": "ad",
+   "target": "sn",
+   "target_input_index": 0
+  },
+  {
+   "source": "sn",
+   "target": "mz",
+   "target_input_index": 0
+  },
+  {
+   "source": "amp",
+   "target": "mz",
+   "target_input_index": 1
+  },
+  {
+   "source": "mz",
+   "target": "uz",
+   "target_input_index": 0
+  },
+  {
+   "source": "pt",
+   "target": "mv",
+   "target_input_index": 0
+  },
+  {
+   "source": "uz",
+   "target": "mv",
+   "target_input_index": 1
+  },
+  {
+   "source": "mv",
+   "target": "rows",
+   "target_input_index": 0
+  },
+  {
+   "source": "mv",
+   "target": "fm",
+   "target_input_index": 0
+  },
+  {
+   "source": "fm",
+   "target": "cols",
+   "target_input_index": 0
+  },
+  {
+   "source": "rows",
+   "target": "lf",
+   "target_input_index": 0
+  }
+ ],
+ "values": [
+  {
+   "target": "sx",
+   "input_index": 0,
+   "value": 0
+  },
+  {
+   "target": "sy",
+   "input_index": 0,
+   "value": 0
+  }
+ ],
+ "groups": [
+  {
+   "name": "Inputs",
+   "members": [
+    "nx",
+    "ny",
+    "sp",
+    "amp"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Grid tree",
+   "members": [
+    "sx",
+    "sy",
+    "pt",
+    "dc",
+    "ad",
+    "sn",
+    "mz",
+    "uz",
+    "mv"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Surface",
+   "members": [
+    "rows",
+    "fm",
+    "cols",
+    "lf"
+   ],
+   "color": [
+    255,
+    214,
+    171
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 17,
+  "created_component_count": 17,
+  "created_group_count": 3,
+  "connection_count": 19,
+  "value_count": 2,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012075754058",
+  "mutation_duration_ms": 347,
+  "solution_duration_ms": 5,
+  "verification_duration_ms": 0,
+  "duration_ms": 885,
+  "aliases": {
+    "nx": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+    "ny": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+    "sp": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+    "amp": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+    "sx": "f7d4c551-049e-47cd-ad52-a2a0fef09aec",
+    "sy": "007dd38f-2e61-45ec-8362-188343195a37",
+    "pt": "f40d40b8-1768-4a56-943b-5d2ada1141db",
+    "dc": "04973dd3-2423-41a0-a840-943313561959",
+    "ad": "52bfa109-066e-4d4a-8e84-8ce724e48f94",
+    "sn": "fd5a0fb5-77ff-4ebc-abe0-4ffd68520d73",
+    "mz": "59ee3ba8-64c6-4088-a6b1-475215596e2d",
+    "uz": "d38afdf9-ba4b-4599-bb22-596954d691f5",
+    "mv": "75fd0f53-7c7e-4451-ae74-53a5bee34cab",
+    "rows": "59215315-b745-47bc-bbf5-807735e3bf1e",
+    "fm": "7c76848f-7739-4e0f-b0c9-c88765d074cc",
+    "cols": "bfd90170-706c-47ad-bba9-d63b8b1299fd",
+    "lf": "20e92238-9452-49f4-ad45-6d6b9c507653"
+  },
+  "components": [
+    {
+      "instance_id": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+      "name": "Number Slider",
+      "nickname": "Nx",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+      "name": "Number Slider",
+      "nickname": "Ny",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+      "name": "Number Slider",
+      "nickname": "Spacing",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+      "name": "Number Slider",
+      "nickname": "Amp",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "f7d4c551-049e-47cd-ad52-a2a0fef09aec",
+      "name": "Series",
+      "nickname": "Series",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "007dd38f-2e61-45ec-8362-188343195a37",
+      "name": "Series",
+      "nickname": "Series",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "f40d40b8-1768-4a56-943b-5d2ada1141db",
+      "name": "Construct Point",
+      "nickname": "Pt",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "04973dd3-2423-41a0-a840-943313561959",
+      "name": "Deconstruct",
+      "nickname": "pDecon",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "52bfa109-066e-4d4a-8e84-8ce724e48f94",
+      "name": "Addition",
+      "nickname": "A+B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "fd5a0fb5-77ff-4ebc-abe0-4ffd68520d73",
+      "name": "Sine",
+      "nickname": "Sin",
+      "category": "Maths",
+      "subcategory": "Trig",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "59ee3ba8-64c6-4088-a6b1-475215596e2d",
+      "name": "Multiplication",
+      "nickname": "A×B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        40.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "d38afdf9-ba4b-4599-bb22-596954d691f5",
+      "name": "Unit Z",
+      "nickname": "Z",
+      "category": "Vector",
+      "subcategory": "Vector",
+      "position": [
+        260.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "75fd0f53-7c7e-4451-ae74-53a5bee34cab",
+      "name": "Move",
+      "nickname": "Move",
+      "category": "Transform",
+      "subcategory": "Euclidean",
+      "position": [
+        480.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "59215315-b745-47bc-bbf5-807735e3bf1e",
+      "name": "Interpolate",
+      "nickname": "IntCrv",
+      "category": "Curve",
+      "subcategory": "Spline",
+      "position": [
+        700.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "7c76848f-7739-4e0f-b0c9-c88765d074cc",
+      "name": "Flip Matrix",
+      "nickname": "Flip",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "position": [
+        700.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "bfd90170-706c-47ad-bba9-d63b8b1299fd",
+      "name": "Interpolate",
+      "nickname": "IntCrv",
+      "category": "Curve",
+      "subcategory": "Spline",
+      "position": [
+        920.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "20e92238-9452-49f4-ad45-6d6b9c507653",
+      "name": "Loft",
+      "nickname": "Loft",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        920.0,
+        580.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "b39882b6-cb57-48ba-aeba-79c9ffbc530a",
+      "name": "Inputs",
+      "object_count": 17,
+      "graph_id": "MCPGraph_20261012075754058",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "3ef8a02a-d479-40e1-a0dd-f10de64f2d79",
+      "name": "Grid tree",
+      "object_count": 17,
+      "graph_id": "MCPGraph_20261012075754058",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "8749eed1-0774-4bb3-8e40-0515e3ec7869",
+      "name": "Surface",
+      "object_count": 17,
+      "graph_id": "MCPGraph_20261012075754058",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 17,
+    "edge_count": 18,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+        "name": "Number Slider",
+        "nickname": "Nx",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+        "name": "Number Slider",
+        "nickname": "Ny",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+        "name": "Number Slider",
+        "nickname": "Spacing",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+        "name": "Number Slider",
+        "nickname": "Amp",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "f7d4c551-049e-47cd-ad52-a2a0fef09aec",
+        "name": "Series",
+        "nickname": "Series",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "007dd38f-2e61-45ec-8362-188343195a37",
+        "name": "Series",
+        "nickname": "Series",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "f40d40b8-1768-4a56-943b-5d2ada1141db",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "04973dd3-2423-41a0-a840-943313561959",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "52bfa109-066e-4d4a-8e84-8ce724e48f94",
+        "name": "Addition",
+        "nickname": "A+B",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "fd5a0fb5-77ff-4ebc-abe0-4ffd68520d73",
+        "name": "Sine",
+        "nickname": "Sin",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "59ee3ba8-64c6-4088-a6b1-475215596e2d",
+        "name": "Multiplication",
+        "nickname": "A×B",
+        "position": [
+          40.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "d38afdf9-ba4b-4599-bb22-596954d691f5",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "position": [
+          260.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "75fd0f53-7c7e-4451-ae74-53a5bee34cab",
+        "name": "Move",
+        "nickname": "Move",
+        "position": [
+          480.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "59215315-b745-47bc-bbf5-807735e3bf1e",
+        "name": "Interpolate",
+        "nickname": "IntCrv",
+        "position": [
+          700.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "7c76848f-7739-4e0f-b0c9-c88765d074cc",
+        "name": "Flip Matrix",
+        "nickname": "Flip",
+        "position": [
+          700.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "bfd90170-706c-47ad-bba9-d63b8b1299fd",
+        "name": "Interpolate",
+        "nickname": "IntCrv",
+        "position": [
+          920.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "20e92238-9452-49f4-ad45-6d6b9c507653",
+        "name": "Loft",
+        "nickname": "Loft",
+        "position": [
+          920.0,
+          580.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 17,
+    "output_count": 24,
+    "outputs_with_data": 24,
+    "total_output_data_count": 164,
+    "warning_count": 0,
+    "error_count": 2,
+    "objects": [
+      {
+        "instance_id": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+        "alias": "nx",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Nx",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Nx",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+        "alias": "ny",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Ny",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Ny",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 20.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+        "alias": "sp",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Spacing",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Spacing",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 0.5,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+        "alias": "amp",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Amp",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Amp",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.5,
+        "min": 0.0,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "f7d4c551-049e-47cd-ad52-a2a0fef09aec",
+        "alias": "sx",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Series",
+        "nickname": "Series",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Series",
+            "nickname": "S",
+            "type": "Number",
+            "access": "list",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "007dd38f-2e61-45ec-8362-188343195a37",
+        "alias": "sy",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Series",
+        "nickname": "Series",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Series",
+            "nickname": "S",
+            "type": "Number",
+            "access": "list",
+            "has_data": true,
+            "data_count": 6,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "f40d40b8-1768-4a56-943b-5d2ada1141db",
+        "alias": "pt",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "04973dd3-2423-41a0-a840-943313561959",
+        "alias": "dc",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "X component",
+            "nickname": "X",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Y component",
+            "nickname": "Y",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Z component",
+            "nickname": "Z",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "52bfa109-066e-4d4a-8e84-8ce724e48f94",
+        "alias": "ad",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Addition",
+        "nickname": "A+B",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "fd5a0fb5-77ff-4ebc-abe0-4ffd68520d73",
+        "alias": "sn",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Sine",
+        "nickname": "Sin",
+        "category": "Maths",
+        "subcategory": "Trig",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "y",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "59ee3ba8-64c6-4088-a6b1-475215596e2d",
+        "alias": "mz",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Multiplication",
+        "nickname": "A×B",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "d38afdf9-ba4b-4599-bb22-596954d691f5",
+        "alias": "uz",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Unit Z",
+        "nickname": "Z",
+        "category": "Vector",
+        "subcategory": "Vector",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Unit vector",
+            "nickname": "V",
+            "type": "Vector",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "75fd0f53-7c7e-4451-ae74-53a5bee34cab",
+        "alias": "mv",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Move",
+        "nickname": "Move",
+        "category": "Transform",
+        "subcategory": "Euclidean",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Geometry",
+            "nickname": "G",
+            "type": "Geometry",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Transform",
+            "nickname": "X",
+            "type": "Transform",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "59215315-b745-47bc-bbf5-807735e3bf1e",
+        "alias": "rows",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Interpolate",
+        "nickname": "IntCrv",
+        "category": "Curve",
+        "subcategory": "Spline",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Curve",
+            "nickname": "C",
+            "type": "Curve",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Domain",
+            "nickname": "D",
+            "type": "Domain",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "7c76848f-7739-4e0f-b0c9-c88765d074cc",
+        "alias": "fm",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Flip Matrix",
+        "nickname": "Flip",
+        "category": "Sets",
+        "subcategory": "Tree",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Data",
+            "nickname": "D",
+            "type": "Generic Data",
+            "access": "tree",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 10
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "bfd90170-706c-47ad-bba9-d63b8b1299fd",
+        "alias": "cols",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Interpolate",
+        "nickname": "IntCrv",
+        "category": "Curve",
+        "subcategory": "Spline",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Insufficient interpolation points for a curve"
+          }
+        ],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Curve",
+            "nickname": "C",
+            "type": "Curve",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 10
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 10
+          },
+          {
+            "index": 2,
+            "name": "Domain",
+            "nickname": "D",
+            "type": "Domain",
+            "access": "item",
+            "has_data": true,
+            "data_count": 10,
+            "branch_count": 10
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "20e92238-9452-49f4-ad45-6d6b9c507653",
+        "alias": "lf",
+        "graph_id": "MCPGraph_20261012075754058",
+        "role": "",
+        "name": "Loft",
+        "nickname": "Loft",
+        "category": "Surface",
+        "subcategory": "Freeform",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Loft could not be constructed."
+          }
+        ],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Loft",
+            "nickname": "L",
+            "type": "Brep",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 13,
+    "preview_enabled_object_count": 12,
+    "preview_disabled_object_count": 1,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 13447,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012075754058",
+    "object_count": 20,
+    "controls": [
+      {
+        "alias": "nx",
+        "name": "Number Slider",
+        "nickname": "Nx",
+        "instance_id": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "ny",
+        "name": "Number Slider",
+        "nickname": "Ny",
+        "instance_id": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 20.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "sp",
+        "name": "Number Slider",
+        "nickname": "Spacing",
+        "instance_id": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 0.5,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "amp",
+        "name": "Number Slider",
+        "nickname": "Amp",
+        "instance_id": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.5,
+        "min": 0.0,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "nx",
+        "name": "Number Slider",
+        "nickname": "Nx",
+        "instance_id": "5d43d041-a36d-4374-b0d5-169f7c0cfd6c",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "ny",
+        "name": "Number Slider",
+        "nickname": "Ny",
+        "instance_id": "7ecd3530-f31d-468a-991e-eac2ddb78f42",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 20.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "sp",
+        "name": "Number Slider",
+        "nickname": "Spacing",
+        "instance_id": "b0f7ffc8-af64-4934-8c8a-fb445b3486bb",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 0.5,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "amp",
+        "name": "Number Slider",
+        "nickname": "Amp",
+        "instance_id": "223f4c98-9ef3-4863-9e15-9837d8c11349",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.5,
+        "min": 0.0,
+        "max": 5.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 17 component(s) and 19 connection(s)"
+}

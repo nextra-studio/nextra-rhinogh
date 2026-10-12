@@ -1,0 +1,52 @@
+{
+ "query": "Material Selection",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Material Selection",
+  "category": null,
+  "components": [
+    {
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "guid": "0d5c0b69-ad54-435b-a6cf-ed43d63a4699",
+      "description": "Lets you select a materials by name or regular expression from a list of materials."
+    },
+    {
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "guid": "3e34dc4c-d070-4a32-a9b9-a62c93377696",
+      "description": "Lets you select a materials by name or regular expression from a list of materials."
+    },
+    {
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "guid": "7b1af747-acc1-4bc5-a466-902d8caf2eb4",
+      "description": "Lets you select a materials by name or regular expression from a list of materials."
+    },
+    {
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "guid": "e6cd1f96-72f2-4dd0-8ef0-2be9329f66b8",
+      "description": "Lets you select a materials by name or regular expression from a list of materials."
+    },
+    {
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "guid": "f44a3275-3c70-43de-ad89-591bf9daa9f6",
+      "description": "Lets you select a materials by name or regular expression from a list of materials."
+    }
+  ]
+}

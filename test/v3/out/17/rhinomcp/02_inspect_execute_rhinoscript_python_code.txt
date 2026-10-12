@@ -1,0 +1,8 @@
+{
+ "code": "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\no = [x for x in doc.Objects if x.Attributes.Name == 'CANOPY'][0]\nb = o.Geometry\nprint(b.Faces.Count, 'faces', 'area', round(rg.AreaMassProperties.Compute(b).Area / 1e6, 1), 'm2', 'volume', round(rg.VolumeMassProperties.Compute(b).Volume / 1e9, 2), 'm3', b.GetBoundingBox(True))"
+}
+---
+{
+  "success": true,
+  "output": "(8, 'faces', 'area', 1004.2000000000000, 'm2', 'volume', 239.93000000000001, 'm3', <Rhino.Geometry.BoundingBox object at 0x0000000000000071 [-74.23181473052603,-215.38450154084487,2771.951219512195 - 30073.877686439802,14215.384501540848,7249.999965873542]>)\n(8, 'faces', 'area', 1004.2000000000000, 'm2', 'volume', 239.93000000000001, 'm3', <Rhino.Geometry.BoundingBox object at 0x0000000000000071 [-74.23181473052603,-215.38450154084487,2771.951219512195 - 30073.877686439802,14215.384501540848,7249.999965873542]>)\n"
+}

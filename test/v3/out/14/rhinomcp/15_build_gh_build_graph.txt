@@ -299,35 +299,35 @@
   "value_count": 2,
   "recomputed": true,
   "rolled_back": false,
-  "graph_id": "MCPGraph_20261012074847430",
-  "mutation_duration_ms": 438,
-  "solution_duration_ms": 4,
+  "graph_id": "MCPGraph_20261012075730047",
+  "mutation_duration_ms": 502,
+  "solution_duration_ms": 10,
   "verification_duration_ms": 0,
-  "duration_ms": 1154,
+  "duration_ms": 1494,
   "aliases": {
-    "lns": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
-    "shs": "256f27e5-9853-4803-b174-63f7f602ce48",
-    "mr": "d78995eb-b667-435a-9f4a-4233a3531bd2",
-    "mat": "f9257150-269e-4595-a568-ab7c04092746",
-    "csb": "b9528df3-b879-401b-b646-94f9224ae6dc",
-    "css": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
-    "el": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
-    "mb": "553bc968-9788-4bf0-87b8-d75b044754f8",
-    "se": "b2025c80-07c2-4c13-a1da-5115efadee3a",
-    "mv": "771a8531-a871-4d67-9e7d-ad11a75472c3",
-    "all": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
-    "cd": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
-    "dz": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
-    "lt": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
-    "base": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
-    "sup": "432b682a-d86f-450a-9979-b0b34fa8c685",
-    "g": "00be4119-02aa-45a2-8571-53449a6a8ed7",
-    "asm": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
-    "an": "6c17e2dd-600f-4987-b494-720a5952e883"
+    "lns": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
+    "shs": "c79658de-0460-4580-a504-e732fcc3895b",
+    "mr": "e755d009-6942-4873-b3f5-45efb63745c6",
+    "mat": "4ed3d460-d107-467e-b20d-08769b4ed92f",
+    "csb": "4ef83b26-f226-422b-8695-faddd31db6f3",
+    "css": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
+    "el": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
+    "mb": "d674bdb9-8ff1-4889-871e-7c583f235c27",
+    "se": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
+    "mv": "fa83c14f-d364-487a-9fc7-329402b8e876",
+    "all": "25fa75a5-3d14-4929-bee3-e76da9c02879",
+    "cd": "aafc3858-b30b-47f0-9330-f171a4251b86",
+    "dz": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
+    "lt": "5d4e1a24-4110-4036-b643-b884a405a76c",
+    "base": "4b4d9889-e899-40c7-9abb-c70b39af063a",
+    "sup": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
+    "g": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
+    "asm": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
+    "an": "aeb2f1d1-fbe7-4956-82db-63171d282954"
   },
   "components": [
     {
-      "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+      "instance_id": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
       "name": "Curve",
       "nickname": "Crv",
       "category": "Params",
@@ -338,7 +338,7 @@
       ]
     },
     {
-      "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+      "instance_id": "c79658de-0460-4580-a504-e732fcc3895b",
       "name": "Brep",
       "nickname": "Brep",
       "category": "Params",
@@ -349,7 +349,7 @@
       ]
     },
     {
-      "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+      "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
       "name": "Number Slider",
       "nickname": "Mesh size m",
       "category": "Params",
@@ -360,7 +360,7 @@
       ]
     },
     {
-      "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+      "instance_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
       "name": "Material Selection (Karamba3D)",
       "nickname": "MatSelect",
       "category": "Karamba3D",
@@ -371,7 +371,7 @@
       ]
     },
     {
-      "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+      "instance_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
       "name": "Cross-section (Karamba3D)",
       "nickname": "CroSec",
       "category": "Karamba3D",
@@ -382,7 +382,7 @@
       ]
     },
     {
-      "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+      "instance_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
       "name": "Cross-section (Karamba3D)",
       "nickname": "CroSec",
       "category": "Karamba3D",
@@ -393,7 +393,7 @@
       ]
     },
     {
-      "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+      "instance_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
       "name": "Create Linear Element (Karamba3D)",
       "nickname": "LineElem",
       "category": "Karamba3D",
@@ -404,7 +404,7 @@
       ]
     },
     {
-      "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+      "instance_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
       "name": " Mesh Breps (Karamba3D)",
       "nickname": "Mesh Breps",
       "category": "Karamba3D",
@@ -415,7 +415,7 @@
       ]
     },
     {
-      "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+      "instance_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
       "name": "Create Surface Element (Karamba3D)",
       "nickname": "SurfElem",
       "category": "Karamba3D",
@@ -426,7 +426,7 @@
       ]
     },
     {
-      "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+      "instance_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
       "name": "Deconstruct Mesh",
       "nickname": "DeMesh",
       "category": "Mesh",
@@ -437,7 +437,7 @@
       ]
     },
     {
-      "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+      "instance_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
       "name": "Merge",
       "nickname": "Merge",
       "category": "Sets",
@@ -448,7 +448,7 @@
       ]
     },
     {
-      "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+      "instance_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
       "name": "Cull Duplicates",
       "nickname": "CullPt",
       "category": "Vector",
@@ -459,7 +459,7 @@
       ]
     },
     {
-      "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+      "instance_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
       "name": "Deconstruct",
       "nickname": "pDecon",
       "category": "Vector",
@@ -470,7 +470,7 @@
       ]
     },
     {
-      "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+      "instance_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
       "name": "Smaller Than",
       "nickname": "Smaller",
       "category": "Maths",
@@ -481,7 +481,7 @@
       ]
     },
     {
-      "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+      "instance_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
       "name": "Cull Pattern",
       "nickname": "Cull",
       "category": "Sets",
@@ -492,7 +492,7 @@
       ]
     },
     {
-      "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+      "instance_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
       "name": "Support (Karamba3D)",
       "nickname": "Supp",
       "category": "Karamba3D",
@@ -503,7 +503,7 @@
       ]
     },
     {
-      "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+      "instance_id": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
       "name": " Loads (Karamba3D)",
       "nickname": "Loads",
       "category": "Karamba3D",
@@ -514,7 +514,7 @@
       ]
     },
     {
-      "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+      "instance_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
       "name": " Assemble Model (Karamba3D)",
       "nickname": "Assemble",
       "category": "Karamba3D",
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+      "instance_id": "aeb2f1d1-fbe7-4956-82db-63171d282954",
       "name": " Analyse (Karamba3D)",
       "nickname": "Analyse",
       "category": "Karamba3D",
@@ -538,57 +538,57 @@
   ],
   "groups": [
     {
-      "instance_id": "ebccfa97-3854-4122-8082-e67226f370c6",
+      "instance_id": "5e3a0233-d6f2-453f-b373-38b6b2c6991c",
       "name": "FE geometry from Rhino",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "c85280b9-9d44-4b62-ad04-2e4fed8ab7af",
+      "instance_id": "719c93d2-32f2-455b-890c-f22a5756799d",
       "name": "Sections",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "98c8490c-af1b-440a-850a-ca7f7467aeae",
+      "instance_id": "78a759dc-3402-4499-9b78-2dfdd27ee130",
       "name": "Elements",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "1cffde38-28c9-4b20-9a5b-b06e691b56d1",
+      "instance_id": "d04a4373-d66a-4533-8503-f1f602dc0a14",
       "name": "Supports at z=0",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     },
     {
-      "instance_id": "f788667c-53f7-4a8e-b442-a32d891a85bf",
+      "instance_id": "68c3da74-a312-44d7-a7bc-2d63b88f5fd3",
       "name": "Model + analysis",
       "object_count": 19,
-      "graph_id": "MCPGraph_20261012074847430",
+      "graph_id": "MCPGraph_20261012075730047",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "group"
       }
     }
@@ -600,7 +600,7 @@
     "style": "graph_depth_wrapped",
     "positions": [
       {
-        "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+        "instance_id": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
         "name": "Curve",
         "nickname": "Crv",
         "position": [
@@ -609,7 +609,7 @@
         ]
       },
       {
-        "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+        "instance_id": "c79658de-0460-4580-a504-e732fcc3895b",
         "name": "Brep",
         "nickname": "Brep",
         "position": [
@@ -618,7 +618,7 @@
         ]
       },
       {
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "name": "Number Slider",
         "nickname": "Mesh size m",
         "position": [
@@ -627,7 +627,7 @@
         ]
       },
       {
-        "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+        "instance_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
         "name": "Material Selection (Karamba3D)",
         "nickname": "MatSelect",
         "position": [
@@ -636,7 +636,7 @@
         ]
       },
       {
-        "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+        "instance_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
         "name": "Cross-section (Karamba3D)",
         "nickname": "CroSec",
         "position": [
@@ -645,7 +645,7 @@
         ]
       },
       {
-        "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+        "instance_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
         "name": "Cross-section (Karamba3D)",
         "nickname": "CroSec",
         "position": [
@@ -654,7 +654,7 @@
         ]
       },
       {
-        "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+        "instance_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
         "name": "Create Linear Element (Karamba3D)",
         "nickname": "LineElem",
         "position": [
@@ -663,7 +663,7 @@
         ]
       },
       {
-        "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+        "instance_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
         "name": " Mesh Breps (Karamba3D)",
         "nickname": "Mesh Breps",
         "position": [
@@ -672,7 +672,7 @@
         ]
       },
       {
-        "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+        "instance_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
         "name": "Create Surface Element (Karamba3D)",
         "nickname": "SurfElem",
         "position": [
@@ -681,7 +681,7 @@
         ]
       },
       {
-        "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+        "instance_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
         "name": "Deconstruct Mesh",
         "nickname": "DeMesh",
         "position": [
@@ -690,7 +690,7 @@
         ]
       },
       {
-        "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+        "instance_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
         "name": "Merge",
         "nickname": "Merge",
         "position": [
@@ -699,7 +699,7 @@
         ]
       },
       {
-        "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+        "instance_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
         "name": "Cull Duplicates",
         "nickname": "CullPt",
         "position": [
@@ -708,7 +708,7 @@
         ]
       },
       {
-        "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+        "instance_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
         "name": "Deconstruct",
         "nickname": "pDecon",
         "position": [
@@ -717,7 +717,7 @@
         ]
       },
       {
-        "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+        "instance_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
         "name": "Smaller Than",
         "nickname": "Smaller",
         "position": [
@@ -726,7 +726,7 @@
         ]
       },
       {
-        "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+        "instance_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
         "name": "Cull Pattern",
         "nickname": "Cull",
         "position": [
@@ -735,7 +735,7 @@
         ]
       },
       {
-        "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+        "instance_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
         "name": "Support (Karamba3D)",
         "nickname": "Supp",
         "position": [
@@ -744,7 +744,7 @@
         ]
       },
       {
-        "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+        "instance_id": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
         "name": " Loads (Karamba3D)",
         "nickname": "Loads",
         "position": [
@@ -753,7 +753,7 @@
         ]
       },
       {
-        "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+        "instance_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
         "name": " Assemble Model (Karamba3D)",
         "nickname": "Assemble",
         "position": [
@@ -762,7 +762,7 @@
         ]
       },
       {
-        "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+        "instance_id": "aeb2f1d1-fbe7-4956-82db-63171d282954",
         "name": " Analyse (Karamba3D)",
         "nickname": "Analyse",
         "position": [
@@ -782,9 +782,9 @@
     "error_count": 1,
     "objects": [
       {
-        "instance_id": "3ab7c8fc-3aae-4b63-8688-ea1dd7c62a6f",
+        "instance_id": "27a82b52-a815-45a8-82e0-e1d85da84d7b",
         "alias": "lns",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Curve",
         "nickname": "Crv",
@@ -815,9 +815,9 @@
         "enabled": true
       },
       {
-        "instance_id": "256f27e5-9853-4803-b174-63f7f602ce48",
+        "instance_id": "c79658de-0460-4580-a504-e732fcc3895b",
         "alias": "shs",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Brep",
         "nickname": "Brep",
@@ -848,9 +848,9 @@
         "enabled": true
       },
       {
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "alias": "mr",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Number Slider",
         "nickname": "Mesh size m",
@@ -881,9 +881,9 @@
         "expression": null
       },
       {
-        "instance_id": "f9257150-269e-4595-a568-ab7c04092746",
+        "instance_id": "4ed3d460-d107-467e-b20d-08769b4ed92f",
         "alias": "mat",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Material Selection (Karamba3D)",
         "nickname": "MatSelect",
@@ -909,9 +909,9 @@
         "enabled": true
       },
       {
-        "instance_id": "b9528df3-b879-401b-b646-94f9224ae6dc",
+        "instance_id": "4ef83b26-f226-422b-8695-faddd31db6f3",
         "alias": "csb",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Cross-section (Karamba3D)",
         "nickname": "CroSec",
@@ -937,9 +937,9 @@
         "enabled": true
       },
       {
-        "instance_id": "e5da6554-c550-43a1-a0f8-f33efd25e40a",
+        "instance_id": "dbc02d92-aae6-4f9c-a4ec-de9ea2315e4b",
         "alias": "css",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Cross-section (Karamba3D)",
         "nickname": "CroSec",
@@ -965,9 +965,9 @@
         "enabled": true
       },
       {
-        "instance_id": "4adda96d-cec7-4ad2-823b-f56c1f50d24d",
+        "instance_id": "48cc2fdb-2cc2-4adc-acd9-be3a6a294413",
         "alias": "el",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Create Linear Element (Karamba3D)",
         "nickname": "LineElem",
@@ -1018,9 +1018,9 @@
         "enabled": true
       },
       {
-        "instance_id": "553bc968-9788-4bf0-87b8-d75b044754f8",
+        "instance_id": "d674bdb9-8ff1-4889-871e-7c583f235c27",
         "alias": "mb",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": " Mesh Breps (Karamba3D)",
         "nickname": "Mesh Breps",
@@ -1056,9 +1056,9 @@
         "enabled": true
       },
       {
-        "instance_id": "b2025c80-07c2-4c13-a1da-5115efadee3a",
+        "instance_id": "35d64123-d4a1-48f5-ae99-26acdc6b431b",
         "alias": "se",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Create Surface Element (Karamba3D)",
         "nickname": "SurfElem",
@@ -1104,9 +1104,9 @@
         "enabled": true
       },
       {
-        "instance_id": "771a8531-a871-4d67-9e7d-ad11a75472c3",
+        "instance_id": "fa83c14f-d364-487a-9fc7-329402b8e876",
         "alias": "mv",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Deconstruct Mesh",
         "nickname": "DeMesh",
@@ -1162,9 +1162,9 @@
         "enabled": true
       },
       {
-        "instance_id": "26972a1f-0d30-4eed-ab84-c36c2e7ae24d",
+        "instance_id": "25fa75a5-3d14-4929-bee3-e76da9c02879",
         "alias": "all",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Merge",
         "nickname": "Merge",
@@ -1190,9 +1190,9 @@
         "enabled": true
       },
       {
-        "instance_id": "2bf2496d-ef15-4c24-baf2-c9bc8217aac2",
+        "instance_id": "aafc3858-b30b-47f0-9330-f171a4251b86",
         "alias": "cd",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Cull Duplicates",
         "nickname": "CullPt",
@@ -1238,9 +1238,9 @@
         "enabled": true
       },
       {
-        "instance_id": "9caf71a1-3ad8-4347-b8a5-e4c609d288da",
+        "instance_id": "de788f4f-6d77-4b8b-847e-06e3b8c08651",
         "alias": "dz",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Deconstruct",
         "nickname": "pDecon",
@@ -1286,9 +1286,9 @@
         "enabled": true
       },
       {
-        "instance_id": "08a637ce-2afe-4d05-ad97-d31daa1bd552",
+        "instance_id": "5d4e1a24-4110-4036-b643-b884a405a76c",
         "alias": "lt",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Smaller Than",
         "nickname": "Smaller",
@@ -1324,9 +1324,9 @@
         "enabled": true
       },
       {
-        "instance_id": "7c5bee09-a0fc-4b42-8cf5-dc14850325bf",
+        "instance_id": "4b4d9889-e899-40c7-9abb-c70b39af063a",
         "alias": "base",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Cull Pattern",
         "nickname": "Cull",
@@ -1352,9 +1352,9 @@
         "enabled": true
       },
       {
-        "instance_id": "432b682a-d86f-450a-9979-b0b34fa8c685",
+        "instance_id": "28db52cc-187e-473c-99ac-ef02f47fe7c4",
         "alias": "sup",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": "Support (Karamba3D)",
         "nickname": "Supp",
@@ -1380,9 +1380,9 @@
         "enabled": true
       },
       {
-        "instance_id": "00be4119-02aa-45a2-8571-53449a6a8ed7",
+        "instance_id": "903ea587-5782-4d0d-842b-3dbbc94dfddd",
         "alias": "g",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": " Loads (Karamba3D)",
         "nickname": "Loads",
@@ -1408,9 +1408,9 @@
         "enabled": true
       },
       {
-        "instance_id": "5aeecd2f-db53-40b4-a1a3-a03cefa96932",
+        "instance_id": "43873775-2c58-40cf-9a77-db8ea4c1aa95",
         "alias": "asm",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": " Assemble Model (Karamba3D)",
         "nickname": "Assemble",
@@ -1476,9 +1476,9 @@
         "enabled": true
       },
       {
-        "instance_id": "6c17e2dd-600f-4987-b494-720a5952e883",
+        "instance_id": "aeb2f1d1-fbe7-4956-82db-63171d282954",
         "alias": "an",
-        "graph_id": "MCPGraph_20261012074847430",
+        "graph_id": "MCPGraph_20261012075730047",
         "role": "",
         "name": " Analyse (Karamba3D)",
         "nickname": "Analyse",
@@ -1547,19 +1547,19 @@
     "preview_enabled_object_count": 11,
     "preview_disabled_object_count": 7,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 244,
+    "rhino_document_object_count": 13393,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012074847430",
+    "graph_id": "MCPGraph_20261012075730047",
     "object_count": 24,
     "controls": [
       {
         "alias": "mr",
         "name": "Number Slider",
         "nickname": "Mesh size m",
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3.5,
@@ -1574,7 +1574,7 @@
         "alias": "mr",
         "name": "Number Slider",
         "nickname": "Mesh size m",
-        "instance_id": "d78995eb-b667-435a-9f4a-4233a3531bd2",
+        "instance_id": "e755d009-6942-4873-b3f5-45efb63745c6",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3.5,

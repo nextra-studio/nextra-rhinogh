@@ -1,0 +1,3733 @@
+{
+ "graph_id": "MCPGraph_20261012075808454",
+ "include_values": true,
+ "max_items": 3
+}
+---
+{
+  "graph_id": "MCPGraph_20261012075808454",
+  "object_count": 25,
+  "component_count": 17,
+  "standalone_parameter_count": 4,
+  "group_count": 4,
+  "components": [
+    {
+      "instance_id": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+      "name": "XY Plane",
+      "nickname": "XY",
+      "category": "Vector",
+      "subcategory": "Plane",
+      "position": [
+        40.0,
+        400.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Origin",
+          "nickname": "O",
+          "description": "Origin of plane",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Plane",
+          "nickname": "P",
+          "description": "World XY plane",
+          "type": "Plane",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "pl",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "pl",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        260.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Plane",
+          "nickname": "P",
+          "description": "Rectangle base plane",
+          "type": "Plane",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+              "param_name": "Plane",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "origin": [
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "x_axis": [
+                      1.0,
+                      0.0,
+                      0.0
+                    ],
+                    "y_axis": [
+                      0.0,
+                      1.0,
+                      0.0
+                    ],
+                    "z_axis": [
+                      0.0,
+                      0.0,
+                      1.0
+                    ]
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "X Size",
+          "nickname": "X",
+          "description": "Dimensions of rectangle in plane X direction.",
+          "type": "Domain",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+              "param_name": "Number Slider",
+              "param_nickname": "Span m"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Domain",
+                    "description": "0 To 10"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Y Size",
+          "nickname": "Y",
+          "description": "Dimensions of rectangle in plane Y direction.",
+          "type": "Domain",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+              "param_name": "Number Slider",
+              "param_nickname": "Width m"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Domain",
+                    "description": "0 To 6"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Radius",
+          "nickname": "R",
+          "description": "Rectangle corner fillet radius",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Rectangle",
+          "nickname": "R",
+          "description": "Rectangle",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "45732507-82c4-4baa-9f82-824f031937cc",
+              "param_name": "Edges",
+              "param_nickname": "E"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Rectangle",
+                    "description": "Rectangle (w=10, h=6)"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Length",
+          "nickname": "L",
+          "description": "Length of rectangle curve",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  32.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "rc",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "rc",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "45732507-82c4-4baa-9f82-824f031937cc",
+      "name": "Boundary Surfaces",
+      "nickname": "Boundary",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        480.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Edges",
+          "nickname": "E",
+          "description": "Boundary curves",
+          "type": "Curve",
+          "access": "list",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+              "param_name": "Rectangle",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Curve",
+                    "is_closed": true,
+                    "length": 32.0
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Surfaces",
+          "nickname": "S",
+          "description": "Resulting boundary surfaces",
+          "type": "Surface",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+              "param_name": "Brep",
+              "param_nickname": "Brep"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Surface"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "bs",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "bs",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+      "name": " Mesh Breps (Karamba3D)",
+      "nickname": "Mesh Breps",
+      "category": "Karamba3D",
+      "subcategory": "9.Utilities",
+      "position": [
+        700.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Brep",
+          "nickname": "Brep",
+          "description": "Breps or surfaces to mesh.",
+          "type": "Brep",
+          "access": "list",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "45732507-82c4-4baa-9f82-824f031937cc",
+              "param_name": "Surfaces",
+              "param_nickname": "S"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Brep",
+                    "is_solid": false,
+                    "faces": 1
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Inclusion Points",
+          "nickname": "IPts",
+          "description": "Points to include into the mesh.",
+          "type": "Point",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Mesh Resolution",
+          "nickname": "MRes",
+          "description": "Target mesh size [m].",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+              "param_name": "Number Slider",
+              "param_nickname": "Mesh m"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  2.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Edge Refinement Factor",
+          "nickname": "ERef",
+          "description": "Resolution refinement at brep edges.",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.67
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Point Reduction",
+          "nickname": "PRed",
+          "description": "Optional reduction of points at narrowing UV-spaces. Disabling point reduction results in a much faster output but mesh vertices may have a greater difference of density.",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  false
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 5,
+          "name": "Smoothing Step Size",
+          "nickname": "SStep",
+          "description": "Smoothing step size for each iteration ('0' means no smoothing). Note that mesh smoothing can result self-overlapping meshes at inclusion points!",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 6,
+          "name": "Smoothing Iterations",
+          "nickname": "SIter",
+          "description": "Smoothing iterations ('0' means no smoothing). Note that mesh smoothing can result self-overlapping meshes at inclusion points!",
+          "type": "Integer",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  5
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Mesh",
+          "nickname": "Mesh",
+          "description": "Output Mesh.",
+          "type": "Mesh",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 2,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+              "param_name": "Mesh",
+              "param_nickname": "Mesh"
+            },
+            {
+              "component_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+              "param_name": "Mesh",
+              "param_nickname": "M"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Mesh",
+                    "vertices": 30,
+                    "faces": 36
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Info",
+          "nickname": "Info",
+          "description": "Output stats.",
+          "type": "Text",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  "document tolerance 0.001\nCreating Meshes for 1 BrepFaces\nTarget Mesh Resolution: 2\nEdges are refined with: 0.67 x Mesh Resolution\nNo Point Reduction (check Cull Mode)"
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "mb",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "mb",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "position": [
+        40.0,
+        490.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Materials",
+          "nickname": "Mat",
+          "description": "Input list of materials to select from.",
+          "type": "Material",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Name or List Index of Material",
+          "nickname": "Name|Ind",
+          "description": "Name of material to select (e.g., 'S235 # Steel') or index of cross section in list. Material names are converted to lower case. Everything that comes after '#' is a comment.",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  "C30/37"
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Element|Identifier",
+          "nickname": "Elem|Id",
+          "description": "Identifier of element or element with identifier to attach a material to.",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Colour",
+          "nickname": "Colour",
+          "description": "Color of the material.",
+          "type": "Colour",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Material",
+          "nickname": "Mat",
+          "description": "Material properties.",
+          "type": "Material",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+              "param_name": "Material",
+              "param_nickname": "Mat"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Material",
+                    "description": "Material: Concrete 'C30/37'(EU) E:3300[kN/cm²] G12:1375[kN/cm²] G3:1375[kN/cm²] gamma:25[kN/m³] alphaT:1.0E-5[1/℃] ft:0.2[kN/cm²] fc:-2[kN/cm²] flowHypo: Rankine; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "mat",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "mat",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+      "name": "Cross-section (Karamba3D)",
+      "nickname": "CroSec",
+      "category": "Karamba3D",
+      "subcategory": "3.Cross Section",
+      "position": [
+        260.0,
+        130.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Family name of cross-section",
+          "nickname": "Family",
+          "description": "Family name of cross-section defines a group of cross-sections for cross-section optimization.",
+          "type": "Text",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  "DefaultCroSec"
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Name of cross-section",
+          "nickname": "Name",
+          "description": "The name serves to identify a cross-section uniquely upon selection from a list of cross-sections.",
+          "type": "Text",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  ""
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Element|Identifier",
+          "nickname": "Elem|Id",
+          "description": "Identifier of beam or beam with identifier to attach cross-section to.",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Colour",
+          "nickname": "Colour",
+          "description": "Colour of the cross section.",
+          "type": "Colour",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Material",
+          "nickname": "Mat",
+          "description": "Material used for the cross section. Overrules the material definition supplied at the Assemble-component. If nothing is given the material will not be affected.",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+              "param_name": "Material",
+              "param_nickname": "Mat"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Material",
+                    "description": "Material: Concrete 'C30/37'(EU) E:3300[kN/cm²] G12:1375[kN/cm²] G3:1375[kN/cm²] gamma:25[kN/m³] alphaT:1.0E-5[1/℃] ft:0.2[kN/cm²] fc:-2[kN/cm²] flowHypo: Rankine; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 5,
+          "name": "Height [cm]",
+          "nickname": "Height",
+          "description": "Height [cm] of the cross section.",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+              "param_name": "Number Slider",
+              "param_nickname": "Thickness cm"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  20.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Cross-section",
+          "nickname": "CroSec",
+          "description": "Cross-section which was created.",
+          "type": "CrossSection",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+              "param_name": "Cross-section",
+              "param_nickname": "CroSec"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "CrossSection",
+                    "description": "family:'DefaultCroSec';name:'';applies to elements:'';\n  face 1:height:20[cm];dir:0[deg];ecce:0[cm];material:C30/37;bending:True\nfamily:'DefaultCroSec' name:'' material:'C30/37' applies to elements:''; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "cs",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "cs",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+      "name": "Create Surface Element (Karamba3D)",
+      "nickname": "SurfElem",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Mesh",
+          "nickname": "Mesh",
+          "description": "These meshes will be connected if their vertices meet.",
+          "type": "Mesh",
+          "access": "list",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+              "param_name": "Mesh",
+              "param_nickname": "Mesh"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Mesh",
+                    "vertices": 30,
+                    "faces": 36
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Colour",
+          "nickname": "Colour",
+          "description": "Colour of the shell. The component applies the longest list principle with respect to the input meshes.",
+          "type": "Colour",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Identifier",
+          "nickname": "Id",
+          "description": "Identifier of the shells in the model. Need not be unique. The component applies the longest list principle with respect to the input meshes.",
+          "type": "Text",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  ""
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Cross-section",
+          "nickname": "CroSec",
+          "description": "Cross-section of the shell. The component applies the longest list principle with respect to the input meshes.",
+          "type": "CrossSection",
+          "access": "list",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+              "param_name": "Cross-section",
+              "param_nickname": "CroSec"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "CrossSection",
+                    "description": "family:'DefaultCroSec';name:'';applies to elements:'';\n  face 1:height:20[cm];dir:0[deg];ecce:0[cm];material:C30/37;bending:True\nfamily:'DefaultCroSec' name:'' material:'C30/37' applies to elements:''; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Limit Distance [m]",
+          "nickname": "LDist",
+          "description": "Limit distance [m] for coincident points.",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.005
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 5,
+          "name": "Bending",
+          "nickname": "Bending",
+          "description": "If ‘True’, the shell has bending stiffness. Otherwise, it is a membrane.",
+          "type": "Boolean",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  true
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 6,
+          "name": "Points",
+          "nickname": "Pts",
+          "description": "List of points which will be inserted at the beginning of the node-list at the output-plug. This makes it easy to reference them by index in the model later. May contain duplicate points. In case of duplicate points elements are attached to them alternating: first element to first duplicate point, second element to second duplicate point, third element to first duplicate point in case there are only two points in one position.",
+          "type": "Point",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Element",
+          "nickname": "Elem",
+          "description": "Beams with default properties.",
+          "type": "Element",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+              "param_name": "Elem",
+              "param_nickname": "Elem"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Element",
+                    "description": "Shell '' Vertices:30 Triangles:36 (active) (valid) crosec:; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Points",
+          "nickname": "Pts",
+          "description": "Endpoints of the beams.",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    2.0,
+                    2.0,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    4.0,
+                    2.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 2,
+          "name": "Info",
+          "nickname": "Info",
+          "description": "Information regarding the conversion of lines to beams.",
+          "type": "Text",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  ""
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "se",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "se",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+      "name": "Deconstruct Mesh",
+      "nickname": "DeMesh",
+      "category": "Mesh",
+      "subcategory": "Analysis",
+      "position": [
+        920.0,
+        130.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Mesh",
+          "nickname": "M",
+          "description": "Base mesh",
+          "type": "Mesh",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+              "param_name": "Mesh",
+              "param_nickname": "Mesh"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0}",
+                "items": [
+                  {
+                    "type": "Mesh",
+                    "vertices": 30,
+                    "faces": 36
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Vertices",
+          "nickname": "V",
+          "description": "Mesh vertices",
+          "type": "Point",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 2,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+              "param_name": "Point",
+              "param_nickname": "P"
+            },
+            {
+              "component_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+              "param_name": "List",
+              "param_nickname": "L"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    2.0,
+                    2.0,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    4.0,
+                    2.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Faces",
+          "nickname": "F",
+          "description": "Mesh faces",
+          "type": "Mesh face",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 36,
+          "branch_count": 1,
+          "value": {
+            "data_count": 36,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Meshface",
+                    "description": "T{8;9;27}"
+                  },
+                  {
+                    "type": "Meshface",
+                    "description": "T{25;23;24}"
+                  },
+                  {
+                    "type": "Meshface",
+                    "description": "T{26;27;0}"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 2,
+          "name": "Colours",
+          "nickname": "C",
+          "description": "Mesh vertex colours",
+          "type": "Colour",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 1,
+          "value": {
+            "data_count": 0,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": []
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Normals",
+          "nickname": "N",
+          "description": "Mesh normals",
+          "type": "Vector",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    1.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "dm",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "dm",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+      "name": "Deconstruct",
+      "nickname": "pDecon",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        1140.0,
+        40.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Point",
+          "nickname": "P",
+          "description": "Input point",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+              "param_name": "Vertices",
+              "param_nickname": "V"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    2.0,
+                    2.0,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    4.0,
+                    2.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "X component",
+          "nickname": "X",
+          "description": "Point {x} component",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 2,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+              "param_name": "First Number",
+              "param_nickname": "A"
+            },
+            {
+              "component_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+              "param_name": "First Number",
+              "param_nickname": "A"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  2.0,
+                  2.0,
+                  4.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Y component",
+          "nickname": "Y",
+          "description": "Point {y} component",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  2.0,
+                  4.0,
+                  2.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 2,
+          "name": "Z component",
+          "nickname": "Z",
+          "description": "Point {z} component",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "dp",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "dp",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+      "name": "Smaller Than",
+      "nickname": "Smaller",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        40.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "First Number",
+          "nickname": "A",
+          "description": "Number to test",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+              "param_name": "X component",
+              "param_nickname": "X"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  2.0,
+                  2.0,
+                  4.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Second Number",
+          "nickname": "B",
+          "description": "Number to test against",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.01
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Smaller than",
+          "nickname": "<",
+          "description": "True if A < B",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+              "param_name": "A",
+              "param_nickname": "A"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "… or Equal to",
+          "nickname": "<=",
+          "description": "True if A <= B",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "lt",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "lt",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+      "name": "Larger Than",
+      "nickname": "Larger",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        40.0,
+        850.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "First Number",
+          "nickname": "A",
+          "description": "Number to test",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+              "param_name": "X component",
+              "param_nickname": "X"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  2.0,
+                  2.0,
+                  4.0
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Second Number",
+          "nickname": "B",
+          "description": "Number to test against",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+              "param_name": "Number Slider",
+              "param_nickname": "Span m"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  9.99
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Larger than",
+          "nickname": ">",
+          "description": "True if A > B",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+              "param_name": "B",
+              "param_nickname": "B"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "… or Equal to",
+          "nickname": ">=",
+          "description": "True if A >= B",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "gt",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "gt",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+      "name": "Gate Or",
+      "nickname": "Or",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        260.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "A",
+          "nickname": "A",
+          "description": "First boolean for OR operation",
+          "type": "Boolean",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+              "param_name": "Smaller than",
+              "param_nickname": "<"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "nickname": "B",
+          "description": "Second boolean for OR operation",
+          "type": "Boolean",
+          "access": "item",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+              "param_name": "Larger than",
+              "param_nickname": ">"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Result",
+          "nickname": "R",
+          "description": "Resulting value",
+          "type": "Boolean",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+              "param_name": "Cull Pattern",
+              "param_nickname": "P"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "orr",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "orr",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+      "name": "Cull Pattern",
+      "nickname": "Cull",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        480.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "List",
+          "nickname": "L",
+          "description": "List to cull",
+          "type": "Generic Data",
+          "access": "list",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+              "param_name": "Vertices",
+              "param_nickname": "V"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    2.0,
+                    2.0,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    4.0,
+                    0.0
+                  ],
+                  [
+                    4.0,
+                    2.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Cull Pattern",
+          "nickname": "P",
+          "description": "Culling pattern",
+          "type": "Boolean",
+          "access": "list",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 30,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+              "param_name": "Result",
+              "param_nickname": "R"
+            }
+          ],
+          "value": {
+            "data_count": 30,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  false,
+                  false,
+                  false
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "List",
+          "nickname": "L",
+          "description": "Culled list",
+          "type": "Generic Data",
+          "access": "list",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 10,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+              "param_name": "Pos|Ind",
+              "param_nickname": "Pos|Ind"
+            }
+          ],
+          "value": {
+            "data_count": 10,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    1.5,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    3.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": true,
+      "enabled": true,
+      "alias": "base",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "base",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+      "name": "Support (Karamba3D)",
+      "nickname": "Supp",
+      "category": "Karamba3D",
+      "subcategory": "1.Support",
+      "position": [
+        700.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Pos|Ind",
+          "nickname": "Pos|Ind",
+          "description": "Input indexes or coordinates.",
+          "type": "Generic Data",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 10,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+              "param_name": "List",
+              "param_nickname": "L"
+            }
+          ],
+          "value": {
+            "data_count": 10,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    1.5,
+                    0.0
+                  ],
+                  [
+                    10.0,
+                    3.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 1,
+          "name": "Plane of reference",
+          "nickname": "Plane",
+          "description": "Plane for orienting the support. By default, supports are defined using the global coordinate system.",
+          "type": "Plane",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Ct [kN/m]",
+          "nickname": "Ct",
+          "description": "Translational spring stiffness [kN/m] at the support if greater than 0.",
+          "type": "Vector",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Cr [kNm/rad]",
+          "nickname": "Cr",
+          "description": "Rotational spring stiffness [kNm/rad] at the support if greater than 0.",
+          "type": "Vector",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Dofs",
+          "nickname": "Dofs",
+          "description": "List of degree of freedom indexes (0:Tx, 1:Ty, 2:Tz, 3:Rx, 4:Ry, 5:Rz) to be fixed in addition to those selected via check-boxes. Add a ValueList-component for easy selection or use 'Expand ValueLists' from the component's context menu.",
+          "type": "Integer",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Support",
+          "nickname": "Supp",
+          "description": "Output support(s).",
+          "type": "Support",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 10,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+              "param_name": "Support",
+              "param_nickname": "Support"
+            }
+          ],
+          "value": {
+            "data_count": 10,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Support",
+                    "description": "Support:({0, 0, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  },
+                  {
+                    "type": "Support",
+                    "description": "Support:({10, 1.5, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  },
+                  {
+                    "type": "Support",
+                    "description": "Support:({10, 3, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "sup",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "sup",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "c4471da3-5839-4c6e-8512-53e03c468407",
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "position": [
+        40.0,
+        580.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Vector",
+          "nickname": "Vec",
+          "description": "Direction of gravity [].",
+          "type": "Vector",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    -1.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "LCase",
+          "nickname": "LCase",
+          "description": "Name of load-case.",
+          "type": "Text",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  "LC0"
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Load",
+          "nickname": "Load",
+          "description": "Load for a structural model.",
+          "type": "Load",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+              "param_name": "Load",
+              "param_nickname": "Load"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Load",
+                    "description": "Load: LC:'LC0';Gravity:<0, 0, -1>[g]"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "ld",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "ld",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Elem",
+          "nickname": "Elem",
+          "description": "Input beams/shells of the model.",
+          "type": "Element",
+          "access": "list",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+              "param_name": "Element",
+              "param_nickname": "Elem"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Element",
+                    "description": "Shell '' Vertices:30 Triangles:36 (active) (valid) crosec:; "
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Support",
+          "nickname": "Support",
+          "description": "Input supports.",
+          "type": "Support",
+          "access": "list",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 10,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+              "param_name": "Support",
+              "param_nickname": "Supp"
+            }
+          ],
+          "value": {
+            "data_count": 10,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Support",
+                    "description": "Support:({0, 0, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  },
+                  {
+                    "type": "Support",
+                    "description": "Support:({10, 1.5, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  },
+                  {
+                    "type": "Support",
+                    "description": "Support:({10, 3, 0})[m];DOF(True True True False False False)STIFF(<0, 0, 0>[kN/m] <0, 0, 0>[kNm/rad]);"
+                  }
+                ]
+              }
+            ],
+            "truncated": true
+          }
+        },
+        {
+          "index": 2,
+          "name": "Load",
+          "nickname": "Load",
+          "description": "Input loads.",
+          "type": "Load",
+          "access": "list",
+          "optional": true,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "c4471da3-5839-4c6e-8512-53e03c468407",
+              "param_name": "Load",
+              "param_nickname": "Load"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  {
+                    "type": "Load",
+                    "description": "Load: LC:'LC0';Gravity:<0, 0, -1>[g]"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Joint",
+          "nickname": "Joint",
+          "description": "Input element joints.",
+          "type": "Joint",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Beam Set",
+          "nickname": "Set",
+          "description": "Input sets of beams.",
+          "type": "ElemSet",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 5,
+          "name": "Limit Distance [m]",
+          "nickname": "LDist",
+          "description": "Limit distance [m] for coincident points (for point-loads, supports given with coordinates).",
+          "type": "Number",
+          "access": "item",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0}",
+                "items": [
+                  0.005
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 6,
+          "name": "Points",
+          "nickname": "Pts",
+          "description": "List of points which will be inserted at the beginning of the node-list at the output-plug. This makes it easy to reference them by index in the model later. May contain duplicate points. In case of duplicate points elements are attached to them alternating: first element to first duplicate point, second element to second duplicate point, third element to first duplicate point in case there are only two points in one position.",
+          "type": "Point",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 7,
+          "name": "Cross-section",
+          "nickname": "CroSec",
+          "description": "Input cross-sections of the model. Can be used to override the cross-section definitions at the elements.",
+          "type": "CrossSection",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        },
+        {
+          "index": 8,
+          "name": "Material",
+          "nickname": "Mat",
+          "description": "Input materials of the model. Can be used to override the material-section definitions via cross-sections at the elements.",
+          "type": "Material",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Model",
+          "nickname": "Model",
+          "description": "Model based on inputs.",
+          "type": "Model",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 1,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "recipients": [
+            {
+              "component_id": "decebfc4-afa6-499f-81dd-c9756a152704",
+              "param_name": "Model",
+              "param_nickname": "Model"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Model",
+                    "description": "Model: \nc.Length: 11.7[m]\nNodes: 30\nElements: 36\nMaterials: 2\nCross sections: 3\nPoint-loads: 0\nPoint-displacements: 0\nPoint-masses: 0\nMesh-loads: 0\nBeam-loads: 0\nSupports: 10\nBeamSets: 0\nGravities: 1\nActive load case combinations: \n    'LC0'\nDefault result selection: \n    'LC0'"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Info",
+          "nickname": "Info",
+          "description": "information regarding the assembly of the model.",
+          "type": "Text",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  ""
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Mass [kg]",
+          "nickname": "Mass",
+          "description": "Mass of structure in [kg]. Point masses are not included since version 2.0.0.",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  30000.0
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Centre of Gravity",
+          "nickname": "COG",
+          "description": "Centre of gravity of the model. Point masses are not included since version 2.0.0.",
+          "type": "Point",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  [
+                    5.0,
+                    3.0,
+                    0.0
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 4,
+          "name": "Load Case Names",
+          "nickname": "LCNames",
+          "description": "List of load case names.",
+          "type": "Text",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0;0}",
+                "items": [
+                  "LC0"
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "asm",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "asm",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    },
+    {
+      "instance_id": "decebfc4-afa6-499f-81dd-c9756a152704",
+      "name": " Analyse (Karamba3D)",
+      "nickname": "Analyse",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "position": [
+        1140.0,
+        760.0
+      ],
+      "runtime_message_level": "Blank",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Model",
+          "nickname": "Model",
+          "description": "Model for which to calculate deflections.",
+          "type": "Model",
+          "access": "item",
+          "optional": false,
+          "source_count": 1,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "sources": [
+            {
+              "component_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+              "param_name": "Model",
+              "param_nickname": "Model"
+            }
+          ],
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Model",
+                    "description": "Model: \nc.Length: 11.7[m]\nNodes: 30\nElements: 36\nMaterials: 2\nCross sections: 3\nPoint-loads: 0\nPoint-displacements: 0\nPoint-masses: 0\nMesh-loads: 0\nBeam-loads: 0\nSupports: 10\nBeamSets: 0\nGravities: 1\nActive load case combinations: \n    'LC0'\nDefault result selection: \n    'LC0'"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Load Cases",
+          "nickname": "LCase",
+          "description": "Load cases for which to calculate deflections.",
+          "type": "Text",
+          "access": "list",
+          "optional": true,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": false,
+          "data_count": 0,
+          "branch_count": 0,
+          "value": {
+            "data_count": 0,
+            "branch_count": 0,
+            "values": [],
+            "truncated": false
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "index": 0,
+          "name": "Analysed Model",
+          "nickname": "Model",
+          "description": "Model with displacements calculated.",
+          "type": "Model",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0}",
+                "items": [
+                  {
+                    "type": "Model",
+                    "description": "Model: \nc.Length: 11.7[m]\nNodes: 30\nElements: 36\nMaterials: 2\nCross sections: 3\nPoint-loads: 0\nPoint-displacements: 0\nPoint-masses: 0\nMesh-loads: 0\nBeam-loads: 0\nSupports: 10\nBeamSets: 0\nGravities: 1\nActive load case combinations: \n    'LC0'\nDefault result selection: \n    'LC0'"
+                  }
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 1,
+          "name": "Maximum Displacement [cm]",
+          "nickname": "MaxDisp",
+          "description": "Maximum displacement [cm] of each load-case of the model at endpoints and mid-points of elements.",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0;0}",
+                "items": [
+                  2.902301072368013
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 2,
+          "name": "Resulting force [kN]",
+          "nickname": "Force",
+          "description": "Resulting force of external loads [kN] of each calculated load case in global directions.",
+          "type": "Vector",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0;0}",
+                "items": [
+                  [
+                    0.0,
+                    0.0,
+                    -299.9999999999987
+                  ]
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        },
+        {
+          "index": 3,
+          "name": "Change of elastic energy [kNm]",
+          "nickname": "Energy",
+          "description": "Change of the internal elastic energy [kNm] of each load-cases of the model computed as the scalar product of external nodal loads and nodal displacements.",
+          "type": "Number",
+          "access": "item",
+          "optional": false,
+          "source_count": 0,
+          "recipient_count": 0,
+          "has_data": true,
+          "data_count": 1,
+          "branch_count": 1,
+          "value": {
+            "data_count": 1,
+            "branch_count": 1,
+            "values": [
+              {
+                "path": "{0;0;0;0}",
+                "items": [
+                  2.68227442118587
+                ]
+              }
+            ],
+            "truncated": false
+          }
+        }
+      ],
+      "runtime_messages": [],
+      "preview": false,
+      "enabled": true,
+      "alias": "an",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "an",
+        "graph_id": "MCPGraph_20261012075808454"
+      }
+    }
+  ],
+  "standalone_parameters": [
+    {
+      "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+      "name": "Number Slider",
+      "nickname": "Span m",
+      "type": "Number",
+      "position": [
+        40.0,
+        40.0
+      ],
+      "source_count": 0,
+      "recipient_count": 2,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 10.0,
+      "min": 4.0,
+      "max": 20.0,
+      "decimals": 2,
+      "expression": null,
+      "alias": "L",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "L",
+        "graph_id": "MCPGraph_20261012075808454"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              10.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+      "name": "Number Slider",
+      "nickname": "Width m",
+      "type": "Number",
+      "position": [
+        40.0,
+        130.0
+      ],
+      "source_count": 0,
+      "recipient_count": 1,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 6.0,
+      "min": 2.0,
+      "max": 12.0,
+      "decimals": 2,
+      "expression": null,
+      "alias": "W",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "W",
+        "graph_id": "MCPGraph_20261012075808454"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              6.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+      "name": "Number Slider",
+      "nickname": "Thickness cm",
+      "type": "Number",
+      "position": [
+        40.0,
+        220.0
+      ],
+      "source_count": 0,
+      "recipient_count": 1,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 20.0,
+      "min": 10.0,
+      "max": 40.0,
+      "decimals": 0,
+      "expression": null,
+      "alias": "th",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "th",
+        "graph_id": "MCPGraph_20261012075808454"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              20.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+      "name": "Number Slider",
+      "nickname": "Mesh m",
+      "type": "Number",
+      "position": [
+        40.0,
+        310.0
+      ],
+      "source_count": 0,
+      "recipient_count": 1,
+      "enabled": true,
+      "special_type": "number_slider",
+      "value": 2.0,
+      "min": 1.0,
+      "max": 4.0,
+      "decimals": 2,
+      "expression": null,
+      "alias": "mr",
+      "graph_id": "MCPGraph_20261012075808454",
+      "metadata": {
+        "alias": "mr",
+        "graph_id": "MCPGraph_20261012075808454"
+      },
+      "value_data": {
+        "data_count": 1,
+        "branch_count": 1,
+        "values": [
+          {
+            "path": "{0}",
+            "items": [
+              2.0
+            ]
+          }
+        ],
+        "truncated": false
+      }
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "1ead3d84-6aed-4033-9077-ff02cc448d8c",
+      "nickname": "Inputs",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "1694ec02-cc1a-4bee-86b7-0a77984a9cc9",
+      "nickname": "Plate",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "0044a301-9400-4d74-a162-c02b02bc54d5",
+      "nickname": "Supports on the short edges",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "44f3b65e-5b6a-4f06-bb19-819a58563cbe",
+      "nickname": "Analysis",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    }
+  ],
+  "summary": {
+    "graph_id": "MCPGraph_20261012075808454",
+    "object_count": 25,
+    "controls": [
+      {
+        "alias": "L",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 4.0,
+        "max": 20.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 12.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 1.0,
+        "max": 4.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "L",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 4.0,
+        "max": 20.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 12.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 1.0,
+        "max": 4.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  }
+}

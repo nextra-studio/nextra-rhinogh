@@ -12,4 +12,4 @@
  "solve": false
 }
 ---
-{"Placed":[{"Key":"cir","Id":"1ddcd923-d77e-4578-8b80-34f304217daf","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}
+{"Placed":[{"Key":"cir","Id":"0bf228db-e440-4db4-8492-cff4305bc837","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

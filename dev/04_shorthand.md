@@ -204,7 +204,64 @@ followed by `gh_edit {layout:'tidy'}`.
 
 ---
 
-## 7. Changing the grammar
+## 7. `.ghs` files: a definition stored as shorthand
+
+A `.ghs` file is a whole Grasshopper definition written in this same grammar, as plain UTF-8 text. It is not a new language: anything `gh_edit {ops}` accepts is a valid `.ghs`, and anything `query` prints is close to one. Only the file mode of the Writer adds what a canvas needs to be rebuilt exactly.
+
+```
+gh_edit {save:'C:/work/tower.ghs'}    # canvas → text (the canvas keeps its own .gh path)
+gh_edit {open:'C:/work/tower.ghs'}    # text → a new canvas, solved
+gh_edit {open:'x.gh', save:'x.ghs'}   # convert a .gh
+```
+
+**Why.** A `.gh` is a binary archive: it can't be read, diffed or reviewed, and an LLM can't open it. The same definition as `.ghs` is about 10–25 % of the size (house FE model: 28 KB `.gh` → 3.1 KB `.ghs`) and reads like the canvas:
+
+```
+# ghs 1 · Grasshopper definition as Nextra shorthand · open: gh_edit {open:'kshell.ghs'} · grammar: query {scope:'docs', filter:'shorthand'}
+# 23 objects, 5 groups · saved 2026-10-12 10:02
+
+## Inputs #DBABFF
+g1 = Number Slider {v=10, r=4..20, nick="Span m", pos={60,212}}
+## Supports on the short edges #ABDBFF
+g18 = Support @Karamba3D (0=g17) {hide, $button[0]=true, $button[1]=true, $button[2]=true, pos={2409,217}}
+## Logic #ABDBFF
+g5 = Python 3 Script (P:list:Point3d=g1, n:item:int=g3) -> (a, count) {code="""
+a = [p for p in P] * n
+count = len(a)
+""", pos={400,372}}
+```
+
+**What file mode writes, beyond a normal listing** (`WriteOptions.ForFile()`):
+
+| | listing (`query`) | `.ghs` file |
+|---|---|---|
+| ids | live handles `g12` | `g1, g2…` in written order, so saving, opening and saving again gives the **identical file** |
+| script code | `code=<12 lines py>` | the full code in `code="""…"""`; a `"""` inside it is written `\"""` |
+| Python input hints | — | `name:access:Hint` (`P:list:Point3d`); C# hints come from the `RunScript` signature |
+| text, values | truncated | full (panel text, strings, all list items, numbers at full precision) |
+| `$state` keys | 8 non-default | every non-default key |
+| positions | — | `pos={x,y}` on every node (open does not auto-place these) |
+| type / port names | object's own | registered names (some files carry renamed components or ports) |
+| groups | `## Name #col (g40)` | `## Name #col`; on open **every section is a new group**, so repeated or empty names stay separate groups |
+| Rhino references | `ref=[r12,r13]` | object ids `ref=[9ac49892-…]`, valid in the same `.3dm` like a `.gh`; elsewhere open reports the line as failed |
+
+**Not stored** (listed in the header as `# not stored: …` and in the save reply):
+- internalised geometry (a param holding a curve that is not a Rhino reference)
+- data trees typed into params
+- group nesting
+
+Use a `.gh` for those. Anything else that fails to build on open is reported per line. The rest of the canvas is still built.
+
+**Code:**
+- `GhsFile.cs`: header plus the open/save entry points.
+- `Writer` file mode: `FileIds`, `Quote`, `Storable`, `PortId` with registered names.
+- `Builder`:
+  - `pos` setting via `Layout.SetPivot`. This moves Karamba's hidden params as well; setting `Pivot` directly stretches the component across the canvas.
+  - `freshGroups` and `BuildResult.Placed`.
+- `Parser`: `TripleEnd` for the escape.
+- Regression **c28** checks that save → open → save is identical, that the results are equal, that references and scripts survive, and that there are no dangling wires or stretched components.
+
+## 8. Changing the grammar
 
 1. `Parser.cs`: add the syntax. Keep it unambiguous with the existing forms (wires vs inputs, `#` comments vs colours).
 2. `Builder.cs`: apply it, with a clear per-line error.

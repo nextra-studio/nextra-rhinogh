@@ -188,10 +188,25 @@ namespace Nextra.Engine.Gh
             var piv = o.Attributes?.Pivot;
             if (!o.Read(root)) throw new NxError($"{o.Name} rejected the new state", "the component may validate values; check allowed options with query level:'detail'");
             if (piv.HasValue && o.Attributes != null) o.Attributes.Pivot = piv.Value;
+            RelinkWires(o);
             if (o is IGH_Component comp) { comp.Params.OnParametersChanged(); }
             o.Attributes?.ExpireLayout();
             if (o is IGH_ActiveObject ao) ao.ExpireSolution(false);
             return "state " + string.Join(", ", notes);
+        }
+
+        // Read() turns input wires into proxy sources; left alone they become "Unresolved Proxy" wires drawn from (0,0).
+        static void RelinkWires(IGH_DocumentObject o)
+        {
+            var doc = o.OnPingDocument();
+            var ins = o is IGH_Component c ? c.Params.Input.ToList() : o is IGH_Param p ? new List<IGH_Param> { p } : new List<IGH_Param>();
+            foreach (var ip in ins)
+            {
+                if (ip.HasProxySources) { if (doc != null) ip.RelinkProxySources(doc); ip.ClearProxySources(); }
+                foreach (var s in ip.Sources.ToList())
+                    if (doc == null || s.Attributes?.GetTopLevel?.DocObject is not IGH_DocumentObject t || doc.FindObject(t.InstanceGuid, true) == null)
+                        ip.RemoveSource(s);
+            }
         }
 
         static (string, int) SplitIndex(string s)

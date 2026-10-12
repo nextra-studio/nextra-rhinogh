@@ -7,7 +7,7 @@
   },
   {
    "op": "connect",
-   "source": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
+   "source": "af7f4ed2-d3f3-490e-ad40-68c5944f7376",
    "target": "ml",
    "target_input_name": "I"
   },
@@ -19,7 +19,7 @@
 ---
 {
   "success": true,
-  "graph_id": "MCPGraph_20261012074751347",
+  "graph_id": "MCPGraph_20261012075735276",
   "operation_count": 3,
   "created_count": 1,
   "created_component_count": 1,
@@ -31,22 +31,22 @@
   "rollback_on_error": true,
   "fail_on_verification_error": false,
   "verified": null,
-  "mutation_duration_ms": 12,
-  "solution_duration_ms": 3,
+  "mutation_duration_ms": 18,
+  "solution_duration_ms": 7,
   "verification_duration_ms": 0,
-  "duration_ms": 39,
+  "duration_ms": 55,
   "operations": [
     {
       "op": "create",
       "alias": "ml",
-      "instance_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+      "instance_id": "176d1d28-20a0-4c9b-af8e-ef40523af990",
       "name": "Mass Addition",
       "nickname": "MA"
     },
     {
       "op": "connect",
-      "source_id": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
-      "target_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+      "source_id": "af7f4ed2-d3f3-490e-ad40-68c5944f7376",
+      "target_id": "176d1d28-20a0-4c9b-af8e-ef40523af990",
       "source_param": "Number",
       "target_param": "Input"
     },
@@ -67,9 +67,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "7cecd0da-3af6-476e-a06b-8db2720e5f37",
+        "instance_id": "176d1d28-20a0-4c9b-af8e-ef40523af990",
         "alias": "ml",
-        "graph_id": "MCPGraph_20261012074751347",
+        "graph_id": "MCPGraph_20261012075735276",
         "role": "",
         "name": "Mass Addition",
         "nickname": "MA",
@@ -105,7 +105,7 @@
         "enabled": true
       },
       {
-        "instance_id": "160539cf-7bf5-4a3b-86d0-c0f4c76ea4e3",
+        "instance_id": "af7f4ed2-d3f3-490e-ad40-68c5944f7376",
         "alias": "",
         "graph_id": "",
         "role": "",
@@ -140,12 +140,12 @@
     "preview_enabled_object_count": 1,
     "preview_disabled_object_count": 0,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 136,
+    "rhino_document_object_count": 13393,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012074751347",
+    "graph_id": "MCPGraph_20261012075735276",
     "object_count": 2,
     "controls": [],
     "adjustable_parameters": [],

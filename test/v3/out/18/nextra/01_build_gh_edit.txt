@@ -1,0 +1,14 @@
+{
+ "new": true,
+ "ops": "## Inputs #DBABFF\nnx = Number Slider {v=10, r=3..30, int} \"Nx\"\nny = Number Slider {v=6, r=2..20, int} \"Ny\"\nsp = Number Slider {v=2, r=0.5..5} \"Spacing\"\namp = Number Slider {v=1.5, r=0..5} \"Amp\"\n## Grid tree #ABDBFF\nsx = Series (N=sp, C=nx, S=0)\nsy = Series (N=sp, C=ny, S=0)\npt = Construct Point (X=sx, Y=sy^g)\ndc = Deconstruct @Vector (P=pt)\nad = Addition (A=dc.X, B=dc.Y)\nsn = Sine (x=ad)\nmz = Multiplication (A=sn, B=amp)\nuz = Unit Z (F=mz)\nmv = Move (G=pt, T=uz)\n## Surface #FFD6AB\nrows = Interpolate (V=mv.G)\nfm = Flip Matrix (D=mv.G)\ncols = Interpolate (V=fm)\nlf = Loft (C=rows.C^f)"
+}
+---
+new GH document
+ok: 17/17 lines applied (+17 nodes, 19 wires, 2 values, +3 groups), checkpoint c472
+ids: nx=g1 ny=g2 sp=g3 amp=g4 sx=g5 sy=g6 pt=g7 dc=g8 ad=g9 sn=g10 mz=g11 uz=g12 mv=g13 rows=g14 fm=g15 cols=g16 lf=g17
+groups: Inputs=g18 Grid tree=g19 Surface=g20
+note: L11: 'Addition': 2 versions installed; used the visible one (Maths/Operators)
+note: L17: 'Interpolate': 2 identical entries in Curve; used the first
+note: L19: 'Interpolate': 2 identical entries in Curve; used the first
+solved 20ms, no errors/warnings on affected nodes
+results: g16.C: 10 Curve 10 branches · g16.L: 10 Number 10 branches e.g. 14.012,13.509,13.266,14.072 · g17.L: 1 Brep {0}

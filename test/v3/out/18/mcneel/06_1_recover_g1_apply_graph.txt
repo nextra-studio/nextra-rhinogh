@@ -1,0 +1,21 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "sn",
+   "Selector": "7663efbb-d9b8-4c6a-a0da-c3750a7bbe77",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "mv",
+   "Selector": "b40f28a2-ba30-4ac2-afe5-a6ece7f985fc",
+   "X": 1360,
+   "Y": 0
+  }
+ ],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"sn","Id":"ab4b8d19-6f12-474e-9987-be6296407f40","Kind":"Component"},{"Key":"mv","Id":"a289527b-e7c2-4902-a3df-a6e74eb2c073","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

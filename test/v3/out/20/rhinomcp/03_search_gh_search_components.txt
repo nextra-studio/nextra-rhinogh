@@ -1,0 +1,52 @@
+{
+ "query": "Assemble Model",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Assemble Model",
+  "category": null,
+  "components": [
+    {
+      "name": "Assemble Model",
+      "nickname": "Assemble",
+      "category": "Nextra.fem",
+      "subcategory": "08.Assembly",
+      "guid": "44444444-8274-4f93-a3b9-5561e9a1397f",
+      "description": "Aggregates and compiles all structural components (Nodes, Elements, Materials, Sections, Supports, and Loads) into a unified, mathematically rigorous Nextra Model. This is the primary precursor step before running any solver or analysis. It handles geometric intersection, node merging, and topological validation."
+    },
+    {
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "guid": "36cefb8a-a36a-4f35-8351-f83e9c20dc38",
+      "description": "Creates a finite element model from given entities (points, beams, supports, loads, cross sections, materials,... )."
+    },
+    {
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "guid": "ddcf0ef4-e8bb-4231-8302-ded99046e49c",
+      "description": "Creates a finite element model from given entities (points, beams, supports, loads, cross sections, materials...)."
+    },
+    {
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "guid": "f4053134-6190-4cc3-b6b4-f1f50a1b6a5b",
+      "description": "Creates a finite element model from given entities (points, beams, supports, loads, cross sections, materials...)."
+    },
+    {
+      "name": " Disassemble Model (Karamba3D)",
+      "nickname": "Disassemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "guid": "2cab506b-c3ca-4da0-a5fe-6579603e43a7",
+      "description": "Decomposes a model into its components."
+    }
+  ]
+}

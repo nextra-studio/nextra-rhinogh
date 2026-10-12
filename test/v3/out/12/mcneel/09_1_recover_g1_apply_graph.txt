@@ -2,24 +2,6 @@
  "sliders": [],
  "components": [
   {
-   "Key": "pa",
-   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
-   "X": 0,
-   "Y": 0
-  },
-  {
-   "Key": "pb",
-   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
-   "X": 0,
-   "Y": 70
-  },
-  {
-   "Key": "pm",
-   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
-   "X": 0,
-   "Y": 140
-  },
-  {
    "Key": "ld",
    "Selector": "3598d812-0d6c-4a7c-8d89-19d487862572",
    "X": 170,
@@ -30,4 +12,4 @@
  "solve": false
 }
 ---
-{"Placed":[{"Key":"pa","Id":"3dc7025e-73cd-44d7-9f5b-3cf278221cbf","Kind":"Component"},{"Key":"pb","Id":"4a6813ed-26b4-4428-afa6-c22e6f4848ce","Kind":"Component"},{"Key":"pm","Id":"1f6268c0-3246-470a-8c4f-8e0a66e33c57","Kind":"Component"},{"Key":"ld","Id":"876d8640-a71b-464b-b67b-ca28fd002e05","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}
+{"Placed":[{"Key":"ld","Id":"b4c8fba7-95b4-4c2c-8ad6-32602c647107","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

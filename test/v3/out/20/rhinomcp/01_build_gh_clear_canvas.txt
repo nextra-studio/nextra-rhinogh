@@ -1,0 +1,8 @@
+{}
+---
+{
+  "deleted_count": 0,
+  "include_groups": true,
+  "recomputed": false,
+  "message": "Cleared 0 Grasshopper canvas object(s)"
+}

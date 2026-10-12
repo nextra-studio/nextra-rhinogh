@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nfrom collections import Counter\nc = Counter((doc.Layers[o.Attributes.LayerIndex].Name, o.ObjectType.ToString()) for o in doc.Objects)\nprint(len(list(doc.Objects)), dict(c))"
+}
+---
+{"stdout":"1224 {(\u0027MEP\u0027, \u0027Curve\u0027): 540, (\u0027Slabs\u0027, \u0027Brep\u0027): 6, (\u0027Beams\u0027, \u0027Brep\u0027): 426, (\u0027Columns\u0027, \u0027Brep\u0027): 252}\n","error":null}

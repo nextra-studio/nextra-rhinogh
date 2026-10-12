@@ -1,0 +1,13 @@
+{
+ "wires": [
+  {
+   "SrcId": "266d5a5d-f4cf-4b92-b47b-22d70c9fef9e",
+   "Src": "0",
+   "DstId": "0d7a91aa-76c5-4aac-b69c-5ddc7f513301",
+   "Dst": "Height"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":1,"OkCount":1,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"266d5a5d-f4cf-4b92-b47b-22d70c9fef9e","Param":"Number Slider"},"Dst":{"Id":"0d7a91aa-76c5-4aac-b69c-5ddc7f513301","Param":"Height [cm]"},"Error":null}]}

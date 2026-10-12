@@ -89,7 +89,8 @@ These files are also served to any non-Claude LLM through `query {scope:'docs'}`
 | `ComponentSearch.cs` | 275 | component lookup from `ComponentServer` + port resolution on live objects |
 | `Shorthand/Parser.cs` | 465 | text → ops (AST) |
 | `Shorthand/Builder.cs` | 590 | ops → canvas changes, per-line errors |
-| `Shorthand/Writer.cs` | 335 | canvas → text (reverse engine) |
+| `Shorthand/Writer.cs` | 400 | canvas → text (reverse engine); file mode for `.ghs` |
+| `GhsFile.cs` | 90 | `.ghs` files: save (Writer file mode + header) and open (parse → build on a new canvas) |
 | `Layout.cs` | 630 | Sugiyama micro/macro layout, place/tidy, relays, bounds repair |
 | `StateIO.cs` | 195 | generic `$key` component state through GH archives |
 | `MenuIO.cs` | 100 | right-click menu items and on-component clicks |

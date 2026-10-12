@@ -95,7 +95,15 @@ system can do it at all ("not possible" + reason otherwise), plus 4 new cases: 1
 During the run: RhinoMCP installed temporarily (uninstall at the end), McNeel MCPStart on :5123.
 - [x] I1 Nextra regression from scratch: 194/194 (component search tightened: suffix-stripped exact names, weak fuzzy matches dropped — 830 → 300 tokens on a 6-name lookup)
 - [x] I2 New cases 17–20 on Nextra, added to the regression suite as c24–c27 (canopy, data trees, 1,224-object model, Karamba shell 2.90 cm vs plate theory 2.84 cm)
-- [ ] I3 v3 harness test/v3 (common clients + one module per case, neutral checks)
-- [ ] I4 Run cases 01–20 on all three systems, fix harness/engine issues, rerun until all correct (or "not possible" with reason)
-- [ ] I5 Report test/v3/REPORT.md + tables; README / test index / dev docs
-- [ ] I6 Regression again, restore environment (uninstall RhinoMCP), commit + push
+- [x] I3 v3 harness test/v3 (bench_v3.py, neutral specs3.py emitted per system, pyhelpers.py for competitor Python fallbacks)
+- [x] I4 All 19 cases × 3 systems correct (identical checks). Whole session: Nextra 16.2k tokens / 43 calls / 0 fallbacks; McNeel 77.0k (4.8×) / 108 / 34; RhinoMCP 237.7k (14.7×) / 96 / 32
+- [x] I5 test/v3/REPORT.md + tables_v3.md; README / test index / dev docs
+- [x] I5b User-reported: wires drawn from (0,0) after `$state` on a wired component (Read() leaves unresolved proxy sources) → StateIO relinks; regression c27 + dangling-wire count in every v3 GH check
+- [x] I6 Regression 238/238, commit + push (RhinoMCP uninstall: next time Rhino is closed)
+
+## J. `.ghs` file format (2026-10-12)
+User request: a new file format that is the shorthand of a definition, documented and used in the repo.
+- [x] J1 `gh_edit {save:'x.ghs'}` / `{open:'x.ghs'}`; Writer file mode (canonical ids, full code, Python hints, positions, all states, registered names, Rhino refs as object ids); Builder `pos`, fresh groups per section; parser `\"""` escape
+- [x] J2 Round trips identical + same results: kshell, mixed scripts test, v1 house FE, messy, tidy, relays (first save of an old-Karamba file normalises port names once)
+- [x] J3 Found on the way: `pos` must move Karamba's hidden params (stretched components); component search preferred `Domain` over `Domain²` (verbatim names now win)
+- [x] J4 Repo uses it: test/v3/scripts/*.ghs, regress/scripts/ghs_mix.ghs, .ghs next to the v1 .gh files; dev/04_shorthand.md §7, skill shorthand.md, bridge schema; regression c28

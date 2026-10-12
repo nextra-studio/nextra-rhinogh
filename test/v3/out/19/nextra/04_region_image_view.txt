@@ -1,0 +1,10 @@
+{
+ "view": "top",
+ "focus": "layer:Columns",
+ "tags": "off"
+}
+---
+rhino view 'Top' 778x600, focus 252 object(s). Grid A-H x 1-8.
+1224 object(s) in frame.
+cells (count): A1:6 B1:18 C1:18 D1:12 E1:18 F1:18 G1:18 H1:6 A2:12 B2:30 C2:30 D2:17 E2:31 F2:30 G2:30 H2:12 A3:6 B3:18 C3:18 D3:12 E3:18 F3:18 G3:18 H3:6 A4:6 B4:24 C4:24 D4:18 E4:24 F4:24 G4:24 H4:6 A5:12 B5:36 C5:36 D5:24 E5:42 F5:36 G5:36 H5:12 A6:6 B6:18 C6:18 D6:12 E6:18 F6:18 G6:18 H6:6 A7:12 B7:30 C7:30 D7:18 E7:30 F7:30 G7:30 H7:12 A8:6 B8:18 C8:18 D8:12 E8:18 F8:18 G8:18 H8:6
+Too many to tag (252 > 30). Next: view focus:'C3:E5' (region), or focus:'layer:X', or query filter:'cells:C3:E5'.

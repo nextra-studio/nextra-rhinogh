@@ -1,0 +1,1755 @@
+{
+ "components": [
+  {
+   "alias": "L",
+   "component_name": "Number Slider",
+   "value": 10,
+   "min": 4,
+   "max": 20,
+   "nickname": "Span m"
+  },
+  {
+   "alias": "W",
+   "component_name": "Number Slider",
+   "value": 6,
+   "min": 2,
+   "max": 12,
+   "nickname": "Width m"
+  },
+  {
+   "alias": "th",
+   "component_name": "Number Slider",
+   "value": 20,
+   "min": 10,
+   "max": 40,
+   "decimals": 0,
+   "nickname": "Thickness cm"
+  },
+  {
+   "alias": "mr",
+   "component_name": "Number Slider",
+   "value": 2,
+   "min": 1,
+   "max": 4,
+   "nickname": "Mesh m"
+  },
+  {
+   "alias": "pl",
+   "component_name": "XY Plane"
+  },
+  {
+   "alias": "rc",
+   "component_guid": "d93100b6-d50b-40b2-831a-814659dc38e3"
+  },
+  {
+   "alias": "bs",
+   "component_name": "Boundary Surfaces"
+  },
+  {
+   "alias": "mb",
+   "component_guid": "c9bf8fd5-cff5-41e8-b957-d9338b581e0f"
+  },
+  {
+   "alias": "mat",
+   "component_name": "Material Selection (Karamba3D)"
+  },
+  {
+   "alias": "cs",
+   "component_guid": "f201e873-4df8-400f-9d75-92e1963ad371"
+  },
+  {
+   "alias": "se",
+   "component_name": "Create Surface Element (Karamba3D)"
+  },
+  {
+   "alias": "dm",
+   "component_name": "Deconstruct Mesh"
+  },
+  {
+   "alias": "dp",
+   "component_guid": "9abae6b7-fa1d-448c-9209-4a8155345841"
+  },
+  {
+   "alias": "lt",
+   "component_name": "Smaller Than"
+  },
+  {
+   "alias": "gt",
+   "component_name": "Larger Than"
+  },
+  {
+   "alias": "orr",
+   "component_name": "Gate Or"
+  },
+  {
+   "alias": "base",
+   "component_name": "Cull Pattern"
+  },
+  {
+   "alias": "sup",
+   "component_guid": "ca9eab02-e4ea-4126-9755-1c24b6e74176"
+  },
+  {
+   "alias": "ld",
+   "component_name": " Loads (Karamba3D)"
+  },
+  {
+   "alias": "asm",
+   "component_guid": "ddcf0ef4-e8bb-4231-8302-ded99046e49c"
+  },
+  {
+   "alias": "an",
+   "component_name": " Analyse (Karamba3D)"
+  }
+ ],
+ "connections": [
+  {
+   "source": "pl",
+   "target": "rc",
+   "target_input_index": 0
+  },
+  {
+   "source": "L",
+   "target": "rc",
+   "target_input_index": 1
+  },
+  {
+   "source": "W",
+   "target": "rc",
+   "target_input_index": 2
+  },
+  {
+   "source": "rc",
+   "target": "bs",
+   "target_input_index": 0
+  },
+  {
+   "source": "bs",
+   "target": "mb",
+   "target_input_index": 0
+  },
+  {
+   "source": "mr",
+   "target": "mb",
+   "target_input_index": 2
+  },
+  {
+   "source": "mat",
+   "target": "cs",
+   "target_input_index": 4
+  },
+  {
+   "source": "mb",
+   "target": "se",
+   "target_input_index": 0
+  },
+  {
+   "source": "cs",
+   "target": "se",
+   "target_input_index": 3
+  },
+  {
+   "source": "mb",
+   "target": "dm",
+   "target_input_index": 0
+  },
+  {
+   "source": "dm",
+   "target": "dp",
+   "target_input_index": 0
+  },
+  {
+   "source": "dp",
+   "target": "lt",
+   "target_input_index": 0
+  },
+  {
+   "source": "dp",
+   "target": "gt",
+   "target_input_index": 0
+  },
+  {
+   "source": "L",
+   "target": "gt",
+   "target_input_index": 1
+  },
+  {
+   "source": "lt",
+   "target": "orr",
+   "target_input_index": 0
+  },
+  {
+   "source": "gt",
+   "target": "orr",
+   "target_input_index": 1
+  },
+  {
+   "source": "dm",
+   "target": "base",
+   "target_input_index": 0
+  },
+  {
+   "source": "orr",
+   "target": "base",
+   "target_input_index": 1
+  },
+  {
+   "source": "base",
+   "target": "sup",
+   "target_input_index": 0
+  },
+  {
+   "source": "se",
+   "target": "asm",
+   "target_input_index": 0
+  },
+  {
+   "source": "sup",
+   "target": "asm",
+   "target_input_index": 1
+  },
+  {
+   "source": "ld",
+   "target": "asm",
+   "target_input_index": 2
+  },
+  {
+   "source": "asm",
+   "target": "an",
+   "target_input_index": 0
+  }
+ ],
+ "values": [
+  {
+   "target": "lt",
+   "input_index": 1,
+   "value": 0.01
+  }
+ ],
+ "groups": [
+  {
+   "name": "Inputs",
+   "members": [
+    "L",
+    "W",
+    "th",
+    "mr"
+   ],
+   "color": [
+    219,
+    171,
+    255
+   ]
+  },
+  {
+   "name": "Plate",
+   "members": [
+    "pl",
+    "rc",
+    "bs",
+    "mb",
+    "mat",
+    "cs",
+    "se"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Supports on the short edges",
+   "members": [
+    "dm",
+    "dp",
+    "lt",
+    "gt",
+    "orr",
+    "base",
+    "sup"
+   ],
+   "color": [
+    171,
+    219,
+    255
+   ]
+  },
+  {
+   "name": "Analysis",
+   "members": [
+    "ld",
+    "asm",
+    "an"
+   ],
+   "color": [
+    255,
+    214,
+    171
+   ]
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "max_columns": 6
+ }
+}
+---
+{
+  "success": true,
+  "component_count": 21,
+  "created_component_count": 21,
+  "created_group_count": 4,
+  "connection_count": 23,
+  "value_count": 1,
+  "recomputed": true,
+  "rolled_back": false,
+  "graph_id": "MCPGraph_20261012075808454",
+  "mutation_duration_ms": 566,
+  "solution_duration_ms": 8,
+  "verification_duration_ms": 0,
+  "duration_ms": 1523,
+  "aliases": {
+    "L": "56652030-eda3-4f21-a950-ccf3567cc644",
+    "W": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+    "th": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+    "mr": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+    "pl": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+    "rc": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+    "bs": "45732507-82c4-4baa-9f82-824f031937cc",
+    "mb": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+    "mat": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+    "cs": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+    "se": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+    "dm": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+    "dp": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+    "lt": "c14d7abe-13f8-4900-86da-5396adf46761",
+    "gt": "75b14a10-6917-4b35-9465-96ec1fda2964",
+    "orr": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+    "base": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+    "sup": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+    "ld": "c4471da3-5839-4c6e-8512-53e03c468407",
+    "asm": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+    "an": "decebfc4-afa6-499f-81dd-c9756a152704"
+  },
+  "components": [
+    {
+      "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+      "name": "Number Slider",
+      "nickname": "Span m",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+      "name": "Number Slider",
+      "nickname": "Width m",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+      "name": "Number Slider",
+      "nickname": "Thickness cm",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        220.0
+      ]
+    },
+    {
+      "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+      "name": "Number Slider",
+      "nickname": "Mesh m",
+      "category": "Params",
+      "subcategory": "Input",
+      "position": [
+        40.0,
+        310.0
+      ]
+    },
+    {
+      "instance_id": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+      "name": "XY Plane",
+      "nickname": "XY",
+      "category": "Vector",
+      "subcategory": "Plane",
+      "position": [
+        40.0,
+        400.0
+      ]
+    },
+    {
+      "instance_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "position": [
+        260.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "45732507-82c4-4baa-9f82-824f031937cc",
+      "name": "Boundary Surfaces",
+      "nickname": "Boundary",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "position": [
+        480.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+      "name": " Mesh Breps (Karamba3D)",
+      "nickname": "Mesh Breps",
+      "category": "Karamba3D",
+      "subcategory": "9.Utilities",
+      "position": [
+        700.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+      "name": "Material Selection (Karamba3D)",
+      "nickname": "MatSelect",
+      "category": "Karamba3D",
+      "subcategory": "5.Material",
+      "position": [
+        40.0,
+        490.0
+      ]
+    },
+    {
+      "instance_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+      "name": "Cross-section (Karamba3D)",
+      "nickname": "CroSec",
+      "category": "Karamba3D",
+      "subcategory": "3.Cross Section",
+      "position": [
+        260.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+      "name": "Create Surface Element (Karamba3D)",
+      "nickname": "SurfElem",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+      "name": "Deconstruct Mesh",
+      "nickname": "DeMesh",
+      "category": "Mesh",
+      "subcategory": "Analysis",
+      "position": [
+        920.0,
+        130.0
+      ]
+    },
+    {
+      "instance_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+      "name": "Deconstruct",
+      "nickname": "pDecon",
+      "category": "Vector",
+      "subcategory": "Point",
+      "position": [
+        1140.0,
+        40.0
+      ]
+    },
+    {
+      "instance_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+      "name": "Smaller Than",
+      "nickname": "Smaller",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        40.0,
+        760.0
+      ]
+    },
+    {
+      "instance_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+      "name": "Larger Than",
+      "nickname": "Larger",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        40.0,
+        850.0
+      ]
+    },
+    {
+      "instance_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+      "name": "Gate Or",
+      "nickname": "Or",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "position": [
+        260.0,
+        760.0
+      ]
+    },
+    {
+      "instance_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+      "name": "Cull Pattern",
+      "nickname": "Cull",
+      "category": "Sets",
+      "subcategory": "Sequence",
+      "position": [
+        480.0,
+        760.0
+      ]
+    },
+    {
+      "instance_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+      "name": "Support (Karamba3D)",
+      "nickname": "Supp",
+      "category": "Karamba3D",
+      "subcategory": "1.Support",
+      "position": [
+        700.0,
+        760.0
+      ]
+    },
+    {
+      "instance_id": "c4471da3-5839-4c6e-8512-53e03c468407",
+      "name": " Loads (Karamba3D)",
+      "nickname": "Loads",
+      "category": "Karamba3D",
+      "subcategory": "2.Load",
+      "position": [
+        40.0,
+        580.0
+      ]
+    },
+    {
+      "instance_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+      "name": " Assemble Model (Karamba3D)",
+      "nickname": "Assemble",
+      "category": "Karamba3D",
+      "subcategory": "0.Model",
+      "position": [
+        920.0,
+        760.0
+      ]
+    },
+    {
+      "instance_id": "decebfc4-afa6-499f-81dd-c9756a152704",
+      "name": " Analyse (Karamba3D)",
+      "nickname": "Analyse",
+      "category": "Karamba3D",
+      "subcategory": "6.Algorithms",
+      "position": [
+        1140.0,
+        760.0
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "instance_id": "1ead3d84-6aed-4033-9077-ff02cc448d8c",
+      "name": "Inputs",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "1694ec02-cc1a-4bee-86b7-0a77984a9cc9",
+      "name": "Plate",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "0044a301-9400-4d74-a162-c02b02bc54d5",
+      "name": "Supports on the short edges",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    },
+    {
+      "instance_id": "44f3b65e-5b6a-4f06-bb19-819a58563cbe",
+      "name": "Analysis",
+      "object_count": 21,
+      "graph_id": "MCPGraph_20261012075808454",
+      "role": "group",
+      "metadata": {
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "group"
+      }
+    }
+  ],
+  "layout": {
+    "layout_count": 21,
+    "edge_count": 23,
+    "max_columns": 6,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "position": [
+          40.0,
+          220.0
+        ]
+      },
+      {
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "position": [
+          40.0,
+          310.0
+        ]
+      },
+      {
+        "instance_id": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "position": [
+          40.0,
+          400.0
+        ]
+      },
+      {
+        "instance_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+        "name": "Rectangle",
+        "nickname": "Rectangle",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "45732507-82c4-4baa-9f82-824f031937cc",
+        "name": "Boundary Surfaces",
+        "nickname": "Boundary",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+        "name": " Mesh Breps (Karamba3D)",
+        "nickname": "Mesh Breps",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+        "name": "Material Selection (Karamba3D)",
+        "nickname": "MatSelect",
+        "position": [
+          40.0,
+          490.0
+        ]
+      },
+      {
+        "instance_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "position": [
+          260.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+        "name": "Create Surface Element (Karamba3D)",
+        "nickname": "SurfElem",
+        "position": [
+          920.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+        "name": "Deconstruct Mesh",
+        "nickname": "DeMesh",
+        "position": [
+          920.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "position": [
+          1140.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+        "name": "Smaller Than",
+        "nickname": "Smaller",
+        "position": [
+          40.0,
+          760.0
+        ]
+      },
+      {
+        "instance_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+        "name": "Larger Than",
+        "nickname": "Larger",
+        "position": [
+          40.0,
+          850.0
+        ]
+      },
+      {
+        "instance_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+        "name": "Gate Or",
+        "nickname": "Or",
+        "position": [
+          260.0,
+          760.0
+        ]
+      },
+      {
+        "instance_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+        "name": "Cull Pattern",
+        "nickname": "Cull",
+        "position": [
+          480.0,
+          760.0
+        ]
+      },
+      {
+        "instance_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "position": [
+          700.0,
+          760.0
+        ]
+      },
+      {
+        "instance_id": "c4471da3-5839-4c6e-8512-53e03c468407",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "position": [
+          40.0,
+          580.0
+        ]
+      },
+      {
+        "instance_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "position": [
+          920.0,
+          760.0
+        ]
+      },
+      {
+        "instance_id": "decebfc4-afa6-499f-81dd-c9756a152704",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "position": [
+          1140.0,
+          760.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "diagnostics": {
+    "object_count": 21,
+    "output_count": 39,
+    "outputs_with_data": 31,
+    "total_output_data_count": 986,
+    "warning_count": 2,
+    "error_count": 2,
+    "objects": [
+      {
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "alias": "L",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Span m",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 4.0,
+        "max": 20.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "alias": "W",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Width m",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 12.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "alias": "th",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Thickness cm",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "alias": "mr",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Mesh m",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 1.0,
+        "max": 4.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "c31538de-e8e7-46ab-9ccc-5c239f0cdbf2",
+        "alias": "pl",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "XY Plane",
+        "nickname": "XY",
+        "category": "Vector",
+        "subcategory": "Plane",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Plane",
+            "nickname": "P",
+            "type": "Plane",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "0f2d7907-cc4e-45be-865e-4869cd6dd1a5",
+        "alias": "rc",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Rectangle",
+        "nickname": "Rectangle",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Rectangle",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Length",
+            "nickname": "L",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "45732507-82c4-4baa-9f82-824f031937cc",
+        "alias": "bs",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Boundary Surfaces",
+        "nickname": "Boundary",
+        "category": "Surface",
+        "subcategory": "Freeform",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Surfaces",
+            "nickname": "S",
+            "type": "Surface",
+            "access": "list",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "03c16ec5-dbbe-468a-a2ac-91fbb25435ee",
+        "alias": "mb",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": " Mesh Breps (Karamba3D)",
+        "nickname": "Mesh Breps",
+        "category": "Karamba3D",
+        "subcategory": "9.Utilities",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Mesh",
+            "nickname": "Mesh",
+            "type": "Mesh",
+            "access": "list",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "342a95d3-b7b2-40ad-81c1-78d7b9784596",
+        "alias": "mat",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Material Selection (Karamba3D)",
+        "nickname": "MatSelect",
+        "category": "Karamba3D",
+        "subcategory": "5.Material",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Material",
+            "nickname": "Mat",
+            "type": "Material",
+            "access": "item",
+            "has_data": true,
+            "data_count": 312,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+        "alias": "cs",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "category": "Karamba3D",
+        "subcategory": "3.Cross Section",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Cross-section",
+            "nickname": "CroSec",
+            "type": "CrossSection",
+            "access": "item",
+            "has_data": true,
+            "data_count": 312,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "047f9d2d-84bf-4d42-80c3-571f89329f24",
+        "alias": "se",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Create Surface Element (Karamba3D)",
+        "nickname": "SurfElem",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Solution exception:The provided cross section is not a shell cross section."
+          }
+        ],
+        "output_count": 3,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Element",
+            "nickname": "Elem",
+            "type": "Element",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Points",
+            "nickname": "Pts",
+            "type": "Point",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "3d1581a6-2452-4f3e-a199-f2c8f786a9f0",
+        "alias": "dm",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Deconstruct Mesh",
+        "nickname": "DeMesh",
+        "category": "Mesh",
+        "subcategory": "Analysis",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 4,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Vertices",
+            "nickname": "V",
+            "type": "Point",
+            "access": "list",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Faces",
+            "nickname": "F",
+            "type": "Mesh face",
+            "access": "list",
+            "has_data": true,
+            "data_count": 36,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Colours",
+            "nickname": "C",
+            "type": "Colour",
+            "access": "list",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Normals",
+            "nickname": "N",
+            "type": "Vector",
+            "access": "list",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "7463fc94-9946-4d13-83b4-c68a553e88f8",
+        "alias": "dp",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Deconstruct",
+        "nickname": "pDecon",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "X component",
+            "nickname": "X",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Y component",
+            "nickname": "Y",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Z component",
+            "nickname": "Z",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "c14d7abe-13f8-4900-86da-5396adf46761",
+        "alias": "lt",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Smaller Than",
+        "nickname": "Smaller",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Smaller than",
+            "nickname": "<",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "… or Equal to",
+            "nickname": "<=",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "75b14a10-6917-4b35-9465-96ec1fda2964",
+        "alias": "gt",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Larger Than",
+        "nickname": "Larger",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Larger than",
+            "nickname": ">",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "… or Equal to",
+            "nickname": ">=",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "dd401c6a-ffff-4a4f-bfc3-1de6ec473936",
+        "alias": "orr",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Gate Or",
+        "nickname": "Or",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Boolean",
+            "access": "item",
+            "has_data": true,
+            "data_count": 30,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "441798f7-4de4-43d5-80dd-b9e222b61dbf",
+        "alias": "base",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Cull Pattern",
+        "nickname": "Cull",
+        "category": "Sets",
+        "subcategory": "Sequence",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "List",
+            "nickname": "L",
+            "type": "Generic Data",
+            "access": "list",
+            "has_data": true,
+            "data_count": 5,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "43023c7b-e446-4247-bdfb-142eaa646d4b",
+        "alias": "sup",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Support (Karamba3D)",
+        "nickname": "Supp",
+        "category": "Karamba3D",
+        "subcategory": "1.Support",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Support",
+            "nickname": "Supp",
+            "type": "Support",
+            "access": "item",
+            "has_data": true,
+            "data_count": 5,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "c4471da3-5839-4c6e-8512-53e03c468407",
+        "alias": "ld",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": " Loads (Karamba3D)",
+        "nickname": "Loads",
+        "category": "Karamba3D",
+        "subcategory": "2.Load",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Load",
+            "nickname": "Load",
+            "type": "Load",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "8571a74d-83bd-43a8-b35a-569b3f5a399c",
+        "alias": "asm",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": " Assemble Model (Karamba3D)",
+        "nickname": "Assemble",
+        "category": "Karamba3D",
+        "subcategory": "0.Model",
+        "runtime_message_level": "Warning",
+        "runtime_messages": [
+          {
+            "level": "Warning",
+            "message": "There are no elements in the model."
+          },
+          {
+            "level": "Warning",
+            "message": "Could not find node at (0/0/0) where support index 0 is attached.\nCould not find node at (0/6/0) where support index 1 is attached.\nCould not find node at (0/4.5/0) where support index 2 is attached.\nCould not find node at (0/3/0) where support index 3 is attached.\nCould not find node at (0/1.5/0) where support index 4 is attached."
+          }
+        ],
+        "output_count": 5,
+        "outputs_with_data": 5,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Info",
+            "nickname": "Info",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Mass [kg]",
+            "nickname": "Mass",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 3,
+            "name": "Centre of Gravity",
+            "nickname": "COG",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          },
+          {
+            "index": 4,
+            "name": "Load Case Names",
+            "nickname": "LCNames",
+            "type": "Text",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      },
+      {
+        "instance_id": "decebfc4-afa6-499f-81dd-c9756a152704",
+        "alias": "an",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": " Analyse (Karamba3D)",
+        "nickname": "Analyse",
+        "category": "Karamba3D",
+        "subcategory": "6.Algorithms",
+        "runtime_message_level": "Error",
+        "runtime_messages": [
+          {
+            "level": "Error",
+            "message": "Model can not be calculated: there are no elements."
+          }
+        ],
+        "output_count": 4,
+        "outputs_with_data": 0,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Analysed Model",
+            "nickname": "Model",
+            "type": "Model",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 1,
+            "name": "Maximum Displacement [cm]",
+            "nickname": "MaxDisp",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 2,
+            "name": "Resulting force [kN]",
+            "nickname": "Force",
+            "type": "Vector",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          },
+          {
+            "index": 3,
+            "name": "Change of elastic energy [kNm]",
+            "nickname": "Energy",
+            "type": "Number",
+            "access": "item",
+            "has_data": false,
+            "data_count": 0,
+            "branch_count": 0
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 17,
+    "preview_enabled_object_count": 11,
+    "preview_disabled_object_count": 6,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 17119,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012075808454",
+    "object_count": 25,
+    "controls": [
+      {
+        "alias": "L",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 4.0,
+        "max": 20.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 12.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 1.0,
+        "max": 4.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "L",
+        "name": "Number Slider",
+        "nickname": "Span m",
+        "instance_id": "56652030-eda3-4f21-a950-ccf3567cc644",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 10.0,
+        "min": 4.0,
+        "max": 20.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width m",
+        "instance_id": "8483c1e4-04a4-49b9-94ad-c11575a9ff46",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 2.0,
+        "max": 12.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "alias": "mr",
+        "name": "Number Slider",
+        "nickname": "Mesh m",
+        "instance_id": "dd28a105-a94e-4871-894f-a45507fb9ebf",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 2.0,
+        "min": 1.0,
+        "max": 4.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Built Grasshopper graph with 21 component(s) and 23 connection(s)"
+}

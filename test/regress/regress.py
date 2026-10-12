@@ -658,7 +658,7 @@ def c24():
 
 def c25():
     c = Case("25_gh_trees", "data trees: grafted grid → rows/columns → loft; swap the graft")
-    t = c.call("gh_edit", {"new": True, "ops": v3("trees.gh.txt")}, expect=[r"ok: 17/17", r"10 Curve 10 branches", r"1 Brep"])
+    t = c.call("gh_edit", {"new": True, "ops": v3("trees.ghs")}, expect=[r"ok: 17/17", r"10 Curve 10 branches", r"1 Brep"])
     m = ids(t)
     c.call("query", {"scope": "gh", "filter": m["rows"], "level": "data", "items": 2}, expect=[r"6 Curve 6 branches"])
     c.call("gh_edit", {"ops": f"{m['pt']} (X={m['sx']}^g, Y={m['sy']}^x)"}, expect=[r"ok: 1/1", r"6 Curve 6 branches"])
@@ -678,7 +678,7 @@ def c26():
 
 def c27():
     c = Case("27_karamba_shell", "Karamba shell plate: 10x6 m, 20 cm C30/37, edges supported → 2.9 cm, thicker → less")
-    t = c.call("gh_edit", {"new": True, "ops": v3("kshell.gh.txt")}, expect=[r"ok: 23/23", r"MaxDisp"])
+    t = c.call("gh_edit", {"new": True, "ops": v3("kshell.ghs")}, expect=[r"ok: 23/23", r"MaxDisp"])
     m = ids(t)
     d = c.call("query", {"scope": "gh", "filter": f"{m['an']} {m['asm']}", "level": "data"}, expect=[r"Mass"])
     v = num_after(d, r"MaxDisp: .*?e\.g\. ([\d.]+)")
@@ -689,10 +689,51 @@ def c27():
     d2 = c.call("query", {"scope": "gh", "filter": m["an"], "level": "data"}, expect=[r"MaxDisp"])
     v2 = num_after(d2, r"MaxDisp: .*?e\.g\. ([\d.]+)")
     c.check(v2 is not None and v is not None and v2 < v * 0.5, "30 cm plate deflects < half (stiffness ~ t^3, weight ~ t)", f"{v} → {v2}")
+    # state change on a wired component re-reads its archive: wires must come back as real wires, not proxies drawn from (0,0)
+    c.call("gh_edit", {"ops": f"{m['sup']} {{$button[3]=true}}"}, expect=[r"ok: 1/1"])
+    c.call("gh_edit", {"ops": f"{m['sup']} {{$button[3]=false}}"}, expect=[r"ok: 1/1", r"MaxDisp"])
+    c.call("run", {"code": DANGLING}, expect=[r"dangling 0 wired 1\b"], label="no dangling wires")
 
+
+def c28():
+    c = Case("28_ghs_files", ".ghs = definition as shorthand text: save → open → save is identical, results equal, refs + scripts kept")
+    os.makedirs(TMP, exist_ok=True)
+    a, b = os.path.join(TMP, "mix_a.ghs"), os.path.join(TMP, "mix_b.ghs")
+    # scripts with type hints and a docstring, value list, quoted multi-line text, expression, stored points
+    c.call("gh_edit", {"new": True, "ops": script("ghs_mix.ghs")}, expect=[r"ok: 15/15", r"Timber @ 2\.75"], forbid=(" ! ",))
+    c.call("gh_edit", {"save": a}, expect=[r"saved .*mix_a\.ghs \(\.ghs text: 13 objects"])
+    c.call("gh_edit", {"open": a}, expect=[r"opened mix_a\.ghs \(\.ghs\): 13 objects, 3 groups, 9 wires; solved"], forbid=("failed",))
+    c.call("query", {"scope": "gh", "filter": "type:Panel", "level": "data"},
+           expect=[r'"Timber @ 2\.75"', r'"6\.5"', r'"18"', r'a \\"quoted\\" line\\nand a second line'])
+    c.call("gh_edit", {"save": b}, expect=[r"saved"])
+    la, lb = (open(x, encoding="utf-8").read().split("\n")[2:] for x in (a, b))
+    c.check(la == lb, "save → open → save gives the identical file", f"{sum(1 for x, y in zip(la, lb) if x != y)} lines differ")
+    txt = "\n".join(la)
+    c.check('P:list:Point3d=' in txt and 'n:item:int=' in txt and '\\"""Docstring' in txt, "Python hints + escaped docstring written", txt[:300])
+    # Rhino references are kept as object ids (valid in the same .3dm); Karamba components keep a normal size
+    reset(c)
+    c.call("run", {"code": 'li = doc.Layers.Add("GhsRef", System.Drawing.Color.Black)\nfor i in range(3):\n    a = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = li\n    doc.Objects.AddLine(rg.Line(rg.Point3d(i * 1000, 0, 0), rg.Point3d(i * 1000, 0, 3000)), a)'}, expect=[r"\+3"], label="3 lines")
+    c.call("gh_edit", {"new": True, "ops": 'crv = Curve {ref="layer:GhsRef"}\nln = Length (C=crv)\n' + v3("kshell.ghs")}, expect=[r"ok: 25/25"])
+    k = os.path.join(TMP, "refs.ghs")
+    c.call("gh_edit", {"save": k}, expect=[r"saved"], forbid=("not stored",))
+    c.check(len(re.findall(r"[0-9a-f]{8}-[0-9a-f]{4}-", open(k, encoding="utf-8").read())) == 3, "3 Rhino object ids in the file")
+    c.call("gh_edit", {"open": k}, expect=[r"opened refs\.ghs"], forbid=("failed",))
+    c.call("query", {"scope": "gh", "filter": "type:Length", "level": "data"}, expect=[r"3 Number"])
+    c.call("query", {"scope": "gh", "filter": "group:Results", "level": "data"}, expect=[r'"2\.90'])
+    c.call("run", {"code": DANGLING.replace("print('dangling', bad, 'wired', sup.Params.Input[0].SourceCount)",
+                                            "wide = [o.NickName for o in d.Objects if o.Attributes and o.GetType().Name != 'GH_Group' and o.Attributes.Bounds.Width > 400]\nprint('dangling', bad, 'wired', sup.Params.Input[0].SourceCount, 'wide', wide)")},
+           expect=[r"dangling 0 wired 1 wide \[\]"], label="no dangling wires, no stretched components")
+
+
+DANGLING = """import Grasshopper
+d = Grasshopper.Instances.ActiveCanvas.Document
+ins = [p for o in d.Objects for p in (list(o.Params.Input) if hasattr(o, 'Params') and hasattr(o.Params, 'Input') else [o] if hasattr(o, 'Sources') else [])]
+bad = sum(1 for p in ins for s in p.Sources if s.Attributes is None or d.FindObject(s.Attributes.GetTopLevel.DocObject.InstanceGuid, True) is None)
+sup = [o for o in d.Objects if o.Name.startswith('Support')][0]
+print('dangling', bad, 'wired', sup.Params.Input[0].SourceCount)"""
 
 CTX = {}
-CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27]
+CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28]
 
 
 def summary():

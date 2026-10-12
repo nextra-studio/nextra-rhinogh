@@ -164,6 +164,23 @@ namespace Nextra.Engine.Gh
             ["NurbsCurve"] = "Curve", ["PolylineCurve"] = "Curve", ["LineCurve"] = "Curve", ["ArcCurve"] = "Curve", ["Color"] = "Color",
         };
 
+        /// The selected type hint of a Rhino 8 script input ("Curve", "double" …), null for the default (Python's
+        /// "ghdoc Object") or when the param has no hints.
+        public static string GetHint(IGH_Param p)
+        {
+            try
+            {
+                var hs = p.GetType().GetProperty("TypeHints", F)?.GetValue(p);
+                var sel = hs?.GetType().GetMethod("GetSelected", Type.EmptyTypes)?.Invoke(hs, null);
+                if (sel == null) return null;
+                var id = sel.GetType().GetProperty("Id")?.GetValue(sel)?.ToString() ?? "";
+                if (id.StartsWith("ghdoc Object")) return null;
+                var name = sel.GetType().GetProperty("TypeName")?.GetValue(sel)?.ToString();
+                return string.IsNullOrEmpty(name) ? null : name;
+            }
+            catch { return null; }
+        }
+
         /// Rhino 8 script params: TypeHints.Select("Curve" | "int" | …). Returns false if unknown.
         public static bool SetHint(IGH_Param p, string hint)
         {

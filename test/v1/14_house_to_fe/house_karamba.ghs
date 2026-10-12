@@ -1,0 +1,31 @@
+# ghs 1 · Grasshopper definition as Nextra shorthand · open: gh_edit {open:'house_karamba.ghs'} · grammar: query {scope:'docs', filter:'shorthand'}
+# 22 objects, 6 groups · saved 2026-10-12 10:12 from house_karamba.gh
+
+## FE geometry from Rhino #DBABFF
+g1 = Curve {ref=[9ac49892-a846-4caf-a541-e4a4d2ae9927,44a1294c-a1dc-4afd-9a45-f610ea3e5584,1b59a87d-a287-4858-a4b5-7ebfb31607e8,733b481c-c8d2-4169-a4ee-6b0ef7f7543f,7a42926d-264a-4f02-8ef5-e75b2617aaa9,0738bfd9-243c-4b47-922c-6e0604e6b858,ea1abccc-66f0-4ae4-ab18-38053cbf27e9,530b3f6c-074d-45ac-8c14-2aa60808aa84,68a518b8-084a-4037-9eb8-b28a67440f52,53198716-e3a9-4656-af7b-141cba48cd56,06f3fcf2-e43d-4320-bf59-9a9fe13db0e7,726dd6e2-6a91-478a-b947-eedae41ae3ed,c8318f7e-797f-4afb-bbd7-ae7589366409,e096a451-21b1-419a-8737-a7cb687b64cf], nick="FE lines", pos={85,670}}
+g2 = Brep {ref=[1dfa9623-7d28-4e9b-928d-b8533d4b98c0,1f94b830-f97c-428c-bffe-0a40fb069e9c,d7003fe6-51fd-44cf-95b4-773114b7787f,ca3215c3-b28b-4efc-91bf-5fbc2bb27f83,c17cd022-ac3c-43f7-b27f-60bb70d1be88,5745a8ef-dca4-4674-998e-e2a6643a169c], nick="FE shells", pos={87,712}}
+g3 = Number Slider {v=3.5, r=0.2..6, d=2, nick="Mesh size m", pos={60,744}}
+## Sections #E6E6A0
+g4 = Material Selection @Karamba3D (1="C30/37") {nick="Material Selection (Karamba3D)", hide, pos={131,203}}
+g5 = Cross-section @Karamba3D (Material=g4, 6=30, 7=30, 8=30) {nick="Cross-section (Karamba3D)", hide, $unitname="Trapezoid", pos={354,203}}
+g6 = Cross-section @Karamba3D (Material=g4, 5=20) {nick="Cross-section (Karamba3D)", hide, $unitname="Shell - Const", pos={343,430}}
+## Elements #ABDBFF
+g7 = Create Linear Element @Karamba3D (Line=g1, CroSec=g5) {nick="Create Linear Element (Karamba3D)", pos={632,293}}
+g8 = Mesh Breps @Karamba3D (Brep=g2, IPts=g7.Pts^f, MRes=g3) {nick=" Mesh Breps (Karamba3D)", pos={942,332}}
+g9 = Create Surface Element @Karamba3D (Mesh=g8.Mesh, CroSec=g6) {nick="Create Surface Element (Karamba3D)", pos={1150,327}}
+## Supports at z=0 #ABDBFF
+g10 = Deconstruct Mesh (M=g8.Mesh) {pos={1480,291}}
+g11 = Merge @Sets (D1=g7.Pts^f, D2=g10.V^f) {pos={1659,261}}
+g12 = Deconstruct @Vector (P=g11) {pos={1813,261}}
+g13 = Smaller Than (A=g12.Z, B=0.01) {pos={1968,296}}
+g14 = Cull Pattern (L=g11, P=g13.<) {pos={2130,271}}
+g15 = Support @Karamba3D (0=g14) {nick="Support (Karamba3D)", hide, $button[0]=true, $button[1]=true, $button[2]=true, $button[3]=true, $button[4]=true, $button[5]=true, pos={2341,311}}
+## Model + analysis #FFD6AB
+g16 = Loads @Karamba3D {nick=" Loads (Karamba3D)", pos={2618,123}}
+g17 = Assemble Model @Karamba3D (Elem=g7.Elem+g9.Elem^f, Support=g15^f, Load=g16^f) {nick=" Assemble Model (Karamba3D)", hide, pos={2842,122}}
+g18 = Analyse @Karamba3D (Model=g17.Model) {nick=" Analyse (Karamba3D)", hide, pos={3139,102}}
+g19 = Model View @Karamba3D (Model=g18.Model) {nick="  Model View (Karamba3D)", $Menu/Panel/Checkbox[2]/Active=false, pos={3369,112}}
+## Results #B2FAB4
+g20 = Panel (=g17.Mass) {nick="Mass kg", pos={3598,156}}
+g21 = Panel (=g18.MaxDisp) {nick="Max disp cm", pos={3598,278}}
+g22 = Panel (=g17.Info) {nick="Assemble info", pos={3598,400}}

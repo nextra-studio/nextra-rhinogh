@@ -18,4 +18,4 @@
  "solve": false
 }
 ---
-{"Placed":[{"Key":"pt","Id":"37fc12de-7548-46d1-a4cb-3e9abd28f2f1","Kind":"Component"},{"Key":"mul","Id":"2522d5f0-1c4c-4146-ad7f-03bc120f6b75","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}
+{"Placed":[{"Key":"pt","Id":"d6315290-7426-44b5-bc42-a58af348c02c","Kind":"Component"},{"Key":"mul","Id":"6f900290-10a6-4bf1-8e61-b58b0aa87bad","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

@@ -2,4 +2,4 @@
  "script": "import Grasshopper\n\"\"\"Number param with an explicit data tree: {0;0}: 1,2,3  {0;1}: 10,20  (shorthand set=[...] only makes flat lists)\"\"\"\nimport System\nfrom Grasshopper.Kernel.Parameters import Param_Number\nfrom Grasshopper.Kernel.Data import GH_Path, GH_Structure\nfrom Grasshopper.Kernel.Types import GH_Number\nd = Grasshopper.Instances.ActiveCanvas.Document\np = Param_Number(); p.NickName = \"Tree data\"; p.CreateAttributes()\np.Attributes.Pivot = System.Drawing.PointF(0, 900)\ntree = GH_Structure[GH_Number]()\nfor path, vals in [((0, 0), [1, 2, 3]), ((0, 1), [10, 20])]:\n    for v in vals:\n        tree.Append(GH_Number(v), GH_Path(System.Array[int](path)))\np.SetPersistentData(tree)\nd.AddObject(p, False)\nd.NewSolution(False)\nprint(str(p.InstanceGuid), p.VolatileData.PathCount, \"branches\")\n"
 }
 ---
-{"stdout":"5c960ca3-4a19-44f1-a3f9-dc4a4d2d08e9 2 branches\n","error":null}
+{"stdout":"f8a67f4a-ba10-45f0-a204-86134124a949 2 branches\n","error":null}

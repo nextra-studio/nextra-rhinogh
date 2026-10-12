@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nbest = None\nfor o in doc.Objects:\n    n = o.Attributes.Name or ''\n    if n.startswith('B') and n.endswith('_L4'):\n        bb = o.Geometry.GetBoundingBox(True); L = max(bb.Max.X - bb.Min.X, bb.Max.Y - bb.Min.Y)\n        if best is None or L > best[1]: best = (n, L)\nprint(best)"
+}
+---
+{"stdout":"(\u0027BX24_L4\u0027, 12000.0)\n","error":null}

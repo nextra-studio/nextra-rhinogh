@@ -8,7 +8,7 @@ The user-facing docs are elsewhere: `README.md` covers install and the tool over
 | [01_architecture.md](01_architecture.md) | how a request travels from the LLM to Rhino and back, the threads, hot reload, instance binding, status dots |
 | [02_file_map.md](02_file_map.md) | what every file and folder in the repo is for, and which file to open for a given change |
 | [03_tools.md](03_tools.md) | the 6 tools: every argument, what each one does inside, real example replies |
-| [04_shorthand.md](04_shorthand.md) | the GH shorthand in depth: grammar, how Parser → Builder → Writer work, worked examples |
+| [04_shorthand.md](04_shorthand.md) | the GH shorthand in depth: grammar, how Parser → Builder → Writer work, worked examples, `.ghs` files |
 | [05_internals.md](05_internals.md) | the subsystems behind the tools: handles, deltas, checkpoints, oriented boxes, vision, layout, component state, scripts, memory, plug-in guides |
 | [06_workflow.md](06_workflow.md) | building, hot reload, testing with `nx.py`, packaging, adding features, debugging, known pitfalls |
 | [Nextra.zero_RhinoGh_Plan.md](Nextra.zero_RhinoGh_Plan.md) | the original plan the build started from |

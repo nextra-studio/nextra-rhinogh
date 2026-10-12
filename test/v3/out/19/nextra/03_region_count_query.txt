@@ -1,0 +1,9 @@
+{
+ "filter": "layer:MEP inside:-1,-1,0,12001,30001,7300",
+ "level": "summary"
+}
+---
+doc 'untitled' units millimeters tol 0.001; 60 objects
+extents (300,1000,2700)..(11700,29000,6300) size 11400x28000x3600
+[MEP]: 60 polyline
+next: query filter:'layer:X' (list) → level:'detail' → level:'verts'; or view.

@@ -1,19 +1,19 @@
 {
  "wires": [
   {
-   "SrcId": "1f6268c0-3246-470a-8c4f-8e0a66e33c57",
+   "SrcId": "ff02c741-2d79-4030-bfc4-22dbf2825f54",
    "Src": "Pt",
-   "DstId": "876d8640-a71b-464b-b67b-ca28fd002e05",
+   "DstId": "b4c8fba7-95b4-4c2c-8ad6-32602c647107",
    "Dst": "Pos|Ind"
   },
   {
-   "SrcId": "e807b22f-00a8-4eef-bf7e-fa59fa094469",
+   "SrcId": "cd3c0174-c8b5-4f9a-a21c-dc6b9892e922",
    "Src": "V",
-   "DstId": "876d8640-a71b-464b-b67b-ca28fd002e05",
+   "DstId": "b4c8fba7-95b4-4c2c-8ad6-32602c647107",
    "Dst": "Force"
   }
  ],
  "solve": true
 }
 ---
-{"Count":2,"OkCount":2,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"1f6268c0-3246-470a-8c4f-8e0a66e33c57","Param":"Point"},"Dst":{"Id":"876d8640-a71b-464b-b67b-ca28fd002e05","Param":"Pos|Ind"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"e807b22f-00a8-4eef-bf7e-fa59fa094469","Param":"Vector"},"Dst":{"Id":"876d8640-a71b-464b-b67b-ca28fd002e05","Param":"Force Vector"},"Error":null}]}
+{"Count":2,"OkCount":2,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"ff02c741-2d79-4030-bfc4-22dbf2825f54","Param":"Point"},"Dst":{"Id":"b4c8fba7-95b4-4c2c-8ad6-32602c647107","Param":"Pos|Ind"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"cd3c0174-c8b5-4f9a-a21c-dc6b9892e922","Param":"Vector"},"Dst":{"Id":"b4c8fba7-95b4-4c2c-8ad6-32602c647107","Param":"Force Vector"},"Error":null}]}

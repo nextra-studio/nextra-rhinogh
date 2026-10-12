@@ -1,0 +1,65 @@
+# ghs 1 · Grasshopper definition as Nextra shorthand · open: gh_edit {open:'tidy_relays.ghs'} · grammar: query {scope:'docs', filter:'shorthand'}
+# 56 objects, 6 groups · saved 2026-10-12 10:13 from tidy_relays.gh
+
+## Inputs #DBABFF
+g1 = Number Slider {v=30, r=5..60, nick="W", pos={-33,33}}
+g2 = Number Slider {v=12, r=3..40, nick="H", pos={-33,74}}
+g3 = Number Slider {v=12, r=2..40, int, nick="U", pos={-33,116}}
+g4 = Number Slider {v=6, r=2..20, int, nick="V", pos={-33,159}}
+g5 = Number Slider {v=2, r=0.5..6, nick="Freq", pos={-32,201}}
+g6 = Number Slider {v=0.6, r=0..2, nick="Amp", pos={-33,242}}
+g7 = Number Slider {v=0.8, r=0.1..2, nick="Depth", pos={-33,284}}
+g8 = Point {set={0,0,0}, pos={-8,1}}
+g9 = Point (=g8) {nick="Pt_Out", pos={245,1}}
+g10 = Number (=g1) {nick="W_Out", pos={245,43}}
+g11 = Number (=g2) {nick="H_Out", pos={245,84}}
+g12 = Number (=g3) {nick="U_Out", pos={245,126}}
+g13 = Number (=g4) {nick="V_Out", pos={245,169}}
+g14 = Number (=g5) {nick="Freq_Out", pos={249,211}}
+g15 = Number (=g6) {nick="Amp_Out", pos={250,252}}
+g16 = Number (=g7) {nick="Depth_Out", pos={253,294}}
+## Base surface #ABDBFF
+g17 = Point (=g9) {nick="O_In", pos={455,114}}
+g18 = Domain (=g10) {nick="X_In", pos={455,156}}
+g19 = Domain (=g11) {nick="Y_In", pos={455,198}}
+g20 = XZ Plane (O=g17) {pos={602,115}}
+g21 = Rectangle @Curve (P=g20, X=g18, Y=g19) {pos={756,144}}
+g22 = Boundary Surfaces (E=g21.R) {pos={910,125}}
+g23 = Surface (=g22) {nick="S_Out", pos={1058,124}}
+## Panel grid #ABDBFF
+g24 = Domain² (=g23) {nick="I_In", pos={1252,142}}
+g25 = Integer @Params (=g12) {nick="U_In", pos={1252,184}}
+g26 = Integer @Params (=g13) {nick="V_In", pos={1252,226}}
+g27 = Divide Domain² (I=g24, U=g25, V=g26) {pos={1399,165}}
+g28 = Isotrim (S=g24, D=g27) {pos={1554,153}}
+g29 = List Length (L=g28) {pos={1706,108}}
+g30 = Area (G=g28) {pos={1709,192}}
+g31 = Panel (=g29) {pos={1833,59}}
+g32 = Surface (=g28) {nick="S_Out", pos={2108,152}}
+g33 = Point (=g30.C) {nick="C_Out", pos={2108,202}}
+## Wave scaling #FFD6AB
+g34 = Geometry (=g32) {nick="G_In", pos={2302,85}}
+g35 = Point (=g33) {nick="P_In", pos={2302,127}}
+g36 = Data @Params (=g14) {nick="B_In", pos={2302,169}}
+g37 = Data @Params (=g15) {nick="B_In", pos={2302,211}}
+g38 = Deconstruct @Vector (P=g35) {pos={2447,115}}
+g39 = Multiplication (A=g38.X, B=g36) {pos={2602,105}}
+g40 = Sine (x=g39) {pos={2755,105}}
+g41 = Multiplication (A=g40, B=g37) {pos={2908,115}}
+g42 = Absolute (x=g41) {pos={3061,115}}
+g43 = Addition @Maths (A=g42, B=0.2) {pos={3214,125}}
+g44 = Scale (G=g34, C=g35, F=g43) {pos={3370,105}}
+g45 = Geometry (=g44.G) {nick="G_Out", pos={3520,90}}
+## Fins #FFD6AB
+g46 = Brep (=g45) {nick="B_In", pos={3714,132}}
+g47 = Number (=g16) {nick="F_In", pos={3714,180}}
+g48 = Brep Edges (B=g46) {pos={3859,132}}
+g49 = Join Curves (C=g48.En) {pos={4022,122}}
+g50 = Unit Y (F=g47) {pos={4020,180}}
+g51 = Extrude (B=g49, D=g50) {pos={4178,132}}
+g52 = Cap Holes (B=g51) {pos={4331,132}}
+g53 = Brep (=g52) {nick="B_Out", pos={4479,132}}
+## Display #B2FAB4
+g54 = Geometry (=g53) {nick="G_In", pos={4673,120}}
+g55 = Colour Swatch {c=#5A8CB4, pos={4788,141}}
+g56 = Custom Preview (G=g54, M=g55) {pos={5000,151}}

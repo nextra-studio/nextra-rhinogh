@@ -1,37 +1,37 @@
 {
  "wires": [
   {
-   "SrcId": "703aba5b-2815-4cd1-984c-4054e10f7079",
+   "SrcId": "914c547f-063e-4266-88d3-6bdc535e2375",
    "Src": "S",
-   "DstId": "37fc12de-7548-46d1-a4cb-3e9abd28f2f1",
+   "DstId": "d6315290-7426-44b5-bc42-a58af348c02c",
    "Dst": "Z"
   },
   {
-   "SrcId": "37fc12de-7548-46d1-a4cb-3e9abd28f2f1",
+   "SrcId": "d6315290-7426-44b5-bc42-a58af348c02c",
    "Src": "Pt",
-   "DstId": "e016f19b-6b0b-41f3-b8c7-be0e815fae96",
+   "DstId": "bd021475-906d-457a-accf-8cf39c67586f",
    "Dst": "O"
   },
   {
-   "SrcId": "2103a4ca-b322-4f57-80ac-326158eb0b51",
+   "SrcId": "28defe86-38a6-4f30-aa03-69f5c6093928",
    "Src": "R",
-   "DstId": "2522d5f0-1c4c-4146-ad7f-03bc120f6b75",
+   "DstId": "6f900290-10a6-4bf1-8e61-b58b0aa87bad",
    "Dst": "A"
   },
   {
-   "SrcId": "89f0ece2-3aa5-43c0-89f7-6d98be4325af",
+   "SrcId": "4fe51838-d4a7-4d6c-b4f0-cdf2a81f6c0e",
    "Src": "0",
-   "DstId": "2522d5f0-1c4c-4146-ad7f-03bc120f6b75",
+   "DstId": "6f900290-10a6-4bf1-8e61-b58b0aa87bad",
    "Dst": "B"
   },
   {
-   "SrcId": "2522d5f0-1c4c-4146-ad7f-03bc120f6b75",
+   "SrcId": "6f900290-10a6-4bf1-8e61-b58b0aa87bad",
    "Src": "R",
-   "DstId": "ec67c562-d1d7-48a0-9510-7b08d88f29d3",
+   "DstId": "4d825474-afba-463e-b1fb-5ca300781226",
    "Dst": "D"
   }
  ],
  "solve": true
 }
 ---
-{"Count":5,"OkCount":5,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"703aba5b-2815-4cd1-984c-4054e10f7079","Param":"Series"},"Dst":{"Id":"37fc12de-7548-46d1-a4cb-3e9abd28f2f1","Param":"Z coordinate"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"37fc12de-7548-46d1-a4cb-3e9abd28f2f1","Param":"Point"},"Dst":{"Id":"e016f19b-6b0b-41f3-b8c7-be0e815fae96","Param":"Origin"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"2103a4ca-b322-4f57-80ac-326158eb0b51","Param":"Range"},"Dst":{"Id":"2522d5f0-1c4c-4146-ad7f-03bc120f6b75","Param":"A"},"Error":null},{"Index":3,"Ok":true,"Src":{"Id":"89f0ece2-3aa5-43c0-89f7-6d98be4325af","Param":"Number Slider"},"Dst":{"Id":"2522d5f0-1c4c-4146-ad7f-03bc120f6b75","Param":"B"},"Error":null},{"Index":4,"Ok":true,"Src":{"Id":"2522d5f0-1c4c-4146-ad7f-03bc120f6b75","Param":"Result"},"Dst":{"Id":"ec67c562-d1d7-48a0-9510-7b08d88f29d3","Param":"Degrees"},"Error":null}]}
+{"Count":5,"OkCount":5,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"914c547f-063e-4266-88d3-6bdc535e2375","Param":"Series"},"Dst":{"Id":"d6315290-7426-44b5-bc42-a58af348c02c","Param":"Z coordinate"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"d6315290-7426-44b5-bc42-a58af348c02c","Param":"Point"},"Dst":{"Id":"bd021475-906d-457a-accf-8cf39c67586f","Param":"Origin"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"28defe86-38a6-4f30-aa03-69f5c6093928","Param":"Range"},"Dst":{"Id":"6f900290-10a6-4bf1-8e61-b58b0aa87bad","Param":"A"},"Error":null},{"Index":3,"Ok":true,"Src":{"Id":"4fe51838-d4a7-4d6c-b4f0-cdf2a81f6c0e","Param":"Number Slider"},"Dst":{"Id":"6f900290-10a6-4bf1-8e61-b58b0aa87bad","Param":"B"},"Error":null},{"Index":4,"Ok":true,"Src":{"Id":"6f900290-10a6-4bf1-8e61-b58b0aa87bad","Param":"Result"},"Dst":{"Id":"4d825474-afba-463e-b1fb-5ca300781226","Param":"Degrees"},"Error":null}]}

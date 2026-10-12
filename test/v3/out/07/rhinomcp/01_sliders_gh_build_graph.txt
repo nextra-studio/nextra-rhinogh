@@ -30,18 +30,18 @@
   "value_count": 0,
   "recomputed": true,
   "rolled_back": false,
-  "graph_id": "MCPGraph_20261012055536594",
-  "mutation_duration_ms": 6,
+  "graph_id": "MCPGraph_20261012075707102",
+  "mutation_duration_ms": 4,
   "solution_duration_ms": 4,
   "verification_duration_ms": 0,
-  "duration_ms": 46,
+  "duration_ms": 33,
   "aliases": {
-    "cnt": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
-    "h": "d8332034-2037-410e-af27-fc777001fbca"
+    "cnt": "169a8d52-e99d-4912-bd08-842457321c18",
+    "h": "ac430ba9-4662-4cb3-850e-adabbcaa4e5b"
   },
   "components": [
     {
-      "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+      "instance_id": "169a8d52-e99d-4912-bd08-842457321c18",
       "name": "Number Slider",
       "nickname": "Count",
       "category": "Params",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+      "instance_id": "ac430ba9-4662-4cb3-850e-adabbcaa4e5b",
       "name": "Number Slider",
       "nickname": "Tower h",
       "category": "Params",
@@ -75,9 +75,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "instance_id": "169a8d52-e99d-4912-bd08-842457321c18",
         "alias": "cnt",
-        "graph_id": "MCPGraph_20261012055536594",
+        "graph_id": "MCPGraph_20261012075707102",
         "role": "",
         "name": "Number Slider",
         "nickname": "Count",
@@ -108,9 +108,9 @@
         "expression": null
       },
       {
-        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "instance_id": "ac430ba9-4662-4cb3-850e-adabbcaa4e5b",
         "alias": "h",
-        "graph_id": "MCPGraph_20261012055536594",
+        "graph_id": "MCPGraph_20261012075707102",
         "role": "",
         "name": "Number Slider",
         "nickname": "Tower h",
@@ -149,19 +149,19 @@
     "preview_enabled_object_count": 0,
     "preview_disabled_object_count": 0,
     "has_preview_enabled_objects": false,
-    "rhino_document_object_count": 4811,
+    "rhino_document_object_count": 13081,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012055536594",
+    "graph_id": "MCPGraph_20261012075707102",
     "object_count": 2,
     "controls": [
       {
         "alias": "cnt",
         "name": "Number Slider",
         "nickname": "Count",
-        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "instance_id": "169a8d52-e99d-4912-bd08-842457321c18",
         "enabled": true,
         "special_type": "number_slider",
         "value": 8.0,
@@ -174,7 +174,7 @@
         "alias": "h",
         "name": "Number Slider",
         "nickname": "Tower h",
-        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "instance_id": "ac430ba9-4662-4cb3-850e-adabbcaa4e5b",
         "enabled": true,
         "special_type": "number_slider",
         "value": 9000.0,
@@ -189,7 +189,7 @@
         "alias": "cnt",
         "name": "Number Slider",
         "nickname": "Count",
-        "instance_id": "324f35c7-3ed1-43c0-a4fa-6d6563219882",
+        "instance_id": "169a8d52-e99d-4912-bd08-842457321c18",
         "enabled": true,
         "special_type": "number_slider",
         "value": 8.0,
@@ -202,7 +202,7 @@
         "alias": "h",
         "name": "Number Slider",
         "nickname": "Tower h",
-        "instance_id": "d8332034-2037-410e-af27-fc777001fbca",
+        "instance_id": "ac430ba9-4662-4cb3-850e-adabbcaa4e5b",
         "enabled": true,
         "special_type": "number_slider",
         "value": 9000.0,

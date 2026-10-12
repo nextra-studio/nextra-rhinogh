@@ -1,0 +1,7 @@
+{
+ "ops": "g7 (X=g5^g, Y=g6^x)"
+}
+---
+ok: 1/1 lines applied (2 wires), checkpoint c474
+solved 20ms, no errors/warnings on affected nodes
+results: g17.L: 1 Brep {0} · g16.C: 6 Curve 6 branches · g16.L: 6 Number 6 branches e.g. 24.123,25.015,24.131,24.422

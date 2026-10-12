@@ -9,7 +9,7 @@ namespace Nextra.Engine.Gh.Shorthand
 {
     // ---------------- AST ----------------
 
-    public abstract class Op { public int Line; public string Raw; public string Group; }
+    public abstract class Op { public int Line; public string Raw; public string Group; public GroupOp Section; }
 
     /// `id = Type @Cat (inputs) {config} -> (outputs)` (Create) or `g12 (inputs) {config}` (modify).
     public class NodeOp : Op
@@ -83,6 +83,7 @@ namespace Nextra.Engine.Gh.Shorthand
         {
             var ops = new List<Op>();
             string group = null;
+            GroupOp section = null;
             foreach (var (no, line) in LogicalLines(text))
             {
                 var l = line.Trim();
@@ -94,6 +95,7 @@ namespace Nextra.Engine.Gh.Shorthand
                         var g = ParseGroup(l.Substring(2).Trim());
                         g.Line = no; g.Raw = l;
                         group = g.End ? null : (g.Handle ?? g.Name);
+                        section = g.End ? null : g;
                         ops.Add(g);
                         continue;
                     }
@@ -109,7 +111,7 @@ namespace Nextra.Engine.Gh.Shorthand
                     }
                     else if (IsWire(l)) op = ParseWire(l);
                     else op = ParseNode(l);
-                    op.Line = no; op.Raw = l; op.Group = group;
+                    op.Line = no; op.Raw = l; op.Group = group; op.Section = section;
                     ops.Add(op);
                 }
                 catch (FormatException e) { errors.Add(new ParseError(no, e.Message)); }
@@ -134,7 +136,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 for (int k = 0; k < l.Length; k++)
                 {
                     char ch = l[k];
-                    if (inTriple) { if (l.Substring(k).StartsWith("\"\"\"")) { inTriple = false; k += 2; } continue; }
+                    if (inTriple) { if (TripleEnd(l, k)) { inTriple = false; k += 2; } continue; }
                     if (inStr) { if (ch == '\\') k++; else if (ch == '"') inStr = false; continue; }
                     if (l.Substring(k).StartsWith("\"\"\"")) { inTriple = true; k += 2; continue; }
                     if (ch == '"') { inStr = true; continue; }
@@ -155,7 +157,7 @@ namespace Nextra.Engine.Gh.Shorthand
             for (int k = 0; k < l.Length; k++)
             {
                 char ch = l[k];
-                if (inTriple) { if (l.Substring(k).StartsWith("\"\"\"")) { inTriple = false; k += 2; } continue; }
+                if (inTriple) { if (TripleEnd(l, k)) { inTriple = false; k += 2; } continue; }
                 if (inStr) { if (ch == '\\') k++; else if (ch == '"') inStr = false; continue; }
                 if (l.Substring(k).StartsWith("\"\"\"")) { inTriple = true; k += 2; continue; }
                 if (ch == '"') { inStr = true; continue; }
@@ -354,7 +356,7 @@ namespace Nextra.Engine.Gh.Shorthand
         {
             s = s.Trim();
             if (s == "_") return new Val { Kind = VK.Clear };
-            if (s.StartsWith("\"\"\"") && s.EndsWith("\"\"\"") && s.Length >= 6) return new Val { Kind = VK.Str, Str = s.Substring(3, s.Length - 6).Trim('\n') };
+            if (s.StartsWith("\"\"\"") && s.EndsWith("\"\"\"") && s.Length >= 6) return new Val { Kind = VK.Str, Str = s.Substring(3, s.Length - 6).Trim('\n').Replace("\\\"\"\"", "\"\"\"") };
             if (s.StartsWith("\"")) { int k = 0; var str = ReadString(s, ref k); return new Val { Kind = VK.Str, Str = str }; }
             if (s.StartsWith("{") && s.EndsWith("}"))
             {
@@ -377,6 +379,9 @@ namespace Nextra.Engine.Gh.Shorthand
             }
             return new Val { Kind = VK.Ident, Str = s };
         }
+
+        /// closing """ (an escaped \""" inside the block does not close it)
+        static bool TripleEnd(string s, int k) => string.CompareOrdinal(s, k, "\"\"\"", 0, 3) == 0 && (k == 0 || s[k - 1] != '\\');
 
         static string ReadString(string s, ref int i)
         {
@@ -404,7 +409,7 @@ namespace Nextra.Engine.Gh.Shorthand
             for (; i < s.Length; i++)
             {
                 char ch = s[i];
-                if (inTriple) { if (string.CompareOrdinal(s, i, "\"\"\"", 0, 3) == 0) { inTriple = false; i += 2; } continue; }
+                if (inTriple) { if (TripleEnd(s, i)) { inTriple = false; i += 2; } continue; }
                 if (inStr) { if (ch == '\\') i++; else if (ch == '"') inStr = false; continue; }
                 if (string.CompareOrdinal(s, i, "\"\"\"", 0, 3) == 0) { inTriple = true; i += 2; continue; }
                 if (ch == '"') { inStr = true; continue; }
@@ -422,7 +427,7 @@ namespace Nextra.Engine.Gh.Shorthand
             for (int i = 0; i < s.Length; i++)
             {
                 char ch = s[i];
-                if (inTriple) { if (string.CompareOrdinal(s, i, "\"\"\"", 0, 3) == 0) { inTriple = false; i += 2; } continue; }
+                if (inTriple) { if (TripleEnd(s, i)) { inTriple = false; i += 2; } continue; }
                 if (inStr) { if (ch == '\\') i++; else if (ch == '"') inStr = false; continue; }
                 if (string.CompareOrdinal(s, i, "\"\"\"", 0, 3) == 0) { inTriple = true; i += 2; continue; }
                 if (ch == '"') { inStr = true; continue; }

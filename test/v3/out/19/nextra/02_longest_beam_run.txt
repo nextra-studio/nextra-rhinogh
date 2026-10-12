@@ -1,0 +1,8 @@
+{
+ "code": "b = max(q('layer:Beams name:*_L4'), key=lambda o: obb(o)['L'])\nprint(b.Attributes.Name, round(obb(b)['L']))"
+}
+---
+ok py 145ms
+stdout:
+BX24_L4 12000
+rhino: no changes

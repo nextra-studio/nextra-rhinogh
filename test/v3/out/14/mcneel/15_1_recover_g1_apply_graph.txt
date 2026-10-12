@@ -1,0 +1,15 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "mat",
+   "Selector": "0d5c0b69-ad54-435b-a6cf-ed43d63a4699",
+   "X": 0,
+   "Y": 210
+  }
+ ],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"mat","Id":"0ca9688a-2197-4588-89e8-111acac7f4e6","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

@@ -1,0 +1,21 @@
+{
+ "lib": "canopy",
+ "args": {
+  "h_mid": 8400
+ }
+}
+---
+ok py 228ms, checkpoint c463
+stdout:
+canopy 30000 x 14000, crown 8400/4500, area 522.4 m2, 8 columns
+rhino delta +9:
++ r13376 polysurface solid [Canopy] "CANOPY" 30222.9x14483.6x5878 block @(15000.8,7000,5711)
++ r13377 polysurface solid [Canopy Columns] "COL_S1" 3000x400x400 linear vertical @(3750,0,1500)
++ r13378 polysurface solid [Canopy Columns] "COL_S2" 3000x400x400 linear vertical @(11250,0,1500)
++ r13379 polysurface solid [Canopy Columns] "COL_S3" 3000x400x400 linear vertical @(18750,0,1500)
++ r13380 polysurface solid [Canopy Columns] "COL_S4" 3000x400x400 linear vertical @(26250,0,1500)
++ r13381 polysurface solid [Canopy Columns] "COL_N1" 3000x400x400 linear vertical @(3750,14000,1500)
++ r13382 polysurface solid [Canopy Columns] "COL_N2" 3000x400x400 linear vertical @(11250,14000,1500)
++ r13383 polysurface solid [Canopy Columns] "COL_N3" 3000x400x400 linear vertical @(18750,14000,1500)
++ r13384 polysurface solid [Canopy Columns] "COL_N4" 3000x400x400 linear vertical @(26250,14000,1500)
+(library C:\Users\tatsu\AppData\Roaming\Nextra\memory\library\canopy.py)

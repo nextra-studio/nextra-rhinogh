@@ -28,13 +28,10 @@ STATE = """def set_state(i, name, index, value):
                 return True
         return any(walk(ch) for ch in c.Chunks)
     if not walk(root): raise Exception('state %s not found' % name)
-    # re-reading the archive drops existing wires: remember them and reconnect by input name
-    wired = [(p.NickName, list(p.Sources)) for p in obj.Params.Input]
     obj.Read(root)
-    for nick, srcs in wired:
-        tgt = [p for p in obj.Params.Input if p.NickName == nick]
-        for s in srcs:
-            if tgt and not tgt[0].Sources.Contains(s): tgt[0].AddSource(s)
+    # re-reading turns wires into proxy sources (drawn from 0,0): relink them to the real objects
+    for p in obj.Params.Input:
+        if p.HasProxySources: p.RelinkProxySources(gd); p.ClearProxySources()
     obj.Params.OnParametersChanged(); obj.ExpireSolution(False)
 """
 

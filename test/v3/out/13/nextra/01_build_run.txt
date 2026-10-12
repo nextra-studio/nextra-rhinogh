@@ -3,15 +3,15 @@
  "args": {}
 }
 ---
-ok py 209ms, checkpoint c262
+ok py 170ms, checkpoint c419
 stdout:
 MBS: 3 towers, skypark 272 m long, cantilever 59 m
 rhino delta +8:
-+ r5010 polysurface solid [MBS::Towers] "T1_leg_straight" 194x62x11 block @(-7.5,0,97)
-+ r5011 polysurface solid [MBS::Towers] "T1_leg_curved" 195.559x62x14.78 block @(15.185,0,97.048)
-+ r5012 polysurface solid [MBS::Towers] "T2_leg_straight" 194x62x11 block @(72.5,0,97)
-+ r5013 polysurface solid [MBS::Towers] "T2_leg_curved" 195.559x62x14.78 block @(95.185,0,97.048)
-+ r5014 polysurface solid [MBS::Towers] "T3_leg_straight" 194x62x11 block @(152.5,0,97)
-+ r5015 polysurface solid [MBS::Towers] "T3_leg_curved" 195.559x62x14.78 block @(175.185,0,97.048)
-+ r5016 polysurface solid [MBS::Skypark] "Skypark" 272x38x9 linear horiz+x @(64,0,198.5)
-+ r5017 polysurface solid [MBS::Podium] "Podium" 240x65x22 block @(80,-77.5,11)
++ r13235 polysurface solid [MBS::Towers] "T1_leg_straight" 194x62x11 block @(-7.5,0,97)
++ r13236 polysurface solid [MBS::Towers] "T1_leg_curved" 195.559x62x14.78 block @(15.185,0,97.048)
++ r13237 polysurface solid [MBS::Towers] "T2_leg_straight" 194x62x11 block @(72.5,0,97)
++ r13238 polysurface solid [MBS::Towers] "T2_leg_curved" 195.559x62x14.78 block @(95.185,0,97.048)
++ r13239 polysurface solid [MBS::Towers] "T3_leg_straight" 194x62x11 block @(152.5,0,97)
++ r13240 polysurface solid [MBS::Towers] "T3_leg_curved" 195.559x62x14.78 block @(175.185,0,97.048)
++ r13241 polysurface solid [MBS::Skypark] "Skypark" 272x38x9 linear horiz+x @(64,0,198.5)
++ r13242 polysurface solid [MBS::Podium] "Podium" 240x65x22 block @(80,-77.5,11)

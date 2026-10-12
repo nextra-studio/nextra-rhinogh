@@ -9,10 +9,11 @@
 ## rules (learned, user-approved)
 (none)
 ## library
+- canopy.py: Freeform canopy: 5 arched sections lofted into a shell, offset to a solid of thickness t, …
 - frame_building.py: Concrete frame: grid of columns, perimeter+grid beams and slabs per storey. args: nx, ny, …
 - hello_pts.py: Points on a line. args: n
 - marina_bay_sands.py: Marina Bay Sands massing: 3 towers (straight + curved leg each), skypark ship with cantile…
 - solids_to_fe.py: Solids -> FE geometry: linear members -> centre lines, planar members -> mid-surfaces, sna…
 ## recurring mistakes not yet in rules
-- 2x IndexError: list index out of range
-- 2x Error running script: name '…' is not defined [N:N]
+- 3x Error running script: name '…' is not defined [N:N]
+- 2x IndexError: list index out of range

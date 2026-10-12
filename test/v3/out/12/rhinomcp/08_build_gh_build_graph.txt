@@ -167,27 +167,27 @@
   "value_count": 4,
   "recomputed": true,
   "rolled_back": false,
-  "graph_id": "MCPGraph_20261012074619981",
-  "mutation_duration_ms": 262,
-  "solution_duration_ms": 3,
+  "graph_id": "MCPGraph_20261012075717395",
+  "mutation_duration_ms": 328,
+  "solution_duration_ms": 4,
   "verification_duration_ms": 0,
-  "duration_ms": 602,
+  "duration_ms": 741,
   "aliases": {
-    "pa": "d019e42a-b0a2-497a-8362-9b1338cac048",
-    "pb": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
-    "ln": "dac9e929-6736-46b4-9103-56c7568cad05",
-    "sh": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
-    "el": "df7210d9-6b38-491f-a626-7802dacc2e1f",
-    "sup": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
-    "pm": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
-    "fv": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
-    "ld": "1e985195-30c9-4012-b1f8-d3691f3fada7",
-    "asm": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
-    "an": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6"
+    "pa": "56475c22-3029-48f1-8ff2-90a33004fd05",
+    "pb": "8fffbd67-28ad-4a8b-936f-575cbb0cdea5",
+    "ln": "7c10586e-d81b-4711-92d2-f227d3ab0141",
+    "sh": "70e317d4-0cbd-4d0e-9944-d6368791b944",
+    "el": "292f0430-3f1b-498e-a00a-53eddbe1803e",
+    "sup": "08965f7a-6855-4d9b-a8ac-390655308539",
+    "pm": "68c431cd-01b2-4a52-83d4-68117942098e",
+    "fv": "d92cee96-1919-4070-90a8-3364d6eec2f2",
+    "ld": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
+    "asm": "03d31d19-46eb-46c8-92ce-8ef9101d1e7e",
+    "an": "e1198acc-5095-43e3-8816-47b113d45bc1"
   },
   "components": [
     {
-      "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+      "instance_id": "56475c22-3029-48f1-8ff2-90a33004fd05",
       "name": "Construct Point",
       "nickname": "Pt",
       "category": "Vector",
@@ -198,7 +198,7 @@
       ]
     },
     {
-      "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+      "instance_id": "8fffbd67-28ad-4a8b-936f-575cbb0cdea5",
       "name": "Construct Point",
       "nickname": "Pt",
       "category": "Vector",
@@ -209,7 +209,7 @@
       ]
     },
     {
-      "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+      "instance_id": "7c10586e-d81b-4711-92d2-f227d3ab0141",
       "name": "Line",
       "nickname": "Ln",
       "category": "Curve",
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+      "instance_id": "70e317d4-0cbd-4d0e-9944-d6368791b944",
       "name": "Shatter",
       "nickname": "Shatter",
       "category": "Curve",
@@ -231,7 +231,7 @@
       ]
     },
     {
-      "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+      "instance_id": "292f0430-3f1b-498e-a00a-53eddbe1803e",
       "name": "Create Linear Element (Karamba3D)",
       "nickname": "LineElem",
       "category": "Karamba3D",
@@ -242,7 +242,7 @@
       ]
     },
     {
-      "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+      "instance_id": "08965f7a-6855-4d9b-a8ac-390655308539",
       "name": "Support (Karamba3D)",
       "nickname": "Supp",
       "category": "Karamba3D",
@@ -253,7 +253,7 @@
       ]
     },
     {
-      "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+      "instance_id": "68c431cd-01b2-4a52-83d4-68117942098e",
       "name": "Construct Point",
       "nickname": "Pt",
       "category": "Vector",
@@ -264,7 +264,7 @@
       ]
     },
     {
-      "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+      "instance_id": "d92cee96-1919-4070-90a8-3364d6eec2f2",
       "name": "Vector XYZ",
       "nickname": "Vec",
       "category": "Vector",
@@ -275,7 +275,7 @@
       ]
     },
     {
-      "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "instance_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
       "name": " Loads (Karamba3D)",
       "nickname": "Loads",
       "category": "Karamba3D",
@@ -286,7 +286,7 @@
       ]
     },
     {
-      "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+      "instance_id": "03d31d19-46eb-46c8-92ce-8ef9101d1e7e",
       "name": " Assemble Model (Karamba3D)",
       "nickname": "Assemble",
       "category": "Karamba3D",
@@ -297,7 +297,7 @@
       ]
     },
     {
-      "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+      "instance_id": "e1198acc-5095-43e3-8816-47b113d45bc1",
       "name": " Analyse (Karamba3D)",
       "nickname": "Analyse",
       "category": "Karamba3D",
@@ -310,24 +310,24 @@
   ],
   "groups": [
     {
-      "instance_id": "601f1cc0-4637-4ba6-9c87-95a9bfc8cbfe",
+      "instance_id": "505b3b3b-5306-4fee-8299-f0fe9293a50c",
       "name": "Beam geometry",
       "object_count": 11,
-      "graph_id": "MCPGraph_20261012074619981",
+      "graph_id": "MCPGraph_20261012075717395",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "group"
       }
     },
     {
-      "instance_id": "a1ff74c6-0ab3-492a-938f-e6e8abedf81a",
+      "instance_id": "aec6eae9-388c-4fe3-a680-b86c64e5129e",
       "name": "Karamba model",
       "object_count": 11,
-      "graph_id": "MCPGraph_20261012074619981",
+      "graph_id": "MCPGraph_20261012075717395",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "group"
       }
     }
@@ -339,7 +339,7 @@
     "style": "graph_depth_wrapped",
     "positions": [
       {
-        "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+        "instance_id": "56475c22-3029-48f1-8ff2-90a33004fd05",
         "name": "Construct Point",
         "nickname": "Pt",
         "position": [
@@ -348,7 +348,7 @@
         ]
       },
       {
-        "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+        "instance_id": "8fffbd67-28ad-4a8b-936f-575cbb0cdea5",
         "name": "Construct Point",
         "nickname": "Pt",
         "position": [
@@ -357,7 +357,7 @@
         ]
       },
       {
-        "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+        "instance_id": "7c10586e-d81b-4711-92d2-f227d3ab0141",
         "name": "Line",
         "nickname": "Ln",
         "position": [
@@ -366,7 +366,7 @@
         ]
       },
       {
-        "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+        "instance_id": "70e317d4-0cbd-4d0e-9944-d6368791b944",
         "name": "Shatter",
         "nickname": "Shatter",
         "position": [
@@ -375,7 +375,7 @@
         ]
       },
       {
-        "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+        "instance_id": "292f0430-3f1b-498e-a00a-53eddbe1803e",
         "name": "Create Linear Element (Karamba3D)",
         "nickname": "LineElem",
         "position": [
@@ -384,7 +384,7 @@
         ]
       },
       {
-        "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+        "instance_id": "08965f7a-6855-4d9b-a8ac-390655308539",
         "name": "Support (Karamba3D)",
         "nickname": "Supp",
         "position": [
@@ -393,7 +393,7 @@
         ]
       },
       {
-        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "instance_id": "68c431cd-01b2-4a52-83d4-68117942098e",
         "name": "Construct Point",
         "nickname": "Pt",
         "position": [
@@ -402,7 +402,7 @@
         ]
       },
       {
-        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "instance_id": "d92cee96-1919-4070-90a8-3364d6eec2f2",
         "name": "Vector XYZ",
         "nickname": "Vec",
         "position": [
@@ -411,7 +411,7 @@
         ]
       },
       {
-        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "instance_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
         "name": " Loads (Karamba3D)",
         "nickname": "Loads",
         "position": [
@@ -420,7 +420,7 @@
         ]
       },
       {
-        "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+        "instance_id": "03d31d19-46eb-46c8-92ce-8ef9101d1e7e",
         "name": " Assemble Model (Karamba3D)",
         "nickname": "Assemble",
         "position": [
@@ -429,7 +429,7 @@
         ]
       },
       {
-        "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+        "instance_id": "e1198acc-5095-43e3-8816-47b113d45bc1",
         "name": " Analyse (Karamba3D)",
         "nickname": "Analyse",
         "position": [
@@ -449,9 +449,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "d019e42a-b0a2-497a-8362-9b1338cac048",
+        "instance_id": "56475c22-3029-48f1-8ff2-90a33004fd05",
         "alias": "pa",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -477,9 +477,9 @@
         "enabled": true
       },
       {
-        "instance_id": "6064e4ca-9620-4c59-861b-fa1e41cf8870",
+        "instance_id": "8fffbd67-28ad-4a8b-936f-575cbb0cdea5",
         "alias": "pb",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -505,9 +505,9 @@
         "enabled": true
       },
       {
-        "instance_id": "dac9e929-6736-46b4-9103-56c7568cad05",
+        "instance_id": "7c10586e-d81b-4711-92d2-f227d3ab0141",
         "alias": "ln",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Line",
         "nickname": "Ln",
@@ -533,9 +533,9 @@
         "enabled": true
       },
       {
-        "instance_id": "1611fb4f-ed6d-40df-93fc-cf7319c3113e",
+        "instance_id": "70e317d4-0cbd-4d0e-9944-d6368791b944",
         "alias": "sh",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Shatter",
         "nickname": "Shatter",
@@ -561,9 +561,9 @@
         "enabled": true
       },
       {
-        "instance_id": "df7210d9-6b38-491f-a626-7802dacc2e1f",
+        "instance_id": "292f0430-3f1b-498e-a00a-53eddbe1803e",
         "alias": "el",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Create Linear Element (Karamba3D)",
         "nickname": "LineElem",
@@ -609,9 +609,9 @@
         "enabled": true
       },
       {
-        "instance_id": "a57cfe01-b9b7-4dc9-ad74-d421da5ba680",
+        "instance_id": "08965f7a-6855-4d9b-a8ac-390655308539",
         "alias": "sup",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Support (Karamba3D)",
         "nickname": "Supp",
@@ -637,9 +637,9 @@
         "enabled": true
       },
       {
-        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "instance_id": "68c431cd-01b2-4a52-83d4-68117942098e",
         "alias": "pm",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -665,9 +665,9 @@
         "enabled": true
       },
       {
-        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "instance_id": "d92cee96-1919-4070-90a8-3364d6eec2f2",
         "alias": "fv",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Vector XYZ",
         "nickname": "Vec",
@@ -703,9 +703,9 @@
         "enabled": true
       },
       {
-        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "instance_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
         "alias": "ld",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": " Loads (Karamba3D)",
         "nickname": "Loads",
@@ -731,9 +731,9 @@
         "enabled": true
       },
       {
-        "instance_id": "337b1441-6ee0-4e07-9670-4cad8cbe3b49",
+        "instance_id": "03d31d19-46eb-46c8-92ce-8ef9101d1e7e",
         "alias": "asm",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": " Assemble Model (Karamba3D)",
         "nickname": "Assemble",
@@ -799,9 +799,9 @@
         "enabled": true
       },
       {
-        "instance_id": "ef9ddc83-0c03-43b6-852d-4bc3aa7b64f6",
+        "instance_id": "e1198acc-5095-43e3-8816-47b113d45bc1",
         "alias": "an",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": " Analyse (Karamba3D)",
         "nickname": "Analyse",
@@ -870,12 +870,12 @@
     "preview_enabled_object_count": 7,
     "preview_disabled_object_count": 4,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 0,
-    "has_baked_rhino_objects": false,
-    "viewport_warning": "Grasshopper preview is live but not baked. Use gh_capture_preview to frame live Grasshopper preview bounds without baking."
+    "rhino_document_object_count": 13261,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012074619981",
+    "graph_id": "MCPGraph_20261012075717395",
     "object_count": 13,
     "controls": [],
     "adjustable_parameters": [],

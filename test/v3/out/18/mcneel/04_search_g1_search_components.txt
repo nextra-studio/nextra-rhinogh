@@ -1,0 +1,6 @@
+{
+ "query": "Interpolate",
+ "limit": 5
+}
+---
+[{"Guid":"027c963c-2d77-4889-8a50-9dd6bf2ea9d3","Name":"Surface Edit Points","NickName":"SrfEditPts","Category":"Pufferfish","SubCategory":"Point","Kind":"Component","Description":"Extract the edit points on a surface at knot averages, the points an interpolated surface interpolated through."},{"Guid":"05cb3565-6caa-4ca2-b99c-d9f91b963001","Name":"ggPolyCurve","NickName":"ggPC","Category":"GeomGym","SubCategory":"BullAnt","Kind":"Component","Description":"Interpolate Poly Curve"},{"Guid":"2b2a4145-3dff-41d4-a8de-1ea9d29eef33","Name":"Interpolate","NickName":"IntCrv","Category":"Curve","SubCategory":"Spline","Kind":"Component","Description":"Create an interpolated curve through a set of points."},{"Guid":"4083802b-3dd9-4b13-9756-bf5441213e70","Name":"Interpolate Date","NickName":"IntDate","Category":"Maths","SubCategory":"Time","Kind":"Component","Description":"Interpolate between two dates or times."},{"Guid":"4c65ab43-8f27-47bd-939b-1181d68689eb","Name":"Surface Edit Points","NickName":"SrfEditPts","Category":"Pufferfish","SubCategory":"Point","Kind":"Component","Description":"Extract the edit points on a surface at knot averages, the points an interpolated surface interpolated through."}]

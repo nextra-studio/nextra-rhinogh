@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\no = [x for x in doc.Objects if x.Attributes.Name == 'CANOPY'][0]\nb = o.Geometry\nprint(b.Faces.Count, 'faces', 'area', round(rg.AreaMassProperties.Compute(b).Area / 1e6, 1), 'm2', 'volume', round(rg.VolumeMassProperties.Compute(b).Volume / 1e9, 2), 'm3', b.GetBoundingBox(True))"
+}
+---
+{"stdout":"8 faces area 1004.2 m2 volume 239.93 m3 -74.23181473052603,-215.38450622558594,2771.951171875 - 30073.877686439802,14215.384765625,7250\n","error":null}

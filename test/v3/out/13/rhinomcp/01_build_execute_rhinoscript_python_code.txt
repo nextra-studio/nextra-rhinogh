@@ -4,5 +4,5 @@
 ---
 {
   "success": true,
-  "output": "MBS: 3 towers, skypark 272 m long, cantilever 59 m\n{'MBS::Towers': 6, 'MBS::Podium': 1, 'MBS::Skypark': 1}\nMBS: 3 towers, skypark 272 m long, cantilever 59 m\n\n{'MBS::Towers': 6, 'MBS::Podium': 1, 'MBS::Skypark': 1}\n"
+  "output": "MBS: 3 towers, skypark 272 m long, cantilever 59 m\n{'MBS::Podium': 1, 'MBS::Skypark': 1, 'MBS::Towers': 6}\nMBS: 3 towers, skypark 272 m long, cantilever 59 m\n\n{'MBS::Podium': 1, 'MBS::Skypark': 1, 'MBS::Towers': 6}\n"
 }

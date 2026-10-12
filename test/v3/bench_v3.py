@@ -54,7 +54,10 @@ def gh_counts(names):
     t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\nd.NewSolution(False)\nres = {}\n"
              f"for o in d.Objects:\n    if o.Name.strip().split(' (')[0] in {json.dumps(names)} and hasattr(o, 'Params'):\n"
              "        res[o.Name.strip().split(' (')[0]] = res.get(o.Name.strip().split(' (')[0], 0) + sum(p.VolatileDataCount for p in o.Params.Output)\n"
-             "print('groups', sum(1 for o in d.Objects if o.GetType().Name == 'GH_Group'), 'errors', sum(1 for o in d.Objects if hasattr(o, 'RuntimeMessageLevel') and str(o.RuntimeMessageLevel) == 'Error'), json.dumps(res))\n".replace("json.dumps", "str"))
+             # dangling wires: sources that are not real canvas objects (e.g. unresolved proxies, drawn from 0,0)
+             "ins = [p for o in d.Objects for p in (list(o.Params.Input) if hasattr(o, 'Params') and hasattr(o.Params, 'Input') else [o] if hasattr(o, 'Sources') else [])]\n"
+             "bad = sum(1 for p in ins for s in p.Sources if s.Attributes is None or d.FindObject(s.Attributes.GetTopLevel.DocObject.InstanceGuid, True) is None)\n"
+             "print('groups', sum(1 for o in d.Objects if o.GetType().Name == 'GH_Group'), 'errors', sum(1 for o in d.Objects if hasattr(o, 'RuntimeMessageLevel') and str(o.RuntimeMessageLevel) == 'Error'), 'dangling', bad, json.dumps(res))\n".replace("json.dumps", "str"))
     return next((l for l in t.splitlines() if l.startswith("groups")), t[:200])
 
 
@@ -448,7 +451,7 @@ MESSY = None   # (path, key→guid) prepared once
 def prepare_messy():
     """Not counted: the same scrambled 30-node canvas for everyone (from the v1 case 16)."""
     global MESSY
-    ops = read(HERE, "scripts", "messy.gh.txt")
+    ops = read(HERE, "scripts", "messy.ghs")
     t = nx.call("gh_edit", {"new": True, "layout": "none", "ops": ops}, 60, log=False)[0]["text"]
     ids = ids_line(t)
     nrun("import random, System\nrandom.seed(7)\nfor o in ghdoc().Objects:\n    o.Attributes.Pivot = System.Drawing.PointF(random.uniform(0, 1400), random.uniform(0, 900))\n    o.Attributes.ExpireLayout(); o.Attributes.PerformLayout()")
@@ -525,7 +528,13 @@ def c18(S):
         S.call("18", "swap_graft", "gh_edit", {"ops": f"{ids['pt']} (X={ids['sx']}^g, Y={ids['sy']}^x)"})
     else:
         gh_py(S, "18", "swap_graft", PY.gh(PY.FLAGS, body=f"flag('{ids['pt']}', 'X', 'g')\nflag('{ids['pt']}', 'Y', 'x')"))
-    return {"before": before, "after": gh_counts(["Interpolate", "Loft"])}
+    # the swap must move the graft from Y to X: rows then run along Y (10 → 6 curves in the first Interpolate's branches)
+    t = nrun("import Grasshopper\nd = Grasshopper.Instances.ActiveCanvas.Document\nd.NewSolution(False)\n"
+             "pt = [o for o in d.Objects if o.Name == 'Construct Point'][0]\n"
+             "ms = {p.NickName: str(p.DataMapping) for p in pt.Params.Input}\n"
+             "rows = [o for o in d.Objects if o.Name == 'Interpolate']\n"
+             "print('MAP', ms['X'], ms['Y'], 'branches', sorted(r.Params.Output[0].VolatileData.PathCount for r in rows))")
+    return {"before": before, "after": next((l for l in t.splitlines() if l.startswith("MAP")), t[:150])}
 
 
 BIG = read(V3S, "big_model.py")
@@ -553,7 +562,11 @@ def c19(S):
             S.call("19", "region_image", "get_viewport_image", {"view": "top", "displayMode": "Shaded", "width": 800, "height": 600})
         else:
             S.call("19", "region_image", "capture_viewport", {"viewport": "top", "width": 800, "height": 600, "zoom_to_fit": True})
-    return {"answers": "BX24_L4 12000 / 60 MEP"}
+    # what the system actually answered (its own replies), against the known truth: BX24_L4 / 12000, 60 MEP runs
+    d = os.path.join(HERE, "out", "19", S.name)
+    txt = {k: "".join(open(os.path.join(d, f), encoding="utf-8").read().split("\n---\n", 1)[-1] for f in os.listdir(d) if k in f) for k in ("longest", "region_count")}
+    return {"longest_beam_ok": "BX24_L4" in txt["longest"] and "12000" in txt["longest"],
+            "region_count_ok": bool(re.search(r"(^|\D)60(\D|$)", txt["region_count"]))}
 
 
 def c20(S):

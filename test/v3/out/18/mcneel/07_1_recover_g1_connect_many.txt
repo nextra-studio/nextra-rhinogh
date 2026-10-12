@@ -1,0 +1,43 @@
+{
+ "wires": [
+  {
+   "SrcId": "01a9c13e-3de3-4796-b025-b907fcdb1c9c",
+   "Src": "R",
+   "DstId": "ab4b8d19-6f12-474e-9987-be6296407f40",
+   "Dst": "x"
+  },
+  {
+   "SrcId": "ab4b8d19-6f12-474e-9987-be6296407f40",
+   "Src": "y",
+   "DstId": "6a8f7d27-9633-46af-a2e8-ab99646dd905",
+   "Dst": "A"
+  },
+  {
+   "SrcId": "376251d6-294a-4cfd-ac08-64b862a55119",
+   "Src": "Pt",
+   "DstId": "a289527b-e7c2-4902-a3df-a6e74eb2c073",
+   "Dst": "G"
+  },
+  {
+   "SrcId": "184a685c-7887-4cfc-8856-918949213fd5",
+   "Src": "V",
+   "DstId": "a289527b-e7c2-4902-a3df-a6e74eb2c073",
+   "Dst": "T"
+  },
+  {
+   "SrcId": "a289527b-e7c2-4902-a3df-a6e74eb2c073",
+   "Src": "G",
+   "DstId": "b34ae667-9a6e-4ac3-b57d-538897ba1ab9",
+   "Dst": "V"
+  },
+  {
+   "SrcId": "a289527b-e7c2-4902-a3df-a6e74eb2c073",
+   "Src": "G",
+   "DstId": "1671e9c6-f5cd-4941-af7d-34433d2bcbc2",
+   "Dst": "D"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":6,"OkCount":6,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"01a9c13e-3de3-4796-b025-b907fcdb1c9c","Param":"Result"},"Dst":{"Id":"ab4b8d19-6f12-474e-9987-be6296407f40","Param":"Value"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"ab4b8d19-6f12-474e-9987-be6296407f40","Param":"Result"},"Dst":{"Id":"6a8f7d27-9633-46af-a2e8-ab99646dd905","Param":"A"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"376251d6-294a-4cfd-ac08-64b862a55119","Param":"Point"},"Dst":{"Id":"a289527b-e7c2-4902-a3df-a6e74eb2c073","Param":"Geometry"},"Error":null},{"Index":3,"Ok":true,"Src":{"Id":"184a685c-7887-4cfc-8856-918949213fd5","Param":"Unit vector"},"Dst":{"Id":"a289527b-e7c2-4902-a3df-a6e74eb2c073","Param":"Translation"},"Error":null},{"Index":4,"Ok":true,"Src":{"Id":"a289527b-e7c2-4902-a3df-a6e74eb2c073","Param":"Geometry"},"Dst":{"Id":"b34ae667-9a6e-4ac3-b57d-538897ba1ab9","Param":"Vertices"},"Error":null},{"Index":5,"Ok":true,"Src":{"Id":"a289527b-e7c2-4902-a3df-a6e74eb2c073","Param":"Geometry"},"Dst":{"Id":"1671e9c6-f5cd-4941-af7d-34433d2bcbc2","Param":"Data"},"Error":null}]}

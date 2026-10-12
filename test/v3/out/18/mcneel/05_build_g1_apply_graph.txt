@@ -1,0 +1,243 @@
+{
+ "sliders": [
+  {
+   "Key": "nx",
+   "Min": 3,
+   "Value": 10,
+   "Max": 30,
+   "Type": "int",
+   "Name": "Nx",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "ny",
+   "Min": 2,
+   "Value": 6,
+   "Max": 20,
+   "Type": "int",
+   "Name": "Ny",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "sp",
+   "Min": 0.5,
+   "Value": 2,
+   "Max": 5,
+   "Type": "float",
+   "Name": "Spacing",
+   "X": 0,
+   "Y": 140
+  },
+  {
+   "Key": "amp",
+   "Min": 0,
+   "Value": 1.5,
+   "Max": 5,
+   "Type": "float",
+   "Name": "Amp",
+   "X": 0,
+   "Y": 210
+  }
+ ],
+ "components": [
+  {
+   "Key": "sx",
+   "Selector": "Series",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "sy",
+   "Selector": "Series",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "pt",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "dc",
+   "Selector": "9abae6b7-fa1d-448c-9209-4a8155345841",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "ad",
+   "Selector": "a0d62394-a118-422d-abb3-6af115c75b25",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "sn",
+   "Selector": "Sine",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "mz",
+   "Selector": "b8963bb1-aa57-476e-a20e-ed6cf635a49c",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "uz",
+   "Selector": "Unit Z",
+   "X": 1190,
+   "Y": 0
+  },
+  {
+   "Key": "mv",
+   "Selector": "Move",
+   "X": 1360,
+   "Y": 0
+  },
+  {
+   "Key": "rows",
+   "Selector": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33",
+   "X": 1530,
+   "Y": 0
+  },
+  {
+   "Key": "fm",
+   "Selector": "Flip Matrix",
+   "X": 1530,
+   "Y": 70
+  },
+  {
+   "Key": "cols",
+   "Selector": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33",
+   "X": 1700,
+   "Y": 0
+  },
+  {
+   "Key": "lf",
+   "Selector": "Loft",
+   "X": 1700,
+   "Y": 70
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "sp",
+   "Src": "0",
+   "DstKey": "sx",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "nx",
+   "Src": "0",
+   "DstKey": "sx",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "sp",
+   "Src": "0",
+   "DstKey": "sy",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "ny",
+   "Src": "0",
+   "DstKey": "sy",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "sx",
+   "Src": "S",
+   "DstKey": "pt",
+   "Dst": "X"
+  },
+  {
+   "SrcKey": "sy",
+   "Src": "S",
+   "DstKey": "pt",
+   "Dst": "Y"
+  },
+  {
+   "SrcKey": "pt",
+   "Src": "Pt",
+   "DstKey": "dc",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "dc",
+   "Src": "X",
+   "DstKey": "ad",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "dc",
+   "Src": "Y",
+   "DstKey": "ad",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ad",
+   "Src": "R",
+   "DstKey": "sn",
+   "Dst": "x"
+  },
+  {
+   "SrcKey": "sn",
+   "Src": "y",
+   "DstKey": "mz",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "amp",
+   "Src": "0",
+   "DstKey": "mz",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "mz",
+   "Src": "R",
+   "DstKey": "uz",
+   "Dst": "F"
+  },
+  {
+   "SrcKey": "pt",
+   "Src": "Pt",
+   "DstKey": "mv",
+   "Dst": "G"
+  },
+  {
+   "SrcKey": "uz",
+   "Src": "V",
+   "DstKey": "mv",
+   "Dst": "T"
+  },
+  {
+   "SrcKey": "mv",
+   "Src": "G",
+   "DstKey": "rows",
+   "Dst": "V"
+  },
+  {
+   "SrcKey": "mv",
+   "Src": "G",
+   "DstKey": "fm",
+   "Dst": "D"
+  },
+  {
+   "SrcKey": "fm",
+   "Src": "D",
+   "DstKey": "cols",
+   "Dst": "V"
+  },
+  {
+   "SrcKey": "rows",
+   "Src": "C",
+   "DstKey": "lf",
+   "Dst": "C"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"nx","Id":"fef4d612-b92a-4679-a770-502ef8db0ce1","Kind":"Slider"},{"Key":"ny","Id":"98e2094f-757e-4579-b2b3-38b4b92b0fa0","Kind":"Slider"},{"Key":"sp","Id":"46ad2dd1-3e9b-4118-9232-11ee0afb30cd","Kind":"Slider"},{"Key":"amp","Id":"da30ef5a-b947-45d5-9fc5-f96d3d3a18c7","Kind":"Slider"},{"Key":"sx","Id":"d1d874ef-7d51-4392-91d3-c443d400b7da","Kind":"Component"},{"Key":"sy","Id":"38ca5a09-34e5-4a56-a517-52240419b926","Kind":"Component"},{"Key":"pt","Id":"376251d6-294a-4cfd-ac08-64b862a55119","Kind":"Component"},{"Key":"dc","Id":"fd9c387c-7e26-4efd-a579-3682451a759c","Kind":"Component"},{"Key":"ad","Id":"01a9c13e-3de3-4796-b025-b907fcdb1c9c","Kind":"Component"},{"Key":"mz","Id":"6a8f7d27-9633-46af-a2e8-ab99646dd905","Kind":"Component"},{"Key":"uz","Id":"184a685c-7887-4cfc-8856-918949213fd5","Kind":"Component"},{"Key":"rows","Id":"b34ae667-9a6e-4ac3-b57d-538897ba1ab9","Kind":"Component"},{"Key":"fm","Id":"1671e9c6-f5cd-4941-af7d-34433d2bcbc2","Kind":"Component"},{"Key":"cols","Id":"e7097f01-745a-450d-9e44-f582126a371d","Kind":"Component"},{"Key":"lf","Id":"10982d49-0e49-4271-bcb2-b6d6ccd06556","Kind":"Component"}],"PlaceErrors":[{"Key":"sn","Error":"Component name \u0027Sine\u0027 is ambiguous (3 matches): 7663efbb-d9b8-4c6a-a0da-c3750a7bbe77 (Maths/Trig), c53932eb-7c8c-4825-ae98-e36bba97232d (Complex/Trig), ecee923b-1b93-4cf2-acd6-680835503437 (Scalar/Trig). Pass a Guid to disambiguate."},{"Key":"mv","Error":"Component name \u0027Move\u0027 is ambiguous (2 matches): b40f28a2-ba30-4ac2-afe5-a6ece7f985fc (Transform/Euclidean), e9eb1dcf-92f6-4d4d-84ae-96222d60f56b (Transform/Euclidean). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":true,"Error":null},{"Index":9,"Ok":false,"Error":"dst_key \u0027sn\u0027 did not match a placed object"},{"Index":10,"Ok":false,"Error":"src_key \u0027sn\u0027 did not match a placed object"},{"Index":11,"Ok":true,"Error":null},{"Index":12,"Ok":true,"Error":null},{"Index":13,"Ok":false,"Error":"dst_key \u0027mv\u0027 did not match a placed object"},{"Index":14,"Ok":false,"Error":"dst_key \u0027mv\u0027 did not match a placed object"},{"Index":15,"Ok":false,"Error":"src_key \u0027mv\u0027 did not match a placed object"},{"Index":16,"Ok":false,"Error":"src_key \u0027mv\u0027 did not match a placed object"},{"Index":17,"Ok":true,"Error":null},{"Index":18,"Ok":true,"Error":null}],"WiresOk":13}

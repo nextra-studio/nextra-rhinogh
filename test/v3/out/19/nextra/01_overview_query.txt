@@ -1,0 +1,10 @@
+{}
+---
+doc 'untitled' units millimeters tol 0.001; 1224 objects
+extents (-300,-300,0)..(36300,30300,21600) size 36600x30600x21600
+[Beams]: 426 polysurface
+[Columns]: 252 polysurface
+[MEP]: 540 polyline
+[Slabs]: 6 polysurface (r14621-r14626)
+empty layers: Default
+next: query filter:'layer:X' (list) → level:'detail' → level:'verts'; or view.

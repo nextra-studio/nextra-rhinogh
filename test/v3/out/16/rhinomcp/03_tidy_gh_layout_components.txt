@@ -7,7 +7,7 @@
   "edge_count": 32,
   "positions": [
     {
-      "instance_id": "63575f1e-b623-4272-b5ba-54f8fdb872cd",
+      "instance_id": "8dba7cc7-db78-444b-b8d8-a1033936b6bc",
       "name": "Number Slider",
       "nickname": "W",
       "position": [
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "instance_id": "51421c26-a11d-47ed-ba76-3b3a01561b5f",
+      "instance_id": "65fa3bc6-0027-4eae-a204-0a641f16959c",
       "name": "Number Slider",
       "nickname": "H",
       "position": [
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "instance_id": "93f68a35-0de2-468c-8c84-54a9de5e0372",
+      "instance_id": "37ec5dad-bf31-419d-b9c9-a67816552d7a",
       "name": "Number Slider",
       "nickname": "U",
       "position": [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "instance_id": "b7a3c0a8-e09d-4155-af2d-6f0f81125537",
+      "instance_id": "e95faaa2-81da-4a7f-a0c8-7590dcb9e490",
       "name": "Number Slider",
       "nickname": "V",
       "position": [
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "instance_id": "2f067f97-0441-4742-9770-21ea6633c2da",
+      "instance_id": "eb70bde6-1945-44a5-bc71-e8990370b349",
       "name": "Number Slider",
       "nickname": "Amp",
       "position": [
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "instance_id": "f678fd99-b64f-4280-a4ac-f270007b051e",
+      "instance_id": "e71d8055-abb0-49cf-b164-0e2c611f337f",
       "name": "Number Slider",
       "nickname": "Freq",
       "position": [
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "instance_id": "2f05a4e1-aea9-47a9-9e87-e4f127e8630d",
+      "instance_id": "a31db74a-e181-4b45-86d1-f5daaf054a41",
       "name": "Number Slider",
       "nickname": "Depth",
       "position": [
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "instance_id": "e04072f1-e40a-492d-b2bc-6b5509da89a2",
+      "instance_id": "aa7a6e5f-92f2-437d-a249-2b50ab9fa0fb",
       "name": "Point",
       "nickname": "Pt",
       "position": [
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "instance_id": "c9809759-d1b7-49c1-b4c1-cf9934493999",
+      "instance_id": "1f278c3b-5896-402e-ade6-f0f67020bc46",
       "name": "XZ Plane",
       "nickname": "XZ",
       "position": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "instance_id": "c5db16cf-d25c-4bf8-b138-5f0bbf2bbea9",
+      "instance_id": "7312408e-9802-4773-8e04-f114c4496293",
       "name": "Rectangle",
       "nickname": "Rectangle",
       "position": [
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "instance_id": "ce964765-4787-4a55-9a36-cbf0ad262bc5",
+      "instance_id": "7dba0bbe-cdfb-43e1-a3cf-6910a6e28a3b",
       "name": "Boundary Surfaces",
       "nickname": "Boundary",
       "position": [
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "instance_id": "f41bdbf3-eba1-4b12-9e49-c5efb8497061",
+      "instance_id": "65d889d3-e556-47dc-98bc-25d802e8b477",
       "name": "Divide Domain²",
       "nickname": "Divide",
       "position": [
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "instance_id": "f2560acf-f5a1-4ae5-8174-7622fb3b8e2f",
+      "instance_id": "23ef647d-e360-4335-b957-0d69b8a1c67e",
       "name": "Isotrim",
       "nickname": "SubSrf",
       "position": [
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "instance_id": "ab950806-0573-463a-922c-8b090ce712c6",
+      "instance_id": "8e26da1c-3feb-45ad-90f9-5314b40501f2",
       "name": "Area",
       "nickname": "Area",
       "position": [
@@ -133,7 +133,7 @@
       ]
     },
     {
-      "instance_id": "e2d6b26c-86bc-4c1a-b2b5-6f968470eefe",
+      "instance_id": "f6ddb6fd-32ba-466c-90ef-6626575f80f2",
       "name": "Deconstruct",
       "nickname": "pDecon",
       "position": [
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "instance_id": "cdbea252-aa86-4640-864c-e6fa03905aeb",
+      "instance_id": "494769e4-0a70-4ec7-9a9d-2b110f352dde",
       "name": "Multiplication",
       "nickname": "A×B",
       "position": [
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "instance_id": "596b7d3f-d36a-4c02-ba61-f4056474650a",
+      "instance_id": "be5800da-49fb-46b7-a1d5-210e3daeede4",
       "name": "Sine",
       "nickname": "Sin",
       "position": [
@@ -160,7 +160,7 @@
       ]
     },
     {
-      "instance_id": "65f6f60e-32b5-4b2a-9a15-30144f06dd6c",
+      "instance_id": "bf8cdec8-734b-4df3-a55c-58c9daf98725",
       "name": "Multiplication",
       "nickname": "A×B",
       "position": [
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "instance_id": "be758220-422d-438a-8579-6cbc54d6078f",
+      "instance_id": "92882668-f057-4d40-9079-6a09108e6c97",
       "name": "Absolute",
       "nickname": "Abs",
       "position": [
@@ -178,7 +178,7 @@
       ]
     },
     {
-      "instance_id": "46cab1dd-963d-4939-b634-50d6252f937a",
+      "instance_id": "c51a310d-7618-434a-ad7c-e3437ced953a",
       "name": "Addition",
       "nickname": "A+B",
       "position": [
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "instance_id": "ae46ee3f-b446-4696-a321-6d6fcfc0c65c",
+      "instance_id": "c648ca56-c62b-40e3-8652-461ace7fe197",
       "name": "Scale",
       "nickname": "Scale",
       "position": [
@@ -196,7 +196,7 @@
       ]
     },
     {
-      "instance_id": "fd423768-ae21-42ea-9e70-b093c8822a6d",
+      "instance_id": "65c61776-33fd-4362-b397-c394d5092b1b",
       "name": "Brep Edges",
       "nickname": "Edges",
       "position": [
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "instance_id": "f0a52ede-d687-4323-b4cd-192a54e64dab",
+      "instance_id": "63a88cbc-a3a0-4069-91d6-9f72555d3922",
       "name": "Join Curves",
       "nickname": "Join",
       "position": [
@@ -214,7 +214,7 @@
       ]
     },
     {
-      "instance_id": "ff4d6b8c-5c05-4033-bfe3-04acc9887047",
+      "instance_id": "feaf8709-8de6-41ee-8779-1bd87b3d1da2",
       "name": "Unit Y",
       "nickname": "Y",
       "position": [
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "instance_id": "c483d348-62bc-4b9f-bcaa-f910042d90b0",
+      "instance_id": "5b480f23-7541-44e1-a609-d8f9903abd75",
       "name": "Extrude",
       "nickname": "Extr",
       "position": [
@@ -232,7 +232,7 @@
       ]
     },
     {
-      "instance_id": "0abc2dff-7a2d-466b-8b0d-5667e3fdc1f7",
+      "instance_id": "da8a26fe-a0a2-4dce-be5e-bbb831078d0c",
       "name": "Cap Holes",
       "nickname": "Cap",
       "position": [
@@ -241,7 +241,7 @@
       ]
     },
     {
-      "instance_id": "73052264-b6c5-4521-9a78-060bd160c581",
+      "instance_id": "85033a70-5c83-43c0-94fc-58db4350f96b",
       "name": "Colour Swatch",
       "nickname": "Swatch",
       "position": [
@@ -250,7 +250,7 @@
       ]
     },
     {
-      "instance_id": "e46d1770-8e10-443c-a1df-b1f935f07241",
+      "instance_id": "02b2337c-3ca4-4eb4-ae23-7f37b32f4854",
       "name": "Custom Preview",
       "nickname": "Preview",
       "position": [
@@ -259,7 +259,7 @@
       ]
     },
     {
-      "instance_id": "380c087f-2152-44fa-92ae-c9603a9aadfb",
+      "instance_id": "f0088b5e-7dcf-4637-92e9-a838cfd78c41",
       "name": "List Length",
       "nickname": "Lng",
       "position": [
@@ -268,7 +268,7 @@
       ]
     },
     {
-      "instance_id": "a1758f3d-dfa1-4bb2-8718-db9f82e03696",
+      "instance_id": "e41633fd-ad80-4a73-8557-a5ce22f73ba4",
       "name": "Panel",
       "nickname": "",
       "position": [
@@ -277,7 +277,7 @@
       ]
     },
     {
-      "instance_id": "4897b987-17c7-4c2a-84bc-887a73338ee1",
+      "instance_id": "cb15845c-84fe-4ad4-8b70-069511dffa44",
       "name": "Group",
       "nickname": "Inputs",
       "position": [
@@ -286,7 +286,7 @@
       ]
     },
     {
-      "instance_id": "4f40c3d0-d42e-4b4a-84ae-4923ae64d13f",
+      "instance_id": "bdf716c6-5cd0-4dd0-bc32-719b0bad71af",
       "name": "Group",
       "nickname": "Base surface",
       "position": [
@@ -295,7 +295,7 @@
       ]
     },
     {
-      "instance_id": "56274142-41b5-4843-9eb8-acfc4dcdeaba",
+      "instance_id": "e4ff1168-c358-46b5-80f7-f8cf7aeb8057",
       "name": "Group",
       "nickname": "Panel grid",
       "position": [
@@ -304,7 +304,7 @@
       ]
     },
     {
-      "instance_id": "19483b69-83f9-42f2-b95b-86b9f6563413",
+      "instance_id": "4c2d2ba8-fee4-4d05-bc4e-6548de1e9175",
       "name": "Group",
       "nickname": "Wave scaling",
       "position": [
@@ -313,7 +313,7 @@
       ]
     },
     {
-      "instance_id": "bde0f6c7-abf1-4147-abce-28defa0b05b0",
+      "instance_id": "c0553dac-b2fd-420b-af8f-425ceb058d60",
       "name": "Group",
       "nickname": "Fins",
       "position": [
@@ -322,7 +322,7 @@
       ]
     },
     {
-      "instance_id": "b7196307-1180-4c7e-83a8-503cb4a014ac",
+      "instance_id": "32c207ee-b593-4a54-a5ff-166eddb2ffbd",
       "name": "Group",
       "nickname": "Display",
       "position": [

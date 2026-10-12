@@ -1,0 +1,7 @@
+{
+ "ops": "g3 {v=30}"
+}
+---
+ok: 1/1 lines applied (), checkpoint c491
+solved 21ms, no errors/warnings on affected nodes
+results: g21.Model: 1 Model {0;0;0} · g21.MaxDisp: 1 Number {0;0;0;0} e.g. 1.29

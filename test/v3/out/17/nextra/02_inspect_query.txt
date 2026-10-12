@@ -1,0 +1,10 @@
+{
+ "filter": "name:CANOPY",
+ "level": "detail"
+}
+---
+1 object(s); units millimeters
+r13367 polysurface solid [Canopy] "CANOPY" 30148.1x14430.8x4478 block @(14999.8,7000,5011)
+  topo: 8 faces, 18 edges, 12 verts, naked edges 0
+  area 1004177328.8, volume 239930899282.7
+  curved faces: 8

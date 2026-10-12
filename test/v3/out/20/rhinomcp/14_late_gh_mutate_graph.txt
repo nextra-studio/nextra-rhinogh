@@ -1,0 +1,168 @@
+{
+ "operations": [
+  {
+   "op": "connect",
+   "source": "th",
+   "target": "cs",
+   "target_input_name": "Height"
+  },
+  {
+   "op": "recompute"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012075810299",
+  "operation_count": 2,
+  "created_count": 0,
+  "created_component_count": 0,
+  "created_group_count": 0,
+  "deleted_count": 0,
+  "deleted_component_count": 0,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 66,
+  "solution_duration_ms": 15,
+  "verification_duration_ms": 0,
+  "duration_ms": 183,
+  "operations": [
+    {
+      "op": "connect",
+      "source_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+      "target_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+      "source_param": "Number Slider",
+      "target_param": "Height [cm]"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 2,
+    "output_count": 2,
+    "outputs_with_data": 2,
+    "total_output_data_count": 2,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "alias": "th",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Thickness cm",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      },
+      {
+        "instance_id": "01262cdc-3707-44ff-bcaf-ebdf06ee61ff",
+        "alias": "cs",
+        "graph_id": "MCPGraph_20261012075808454",
+        "role": "",
+        "name": "Cross-section (Karamba3D)",
+        "nickname": "CroSec",
+        "category": "Karamba3D",
+        "subcategory": "3.Cross Section",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Cross-section",
+            "nickname": "CroSec",
+            "type": "CrossSection",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": false,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 17,
+    "preview_enabled_object_count": 11,
+    "preview_disabled_object_count": 6,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 17119,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012075810299",
+    "object_count": 2,
+    "controls": [
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "th",
+        "name": "Number Slider",
+        "nickname": "Thickness cm",
+        "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 20.0,
+        "min": 10.0,
+        "max": 40.0,
+        "decimals": 0,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 2 operation(s)"
+}

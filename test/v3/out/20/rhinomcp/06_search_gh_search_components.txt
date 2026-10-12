@@ -1,0 +1,52 @@
+{
+ "query": "Deconstruct",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Deconstruct",
+  "category": null,
+  "components": [
+    {
+      "name": "Deconstruct",
+      "nickname": "pDecon",
+      "category": "Vector",
+      "subcategory": "Point",
+      "guid": "9abae6b7-fa1d-448c-9209-4a8155345841",
+      "description": "Deconstruct a point into its component parts."
+    },
+    {
+      "name": "Deconstruct",
+      "nickname": "D",
+      "category": "Speckle",
+      "subcategory": "Dev",
+      "guid": "c491d26c-84cb-4684-8bd2-aa78d0f2fe53",
+      "description": "Deconstructs any Speckle param into its atomic parts"
+    },
+    {
+      "name": "BB Deconstruct CurveOnSurface",
+      "nickname": "Deconstruct",
+      "category": "Bowerbird",
+      "subcategory": "Curve on Surface",
+      "guid": "27762e37-a208-4c07-ba02-da650f7052b1",
+      "description": "Deconstruct an embedded curve into its components."
+    },
+    {
+      "name": "AXISVM Deconstruct Cross-Section",
+      "nickname": "AxDCS",
+      "category": "AXISVM",
+      "subcategory": "1. Elements",
+      "guid": "fd6ee6e7-19ae-4ae9-8537-859e17ca1e13",
+      "description": "Component to deconstruct the AXISVM cross-sections into cross-section parameters. Output may be used to create inputs for optimization CS parameter limits or define parametric cross-section based on the cross-section dimensions from the CS library."
+    },
+    {
+      "name": "AXISVM Deconstruct Items",
+      "nickname": "AxDI",
+      "category": "AXISVM",
+      "subcategory": "4. Import/Send",
+      "guid": "df8d92be-01f8-42b4-ba49-0eaf50c751fa",
+      "description": "Component to deconstruct the AXISVM items into parameters. Output may be used to feed other components with the properties (parameters) of the deconstructed items as parametric input."
+    }
+  ]
+}

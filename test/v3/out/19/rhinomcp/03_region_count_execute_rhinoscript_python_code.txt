@@ -1,0 +1,8 @@
+{
+ "code": "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\nbox = rg.BoundingBox(rg.Point3d(-1, -1, 0), rg.Point3d(12001, 30001, 7300))\nprint(sum(1 for o in doc.Objects if doc.Layers[o.Attributes.LayerIndex].Name == 'MEP' and box.Contains(o.Geometry.GetBoundingBox(True), True)))"
+}
+---
+{
+  "success": true,
+  "output": "60\n60\n"
+}

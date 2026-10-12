@@ -4,8 +4,8 @@
 }
 ---
 new GH document
-ok: 15/15 lines applied (+15 nodes, 16 wires, 1 values, +2 groups), checkpoint c197
+ok: 15/15 lines applied (+15 nodes, 16 wires, 1 values, +2 groups), checkpoint c378
 ids: slab=g1 nf=g2 fd=g3 fh=g4 zp=g5 pz=g6 sec=g7 jn=g8 dv=g9 ev=g10 u1=g11 cp=g12 ln=g13 uz=g14 ext=g15
 groups: Fins input=g16 Fins=g17
-solved 6ms, no errors/warnings on affected nodes
+solved 0ms, no errors/warnings on affected nodes
 results: g15.E: 24 Surface {0;0;0}

@@ -4,10 +4,10 @@
 }
 ---
 new GH document
-ok: 14/14 lines applied (+14 nodes, 16 wires, 1 values, +4 groups), checkpoint c184
+ok: 14/14 lines applied (+14 nodes, 16 wires, 1 values, +4 groups), checkpoint c365
 ids: n=g1 fh=g2 w=g3 tw=g4 ser=g5 pt=g6 pl=g7 rec=g8 ang=g9 mul=g10 rad=g11 rot=g12 lft=g13 cap=g14
 groups: Inputs=g15 Floors=g16 Twist=g17 Massing=g18
 note: L10: 'Rectangle' is ambiguous; used Curve/Primitive because its ports match P,X,Y
 note: L15: 'Rotate' is ambiguous; used Transform/Euclidean because its ports match G,A,P
-solved 18ms, no errors/warnings on affected nodes
+solved 0ms, no errors/warnings on affected nodes
 results: g14.B: 1 Brep {0}

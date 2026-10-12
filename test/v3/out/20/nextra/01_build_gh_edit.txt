@@ -1,0 +1,16 @@
+{
+ "new": true,
+ "ops": "## Inputs #DBABFF\nL = Number Slider {v=10, r=4..20} \"Span m\"\nW = Number Slider {v=6, r=2..12} \"Width m\"\nth = Number Slider {v=20, r=10..40, int} \"Thickness cm\"\nmr = Number Slider {v=2, r=1..4} \"Mesh m\"\n## Plate #ABDBFF\npl = XY Plane\nrc = Rectangle (P=pl, X=L, Y=W)\nbs = Boundary Surfaces (E=rc.R)\nmb = Mesh Breps @Karamba3D (Brep=bs, MRes=mr)\nmat = Material Selection @Karamba3D (Name|Ind=\"C30/37\")\ncs = Cross-section @Karamba3D (Mat=mat, Height=th) {menu=\"Units>Shell - Const\"}\nse = Create Surface Element @Karamba3D (Mesh=mb.Mesh, CroSec=cs)\n## Supports on the short edges #ABDBFF\ndm = Deconstruct Mesh (M=mb.Mesh)\ndp = Deconstruct @Vector (P=dm.V)\nlt = Smaller Than (A=dp.X, B=0.01)\ngt = Larger Than (A=dp.X, B=L^e(x-0.01))\norr = Gate Or (A=lt.<, B=gt.>)\nbase = Cull Pattern (L=dm.V, P=orr)\nsup = Support @Karamba3D (Pos|Ind=base) {$button[0]=true, $button[1]=true, $button[2]=true}\n## Analysis #FFD6AB\nld = Loads @Karamba3D\nasm = Assemble Model @Karamba3D (Elem=se.Elem, Support=sup^f, Load=ld)\nan = Analyse @Karamba3D (Model=asm.Model)"
+}
+---
+new GH document
+ok: 21/21 lines applied (+21 nodes, 24 wires, 2 values, +4 groups), checkpoint c489
+ids: L=g1 W=g2 th=g3 mr=g4 pl=g5 rc=g6 bs=g7 mb=g8 mat=g9 cs=g10 se=g11 dm=g12 dp=g13 lt=g14 gt=g15 orr=g16 base=g17 sup=g18 ld=g19 asm=g20 an=g21
+groups: Inputs=g22 Plate=g23 Supports on the short edges=g24 Analysis=g25
+note: L8: 'Rectangle' is ambiguous; used Curve/Primitive because its ports match P,X,Y
+note: L12: 'Cross-section' is ambiguous; used Karamba3D/3.Cross Section because its ports match Mat,Height
+note: L21: 'Support' is ambiguous; used Karamba3D/1.Support because its ports match Pos|Ind
+note: L24: 'Assemble Model': 2 versions installed; used the visible one (Karamba3D/0.Model)
+note: L12: menu 'Units>Shell - Const' clicked
+solved 28ms, no errors/warnings on affected nodes
+results: g21.Model: 1 Model {0;0;0} · g21.MaxDisp: 1 Number {0;0;0;0} e.g. 2.902

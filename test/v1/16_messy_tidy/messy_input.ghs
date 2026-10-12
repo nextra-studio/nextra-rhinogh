@@ -1,0 +1,33 @@
+# ghs 1 · Grasshopper definition as Nextra shorthand · open: gh_edit {open:'messy_input.ghs'} · grammar: query {scope:'docs', filter:'shorthand'}
+# 30 objects, 0 groups · saved 2026-10-12 10:12 from messy_input.gh
+
+g1 = Number Slider {v=0.6, r=0..2, nick="Amp", pos={52,390}}
+g2 = Number Slider {v=6, r=2..20, int, nick="V", pos={81,457}}
+g3 = Number Slider {v=2, r=0.5..6, nick="Freq", pos={98,82}}
+g4 = Point {set={0,0,0}, pos={173,201}}
+g5 = Number Slider {v=30, r=5..60, nick="W", pos={453,136}}
+g6 = Colour Swatch {c=#5A8CB4, pos={585,681}}
+g7 = Number Slider {v=0.8, r=0.1..2, nick="Depth", pos={594,744}}
+g8 = Number Slider {v=12, r=2..40, int, nick="U", pos={750,329}}
+g9 = Unit Y (F=g7) {pos={735,787}}
+g10 = Number Slider {v=12, r=3..40, nick="H", pos={911,65}}
+g11 = XZ Plane (O=g4) {pos={878,852}}
+g12 = Rectangle @Curve (P=g11, X=g5, Y=g10) {pos={807,357}}
+g13 = Boundary Surfaces (E=g12.R) {pos={1366,41}}
+g14 = Divide Domain² (I=g13, U=g8, V=g2) {pos={1201,260}}
+g15 = Isotrim (S=g13, D=g14) {pos={201,106}}
+g16 = List Length (L=g15) {pos={54,601}}
+g17 = Area (G=g15) {pos={431,734}}
+g18 = Deconstruct @Vector (P=g17.C) {pos={253,523}}
+g19 = Multiplication (A=g18.X, B=g3) {pos={894,335}}
+g20 = Sine (x=g19) {pos={766,56}}
+g21 = Multiplication (A=g20, B=g1) {pos={83,185}}
+g22 = Absolute (x=g21) {pos={952,384}}
+g23 = Addition @Maths (A=g22, B=0.2) {pos={439,527}}
+g24 = Scale (G=g15, C=g17.C, F=g23) {pos={634,269}}
+g25 = Panel (=g16) {pos={1070,516}}
+g26 = Brep Edges (B=g24.G) {pos={1112,629}}
+g27 = Join Curves (C=g26.En) {pos={341,516}}
+g28 = Extrude (B=g27, D=g9) {pos={1021,259}}
+g29 = Cap Holes (B=g28) {pos={1372,106}}
+g30 = Custom Preview (G=g29, M=g6) {pos={212,440}}

@@ -58,7 +58,7 @@ const TOOLS = [
       ops: { type: "string", description: "shorthand lines, e.g. 'n = Number Slider {v=5, r=1..10, int}\\nc = Circle (R=n)'" },
       script: { type: "object", description: "{handle, code | patch:[{find,replace}] | file | mirror:true | from_mirror:true}" },
       layout: { type: "string", description: "auto (default) | tidy | tidy:<filter> | none" },
-      open: { type: "string" }, new: { type: "boolean" }, save: { type: "string" },
+      open: { type: "string" }, new: { type: "boolean" }, save: { type: "string", description: ".gh/.ghx, or .ghs = the definition as shorthand text (readable, diffable; open builds it)" },
       bake: { type: "array", items: { type: "string" }, description: "handles (g5 or g5.Port) to bake" }, layer: { type: "string" },
       solve: { type: "boolean" }, atomic: { type: "boolean" }, echo: { type: "boolean" }, show: { type: "boolean" },
     } },

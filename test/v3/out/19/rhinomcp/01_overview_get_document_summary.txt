@@ -1,0 +1,114 @@
+{}
+---
+{
+  "meta_data": {
+    "name": null,
+    "date_created": "0001-01-01T00:00:00",
+    "date_modified": "0001-01-01T00:00:00",
+    "tolerance": 0.001,
+    "angle_tolerance": 1.0,
+    "path": null,
+    "units": "Millimeters"
+  },
+  "object_count": 1224,
+  "objects_by_type": {
+    "BREP": 684,
+    "POLYLINE": 540
+  },
+  "objects_by_layer": {
+    "MEP": 540,
+    "Beams": 426,
+    "Columns": 252,
+    "Slabs": 6
+  },
+  "model_bounding_box": [
+    [
+      -300.0,
+      -300.0,
+      0.0
+    ],
+    [
+      36300.0,
+      30300.0,
+      21600.0
+    ]
+  ],
+  "layer_count": 250,
+  "layer_hierarchy": [
+    {
+      "id": "d30445a3-0dea-465b-947c-d4fe036e6899",
+      "name": "Default",
+      "full_path": "Default",
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 0,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "e06af2f6-ad68-4a9d-820f-638eefd3eb56",
+      "name": "Columns",
+      "full_path": "Columns",
+      "color": {
+        "r": 200,
+        "g": 60,
+        "b": 60
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 252,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "3e32b4df-9bd2-446c-8212-aac2409cebca",
+      "name": "Beams",
+      "full_path": "Beams",
+      "color": {
+        "r": 60,
+        "g": 90,
+        "b": 200
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 426,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "2867081e-0a1a-443f-8d1b-c43221ab0ac6",
+      "name": "Slabs",
+      "full_path": "Slabs",
+      "color": {
+        "r": 150,
+        "g": 150,
+        "b": 150
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 6,
+      "parent_id": null,
+      "children": []
+    },
+    {
+      "id": "3877ade0-918a-4087-9dfd-b3713b189fca",
+      "name": "MEP",
+      "full_path": "MEP",
+      "color": {
+        "r": 40,
+        "g": 160,
+        "b": 90
+      },
+      "visible": true,
+      "locked": false,
+      "object_count": 540,
+      "parent_id": null,
+      "children": []
+    }
+  ]
+}

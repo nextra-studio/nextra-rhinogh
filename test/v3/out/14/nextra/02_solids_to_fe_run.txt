@@ -3,17 +3,17 @@
  "args": {}
 }
 ---
-ok py 60ms, checkpoint c106
+ok py 174ms, checkpoint c427
 stdout:
 levels [0.0, 2.9, 5.9], grid x [0.0, 4.0, 8.0] y [0.0, 3.0, 6.0]; 14 lines (from 10 members), 6 shells
 rhino delta +20:
-+ [FE::Lines] line 2.9x0x0 linear vertical ×3 r153-r155 z 0..2.9
-+ [FE::Lines] line 3x0x0 linear horizontal ×4 r156-r159 z 2.9..5.9
-+ [FE::Lines] line 3x0x0 linear vertical ×3 r160-r162 z 2.9..5.9
-+ [FE::Lines] line 4x0x0 linear horizontal ×4 r163-r166 z 2.9..5.9
-+ [FE::Shells] surface 6x2.9x0 planar ×1 r167 z 0..2.9
-+ [FE::Shells] surface 6x3x0 planar ×1 r168 z 2.9..5.9
-+ [FE::Shells] surface 8x2.9x0 planar ×1 r169 z 0..2.9
-+ [FE::Shells] surface 8x3x0 planar ×1 r170 z 2.9..5.9
-+ [FE::Shells] surface 8x6x0 planar ×2 r171 r172 z 2.9..5.9
++ [FE::Lines] line 2.9x0x0 linear vertical ×3 r13275-r13277 z 0..2.9
++ [FE::Lines] line 3x0x0 linear horizontal ×4 r13278-r13281 z 2.9..5.9
++ [FE::Lines] line 3x0x0 linear vertical ×3 r13282-r13284 z 2.9..5.9
++ [FE::Lines] line 4x0x0 linear horizontal ×4 r13285-r13288 z 2.9..5.9
++ [FE::Shells] surface 6x2.9x0 planar ×1 r13289 z 0..2.9
++ [FE::Shells] surface 6x3x0 planar ×1 r13290 z 2.9..5.9
++ [FE::Shells] surface 8x2.9x0 planar ×1 r13291 z 0..2.9
++ [FE::Shells] surface 8x3x0 planar ×1 r13292 z 2.9..5.9
++ [FE::Shells] surface 8x6x0 planar ×2 r13293 r13294 z 2.9..5.9
 (details: query filter:'r12 r13' or 'layer:X')

@@ -1,0 +1,13 @@
+{
+ "nickname": "Thickness cm",
+ "value": 30
+}
+---
+{
+  "instance_id": "e521206d-1b4e-46c8-88c0-3d9c12d1f2dc",
+  "nickname": "Thickness cm",
+  "value": 30.0,
+  "min": 10.0,
+  "max": 40.0,
+  "message": "Set slider 'Thickness cm' to 30"
+}

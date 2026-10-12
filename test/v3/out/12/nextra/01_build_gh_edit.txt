@@ -4,13 +4,13 @@
 }
 ---
 new GH document
-ok: 11/11 lines applied (+11 nodes, 12 wires, 4 values, +2 groups), checkpoint c27
+ok: 11/11 lines applied (+11 nodes, 12 wires, 4 values, +2 groups), checkpoint c412
 ids: pa=g1 pb=g2 ln=g3 sh=g4 el=g5 sup=g6 pm=g7 fv=g8 ld=g9 asm=g10 an=g11
 groups: Beam geometry=g12 Karamba model=g13
 note: L4: 'Line' is ambiguous; used Curve/Primitive because its ports match A,B
 note: L8: 'Support' is ambiguous; used Karamba3D/1.Support because its ports match Pos|Ind
 note: L12: 'Assemble Model': 2 versions installed; used the visible one (Karamba3D/0.Model)
-solved 14ms, no errors/warnings on affected nodes
+solved 17ms, no errors/warnings on affected nodes
 results: g11.Model: 1 Model {0;0;0} · g11.MaxDisp: 1 Number {0;0;0;0} e.g. 47.038
 plugin rules (Karamba3D, shown once; full guide: query {scope:'docs', filter:'plugins/Karamba3D'}):
 - **Karamba works in metres, kN, cm results — whatever the Rhino unit is.** If the doc is in mm, scale geometry ×0.001 before Karamba (`Scale (G=…, F=0.001)`) or model the analysis geometry in metres. Check: `Assemble.Mass` must be plausible (10 m CHS 114.3×4 ≈ 109 kg).

@@ -1,0 +1,25 @@
+{
+ "wires": [
+  {
+   "SrcId": "74df105c-e6a2-42ee-86c3-8e00c2477c4d",
+   "Src": "<",
+   "DstId": "db9feb34-d729-4559-9c10-bfed4f28e8f8",
+   "Dst": "A"
+  },
+  {
+   "SrcId": "6138a715-f73a-4612-970f-edde741a4e1f",
+   "Src": ">",
+   "DstId": "db9feb34-d729-4559-9c10-bfed4f28e8f8",
+   "Dst": "B"
+  },
+  {
+   "SrcId": "db9feb34-d729-4559-9c10-bfed4f28e8f8",
+   "Src": "R",
+   "DstId": "325014e7-2eed-4832-803c-208230237e40",
+   "Dst": "P"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":3,"OkCount":3,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"74df105c-e6a2-42ee-86c3-8e00c2477c4d","Param":"Smaller than"},"Dst":{"Id":"db9feb34-d729-4559-9c10-bfed4f28e8f8","Param":"A"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"6138a715-f73a-4612-970f-edde741a4e1f","Param":"Larger than"},"Dst":{"Id":"db9feb34-d729-4559-9c10-bfed4f28e8f8","Param":"B"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"db9feb34-d729-4559-9c10-bfed4f28e8f8","Param":"Result"},"Dst":{"Id":"325014e7-2eed-4832-803c-208230237e40","Param":"Cull Pattern"},"Error":null}]}

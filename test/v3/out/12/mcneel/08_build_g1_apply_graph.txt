@@ -3,13 +3,13 @@
  "components": [
   {
    "Key": "pa",
-   "Selector": "Construct Point",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
    "X": 0,
    "Y": 0
   },
   {
    "Key": "pb",
-   "Selector": "Construct Point",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
    "X": 0,
    "Y": 70
   },
@@ -39,7 +39,7 @@
   },
   {
    "Key": "pm",
-   "Selector": "Construct Point",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
    "X": 0,
    "Y": 140
   },
@@ -133,4 +133,4 @@
  "solve": true
 }
 ---
-{"Placed":[{"Key":"ln","Id":"25fe8007-aad3-458e-a019-56a2fc6b9626","Kind":"Component"},{"Key":"sh","Id":"b9d0473a-33cf-4767-991f-f04ffe1bd789","Kind":"Component"},{"Key":"el","Id":"2537623d-5e36-4c38-8314-4fa4e03935f0","Kind":"Component"},{"Key":"sup","Id":"aebd00e1-3f62-4205-b660-ba256926a5bf","Kind":"Component"},{"Key":"fv","Id":"e807b22f-00a8-4eef-bf7e-fa59fa094469","Kind":"Component"},{"Key":"asm","Id":"3485392b-6849-48f1-aa97-c9a94b252f4d","Kind":"Component"},{"Key":"an","Id":"33bd0b78-0706-4829-8f2a-99ddfb3ce806","Kind":"Component"}],"PlaceErrors":[{"Key":"pa","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"pb","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"pm","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"ld","Error":"Component name \u0027 Loads (Karamba3D)\u0027 is ambiguous (8 matches): 3598d812-0d6c-4a7c-8d89-19d487862572 (Karamba3D/2.Load), 495f7fb4-13db-400b-bbe5-3da9bc7188ff (Karamba3D/2.Load), 92877431-5279-4438-8305-e7329cc090b4 (Karamba3D/2.Load), a425fcab-03b5-474b-a422-2646ed230dfc (Karamba3D/2.Load), b6038fdf-fd8e-4d79-b857-bb909169cd80 (Karamba3D/2.Load), c9b09174-e927-4a64-9e0f-b934faa71b97 (Karamba3D/2.Load), e68f8859-a7b6-42ee-aab0-1ba14b455f6a (Karamba3D/2.Load), f0b8c266-6d81-485c-b696-4980071ba603 (Karamba3D/2.Load). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":false,"Error":"src_key \u0027pa\u0027 did not match a placed object"},{"Index":1,"Ok":false,"Error":"src_key \u0027pb\u0027 did not match a placed object"},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":false,"Error":"src_key \u0027pa\u0027 did not match a placed object"},{"Index":5,"Ok":false,"Error":"src_key \u0027pb\u0027 did not match a placed object"},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":false,"Error":"src_key \u0027ld\u0027 did not match a placed object"},{"Index":9,"Ok":true,"Error":null}],"WiresOk":5}
+{"Placed":[{"Key":"pa","Id":"a8c27dd4-4d2f-4af1-af0f-1ddc3234670e","Kind":"Component"},{"Key":"pb","Id":"b2710765-069d-4015-80ca-ad49ad23a6ee","Kind":"Component"},{"Key":"ln","Id":"b69f41fa-97d5-4338-bb85-5a7ec73f6bdb","Kind":"Component"},{"Key":"sh","Id":"3fc2f3ee-338e-4f49-bc97-8cb4d5b4cbac","Kind":"Component"},{"Key":"el","Id":"0e4163af-4a1c-4ee9-a9cc-debbabb01c83","Kind":"Component"},{"Key":"sup","Id":"e8a9f379-3df9-438d-b2b0-3798f0e3fd5c","Kind":"Component"},{"Key":"pm","Id":"ff02c741-2d79-4030-bfc4-22dbf2825f54","Kind":"Component"},{"Key":"fv","Id":"cd3c0174-c8b5-4f9a-a21c-dc6b9892e922","Kind":"Component"},{"Key":"asm","Id":"19ca6f83-4be2-49da-97c3-f19dc4411ee0","Kind":"Component"},{"Key":"an","Id":"74a3afbb-8e4d-4354-b93d-a1ca39692f55","Kind":"Component"}],"PlaceErrors":[{"Key":"ld","Error":"Component name \u0027 Loads (Karamba3D)\u0027 is ambiguous (8 matches): 3598d812-0d6c-4a7c-8d89-19d487862572 (Karamba3D/2.Load), 495f7fb4-13db-400b-bbe5-3da9bc7188ff (Karamba3D/2.Load), 92877431-5279-4438-8305-e7329cc090b4 (Karamba3D/2.Load), a425fcab-03b5-474b-a422-2646ed230dfc (Karamba3D/2.Load), b6038fdf-fd8e-4d79-b857-bb909169cd80 (Karamba3D/2.Load), c9b09174-e927-4a64-9e0f-b934faa71b97 (Karamba3D/2.Load), e68f8859-a7b6-42ee-aab0-1ba14b455f6a (Karamba3D/2.Load), f0b8c266-6d81-485c-b696-4980071ba603 (Karamba3D/2.Load). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":false,"Error":"src_key \u0027ld\u0027 did not match a placed object"},{"Index":9,"Ok":true,"Error":null}],"WiresOk":9}

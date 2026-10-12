@@ -21,7 +21,7 @@
 ---
 {
   "success": true,
-  "graph_id": "MCPGraph_20261012074620672",
+  "graph_id": "MCPGraph_20261012075718214",
   "operation_count": 3,
   "created_count": 0,
   "created_component_count": 0,
@@ -33,22 +33,22 @@
   "rollback_on_error": true,
   "fail_on_verification_error": false,
   "verified": null,
-  "mutation_duration_ms": 73,
-  "solution_duration_ms": 4,
+  "mutation_duration_ms": 83,
+  "solution_duration_ms": 8,
   "verification_duration_ms": 0,
-  "duration_ms": 169,
+  "duration_ms": 214,
   "operations": [
     {
       "op": "connect",
-      "source_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
-      "target_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "source_id": "68c431cd-01b2-4a52-83d4-68117942098e",
+      "target_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
       "source_param": "Point",
       "target_param": "Pos|Ind"
     },
     {
       "op": "connect",
-      "source_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
-      "target_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+      "source_id": "d92cee96-1919-4070-90a8-3364d6eec2f2",
+      "target_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
       "source_param": "Vector",
       "target_param": "Force Vector"
     },
@@ -69,9 +69,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "f39d3cb4-e686-4333-9ca3-8b11144234a0",
+        "instance_id": "68c431cd-01b2-4a52-83d4-68117942098e",
         "alias": "pm",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -97,9 +97,9 @@
         "enabled": true
       },
       {
-        "instance_id": "1e985195-30c9-4012-b1f8-d3691f3fada7",
+        "instance_id": "67ebad5b-2a00-4a99-9970-cce9d0ed1718",
         "alias": "ld",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": " Loads (Karamba3D)",
         "nickname": "Loads",
@@ -125,9 +125,9 @@
         "enabled": true
       },
       {
-        "instance_id": "aba85109-abb5-4bdf-a3ee-cf686a12af91",
+        "instance_id": "d92cee96-1919-4070-90a8-3364d6eec2f2",
         "alias": "fv",
-        "graph_id": "MCPGraph_20261012074619981",
+        "graph_id": "MCPGraph_20261012075717395",
         "role": "",
         "name": "Vector XYZ",
         "nickname": "Vec",
@@ -171,12 +171,12 @@
     "preview_enabled_object_count": 7,
     "preview_disabled_object_count": 4,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 0,
-    "has_baked_rhino_objects": false,
-    "viewport_warning": "Grasshopper preview is live but not baked. Use gh_capture_preview to frame live Grasshopper preview bounds without baking."
+    "rhino_document_object_count": 13261,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012074620672",
+    "graph_id": "MCPGraph_20261012075718214",
     "object_count": 3,
     "controls": [],
     "adjustable_parameters": [],

@@ -1,0 +1,8 @@
+{
+ "code": "import Grasshopper, System\nfrom Grasshopper.Kernel import GH_DataMapping, GH_ParameterSide, GH_ParamAccess, GH_RuntimeMessageLevel\nfrom Grasshopper.Kernel.Special import GH_Group\nfrom Grasshopper.Kernel.Types import GH_Number, GH_Integer\ngd = Grasshopper.Instances.ActiveCanvas.Document\ndef o(i): return gd.FindObject(System.Guid(i), True)\ndef inp(i, nick): return [p for p in o(i).Params.Input if p.NickName == nick][0]\ndef flag(i, nick, f):\n    p = inp(i, nick)\n    p.DataMapping = GH_DataMapping.Flatten if f == 'f' else GH_DataMapping.Graft if f == 'g' else System.Enum.ToObject(GH_DataMapping, 0)\n    o(i).ExpireSolution(False)\ndef literal(i, nick, v):\n    p = inp(i, nick); p.PersistentData.Clear()\n    p.PersistentData.Append(GH_Integer(int(v)) if p.TypeName == 'Integer' else GH_Number(v)); p.ExpireSolution(False)\ndef expr(i, nick, e):\n    inp(i, nick).Expression = e; o(i).ExpireSolution(False)\nflag('f40d40b8-1768-4a56-943b-5d2ada1141db', 'Y', 'g')\nflag('20e92238-9452-49f4-ad45-6d6b9c507653', 'C', 'f')\ngd.NewSolution(True)\nprint('ok')"
+}
+---
+{
+  "success": true,
+  "output": "ok\nok\n"
+}

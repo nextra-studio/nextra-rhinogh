@@ -86,6 +86,9 @@ Colours (default palette): inputs `#DBABFF`, logic `#ABDBFF`, geometry `#FFD6AB`
 - Layout is automatic: new nodes are placed next to their upstream nodes; nodes added to an existing group re-layout that group in place and push neighbours aside. `layout:'tidy'` (whole) or `layout:'tidy:group:Name'`.
 - One solve after all lines; runtime errors of affected nodes (and anything newly broken downstream) are listed; `results:` shows what the sinks produced (counts, types, tree paths).
 
+## Files (.ghs)
+A `.ghs` is a whole definition in this grammar (full code, positions, every setting). `gh_edit {save:'x.ghs'}` writes it. `{open:'x.ghs'}` builds it on a new canvas, and every `##` section becomes its own group. To read a `.gh` as text: `{open:'x.gh', save:'x.ghs'}`. You may read or edit a `.ghs` like code. Rhino references are kept as object ids, which only work in the same .3dm.
+
 ## Examples
 ```
 ## Inputs #DBABFF

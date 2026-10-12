@@ -1,0 +1,39 @@
+# ghs 1 · Grasshopper definition as Nextra shorthand · open: gh_edit {open:'tidy_output.ghs'} · grammar: query {scope:'docs', filter:'shorthand'}
+# 30 objects, 6 groups · saved 2026-10-12 10:12 from tidy_output.gh
+
+## Inputs #DBABFF
+g1 = Number Slider {v=30, r=5..60, nick="W", pos={25,45}}
+g2 = Number Slider {v=12, r=3..40, nick="H", pos={25,86}}
+g3 = Number Slider {v=12, r=2..40, int, nick="U", pos={25,128}}
+g4 = Number Slider {v=6, r=2..20, int, nick="V", pos={25,171}}
+g5 = Number Slider {v=2, r=0.5..6, nick="Freq", pos={26,213}}
+g6 = Number Slider {v=0.6, r=0..2, nick="Amp", pos={25,254}}
+g7 = Number Slider {v=0.8, r=0.1..2, nick="Depth", pos={25,296}}
+g8 = Point {set={0,0,0}, pos={50,13}}
+## Base surface #ABDBFF
+g9 = XZ Plane (O=g8) {pos={364,138}}
+g10 = Rectangle @Curve (P=g9, X=g1, Y=g2) {pos={518,167}}
+g11 = Boundary Surfaces (E=g10.R) {pos={672,148}}
+## Panel grid #ABDBFF
+g12 = Divide Domain² (I=g11, U=g3, V=g4) {pos={881,186}}
+g13 = Isotrim (S=g11, D=g12) {pos={1036,174}}
+g14 = List Length (L=g13) {pos={1188,126}}
+g15 = Panel (=g14) {pos={1310,77}}
+g16 = Area (G=g13) {pos={1342,220}}
+## Wave scaling #FFD6AB
+g17 = Deconstruct @Vector (P=g16.C) {pos={1644,164}}
+g18 = Multiplication (A=g17.X, B=g5) {pos={1799,154}}
+g19 = Sine (x=g18) {pos={1952,154}}
+g20 = Multiplication (A=g19, B=g6) {pos={2105,164}}
+g21 = Absolute (x=g20) {pos={2258,164}}
+g22 = Addition @Maths (A=g21, B=0.2) {pos={2411,174}}
+g23 = Scale (G=g13, C=g16.C, F=g22) {pos={2567,154}}
+## Fins #FFD6AB
+g24 = Brep Edges (B=g23.G) {pos={2776,144}}
+g25 = Join Curves (C=g24.En) {pos={2939,134}}
+g26 = Unit Y (F=g7) {pos={2937,192}}
+g27 = Extrude (B=g25, D=g26) {pos={3095,144}}
+g28 = Cap Holes (B=g27) {pos={3248,144}}
+## Display #B2FAB4
+g29 = Colour Swatch {c=#5A8CB4, pos={3425,164}}
+g30 = Custom Preview (G=g28, M=g29) {pos={3637,159}}

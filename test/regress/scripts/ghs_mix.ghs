@@ -1,0 +1,35 @@
+## Inputs #DBABFF
+n = Number Slider {v=6, r=2..20, int} "Count"
+h = Number Slider {v=2.75, r=0..10, d=2} "Height"
+mat = Value List {items="Steel:\"Steel\"|Timber:\"Timber\"|Concrete:\"Concrete\"", sel=1} "Material"
+pts = Point {set=[{0,0,0},{10,0,0},{10,10,0}]}
+## Logic #ABDBFF
+py = Python 3 Script (P:list:Point3d=pts, n:item:int=n) -> (a, count) {code="""
+\"""Docstring "quoted"; the file must keep it.\"""
+a = [p for p in P] * n
+count = len(a)
+"""}
+cs = C# Script {code="""
+using System;
+using Grasshopper.Kernel;
+
+public class Script_Instance : GH_ScriptInstance
+{
+    private void RunScript(double h, string m, ref object a)
+    {
+        a = m + " @ " + h.ToString("0.00");
+    }
+}
+"""}
+cs (h=h, m=mat)
+ex = Expression {expr="x*2+1"}
+ex (x=h)
+## Logic #ABDBFF
+pl = Polyline (V=py.a, C=true)
+## #FFD6AB
+note = Scribble {text="Note: \"quoted\"\nsecond line", size=18}
+## Out #B2FAB4
+p1 = Panel (=cs.a) "Label"
+p2 = Panel {text="a \"quoted\" line\nand a second line"} "Text"
+p3 = Panel (=ex) "Expr"
+p4 = Panel (=py.count) "Count out"

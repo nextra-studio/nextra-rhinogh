@@ -20,7 +20,9 @@ namespace Nextra.Engine.Gh
             // document-level actions first
             if (a.Has("open"))
             {
-                r.Line(GhCore.OpenFile(a.Str("open"), a.Bool("solve", true), out _, a.Bool("reload", false)));
+                var op = a.Str("open");
+                if (GhsFile.Is(op)) { var rep = GhsFile.Open(Path.GetFullPath(op), a.Bool("solve", true), out _); r.Line(rep); if (rep.Contains("failed")) r.Ok = false; }
+                else r.Line(GhCore.OpenFile(op, a.Bool("solve", true), out _, a.Bool("reload", false)));
             }
             if (a.Bool("new", false))
             {
@@ -80,7 +82,7 @@ namespace Nextra.Engine.Gh
                 touched.AddRange(br.Touched);
                 if (perr.Count > 0) br.Errors.InsertRange(0, perr.Select(e => $"L{e.Line}: parse error: {e.Message}"));
                 if (layout != "none" && br.Created.Count > 0 && !layout.StartsWith("tidy"))
-                    Layout.Place(d, br.Created.Where(o => !(o is GH_Group)).ToList());
+                    Layout.Place(d, br.Created.Where(o => !(o is GH_Group) && !br.Placed.Contains(o)).ToList());
             }
 
             string scriptReport = null;
@@ -182,14 +184,18 @@ namespace Nextra.Engine.Gh
             if (hasBake) Bake(d, a, r);
             if (a.Has("save"))
             {
-                // archive write: no GH UI (SaveQuiet shows a modal box on a bad path)
                 var path = Path.GetFullPath(a.Str("save"));
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-                var arc = new GH_IO.Serialization.GH_Archive();
-                if (!arc.AppendObject(d, "Definition")) throw new NxError("could not serialise the GH document");
-                if (!arc.WriteToFile(path, true, false)) throw new NxError("save failed: " + path, "check the path is writable / not open elsewhere");
-                d.FilePath = path;
-                r.Line("saved " + path);
+                if (GhsFile.Is(path)) r.Line(GhsFile.Save(d, path));   // text copy; the canvas keeps its own file path
+                else
+                {
+                    // archive write: no GH UI (SaveQuiet shows a modal box on a bad path)
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+                    var arc = new GH_IO.Serialization.GH_Archive();
+                    if (!arc.AppendObject(d, "Definition")) throw new NxError("could not serialise the GH document");
+                    if (!arc.WriteToFile(path, true, false)) throw new NxError("save failed: " + path, "check the path is writable / not open elsewhere");
+                    d.FilePath = path;
+                    r.Line("saved " + path);
+                }
             }
             var hint = Memory.RecurringHint();
             if (hint != null) r.Line(hint);

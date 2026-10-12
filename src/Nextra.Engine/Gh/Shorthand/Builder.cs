@@ -20,6 +20,7 @@ namespace Nextra.Engine.Gh.Shorthand
         public readonly HashSet<IGH_DocumentObject> Touched = new HashSet<IGH_DocumentObject>();
         public int Wires, Deleted, Values, GroupsNew, LinesOk, Lines;
         public readonly HashSet<int> FailedLines = new HashSet<int>();
+        public readonly HashSet<IGH_DocumentObject> Placed = new HashSet<IGH_DocumentObject>();   // given pos={x,y}
     }
 
     /// Applies shorthand ops. Lines are applied independently: a failing line is reported with the
@@ -28,13 +29,16 @@ namespace Nextra.Engine.Gh.Shorthand
     public static class Builder
     {
         [ThreadStatic] public static List<string> LastNotes;
+        [ThreadStatic] static HashSet<IGH_DocumentObject> LastPlaced;
         static readonly CultureInfo C = CultureInfo.InvariantCulture;
         static readonly string[] Palette = { "#DBABFF", "#ABDBFF", "#FFD6AB", "#B2FAB4", "#FFABAB", "#E6E6A0", "#C8C8FF" };
 
-        public static BuildResult Apply(GH_Document d, List<Op> ops)
+        /// freshGroups (.ghs files): every `## Name` section is its own new group, even when names repeat.
+        public static BuildResult Apply(GH_Document d, List<Op> ops, bool freshGroups = false)
         {
             var res = new BuildResult { Lines = ops.Count(o => !(o is GroupOp)) };
             LastNotes = res.Notes;
+            LastPlaced = res.Placed;
             var locals = new Dictionary<string, IGH_DocumentObject>(StringComparer.Ordinal);
 
             void Fail(Op op, string msg) { res.Errors.Add($"L{op.Line} `{Fmt.Trunc(op.Raw.Split('\n')[0], 50)}`: {msg}"); res.FailedLines.Add(op.Line); }
@@ -152,8 +156,33 @@ namespace Nextra.Engine.Gh.Shorthand
             }
 
             // 5. groups
-            Groups(d, ops, locals, res, Resolve, Fail);
+            if (freshGroups) FreshGroups(d, ops, res, Resolve);
+            else Groups(d, ops, locals, res, Resolve, Fail);
             return res;
+        }
+
+        static void FreshGroups(GH_Document d, List<Op> ops, BuildResult res, Func<string, Op, IGH_DocumentObject> resolve)
+        {
+            var map = new Dictionary<GroupOp, GH_Group>();
+            int pal = 0;
+            foreach (var g in ops.OfType<GroupOp>().Where(g => !g.End))
+            {
+                var grp = new GH_Group { NickName = g.Name ?? "" };
+                grp.CreateAttributes();
+                grp.Colour = ParseColor(g.Color ?? Palette[pal++ % Palette.Length], 150);
+                d.AddObject(grp, false);
+                res.GroupsNew++;
+                res.Created.Add(grp);
+                map[g] = grp;
+            }
+            foreach (var n in ops.OfType<NodeOp>().Where(n => n.Section != null && map.ContainsKey(n.Section)))
+            {
+                IGH_DocumentObject o;
+                try { o = resolve(n.Id, n); } catch { continue; }
+                var grp = map[n.Section];
+                if (!grp.ObjectIDs.Contains(o.InstanceGuid)) grp.AddObject(o.InstanceGuid);
+            }
+            foreach (var g in map.Values) { g.ExpireCaches(); g.Attributes?.ExpireLayout(); }
         }
 
         // ---------- groups ----------
@@ -176,7 +205,9 @@ namespace Nextra.Engine.Gh.Shorthand
                 }
                 if (grp == null)
                 {
-                    var same = d.Objects.OfType<GH_Group>().Where(x => x.NickName == g.Name).ToList();
+                    // a section with a (stale) handle never merges into a group this call created: a pasted
+                    // definition may have several groups with the same name
+                    var same = d.Objects.OfType<GH_Group>().Where(x => x.NickName == g.Name && !(g.Handle != null && res.Created.Contains(x))).ToList();
                     if (same.Count == 1) grp = same[0];
                     else if (same.Count > 1) { fail(g, $"several groups named '{g.Name}'; use its handle: ## {string.Join(" | ## ", same.Select(x => GhCore.Handle(d, x)))}"); continue; }
                 }
@@ -277,6 +308,11 @@ namespace Nextra.Engine.Gh.Shorthand
                     LastNotes?.Add($"L{n.Line}: " + MenuIO.ClickAt(o, s));
                     return;
                 case "nick": o.NickName = s; return;
+                case "pos":   // canvas position (.ghs files): the node is not auto-placed
+                    if (v.Kind != VK.Point) throw new NxError("pos must be {x,y}");
+                    Layout.SetPivot(o, new PointF((float)v.Xyz[0], (float)v.Xyz[1]));   // moves hidden params too (Karamba)
+                    LastPlaced?.Add(o);
+                    return;
                 case "hide": if (o is IGH_PreviewObject po) po.Hidden = true; return;
                 case "show": if (o is IGH_PreviewObject po2) po2.Hidden = false; return;
                 case "lock": if (o is IGH_ActiveObject ao) ao.Locked = true; return;
@@ -537,6 +573,10 @@ namespace Nextra.Engine.Gh.Shorthand
                         if (!Handles.TryRh(id, out var g) || Rhino.RhinoDoc.ActiveDoc.Objects.FindId(g) == null) throw new NxError($"Rhino object {id} not found");
                         yield return Reference(p, g, id);
                     }
+                    break;
+                case VK.Ident when Guid.TryParse(v.Str, out var oid):   // Rhino object id (.ghs files)
+                    if (Rhino.RhinoDoc.ActiveDoc.Objects.FindId(oid) == null) throw new NxError($"Rhino object {oid} is not in this document", "open the .3dm the definition was saved with, or set the input again");
+                    yield return Reference(p, oid, Handles.Rh(oid));
                     break;
                 case VK.Ident when Handles.IsRhHandle(v.Str):
                     foreach (var x in Values(new Val { Kind = VK.Ref, Refs = new List<(string, string)> { (v.Str, null) } }, p)) yield return x;

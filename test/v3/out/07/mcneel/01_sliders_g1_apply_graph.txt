@@ -26,4 +26,4 @@
  "solve": false
 }
 ---
-{"Placed":[{"Key":"cnt","Id":"4e12bbb5-fa97-45f6-ad86-13dc6b3dcdc6","Kind":"Slider"},{"Key":"h","Id":"96cf842a-c0cf-402f-bcf3-48513cd0c15c","Kind":"Slider"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}
+{"Placed":[{"Key":"cnt","Id":"84053071-cb3c-4d05-aff0-8a1ce20c2de2","Kind":"Slider"},{"Key":"h","Id":"a983e236-651d-4c83-9499-24fd4ae71298","Kind":"Slider"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

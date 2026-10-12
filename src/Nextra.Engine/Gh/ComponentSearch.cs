@@ -55,6 +55,9 @@ namespace Nextra.Engine.Gh
             // a real name match beats a nickname-only match
             var byName = exact.Where(p => Norm(StripSuffix(p.Desc.Name)) == Norm(StripSuffix(name)) || Norm(p.Desc.Name) == Norm(name)).ToList();
             if (byName.Count > 0) exact = byName;
+            // the name exactly as written beats a normalised match (Domain² is not Domain)
+            var verbatim = exact.Where(p => p.Desc.Name.Trim().Equals(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (verbatim.Count > 0) exact = verbatim;
             var live = exact.Where(p => !p.Obsolete).ToList();
             if (live.Count > 0) exact = live;
             if (exact.Count == 1) return exact[0];

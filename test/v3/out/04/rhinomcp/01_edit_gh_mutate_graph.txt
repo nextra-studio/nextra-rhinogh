@@ -35,7 +35,7 @@
 ---
 {
   "success": true,
-  "graph_id": "MCPGraph_20261012055349363",
+  "graph_id": "MCPGraph_20261012075654785",
   "operation_count": 6,
   "created_count": 1,
   "created_component_count": 1,
@@ -47,42 +47,42 @@
   "rollback_on_error": true,
   "fail_on_verification_error": false,
   "verified": null,
-  "mutation_duration_ms": 92,
-  "solution_duration_ms": 7,
+  "mutation_duration_ms": 7,
+  "solution_duration_ms": 0,
   "verification_duration_ms": 0,
-  "duration_ms": 205,
+  "duration_ms": 15,
   "operations": [
     {
       "op": "delete",
-      "target_id": "d8d76abb-f237-429d-92a8-8e11f2511f5b",
+      "target_id": "9b9b8174-a09f-4171-a003-17b707f87617",
       "target": "Rectangle",
       "rollback": "limited"
     },
     {
       "op": "create",
       "alias": "cir",
-      "instance_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "instance_id": "f2201788-8dfa-452a-bce1-ac0edc2054ee",
       "name": "Circle",
       "nickname": "Cir"
     },
     {
       "op": "connect",
-      "source_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
-      "target_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "source_id": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
+      "target_id": "f2201788-8dfa-452a-bce1-ac0edc2054ee",
       "source_param": "Plane",
       "target_param": "Plane"
     },
     {
       "op": "connect",
-      "source_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
-      "target_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+      "source_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
+      "target_id": "f2201788-8dfa-452a-bce1-ac0edc2054ee",
       "source_param": "Number Slider",
       "target_param": "Radius"
     },
     {
       "op": "connect",
-      "source_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
-      "target_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+      "source_id": "f2201788-8dfa-452a-bce1-ac0edc2054ee",
+      "target_id": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
       "source_param": "Circle",
       "target_param": "Geometry"
     },
@@ -103,9 +103,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "54fcfffb-b21d-4c02-9897-d8d40f2a95d8",
+        "instance_id": "f2201788-8dfa-452a-bce1-ac0edc2054ee",
         "alias": "cir",
-        "graph_id": "MCPGraph_20261012055349363",
+        "graph_id": "MCPGraph_20261012075654785",
         "role": "",
         "name": "Circle",
         "nickname": "Cir",
@@ -131,9 +131,9 @@
         "enabled": true
       },
       {
-        "instance_id": "b877ac5d-29ad-4c70-a95e-07d82e8d0881",
+        "instance_id": "7a3ba223-aaa1-416f-a50b-6f1a01054d2f",
         "alias": "pl",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "XY Plane",
         "nickname": "XY",
@@ -159,9 +159,9 @@
         "enabled": true
       },
       {
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "alias": "w",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Number Slider",
         "nickname": "Width",
@@ -192,9 +192,9 @@
         "expression": null
       },
       {
-        "instance_id": "394786a8-896d-4572-b1c0-5f2168bb33fc",
+        "instance_id": "9ced45b0-a2b9-40a6-9170-44292f8ba350",
         "alias": "rot",
-        "graph_id": "MCPGraph_20261012055348256",
+        "graph_id": "MCPGraph_20261012075654405",
         "role": "",
         "name": "Rotate",
         "nickname": "Rotate",
@@ -238,19 +238,19 @@
     "preview_enabled_object_count": 10,
     "preview_disabled_object_count": 0,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 4736,
+    "rhino_document_object_count": 13006,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012055349363",
+    "graph_id": "MCPGraph_20261012075654785",
     "object_count": 4,
     "controls": [
       {
         "alias": "w",
         "name": "Number Slider",
         "nickname": "Width",
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "enabled": true,
         "special_type": "number_slider",
         "value": 20000.0,
@@ -265,7 +265,7 @@
         "alias": "w",
         "name": "Number Slider",
         "nickname": "Width",
-        "instance_id": "54a7be16-2dde-4b72-9e03-56cb60e60531",
+        "instance_id": "404b4e85-a3c5-47d0-973b-1ba86ec00b68",
         "enabled": true,
         "special_type": "number_slider",
         "value": 20000.0,

@@ -24,7 +24,1167 @@
    "n": 1,
    "tool": "memory",
    "out": 4,
-   "in": 175,
+   "in": 202,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "01",
+   "task": "build",
+   "n": 1,
+   "tool": "run",
+   "out": 523,
+   "in": 102,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "01",
+   "task": "look",
+   "n": 2,
+   "tool": "view",
+   "out": 3,
+   "in": 716,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "01",
+   "task": "build",
+   "n": 1,
+   "tool": "run_python",
+   "out": 564,
+   "in": 29,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "01",
+   "task": "look",
+   "n": 2,
+   "tool": "get_viewport_image",
+   "out": 19,
+   "in": 766,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "01",
+   "task": "build",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 567,
+   "in": 40,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "01",
+   "task": "look",
+   "n": 2,
+   "tool": "capture_viewport",
+   "out": 19,
+   "in": 642,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "02",
+   "task": "add_storey",
+   "n": 1,
+   "tool": "run",
+   "out": 15,
+   "in": 111,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "02",
+   "task": "move",
+   "n": 2,
+   "tool": "run",
+   "out": 28,
+   "in": 84,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "02",
+   "task": "undo",
+   "n": 3,
+   "tool": "undo",
+   "out": 5,
+   "in": 13,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "02",
+   "task": "add_storey",
+   "n": 1,
+   "tool": "run_python",
+   "out": 568,
+   "in": 29,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "02",
+   "task": "move",
+   "n": 2,
+   "tool": "run_python",
+   "out": 71,
+   "in": 9,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "02",
+   "task": "undo",
+   "n": 3,
+   "tool": "run_command",
+   "out": 5,
+   "in": 4,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "02",
+   "task": "add_storey",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 571,
+   "in": 40,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "02",
+   "task": "move",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 74,
+   "in": 16,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "02",
+   "task": "undo",
+   "n": 3,
+   "tool": "undo",
+   "out": 3,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "03",
+   "task": "docs",
+   "n": 1,
+   "tool": "query",
+   "out": 10,
+   "in": 1547,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "03",
+   "task": "build",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 152,
+   "in": 127,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "04",
+   "task": "edit",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 18,
+   "in": 66,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "build",
+   "n": 1,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 326,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 329,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "build",
+   "n": 4,
+   "tool": "g1_apply_graph",
+   "out": 513,
+   "in": 602,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "1_recover",
+   "n": 5,
+   "tool": "g1_apply_graph",
+   "out": 58,
+   "in": 51,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "1_recover",
+   "n": 6,
+   "tool": "g1_connect_many",
+   "out": 161,
+   "in": 225,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "fix",
+   "n": 7,
+   "tool": "run_python",
+   "out": 511,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "03",
+   "task": "verify",
+   "n": 8,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 2938,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "04",
+   "task": "edit",
+   "n": 1,
+   "tool": "g1_apply_graph",
+   "out": 36,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "04",
+   "task": "edit",
+   "n": 2,
+   "tool": "g1_connect_many",
+   "out": 68,
+   "in": 96,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "04",
+   "task": "edit",
+   "n": 3,
+   "tool": "run_python",
+   "out": 310,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 354,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 330,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "build",
+   "n": 4,
+   "tool": "gh_build_graph",
+   "out": 621,
+   "in": 6079,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "fix",
+   "n": 5,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 270,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "03",
+   "task": "verify",
+   "n": 6,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 12844,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "04",
+   "task": "edit",
+   "n": 1,
+   "tool": "gh_mutate_graph",
+   "out": 99,
+   "in": 1646,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "04",
+   "task": "edit",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 264,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "05",
+   "task": "slab",
+   "n": 1,
+   "tool": "run",
+   "out": 69,
+   "in": 34,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "05",
+   "task": "build",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 152,
+   "in": 81,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "05",
+   "task": "bake",
+   "n": 3,
+   "tool": "gh_edit",
+   "out": 8,
+   "in": 37,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "slab",
+   "n": 1,
+   "tool": "run_python",
+   "out": 87,
+   "in": 8,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "build",
+   "n": 2,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "build",
+   "n": 3,
+   "tool": "g1_apply_graph",
+   "out": 509,
+   "in": 527,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "1_recover",
+   "n": 4,
+   "tool": "g1_apply_graph",
+   "out": 36,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "1_recover",
+   "n": 5,
+   "tool": "g1_connect_many",
+   "out": 99,
+   "in": 139,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "fix",
+   "n": 6,
+   "tool": "run_python",
+   "out": 711,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "verify",
+   "n": 7,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 3061,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "05",
+   "task": "bake",
+   "n": 8,
+   "tool": "run_python",
+   "out": 226,
+   "in": 10,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "slab",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 90,
+   "in": 12,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "build",
+   "n": 2,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "build",
+   "n": 3,
+   "tool": "gh_build_graph",
+   "out": 586,
+   "in": 6598,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "fix",
+   "n": 4,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 473,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "verify",
+   "n": 5,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 13388,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "05",
+   "task": "bake",
+   "n": 6,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 226,
+   "in": 19,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "06",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 107,
+   "in": 55,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "06",
+   "task": "break",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 39,
+   "in": 103,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "06",
+   "task": "fix",
+   "n": 3,
+   "tool": "gh_edit",
+   "out": 22,
+   "in": 58,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "06",
+   "task": "sliders",
+   "n": 1,
+   "tool": "g1_apply_graph",
+   "out": 66,
+   "in": 50,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "06",
+   "task": "build",
+   "n": 2,
+   "tool": "run_python",
+   "out": 672,
+   "in": 34,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "06",
+   "task": "break",
+   "n": 3,
+   "tool": "run_python",
+   "out": 657,
+   "in": 46,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "06",
+   "task": "fix",
+   "n": 4,
+   "tool": "run_python",
+   "out": 655,
+   "in": 25,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "06",
+   "task": "sliders",
+   "n": 1,
+   "tool": "gh_build_graph",
+   "out": 67,
+   "in": 1275,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "06",
+   "task": "build",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 672,
+   "in": 49,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "06",
+   "task": "break",
+   "n": 3,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 657,
+   "in": 62,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "06",
+   "task": "fix",
+   "n": 4,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 655,
+   "in": 29,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "07",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 185,
+   "in": 64,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "07",
+   "task": "sliders",
+   "n": 1,
+   "tool": "g1_apply_graph",
+   "out": 66,
+   "in": 49,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "07",
+   "task": "build",
+   "n": 2,
+   "tool": "run_python",
+   "out": 758,
+   "in": 82,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "07",
+   "task": "type_hints",
+   "n": 3,
+   "tool": "run_python",
+   "out": 734,
+   "in": 19,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "07",
+   "task": "sliders",
+   "n": 1,
+   "tool": "gh_build_graph",
+   "out": 67,
+   "in": 1274,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "07",
+   "task": "build",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 758,
+   "in": 119,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "07",
+   "task": "type_hints",
+   "n": 3,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 734,
+   "in": 26,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "08",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 47,
+   "in": 58,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "08",
+   "task": "click",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 8,
+   "in": 59,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "08",
+   "task": "build",
+   "n": 1,
+   "tool": "run_python",
+   "out": 1686,
+   "in": 26,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "08",
+   "task": "click",
+   "n": 2,
+   "tool": "run_python",
+   "out": 296,
+   "in": 16,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "08",
+   "task": "build",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 1686,
+   "in": 42,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "08",
+   "task": "click",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 296,
+   "in": 20,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "09",
+   "task": "save",
+   "n": 1,
+   "tool": "memory",
+   "out": 53,
+   "in": 9,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "09",
+   "task": "list",
+   "n": 2,
+   "tool": "query",
+   "out": 9,
+   "in": 59,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "09",
+   "task": "save",
+   "n": 1,
+   "tool": "run_python",
+   "out": 134,
+   "in": 8,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "09",
+   "task": "save",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 138,
+   "in": 12,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "10",
+   "task": "run_file",
+   "n": 1,
+   "tool": "run",
+   "out": 32,
+   "in": 116,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "10",
+   "task": "run_file",
+   "n": 1,
+   "tool": "run_python",
+   "out": 86,
+   "in": 39,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "10",
+   "task": "run_file",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 89,
+   "in": 40,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 143,
+   "in": 561,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 272,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 333,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 4,
+   "tool": "g1_search_components",
+   "out": 11,
+   "in": 108,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 5,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 346,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 6,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 279,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "search",
+   "n": 7,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 318,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "build",
+   "n": 8,
+   "tool": "g1_apply_graph",
+   "out": 384,
+   "in": 448,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "1_recover",
+   "n": 9,
+   "tool": "g1_apply_graph",
+   "out": 36,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "1_recover",
+   "n": 10,
+   "tool": "g1_connect_many",
+   "out": 39,
+   "in": 50,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "fix",
+   "n": 11,
+   "tool": "run_python",
+   "out": 909,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "late",
+   "n": 12,
+   "tool": "g1_connect_many",
+   "out": 71,
+   "in": 96,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "12",
+   "task": "verify",
+   "n": 13,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 4249,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 331,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 481,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 4,
+   "tool": "gh_search_components",
+   "out": 11,
+   "in": 141,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 5,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 397,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 6,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 352,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "search",
+   "n": 7,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 393,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "build",
+   "n": 8,
+   "tool": "gh_build_graph",
+   "out": 442,
+   "in": 4871,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "fix",
+   "n": 9,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 667,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "late",
+   "n": 10,
+   "tool": "gh_mutate_graph",
+   "out": 57,
+   "in": 1105,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "12",
+   "task": "verify",
+   "n": 11,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 17668,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "13",
+   "task": "build",
+   "n": 1,
+   "tool": "run",
+   "out": 637,
+   "in": 211,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "13",
+   "task": "look",
+   "n": 2,
+   "tool": "view",
+   "out": 3,
+   "in": 648,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "13",
+   "task": "build",
+   "n": 1,
+   "tool": "run_python",
+   "out": 685,
+   "in": 51,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "13",
+   "task": "look",
+   "n": 2,
+   "tool": "get_viewport_image",
+   "out": 19,
+   "in": 771,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "13",
+   "task": "build",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 688,
+   "in": 64,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "13",
+   "task": "look",
+   "n": 2,
+   "tool": "capture_viewport",
+   "out": 19,
+   "in": 642,
    "ok": true
   },
   {
@@ -34,7 +1194,7 @@
    "n": 1,
    "tool": "run",
    "out": 428,
-   "in": 150,
+   "in": 156,
    "ok": true
   },
   {
@@ -44,7 +1204,7 @@
    "n": 2,
    "tool": "run",
    "out": 896,
-   "in": 189,
+   "in": 196,
    "ok": true
   },
   {
@@ -54,7 +1214,7 @@
    "n": 3,
    "tool": "gh_edit",
    "out": 318,
-   "in": 662,
+   "in": 256,
    "ok": true
   },
   {
@@ -64,7 +1224,7 @@
    "n": 1,
    "tool": "run_python",
    "out": 476,
-   "in": 48,
+   "in": 58,
    "ok": true
   },
   {
@@ -74,7 +1234,7 @@
    "n": 2,
    "tool": "run_python",
    "out": 1113,
-   "in": 73,
+   "in": 83,
    "ok": true
   },
   {
@@ -153,16 +1313,6 @@
    "task": "search",
    "n": 10,
    "tool": "g1_search_components",
-   "out": 7,
-   "in": 279,
-   "ok": true
-  },
-  {
-   "system": "mcneel",
-   "scenario": "14",
-   "task": "search",
-   "n": 11,
-   "tool": "g1_search_components",
    "out": 10,
    "in": 347,
    "ok": true
@@ -171,7 +1321,7 @@
    "system": "mcneel",
    "scenario": "14",
    "task": "search",
-   "n": 12,
+   "n": 11,
    "tool": "g1_search_components",
    "out": 7,
    "in": 244,
@@ -181,7 +1331,7 @@
    "system": "mcneel",
    "scenario": "14",
    "task": "search",
-   "n": 13,
+   "n": 12,
    "tool": "g1_search_components",
    "out": 8,
    "in": 197,
@@ -191,7 +1341,7 @@
    "system": "mcneel",
    "scenario": "14",
    "task": "search",
-   "n": 14,
+   "n": 13,
    "tool": "g1_search_components",
    "out": 8,
    "in": 318,
@@ -201,10 +1351,20 @@
    "system": "mcneel",
    "scenario": "14",
    "task": "build",
+   "n": 14,
+   "tool": "g1_apply_graph",
+   "out": 745,
+   "in": 695,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "14",
+   "task": "1_recover",
    "n": 15,
    "tool": "g1_apply_graph",
-   "out": 741,
-   "in": 833,
+   "out": 36,
+   "in": 32,
    "ok": true
   },
   {
@@ -212,28 +1372,18 @@
    "scenario": "14",
    "task": "1_recover",
    "n": 16,
-   "tool": "g1_apply_graph",
-   "out": 57,
-   "in": 51,
-   "ok": true
-  },
-  {
-   "system": "mcneel",
-   "scenario": "14",
-   "task": "1_recover",
-   "n": 17,
    "tool": "g1_connect_many",
-   "out": 103,
-   "in": 139,
+   "out": 70,
+   "in": 96,
    "ok": true
   },
   {
    "system": "mcneel",
    "scenario": "14",
    "task": "fix",
-   "n": 18,
+   "n": 17,
    "tool": "run_python",
-   "out": 1595,
+   "out": 1557,
    "in": 7,
    "ok": true
   },
@@ -241,10 +1391,10 @@
    "system": "mcneel",
    "scenario": "14",
    "task": "verify",
-   "n": 19,
+   "n": 18,
    "tool": "g1_get_canvas_graph",
    "out": 10,
-   "in": 10920,
+   "in": 7392,
    "ok": true
   },
   {
@@ -394,7 +1544,7 @@
    "n": 15,
    "tool": "gh_build_graph",
    "out": 849,
-   "in": 8610,
+   "in": 8611,
    "ok": true
   },
   {
@@ -403,7 +1553,7 @@
    "task": "fix",
    "n": 16,
    "tool": "execute_rhinoscript_python_code",
-   "out": 1268,
+   "out": 1230,
    "in": 11,
    "ok": true
   },
@@ -414,7 +1564,87 @@
    "n": 17,
    "tool": "gh_get_graph",
    "out": 20,
-   "in": 33020,
+   "in": 30137,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "15",
+   "task": "tree",
+   "n": 1,
+   "tool": "run",
+   "out": 199,
+   "in": 38,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "15",
+   "task": "wire",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 15,
+   "in": 61,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "15",
+   "task": "tree",
+   "n": 1,
+   "tool": "run_python",
+   "out": 208,
+   "in": 18,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "15",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 265,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "15",
+   "task": "wire",
+   "n": 3,
+   "tool": "g1_apply_graph",
+   "out": 36,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "15",
+   "task": "wire",
+   "n": 4,
+   "tool": "g1_connect_many",
+   "out": 37,
+   "in": 51,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "15",
+   "task": "tree",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 208,
+   "in": 37,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "15",
+   "task": "wire",
+   "n": 2,
+   "tool": "gh_mutate_graph",
+   "out": 54,
+   "in": 893,
    "ok": true
   },
   {
@@ -464,7 +1694,7 @@
    "n": 1,
    "tool": "gh_get_canvas_state",
    "out": 0,
-   "in": 11584,
+   "in": 11585,
    "ok": true
   },
   {
@@ -486,9 +1716,896 @@
    "out": 6,
    "in": 1690,
    "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "17",
+   "task": "build",
+   "n": 1,
+   "tool": "run",
+   "out": 487,
+   "in": 263,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "17",
+   "task": "inspect",
+   "n": 2,
+   "tool": "query",
+   "out": 11,
+   "in": 59,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "17",
+   "task": "undo",
+   "n": 3,
+   "tool": "undo",
+   "out": 5,
+   "in": 12,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "17",
+   "task": "raise_crown",
+   "n": 4,
+   "tool": "run",
+   "out": 10,
+   "in": 272,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "17",
+   "task": "build",
+   "n": 1,
+   "tool": "run_python",
+   "out": 530,
+   "in": 46,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "17",
+   "task": "inspect",
+   "n": 2,
+   "tool": "run_python",
+   "out": 91,
+   "in": 40,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "17",
+   "task": "raise_crown",
+   "n": 3,
+   "tool": "run_python",
+   "out": 538,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "17",
+   "task": "build",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 533,
+   "in": 60,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "17",
+   "task": "inspect",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 94,
+   "in": 139,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "17",
+   "task": "raise_crown",
+   "n": 3,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 541,
+   "in": 41,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "18",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 159,
+   "in": 167,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "18",
+   "task": "swap_graft",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 7,
+   "in": 54,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "build",
+   "n": 1,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 257,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 434,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "search",
+   "n": 4,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 302,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "build",
+   "n": 5,
+   "tool": "g1_apply_graph",
+   "out": 616,
+   "in": 665,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "1_recover",
+   "n": 6,
+   "tool": "g1_apply_graph",
+   "out": 57,
+   "in": 51,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "1_recover",
+   "n": 7,
+   "tool": "g1_connect_many",
+   "out": 192,
+   "in": 270,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "fix",
+   "n": 8,
+   "tool": "run_python",
+   "out": 550,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "verify",
+   "n": 9,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 3591,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "18",
+   "task": "swap_graft",
+   "n": 10,
+   "tool": "run_python",
+   "out": 270,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 301,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 442,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "search",
+   "n": 4,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 376,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "build",
+   "n": 5,
+   "tool": "gh_build_graph",
+   "out": 704,
+   "in": 7283,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "fix",
+   "n": 6,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 269,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "verify",
+   "n": 7,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 15940,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "18",
+   "task": "swap_graft",
+   "n": 8,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 269,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "19",
+   "task": "overview",
+   "n": 1,
+   "tool": "query",
+   "out": 0,
+   "in": 85,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "19",
+   "task": "longest_beam",
+   "n": 2,
+   "tool": "run",
+   "out": 30,
+   "in": 13,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "19",
+   "task": "region_count",
+   "n": 3,
+   "tool": "query",
+   "out": 18,
+   "in": 55,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "19",
+   "task": "region_image",
+   "n": 4,
+   "tool": "view",
+   "out": 14,
+   "in": 770,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "19",
+   "task": "overview",
+   "n": 1,
+   "tool": "run_python",
+   "out": 65,
+   "in": 52,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "19",
+   "task": "longest_beam",
+   "n": 2,
+   "tool": "run_python",
+   "out": 91,
+   "in": 14,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "19",
+   "task": "region_count",
+   "n": 3,
+   "tool": "run_python",
+   "out": 76,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "19",
+   "task": "region_image",
+   "n": 4,
+   "tool": "zoom_to_layer",
+   "out": 5,
+   "in": 10,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "19",
+   "task": "region_image",
+   "n": 5,
+   "tool": "get_viewport_image",
+   "out": 17,
+   "in": 734,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "19",
+   "task": "overview",
+   "n": 1,
+   "tool": "get_document_summary",
+   "out": 0,
+   "in": 539,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "19",
+   "task": "longest_beam",
+   "n": 2,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 94,
+   "in": 20,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "19",
+   "task": "region_count",
+   "n": 3,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 79,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "19",
+   "task": "region_image",
+   "n": 4,
+   "tool": "capture_viewport",
+   "out": 17,
+   "in": 642,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "20",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 275,
+   "in": 221,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "20",
+   "task": "thicker",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 5,
+   "in": 43,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "build",
+   "n": 1,
+   "tool": "g1_clear_canvas",
+   "out": 4,
+   "in": 3,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 272,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 333,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 4,
+   "tool": "g1_search_components",
+   "out": 11,
+   "in": 95,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 5,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 334,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 6,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 434,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 7,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 197,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 8,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 326,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "search",
+   "n": 9,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 318,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "build",
+   "n": 10,
+   "tool": "g1_apply_graph",
+   "out": 786,
+   "in": 690,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "1_recover",
+   "n": 11,
+   "tool": "g1_apply_graph",
+   "out": 36,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "1_recover",
+   "n": 12,
+   "tool": "g1_connect_many",
+   "out": 99,
+   "in": 139,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "fix",
+   "n": 13,
+   "tool": "run_python",
+   "out": 1124,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "late",
+   "n": 14,
+   "tool": "g1_connect_many",
+   "out": 38,
+   "in": 54,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "verify",
+   "n": 15,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 6274,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "20",
+   "task": "thicker",
+   "n": 16,
+   "tool": "run_python",
+   "out": 138,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "build",
+   "n": 1,
+   "tool": "gh_clear_canvas",
+   "out": 0,
+   "in": 32,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 331,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 481,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 4,
+   "tool": "gh_search_components",
+   "out": 11,
+   "in": 128,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 5,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 387,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 6,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 442,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 7,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 352,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 8,
+   "tool": "gh_search_components",
+   "out": 10,
+   "in": 421,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 9,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 247,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 10,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 354,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "search",
+   "n": 11,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 393,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "build",
+   "n": 12,
+   "tool": "gh_build_graph",
+   "out": 858,
+   "in": 9717,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "fix",
+   "n": 13,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 803,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "late",
+   "n": 14,
+   "tool": "gh_mutate_graph",
+   "out": 29,
+   "in": 1025,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "verify",
+   "n": 15,
+   "tool": "gh_get_graph",
+   "out": 20,
+   "in": 25380,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "20",
+   "task": "thicker",
+   "n": 16,
+   "tool": "gh_set_parameter_value",
+   "out": 10,
+   "in": 46,
+   "ok": true
   }
  ],
  "checks": {
+  "01/nextra": {
+   "model": "{'Slabs': 3, 'Beams': 51, 'Columns': 36}"
+  },
+  "01/mcneel": {
+   "model": "{'Slabs': 3, 'Beams': 51, 'Columns': 36}"
+  },
+  "01/rhinomcp": {
+   "model": "{'Slabs': 3, 'Beams': 51, 'Columns': 36}"
+  },
+  "02/nextra": {
+   "after_move": "['1 object(s); units millimeters', 'r12739 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(12000,6000,13875)']",
+   "after_undo": "['1 object(s); units millimeters', 'r12739 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(9000,6000,13875)']",
+   "model": "{'Columns': 48, 'Beams': 68, 'Slabs': 4}"
+  },
+  "02/mcneel": {
+   "after_move": "['1 object(s); units millimeters', 'r12830 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(12000,6000,13875)']",
+   "after_undo": "['1 object(s); units millimeters', 'r12830 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(12000,6000,13875)']",
+   "model": "{'Columns': 48, 'Beams': 68, 'Slabs': 4}"
+  },
+  "02/rhinomcp": {
+   "after_move": "['1 object(s); units millimeters', 'r12950 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(12000,6000,13875)']",
+   "after_undo": "['1 object(s); units millimeters', 'r12950 polysurface solid [Slabs] \"S_L4\" 18600x12600x250 planar n+z @(12000,6000,13875)']",
+   "model": "{'Columns': 48, 'Beams': 68, 'Slabs': 4}"
+  },
+  "03/nextra": {
+   "gh": "groups 4 errors 0 dangling 0 {'Loft': 1, 'Cap Holes': 1}",
+   "case04": {
+    "gh": "groups 4 errors 0 dangling 0 {'Cap Holes': 1, 'Circle': 12}"
+   }
+  },
+  "03/mcneel": {
+   "gh": "groups 4 errors 0 dangling 0 {'Loft': 1, 'Cap Holes': 1}",
+   "case04": {
+    "gh": "groups 4 errors 0 dangling 0 {'Cap Holes': 1, 'Circle': 12}"
+   }
+  },
+  "03/rhinomcp": {
+   "gh": "groups 4 errors 0 dangling 0 {'Loft': 1, 'Cap Holes': 1}",
+   "case04": {
+    "gh": "groups 4 errors 0 dangling 0 {'Cap Holes': 1, 'Circle': 12}"
+   }
+  },
+  "05/nextra": {
+   "gh": "groups 2 errors 0 dangling 0 {'Extrude': 24}",
+   "model": "{'Fins': 24, 'Slab': 1}"
+  },
+  "05/mcneel": {
+   "gh": "groups 2 errors 0 dangling 0 {'Extrude': 24}",
+   "model": "{'Fins': 24, 'Slab': 1}"
+  },
+  "05/rhinomcp": {
+   "gh": "groups 2 errors 0 dangling 0 {'Extrude': 24}",
+   "model": "{'Fins': 24, 'Slab': 1}"
+  },
+  "06/nextra": {
+   "gh": "groups 1 errors 0 dangling 0 {'Python 3 Script': 10}"
+  },
+  "06/mcneel": {
+   "gh": "groups 0 errors 0 dangling 0 {'Python 3 Script': 10}"
+  },
+  "06/rhinomcp": {
+   "gh": "groups 0 errors 0 dangling 0 {'Python 3 Script': 10}"
+  },
+  "07/nextra": {
+   "gh": "groups 1 errors 0 dangling 0 {'C# Script': 8}"
+  },
+  "07/mcneel": {
+   "gh": "groups 0 errors 0 dangling 0 {'C# Script': 8}"
+  },
+  "07/rhinomcp": {
+   "gh": "groups 0 errors 0 dangling 0 {'C# Script': 8}"
+  },
+  "08/nextra": {
+   "choice": "VAL ['Timber']"
+  },
+  "08/mcneel": {
+   "choice": "VAL ['Timber']"
+  },
+  "08/rhinomcp": {
+   "choice": "VAL ['Timber']"
+  },
+  "09/nextra": {
+   "saved": true
+  },
+  "09/mcneel": {
+   "saved": true
+  },
+  "09/rhinomcp": {
+   "saved": true
+  },
+  "10/nextra": {
+   "model": "{'Slabs': 2, 'Beams': 34, 'Columns': 24}"
+  },
+  "10/mcneel": {
+   "model": "{'Slabs': 2, 'Beams': 34, 'Columns': 24}"
+  },
+  "10/rhinomcp": {
+   "model": "{'Slabs': 2, 'Beams': 34, 'Columns': 24}"
+  },
+  "12/nextra": {
+   "max_disp_cm": "VAL ['47.037724']"
+  },
+  "12/mcneel": {
+   "max_disp_cm": "VAL ['47.037724']"
+  },
+  "12/rhinomcp": {
+   "max_disp_cm": "VAL ['47.037724']"
+  },
+  "13/nextra": {
+   "model": "{'MBS::Podium': 1, 'MBS::Skypark': 1, 'MBS::Towers': 6}"
+  },
+  "13/mcneel": {
+   "model": "{'MBS::Podium': 1, 'MBS::Skypark': 1, 'MBS::Towers': 6}"
+  },
+  "13/rhinomcp": {
+   "model": "{'MBS::Podium': 1, 'MBS::Skypark': 1, 'MBS::Towers': 6}"
+  },
   "14/nextra": {
    "mass_kg": "VAL ['99582.500668']",
    "max_disp_cm": "VAL ['0.096729']",
@@ -504,17 +2621,74 @@
    "max_disp_cm": "VAL ['0.096729']",
    "model": "{'Shells': 6, 'Lines': 14, 'ARCH::Slabs': 2, 'ARCH::Beams': 4, 'ARCH::Columns': 6, 'ARCH::Walls': 4}"
   },
+  "15/nextra": {
+   "gh": "groups 1 errors 0 dangling 0 {'Mass Addition': 7}"
+  },
+  "15/mcneel": {
+   "gh": "groups 0 errors 0 dangling 0 {'Mass Addition': 7}"
+  },
+  "15/rhinomcp": {
+   "gh": "groups 0 errors 0 dangling 0 {'Mass Addition': 7}"
+  },
   "16/nextra": {
-   "gh": "groups 6 errors 0 {'Cap Holes': 72}",
+   "gh": "groups 6 errors 0 dangling 0 {'Cap Holes': 72}",
    "overlaps": "OVERLAPS 0"
   },
   "16/mcneel": {
-   "gh": "groups 6 errors 0 {'Cap Holes': 72}",
+   "gh": "groups 6 errors 0 dangling 0 {'Cap Holes': 72}",
    "overlaps": "OVERLAPS 0"
   },
   "16/rhinomcp": {
-   "gh": "groups 6 errors 0 {'Cap Holes': 72}",
+   "gh": "groups 6 errors 0 dangling 0 {'Cap Holes': 72}",
    "overlaps": "OVERLAPS 0"
+  },
+  "17/nextra": {
+   "model": "{'Canopy Columns': 8, 'Canopy': 1}",
+   "crown": "8650 n 1\r\nrhino: no changes"
+  },
+  "17/mcneel": {
+   "model": "{'Canopy Columns': 8, 'Canopy': 1}",
+   "crown": "8650 n 1\r\nrhino: no changes"
+  },
+  "17/rhinomcp": {
+   "model": "{'Canopy Columns': 8, 'Canopy': 1}",
+   "crown": "8650 n 1\r\nrhino: no changes"
+  },
+  "18/nextra": {
+   "before": "groups 3 errors 0 dangling 0 {'Interpolate': 48, 'Loft': 1}",
+   "after": "MAP Graft None branches [6, 10]"
+  },
+  "18/mcneel": {
+   "before": "groups 3 errors 0 dangling 0 {'Interpolate': 48, 'Loft': 1}",
+   "after": "MAP Graft None branches [6, 10]"
+  },
+  "18/rhinomcp": {
+   "before": "groups 3 errors 0 dangling 0 {'Interpolate': 48, 'Loft': 1}",
+   "after": "MAP Graft None branches [6, 10]"
+  },
+  "19/nextra": {
+   "longest_beam_ok": true,
+   "region_count_ok": true
+  },
+  "19/mcneel": {
+   "longest_beam_ok": true,
+   "region_count_ok": true
+  },
+  "19/rhinomcp": {
+   "longest_beam_ok": true,
+   "region_count_ok": true
+  },
+  "20/nextra": {
+   "disp_20cm": "VAL ['2.902301']",
+   "disp_30cm": "VAL ['1.289912']"
+  },
+  "20/mcneel": {
+   "disp_20cm": "VAL ['2.902301']",
+   "disp_30cm": "VAL ['1.289912']"
+  },
+  "20/rhinomcp": {
+   "disp_20cm": "VAL ['2.902301']",
+   "disp_30cm": "VAL ['1.289912']"
   }
  }
 }

@@ -219,31 +219,31 @@
   "value_count": 1,
   "recomputed": true,
   "rolled_back": false,
-  "graph_id": "MCPGraph_20261012055355027",
-  "mutation_duration_ms": 110,
-  "solution_duration_ms": 9,
+  "graph_id": "MCPGraph_20261012075700359",
+  "mutation_duration_ms": 1,
+  "solution_duration_ms": 0,
   "verification_duration_ms": 0,
-  "duration_ms": 226,
+  "duration_ms": 2,
   "aliases": {
-    "slab": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
-    "nf": "58a9114f-8f60-46cb-9619-c54a50fea33a",
-    "fd": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
-    "fh": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
-    "zp": "1fa93958-6f11-4fde-8749-415cc389979f",
-    "pz": "845069df-21cc-4af9-825b-72df1a49d625",
-    "sec": "3825016f-9219-4218-8c15-fcaad2d89d15",
-    "jn": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
-    "dv": "6936b917-8be4-44d7-8c75-1165579a250a",
-    "ev": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
-    "u1": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
-    "cp": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
-    "ln": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
-    "uz": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
-    "ext": "da6e7446-2339-4fdc-8a00-2111823666c3"
+    "slab": "127361ae-463a-4505-b365-de7fc81a3119",
+    "nf": "fce31600-bb38-4711-b1c3-21df6dc5517f",
+    "fd": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
+    "fh": "a0d4e468-754c-4055-988c-4af48babaf4d",
+    "zp": "28d6268d-69ed-4244-abde-4ec5e67efab0",
+    "pz": "e835fa56-61e0-4fac-8d60-bb6b464704dd",
+    "sec": "ec86dc33-f310-4f18-aefb-37a943b5a2f9",
+    "jn": "60c28641-d212-4b8b-b7dc-b1f150a44164",
+    "dv": "e58d602d-328c-43ca-b10d-8fa223705f5b",
+    "ev": "c13f6ba4-8691-4b87-ab4f-3a6f45752b8b",
+    "u1": "8a63cca7-efe8-4a88-8d0c-9afea1e06e48",
+    "cp": "73d91dc5-c2b3-45e5-8d22-a032895397e6",
+    "ln": "3db7b15e-4487-4eed-a973-0cb64600f80b",
+    "uz": "fe4511c9-4c46-4f9a-b095-cf7e7cc291dd",
+    "ext": "6827831e-6242-41bf-a3dc-0e6780e2cd1f"
   },
   "components": [
     {
-      "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+      "instance_id": "127361ae-463a-4505-b365-de7fc81a3119",
       "name": "Brep",
       "nickname": "Brep",
       "category": "Params",
@@ -254,7 +254,7 @@
       ]
     },
     {
-      "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+      "instance_id": "fce31600-bb38-4711-b1c3-21df6dc5517f",
       "name": "Number Slider",
       "nickname": "Fins",
       "category": "Params",
@@ -265,7 +265,7 @@
       ]
     },
     {
-      "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+      "instance_id": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
       "name": "Number Slider",
       "nickname": "Fin depth",
       "category": "Params",
@@ -276,7 +276,7 @@
       ]
     },
     {
-      "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+      "instance_id": "a0d4e468-754c-4055-988c-4af48babaf4d",
       "name": "Number Slider",
       "nickname": "Fin height",
       "category": "Params",
@@ -287,7 +287,7 @@
       ]
     },
     {
-      "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+      "instance_id": "28d6268d-69ed-4244-abde-4ec5e67efab0",
       "name": "Construct Point",
       "nickname": "Pt",
       "category": "Vector",
@@ -298,7 +298,7 @@
       ]
     },
     {
-      "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+      "instance_id": "e835fa56-61e0-4fac-8d60-bb6b464704dd",
       "name": "XY Plane",
       "nickname": "XY",
       "category": "Vector",
@@ -309,7 +309,7 @@
       ]
     },
     {
-      "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+      "instance_id": "ec86dc33-f310-4f18-aefb-37a943b5a2f9",
       "name": "Brep | Plane",
       "nickname": "Sec",
       "category": "Intersect",
@@ -320,7 +320,7 @@
       ]
     },
     {
-      "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+      "instance_id": "60c28641-d212-4b8b-b7dc-b1f150a44164",
       "name": "Join Curves",
       "nickname": "Join",
       "category": "Curve",
@@ -331,7 +331,7 @@
       ]
     },
     {
-      "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+      "instance_id": "e58d602d-328c-43ca-b10d-8fa223705f5b",
       "name": "Divide Curve",
       "nickname": "Divide",
       "category": "Curve",
@@ -342,7 +342,7 @@
       ]
     },
     {
-      "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+      "instance_id": "c13f6ba4-8691-4b87-ab4f-3a6f45752b8b",
       "name": "Evaluate Curve",
       "nickname": "Eval",
       "category": "Curve",
@@ -353,7 +353,7 @@
       ]
     },
     {
-      "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+      "instance_id": "8a63cca7-efe8-4a88-8d0c-9afea1e06e48",
       "name": "Unit Z",
       "nickname": "Z",
       "category": "Vector",
@@ -364,7 +364,7 @@
       ]
     },
     {
-      "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+      "instance_id": "73d91dc5-c2b3-45e5-8d22-a032895397e6",
       "name": "Cross Product",
       "nickname": "XProd",
       "category": "Vector",
@@ -375,7 +375,7 @@
       ]
     },
     {
-      "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+      "instance_id": "3db7b15e-4487-4eed-a973-0cb64600f80b",
       "name": "Line SDL",
       "nickname": "Line",
       "category": "Curve",
@@ -386,7 +386,7 @@
       ]
     },
     {
-      "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+      "instance_id": "fe4511c9-4c46-4f9a-b095-cf7e7cc291dd",
       "name": "Unit Z",
       "nickname": "Z",
       "category": "Vector",
@@ -397,7 +397,7 @@
       ]
     },
     {
-      "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+      "instance_id": "6827831e-6242-41bf-a3dc-0e6780e2cd1f",
       "name": "Extrude",
       "nickname": "Extr",
       "category": "Surface",
@@ -410,24 +410,24 @@
   ],
   "groups": [
     {
-      "instance_id": "fe414788-49a4-4dc4-9874-4bc47189a4cd",
+      "instance_id": "ad4a3630-dc4f-4f11-a42d-f0fe4217bad7",
       "name": "Fins input",
       "object_count": 15,
-      "graph_id": "MCPGraph_20261012055355027",
+      "graph_id": "MCPGraph_20261012075700359",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "group"
       }
     },
     {
-      "instance_id": "93d1994f-9f55-4a61-863f-1fdbc66d22f9",
+      "instance_id": "ce41556f-96be-4a79-a5a2-bf403001620b",
       "name": "Fins",
       "object_count": 15,
-      "graph_id": "MCPGraph_20261012055355027",
+      "graph_id": "MCPGraph_20261012075700359",
       "role": "group",
       "metadata": {
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "group"
       }
     }
@@ -439,7 +439,7 @@
     "style": "graph_depth_wrapped",
     "positions": [
       {
-        "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+        "instance_id": "127361ae-463a-4505-b365-de7fc81a3119",
         "name": "Brep",
         "nickname": "Brep",
         "position": [
@@ -448,7 +448,7 @@
         ]
       },
       {
-        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "instance_id": "fce31600-bb38-4711-b1c3-21df6dc5517f",
         "name": "Number Slider",
         "nickname": "Fins",
         "position": [
@@ -457,7 +457,7 @@
         ]
       },
       {
-        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "instance_id": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
         "name": "Number Slider",
         "nickname": "Fin depth",
         "position": [
@@ -466,7 +466,7 @@
         ]
       },
       {
-        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "instance_id": "a0d4e468-754c-4055-988c-4af48babaf4d",
         "name": "Number Slider",
         "nickname": "Fin height",
         "position": [
@@ -475,7 +475,7 @@
         ]
       },
       {
-        "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+        "instance_id": "28d6268d-69ed-4244-abde-4ec5e67efab0",
         "name": "Construct Point",
         "nickname": "Pt",
         "position": [
@@ -484,7 +484,7 @@
         ]
       },
       {
-        "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+        "instance_id": "e835fa56-61e0-4fac-8d60-bb6b464704dd",
         "name": "XY Plane",
         "nickname": "XY",
         "position": [
@@ -493,7 +493,7 @@
         ]
       },
       {
-        "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+        "instance_id": "ec86dc33-f310-4f18-aefb-37a943b5a2f9",
         "name": "Brep | Plane",
         "nickname": "Sec",
         "position": [
@@ -502,7 +502,7 @@
         ]
       },
       {
-        "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+        "instance_id": "60c28641-d212-4b8b-b7dc-b1f150a44164",
         "name": "Join Curves",
         "nickname": "Join",
         "position": [
@@ -511,7 +511,7 @@
         ]
       },
       {
-        "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+        "instance_id": "e58d602d-328c-43ca-b10d-8fa223705f5b",
         "name": "Divide Curve",
         "nickname": "Divide",
         "position": [
@@ -520,7 +520,7 @@
         ]
       },
       {
-        "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+        "instance_id": "c13f6ba4-8691-4b87-ab4f-3a6f45752b8b",
         "name": "Evaluate Curve",
         "nickname": "Eval",
         "position": [
@@ -529,7 +529,7 @@
         ]
       },
       {
-        "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+        "instance_id": "8a63cca7-efe8-4a88-8d0c-9afea1e06e48",
         "name": "Unit Z",
         "nickname": "Z",
         "position": [
@@ -538,7 +538,7 @@
         ]
       },
       {
-        "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+        "instance_id": "73d91dc5-c2b3-45e5-8d22-a032895397e6",
         "name": "Cross Product",
         "nickname": "XProd",
         "position": [
@@ -547,7 +547,7 @@
         ]
       },
       {
-        "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+        "instance_id": "3db7b15e-4487-4eed-a973-0cb64600f80b",
         "name": "Line SDL",
         "nickname": "Line",
         "position": [
@@ -556,7 +556,7 @@
         ]
       },
       {
-        "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+        "instance_id": "fe4511c9-4c46-4f9a-b095-cf7e7cc291dd",
         "name": "Unit Z",
         "nickname": "Z",
         "position": [
@@ -565,7 +565,7 @@
         ]
       },
       {
-        "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+        "instance_id": "6827831e-6242-41bf-a3dc-0e6780e2cd1f",
         "name": "Extrude",
         "nickname": "Extr",
         "position": [
@@ -585,9 +585,9 @@
     "error_count": 0,
     "objects": [
       {
-        "instance_id": "2675f71b-c4c5-4933-ba85-b09945c14ef7",
+        "instance_id": "127361ae-463a-4505-b365-de7fc81a3119",
         "alias": "slab",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Brep",
         "nickname": "Brep",
@@ -618,9 +618,9 @@
         "enabled": true
       },
       {
-        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "instance_id": "fce31600-bb38-4711-b1c3-21df6dc5517f",
         "alias": "nf",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Number Slider",
         "nickname": "Fins",
@@ -651,9 +651,9 @@
         "expression": null
       },
       {
-        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "instance_id": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
         "alias": "fd",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Number Slider",
         "nickname": "Fin depth",
@@ -684,9 +684,9 @@
         "expression": null
       },
       {
-        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "instance_id": "a0d4e468-754c-4055-988c-4af48babaf4d",
         "alias": "fh",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Number Slider",
         "nickname": "Fin height",
@@ -717,9 +717,9 @@
         "expression": null
       },
       {
-        "instance_id": "1fa93958-6f11-4fde-8749-415cc389979f",
+        "instance_id": "28d6268d-69ed-4244-abde-4ec5e67efab0",
         "alias": "zp",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Construct Point",
         "nickname": "Pt",
@@ -745,9 +745,9 @@
         "enabled": true
       },
       {
-        "instance_id": "845069df-21cc-4af9-825b-72df1a49d625",
+        "instance_id": "e835fa56-61e0-4fac-8d60-bb6b464704dd",
         "alias": "pz",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "XY Plane",
         "nickname": "XY",
@@ -773,9 +773,9 @@
         "enabled": true
       },
       {
-        "instance_id": "3825016f-9219-4218-8c15-fcaad2d89d15",
+        "instance_id": "ec86dc33-f310-4f18-aefb-37a943b5a2f9",
         "alias": "sec",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Brep | Plane",
         "nickname": "Sec",
@@ -816,9 +816,9 @@
         "enabled": true
       },
       {
-        "instance_id": "adedec99-bf77-4a5d-8c69-85d492a5bce3",
+        "instance_id": "60c28641-d212-4b8b-b7dc-b1f150a44164",
         "alias": "jn",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Join Curves",
         "nickname": "Join",
@@ -849,9 +849,9 @@
         "enabled": true
       },
       {
-        "instance_id": "6936b917-8be4-44d7-8c75-1165579a250a",
+        "instance_id": "e58d602d-328c-43ca-b10d-8fa223705f5b",
         "alias": "dv",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Divide Curve",
         "nickname": "Divide",
@@ -902,9 +902,9 @@
         "enabled": true
       },
       {
-        "instance_id": "25ead69c-cfe3-425b-b97b-02b17c8dbe9d",
+        "instance_id": "c13f6ba4-8691-4b87-ab4f-3a6f45752b8b",
         "alias": "ev",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Evaluate Curve",
         "nickname": "Eval",
@@ -959,9 +959,9 @@
         "enabled": true
       },
       {
-        "instance_id": "36fcc785-f90b-4ab9-beaf-e30236e6d661",
+        "instance_id": "8a63cca7-efe8-4a88-8d0c-9afea1e06e48",
         "alias": "u1",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Unit Z",
         "nickname": "Z",
@@ -987,9 +987,9 @@
         "enabled": true
       },
       {
-        "instance_id": "43ec5a6f-f55d-4082-ba0d-2ee9eb5c3782",
+        "instance_id": "73d91dc5-c2b3-45e5-8d22-a032895397e6",
         "alias": "cp",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Cross Product",
         "nickname": "XProd",
@@ -1030,9 +1030,9 @@
         "enabled": true
       },
       {
-        "instance_id": "98f16ff5-adf6-4b7e-a862-9d5677cbe0a0",
+        "instance_id": "3db7b15e-4487-4eed-a973-0cb64600f80b",
         "alias": "ln",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Line SDL",
         "nickname": "Line",
@@ -1067,9 +1067,9 @@
         "enabled": true
       },
       {
-        "instance_id": "3576ec63-d7ee-4220-92c5-6325bc3bf965",
+        "instance_id": "fe4511c9-4c46-4f9a-b095-cf7e7cc291dd",
         "alias": "uz",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Unit Z",
         "nickname": "Z",
@@ -1095,9 +1095,9 @@
         "enabled": true
       },
       {
-        "instance_id": "da6e7446-2339-4fdc-8a00-2111823666c3",
+        "instance_id": "6827831e-6242-41bf-a3dc-0e6780e2cd1f",
         "alias": "ext",
-        "graph_id": "MCPGraph_20261012055355027",
+        "graph_id": "MCPGraph_20261012075700359",
         "role": "",
         "name": "Extrude",
         "nickname": "Extr",
@@ -1136,19 +1136,19 @@
     "preview_enabled_object_count": 12,
     "preview_disabled_object_count": 0,
     "has_preview_enabled_objects": true,
-    "rhino_document_object_count": 4787,
+    "rhino_document_object_count": 13057,
     "has_baked_rhino_objects": true,
     "viewport_warning": null
   },
   "summary": {
-    "graph_id": "MCPGraph_20261012055355027",
+    "graph_id": "MCPGraph_20261012075700359",
     "object_count": 17,
     "controls": [
       {
         "alias": "nf",
         "name": "Number Slider",
         "nickname": "Fins",
-        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "instance_id": "fce31600-bb38-4711-b1c3-21df6dc5517f",
         "enabled": true,
         "special_type": "number_slider",
         "value": 24.0,
@@ -1161,7 +1161,7 @@
         "alias": "fd",
         "name": "Number Slider",
         "nickname": "Fin depth",
-        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "instance_id": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
         "enabled": true,
         "special_type": "number_slider",
         "value": 900.0,
@@ -1174,7 +1174,7 @@
         "alias": "fh",
         "name": "Number Slider",
         "nickname": "Fin height",
-        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "instance_id": "a0d4e468-754c-4055-988c-4af48babaf4d",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3200.0,
@@ -1189,7 +1189,7 @@
         "alias": "nf",
         "name": "Number Slider",
         "nickname": "Fins",
-        "instance_id": "58a9114f-8f60-46cb-9619-c54a50fea33a",
+        "instance_id": "fce31600-bb38-4711-b1c3-21df6dc5517f",
         "enabled": true,
         "special_type": "number_slider",
         "value": 24.0,
@@ -1202,7 +1202,7 @@
         "alias": "fd",
         "name": "Number Slider",
         "nickname": "Fin depth",
-        "instance_id": "dbfc3c4d-7f98-4a7a-8a6a-3b37e9d5b8a4",
+        "instance_id": "042ce9c3-8b42-40cd-8650-b70fde3e3f8b",
         "enabled": true,
         "special_type": "number_slider",
         "value": 900.0,
@@ -1215,7 +1215,7 @@
         "alias": "fh",
         "name": "Number Slider",
         "nickname": "Fin height",
-        "instance_id": "6a5876d1-df95-4ddd-8fd2-654c8ef79661",
+        "instance_id": "a0d4e468-754c-4055-988c-4af48babaf4d",
         "enabled": true,
         "special_type": "number_slider",
         "value": 3200.0,

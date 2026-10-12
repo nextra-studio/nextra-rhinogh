@@ -6,12 +6,12 @@
  }
 }
 ---
-ok py 111ms, checkpoint c125
+ok py 148ms, checkpoint c356
 stdout:
 storeys 4..4 done
 rhino delta +30:
-+ [Beams] polysurface 6000x450x300 linear horizontal ×17 r4383-r4399 z 13300..13750
-+ [Columns] polysurface 3250x400x400 linear vertical ×12 r4400-r4411 z 10500..13750
-+ [Slabs] polysurface 18600x12600x250 planar ×1 r4412 z 13750..14000
++ [Beams] polysurface 6000x450x300 linear horizontal ×17 r12710-r12726 z 13300..13750
++ [Columns] polysurface 3250x400x400 linear vertical ×12 r12727-r12738 z 10500..13750
++ [Slabs] polysurface 18600x12600x250 planar ×1 r12739 z 13750..14000
 (details: query filter:'r12 r13' or 'layer:X')
 (library C:\Users\tatsu\AppData\Roaming\Nextra\memory\library\frame_building.py)

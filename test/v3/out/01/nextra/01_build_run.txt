@@ -6,12 +6,12 @@
  "save_as": "frame_building"
 }
 ---
-ok py 118ms, checkpoint c117
+ok py 98ms, checkpoint c348
 stdout:
 storeys 1..3 done
 rhino delta +90:
-+ [Beams] polysurface 6000x450x300 linear horizontal ×51 r4023-r4073 z 2800..10250
-+ [Columns] polysurface 3250x400x400 linear vertical ×36 r4074-r4109 z 0..10250
-+ [Slabs] polysurface 18600x12600x250 planar ×3 r4110-r4112 z 3250..10500
++ [Beams] polysurface 6000x450x300 linear horizontal ×51 r12350-r12400 z 2800..10250
++ [Columns] polysurface 3250x400x400 linear vertical ×36 r12401-r12436 z 0..10250
++ [Slabs] polysurface 18600x12600x250 planar ×3 r12437-r12439 z 3250..10500
 (details: query filter:'r12 r13' or 'layer:X')
 updated library script 'frame_building.py'

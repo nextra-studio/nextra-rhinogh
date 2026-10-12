@@ -4,5 +4,5 @@
 ---
 {
   "success": true,
-  "output": "('0b8e4db0-7fc2-4679-964a-5a1d955ef6cc', ['Steel', '0'], [])\nok\n('0b8e4db0-7fc2-4679-964a-5a1d955ef6cc', ['Steel', '0'], [])\n\nok\n"
+  "output": "('99aa03b9-7e03-4edd-bc4b-fdee3a4d69c0', ['Steel', '0'], [])\nok\n('99aa03b9-7e03-4edd-bc4b-fdee3a4d69c0', ['Steel', '0'], [])\n\nok\n"
 }
