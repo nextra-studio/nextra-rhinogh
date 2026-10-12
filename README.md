@@ -32,9 +32,9 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-**For other people:** send them to the public page **https://github.com/Tatsuki0123/nextra-rhinogh-releases**. It has the install guide and the downloads (`.mcpb` bridge, skill zip, `.yak`). This repo is private. All three parts are needed: Rhino plug-in (Package Manager), bridge (`.mcpb`) and skill (`.zip`). Without the bridge, Claude has no tools and says Nextra isn't connected.
+**For other people:** send them to this page and its [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) (`.mcpb` bridge, skill zip, `.yak`). All three parts are needed: Rhino plug-in (Package Manager, search `Nextra-RhinoGh`), bridge (`.mcpb`) and skill (`.zip`). Without the bridge, Claude has no tools and says Nextra isn't connected.
 
-**New release:** `tools/package.ps1`, then `gh release create v<ver> --repo Tatsuki0123/nextra-rhinogh-releases dist/*.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-*.yak`.
+**New release:** `tools/package.ps1`, then `gh release create v<ver> dist/*.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-*.yak`.
 
 1. **Rhino plug-in.** In Package Manager, install `Nextra-RhinoGh` (search it in Package Manager, or drag `dist/nextra-rhinogh-0.1.1-rh8_35-win.yak` onto Rhino / run `Yak.exe install <file>`), then restart Rhino.
    - **Status dot:** a small dot appears at the bottom-right of the Rhino window and of the GH canvas. Green = an LLM is connected, amber = ready, red = click to restart.
