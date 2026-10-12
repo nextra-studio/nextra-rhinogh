@@ -1,0 +1,16 @@
+{
+  "name": "nextra",
+  "owner": {
+    "name": "Tatsuki",
+    "url": "https://github.com/Tatsuki0123/nextra-rhinogh"
+  },
+  "description": "Nextra: Rhino 8 + Grasshopper tools and skill for AI agents",
+  "plugins": [
+    {
+      "name": "nextra-rhinogh",
+      "source": "./plugin/nextra-rhinogh",
+      "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
+      "version": "0.1.2"
+    }
+  ]
+}

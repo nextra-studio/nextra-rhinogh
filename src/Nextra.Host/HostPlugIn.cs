@@ -43,6 +43,25 @@ namespace Nextra.Host
             try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("Nextra: status dot failed: " + ex.Message); }
             GhDotHook.Start();
             InitUserFolder();
+            InstallBridge();
+        }
+
+        /// Stable path of the MCP bridge for clients configured by hand (ChatGPT desktop, Codex, others):
+        /// the Yak package folder has the version in its name, this path does not.
+        public static string BridgePath => System.IO.Path.Combine(Server.AppDir, "bridge", "index.js");
+
+        /// Copies the bridge shipped next to the .rhp (Yak package: bridge/server/index.js) to BridgePath.
+        static void InstallBridge()
+        {
+            try
+            {
+                var src = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(typeof(NextraHostPlugIn).Assembly.Location) ?? "", "bridge", "server", "index.js");
+                if (!System.IO.File.Exists(src)) return;   // dev install: no bridge next to the .rhp
+                if (System.IO.File.Exists(BridgePath) && System.IO.File.ReadAllText(src) == System.IO.File.ReadAllText(BridgePath)) return;
+                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(BridgePath));
+                System.IO.File.Copy(src, BridgePath, true);
+            }
+            catch (Exception e) { RhinoApp.WriteLine("Nextra: bridge not copied: " + e.Message); }
         }
 
         /// Creates the user folder with its default files right after install (first start), via the engine.
@@ -82,9 +101,19 @@ namespace Nextra.Host
             int iOff = go.AddOption("Off");
             int iReload = go.AddOption("ReloadEngine");
             int iRestart = go.AddOption("RestartServer");
+            int iBridge = go.AddOption("CopyBridgePath");
             go.AcceptNothing(true);
             if (go.Get() != Rhino.Input.GetResult.Option) return Result.Success;
             int i = go.Option().Index;
+            if (i == iBridge)
+            {
+                var p = NextraHostPlugIn.BridgePath;
+                try { System.Windows.Clipboard.SetText(p); } catch { }
+                RhinoApp.WriteLine(System.IO.File.Exists(p)
+                    ? "Nextra: bridge path copied to the clipboard: " + p + "  (MCP server: command node, argument this path)"
+                    : "Nextra: no bridge at " + p + " (it is copied there when the Yak package starts)");
+                return Result.Success;
+            }
             if (i == iOn) NextraOnCommand.Do();
             else if (i == iOff) NextraOffCommand.Do();
             else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("Nextra: engine reloaded: " + EngineLoader.Describe()); }

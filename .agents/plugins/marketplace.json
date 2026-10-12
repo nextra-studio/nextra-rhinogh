@@ -1,0 +1,20 @@
+{
+  "name": "nextra",
+  "interface": {
+    "displayName": "Nextra"
+  },
+  "plugins": [
+    {
+      "name": "nextra-rhinogh",
+      "source": {
+        "source": "local",
+        "path": "./plugin/nextra-rhinogh"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Design"
+    }
+  ]
+}

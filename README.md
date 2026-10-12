@@ -32,71 +32,93 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-**Requirements:** Windows, Rhino 8 (a recent service release), and Claude Desktop (or another MCP client, see [other clients](#other-clients)).
+Windows · Rhino 8 · one AI app. Two steps:
 
-Nextra has **three parts**, and all three are needed:
+![Step 1: Rhino plug-in. Step 2: a connector for your AI app](docs/img/overview.svg)
 
-![The three parts: Rhino plug-in, bridge, skill](docs/img/overview.svg)
+### 1 · Rhino plug-in
 
-| # | Part | Where to get it |
-|---|---|---|
-| 1 | **Rhino plug-in** | Rhino Package Manager, search `Nextra-RhinoGh` |
-| 2 | **Bridge** (`nextra-rhinogh-<version>.mcpb`) | [Latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) |
-| 3 | **Skill** (`nextra-rhinogh-skill.zip`) | [Latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest) |
+In Rhino type **`PackageManager`**, search **`Nextra-RhinoGh`**, click **Install**, then **restart Rhino**.
 
-### Step 1: Rhino plug-in
+![Rhino Package Manager: search Nextra-RhinoGh, click Install](docs/img/install/rhino-package-manager.svg)
 
-1. In Rhino, type **`PackageManager`** in the command line and press Enter.
-2. Search for **`Nextra-RhinoGh`** and click **Install**.
-3. **Close and restart Rhino.** The plug-in only loads at startup.
-4. Look at the bottom-right corner of the Rhino window. A small dot means it works:
+A dot in the bottom-right corner of Rhino means it works:
 
-   ![The status dot in the bottom-right corner of Rhino](docs/img/status-dot-real.png)
+![Status dot in the bottom-right corner of Rhino](docs/img/status-dot-real.png)
 
-   ![Dot colours: green = connected, amber = ready, red = restart](docs/img/dot-states.svg)
+![Green = connected, amber = ready, red = click to restart](docs/img/dot-states.svg)
 
-   If there is no dot, type `NextraOn`. If Rhino says `Unknown command: NextraOn`, see [Troubleshooting](#troubleshooting).
+### 2 · Connector for your AI app
 
-> **No Package Manager?** Download `nextra-rhinogh-<version>-rh8_35-win.yak` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest), drag it onto the Rhino window, and restart Rhino.
+Downloads are on the **[latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest)**. Pick your app:
 
-Other Rhino commands: `Nextra`, `NextraOff`, `NextraFolder` (opens your own instructions folder, see [below](#your-own-instructions)).
+<details>
+<summary><b>Claude Desktop</b> (2 files)</summary>
 
-### Step 2: Bridge (gives Claude the tools)
+1. Download **`nextra-rhinogh-<version>.mcpb`** → double-click → **Install** → quit Claude fully (tray icon too) and reopen.
 
-1. Download `nextra-rhinogh-<version>.mcpb` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest).
-2. **Double-click the file.** Claude Desktop opens an install dialog; confirm it. (Or open Claude Desktop → **Settings → Extensions → Advanced settings → Install Extension…** and pick the file.)
-3. **Fully quit Claude Desktop**, including its icon in the system tray, and start it again.
-4. In a new chat, **nextra-rhinogh** should appear in the list of tools/connectors.
+   ![Double-click the .mcpb, click Install](docs/img/install/claude-desktop.svg)
 
-### Step 3: Skill (teaches Claude how to use the tools)
+2. Download **`nextra-rhinogh-skill.zip`** (don't unzip) → Claude **Settings → Capabilities → Skills → Upload**.
 
-1. Download `nextra-rhinogh-skill.zip` from the [latest release](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest). **Do not unzip it.**
-2. In Claude, open **Settings → Capabilities → Skills** and upload the zip. (Menu names can differ slightly between Claude versions.)
+   ![Upload the skill zip in Claude settings](docs/img/install/claude-skill.svg)
 
-### Step 4: Try it
+</details>
 
-Keep Rhino open with the dot showing and ask Claude:
+<details>
+<summary><b>Claude Code</b> (1 command: tools + skill)</summary>
 
-> *Create a simple timber house in Rhino.*
+```
+/plugin install nextra-rhinogh --marketplace Tatsuki0123/nextra-rhinogh
+```
 
-Claude should call the `nextra-rhinogh` tools, and the dot turns green while it works.
+![Claude Code: one install command](docs/img/install/claude-code.svg)
+
+Older Claude Code: `/plugin marketplace add Tatsuki0123/nextra-rhinogh`, then `/plugin install nextra-rhinogh@nextra`.
+
+</details>
+
+<details>
+<summary><b>ChatGPT / Codex desktop app</b> (1 prompt: tools + skill)</summary>
+
+Use **Codex** or **Work** mode (plain Chat mode can't start local tools). Paste this, let the agent run it, then restart the app:
+
+```
+Run: codex plugin marketplace add Tatsuki0123/nextra-rhinogh
+then: codex plugin add nextra-rhinogh@nextra
+```
+
+![Paste the prompt in Codex or Work mode](docs/img/install/chatgpt-prompt.svg)
+
+**Or by hand** (tools only, no skill): **Settings → MCP servers → Add server** → STDIO, command `node`, argument = the path Rhino copies with **`Nextra` → `CopyBridgePath`**.
+
+![Add the server by hand in settings](docs/img/install/chatgpt-settings.svg)
+
+</details>
+
+<details>
+<summary><b>Codex CLI · other MCP clients</b></summary>
+
+- Codex CLI: the same two `codex plugin …` commands in a terminal.
+- Any MCP client: `node %APPDATA%\Nextra\bridge\index.js` over stdio (Node 18+, no dependencies). Docs reach the model through `query {scope:'docs'}`.
+
+</details>
+
+### Try it
+
+With Rhino open, ask: ***"Create a simple timber house in Rhino."*** The dot turns green while the AI works.
 
 ### Troubleshooting
 
-| What you see | What to do |
+| You see | Do |
 |---|---|
-| Claude says **"Nextra isn't connected"** or can't find any Rhino tools | The bridge (step 2) is missing. The skill alone has no tools. Install the `.mcpb` and fully restart Claude Desktop. |
-| `Unknown command: NextraOn` in Rhino | The plug-in isn't loaded. Restart Rhino after installing. Still missing? Run `PlugInManager`, find **Nextra.Host**, right-click → **Load**. |
-| `Blocking plug-in Nextra.Host` | Usually after uninstalling and reinstalling in one session. Close **all** Rhino windows and start Rhino again. |
-| No dot in Rhino | Type `NextraOn`. |
-| Dot is **red** | Click it to restart the server. |
-| Claude says **"Rhino is not reachable"** | Rhino isn't running, or the plug-in is off (`NextraOn`). Don't let Claude retry in a loop. |
-| Several Rhino windows open | The bridge binds to one file. Tell Claude which (for example *"use house.3dm"*), or set `NEXTRA_FILE=house.3dm`. It never talks to another window. |
+| AI says "Nextra isn't connected" / no Rhino tools | Step 2 is missing. Install the connector and restart the app. |
+| `Unknown command: NextraOn` | Restart Rhino. Still missing: `PlugInManager` → **Nextra.Host** → right-click **Load**. |
+| `Blocking plug-in Nextra.Host` | Close **all** Rhino windows, start Rhino again. |
+| No dot / red dot | Type `NextraOn` / click the dot. |
+| Several Rhino windows | Tell the AI which file, e.g. *"use house.3dm"*. |
 
-### Other clients
-
-- **Claude Code:** open this repo folder (`.mcp.json` and `.claude/skills/nextra-rhinogh` are project-scoped). Elsewhere: `claude mcp add nextra-rhinogh -- node <repo>/bridge/server/index.js`.
-- **Any other MCP client:** run `node bridge/server/index.js` over stdio (Node 18 or later, no dependencies). LLMs other than Claude read the same docs through `query {scope:'docs'}`.
+*The app pictures are simplified drawings; labels can differ slightly between app versions.*
 
 <details>
 <summary>Maintainers: making a release</summary>
@@ -104,10 +126,12 @@ Claude should call the `nextra-rhinogh` tools, and the dot turns green while it 
 Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js` and both `.csproj` files, then:
 
 ```
-tools/package.ps1
+tools/package.ps1          # .yak, .mcpb, skill zip, plugin/ (Claude Code + Codex)
 yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
 gh release create v<ver> dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-skill.zip dist/nextra-rhinogh-<ver>-rh8_35-win.yak
 ```
+
+Commit `plugin/`, `.claude-plugin/` and `.agents/plugins/`: the GitHub repo is the marketplace. Images: `python tools/make_install_images.py`.
 
 </details>
 
@@ -143,9 +167,11 @@ The folder works however the skill is installed, including as a zip uploaded to 
 src/Nextra.Host     .rhp: 127.0.0.1 server (token), UI-thread dispatcher with timeouts + late results, dialog probe/dismiss, status dots, engine hot-reload
 src/Nextra.Engine   all Rhino/GH logic (hot-reloaded on rebuild): tools, shorthand parser/builder/writer, layout, vision, checkpoints, memory, API reference, user folder
 bridge/             MCP stdio bridge (zero-dependency Node) + .mcpb manifest
-skill/nextra/       SKILL.md, shorthand.md, workflows.md, api/*
-guides/plugins/     plug-in guides (<Category>.md, auto-attached); shipped inside the Rhino plug-in package
-tools/              build.py, deploy_dev.ps1 (dev install with hot reload), package.ps1 (yak + mcpb + skill zip), nx.py (test client), mcp_http.py
+skill/nextra/       SKILL.md, shorthand.md, workflows.md, api/*, plugins/<Category>.md (plug-in guides, auto-attached)
+plugin/             generated by tools/make_plugin.py: one plug-in (bridge + skill) for Claude Code and Codex / ChatGPT desktop
+.claude-plugin/     Claude Code marketplace (this repo);  .agents/plugins/ = Codex / ChatGPT marketplace
+docs/img/           README images (install pictures: tools/make_install_images.py)
+tools/              build.py, deploy_dev.ps1 (dev install with hot reload), package.ps1 (yak + mcpb + skill zip + plugin/), nx.py (test client), mcp_http.py
 test/               v1/ = first round (cases 01-16), v2/ = detailed benchmark, v3/ = all cases on three systems, regress/ = full regression suite
 dev/                developer guide, original plan, build checklist, reference code (information only, not part of the skill)
 ```

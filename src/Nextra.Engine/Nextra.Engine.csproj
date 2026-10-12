@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>Nextra.Engine</AssemblyName>
     <RootNamespace>Nextra.Engine</RootNamespace>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>

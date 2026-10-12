@@ -1,0 +1,39 @@
+{
+  "name": "nextra-rhinogh",
+  "version": "0.1.2",
+  "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
+  "author": {
+    "name": "Tatsuki",
+    "url": "https://github.com/Tatsuki0123/nextra-rhinogh"
+  },
+  "homepage": "https://github.com/Tatsuki0123/nextra-rhinogh",
+  "repository": "https://github.com/Tatsuki0123/nextra-rhinogh",
+  "license": "Apache-2.0",
+  "keywords": [
+    "rhino",
+    "grasshopper",
+    "mcp",
+    "karamba"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./codex.mcp.json",
+  "interface": {
+    "displayName": "Nextra for Rhino",
+    "shortDescription": "Build and edit Rhino 8 + Grasshopper models",
+    "longDescription": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper. Needs Rhino 8 running with the Nextra-RhinoGh plug-in (Rhino Package Manager).",
+    "developerName": "Tatsuki",
+    "category": "Design",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Tatsuki0123/nextra-rhinogh",
+    "defaultPrompt": [
+      "Create a simple timber house in Rhino",
+      "Show my Grasshopper definition"
+    ],
+    "brandColor": "#1A7F37",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/icon.svg"
+  }
+}

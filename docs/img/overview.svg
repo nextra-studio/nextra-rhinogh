@@ -1,47 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" font-family="Segoe UI, Helvetica, Arial, sans-serif">
   <style>
     .t{font-size:17px;font-weight:700;fill:#1f2328}
     .s{font-size:13px;fill:#57606a}
-    .n{font-size:15px;font-weight:700;fill:#fff}
+    .n{font-size:14px;font-weight:700;fill:#fff}
     .box{fill:#fff;stroke:#d0d7de;stroke-width:1.5}
-    .arrow{stroke:#57606a;stroke-width:2;fill:none;marker-end:url(#a)}
-    @media (prefers-color-scheme: dark){.t{fill:#e6edf3}.s{fill:#9da7b3}.box{fill:#161b22;stroke:#3d444d}.arrow{stroke:#9da7b3}}
+    .app{fill:#f6f8fa;stroke:#d0d7de}
+    .arrow{stroke:#57606a;stroke-width:2;fill:none}
+    @media (prefers-color-scheme: dark){.t{fill:#e6edf3}.s{fill:#9da7b3}.box{fill:#161b22;stroke:#3d444d}.app{fill:#0d1117;stroke:#3d444d}.arrow{stroke:#9da7b3}}
   </style>
-  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#57606a"/></marker></defs>
 
-  <!-- Claude -->
-  <rect class="box" x="20" y="40" width="250" height="190" rx="12"/>
-  <text class="t" x="145" y="72" text-anchor="middle">Claude</text>
-  <text class="s" x="145" y="92" text-anchor="middle">Desktop / claude.ai</text>
-  <rect x="42" y="112" width="206" height="44" rx="8" fill="#0969da"/>
-  <circle cx="64" cy="134" r="12" fill="#fff"/><text x="64" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#0969da">3</text>
-  <text class="n" x="84" y="139">Skill (.zip)</text>
-  <text class="s" x="145" y="180" text-anchor="middle">tells Claude how to use</text>
-  <text class="s" x="145" y="198" text-anchor="middle">the tools well</text>
+  <!-- step 1 -->
+  <rect class="box" x="20" y="30" width="300" height="240" rx="14"/>
+  <circle cx="52" cy="62" r="16" fill="#1a7f37"/><text class="n" x="52" y="67" text-anchor="middle">1</text>
+  <text class="t" x="78" y="68">Rhino plug-in</text>
+  <text class="s" x="44" y="100">Always. Rhino Package Manager →</text>
+  <text class="s" x="44" y="120">search Nextra-RhinoGh → Install</text>
+  <rect x="44" y="146" width="252" height="96" rx="10" fill="#1a7f37"/>
+  <text class="n" x="170" y="178" text-anchor="middle">Rhino 8 + Grasshopper</text>
+  <circle cx="132" cy="212" r="9" fill="#2da44e" stroke="#fff" stroke-width="2"/>
+  <text x="148" y="217" font-size="13" fill="#fff">status dot</text>
 
-  <!-- Bridge -->
-  <rect class="box" x="325" y="40" width="250" height="190" rx="12"/>
-  <text class="t" x="450" y="72" text-anchor="middle">Bridge</text>
-  <text class="s" x="450" y="92" text-anchor="middle">runs on your PC</text>
-  <rect x="347" y="112" width="206" height="44" rx="8" fill="#bf8700"/>
-  <circle cx="369" cy="134" r="12" fill="#fff"/><text x="369" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#bf8700">2</text>
-  <text class="n" x="389" y="139">Bridge (.mcpb)</text>
-  <text class="s" x="450" y="180" text-anchor="middle">gives Claude the 6 tools</text>
-  <text class="s" x="450" y="198" text-anchor="middle">view, query, run, gh_edit, undo, memory</text>
+  <path class="arrow" d="M330 150 H372"/><path d="M372 144l10 6-10 6z" fill="#57606a"/>
 
-  <!-- Rhino -->
-  <rect class="box" x="630" y="40" width="250" height="190" rx="12"/>
-  <text class="t" x="755" y="72" text-anchor="middle">Rhino 8 + Grasshopper</text>
-  <text class="s" x="755" y="92" text-anchor="middle">on the same PC</text>
-  <rect x="652" y="112" width="206" height="44" rx="8" fill="#1a7f37"/>
-  <circle cx="674" cy="134" r="12" fill="#fff"/><text x="674" y="139" text-anchor="middle" font-size="14" font-weight="700" fill="#1a7f37">1</text>
-  <text class="n" x="694" y="139">Plug-in (Yak)</text>
-  <text class="s" x="755" y="180" text-anchor="middle">local server inside Rhino</text>
-  <text class="s" x="755" y="198" text-anchor="middle">shows the status dot</text>
+  <!-- step 2 -->
+  <rect class="box" x="392" y="30" width="488" height="240" rx="14"/>
+  <circle cx="424" cy="62" r="16" fill="#0969da"/><text class="n" x="424" y="67" text-anchor="middle">2</text>
+  <text class="t" x="450" y="68">Connector for your AI app (pick one)</text>
 
-  <path class="arrow" d="M270 135 H323"/>
-  <path class="arrow" d="M575 135 H628"/>
+  <rect class="app" x="414" y="92" width="144" height="160" rx="10"/>
+  <text class="t" x="486" y="120" text-anchor="middle" font-size="15">Claude Desktop</text>
+  <rect x="428" y="138" width="116" height="30" rx="6" fill="#bf8700"/><text class="n" x="486" y="158" text-anchor="middle" font-size="13">.mcpb (tools)</text>
+  <rect x="428" y="176" width="116" height="30" rx="6" fill="#0969da"/><text class="n" x="486" y="196" text-anchor="middle" font-size="13">.zip (skill)</text>
+  <text class="s" x="486" y="232" text-anchor="middle">2 files</text>
 
-  <text class="t" x="450" y="275" text-anchor="middle" font-size="15">All three are needed. The skill alone has no tools; the bridge alone has no Rhino to talk to.</text>
-  <text class="s" x="450" y="298" text-anchor="middle">Install in the order 1 → 2 → 3.</text>
+  <rect class="app" x="568" y="92" width="144" height="160" rx="10"/>
+  <text class="t" x="640" y="120" text-anchor="middle" font-size="15">Claude Code</text>
+  <rect x="582" y="138" width="116" height="68" rx="6" fill="#8250df"/><text class="n" x="640" y="166" text-anchor="middle" font-size="13">plugin</text><text class="n" x="640" y="186" text-anchor="middle" font-size="12">tools + skill</text>
+  <text class="s" x="640" y="232" text-anchor="middle">1 command</text>
+
+  <rect class="app" x="722" y="92" width="144" height="160" rx="10"/>
+  <text class="t" x="794" y="114" text-anchor="middle" font-size="15">ChatGPT / Codex</text>
+  <text class="s" x="794" y="130" text-anchor="middle">desktop app</text>
+  <rect x="736" y="138" width="116" height="68" rx="6" fill="#10a37f"/><text class="n" x="794" y="166" text-anchor="middle" font-size="13">plugin</text><text class="n" x="794" y="186" text-anchor="middle" font-size="12">tools + skill</text>
+  <text class="s" x="794" y="232" text-anchor="middle">1 prompt</text>
 </svg>
