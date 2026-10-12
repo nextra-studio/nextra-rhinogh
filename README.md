@@ -157,12 +157,14 @@ The folder names serve different roles:
 
 | Folder | Purpose |
 |---|---|
-| `.claude-plugin/` | Claude's native marketplace catalog. |
+| `.claude-plugin/` | Claude's marketplace catalog, with Nextra's plugin settings inline. This is the only `.claude-plugin` folder in the repository. |
 | `.agents/` | Shared agent resources. OpenAI also discovers `.agents/plugins/marketplace.json` here. |
 | `plugin/nextra-rhinogh/.codex-plugin/` | OpenAI's native plugin manifest inside the installable package. |
 | `.codex/config.toml` | Optional local Codex workspace configuration for MCP. This is separate from a plugin manifest. |
 
 The marketplace catalog tells the app where to find plugins. `.codex-plugin/plugin.json` describes an installable plugin and its bundled skills and MCP configuration. `.codex/config.toml` configures a particular Codex workspace; the general agent kit includes it so that workspace can connect directly to the MCP server. [OpenAI package format](https://developers.openai.com/plugins/build/plugins).
+
+Claude reads Nextra's manifest fields directly from the marketplace entry when the plugin directory has no separate manifest. The packaging script adds `.claude-plugin/plugin.json` inside standalone plugin ZIPs for direct import. [Claude marketplace manifest rules](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
 
 
 ```
