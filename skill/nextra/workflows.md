@@ -12,7 +12,7 @@ description: Recipes — Rhino build/modify, GH build/modify/tidy, Rhino↔GH, s
 ## Rhino: modify ("add a storey", "move this part")
 1. Find targets with text, not images: `query {filter:'layer:Slabs'}` / `level:'detail'`.
 2. Library first: `query {scope:'library'}` → `run {lib:'frame_building', args:{storeys:1, z0:10500}}`.
-3. Select in code with the same filter syntax: `for o in q('layer:Columns bbox:x0,y0,z0,x1,y1,z1'): …` or handles `h('r12')`.
+3. Select in code with the same filter syntax: `for o in q('layer:Columns inside:x0,y0,z0,x1,y1,z1'): …` or handles `h('r12')`. Names/layers match exactly (use `*` for patterns: `name:*_L4`; `layer:FE` includes its sub-layers); `bbox:` = touches the box, `inside:` = fully inside.
 4. Check the delta (`~` modified, `+` added). Wrong? `undo {checkpoint:'cN'}`.
 
 ## Geometry understanding (cheap → expensive)
@@ -37,7 +37,7 @@ summary → list (oriented box `LxWxH linear|planar|block`, axis) → detail (fa
 - Unbaked result check: `view {target:'gh_preview', focus:'g27'}`.
 
 ## Scripts
-- Rhino: `run` (py default). GH script component: create with shorthand, edit with `gh_edit {script:{handle, patch}}`; long code: `script:{handle, mirror:true}` writes `.nextra/scripts/gN.py`, edit lines, then `from_mirror:true`.
+- Rhino: `run` (py default). GH script component: create with shorthand, edit with `gh_edit {script:{handle, patch}}`; long code: `script:{handle, mirror:true}` writes `.nextra/scripts/<file>_gN.py` (path in the reply), edit lines, then `from_mirror:true`.
 - C# GH: put the `RunScript(...)` signature in code; ports follow it.
 
 ## Structural (FE)

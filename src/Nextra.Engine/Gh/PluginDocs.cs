@@ -56,14 +56,21 @@ namespace Nextra.Engine.Gh
             return string.Join("\n", outL).Trim();
         }
 
+        /// Guides already shown in this conversation. A conversation = since the last `memory list` (session start)
+        /// and without a 30-minute pause; Rhino itself may stay open across many conversations.
         static HashSet<string> Shown
         {
             get
             {
-                if (!Entry.State.TryGetValue("plugindocs.shown", out var o) || !(o is HashSet<string> s)) { s = new HashSet<string>(StringComparer.OrdinalIgnoreCase); Entry.State["plugindocs.shown"] = s; }
+                var now = DateTime.UtcNow;
+                bool stale = Entry.State.TryGetValue("plugindocs.last", out var lt) && lt is DateTime last && (now - last).TotalMinutes > 30;
+                Entry.State["plugindocs.last"] = now;
+                if (stale || !Entry.State.TryGetValue("plugindocs.shown", out var o) || !(o is HashSet<string> s)) { s = new HashSet<string>(StringComparer.OrdinalIgnoreCase); Entry.State["plugindocs.shown"] = s; }
                 return s;
             }
         }
+
+        public static void NewSession() => Entry.State.Remove("plugindocs.shown");
 
         public static void Check(IEnumerable<string> categories, Reply r, string modeOverride = null)
         {

@@ -16,7 +16,15 @@ namespace Nextra.Engine.Rh
         public List<string> BadHandles = new List<string>();
         public string Layer, Type, Name, Cells;
         public BoundingBox? Box;
-        public bool Selected, IncludeHidden;
+        public bool Selected, IncludeHidden, Inside;
+
+        /// Exact (case-insensitive) unless the pattern has * or ?: `layer:Beams` must not also pick "Beams_old",
+        /// because code uses q() to move or delete what it selects.
+        static bool Exact(string text, string pattern) => Fmt.Match(text, pattern);
+
+        /// A layer filter matches the layer by full path or name, and its sub-layers (`layer:FE` → FE, FE::Lines).
+        static bool LayerMatches(Layer l, string pattern) =>
+            Exact(l.FullPath, pattern) || Exact(l.Name, pattern) || l.FullPath.StartsWith(pattern + "::", StringComparison.OrdinalIgnoreCase);
 
         public bool IsEmpty => Ids.Count == 0 && BadHandles.Count == 0 && Layer == null && Type == null && Name == null && Cells == null && Box == null && !Selected;
 
@@ -38,14 +46,9 @@ namespace Nextra.Engine.Rh
                         case "type": f.Type = v.ToLowerInvariant(); break;
                         case "name": f.Name = v; break;
                         case "cells": case "cell": f.Cells = v; break;
-                        case "bbox":
-                            {
-                                var n = v.Split(new[] { ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
-                                if (n.Length == 1) n = v.Split('|');
-                                f.Box = ParseBox(v);
-                                break;
-                            }
-                        default: throw new NxError($"unknown filter key '{k}'", "filter keys: layer: type: name: cells: bbox: plus handles (r3), 'sel', 'hidden'");
+                        case "bbox": f.Box = ParseBox(v); break;                       // touches the box
+                        case "inside": case "in": f.Box = ParseBox(v); f.Inside = true; break;   // fully inside the box
+                        default: throw new NxError($"unknown filter key '{k}'", "filter keys: layer: type: name: cells: bbox: inside: plus handles (r3), 'sel', 'hidden'");
                     }
                 }
                 else if (t == "sel" || t == "selected") f.Selected = true;
@@ -111,14 +114,14 @@ namespace Nextra.Engine.Rh
                 if (Layer != null)
                 {
                     var l = doc.Layers[o.Attributes.LayerIndex];
-                    if (l == null || !(Fmt.Like(l.FullPath, Layer) || Fmt.Like(l.Name, Layer))) continue;
+                    if (l == null || !LayerMatches(l, Layer)) continue;
                 }
-                if (Name != null && !Fmt.Like(o.Attributes.Name, Name)) continue;
+                if (Name != null && !Exact(o.Attributes.Name, Name)) continue;
                 if (!TypeMatches(o.Geometry, Type)) continue;
                 if (Box != null || inCells != null)
                 {
                     var bb = o.Geometry.GetBoundingBox(true);
-                    if (Box != null && !BoundingBox.Intersection(bb, Box.Value).IsValid) continue;
+                    if (Box != null && (Inside ? !(Box.Value.Contains(bb.Min) && Box.Value.Contains(bb.Max)) : !BoundingBox.Intersection(bb, Box.Value).IsValid)) continue;
                     if (inCells != null && !inCells(bb.Center)) continue;
                 }
                 list.Add(o);

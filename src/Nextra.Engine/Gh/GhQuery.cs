@@ -39,13 +39,15 @@ namespace Nextra.Engine.Gh
                 {
                     case "group":
                         {
-                            var gs = all.OfType<GH_Group>().Where(g => Fmt.Like(g.NickName, v)).ToList();
+                            var gs = all.OfType<GH_Group>().Where(g => Fmt.Match(g.NickName, v)).ToList();
+                            if (gs.Count == 0) notes.Add($"no group named '{v}' (groups: {string.Join(", ", all.OfType<GH_Group>().Select(g => g.NickName).Distinct().Take(12))}; use * for patterns)");
                             var ids = new HashSet<Guid>(gs.SelectMany(g => g.ObjectIDs));
                             cur = cur.Where(o => ids.Contains(o.InstanceGuid));
                             break;
                         }
-                    case "type": cur = cur.Where(o => Fmt.Like(o.Name, v)); break;
-                    case "name": case "nick": cur = cur.Where(o => Fmt.Like(o.NickName, v)); break;
+                    // "type:Support" also matches "Support (Karamba3D)"
+                    case "type": cur = cur.Where(o => Fmt.Match(o.Name, v) || Fmt.Match(System.Text.RegularExpressions.Regex.Replace(o.Name ?? "", @"\s*\([^)]*\)\s*$", ""), v)); break;
+                    case "name": case "nick": cur = cur.Where(o => Fmt.Match(o.NickName, v)); break;
                     case "errors": cur = cur.Where(o => o is IGH_ActiveObject ao && ao.RuntimeMessageLevel == GH_RuntimeMessageLevel.Error); break;
                     case "warnings": cur = cur.Where(o => o is IGH_ActiveObject ao && ao.RuntimeMessageLevel >= GH_RuntimeMessageLevel.Warning); break;
                     case "sel": case "selected": cur = cur.Where(o => o.Attributes?.Selected == true); break;
@@ -60,7 +62,7 @@ namespace Nextra.Engine.Gh
                         {
                             var parts = v.Split(':');
                             var o = GhCore.Find(d, parts[0]) ?? throw new NxError($"{parts[0]} not found");
-                            int depth = parts.Length > 1 ? int.Parse(parts[1]) : 1;
+                            int depth = parts.Length > 1 && int.TryParse(parts[1], out var dp) ? Math.Clamp(dp, 1, 10) : 1;
                             var set = Neighbourhood(o, depth);
                             cur = cur.Where(x => set.Contains(x.InstanceGuid));
                             break;

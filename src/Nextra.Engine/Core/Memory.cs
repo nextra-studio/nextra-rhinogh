@@ -134,7 +134,10 @@ namespace Nextra.Engine
             var action = (a.Str("action", "list") ?? "list").ToLowerInvariant();
             switch (action)
             {
-                case "list": case "session": r.Line(Memory.Session()); break;
+                case "list": case "session":
+                    Gh.PluginDocs.NewSession();      // a new conversation starts here: plug-in rules are shown again
+                    r.Line(Memory.Session());
+                    break;
                 case "save_pref": r.Line(Memory.SavePref(Req(a, "text"))); break;
                 case "set_prefs": r.Line(Memory.SetFile("prefs.md", Req(a, "text"), Memory.PrefsCap)); break;
                 case "set_rules": r.Line(Memory.SetFile("rules.md", Req(a, "text"), Memory.RulesCap)); break;

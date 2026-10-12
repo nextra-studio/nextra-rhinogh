@@ -165,7 +165,14 @@ namespace Nextra.Engine.Gh
                     int ix = item.Index;
                     switch (item.Type)
                     {
-                        case GH_Types.gh_bool: { bool x = v == "true" || v == "1"; if (ix >= 0) w.SetBoolean(item.Name, ix, x); else w.SetBoolean(item.Name, x); break; }
+                        case GH_Types.gh_bool:
+                            {
+                                var lv = v.ToLowerInvariant();
+                                bool x = lv == "true" || lv == "1" || lv == "on" || lv == "yes";
+                                if (!x && !(lv == "false" || lv == "0" || lv == "off" || lv == "no")) throw new FormatException();
+                                if (ix >= 0) w.SetBoolean(item.Name, ix, x); else w.SetBoolean(item.Name, x);
+                                break;
+                            }
                         case GH_Types.gh_int32: { int x = int.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetInt32(item.Name, ix, x); else w.SetInt32(item.Name, x); break; }
                         case GH_Types.gh_int64: { long x = long.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetInt64(item.Name, ix, x); else w.SetInt64(item.Name, x); break; }
                         case GH_Types.gh_double: { double x = double.Parse(v, CultureInfo.InvariantCulture); if (ix >= 0) w.SetDouble(item.Name, ix, x); else w.SetDouble(item.Name, x); break; }

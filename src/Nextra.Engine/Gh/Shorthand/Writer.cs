@@ -128,9 +128,10 @@ namespace Nextra.Engine.Gh.Shorthand
 
         static string PortId(IGH_Param p, List<IGH_Param> siblings)
         {
-            var nk = p.NickName;
+            var nk = p.NickName ?? "";
             bool unique = siblings.Count(x => x.NickName == nk) == 1;
-            if (unique && nk.Length > 0 && !nk.Contains(' ') && !nk.Contains(',') && !nk.Contains('=') && !nk.Contains('.')) return nk;
+            // only names the parser reads back as a port: words, or a pure symbol like Smaller Than's `<`
+            if (unique && System.Text.RegularExpressions.Regex.IsMatch(nk, @"^(?:\w+|[<>!|&*/%~]+[=]?|=)$") && !int.TryParse(nk, out _)) return nk;
             return siblings.IndexOf(p).ToString();
         }
 
@@ -167,8 +168,15 @@ namespace Nextra.Engine.Gh.Shorthand
                 case GH_Interval iv: return $"{Fmt.N(iv.Value.T0)}..{Fmt.N(iv.Value.T1)}";
                 case GH_Colour c: return $"#{c.Value.R:X2}{c.Value.G:X2}{c.Value.B:X2}";
                 case GH_Plane pl:
-                    if (pl.Value.ZAxis.IsParallelTo(Rhino.Geometry.Vector3d.ZAxis) == 1 && pl.Value.Origin.DistanceTo(Rhino.Geometry.Point3d.Origin) < 1e-9) return "XY";
-                    return $"plane@{Fmt.P(pl.Value.Origin)}";
+                    {
+                        var v = pl.Value;
+                        bool atO = v.Origin.DistanceTo(Rhino.Geometry.Point3d.Origin) < 1e-9;
+                        bool Same(Rhino.Geometry.Plane w) => v.XAxis.IsParallelTo(w.XAxis) == 1 && v.YAxis.IsParallelTo(w.YAxis) == 1;
+                        if (atO && Same(Rhino.Geometry.Plane.WorldXY)) return "XY";
+                        if (atO && Same(Rhino.Geometry.Plane.WorldZX)) return "XZ";
+                        if (atO && Same(Rhino.Geometry.Plane.WorldYZ)) return "YZ";
+                        return $"<plane @{Fmt.P(v.Origin)} n{Fmt.V(v.ZAxis)}>";   // not settable as a literal: wire a Plane component
+                    }
                 default:
                     {
                         var rid = g.GetType().GetProperty("ReferenceID")?.GetValue(g);

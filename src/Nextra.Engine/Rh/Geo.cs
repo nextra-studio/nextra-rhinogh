@@ -29,10 +29,24 @@ namespace Nextra.Engine.Rh
         static string AxisWord(Vector3d v)
         {
             v.Unitize();
-            double z = Math.Abs(v.Z);
-            if (z > 0.985) return "vertical";
-            if (z < 0.02) return "horiz" + Fmt.V(new Vector3d(Math.Abs(v.X) > 1e-9 && v.X < 0 ? -v.X : v.X, v.X < 0 ? -v.Y : v.Y, 0));
+            var cls = AxisClass(v);
+            if (cls == "vertical") return cls;
+            if (cls == "horizontal")
+            {
+                // one canonical sign per direction: +x / +y / (0.71,0.71,0)
+                var h = new Vector3d(v.X, v.Y, 0);
+                if (h.X < -1e-9 || (Math.Abs(h.X) <= 1e-9 && h.Y < 0)) h = -h;
+                return "horiz" + Fmt.V(h);
+            }
             return "inclined" + Fmt.V(v.Z < 0 ? -v : v);
+        }
+
+        /// vertical | horizontal | inclined — shared by one-line descriptions and aggregated deltas.
+        public static string AxisClass(Vector3d v)
+        {
+            v.Unitize();
+            double z = Math.Abs(v.Z);
+            return z > 0.985 ? "vertical" : z < 0.02 ? "horizontal" : "inclined";
         }
     }
 

@@ -51,10 +51,14 @@ namespace Nextra.Host
             _started = DateTime.Now.ToString("s");
             WriteInfo();
             // keep the published file name current so clients can bind to "the Rhino that has house.3dm open"
-            RhinoDoc.EndOpenDocument += (s, e) => WriteInfo();
-            RhinoDoc.EndSaveDocument += (s, e) => WriteInfo();
-            RhinoDoc.NewDocument += (s, e) => WriteInfo();
-            RhinoDoc.ActiveDocumentChanged += (s, e) => WriteInfo();
+            if (!_hooked)
+            {
+                _hooked = true;   // once per Rhino session, not again on every NextraOn / restart
+                RhinoDoc.EndOpenDocument += (s, e) => WriteInfo();
+                RhinoDoc.EndSaveDocument += (s, e) => WriteInfo();
+                RhinoDoc.NewDocument += (s, e) => WriteInfo();
+                RhinoDoc.ActiveDocumentChanged += (s, e) => WriteInfo();
+            }
 
             _running = true;
             _thread = new Thread(AcceptLoop) { IsBackground = true, Name = "NextraServer" };
@@ -63,11 +67,12 @@ namespace Nextra.Host
         }
 
         static string _started;
+        static bool _hooked;
 
         /// server-<pid>.json: port, token, pid, start time and the open file (name + path) of this Rhino.
         public static void WriteInfo()
         {
-            if (Port == 0) return;
+            if (Port == 0 || !_running && _listener == null) return;   // stopped: never re-publish a dead port
             string name = null, path = null;
             try { var d = RhinoDoc.ActiveDoc; path = d?.Path; name = d?.Name; } catch { }
             var info = new JsonObject
@@ -91,6 +96,8 @@ namespace Nextra.Host
         {
             _running = false;
             try { _listener?.Stop(); } catch { }
+            _listener = null;
+            Port = 0;
             try { File.Delete(Path.Combine(AppDir, $"server-{Environment.ProcessId}.json")); } catch { }
         }
 
@@ -119,7 +126,7 @@ namespace Nextra.Host
                     if (!req.Headers.TryGetValue("x-nextra-token", out var tok) || tok != Token)
                     {
                         code = 401;
-                        body = "{\"ok\":false,\"text\":\"bad token: read %APPDATA%/Nextra/server.json\"}";
+                        body = "{\"ok\":false,\"text\":\"bad token: read %APPDATA%/Nextra/server-<pid>.json (Rhino was restarted?)\"}";
                     }
                     else { LastClientCall = DateTime.Now; body = Route(req); }
                 }

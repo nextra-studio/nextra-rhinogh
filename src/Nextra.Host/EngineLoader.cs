@@ -81,21 +81,38 @@ namespace Nextra.Host
             }
         }
 
+        /// Loads the new engine completely before retiring the old one: a broken or half-written dll leaves the
+        /// previous engine working (and the error is reported) instead of leaving no engine at all.
         static void Load(string path, DateTime stamp)
         {
+            Func<string, string, IDictionary<string, object>, string> newCall;
+            Action newShutdown;
+            MethodInfo init;
+            try
+            {
+                var bytes = ReadShared(path);
+                var pdbPath = Path.ChangeExtension(path, ".pdb");
+                var pdb = File.Exists(pdbPath) ? ReadShared(pdbPath) : null;
+                var ctx = new EngineContext("NextraEngine#" + (_generation + 1));
+                var asm = pdb != null ? ctx.LoadFromStream(new MemoryStream(bytes), new MemoryStream(pdb)) : ctx.LoadFromStream(new MemoryStream(bytes));
+                var entry = asm.GetType("Nextra.Engine.Entry", throwOnError: true);
+                var call = entry.GetMethod("Call", BindingFlags.Public | BindingFlags.Static) ?? throw new MissingMethodException("Entry.Call");
+                newCall = (Func<string, string, IDictionary<string, object>, string>)Delegate.CreateDelegate(typeof(Func<string, string, IDictionary<string, object>, string>), call);
+                var sd = entry.GetMethod("Shutdown", BindingFlags.Public | BindingFlags.Static);
+                newShutdown = sd == null ? null : (Action)Delegate.CreateDelegate(typeof(Action), sd);
+                init = entry.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
+            }
+            catch (Exception e)
+            {
+                if (_call == null) throw;
+                Rhino.RhinoApp.WriteLine($"Nextra: new engine at {path} failed to load ({e.Message}); still using gen {_generation}");
+                _stamp = stamp;   // do not retry on every call; the next rebuild changes the stamp
+                return;
+            }
             Unload();
-            var bytes = ReadShared(path);
-            var pdbPath = Path.ChangeExtension(path, ".pdb");
-            var pdb = File.Exists(pdbPath) ? ReadShared(pdbPath) : null;
             _generation++;
-            var ctx = new EngineContext("NextraEngine#" + _generation);
-            var asm = pdb != null ? ctx.LoadFromStream(new MemoryStream(bytes), new MemoryStream(pdb)) : ctx.LoadFromStream(new MemoryStream(bytes));
-            var entry = asm.GetType("Nextra.Engine.Entry", throwOnError: true);
-            var call = entry.GetMethod("Call", BindingFlags.Public | BindingFlags.Static);
-            _call = (Func<string, string, IDictionary<string, object>, string>)Delegate.CreateDelegate(typeof(Func<string, string, IDictionary<string, object>, string>), call);
-            var sd = entry.GetMethod("Shutdown", BindingFlags.Public | BindingFlags.Static);
-            _shutdown = sd == null ? null : (Action)Delegate.CreateDelegate(typeof(Action), sd);
-            var init = entry.GetMethod("Init", BindingFlags.Public | BindingFlags.Static);
+            _call = newCall;
+            _shutdown = newShutdown;
             State["host.port"] = Server.Port;
             State["host.appdir"] = Server.AppDir;
             State["host.dir"] = Path.GetDirectoryName(typeof(EngineLoader).Assembly.Location);

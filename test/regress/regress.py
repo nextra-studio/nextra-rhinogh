@@ -486,7 +486,10 @@ rot = Rotate (G=rec.R, A=ang, P=pl)
 lft = Loft (C=rot.G^f)
 vl = Value List {items="A:0|B:1|C:2", sel=1}
 ex = Expression {expr="x*2"}
-tg = Boolean Toggle {v=true}"""}, expect=[r"ok: 12/12"])
+tg = Boolean Toggle {v=true}
+lt = Smaller Than (A=ser, B=10)
+cp = Cull Pattern (L=ser, P=lt.<)
+pp = Plane {set=XZ}"""}, expect=[r"ok: 15/15"])
     src = c.call("query", {"scope": "gh", "filter": "all"}, expect=[r"Loft"])
     body = "\n".join(l for l in src.splitlines() if not re.match(r"^\d+ object|^---|^\s+(=>|!|\?)", l))
     t2 = c.call("gh_edit", {"new": True, "ops": body}, expect=[r"ok: "], forbid=("ERROR", "partial", "FAILED"))
@@ -596,8 +599,43 @@ def c22():
             pass
 
 
+def c23():
+    c = Case("23_selection_safety", "exact layer/name/group matching, inside:, handles stable across GH documents")
+    reset(c)
+    c.call("run", {"code": """for nm in ["Beams", "Beams_old", "FE", "FE::Lines"]:
+    if doc.Layers.FindByFullPath(nm, -1) < 0:
+        if "::" in nm:
+            ly = Rhino.DocObjects.Layer(); ly.Name = nm.split("::")[1]; ly.ParentLayerId = doc.Layers[doc.Layers.FindByFullPath("FE", -1)].Id; doc.Layers.Add(ly)
+        else:
+            doc.Layers.Add(nm, System.Drawing.Color.Black)
+def add(pt, layer, name):
+    a = Rhino.DocObjects.ObjectAttributes(); a.LayerIndex = doc.Layers.FindByFullPath(layer, -1); a.Name = name
+    doc.Objects.AddPoint(rg.Point3d(*pt), a)
+add((0,0,0), "Beams", "B1"); add((5,0,0), "Beams_old", "B10"); add((0,0,9), "FE::Lines", "L1")"""}, expect=[r"\+3|rhino delta"])
+    c.call("query", {"filter": "layer:Beams"}, expect=[r"^1 object", r"\"B1\""], forbid=("B10", "ERROR"))
+    c.call("query", {"filter": "layer:Beams*"}, expect=[r"^2 object"])
+    c.call("query", {"filter": "name:B1"}, expect=[r"^1 object"], forbid=("B10", "ERROR"))
+    c.call("query", {"filter": "layer:FE"}, expect=[r"^1 object", r"FE::Lines"])
+    c.call("query", {"filter": "inside:-1,-1,-1,1,1,1"}, expect=[r"^1 object", r"\"B1\""])
+    c.call("query", {"filter": "bbox:-1,-1,-1,6,1,1"}, expect=[r"^2 object"])
+    # GH: groups with similar names, handles across documents
+    os.makedirs(TMP, exist_ok=True)
+    t = c.call("gh_edit", {"new": True, "ops": "## Inputs #DBABFF\na = Number Slider {v=1} \"A\"\n## Inputs 2 #DBABFF\nb = Number Slider {v=2} \"B\""}, expect=[r"ok: 2/2"])
+    m = ids(t)
+    c.call("query", {"scope": "gh", "filter": "group:Inputs"}, expect=[r"^1 object", r"\"A\""], forbid=("\"B\"", "ERROR"))
+    c.call("query", {"scope": "gh", "filter": "group:Input*"}, expect=[r"^2 object"])
+    pa = os.path.join(TMP, "doc_a.gh")
+    c.call("gh_edit", {"save": pa}, expect=[r"saved"])
+    c.call("gh_edit", {"new": True, "ops": "x = Panel {text=\"other doc\"}\ny = Number Slider {v=9} \"Y\""}, expect=[r"ok: 2/2"])
+    c.call("gh_edit", {"open": pa}, expect=[r"already open|switched|opened"])
+    c.call("query", {"scope": "gh", "filter": m["a"]}, expect=[r"\"A\""], forbid=("other doc", "ERROR"))
+    t = c.call("gh_edit", {"ops": "py = Python 3 Script -> (o) {code=\"o = 1\"}"}, expect=[r"ok: 1/1"])
+    py = ids(t)["py"]
+    t = c.call("gh_edit", {"script": {"handle": py, "mirror": True}}, expect=[r"doc_a_g\d+\.py"])
+
+
 CTX = {}
-CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22]
+CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23]
 
 
 def summary():

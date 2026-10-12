@@ -325,8 +325,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 var em = Regex.Match(rhs, @"\^e\((.*)\)\s*$");
                 if (em.Success) { p.Expr = em.Groups[1].Value; rhs = rhs.Substring(0, em.Index).Trim(); }
                 var fm = Regex.Match(rhs, @"\^([a-z]+)\s*$");
-                if (fm.Success && !rhs.TrimEnd().EndsWith("\"")) { p.Flags = fm.Groups[1].Value; rhs = rhs.Substring(0, fm.Index).Trim(); }
-                else if (fm.Success) { p.Flags = fm.Groups[1].Value; rhs = rhs.Substring(0, fm.Index).Trim(); }
+                if (fm.Success) { p.Flags = fm.Groups[1].Value; rhs = rhs.Substring(0, fm.Index).Trim(); }
                 p.Value = rhs.Length == 0 ? null : ParseValue(rhs);
                 (output ? n.OutputMods : n.Inputs).Add(p);
             }
@@ -370,8 +369,8 @@ namespace Nextra.Engine.Gh.Shorthand
             var iv = Regex.Match(s, @"^([-+]?[\d.eE+-]+)\s*\.\.\s*([-+]?[\d.eE+-]+)$");
             if (iv.Success) return new Val { Kind = VK.Interval, Xyz = new[] { double.Parse(iv.Groups[1].Value, C), double.Parse(iv.Groups[2].Value, C) } };
             if (NumRx.IsMatch(s)) return new Val { Kind = VK.Num, Num = double.Parse(s, C) };
-            // references: a, a.0, a.R, a+b.1, r3+r4
-            if (Regex.IsMatch(s, @"^[A-Za-z_][\w]*(\.[\w ]+)?(\s*\+\s*[A-Za-z_][\w]*(\.[\w ]+)?)*$") && !configMode)
+            // references: a, a.0, a.R, a+b.1, r3+r4, and symbol ports like Smaller Than's `g10.<` / `g10.<=`
+            if (Regex.IsMatch(s, @"^[A-Za-z_][\w]*(\.(?:[\w ]+|[<>=!|&*/%^~-]+))?(\s*\+\s*[A-Za-z_][\w]*(\.(?:[\w ]+|[<>=!|&*/%^~-]+))?)*$") && !configMode)
             {
                 var refs = s.Split('+').Select(x => SplitRef(x.Trim())).ToList();
                 return new Val { Kind = VK.Ref, Refs = refs };

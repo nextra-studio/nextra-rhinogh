@@ -78,6 +78,7 @@ namespace Nextra.Engine.Gh
                 return $"{System.IO.Path.GetFileName(path)} is already open: switched to it ({open.ObjectCount} objects). reload:true re-reads it from disk";
             }
             if (open != null) { Instances.DocumentServer.RemoveDocument(open); }
+            bool wasEnabled = GH_Document.EnableSolutions;   // the user may have solutions switched off: keep that
             GH_Document.EnableSolutions = false;
             var sb = new StringBuilder();
             try
@@ -91,8 +92,9 @@ namespace Nextra.Engine.Gh
                 sb.Append($"opened {System.IO.Path.GetFileName(path)}: {doc.ObjectCount} objects");
                 if (missing.Count > 0) sb.Append($"; MISSING plug-in components: {string.Join(", ", missing.Take(15))}");
             }
-            finally { GH_Document.EnableSolutions = true; }
-            if (solve)
+            finally { GH_Document.EnableSolutions = wasEnabled; }
+            if (solve && !wasEnabled) sb.Append("; solutions are disabled in Grasshopper (not solved)");
+            else if (solve)
             {
                 var sw = System.Diagnostics.Stopwatch.StartNew();
                 doc.NewSolution(false);

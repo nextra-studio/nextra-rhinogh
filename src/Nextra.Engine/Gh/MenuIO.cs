@@ -25,9 +25,10 @@ namespace Nextra.Engine.Gh
 
         static string Clean(string t) => (t ?? "").Replace("&", "").Trim();
 
-        static List<(ToolStripMenuItem item, string path)> Items(IGH_DocumentObject o)
+        static List<(ToolStripMenuItem item, string path)> Items(IGH_DocumentObject o) => Items(o, new ToolStripDropDownMenu());
+
+        static List<(ToolStripMenuItem item, string path)> Items(IGH_DocumentObject o, ToolStripDropDownMenu menu)
         {
-            var menu = new ToolStripDropDownMenu();
             try { o.AppendMenuItems(menu); } catch (Exception e) { throw new NxError($"{o.Name} menu could not be built: {e.Message}"); }
             var res = new List<(ToolStripMenuItem, string)>();
             void Walk(ToolStripItemCollection items, string prefix)
@@ -47,10 +48,11 @@ namespace Nextra.Engine.Gh
         /// e.g. "[x] Union Box | [ ] Avoid duplicates | Mode>Linear"
         public static string Describe(IGH_DocumentObject o)
         {
+            using var menu = new ToolStripDropDownMenu();
             try
             {
                 // component-specific items only: skip GH standard items, per-input/output submenus and disabled ones
-                var items = Items(o).Where(x => !Std.Contains(Clean(x.item.Text)) && !x.path.Contains("Wire Display>") && x.item.Enabled
+                var items = Items(o, menu).Where(x => !Std.Contains(Clean(x.item.Text)) && !x.path.Contains("Wire Display>") && x.item.Enabled
                                                && !x.path.StartsWith("Input:") && !x.path.StartsWith("Output:") && !x.path.Contains(">Help")).ToList();
                 if (items.Count == 0) return null;
                 return string.Join(" | ", items.Take(30).Select(x => (x.item.CheckOnClick || x.item.Checked ? (x.item.Checked ? "[x] " : "[ ] ") : "") + x.path + (x.item.Enabled ? "" : " (disabled)")));
@@ -64,7 +66,8 @@ namespace Nextra.Engine.Gh
             string want = null;
             var m = System.Text.RegularExpressions.Regex.Match(spec, @"^(.*?)\s*:\s*(on|off|true|false)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             if (m.Success) { spec = m.Groups[1].Value; want = m.Groups[2].Value.ToLowerInvariant(); }
-            var items = Items(o);
+            using var menu = new ToolStripDropDownMenu();
+            var items = Items(o, menu);
             var hit = items.Where(x => x.path.Equals(spec, StringComparison.OrdinalIgnoreCase) || Clean(x.item.Text).Equals(spec, StringComparison.OrdinalIgnoreCase)).ToList();
             if (hit.Count == 0) hit = items.Where(x => x.path.IndexOf(spec, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
             if (hit.Count == 0) throw new NxError($"no menu item '{spec}' on {o.Name}", "menu: " + (Describe(o) ?? "(only standard items)"));

@@ -8,13 +8,14 @@ namespace Nextra.Engine
 {
     /// GUID <-> short handle tables (r12 for Rhino objects, g4 for GH objects).
     /// Stored in the host state bag using BCL types only, so they survive engine hot-reloads.
-    /// A table resets when the document changes (new Rhino doc / different GH document).
+    /// One table per document: switching between GH documents (or Rhino files) and back keeps every handle
+    /// meaning the same object, instead of renumbering and letting an old `g12` hit a different node.
     public static class Handles
     {
         static Dictionary<string, object> Table(string prefix, object docKey)
         {
-            var key = "handles." + prefix;
-            if (!Entry.State.TryGetValue(key, out var o) || !(o is Dictionary<string, object> t) || !Equals(t["doc"], docKey))
+            var key = "handles." + prefix + "." + docKey;
+            if (!Entry.State.TryGetValue(key, out var o) || !(o is Dictionary<string, object> t))
             {
                 t = new Dictionary<string, object>
                 {
@@ -120,7 +121,12 @@ namespace Nextra.Engine
             return res.SelectMany(t => t.Contains(':') ? new[] { t } : t.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
 
-        /// Wildcard match (* and ?), case-insensitive.
+        /// Selector match: exact (case-insensitive) unless the pattern has * or ?. Used where a selection is acted on
+        /// (layer:Beams must not also pick "Beams_old"; group:Inputs must not also tidy "Inputs 2").
+        public static bool Match(string text, string pattern) =>
+            pattern == null || (pattern.Contains('*') || pattern.Contains('?') ? Like(text, pattern) : string.Equals((text ?? "").Trim(), pattern.Trim(), StringComparison.OrdinalIgnoreCase));
+
+        /// Wildcard match (* and ?), case-insensitive; without wildcards a substring match (for searches).
         public static bool Like(string text, string pattern)
         {
             if (string.IsNullOrEmpty(pattern)) return true;

@@ -237,9 +237,16 @@ namespace Nextra.Engine.Gh
 
         public static string Ext(IGH_Component c) => Lang(c) == "cs" ? ".cs" : ".py";
 
+        /// <gh file name or unsaved-id>_<handle>.py: handles are per document, so the document is part of the name.
+        public static string MirrorPath(GH_Document d, IGH_Component c)
+        {
+            var stem = d.IsFilePathDefined ? Path.GetFileNameWithoutExtension(d.FilePath) : "unsaved-" + d.DocumentID.ToString("N").Substring(0, 8);
+            return Path.Combine(ScriptDir(d), $"{stem}_{GhCore.Handle(d, c)}{Ext(c)}");
+        }
+
         public static string Mirror(GH_Document d, IGH_Component c)
         {
-            var path = Path.Combine(ScriptDir(d), GhCore.Handle(d, c) + Ext(c));
+            var path = MirrorPath(d, c);
             File.WriteAllText(path, GetCode(c));
             return path;
         }
@@ -247,6 +254,7 @@ namespace Nextra.Engine.Gh
         public static string Numbered(string code, int from = 1, int to = int.MaxValue)
         {
             var lines = code.Split('\n');
+            from = Math.Max(1, from);
             to = Math.Min(to, lines.Length);
             return string.Join("\n", Enumerable.Range(from, Math.Max(0, to - from + 1)).Select(i => $"{i,4}| {lines[i - 1]}"));
         }

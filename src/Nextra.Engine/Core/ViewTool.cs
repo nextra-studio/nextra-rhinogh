@@ -45,8 +45,10 @@ namespace Nextra.Engine
 
         public static string SaveImage(Bitmap bmp, string prefix)
         {
-            var dir = Path.Combine(Entry.AppDir, "captures", DateTime.Now.ToString("yyyyMMdd"));
+            var root = Path.Combine(Entry.AppDir, "captures");
+            var dir = Path.Combine(root, DateTime.Now.ToString("yyyyMMdd"));
             Directory.CreateDirectory(dir);
+            PruneOldCaptures(root);
             var name = $"{prefix}_{DateTime.Now:HHmmss_fff}.png";
             var path = Path.Combine(dir, name);
             bmp.Save(path, System.Drawing.Imaging.ImageFormat.Png);
@@ -58,14 +60,29 @@ namespace Nextra.Engine
             return path;
         }
 
+        /// Images sent to the LLM are only needed for the conversation: keep the last 7 days (dated folders only).
+        static void PruneOldCaptures(string root)
+        {
+            if (Entry.State.ContainsKey("captures.pruned")) return;
+            Entry.State["captures.pruned"] = true;
+            try
+            {
+                var cutoff = DateTime.Now.Date.AddDays(-7);
+                foreach (var d in Directory.GetDirectories(root))
+                    if (DateTime.TryParseExact(Path.GetFileName(d), "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var day) && day < cutoff)
+                        Directory.Delete(d, true);
+            }
+            catch { }
+        }
+
         public static string Ranges(IEnumerable<string> handles)
         {
             // r1 r2 r3 r7 → r1-r3 r7
-            var groups = handles.GroupBy(h => new string(h.TakeWhile(char.IsLetter).ToArray()));
+            var groups = handles.Where(h => !string.IsNullOrEmpty(h)).GroupBy(h => new string(h.TakeWhile(char.IsLetter).ToArray()));
             var parts = new List<string>();
             foreach (var g in groups)
             {
-                var nums = g.Select(h => int.TryParse(h.Substring(g.Key.Length), out var n) ? n : -1).Where(n => n >= 0).OrderBy(n => n).ToList();
+                var nums = g.Select(h => int.TryParse(h.Substring(g.Key.Length), out var n) ? n : -1).Where(n => n >= 0).Distinct().OrderBy(n => n).ToList();
                 for (int i = 0; i < nums.Count; i++)
                 {
                     int j = i;
@@ -82,8 +99,6 @@ namespace Nextra.Engine
         class CaptureConduit : DisplayConduit
         {
             public HashSet<Guid> Show;
-            public Transform W2S = Transform.Unset;
-            public int VW, VH;
             public List<GeometryBase> Geometry;   // unbaked GH preview geometry drawn only during capture
             readonly DisplayMaterial _mat = new DisplayMaterial(Color.FromArgb(200, 70, 70), 0.35);
 
@@ -116,17 +131,6 @@ namespace Nextra.Engine
                 if (Show != null && e.RhinoObject != null && !Show.Contains(e.RhinoObject.Id)) e.CullObject = true;
             }
 
-            public int ExpectW, ExpectH, Hits; public string Seen;
-
-            protected override void DrawForeground(DrawEventArgs e)
-            {
-                var s = e.Viewport.Size;
-                Seen = (Seen ?? "") + $"{s.Width}x{s.Height} ";
-                // only the offscreen capture pass (screen redraws of the same view also call this)
-                if (ExpectW > 0 && (s.Width != ExpectW || s.Height != ExpectH)) return;
-                W2S = e.Viewport.GetTransform(CoordinateSystem.World, CoordinateSystem.Screen);
-                VW = s.Width; VH = s.Height; Hits++;
-            }
         }
 
         static Dictionary<string, object> Record
@@ -155,7 +159,7 @@ namespace Nextra.Engine
         static RhinoView PickView(RhinoDoc doc, string name, out DefinedViewportProjection? proj, out bool iso)
         {
             proj = null; iso = false;
-            var active = doc.Views.ActiveView ?? doc.Views.GetViewList(true, false).FirstOrDefault();
+            var active = doc.Views.ActiveView ?? doc.Views.GetViewList(Rhino.Display.ViewTypeFilter.Model).FirstOrDefault();
             if (active == null) throw new NxError("no Rhino view available", "open a viewport in Rhino");
             if (string.IsNullOrEmpty(name) || name == "current" || name == "active") return active;
             var n = name.ToLowerInvariant();
@@ -255,7 +259,6 @@ namespace Nextra.Engine
                     }
                     else if (focus == "keep" && rec != null) { vp.SetViewProjection((ViewportInfo)rec["cam"], true); how = "previous camera"; }
                     else if (focus == "keep") how = "user camera";
-                    else if (ctx.ZoomBox.HasValue) { vp.ZoomBoundingBox(ctx.ZoomBox.Value); how = "zoom to GH preview"; }
                     else { vp.ZoomExtents(); how = "zoom extents"; }
                     if (isolate && focusIds != null) conduit.Show = focusIds;
                 }

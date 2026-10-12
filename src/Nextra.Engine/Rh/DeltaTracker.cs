@@ -89,7 +89,7 @@ namespace Nextra.Engine.Rh
         {
             var l = _doc.Layers[o.Attributes.LayerIndex]?.FullPath ?? "?";
             var obb = Geo.ComputeObb(o.Geometry);
-            string dims = obb == null ? "" : " " + Fmt.Dims(R(obb.L), R(obb.W), R(obb.H)) + " " + obb.Shape + (obb.Shape == "linear" ? (Math.Abs(obb.LongAxis.Z) > 0.98 ? " vertical" : " horizontal") : "");
+            string dims = obb == null ? "" : " " + Fmt.Dims(R(obb.L), R(obb.W), R(obb.H)) + " " + obb.Shape + (obb.Shape == "linear" ? " " + Obb.AxisClass(obb.LongAxis) : "");
             return (Added.Contains(o.Id) ? "+ " : "~ ") + $"[{l}] {Geo.TypeWord(o.Geometry)}{dims}";
         }
 

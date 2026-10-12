@@ -247,7 +247,7 @@ namespace Nextra.Engine.Gh
             if (a.Has("code")) code = a.Str("code");
             else if (a.Has("patch")) code = Patch.Apply(cur, a.Arr("patch"));
             else if (a.Has("file")) { var f = a.Str("file"); if (!File.Exists(f)) throw new NxError("file not found: " + f); code = File.ReadAllText(f); }
-            else if (a.Bool("from_mirror", false)) { var f = Path.Combine(Scripts.ScriptDir(d), h + Scripts.Ext(comp)); if (!File.Exists(f)) throw new NxError("no mirror file " + f, "script {handle, mirror:true} writes it first"); code = File.ReadAllText(f); }
+            else if (a.Bool("from_mirror", false)) { var f = Scripts.MirrorPath(d, comp); if (!File.Exists(f)) throw new NxError("no mirror file " + f, "script {handle, mirror:true} writes it first"); code = File.ReadAllText(f); }
             else if (a.Bool("mirror", false)) return "mirror: " + Scripts.Mirror(d, comp) + " (edit the file, then script {handle, from_mirror:true})";
             else throw new NxError("script needs code | patch [{find,replace}] | file | from_mirror | mirror");
             code = code.Replace("\r\n", "\n");

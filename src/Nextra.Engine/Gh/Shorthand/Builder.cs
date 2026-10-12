@@ -517,7 +517,7 @@ namespace Nextra.Engine.Gh.Shorthand
                 case VK.List: foreach (var x in v.Items) foreach (var y in Values(x, p)) yield return y; break;
                 case VK.Num: yield return v.Num; break;
                 case VK.Bool: yield return v.Str == "true"; break;
-                case VK.Str when IsGeoParam(p) && System.Text.RegularExpressions.Regex.IsMatch(v.Str, @"^(layer|type|name|sel|bbox|cells):|^sel$"):
+                case VK.Str when IsGeoParam(p) && System.Text.RegularExpressions.Regex.IsMatch(v.Str, @"^(layer|type|name|sel|bbox|inside|cells):|^sel$"):
                     {   // reference every Rhino object matching a filter: {ref="layer:FE::Lines"}
                         var objs = Rh.Filter.Parse(v.Str).Apply(Rhino.RhinoDoc.ActiveDoc);
                         if (objs.Count == 0) throw new NxError($"Rhino filter '{v.Str}' matched nothing");
