@@ -87,3 +87,15 @@ config.json has a test memory_dir (restore from config.json.bak at the end); use
 - [x] H6 Code review (engine + host) → fixed: per-document handle tables, exact layer/name/group selectors (+ `inside:`), symbol ports (`g10.<`) + XZ/YZ plane literals round-trip, mirror file names per document, plug-in rules reset per conversation, GH solutions-disabled respected on open, StateIO bool parsing, menu disposal, capture pruning (7 days), server stop never re-publishes a dead port / no duplicate doc hooks, engine reload keeps the old engine if the new dll fails. Regression 194/194 on a fresh Rhino, and 194/194 again in the same session.
 - [x] H7 Benchmark v2 (test/v2, REPORT.md): A office 548 objects + edits + undo, B attractor facade + 3 edits, C organic gridshell + 2 edits; output / input / fixed / billed tokens per task; all 9 system×scenario results checked correct. Whole session: Nextra ≈9.1k, McNeel ≈32.9k (3.6×), RhinoMCP ≈64.9k (7.1×); billed input no cache 122k / 625k / 1.06M. Found + fixed: results through Custom Preview, false conversion notes, phantom checkpoint ids.
 - [x] H8 Environment restored (old Nextra-gh/-rhino packages back, RhinoMCP uninstalled, test memory_dir removed from config, user's frame_building.py naming fixed with .bak), README / dev docs / test README updated, claude.ai skill zip in package.ps1. Final regression in the normal environment: 194/194.
+
+## I. v3 — all cases again + three-way comparison on every case (2026-10-12) — resume point
+Scope agreed with the user: every v1 case 01–16 on all three systems (Nextra, McNeel Rhino-MCP-Platform, RhinoMCP) where the
+system can do it at all ("not possible" + reason otherwise), plus 4 new cases: 17 freeform Rhino, 18 GH data trees,
+19 large-model inspection, 20 Karamba shell. Input/output tokens per case, correctness checked neutrally. Results in test/v3/.
+During the run: RhinoMCP installed temporarily (uninstall at the end), McNeel MCPStart on :5123.
+- [ ] I1 Nextra regression from scratch (test/regress) → fix anything found
+- [ ] I2 Nextra-only first pass of new cases 17–20 (add them to the regression suite)
+- [ ] I3 v3 harness test/v3 (common clients + one module per case, neutral checks)
+- [ ] I4 Run cases 01–20 on all three systems, fix harness/engine issues, rerun until all correct (or "not possible" with reason)
+- [ ] I5 Report test/v3/REPORT.md + tables; README / test index / dev docs
+- [ ] I6 Regression again, restore environment (uninstall RhinoMCP), commit + push
