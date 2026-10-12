@@ -75,41 +75,27 @@ def walkthrough(filename, title, subtitle, steps, footer):
     with open(os.path.join(out, filename), 'w', encoding='utf-8', newline='\n') as f:
         f.write('<svg xmlns="http://www.w3.org/2000/svg" width="920" height="330" viewBox="0 0 920 330" font-family="Segoe UI,Helvetica,Arial,sans-serif">'+body+'</svg>\n')
 
-walkthrough('claude-desktop-marketplace.svg', 'A · Add marketplace — Claude Desktop',
-    'Add this public GitHub repository to your plugin sources.', [
-    ('Open Plugins', ['Customize → Plugins', 'Add → Add marketplace', 'Add from a repository']),
-    ('Add repository', ['Tatsuki0123/nextra-rhinogh', 'Paste the name above.', 'Sync / add the marketplace.']),
-    ('Install Nextra', ['Open nextra-rhinogh.', 'Select Install.', 'Start a Cowork session.'])],
-    'Rhino must be open with Nextra installed. The plugin includes the tools and skill.')
+walkthrough('marketplace-add.svg', 'A · Add marketplace',
+    'Claude and ChatGPT / Codex desktop: use your app’s plugin manager.', [
+    ('Add marketplace', ['Open the plugin manager.', 'GPT: Create plugin →', 'Add a marketplace']),
+    ('Add repository', ['Tatsuki0123/nextra-rhinogh', 'Paste the repository name.', 'Add / sync the marketplace.']),
+    ('Install Nextra', ['Open the Nextra marketplace.', 'Choose the Rhino plugin.', 'Select Install.'])],
+    'Start a new session with Rhino open. App labels vary; this is a workflow diagram.')
 
-walkthrough('claude-desktop-plugin.svg', 'B · Download ZIP — Claude Desktop',
-    'Click the README download link, then upload the ready-made plugin.', [
-    ('Download', ['nextra-rhinogh-plugin.zip', 'Save the ZIP.', 'Keep it zipped.']),
-    ('Upload', ['Customize → Plugins', 'Add → Upload plugin', 'Select the downloaded ZIP.']),
-    ('Finish installation', ['Complete the app prompts.', 'Start a Cowork session.', 'Keep Rhino open.'])],
-    'One package contains both the local Rhino tools and Nextra skill.')
-
-walkthrough('chatgpt-marketplace.svg', 'A · Add marketplace — ChatGPT / Codex',
-    'Open the public repository as a local marketplace project.', [
-    ('Get marketplace', ['Click Download marketplace.', 'Extract All.', 'Folder: nextra-rhinogh-main']),
-    ('Open in Codex', ['Add / open a project.', 'Choose the extracted folder.', 'Trust it; restart the app.']),
-    ('Install Nextra', ['Open Plugins Directory.', 'Source: Nextra', 'Nextra for Rhino → Install'])],
-    'If Nextra is already a configured source, select it directly in Plugins Directory.')
-
-walkthrough('chatgpt-folder.svg', 'B · Download ZIP — ChatGPT / Codex',
-    'Install the kit through the local marketplace in Plugins Directory.', [
-    ('Download + extract', ['Click Download agent kit ZIP.', 'Right-click → Extract All.', 'Keep the extracted folder.']),
-    ('Open in Codex', ['Choose nextra-rhinogh-kit.', 'It contains AGENTS.md.', 'Trust it; restart the app.']),
-    ('Install Nextra', ['Open Plugins Directory.', 'Source: Nextra', 'Nextra for Rhino → Install'])],
-    'OpenAI local installation uses an extracted folder. Start a new chat after installing.')
+walkthrough('plugin-upload.svg', 'B · Download and upload ZIP',
+    'Choose the Claude or GPT plugin download in the README.', [
+    ('Download ZIP', ['Click your app’s download.', 'Save the plugin ZIP.', 'Tools + skill are included.']),
+    ('Import plugin', ['GPT: Create plugin →', 'Upload plugin archive', 'Select the downloaded ZIP.']),
+    ('Finish installation', ['Complete the import.', 'Start a new session.', 'Keep Rhino open.'])],
+    'Claude Desktop uses Cowork for local Rhino tools. Diagram labels may differ from your app.')
 
 # Overview: two equally prominent options, with app-specific handling underneath.
 body = '<rect width="920" height="290" rx="18" fill="#f6f8fa"/>'
 body += '<text x="28" y="42" font-size="24" font-weight="700" fill="#1f2328">Choose your installation option</text>'
 body += '<text x="28" y="70" font-size="14" fill="#57606a">Install in Rhino first. Then choose A or B for your AI app.</text>'
 for x, letter, title, lines in [
-    (28, 'A', 'Add marketplace', ['Claude: add the GitHub repository.', 'Codex: open the marketplace folder.', 'Select Nextra → Install.']),
-    (478, 'B', 'Download ZIP', ['Claude: upload the ZIP.', 'Codex: extract and open the kit.', 'Install Nextra in your app.'])]:
+    (28, 'A', 'Add marketplace', ['Open your app’s plugin manager.', 'Add the GitHub marketplace.', 'Select Nextra → Install.']),
+    (478, 'B', 'Download ZIP', ['Download the ZIP for your app.', 'Choose Upload / Import plugin.', 'Select the ZIP and install.'])]:
     body += f'<rect x="{x}" y="98" width="414" height="160" rx="14" fill="#fff" stroke="#d0d7de"/>'
     body += f'<rect x="{x+18}" y="117" width="38" height="38" rx="10" fill="#1a7f37"/><text x="{x+37}" y="143" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">{letter}</text>'
     body += f'<text x="{x+70}" y="144" font-size="21" font-weight="700" fill="#1f2328">{title}</text>'

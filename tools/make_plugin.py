@@ -59,7 +59,27 @@ write("/.agents/plugins/marketplace.json", {
     "plugins": [{"name": name, "source": {"source": "local", "path": f"./plugin/{name}"},
                  "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Design"}],
 })
-# dist/nextra-rhinogh-plugin.zip: the same folder as one file, for Claude's "Customize > Plugins > Add > Upload plugin"
+# OpenAI-facing authoring directory. The native discovery paths above remain
+# synchronized: .agents/plugins for the catalog and .codex-plugin for the manifest.
+with open(os.path.join(root, ".codex-plugin", "plugin.json"), encoding="utf-8") as f:
+    write("/.gpt-plugin/plugin.json", json.load(f))
+with open(os.path.join(repo, ".agents", "plugins", "marketplace.json"), encoding="utf-8") as f:
+    write("/.gpt-plugin/marketplace.json", json.load(f))
+write("/.gpt-plugin/README.md", """# OpenAI plugin metadata
+
+This directory groups the ChatGPT / Codex metadata for maintainers.
+`tools/make_plugin.py` generates it from the same source as the native files.
+
+- `plugin.json` is a metadata copy of `plugin/nextra-rhinogh/.codex-plugin/plugin.json`.
+  Its relative paths resolve in the packaged plugin directory, not in this authoring directory.
+- `marketplace.json` mirrors `.agents/plugins/marketplace.json`.
+
+OpenAI discovers the native `.agents/plugins/marketplace.json` catalog and
+`.codex-plugin/plugin.json` manifest. `.gpt-plugin` is this repository's organization
+convention, not a replacement discovery path. Keep the native files when packaging.
+""")
+
+# Ready-made plugin ZIPs for desktop import, with the same tools and skill.
 import zipfile
 zp = os.path.join(repo, "dist", f"{name}-plugin.zip")
 os.makedirs(os.path.dirname(zp), exist_ok=True)
@@ -69,6 +89,9 @@ with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
             full = os.path.join(d, f)
             z.write(full, os.path.relpath(full, root).replace(os.sep, "/"))
 print(f"{root}: plug-in {ver}  ->  {zp}")
+gpt_zp = os.path.join(repo, "dist", f"{name}-gpt-plugin.zip")
+shutil.copyfile(zp, gpt_zp)
+print(f"OpenAI plug-in {ver}  ->  {gpt_zp}")
 
 # ---- dist/nextra-rhinogh-agent-kit.zip: ONE folder with skill + MCP server for ChatGPT/Codex desktop (as a local
 # marketplace: `codex plugin marketplace add <folder>`), Claude Code and any other agent that is pointed at the folder.
