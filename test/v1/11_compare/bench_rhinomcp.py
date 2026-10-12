@@ -1,7 +1,7 @@
 """Live benchmark: RhinoMCP (jingcheng-chen, uvx rhinomcp + Rhino plug-in on 127.0.0.1:1999), same tasks as Nextra/McNeel."""
 import json, os, sys, subprocess, threading, queue, base64, io, time
 OUT = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(OUT, "..", "..", "tools"))
+sys.path.insert(0, os.path.join(OUT, "..", "..", "..", "tools"))
 from mcp_http import img_tokens
 
 proc = subprocess.Popen(["uvx", "rhinomcp@latest"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, encoding="utf-8", bufsize=1)
@@ -39,7 +39,7 @@ def call(task, tool, args):
     return text
 
 
-frame = open(os.path.join(OUT, "..", "_tmp", "frame.py"), encoding="utf-8").read()
+frame = open(os.path.join(OUT, "frame.py"), encoding="utf-8").read()
 prelude = "import Rhino, System, scriptcontext as sc\nimport Rhino.Geometry as rg\ndoc = sc.doc\n"
 
 call("T1_overview", "get_document_summary", {})

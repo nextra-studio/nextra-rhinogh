@@ -132,7 +132,7 @@ The gridshell is built from three arches with a wave crown, lofted, divided into
 
 ### Results of the earlier, simpler benchmark (v1)
 
-The v1 tasks were a 36-object frame and a 16-node twisting tower, with output and input counted together and without billing estimates. Nextra came to about 3.4k tokens, McNeel about 24k and RhinoMCP about 52k. The raw data is in [../11_compare/](../11_compare/).
+The v1 tasks were a 36-object frame and a 16-node twisting tower, with output and input counted together and without billing estimates. Nextra came to about 3.4k tokens, McNeel about 24k and RhinoMCP about 52k. The raw data and the v1 report are in [../v1/11_compare/](../v1/11_compare/).
 
 ## 3. Things that went wrong on the way (all systems)
 

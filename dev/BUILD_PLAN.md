@@ -58,7 +58,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 - [x] 08 GH Python component with Karamba-style radio buttons on the component (custom attributes), visually verified
 - [x] 09 Rhino python save (library)
 - [x] 10 Rhino use existing python in a folder
-- [x] 11 Compare vs existing MCPs (tokens + steps) → `test/11_compare/` (v1) and `test/v2/REPORT.md` (v2)
+- [x] 11 Compare vs existing MCPs (tokens + steps) → `test/v1/11_compare/` (v1) and `test/v2/REPORT.md` (v2)
 - [x] 12 GH Karamba simple model
 - [x] 13 Rhino Marina Bay Sands
 - [x] 14 Architecture house → centerlines → FE model → GH Karamba analysis

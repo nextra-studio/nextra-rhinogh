@@ -1,6 +1,6 @@
 """McNeel GH sequence with the recovery an LLM must do after ambiguity errors, on a fresh canvas."""
 import json, os, sys
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
+sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "tools"))
 import nx
 import bench_gh_parts as P
 from bench_rhino_rows import rows, mcneel, OUT

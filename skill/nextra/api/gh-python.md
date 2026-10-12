@@ -32,7 +32,7 @@ Rules learned the hard way:
 3. Do not subclass the component's own attribute class (sealed / "Access is denied").
 4. Store the UI state somewhere persistent (`ghenv.Component.Message`, a value list, or the archive); click → set state → `ExpireSolution(True)`.
 5. If a broken attribute class is stuck on a component: `run` → `c.CreateAttributes()` then re-solve.
-Working example: `test/08_radio_buttons/radio_component.py` (radio rows under the component, choice persisted in Message).
+Working example: `test/v1/08_radio_buttons/radio_component.py` (radio rows under the component, choice persisted in Message).
 
 ## Pitfalls
 - `Rotate`, `Rectangle`, `Line`, `Circle` exist in several categories — give the ports you use; the engine picks the matching one.

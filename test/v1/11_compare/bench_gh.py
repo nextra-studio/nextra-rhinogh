@@ -2,7 +2,7 @@
 Nextra: gh_edit shorthand. McNeel: search for ambiguous names, g1_apply_graph (explicit X/Y), run_python for what the
 graph API cannot express (flatten, groups, delete), g1_get_canvas_graph to verify."""
 import json, os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "tools"))
 import nx
 from mcp_http import Client
 from bench_rhino_rows import rows, nextra, mcneel, OUT, mc  # shared helpers

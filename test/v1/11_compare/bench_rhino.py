@@ -1,7 +1,7 @@
 """Live benchmark, Rhino tasks: Nextra vs McNeel Rhino-MCP-Platform on the same open document.
 Each task = the minimal call sequence an LLM needs on that system. Saves every request/response."""
 import json, os, sys, subprocess
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "tools"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "tools"))
 import nx
 from mcp_http import Client, img_tokens
 
@@ -30,7 +30,7 @@ def mcneel(task, tool, args):
 
 
 os.makedirs(os.path.join(OUT, "out"), exist_ok=True)
-frame_code = open(os.path.join(OUT, "..", "_tmp", "frame.py"), encoding="utf-8").read()
+frame_code = open(os.path.join(OUT, "frame.py"), encoding="utf-8").read()
 
 # T1 overview
 nextra("T1_overview", "query", {})

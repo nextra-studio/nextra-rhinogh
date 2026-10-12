@@ -1,6 +1,6 @@
 """Minimal streamable-HTTP MCP client (used to benchmark other Rhino MCP servers on the same tasks).
 usage: python tools/mcp_http.py <url> list | call <tool> '<json args>'
-Prints the response and a token estimate (text chars/4, images w*h/750); appends to test/11_compare/calls_<host>.jsonl
+Prints the response and a token estimate (text chars/4, images w*h/750); appends to test/v1/11_compare/calls_<host>.jsonl
 """
 import json, sys, os, time, urllib.request, base64, io
 
@@ -49,8 +49,8 @@ if __name__ == "__main__":
         s = json.dumps(tools)
         print(f"{len(tools)} tools, schema {len(s)} chars ≈ {len(s)//4} tokens")
         print([t["name"] for t in tools])
-        os.makedirs(os.path.join(REPO, "test", "11_compare"), exist_ok=True)
-        open(os.path.join(REPO, "test", "11_compare", "tools_" + url.split(":")[2].split("/")[0] + ".json"), "w").write(json.dumps(tools, indent=1))
+        os.makedirs(os.path.join(REPO, "test", "v1", "11_compare"), exist_ok=True)
+        open(os.path.join(REPO, "test", "v1", "11_compare", "tools_" + url.split(":")[2].split("/")[0] + ".json"), "w").write(json.dumps(tools, indent=1))
         sys.exit(0)
     tool, args = sys.argv[3], json.loads(sys.argv[4]) if len(sys.argv) > 4 else {}
     if args.get("__file"):
@@ -68,5 +68,5 @@ if __name__ == "__main__":
     tok_in = len(json.dumps(args)) // 4
     print(text[:3000] + ("…" if len(text) > 3000 else ""))
     print(f"--- {dt:.2f}s ~in {tok_in} tok / out {tok_out} tok")
-    with open(os.path.join(REPO, "test", "11_compare", "calls_mcneel.jsonl"), "a", encoding="utf-8") as f:
+    with open(os.path.join(REPO, "test", "v1", "11_compare", "calls_mcneel.jsonl"), "a", encoding="utf-8") as f:
         f.write(json.dumps({"tool": tool, "tok_in": tok_in, "tok_out": tok_out, "sec": round(dt, 2), "chars": len(text)}) + "\n")

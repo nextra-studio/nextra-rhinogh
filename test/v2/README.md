@@ -19,4 +19,4 @@ Detailed scenarios, input and output tokens counted separately, run live in the 
 
 Run: start Rhino with Nextra, install RhinoMCP with Yak (and uninstall it afterwards), `python test/v2/start_servers.py` via `nx.py run --code`, then `python test/v2/bench_v2.py [A] [B] [C]` and `python test/v2/gen_report.py`.
 
-The first, simpler benchmark (v1: 36-object frame, 16-node tower) stays in [../11_compare/](../11_compare/).
+The first, simpler benchmark (v1: 36-object frame, 16-node tower) lives in [../v1/11_compare/](../v1/11_compare/).

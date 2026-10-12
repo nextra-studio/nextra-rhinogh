@@ -66,7 +66,7 @@ src/Nextra.Engine   all Rhino/GH logic (hot-reloaded on rebuild): tools, shortha
 bridge/             MCP stdio bridge (zero-dependency Node) + .mcpb manifest
 skill/nextra/       SKILL.md, shorthand.md, workflows.md, api/*, plugins/<Category>.md (auto-attached plug-in guides)
 tools/              build.py, deploy_dev.ps1 (dev install with hot reload), package.ps1 (yak + mcpb + skill zip), nx.py (test client), mcp_http.py
-test/               evidence per case; regress/ = full regression suite; v2/ = benchmark v2 with report and all raw results (11_compare/ = first benchmark)
+test/               v1/ = first test round (cases 01-16 + first benchmark), v2/ = detailed benchmark with report and all raw results, regress/ = full regression suite
 dev/                developer guide, original plan, build checklist, reference code (information only, not part of the skill)
 ```
 
