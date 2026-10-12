@@ -12,7 +12,9 @@ test/regress/out/
 test/regress/_mem/
 test/regress/_tmp/
 test/regress/*.log
-.claude/scheduled_tasks.lock
+# Local workspace configuration; plugin manifests are tracked separately.
+/.claude/
+/.codex/
 test/v2/_resolve*.json
 test/v3/_tmp/
 test/v3/*.log
