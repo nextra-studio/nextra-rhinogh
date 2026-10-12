@@ -31,29 +31,6 @@ namespace Nextra.Engine
             }
         }
 
-        /// Plug-in guides that ship with the Rhino plug-in (Yak package: <package>/guides/plugins; dev: config
-        /// "guides_dir" or the repo's guides/plugins next to skill_dir). Read-only defaults; the user's own guides win.
-        public static string BundledGuides
-        {
-            get
-            {
-                var cfg = EngineConfig.Str("guides_dir", null);
-                if (!string.IsNullOrEmpty(cfg) && Directory.Exists(cfg)) return cfg;
-                if (Entry.State != null && Entry.State.TryGetValue("host.dir", out var hd) && hd is string hs)
-                {
-                    var p = Path.Combine(hs, "guides", "plugins");
-                    if (Directory.Exists(p)) return p;
-                }
-                var skill = EngineConfig.Str("skill_dir", null);
-                if (!string.IsNullOrEmpty(skill))
-                {
-                    var repo = Path.GetFullPath(Path.Combine(skill, "..", "..", "guides", "plugins"));
-                    if (Directory.Exists(repo)) return repo;
-                }
-                return null;
-            }
-        }
-
         public static string Workflows => Path.Combine(Dir, "workflows");
         public static string Plugins => Path.Combine(Dir, "plugins");
         public static string Scripts => Path.Combine(Dir, "scripts");
@@ -67,10 +44,7 @@ namespace Nextra.Engine
             Seed("README.md", Readme);
             Seed("preferences.md", PrefsStarter);
             Seed(Path.Combine("workflows", "_TEMPLATE.md"), WorkflowTemplate);
-            // the template that ships with the plug-in, so it matches the installed version (built-in text as a fallback)
-            string shipped = null;
-            try { var b = BundledGuides; if (b != null && File.Exists(Path.Combine(b, "_TEMPLATE.md"))) shipped = File.ReadAllText(Path.Combine(b, "_TEMPLATE.md")); } catch { }
-            Seed(Path.Combine("plugins", "_TEMPLATE.md"), shipped ?? PluginTemplate);
+            Seed(Path.Combine("plugins", "_TEMPLATE.md"), PluginTemplate);
         }
 
         // ------------------------------------------------------------------ reading

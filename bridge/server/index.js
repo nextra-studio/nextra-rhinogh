@@ -70,7 +70,7 @@ const TOOLS = [
   },
   {
     name: "memory",
-    description: "User memory. list (user's preferences + workflows, learned rules, library, recurring mistakes: call at session start) | save_pref {text} | log_mistake {text, fix} | compact (then ask the user, then set_rules {text}) | save_script {name, code, doc} | read_script {name} | save_workflow {name, when, text} / save_guide {name=plug-in category, text}: only when the user asks.",
+    description: "User memory. list (user's preferences + workflows, learned rules, library, recurring mistakes: call at session start) | save_pref {text:'key: value'} (also unasked, whenever the user states a lasting preference; same key replaces) | log_mistake {text, fix} | compact (then ask the user, then set_rules {text}) | save_script {name, code, doc} | read_script {name} | save_workflow {name, when, text} / save_guide {name=plug-in category, text}: only when the user asks (save_guide = when the skill folder is read-only; otherwise write plugins/<Category>.md in the skill).",
     inputSchema: { type: "object", properties: {
       action: { type: "string", enum: ["list", "save_pref", "set_prefs", "log_mistake", "compact", "set_rules", "save_script", "read_script", "delete_script", "save_workflow", "save_guide"] },
       text: { type: "string" }, fix: { type: "string" }, name: { type: "string" }, code: { type: "string" }, doc: { type: "string" }, lang: { type: "string" }, when: { type: "string" },

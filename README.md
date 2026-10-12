@@ -32,7 +32,7 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 
 ## Install
 
-1. **Rhino plug-in.** In Package Manager, install `dist/nextra-zero-0.1.0-rh8_35-win.yak` (drag it onto Rhino, or run `Yak.exe install <file>`), then restart Rhino.
+1. **Rhino plug-in.** In Package Manager, install `Nextra-RhinoGh` (search it in Package Manager, or drag `dist/nextra-rhinogh-0.1.0-rh8_35-win.yak` onto Rhino / run `Yak.exe install <file>`), then restart Rhino.
    - **Status dot:** a small dot appears at the bottom-right of the Rhino window and of the GH canvas. Green = an LLM is connected, amber = ready, red = click to restart.
    - **Commands:** `Nextra`, `NextraOn`, `NextraOff`, `NextraFolder`.
 2. **LLM side**

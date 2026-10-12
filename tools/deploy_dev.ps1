@@ -6,7 +6,9 @@ $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $cfg = if ($Release) { "Release" } else { "Debug" }
 $ver = "0.1.0"
-$pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero"
+$pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-RhinoGh"
+# the package was called Nextra-zero before; two copies of the same plug-in would clash
+Remove-Item (Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero") -Recurse -Force -ErrorAction SilentlyContinue
 $pkg = Join-Path $pkgRoot $ver
 New-Item -ItemType Directory -Force $pkg | Out-Null
 
@@ -17,7 +19,7 @@ Copy-Item "$repo\src\Nextra.Host\bin\$cfg\Nextra.Host.rhp" $pkg -Force
 Copy-Item "$repo\src\Nextra.Engine\bin\$cfg\Nextra.Engine.dll" $pkg -Force
 @"
 ---
-name: Nextra-zero
+name: Nextra-RhinoGh
 version: $ver
 authors:
 - Tatsuki
@@ -35,7 +37,6 @@ $conf = @{}
 if (Test-Path $cfgPath) { (Get-Content $cfgPath -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $conf[$_.Name] = $_.Value } }
 $conf["engine_path"] = "$repo\src\Nextra.Engine\bin\$cfg\Nextra.Engine.dll"
 $conf["skill_dir"] = "$repo\skill\nextra"
-$conf["guides_dir"] = "$repo\guides\plugins"
 $conf["capture_copy_dir"] = "$repo\test\captures"
 if (-not $conf.ContainsKey("enabled")) { $conf["enabled"] = $true }
 $conf | ConvertTo-Json | Set-Content -Encoding utf8 $cfgPath

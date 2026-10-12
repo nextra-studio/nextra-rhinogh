@@ -305,15 +305,10 @@ namespace Nextra.Engine
             catch { }
             var legacy = Path.Combine(Memory.Dir, "plugins");
             if (Directory.Exists(legacy)) user.AddRange(Directory.EnumerateFiles(legacy, "*.md").Select(f => (f, "plugins/" + Path.GetFileName(f))));
-            // guides shipped with the plug-in come after the user's (same relative name: the user's copy wins)
-            var shippedGuides = new List<string>();
-            try { var b = UserDocs.BundledGuides; if (b != null) shippedGuides.AddRange(Directory.EnumerateFiles(b, "*.md").Where(f => !user.Any(u => u.rel == "plugins/" + Path.GetFileName(f)))); } catch { }
             var relOf = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (var (f, rel) in user) relOf[f] = rel;
             files.InsertRange(0, user.Select(u => u.file));
-            var shippedRel = shippedGuides.ToDictionary(f => f, f => "plugins/" + Path.GetFileName(f), StringComparer.OrdinalIgnoreCase);
-            files.InsertRange(user.Count, shippedGuides);
-            string Rel(string f) => relOf.TryGetValue(f, out var rr) ? rr : shippedRel.TryGetValue(f, out var sr) ? sr : Path.GetRelativePath(dir, f).Replace('\\', '/');
+            string Rel(string f) => relOf.TryGetValue(f, out var rr) ? rr : Path.GetRelativePath(dir, f).Replace('\\', '/');
             var topic = a.Str("filter", a.Str("topic", null));
             if (string.IsNullOrEmpty(topic))
             {

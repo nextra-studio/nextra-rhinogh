@@ -13,14 +13,12 @@ Copy-Item "$repo\src\Nextra.Host\bin\Release\Nextra.Host.rhp" $stage
 Copy-Item "$repo\src\Nextra.Engine\bin\Release\Nextra.Engine.dll" $stage
 # skill docs travel with the plug-in so `query {scope:'docs'}` works for any LLM (engine looks in %APPDATA%/Nextra/skill or skill_dir)
 Copy-Item "$repo\skill\nextra" (Join-Path $stage "skill") -Recurse
+# plug-in guides (plugins/Karamba3D.md, _TEMPLATE.md …) belong to the skill only, not to the Rhino plug-in
+Remove-Item (Join-Path $stage "skill\plugins") -Recurse -Force -ErrorAction SilentlyContinue
 Copy-Item "$repo\bridge" (Join-Path $stage "bridge") -Recurse
-# plug-in guides (Karamba3D.md, _TEMPLATE.md …) ship with the Rhino plug-in, not with the skill: the engine attaches their
-# rules and seeds the user's folder (%APPDATA%\Nextra\user\plugins) from the template at first start
-New-Item -ItemType Directory -Force (Join-Path $stage "guides") | Out-Null
-Copy-Item "$repo\guides\plugins" (Join-Path $stage "guides\plugins") -Recurse
 @"
 ---
-name: Nextra-zero
+name: Nextra-RhinoGh
 version: $ver
 authors:
 - Tatsuki

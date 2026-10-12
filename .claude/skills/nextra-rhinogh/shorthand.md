@@ -3,7 +3,7 @@ description: Grasshopper shorthand grammar (gh_edit ops) — create, modify, wir
 ---
 # GH shorthand (gh_edit `ops`)
 
-One line = one operation. The same grammar is what `query {scope:'gh'}` prints, so you can copy lines back.
+One line = one operation. The same grammar is what `query {scope:'gh'}` prints, so you can copy lines back — even onto a new canvas (`gh_edit {new:true, ops:<printed text>}` copies a definition; printed `gN` ids act as local ids there).
 
 ## Create
 ```
@@ -85,6 +85,9 @@ Colours (default palette): inputs `#DBABFF`, logic `#ABDBFF`, geometry `#FFD6AB`
 - `layout:'tidy', relays:true` adds interface params at every group boundary (`<name>_In` in the left column, `<name>_Out` in the right column, typed like the data they carry; re-running adds none). Use when the user wants groups as movable/replaceable blocks.
 - Layout is automatic: new nodes are placed next to their upstream nodes; nodes added to an existing group re-layout that group in place and push neighbours aside. `layout:'tidy'` (whole) or `layout:'tidy:group:Name'`.
 - One solve after all lines; runtime errors of affected nodes (and anything newly broken downstream) are listed; `results:` shows what the sinks produced (counts, types, tree paths).
+
+## Files (.ghs)
+A `.ghs` is a whole definition in this grammar (full code, positions, every setting). `gh_edit {save:'x.ghs'}` writes it. `{open:'x.ghs'}` builds it on a new canvas, and every `##` section becomes its own group. To read a `.gh` as text: `{open:'x.gh', save:'x.ghs'}`. You may read or edit a `.ghs` like code. Rhino references are kept as object ids, which only work in the same .3dm.
 
 ## Examples
 ```

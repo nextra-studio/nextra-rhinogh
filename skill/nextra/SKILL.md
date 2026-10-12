@@ -13,7 +13,8 @@ The bridge binds a session to one Rhino. If more than one is open it refuses unt
 ## Session start
 1. `memory {action:'list'}` → the user's own preferences and workflow list (from their Nextra folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
 2. Look before you edit: `query` (text, cheap) then `view` only when shape/position matters.
-3. User says "remember / save this as my workflow / my Karamba rules" → `memory {action:'save_pref'|'save_workflow' (name, when, text)|'save_guide' (name = plug-in category, text)}`. These write to the user's folder (Rhino command `NextraFolder` opens it).
+3. **Keep preferences up to date without being asked**: when the user states a standing preference (units, layers, naming, colours, style, "always/never …") or corrects the same thing twice, `memory {action:'save_pref', text:'key: value'}` and say so in one line ("saved preference: …"). Same `key:` = the old line is replaced, so preferences stay current; to drop or merge several, `set_prefs {text}` with the full list. Workflows: `save_workflow` (name, when, text) when the user asks. These write to the user's folder (Rhino command `NextraFolder` opens it).
+4. Plug-in guide wanted ("make a guide / rules for Kangaroo") → write `plugins/<Category>.md` **in this skill folder**, following `plugins/_TEMPLATE.md` (Category = component category from `query {scope:'components', filter:'@Name'}`). If the skill folder is read-only (skill uploaded as a .zip on claude.ai / Claude Desktop), use `memory {action:'save_guide', name:<Category>, text}` instead — same format, stored in the user's folder.
 
 ## Priority (always)
 1. **GH canvas work → `gh_edit` shorthand** (`shorthand.md`).
@@ -44,5 +45,5 @@ On partial: fix **only** the failed lines, using the new handles. `undo {checkpo
 - `shorthand.md` — GH shorthand grammar + examples (read before the first gh_edit of a session)
 - `workflows.md` — recipes: Rhino from scratch / modify, GH build / modify / tidy, Rhino↔GH, scripts, Karamba
 - `api/rhino-python.md`, `api/rhino-csharp.md`, `api/gh-python.md`, `api/gh-csharp.md` — cheat sheets
-- Plug-in guides (Karamba3D, …) are **not in this skill**: they ship with the Rhino plug-in, plus the user's own in their Nextra folder (`plugins/`, which wins). The first time a plug-in's components appear in gh_edit/query, its `## Rules` are attached to the reply automatically, once per session (`hint` = pointer only, `off` — config `"plugin_docs"` or `gh_edit {plugin_docs:'hint'}`). Full guide: `query {scope:'docs', filter:'plugins/<Category>'}`.
-- These docs are also served by the plug-in (`query {scope:'docs'}`), so they work even when this skill was uploaded as a .zip.
+- `plugins/<Category>.md` — plug-in guides (Karamba3D, …) + `_TEMPLATE.md` for new ones. **Before using a plug-in's components, read its guide here** if one exists. When the skill is installed as a folder (Claude Code: `~/.claude/skills/nextra-rhinogh`), the plug-in also attaches the guide's `## Rules` automatically the first time those components appear, once per session (`hint` = pointer only, `off` — config `"plugin_docs"` or `gh_edit {plugin_docs:'hint'}`). Guides in the user's folder (`save_guide`) win over the ones here.
+- The other docs are also served by the plug-in (`query {scope:'docs'}`), so they work even when this skill was uploaded as a .zip.
