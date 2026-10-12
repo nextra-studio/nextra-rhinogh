@@ -33,6 +33,10 @@ $ErrorActionPreference = "Stop"
 Pop-Location
 Get-ChildItem $stage -Filter *.yak | Move-Item -Destination $dist -Force
 
+# skill .zip for claude.ai "Upload a skill" (a folder with SKILL.md at its top). User-specific instructions do not go
+# in here: they live in the user's Nextra folder and reach the model through the tools, so the uploaded skill stays generic.
+python "$repo\tools\make_skill_zip.py"
+
 # .mcpb = zip of bridge (manifest.json + server/)
 $mcpb = Join-Path $dist "nextra-rhinogh-$ver.mcpb"
 Remove-Item $mcpb -ErrorAction SilentlyContinue

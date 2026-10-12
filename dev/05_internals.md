@@ -2,7 +2,7 @@
 
 ## 1. Handles (`Core/Handles.cs`)
 
-- Two tables in the state bag: Rhino `r` (GUID ↔ number) and GH `g` (GUID ↔ number), each keyed by document. The Rhino doc serial number or the GH `DocumentID` is the key, so a new or different document starts a new table.
+- Tables in the state bag: Rhino `r` (GUID ↔ number) and GH `g` (GUID ↔ number), **one table per document** (key `handles.<prefix>.<doc>`: Rhino doc serial number or GH `DocumentID`). Switching between GH documents and back keeps every handle meaning the same object; an old `g12` can never silently hit a node of another document.
 - A handle is assigned the first time an object is mentioned in a reply, and stays the same for the session (including across engine reloads). New objects get new numbers; numbers are never reused.
 - GH groups also get `g` handles.
 - `Fmt`: compact number formatting (`N`: ≥1000 → 1 decimal, ≥1 → 3, <1 → 4, no trailing zeros), points `(x,y,z)`, dims `LxWxH`, `Trunc`.
@@ -142,15 +142,37 @@ In `%APPDATA%/Nextra/memory/` (or config `memory_dir`):
 
   Mode comes from config `plugin_docs` or the per-call `plugin_docs` argument.
 
-## 11. Dialog handling (`Nextra.Host/Dispatcher.cs`, `DialogProbe`)
+## 11. Dialog handling (`Nextra.Host/DialogProbe.cs`)
+
+Rule: the probe runs on the server thread and must **never wait for the Rhino UI thread** (it may be busy for minutes — that is exactly when status and timeouts are needed):
+- the main window handle is cached at start (`RhinoApp.MainWindowHandle()` marshals to the UI thread);
+- titles are read with `InternalGetWindowText` — `GetWindowText` on a window of our own process *sends* WM_GETTEXT and blocks until the UI thread answers (this once made timeouts and `status` hang during long scripts);
+- WPF/Eto dialogs (e.g. `Rhino.UI.Dialogs.ShowMessage`) have no child HWNDs: their text and button names come from UI Automation on a helper thread with a 1.5 s limit (a modal loop pumps messages, so it answers);
+- `Dismiss` posts IDCANCEL/WM_CLOSE and then **verifies** the window is gone; one that stays is reported ("ask the user to answer it in Rhino").
 
 Finds blocking popups in two ways:
 - the last active popup of each disabled top-level window of the Rhino process, and
 - any other visible, titled top-level window that is not Rhino's main window or the GH editor. Plug-in message boxes are often like this.
 
 What it does with them:
-- Reads the title and the child control text.
+- Reads the title and the child control text (or UI Automation text for WPF/Eto).
 - **Never sends keystrokes.** Esc once interrupted a running GH solution and triggered a breakpoint.
-- `Dismiss` posts IDCANCEL / WM_CLOSE to modal dialogs only.
 - `AutoDismiss` closes only titles listed in config `auto_dismiss` (default: Karamba's EPPlus notice).
-- Limitation: for dialogs a plug-in draws itself, the title is reported but often not the body text.
+- Limitation: a dialog a plug-in paints entirely itself (no HWND children, no automation tree) shows only its title.
+
+## 12. API reference (`Core/ApiDocs.cs`)
+
+- **Sources** (always the installed versions):
+  - RhinoCommon and Grasshopper / GH_IO by reflection on the loaded assemblies — real signatures, return types, static/instance, obsolete flags, enum values — joined with the XML docs Rhino ships next to them (`RhinoCommon.xml`, `Grasshopper.xml`, `GH_IO.XML`) by documentation id;
+  - rhinoscriptsyntax from its Python sources (`~/.rhinocode/py39-rh8/site-rhinopython/rhinoscript/*.py`, docstrings split into description / returns / parameters / example).
+- **Cleaning:** `<see cref>` → short names, paragraphs kept, wrapped lines joined, short type names (`IEnumerable<Curve>`, `int?`), operators as `operator +`, property accessors and `EditorBrowsable(Never)` dropped. Obsolete members stay in the index but rank last and are labelled.
+- **Cache:** `%APPDATA%/Nextra/api/index.json` + `stamp.txt` (Rhino version + GH version + format number; bump `Format` when the cleaning changes). First query builds it (~2 s, ~31k items). Tidy per-namespace Markdown in `api/md/<rc|gh|rs>/<Namespace>.md` for humans.
+- **Search:** every query word must match somewhere (name, camel-case word of the name, type, or summary); name matches weigh most; everyday types (Brep, Curve, Mesh, Point3d, RhinoDoc, GH_Document…) and namespaces (Rhino.Geometry, Grasshopper.Kernel) rank up, interop/UI namespaces down. Overloads collapse into one line (`+2 overloads`). Detail output prints each doc line once across overloads.
+
+## 13. The user's folder (`Core/UserDocs.cs`)
+
+- Default `%APPDATA%/Nextra/user` (config `user_dir`), created at Rhino start through `memory {action:'init'}` from the host, seeded with README.md, preferences.md and `_TEMPLATE.md` files — **never overwritten**. Outside the Yak package folder, so plug-in updates do not touch it.
+- `memory list` shows preferences (comment lines stripped, capped), the workflow index (file name + `when:` line) and the list of the user's plug-in guides. `query scope:'docs'` reads `preferences`, `workflows/<name>`, `plugins/<name>` (marked "yours").
+- Plug-in guides: user folder first, then the old `memory/plugins`, then the bundled `skill/plugins`; the first guide claiming a category wins. Front matter is read by `UserDocs.Meta` (`plugin:`, `when:`, `description:`).
+- `save_workflow` requires a `when` line; `save_guide` adds front matter and a `## Rules` stub if missing; both keep a `.bak` of the previous version.
+- Why this design: a skill uploaded to claude.ai is a fixed bundle the user cannot extend. User-specific instructions therefore live on the user's machine and reach the model through the tools — the same for every client.

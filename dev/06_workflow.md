@@ -34,6 +34,17 @@ python tools/nx.py health                  # engine generation, busy state
 - `nx.py` appends every call to `test/calls.jsonl` with token estimates (text ≈ chars/4, image ≈ w·h/750). That file is git-ignored and was the source for the benchmark numbers.
 - Several Rhinos open: set `NEXTRA_FILE=house.3dm` or `NEXTRA_PID` for `nx.py` as well.
 
+## Regression suite (run after every change)
+```bash
+python test/regress/regress.py            # all cases, ~5 min, needs a running Rhino with Nextra
+python test/regress/regress.py 03 04      # only cases whose id starts with these (some depend on earlier ones: 04 needs 03)
+```
+- Runs every case in **one** Rhino session, in order, and checks each reply (regexes on the text, numeric checks like the Karamba deflection 47.04 cm and house mass ≈ 99.5 t, round-trip identity, bridge behaviour).
+- Each run points the engine at a fresh memory folder (`test/regress/_mem/run-…`) and restores the config afterwards.
+- Output: `test/regress/out/<case>/NN_tool.txt` (request + reply) and images, `out/SUMMARY.md`, `out/steps.json`.
+- A failing step prints the first lines of the reply. Fix, rebuild, rerun the whole suite — not only the failed case — and run it twice in the same session to catch state leaks.
+- Add a case for every bug fixed: a function `cNN()` using `Case.call(tool, args, expect=[regex…], ok=…, forbid=…)` and `Case.check(cond, label)`, appended to `CASES`.
+
 ## Adding things
 
 **A new argument for an existing tool**
@@ -92,7 +103,10 @@ Bump the version in `deploy_dev.ps1`, `package.ps1`, `bridge/server/index.js` (`
 - **Custom attributes on Rhino 8 script components** must implement `IScriptAttribute` (`skill/nextra/api/gh-python.md`).
 - **Hops / Rhino.Compute** load plug-ins headless, hence the headless guard.
 - **Rhino sometimes hangs on exit** while other MCP plug-ins are active. Save first; killing the process is then safe.
-- **Patching code inline in shell heredocs** breaks on `\n` / `\d` escapes. Write patch scripts to files.
+- **Patching code inline in shell heredocs** breaks on `\n` / `\d` escapes. Use an editor (or the Edit tool), never shell-generated patches for C#/regex code.
+- **Never call RhinoCommon from the host's server thread** (e.g. `RhinoApp.MainWindowHandle()`), and never `GetWindowText` our own windows from it: both wait for the UI thread.
+- **`run` stdout is capped (2,500 chars, middle cut)**: tools that need large output from Rhino should write a file.
+- **Rhino's own undo stack** can be emptied in long sessions; Nextra's `undo` uses its checkpoints and does not depend on it.
 - **Screenshots for checking:** the display is 2560×1600 physical vs 2048×1280 logical, so use DPI-aware capture.
 
 ## Repo and history

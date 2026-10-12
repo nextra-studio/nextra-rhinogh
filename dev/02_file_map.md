@@ -49,7 +49,8 @@ These files are also served to any non-Claude LLM through `query {scope:'docs'}`
 |---|---|---|
 | `HostPlugIn.cs` | 100 | plug-in class, headless guard, `TurnOn`/`TurnOff`, commands `Nextra`, `NextraOn`, `NextraOff` |
 | `Server.cs` | 250 | `TcpListener`, tiny HTTP parser (`HttpLite`), token check, routes, `WriteInfo` (server-pid.json), `Config` get/set |
-| `Dispatcher.cs` | 320 | UI-thread execution, queue, timeouts, late results, status/dismiss; `DialogProbe` (finds, reads and closes modal dialogs) |
+| `Dispatcher.cs` | 205 | UI-thread execution, queue, timeouts, late results, status/dismiss |
+| `DialogProbe.cs` | 190 | finds, reads (Win32 + UI Automation for WPF/Eto) and closes blocking dialogs, never touching the UI thread |
 | `EngineLoader.cs` | 115 | loads `Nextra.Engine.dll` from bytes into a collectible load context, owns the `State` bag |
 | `StatusDot.cs` | 150 | the Rhino status light form |
 | `GhDot.cs` | 105 | the GH canvas status light |
@@ -67,7 +68,9 @@ These files are also served to any non-Claude LLM through `query {scope:'docs'}`
 | `QueryTool.cs` | 95 | the `query` tool: routes to Rhino / GH / components / docs / library / status |
 | `RunTool.cs` | 370 | the `run` tool: RhinoCode execution, helpers, patches, error context |
 | `Checkpoints.cs` | 115 | checkpoint list + the `undo` tool |
-| `Memory.cs` | 330 | `Memory` (prefs/rules/mistakes), `MemoryTool`, `Library`, `DocsStore` |
+| `Memory.cs` | 350 | `Memory` (prefs/rules/mistakes), `MemoryTool`, `Library`, `DocsStore` |
+| `ApiDocs.cs` | 560 | API reference: builds a cleaned index of RhinoCommon + Grasshopper SDK (reflection + shipped XML docs) + rhinoscriptsyntax (Python sources), cached per Rhino version; ranked search for `query {scope:'api'}` |
+| `UserDocs.cs` | 230 | the user's folder (`%APPDATA%/Nextra/user`): preferences, workflows, plug-in guides, scripts; seeded with README + templates |
 
 ### Rh/ — Rhino side
 | file | lines | what |
@@ -101,7 +104,8 @@ Project files: `Nextra.Engine.csproj`, `Nextra.Host.csproj`, and `src/Directory.
 |---|---|
 | `build.py` | `python tools/build.py [Nextra.Engine\|Nextra.Host]` builds and prints de-duplicated errors |
 | `deploy_dev.ps1` | **Rhino closed.** Builds both projects, installs the dev package folder, points `config.json` at the build output so hot reload works, syncs `.claude/skills` |
-| `package.ps1` | release: Yak package + `.mcpb` into `dist/` |
+| `package.ps1` | release: Yak package + `.mcpb` + claude.ai skill zip into `dist/` |
+| `make_skill_zip.py` | `dist/nextra-rhinogh-skill.zip` (folder `nextra-rhinogh/` with SKILL.md, forward-slash entries) |
 | `nx.py` | test client: `python tools/nx.py <tool> '<json>'`, `--code file.py`, `health`, `reload`; logs to `test/calls.jsonl` with token estimates |
 | `mcp_http.py` | helper for the benchmark: talks MCP to other servers over HTTP/stdio |
 
@@ -109,7 +113,9 @@ Project files: `Nextra.Engine.csproj`, `Nextra.Host.csproj`, and `src/Directory.
 
 One folder per requested case (`01_rhino_from_scratch` … `16_messy_tidy`), plus `extra_component_controls`, `status_dot` and `memory_test`.
 Each holds the images the LLM received and the produced `.3dm` / `.gh` / scripts.
-`11_compare/` holds the benchmark: `REPORT.md`, `bench_*.py` and raw requests/replies in `out/`. `test/README.md` is the results table.
+- `test/regress/regress.py` — **the regression suite**: every case in one Rhino session, in order, with checks (194 steps). Scripts it runs are in `test/regress/scripts/`. Outputs go to `test/regress/out/` (git-ignored); each run uses a fresh memory folder.
+- `11_compare/` — the benchmark: `REPORT.md`, v1 harness `bench_*.py`, and v2 in `11_compare/v2/` (`bench_v2.py` live harness, `ghspec.py` neutral GH specs + per-system emitters, `office.py`, `gen_report.py`, raw calls in `v2/out/`).
+- `test/README.md` — the results table.
 
 ## Which file do I open for…
 

@@ -3,7 +3,7 @@ description: Grasshopper shorthand grammar (gh_edit ops) — create, modify, wir
 ---
 # GH shorthand (gh_edit `ops`)
 
-One line = one operation. The same grammar is what `query {scope:'gh'}` prints, so you can copy lines back.
+One line = one operation. The same grammar is what `query {scope:'gh'}` prints, so you can copy lines back — even onto a new canvas (`gh_edit {new:true, ops:<printed text>}` copies a definition; printed `gN` ids act as local ids there).
 
 ## Create
 ```

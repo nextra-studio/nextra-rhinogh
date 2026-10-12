@@ -47,15 +47,23 @@ errors (red): g11
 | `rhino` (default) | model contents |
 | `gh` | the Grasshopper definition as shorthand |
 | `components` | installed GH components with ports (replaces a RAG index) |
-| `docs` | the skill documents |
+| `api` | cleaned API reference of the installed versions: RhinoCommon, Grasshopper SDK, rhinoscriptsyntax (see 05 §12) |
+| `docs` | the skill documents + the user's workflows / plug-in guides / preferences (marked "yours") |
 | `library` | saved scripts |
 | `status` | busy / dialog state, works even when Rhino is blocked (`dismiss_dialog:true` cancels the modal) |
 | `instances` | answered by the bridge: open Rhinos and which one this session is bound to |
 
 `level`: `summary` → `list` → `detail` → `verts` (rhino) / `data` (gh). `filter` selects. `limit` / `offset` page.
 
-**Rhino filter tokens** (all AND together): `r3 r4` · `layer:X` · `type:curve` · `name:C*` · `sel` · `hidden` · `cells:C3:E5` · `bbox:x0,y0,z0,x1,y1,z1`.
+**Rhino filter tokens** (all AND together): `r3 r4` · `layer:X` · `type:curve` · `name:C*` · `sel` · `hidden` · `cells:C3:E5` · `bbox:x0,y0,z0,x1,y1,z1` (touches) · `inside:…` (fully inside).
 **GH filter tokens:** `g12` · `group:X` · `type:Loft` · `name:nick*` · `errors` · `warnings` · `sel` · `cells:…` · `near:g12:2` · `all`.
+Names, layers, groups and types match **exactly** (case-insensitive) unless the pattern has `*`/`?` — `layer:Beams` never picks "Beams_old", because code acts on what it selects. `layer:FE` includes its sub-layers.
+
+**API search** (`scope:'api'`, `filter`):
+- free words → ranked one-liners: `Brep.CreateFromLoft(IEnumerable<Curve> curves, …) → Brep[] · static · +2 overloads — summary`
+- `Type.Member` → full docs of all overloads (params, returns, remarks, example; Python note for `out` parameters)
+- `Type` → overview: summary, ctors, static / props / methods as names with overload counts
+- `rs.Name` → rhinoscriptsyntax; `src:gh` / `src:rc` / `src:rs` restricts the source; misspellings get "did you mean"
 **components filter:** a name (`extrude`), several (`loft, divide curve`), or a category (`@Karamba3D`).
 
 **Rhino levels, with real replies**
@@ -168,5 +176,7 @@ c4: gh: document restored (5 objects)
 | `compact` | groups the mistake log by signature, for the LLM to propose rules |
 | `set_rules {text}` | write the rules file, **only after the user approves** |
 | `save_script {name, code, doc, lang}` / `read_script` / `delete_script` | script library |
+| `save_workflow {name, when, text}` / `save_guide {name = plug-in category, text}` | write to the user's folder — only when the user asks ("save this as my workflow") |
+| `init` | creates the user folder (the host calls it at Rhino start; `NextraFolder` opens it) |
 
 Details in 05 §9.

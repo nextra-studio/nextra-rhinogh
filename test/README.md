@@ -14,7 +14,7 @@ Every case was run through the real tools against a running Rhino; images are th
 | 08 | Python component with Karamba-style radio buttons | ✅ custom attributes (needs `IScriptAttribute` in Rhino 8), click → choice, survives rebuild | `08_radio_buttons/radio_component.py` + images |
 | 09 | Save Rhino python | ✅ `save_as` → library with docstring index | memory library |
 | 10 | Use existing python in a folder | ✅ `run {lib, args}`; `library_dirs` folders and `<3dm>/scripts` indexed | memory library |
-| 11 | Compare with existing MCPs | ✅ ≈7× fewer tokens than McNeel, ≈15× fewer than RhinoMCP | `11_compare/REPORT.md` |
+| 11 | Compare with existing MCPs | ✅ v2 (detailed office / facade / gridshell, input + output tokens, billed input): whole session ≈9.1k tokens vs ≈32.9k (McNeel, 3.6×) and ≈64.9k (RhinoMCP, 7.1×); all systems' results checked correct | `11_compare/REPORT.md`, `11_compare/v2/` |
 | 12 | Karamba simple model | ✅ 47.04 cm = hand calc PL³/48EI; dropdown via `$state`, supports via check-boxes | `12_karamba/` |
 | 13 | Marina Bay Sands (Rhino) | ✅ one script, saved to library | `13_marina_bay_sands/` |
 | 14 | House solids → centre lines/mid-surfaces → Karamba | ✅ 14 lines + 6 shells snapped to levels/axes, concrete sections, mass 99.6 t (hand check 99.5 t) | `14_house_to_fe/` |
@@ -23,5 +23,10 @@ Every case was run through the real tools against a running Rhino; images are th
 | + | Component controls (check-box, right-click menu, click) | ✅ Karamba Support Tx…Rz, Bounding Box "Union Box", real click | `extra_component_controls/` |
 | + | Status dot | ✅ Rhino status-bar corner (amber), GH canvas corner (green) | `status_dot/` |
 | + | Memory | ✅ prefs, mistake log, compact grouping, rules cap, session list | `memory_test/` |
+| + | API reference search | ✅ RhinoCommon / GH SDK / rhinoscriptsyntax: ranked lists, member detail, type overview, did-you-mean | `regress/` case 21 |
+| + | User folder | ✅ preferences, workflows (`when:`), plug-in guides, scripts; seeded at first start | `regress/` case 22 |
+| + | Selection safety | ✅ exact layer/name/group matching, `inside:`, handles stable across GH documents | `regress/` case 23 |
+
+**Full regression** ([regress/regress.py](regress/regress.py)): all cases above in one Rhino session, in order, with checks — **194/194 steps pass** on a fresh Rhino and again when repeated in the same session (2026-10-12).
 
 Robustness events met during testing (all handled by returning text, never hanging the client): Karamba modal at GH load (timeout → dialog named → dismiss → late result), GH "File Saving Error" box (now: no-UI save), Hops' headless compute loading the plug-in (now: headless guard + per-instance discovery), parallel MCP calls (now queued).
