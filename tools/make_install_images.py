@@ -1,5 +1,5 @@
-"""docs/img/install/*.svg: simplified UI pictures for the install guide (no vendor screenshots; labels may drift
-from the real apps, so keep them generic). Run after changing the install steps."""
+"""Generate simplified installation UI diagrams from the README and supplied screenshots.
+Run with python tools/make_install_images.py after changing installation steps."""
 import os
 
 repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,52 +55,8 @@ svg("rhino-package-manager.svg", 720, 250,
     + '<text class="t" x="124" y="162">Nextra-RhinoGh</text><text class="s" x="124" y="184">by Tatsuki · AI tools for Rhino 8 + Grasshopper</text>'
     + button(560, 150, 96, "Install", n=2))
 
-# Numbered walkthroughs: diagrams, not screenshots of unverified app controls.
-from html import escape
+# Wide, screenshot-inspired app guides live in a separate drawing module.
+from install_diagrams import generate
 
-def walkthrough(filename, title, subtitle, steps, footer):
-    body = '<rect x="0" y="0" width="920" height="330" rx="18" fill="#f6f8fa"/>'
-    body += f'<text x="28" y="40" font-size="22" font-weight="700" fill="#1f2328">{escape(title)}</text>'
-    body += f'<text x="28" y="67" font-size="14" fill="#57606a">{escape(subtitle)}</text>'
-    for i, (heading, lines) in enumerate(steps):
-        x = 28 + i * 300
-        body += f'<rect x="{x}" y="100" width="264" height="174" rx="14" fill="#fff" stroke="#d0d7de"/>'
-        body += f'<circle cx="{x+28}" cy="130" r="15" fill="#1a7f37"/><text x="{x+28}" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">{i+1}</text>'
-        body += f'<text x="{x+52}" y="136" font-size="16" font-weight="700" fill="#1f2328">{escape(heading)}</text>'
-        for j, line in enumerate(lines):
-            body += f'<text x="{x+18}" y="{171+j*25}" font-size="14" fill="#57606a">{escape(line)}</text>'
-        if i < 2:
-            body += f'<path d="M{x+273} 187h18m-7-6 7 6-7 6" fill="none" stroke="#1a7f37" stroke-width="2.5" stroke-linecap="round"/>'
-    body += f'<text x="28" y="308" font-size="13" fill="#57606a">{escape(footer)}</text>'
-    with open(os.path.join(out, filename), 'w', encoding='utf-8', newline='\n') as f:
-        f.write('<svg xmlns="http://www.w3.org/2000/svg" width="920" height="330" viewBox="0 0 920 330" font-family="Segoe UI,Helvetica,Arial,sans-serif">'+body+'</svg>\n')
-
-walkthrough('marketplace-add.svg', 'A · Add marketplace',
-    'Claude and ChatGPT / Codex desktop: use your app’s plugin manager.', [
-    ('Add marketplace', ['Open the plugin manager.', 'GPT: Create plugin →', 'Add a marketplace']),
-    ('Add repository', ['Tatsuki0123/nextra-rhinogh', 'Paste the repository name.', 'Add / sync the marketplace.']),
-    ('Install Nextra', ['Open the Nextra marketplace.', 'Choose the Rhino plugin.', 'Select Install.'])],
-    'Start a new session with Rhino open. App labels vary; this is a workflow diagram.')
-
-walkthrough('plugin-upload.svg', 'B · Download and upload ZIP',
-    'Choose the Claude or GPT plugin download in the README.', [
-    ('Download ZIP', ['Click your app’s download.', 'Save the plugin ZIP.', 'Tools + skill are included.']),
-    ('Import plugin', ['GPT: Create plugin →', 'Upload plugin archive', 'Select the downloaded ZIP.']),
-    ('Finish installation', ['Complete the import.', 'Start a new session.', 'Keep Rhino open.'])],
-    'Claude Desktop uses Cowork for local Rhino tools. Diagram labels may differ from your app.')
-
-# Overview: two equally prominent options, with app-specific handling underneath.
-body = '<rect width="920" height="290" rx="18" fill="#f6f8fa"/>'
-body += '<text x="28" y="42" font-size="24" font-weight="700" fill="#1f2328">Choose your installation option</text>'
-body += '<text x="28" y="70" font-size="14" fill="#57606a">Install in Rhino first. Then choose A or B for your AI app.</text>'
-for x, letter, title, lines in [
-    (28, 'A', 'Add marketplace', ['Open your app’s plugin manager.', 'Add the GitHub marketplace.', 'Select Nextra → Install.']),
-    (478, 'B', 'Download ZIP', ['Download the ZIP for your app.', 'Choose Upload / Import plugin.', 'Select the ZIP and install.'])]:
-    body += f'<rect x="{x}" y="98" width="414" height="160" rx="14" fill="#fff" stroke="#d0d7de"/>'
-    body += f'<rect x="{x+18}" y="117" width="38" height="38" rx="10" fill="#1a7f37"/><text x="{x+37}" y="143" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">{letter}</text>'
-    body += f'<text x="{x+70}" y="144" font-size="21" font-weight="700" fill="#1f2328">{title}</text>'
-    for j, line in enumerate(lines):
-        body += f'<text x="{x+18}" y="{181+25*j}" font-size="15" fill="#57606a">{escape(line)}</text>'
-with open(os.path.join(out, 'two-options.svg'), 'w', encoding='utf-8', newline='\n') as f:
-    f.write('<svg xmlns="http://www.w3.org/2000/svg" width="920" height="290" viewBox="0 0 920 290" font-family="Segoe UI,Helvetica,Arial,sans-serif">'+body+'</svg>\n')
-print('written to', out)
+generate(out)
+print("written to", out)
