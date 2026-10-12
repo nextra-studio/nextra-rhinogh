@@ -55,51 +55,66 @@ svg("rhino-package-manager.svg", 720, 250,
     + '<text class="t" x="124" y="162">Nextra-RhinoGh</text><text class="s" x="124" y="184">by Tatsuki · AI tools for Rhino 8 + Grasshopper</text>'
     + button(560, 150, 96, "Install", n=2))
 
-# 2 Claude Desktop: Customize > Plugins > + Add > Upload plugin
-svg("claude-desktop-plugin.svg", 720, 280,
-    window(20, 16, 680, 248, "Claude — Customize")
-    + '<text class="s" x="44" y="76">Skills</text><text class="s" x="98" y="76">Connectors</text>'
-    + '<rect class="navsel" x="178" y="58" width="70" height="28" rx="6"/><text class="t" x="188" y="77">Plugins</text>' + badge(254, 60, 1)
-    + button(560, 56, 110, "+ Add", ring=False)
-    + '<rect class="win" x="470" y="98" width="200" height="40" rx="8"/><text class="t" x="490" y="123">Upload plugin</text>'
-    + '<rect class="ring" x="464" y="92" width="212" height="52" rx="10"/>' + badge(680, 96, 2)
-    + '<rect class="f" x="44" y="168" width="400" height="44" rx="8"/><text class="m" x="60" y="196">nextra-rhinogh-plugin.zip</text>' + badge(452, 170, 3)
-    + '<text class="s" x="44" y="248">pick the zip (do not unzip it), then Add</text>')
+# Numbered walkthroughs: diagrams, not screenshots of unverified app controls.
+from html import escape
 
-# 2b Claude Desktop: Add marketplace
-svg("claude-desktop-marketplace.svg", 720, 280,
-    window(20, 16, 680, 248, "Claude — Customize")
-    + '<text class="s" x="44" y="76">Skills</text><text class="s" x="98" y="76">Connectors</text>'
-    + '<rect class="navsel" x="178" y="58" width="70" height="28" rx="6"/><text class="t" x="188" y="77">Plugins</text>' + badge(254, 60, 1)
-    + button(560, 56, 110, "+ Add", ring=False)
-    + '<rect class="win" x="470" y="98" width="200" height="40" rx="8"/><text class="t" x="490" y="123">Add marketplace</text>'
-    + '<rect class="ring" x="464" y="92" width="212" height="52" rx="10"/>' + badge(680, 96, 2)
-    + field(44, 160, 400, "Marketplace", "Tatsuki0123/nextra-rhinogh") + badge(452, 186, 3)
-    + '<text class="s" x="44" y="238">then open  nextra-rhinogh  in the list and add it</text>' + badge(340, 233, 4))
+def walkthrough(filename, title, subtitle, steps, footer):
+    body = '<rect x="0" y="0" width="920" height="330" rx="18" fill="#f6f8fa"/>'
+    body += f'<text x="28" y="40" font-size="22" font-weight="700" fill="#1f2328">{escape(title)}</text>'
+    body += f'<text x="28" y="67" font-size="14" fill="#57606a">{escape(subtitle)}</text>'
+    for i, (heading, lines) in enumerate(steps):
+        x = 28 + i * 300
+        body += f'<rect x="{x}" y="100" width="264" height="174" rx="14" fill="#fff" stroke="#d0d7de"/>'
+        body += f'<circle cx="{x+28}" cy="130" r="15" fill="#1a7f37"/><text x="{x+28}" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">{i+1}</text>'
+        body += f'<text x="{x+52}" y="136" font-size="16" font-weight="700" fill="#1f2328">{escape(heading)}</text>'
+        for j, line in enumerate(lines):
+            body += f'<text x="{x+18}" y="{171+j*25}" font-size="14" fill="#57606a">{escape(line)}</text>'
+        if i < 2:
+            body += f'<path d="M{x+273} 187h18m-7-6 7 6-7 6" fill="none" stroke="#1a7f37" stroke-width="2.5" stroke-linecap="round"/>'
+    body += f'<text x="28" y="308" font-size="13" fill="#57606a">{escape(footer)}</text>'
+    with open(os.path.join(out, filename), 'w', encoding='utf-8', newline='\n') as f:
+        f.write('<svg xmlns="http://www.w3.org/2000/svg" width="920" height="330" viewBox="0 0 920 330" font-family="Segoe UI,Helvetica,Arial,sans-serif">'+body+'</svg>\n')
 
-# 5b ChatGPT / Codex desktop: add the GitHub marketplace
-svg("chatgpt-marketplace.svg", 720, 210,
-    window(20, 16, 680, 178, "ChatGPT / Codex desktop — Codex or Work mode")
-    + '<rect class="f" x="44" y="66" width="632" height="76" rx="14"/>'
-    + '<text class="m" x="62" y="94">Run: codex plugin marketplace add Tatsuki0123/nextra-rhinogh</text>'
-    + '<text class="m" x="62" y="118">codex plugin add nextra-rhinogh@nextra</text>'
-    + badge(676, 66, 1)
-    + '<text class="s" x="44" y="170">The agent runs both commands. Then restart the app.</text>' + badge(400, 165, 2))
+walkthrough('claude-desktop-marketplace.svg', 'A · Add marketplace — Claude Desktop',
+    'Add this public GitHub repository to your plugin sources.', [
+    ('Open Plugins', ['Customize → Plugins', 'Add → Add marketplace', 'Add from a repository']),
+    ('Add repository', ['Tatsuki0123/nextra-rhinogh', 'Paste the name above.', 'Sync / add the marketplace.']),
+    ('Install Nextra', ['Open nextra-rhinogh.', 'Select Install.', 'Start a Cowork session.'])],
+    'Rhino must be open with Nextra installed. The plugin includes the tools and skill.')
 
-# 4 Claude Code / terminal
-svg("claude-code.svg", 720, 170,
-    '<rect class="term" x="20" y="16" width="680" height="138" rx="10"/>'
-    + '<circle cx="38" cy="33" r="5" fill="#ff5f57"/><circle cx="54" cy="33" r="5" fill="#febc2e"/><circle cx="70" cy="33" r="5" fill="#28c840"/>'
-    + '<text class="tp" x="40" y="68">&gt;</text><text class="tt" x="56" y="68">/plugin marketplace add Tatsuki0123/nextra-rhinogh</text>'
-    + '<text class="tg" x="40" y="98">/plugin install nextra-rhinogh@nextra</text>'
-    + '<text class="tp" x="40" y="126">  restart Claude Code, then ask: "Create a simple timber house in Rhino"</text>')
+walkthrough('claude-desktop-plugin.svg', 'B · Download ZIP — Claude Desktop',
+    'Click the README download link, then upload the ready-made plugin.', [
+    ('Download', ['nextra-rhinogh-plugin.zip', 'Save the ZIP.', 'Keep it zipped.']),
+    ('Upload', ['Customize → Plugins', 'Add → Upload plugin', 'Select the downloaded ZIP.']),
+    ('Finish installation', ['Complete the app prompts.', 'Start a Cowork session.', 'Keep Rhino open.'])],
+    'One package contains both the local Rhino tools and Nextra skill.')
 
-# 5 ChatGPT / Codex desktop: unzip, then paste one prompt
-svg("chatgpt-prompt.svg", 720, 240,
-    window(20, 16, 680, 208, "ChatGPT / Codex desktop — Codex or Work mode")
-    + '<text class="s" x="44" y="70">After unzipping nextra-rhinogh-agent-kit.zip, paste (use your folder path):</text>' + badge(676, 62, 1)
-    + '<rect class="f" x="44" y="82" width="632" height="76" rx="14"/>'
-    + '<text class="m" x="62" y="110">codex plugin marketplace add &quot;C:/Downloads/nextra-rhinogh-kit&quot;</text>'
-    + '<text class="m" x="62" y="134">codex plugin add nextra-rhinogh@nextra</text>'
-    + '<text class="s" x="44" y="190">The agent runs both commands. Then restart the app.</text>' + badge(400, 185, 2))
-print("written to", out)
+walkthrough('chatgpt-marketplace.svg', 'A · Add marketplace — ChatGPT / Codex',
+    'Open the public repository as a local marketplace project.', [
+    ('Get marketplace', ['Click Download marketplace.', 'Extract All.', 'Folder: nextra-rhinogh-main']),
+    ('Open in Codex', ['Add / open a project.', 'Choose the extracted folder.', 'Trust it; restart the app.']),
+    ('Install Nextra', ['Open Plugins Directory.', 'Source: Nextra', 'Nextra for Rhino → Install'])],
+    'If Nextra is already a configured source, select it directly in Plugins Directory.')
+
+walkthrough('chatgpt-folder.svg', 'B · Download ZIP — ChatGPT / Codex',
+    'Install the kit through the local marketplace in Plugins Directory.', [
+    ('Download + extract', ['Click Download agent kit ZIP.', 'Right-click → Extract All.', 'Keep the extracted folder.']),
+    ('Open in Codex', ['Choose nextra-rhinogh-kit.', 'It contains AGENTS.md.', 'Trust it; restart the app.']),
+    ('Install Nextra', ['Open Plugins Directory.', 'Source: Nextra', 'Nextra for Rhino → Install'])],
+    'OpenAI local installation uses an extracted folder. Start a new chat after installing.')
+
+# Overview: two equally prominent options, with app-specific handling underneath.
+body = '<rect width="920" height="290" rx="18" fill="#f6f8fa"/>'
+body += '<text x="28" y="42" font-size="24" font-weight="700" fill="#1f2328">Choose your installation option</text>'
+body += '<text x="28" y="70" font-size="14" fill="#57606a">Install in Rhino first. Then choose A or B for your AI app.</text>'
+for x, letter, title, lines in [
+    (28, 'A', 'Add marketplace', ['Claude: add the GitHub repository.', 'Codex: open the marketplace folder.', 'Select Nextra → Install.']),
+    (478, 'B', 'Download ZIP', ['Claude: upload the ZIP.', 'Codex: extract and open the kit.', 'Install Nextra in your app.'])]:
+    body += f'<rect x="{x}" y="98" width="414" height="160" rx="14" fill="#fff" stroke="#d0d7de"/>'
+    body += f'<rect x="{x+18}" y="117" width="38" height="38" rx="10" fill="#1a7f37"/><text x="{x+37}" y="143" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">{letter}</text>'
+    body += f'<text x="{x+70}" y="144" font-size="21" font-weight="700" fill="#1f2328">{title}</text>'
+    for j, line in enumerate(lines):
+        body += f'<text x="{x+18}" y="{181+25*j}" font-size="15" fill="#57606a">{escape(line)}</text>'
+with open(os.path.join(out, 'two-options.svg'), 'w', encoding='utf-8', newline='\n') as f:
+    f.write('<svg xmlns="http://www.w3.org/2000/svg" width="920" height="290" viewBox="0 0 920 290" font-family="Segoe UI,Helvetica,Arial,sans-serif">'+body+'</svg>\n')
+print('written to', out)

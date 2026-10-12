@@ -105,9 +105,8 @@ This folder lets an AI agent drive Rhino 8 and Grasshopper. Everything is alread
 3. **Skill:** read `skills/{name}/SKILL.md` before using the tools (also at `.agents/skills/` and `.claude/skills/`).
 4. Six tools: view, query, run, gh_edit, undo, memory. Start with `memory {{action:'list'}}`, then `query` / `view`.
 
-ChatGPT / Codex desktop: ask the agent to run `codex plugin marketplace add "<this folder>"` then
-`codex plugin add {name}@nextra`. Restart the app and start a new chat. If the CLI is unavailable,
-open this folder as a Codex project, trust it, restart the app, and install Nextra from the Plugins Directory.
+ChatGPT / Codex desktop: open this folder as a Codex project, trust it when prompted, restart the desktop
+app, then open Plugins Directory > Nextra > Nextra for Rhino > Install. Keep this folder on your computer.
 Claude Code: `/plugin marketplace add <this folder>` then `/plugin install {name}@nextra`.
 """
 kwrite("AGENTS.md", AGENTS)
