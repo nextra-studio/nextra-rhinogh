@@ -4,8 +4,7 @@ This directory is for cross-agent resources. `.agents/skills/` is the shared
 skill convention used by compatible agents.
 
 OpenAI also discovers marketplace catalogs at `.agents/plugins/marketplace.json`.
-The catalog is generated together with the OpenAI-facing copy at
-`.gpt-plugin/marketplace.json`. Both point to the same self-contained plugin.
+The catalog points to the self-contained plugin at `plugin/nextra-rhinogh/`.
 
 The source skill lives in `skill/nextra/`. The generated installable package
 lives in `plugin/nextra-rhinogh/` and carries both Claude and OpenAI manifests.

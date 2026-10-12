@@ -59,26 +59,6 @@ write("/.agents/plugins/marketplace.json", {
     "plugins": [{"name": name, "source": {"source": "local", "path": f"./plugin/{name}"},
                  "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Design"}],
 })
-# OpenAI-facing authoring directory. The native discovery paths above remain
-# synchronized: .agents/plugins for the catalog and .codex-plugin for the manifest.
-with open(os.path.join(root, ".codex-plugin", "plugin.json"), encoding="utf-8") as f:
-    write("/.gpt-plugin/plugin.json", json.load(f))
-with open(os.path.join(repo, ".agents", "plugins", "marketplace.json"), encoding="utf-8") as f:
-    write("/.gpt-plugin/marketplace.json", json.load(f))
-write("/.gpt-plugin/README.md", """# OpenAI plugin metadata
-
-This directory groups the ChatGPT / Codex metadata for maintainers.
-`tools/make_plugin.py` generates it from the same source as the native files.
-
-- `plugin.json` is a metadata copy of `plugin/nextra-rhinogh/.codex-plugin/plugin.json`.
-  Its relative paths resolve in the packaged plugin directory, not in this authoring directory.
-- `marketplace.json` mirrors `.agents/plugins/marketplace.json`.
-
-OpenAI discovers the native `.agents/plugins/marketplace.json` catalog and
-`.codex-plugin/plugin.json` manifest. `.gpt-plugin` is this repository's organization
-convention, not a replacement discovery path. Keep the native files when packaging.
-""")
-
 # Ready-made plugin ZIPs for desktop import, with the same tools and skill.
 import zipfile
 zp = os.path.join(repo, "dist", f"{name}-plugin.zip")
