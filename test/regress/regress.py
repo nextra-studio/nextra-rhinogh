@@ -634,8 +634,62 @@ add((0,0,0), "Beams", "B1"); add((5,0,0), "Beams_old", "B10"); add((0,0,9), "FE:
     t = c.call("gh_edit", {"script": {"handle": py, "mirror": True}}, expect=[r"doc_a_g\d+\.py"])
 
 
+V3 = os.path.join(REPO, "test", "v3", "scripts")
+
+
+def v3(name):
+    with open(os.path.join(V3, name), encoding="utf-8") as f:
+        return f.read()
+
+
+def c24():
+    c = Case("24_freeform", "freeform canopy (loft + offset solid + columns), inspect, raise the crown")
+    reset(c)
+    t = c.call("run", {"code": v3("canopy.py"), "args": {}, "save_as": "canopy"}, expect=[r"area 479\.9 m2", r"\[Canopy\]", r"×?8|COL_N4"])
+    ck = re.search(r"checkpoint (c\d+)", t).group(1)
+    c.call("query", {"filter": "name:CANOPY", "level": "detail"}, expect=[r"solid", r"area", r"faces"])
+    c.call("undo", {"checkpoint": ck}, expect=[r"reverted"])
+    c.call("run", {"lib": "canopy", "args": {"h_mid": 8400}}, expect=[r"crown 8400/4500", r"area \d{3}\.\d m2"])
+    c.call("view", {"view": "iso"}, expect=[r"Grid"])
+
+
+def c25():
+    c = Case("25_gh_trees", "data trees: grafted grid → rows/columns → loft; swap the graft")
+    t = c.call("gh_edit", {"new": True, "ops": v3("trees.gh.txt")}, expect=[r"ok: 17/17", r"10 Curve 10 branches", r"1 Brep"])
+    m = ids(t)
+    c.call("query", {"scope": "gh", "filter": m["rows"], "level": "data", "items": 2}, expect=[r"6 Curve 6 branches"])
+    c.call("gh_edit", {"ops": f"{m['pt']} (X={m['sx']}^g, Y={m['sy']}^x)"}, expect=[r"ok: 1/1", r"6 Curve 6 branches"])
+    c.call("query", {"scope": "gh", "filter": m["pt"]}, expect=[r"X=g\d+\^g", r"Y=g\d+\)"], forbid=("Y=g6^g", "ERROR"))
+
+
+def c26():
+    c = Case("26_big_model", "large model (1,224 objects): overview, longest beam on level 4, region count, region image")
+    reset(c)
+    c.call("run", {"code": v3("big_model.py")}, expect=[r"1224 objects"], label="setup")
+    c.call("query", {}, expect=[r"1224 objects", r"\[MEP\]: 540 polyline"])
+    t = c.call("query", {"filter": "name:BX*_L4", "limit": 60}, expect=[r"12000x450x300", r"BX24_L4"])
+    c.check(t.count("\n") < 45, "level-4 X-beam list compact", f"{t.count(chr(10))} lines")
+    c.call("query", {"filter": "layer:MEP inside:-1,-1,0,12001,30001,7300", "level": "summary"}, expect=[r"; 60 objects"])
+    c.call("view", {"view": "top", "focus": "layer:Columns"}, expect=[r"Grid"])
+
+
+def c27():
+    c = Case("27_karamba_shell", "Karamba shell plate: 10x6 m, 20 cm C30/37, edges supported → 2.9 cm, thicker → less")
+    t = c.call("gh_edit", {"new": True, "ops": v3("kshell.gh.txt")}, expect=[r"ok: 23/23", r"MaxDisp"])
+    m = ids(t)
+    d = c.call("query", {"scope": "gh", "filter": f"{m['an']} {m['asm']}", "level": "data"}, expect=[r"Mass"])
+    v = num_after(d, r"MaxDisp: .*?e\.g\. ([\d.]+)")
+    mass = num_after(d, r"Mass: .*?e\.g\. ([\d.]+)")
+    c.check(v is not None and 2.5 < v < 3.3, "max displacement ≈ 2.9 cm (plate theory 2.84 cm)", f"got {v}")
+    c.check(mass is not None and abs(mass - 30000) < 300, "mass 30 t (10x6x0.2 m x 2500 kg/m3)", f"got {mass}")
+    t2 = c.call("gh_edit", {"ops": f"{m['t']} {{v=30}}"}, expect=[r"ok: 1/1"])
+    d2 = c.call("query", {"scope": "gh", "filter": m["an"], "level": "data"}, expect=[r"MaxDisp"])
+    v2 = num_after(d2, r"MaxDisp: .*?e\.g\. ([\d.]+)")
+    c.check(v2 is not None and v is not None and v2 < v * 0.5, "30 cm plate deflects < half (stiffness ~ t^3, weight ~ t)", f"{v} → {v2}")
+
+
 CTX = {}
-CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23]
+CASES = [c00, c01, c02, c03, c04, c05, c06, c07, c08, c09_10, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27]
 
 
 def summary():

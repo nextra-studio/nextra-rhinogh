@@ -1,0 +1,28 @@
+## Inputs #DBABFF
+L = Number Slider {v=10, r=4..20} "Span m"
+W = Number Slider {v=6, r=2..12} "Width m"
+t = Number Slider {v=20, r=10..40, int} "Thickness cm"
+mr = Number Slider {v=2, r=1..4} "Mesh m"
+## Plate #ABDBFF
+pl = XY Plane
+rc = Rectangle (P=pl, X=L, Y=W)
+bs = Boundary Surfaces (E=rc.R)
+mb = Mesh Breps @Karamba3D (Brep=bs, MRes=mr)
+mat = Material Selection @Karamba3D (Name|Ind="C30/37")
+cs = Cross-section @Karamba3D (Mat=mat, Height=t) {menu="Units>Shell - Const"}
+se = Create Surface Element @Karamba3D (Mesh=mb.Mesh, CroSec=cs)
+## Supports on the short edges #ABDBFF
+dm = Deconstruct Mesh (M=mb.Mesh)
+dp = Deconstruct @Vector (P=dm.V)
+lt = Smaller Than (A=dp.X, B=0.01)
+gt = Larger Than (A=dp.X, B=L^e(x-0.01))
+or = Gate Or (A=lt.<, B=gt.>)
+base = Cull Pattern (L=dm.V, P=or)
+sup = Support @Karamba3D (Pos|Ind=base) {$button[0]=true, $button[1]=true, $button[2]=true}
+## Analysis #FFD6AB
+ld = Loads @Karamba3D
+asm = Assemble Model @Karamba3D (Elem=se.Elem, Support=sup^f, Load=ld)
+an = Analyse @Karamba3D (Model=asm.Model)
+## Results #B2FAB4
+pd = Panel (=an.MaxDisp) "Max disp cm"
+pm = Panel (=asm.Mass) "Mass kg"

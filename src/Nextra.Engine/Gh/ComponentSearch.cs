@@ -183,8 +183,18 @@ namespace Nextra.Engine.Gh
             var terms = q.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0).ToList();
             foreach (var t in terms)
             {
-                var exact = All.Where(p => p.Desc.Name.Equals(t, StringComparison.OrdinalIgnoreCase) && !p.Obsolete).ToList();
-                var list = exact.Count > 0 ? exact : All.Where(p => !p.Obsolete).Select(p => (p, s: Score(p, t))).Where(x => x.s > 0).OrderByDescending(x => x.s).Take(limit).Select(x => x.p).ToList();
+                // exact also ignores a plug-in suffix: "Mesh Breps" = "Mesh Breps (Karamba3D)"
+                var exact = All.Where(p => !p.Obsolete && (p.Desc.Name.Equals(t, StringComparison.OrdinalIgnoreCase)
+                                                           || StripSuffix(p.Desc.Name).Equals(StripSuffix(t), StringComparison.OrdinalIgnoreCase))).ToList();
+                List<IGH_ObjectProxy> list;
+                if (exact.Count > 0) list = exact;
+                else
+                {
+                    // fuzzy: only candidates close to the best score (weak word overlaps are noise and cost tokens)
+                    var scored = All.Where(p => !p.Obsolete).Select(p => (p, s: Score(p, t))).Where(x => x.s > 0).OrderByDescending(x => x.s).ToList();
+                    int best = scored.Count > 0 ? scored[0].s : 0;
+                    list = scored.Where(x => x.s >= best * 0.6).Take(limit).Select(x => x.p).ToList();
+                }
                 if (list.Count == 0) { r.Line($"'{t}': nothing found"); continue; }
                 foreach (var p in list.Take(limit))
                     r.Line($"{p.Desc.Name} @{p.Desc.Category}/{p.Desc.SubCategory}: {Ports(p)}" + (exact.Count > 0 && terms.Count == 1 ? $"\n  {Fmt.Trunc(p.Desc.Description, 160)}" : ""));

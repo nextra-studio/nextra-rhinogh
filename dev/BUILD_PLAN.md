@@ -93,8 +93,8 @@ Scope agreed with the user: every v1 case 01–16 on all three systems (Nextra, 
 system can do it at all ("not possible" + reason otherwise), plus 4 new cases: 17 freeform Rhino, 18 GH data trees,
 19 large-model inspection, 20 Karamba shell. Input/output tokens per case, correctness checked neutrally. Results in test/v3/.
 During the run: RhinoMCP installed temporarily (uninstall at the end), McNeel MCPStart on :5123.
-- [ ] I1 Nextra regression from scratch (test/regress) → fix anything found
-- [ ] I2 Nextra-only first pass of new cases 17–20 (add them to the regression suite)
+- [x] I1 Nextra regression from scratch: 194/194 (component search tightened: suffix-stripped exact names, weak fuzzy matches dropped — 830 → 300 tokens on a 6-name lookup)
+- [x] I2 New cases 17–20 on Nextra, added to the regression suite as c24–c27 (canopy, data trees, 1,224-object model, Karamba shell 2.90 cm vs plate theory 2.84 cm)
 - [ ] I3 v3 harness test/v3 (common clients + one module per case, neutral checks)
 - [ ] I4 Run cases 01–20 on all three systems, fix harness/engine issues, rerun until all correct (or "not possible" with reason)
 - [ ] I5 Report test/v3/REPORT.md + tables; README / test index / dev docs

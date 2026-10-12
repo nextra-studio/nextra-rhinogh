@@ -1,0 +1,20 @@
+## Inputs #DBABFF
+nx = Number Slider {v=10, r=3..30, int} "Nx"
+ny = Number Slider {v=6, r=2..20, int} "Ny"
+sp = Number Slider {v=2, r=0.5..5} "Spacing"
+amp = Number Slider {v=1.5, r=0..5} "Amp"
+## Grid tree #ABDBFF
+sx = Series (S=0, N=sp, C=nx)
+sy = Series (S=0, N=sp, C=ny)
+pt = Construct Point (X=sx, Y=sy^g)
+dc = Deconstruct @Vector (P=pt)
+ad = Addition (A=dc.X, B=dc.Y)
+sn = Sine (x=ad)
+mz = Multiplication (A=sn, B=amp)
+uz = Unit Z (F=mz)
+mv = Move (G=pt, T=uz)
+## Surface #FFD6AB
+rows = Interpolate (V=mv.G)
+fm = Flip Matrix (D=mv.G)
+cols = Interpolate (V=fm)
+lf = Loft (C=rows.C^f)
