@@ -1,0 +1,69 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "yw",
+   "Selector": "9c85271f-89fa-4e9f-9f4a-d75802120ccc",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "sn",
+   "Selector": "7663efbb-d9b8-4c6a-a0da-c3750a7bbe77",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "amp",
+   "Selector": "b8963bb1-aa57-476e-a20e-ed6cf635a49c",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "half",
+   "Selector": "9c85271f-89fa-4e9f-9f4a-d75802120ccc",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "pa",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 510,
+   "Y": 70
+  },
+  {
+   "Key": "pb",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 1360,
+   "Y": 0
+  },
+  {
+   "Key": "pc",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 510,
+   "Y": 140
+  },
+  {
+   "Key": "iu",
+   "Selector": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33",
+   "X": 2040,
+   "Y": 0
+  },
+  {
+   "Key": "iv",
+   "Selector": "2b2a4145-3dff-41d4-a8de-1ea9d29eef33",
+   "X": 2210,
+   "Y": 0
+  },
+  {
+   "Key": "pp",
+   "Selector": "adeadd58-4e28-46ed-853a-b590507d892e",
+   "X": 2550,
+   "Y": 0
+  }
+ ],
+ "wires": [],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"yw","Id":"a307e855-d43b-40d6-a94c-92d3f5270441","Kind":"Component"},{"Key":"sn","Id":"d332677f-674e-477c-af56-7b41856098af","Kind":"Component"},{"Key":"amp","Id":"b362e9b1-8d82-488a-b113-a8cc6230b87a","Kind":"Component"},{"Key":"half","Id":"bc4ea434-bb27-44e4-b927-a1538da7931e","Kind":"Component"},{"Key":"pa","Id":"84cf4d80-300e-421f-9bf2-645b7c27766e","Kind":"Component"},{"Key":"pb","Id":"f1993001-a665-48dc-b043-3285dfb11024","Kind":"Component"},{"Key":"pc","Id":"42ace144-4634-465d-8778-70a307e5bd51","Kind":"Component"},{"Key":"iu","Id":"223eba01-82c6-44bf-a31d-941dc0b5c4c1","Kind":"Component"},{"Key":"iv","Id":"ecd38cae-fffc-4d6a-97f4-ba5bb9673130","Kind":"Component"},{"Key":"pp","Id":"169de428-b503-4dd9-bdbc-a2ed64c1e16c","Kind":"Component"}],"PlaceErrors":[],"Wires":[],"WiresOk":0}

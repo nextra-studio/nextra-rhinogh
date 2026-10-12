@@ -1,0 +1,28 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "be",
+   "Selector": "0148a65d-6f42-414a-9db7-9a9b2eb78437",
+   "X": 1500,
+   "Y": 400
+  },
+  {
+   "Key": "ep",
+   "Selector": "adeadd58-4e28-46ed-853a-b590507d892e",
+   "X": 1700,
+   "Y": 400
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "be",
+   "Src": "En",
+   "DstKey": "ep",
+   "Dst": "C"
+  }
+ ],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"be","Id":"9761398d-ffcc-47e1-bf91-aca2678d206f","Kind":"Component"},{"Key":"ep","Id":"87606912-a18c-4c08-a034-dd88f08e6f1d","Kind":"Component"}],"PlaceErrors":[],"Wires":[{"Index":0,"Ok":true,"Error":null}],"WiresOk":1}

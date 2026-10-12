@@ -1,0 +1,6 @@
+{
+ "query": "Addition",
+ "limit": 5
+}
+---
+[{"Guid":"58669268-a825-4688-8072-7d3508fcf91c","Name":"Addition","NickName":"Add","Category":"Complex","SubCategory":"Operators","Kind":"Component","Description":"Add two complex numbers."},{"Guid":"586706a8-109b-43ec-b581-743e920c951a","Name":"Series Addition","NickName":"SA","Category":"Maths","SubCategory":"Operators","Kind":"Component","Description":"Perform serial addition until a goal has been reached"},{"Guid":"5b850221-b527-4bd6-8c62-e94168cd6efa","Name":"Mass Addition","NickName":"MA","Category":"Maths","SubCategory":"Operators","Kind":"Component","Description":"Perform mass addition of a list of items"},{"Guid":"60327ca4-c548-40e6-a11f-3c6759582f13","Name":"Addition","NickName":"Add","Category":"Display","SubCategory":"Colour","Kind":"Component","Description":"Perform colour addition."},{"Guid":"63f79e72-36c0-4489-a0c2-9ded0b9ca41f","Name":"Mass Addition","NickName":"MassAdd","Category":"Vector","SubCategory":"Vector","Kind":"Component","Description":"Perform mass addition on a collection of vectors."}]

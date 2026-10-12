@@ -1,0 +1,389 @@
+{
+ "sliders": [
+  {
+   "Key": "W",
+   "Min": 10,
+   "Value": 30,
+   "Max": 60,
+   "Type": "float",
+   "Name": "Width",
+   "X": 0,
+   "Y": 0
+  },
+  {
+   "Key": "H",
+   "Min": 3,
+   "Value": 12,
+   "Max": 30,
+   "Type": "float",
+   "Name": "Height",
+   "X": 0,
+   "Y": 70
+  },
+  {
+   "Key": "U",
+   "Min": 2,
+   "Value": 15,
+   "Max": 40,
+   "Type": "int",
+   "Name": "U",
+   "X": 0,
+   "Y": 140
+  },
+  {
+   "Key": "V",
+   "Min": 2,
+   "Value": 6,
+   "Max": 20,
+   "Type": "int",
+   "Name": "V",
+   "X": 0,
+   "Y": 210
+  },
+  {
+   "Key": "Ax",
+   "Min": 0,
+   "Value": 10,
+   "Max": 60,
+   "Type": "float",
+   "Name": "Attr x",
+   "X": 0,
+   "Y": 280
+  },
+  {
+   "Key": "Az",
+   "Min": 0,
+   "Value": 6,
+   "Max": 30,
+   "Type": "float",
+   "Name": "Attr z",
+   "X": 0,
+   "Y": 350
+  },
+  {
+   "Key": "Rmin",
+   "Min": 0.05,
+   "Value": 0.15,
+   "Max": 1,
+   "Type": "float",
+   "Name": "Open min",
+   "X": 0,
+   "Y": 420
+  },
+  {
+   "Key": "Rmax",
+   "Min": 0.05,
+   "Value": 0.85,
+   "Max": 1,
+   "Type": "float",
+   "Name": "Open max",
+   "X": 0,
+   "Y": 490
+  },
+  {
+   "Key": "D",
+   "Min": 0.05,
+   "Value": 0.3,
+   "Max": 2,
+   "Type": "float",
+   "Name": "Depth",
+   "X": 0,
+   "Y": 560
+  }
+ ],
+ "components": [
+  {
+   "Key": "pl",
+   "Selector": "XZ Plane",
+   "X": 0,
+   "Y": 630
+  },
+  {
+   "Key": "rc",
+   "Selector": "d93100b6-d50b-40b2-831a-814659dc38e3",
+   "X": 170,
+   "Y": 0
+  },
+  {
+   "Key": "bs",
+   "Selector": "Boundary Surfaces",
+   "X": 340,
+   "Y": 0
+  },
+  {
+   "Key": "dv",
+   "Selector": "Divide Domain²",
+   "X": 510,
+   "Y": 0
+  },
+  {
+   "Key": "iso",
+   "Selector": "Isotrim",
+   "X": 680,
+   "Y": 0
+  },
+  {
+   "Key": "ar",
+   "Selector": "Area",
+   "X": 850,
+   "Y": 0
+  },
+  {
+   "Key": "ap",
+   "Selector": "Construct Point",
+   "X": 170,
+   "Y": 70
+  },
+  {
+   "Key": "ds",
+   "Selector": "Distance",
+   "X": 1020,
+   "Y": 0
+  },
+  {
+   "Key": "bnd",
+   "Selector": "Bounds",
+   "X": 1190,
+   "Y": 0
+  },
+  {
+   "Key": "dom",
+   "Selector": "Construct Domain",
+   "X": 170,
+   "Y": 140
+  },
+  {
+   "Key": "rm",
+   "Selector": "Remap Numbers",
+   "X": 1360,
+   "Y": 0
+  },
+  {
+   "Key": "sc",
+   "Selector": "Scale",
+   "X": 1530,
+   "Y": 0
+  },
+  {
+   "Key": "ed",
+   "Selector": "Brep Edges",
+   "X": 1700,
+   "Y": 0
+  },
+  {
+   "Key": "jn",
+   "Selector": "Join Curves",
+   "X": 1870,
+   "Y": 0
+  },
+  {
+   "Key": "uy",
+   "Selector": "Unit Y",
+   "X": 170,
+   "Y": 210
+  },
+  {
+   "Key": "ex",
+   "Selector": "Extrude",
+   "X": 2040,
+   "Y": 0
+  },
+  {
+   "Key": "cs",
+   "Selector": "Colour Swatch",
+   "X": 0,
+   "Y": 700
+  },
+  {
+   "Key": "pv",
+   "Selector": "Custom Preview",
+   "X": 2210,
+   "Y": 0
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "pl",
+   "Src": "P",
+   "DstKey": "rc",
+   "Dst": "P"
+  },
+  {
+   "SrcKey": "W",
+   "Src": "0",
+   "DstKey": "rc",
+   "Dst": "X"
+  },
+  {
+   "SrcKey": "H",
+   "Src": "0",
+   "DstKey": "rc",
+   "Dst": "Y"
+  },
+  {
+   "SrcKey": "rc",
+   "Src": "R",
+   "DstKey": "bs",
+   "Dst": "E"
+  },
+  {
+   "SrcKey": "bs",
+   "Src": "S",
+   "DstKey": "dv",
+   "Dst": "I"
+  },
+  {
+   "SrcKey": "U",
+   "Src": "0",
+   "DstKey": "dv",
+   "Dst": "U"
+  },
+  {
+   "SrcKey": "V",
+   "Src": "0",
+   "DstKey": "dv",
+   "Dst": "V"
+  },
+  {
+   "SrcKey": "bs",
+   "Src": "S",
+   "DstKey": "iso",
+   "Dst": "S"
+  },
+  {
+   "SrcKey": "dv",
+   "Src": "S",
+   "DstKey": "iso",
+   "Dst": "D"
+  },
+  {
+   "SrcKey": "iso",
+   "Src": "S",
+   "DstKey": "ar",
+   "Dst": "G"
+  },
+  {
+   "SrcKey": "Ax",
+   "Src": "0",
+   "DstKey": "ap",
+   "Dst": "X"
+  },
+  {
+   "SrcKey": "Az",
+   "Src": "0",
+   "DstKey": "ap",
+   "Dst": "Z"
+  },
+  {
+   "SrcKey": "ar",
+   "Src": "C",
+   "DstKey": "ds",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "ap",
+   "Src": "Pt",
+   "DstKey": "ds",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ds",
+   "Src": "D",
+   "DstKey": "bnd",
+   "Dst": "N"
+  },
+  {
+   "SrcKey": "Rmin",
+   "Src": "0",
+   "DstKey": "dom",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "Rmax",
+   "Src": "0",
+   "DstKey": "dom",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ds",
+   "Src": "D",
+   "DstKey": "rm",
+   "Dst": "V"
+  },
+  {
+   "SrcKey": "bnd",
+   "Src": "I",
+   "DstKey": "rm",
+   "Dst": "S"
+  },
+  {
+   "SrcKey": "dom",
+   "Src": "I",
+   "DstKey": "rm",
+   "Dst": "T"
+  },
+  {
+   "SrcKey": "iso",
+   "Src": "S",
+   "DstKey": "sc",
+   "Dst": "G"
+  },
+  {
+   "SrcKey": "ar",
+   "Src": "C",
+   "DstKey": "sc",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "rm",
+   "Src": "R",
+   "DstKey": "sc",
+   "Dst": "F"
+  },
+  {
+   "SrcKey": "sc",
+   "Src": "G",
+   "DstKey": "ed",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ed",
+   "Src": "En",
+   "DstKey": "jn",
+   "Dst": "C"
+  },
+  {
+   "SrcKey": "D",
+   "Src": "0",
+   "DstKey": "uy",
+   "Dst": "F"
+  },
+  {
+   "SrcKey": "jn",
+   "Src": "C",
+   "DstKey": "ex",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "uy",
+   "Src": "V",
+   "DstKey": "ex",
+   "Dst": "D"
+  },
+  {
+   "SrcKey": "ex",
+   "Src": "E",
+   "DstKey": "pv",
+   "Dst": "G"
+  },
+  {
+   "SrcKey": "cs",
+   "Src": "0",
+   "DstKey": "pv",
+   "Dst": "M"
+  }
+ ],
+ "solve": true
+}
+---
+{"Placed":[{"Key":"W","Id":"8ff04f67-4d06-4294-92af-32f44f28f8f9","Kind":"Slider"},{"Key":"H","Id":"b0f92ce7-9b8b-4ce6-bb89-6ff89ed98f45","Kind":"Slider"},{"Key":"U","Id":"9cb50baf-9ad3-4bcb-880a-f6f613f8c378","Kind":"Slider"},{"Key":"V","Id":"0aa6377a-f9e2-4fec-b2de-ae2a731ea44d","Kind":"Slider"},{"Key":"Ax","Id":"aa07655b-3756-4f89-aa13-a97fff2c760c","Kind":"Slider"},{"Key":"Az","Id":"6302c20a-47ec-44d2-8a32-a0bbd0069137","Kind":"Slider"},{"Key":"Rmin","Id":"b9cb978b-3804-4d2e-b078-5fff40262a05","Kind":"Slider"},{"Key":"Rmax","Id":"2dff51ab-463a-40ea-bc11-eea41b9ffc69","Kind":"Slider"},{"Key":"D","Id":"c3db84ab-fd17-4108-809a-b9e47f0e1d36","Kind":"Slider"},{"Key":"pl","Id":"9b01d514-2714-453d-80c8-816b95c3e754","Kind":"Component"},{"Key":"rc","Id":"4b8756f5-5f81-447d-8168-9d0c5c3fb3be","Kind":"Component"},{"Key":"bs","Id":"d1174643-0626-41f3-9d23-a7b452be30c7","Kind":"Component"},{"Key":"dv","Id":"4c9a7e7c-db59-43c3-a000-bf76eccb40a7","Kind":"Component"},{"Key":"iso","Id":"d786dde2-552c-4cda-be88-42637af8710a","Kind":"Component"},{"Key":"ds","Id":"f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7","Kind":"Component"},{"Key":"bnd","Id":"b968ca59-8b33-4519-9d4c-917c2b3cf1d6","Kind":"Component"},{"Key":"dom","Id":"4ce5543e-3647-466a-bbde-3954a0d3eaa7","Kind":"Component"},{"Key":"ed","Id":"ddd30d89-372e-4d84-b22c-d279948d5ab6","Kind":"Component"},{"Key":"jn","Id":"011ce72e-8cb9-44e0-8526-5c21437f671e","Kind":"Component"},{"Key":"uy","Id":"963459ac-f89e-440c-82d3-48ed57293bb1","Kind":"Component"},{"Key":"ex","Id":"efbd50f4-a634-46f5-9146-a0c20bf40e8a","Kind":"Component"},{"Key":"cs","Id":"f85509a1-f5c9-49c4-a7e3-b5f09a975aba","Kind":"Param"},{"Key":"pv","Id":"af21cdbc-2f7e-4c72-817a-c51e435aad01","Kind":"Component"}],"PlaceErrors":[{"Key":"ar","Error":"Component name \u0027Area\u0027 is ambiguous (2 matches): 2e205f24-9279-47b2-b414-d06dcd0b21a7 (Surface/Analysis), 86b28a7e-94d9-4791-8306-e13e10d5f8d5 (Surface/Analysis). Pass a Guid to disambiguate."},{"Key":"ap","Error":"Component name \u0027Construct Point\u0027 is ambiguous (2 matches): 3581f42a-9592-4549-bd6b-1c0fc39d067b (Vector/Point), 8a5aae11-8775-4ee5-b4fc-db3a1bd89c2f (Vector/Point). Pass a Guid to disambiguate."},{"Key":"rm","Error":"Component name \u0027Remap Numbers\u0027 is ambiguous (3 matches): 2fcc2743-8339-4cdf-a046-a1f17439191d (Maths/Domain), 9624aeeb-f2a1-49da-b1c7-8789db217177 (Maths/Domain), fa314286-867b-41fa-a7f6-3f474197bb81 (Maths/Domain). Pass a Guid to disambiguate."},{"Key":"sc","Error":"Component name \u0027Scale\u0027 is ambiguous (2 matches): 4d2a06bd-4b0f-4c65-9ee0-4220e4c01703 (Transform/Affine), 4f0dfac8-6c61-40ef-ad41-aad84533f382 (Transform/Affine). Pass a Guid to disambiguate."}],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":true,"Error":null},{"Index":3,"Ok":true,"Error":null},{"Index":4,"Ok":true,"Error":null},{"Index":5,"Ok":true,"Error":null},{"Index":6,"Ok":true,"Error":null},{"Index":7,"Ok":true,"Error":null},{"Index":8,"Ok":true,"Error":null},{"Index":9,"Ok":false,"Error":"dst_key \u0027ar\u0027 did not match a placed object"},{"Index":10,"Ok":false,"Error":"dst_key \u0027ap\u0027 did not match a placed object"},{"Index":11,"Ok":false,"Error":"dst_key \u0027ap\u0027 did not match a placed object"},{"Index":12,"Ok":false,"Error":"src_key \u0027ar\u0027 did not match a placed object"},{"Index":13,"Ok":false,"Error":"src_key \u0027ap\u0027 did not match a placed object"},{"Index":14,"Ok":true,"Error":null},{"Index":15,"Ok":true,"Error":null},{"Index":16,"Ok":true,"Error":null},{"Index":17,"Ok":false,"Error":"dst_key \u0027rm\u0027 did not match a placed object"},{"Index":18,"Ok":false,"Error":"dst_key \u0027rm\u0027 did not match a placed object"},{"Index":19,"Ok":false,"Error":"dst_key \u0027rm\u0027 did not match a placed object"},{"Index":20,"Ok":false,"Error":"dst_key \u0027sc\u0027 did not match a placed object"},{"Index":21,"Ok":false,"Error":"src_key \u0027ar\u0027 did not match a placed object"},{"Index":22,"Ok":false,"Error":"src_key \u0027rm\u0027 did not match a placed object"},{"Index":23,"Ok":false,"Error":"src_key \u0027sc\u0027 did not match a placed object"},{"Index":24,"Ok":true,"Error":null},{"Index":25,"Ok":true,"Error":null},{"Index":26,"Ok":true,"Error":null},{"Index":27,"Ok":true,"Error":null},{"Index":28,"Ok":true,"Error":null},{"Index":29,"Ok":true,"Error":null}],"WiresOk":18}

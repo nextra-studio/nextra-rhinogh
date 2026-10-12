@@ -1,0 +1,18 @@
+{
+ "action": "list"
+}
+---
+## your preferences (C:\Users\tatsu\AppData\Roaming\Nextra\user\preferences.md)
+(none yet)
+## prefs saved by the AI
+(none)
+## rules (learned, user-approved)
+(none)
+## library
+- frame_building.py: Concrete frame: grid of columns, perimeter+grid beams and slabs per storey. args: nx, ny, …
+- marina_bay_sands.py: Marina Bay Sands massing: 3 towers (straight + curved leg each), skypark ship with cantile…
+- office.py: Office building: column grid, beams, slabs with core opening, core walls, stair flights, f…
+- solids_to_fe.py: Solids -> FE geometry: linear members -> centre lines, planar members -> mid-surfaces, sna…
+## recurring mistakes not yet in rules
+- 12x LN: parse error: id '…' looks like a handle; pick another local id (e.g. '…')
+- 2x gN is not a group

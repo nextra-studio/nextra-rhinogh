@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\ndoc = Grasshopper.Instances.ActiveCanvas.Document\nsc = doc.FindObject(System.Guid('92f2f010-a498-4663-a5de-b16703dcb058'), True); f = [p for p in sc.Params.Input if p.NickName == 'F'][0]\nfor src in list(f.Sources):\n    if src.Attributes.GetTopLevel.DocObject.InstanceGuid == System.Guid('9f8be3c9-07a2-4b77-a342-6b663bc149d8'): f.RemoveSource(src)\ndoc.NewSolution(False)\nprint('ok')"
+}
+---
+{"stdout":"ok\n","error":null}

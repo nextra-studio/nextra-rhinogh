@@ -1,0 +1,742 @@
+{
+ "operations": [
+  {
+   "op": "delete",
+   "target": "ap"
+  },
+  {
+   "op": "delete",
+   "target": "ds"
+  },
+  {
+   "op": "create",
+   "alias": "p1",
+   "component_name": "Construct Point"
+  },
+  {
+   "op": "create",
+   "alias": "p2",
+   "component_name": "Construct Point"
+  },
+  {
+   "op": "create",
+   "alias": "ln",
+   "component_guid": "4c4e56eb-2f04-43f9-95a3-cc46a14f495a"
+  },
+  {
+   "op": "create",
+   "alias": "cc",
+   "component_name": "Curve Closest Point"
+  },
+  {
+   "op": "connect",
+   "source": "Az",
+   "target": "p1",
+   "target_input_name": "Z"
+  },
+  {
+   "op": "connect",
+   "source": "W",
+   "target": "p2",
+   "target_input_name": "X"
+  },
+  {
+   "op": "connect",
+   "source": "H",
+   "target": "p2",
+   "target_input_name": "Z"
+  },
+  {
+   "op": "connect",
+   "source": "p1",
+   "target": "ln",
+   "target_input_name": "A"
+  },
+  {
+   "op": "connect",
+   "source": "p2",
+   "target": "ln",
+   "target_input_name": "B"
+  },
+  {
+   "op": "connect",
+   "source": "ln",
+   "target": "cc",
+   "target_input_name": "C"
+  },
+  {
+   "op": "connect",
+   "source": "ar",
+   "source_output_name": "C",
+   "target": "cc",
+   "target_input_name": "P"
+  },
+  {
+   "op": "connect",
+   "source": "cc",
+   "source_output_name": "D",
+   "target": "bnd",
+   "target_input_name": "N"
+  },
+  {
+   "op": "connect",
+   "source": "cc",
+   "source_output_name": "D",
+   "target": "rm",
+   "target_input_name": "V"
+  },
+  {
+   "op": "recompute"
+  }
+ ],
+ "layout": {
+  "enabled": true,
+  "targets": [
+   "p1",
+   "p2",
+   "ln",
+   "cc",
+   "bnd",
+   "rm"
+  ],
+  "max_columns": 4
+ }
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012030136716",
+  "operation_count": 16,
+  "created_count": 4,
+  "created_component_count": 4,
+  "created_group_count": 0,
+  "deleted_count": 2,
+  "deleted_component_count": 2,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 311,
+  "solution_duration_ms": 7,
+  "verification_duration_ms": 1,
+  "duration_ms": 1241,
+  "operations": [
+    {
+      "op": "delete",
+      "target_id": "8a2ad61f-3440-493b-928a-0c7a5fe89867",
+      "target": "Pt",
+      "rollback": "limited"
+    },
+    {
+      "op": "delete",
+      "target_id": "efa397cc-6d59-4b02-84a5-ef594b662436",
+      "target": "Dist",
+      "rollback": "limited"
+    },
+    {
+      "op": "create",
+      "alias": "p1",
+      "instance_id": "d97ee907-0479-40c9-baee-07ea5b9dc9dc",
+      "name": "Construct Point",
+      "nickname": "Pt"
+    },
+    {
+      "op": "create",
+      "alias": "p2",
+      "instance_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+      "name": "Construct Point",
+      "nickname": "Pt"
+    },
+    {
+      "op": "create",
+      "alias": "ln",
+      "instance_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+      "name": "Line",
+      "nickname": "Ln"
+    },
+    {
+      "op": "create",
+      "alias": "cc",
+      "instance_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+      "name": "Curve Closest Point",
+      "nickname": "Crv CP"
+    },
+    {
+      "op": "connect",
+      "source_id": "ac3baa7e-b5a2-4672-9776-4722208ca97f",
+      "target_id": "d97ee907-0479-40c9-baee-07ea5b9dc9dc",
+      "source_param": "Number Slider",
+      "target_param": "Z coordinate"
+    },
+    {
+      "op": "connect",
+      "source_id": "c7eb7324-63bd-45b2-b23c-17884ac4d19b",
+      "target_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+      "source_param": "Number Slider",
+      "target_param": "X coordinate"
+    },
+    {
+      "op": "connect",
+      "source_id": "bf44bfa5-1969-4ee7-a450-6519624354f7",
+      "target_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+      "source_param": "Number Slider",
+      "target_param": "Z coordinate"
+    },
+    {
+      "op": "connect",
+      "source_id": "d97ee907-0479-40c9-baee-07ea5b9dc9dc",
+      "target_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+      "source_param": "Point",
+      "target_param": "Start Point"
+    },
+    {
+      "op": "connect",
+      "source_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+      "target_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+      "source_param": "Point",
+      "target_param": "End Point"
+    },
+    {
+      "op": "connect",
+      "source_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+      "target_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+      "source_param": "Line",
+      "target_param": "Curve"
+    },
+    {
+      "op": "connect",
+      "source_id": "0acdfd7f-8b09-4bcf-890f-60a0ce36148b",
+      "target_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+      "source_param": "Centroid",
+      "target_param": "Point"
+    },
+    {
+      "op": "connect",
+      "source_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+      "target_id": "968fab2c-9aeb-46b1-83fa-66806f2fd389",
+      "source_param": "Distance",
+      "target_param": "Numbers"
+    },
+    {
+      "op": "connect",
+      "source_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+      "target_id": "c8e98615-f73b-4132-bafe-a8c6f595c828",
+      "source_param": "Distance",
+      "target_param": "Value"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": {
+    "layout_count": 6,
+    "edge_count": 6,
+    "max_columns": 4,
+    "style": "graph_depth_wrapped",
+    "positions": [
+      {
+        "instance_id": "d97ee907-0479-40c9-baee-07ea5b9dc9dc",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "position": [
+          40.0,
+          130.0
+        ]
+      },
+      {
+        "instance_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+        "name": "Line",
+        "nickname": "Ln",
+        "position": [
+          260.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+        "name": "Curve Closest Point",
+        "nickname": "Crv CP",
+        "position": [
+          480.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "968fab2c-9aeb-46b1-83fa-66806f2fd389",
+        "name": "Bounds",
+        "nickname": "Bnd",
+        "position": [
+          700.0,
+          40.0
+        ]
+      },
+      {
+        "instance_id": "c8e98615-f73b-4132-bafe-a8c6f595c828",
+        "name": "Remap Numbers",
+        "nickname": "ReMap",
+        "position": [
+          40.0,
+          310.0
+        ]
+      }
+    ]
+  },
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 10,
+    "output_count": 14,
+    "outputs_with_data": 14,
+    "total_output_data_count": 637,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "d97ee907-0479-40c9-baee-07ea5b9dc9dc",
+        "alias": "p1",
+        "graph_id": "MCPGraph_20261012030136716",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "52da25f1-a18b-4c2a-a521-5bfd48dc8312",
+        "alias": "p2",
+        "graph_id": "MCPGraph_20261012030136716",
+        "role": "",
+        "name": "Construct Point",
+        "nickname": "Pt",
+        "category": "Vector",
+        "subcategory": "Point",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "Pt",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "15b7828f-be0e-49fd-9c2d-1d84139c415a",
+        "alias": "ln",
+        "graph_id": "MCPGraph_20261012030136716",
+        "role": "",
+        "name": "Line",
+        "nickname": "Ln",
+        "category": "Curve",
+        "subcategory": "Primitive",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Line",
+            "nickname": "L",
+            "type": "Line",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "58af045e-5b85-41ff-8503-cceb70ec061e",
+        "alias": "cc",
+        "graph_id": "MCPGraph_20261012030136716",
+        "role": "",
+        "name": "Curve Closest Point",
+        "nickname": "Crv CP",
+        "category": "Curve",
+        "subcategory": "Analysis",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 3,
+        "outputs_with_data": 3,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Point",
+            "nickname": "P",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Parameter",
+            "nickname": "t",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 2,
+            "name": "Distance",
+            "nickname": "D",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "ac3baa7e-b5a2-4672-9776-4722208ca97f",
+        "alias": "Az",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Attr z",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Attr z",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 0.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "c7eb7324-63bd-45b2-b23c-17884ac4d19b",
+        "alias": "W",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Width",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 30.0,
+        "min": 10.0,
+        "max": 60.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "bf44bfa5-1969-4ee7-a450-6519624354f7",
+        "alias": "H",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Height",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Height",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "0acdfd7f-8b09-4bcf-890f-60a0ce36148b",
+        "alias": "ar",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Area",
+        "nickname": "Area",
+        "category": "Surface",
+        "subcategory": "Analysis",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Area",
+            "nickname": "A",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Centroid",
+            "nickname": "C",
+            "type": "Point",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "968fab2c-9aeb-46b1-83fa-66806f2fd389",
+        "alias": "bnd",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Bounds",
+        "nickname": "Bnd",
+        "category": "Maths",
+        "subcategory": "Domain",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Domain",
+            "nickname": "I",
+            "type": "Domain",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "c8e98615-f73b-4132-bafe-a8c6f595c828",
+        "alias": "rm",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Remap Numbers",
+        "nickname": "ReMap",
+        "category": "Maths",
+        "subcategory": "Domain",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Mapped",
+            "nickname": "R",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Clipped",
+            "nickname": "C",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 19,
+    "preview_enabled_object_count": 19,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 2080,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012030136716",
+    "object_count": 10,
+    "controls": [
+      {
+        "alias": "Az",
+        "name": "Number Slider",
+        "nickname": "Attr z",
+        "instance_id": "ac3baa7e-b5a2-4672-9776-4722208ca97f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 0.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "c7eb7324-63bd-45b2-b23c-17884ac4d19b",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 30.0,
+        "min": 10.0,
+        "max": 60.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "H",
+        "name": "Number Slider",
+        "nickname": "Height",
+        "instance_id": "bf44bfa5-1969-4ee7-a450-6519624354f7",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "Az",
+        "name": "Number Slider",
+        "nickname": "Attr z",
+        "instance_id": "ac3baa7e-b5a2-4672-9776-4722208ca97f",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 6.0,
+        "min": 0.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "W",
+        "name": "Number Slider",
+        "nickname": "Width",
+        "instance_id": "c7eb7324-63bd-45b2-b23c-17884ac4d19b",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 30.0,
+        "min": 10.0,
+        "max": 60.0,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "alias": "H",
+        "name": "Number Slider",
+        "nickname": "Height",
+        "instance_id": "bf44bfa5-1969-4ee7-a450-6519624354f7",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 12.0,
+        "min": 3.0,
+        "max": 30.0,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 16 operation(s)"
+}

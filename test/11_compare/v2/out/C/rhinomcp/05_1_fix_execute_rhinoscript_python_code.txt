@@ -1,0 +1,8 @@
+{
+ "code": "import Grasshopper, System\nfrom Grasshopper.Kernel import GH_DataMapping\nfrom Grasshopper.Kernel.Special import GH_Group\nfrom Grasshopper.Kernel.Types import GH_Number, GH_Integer\ndoc = Grasshopper.Instances.ActiveCanvas.Document\nids = {\"mg\": \"b58c9456-2262-4154-801e-21f6a8866fa3\"}\ndef o(k): return doc.FindObject(System.Guid(ids[k]), True)\ndef inp(k, nick): return [p for p in o(k).Params.Input if p.NickName == nick][0]\ninp('mg', 'D1').DataMapping = GH_DataMapping.Flatten\ninp('mg', 'D2').DataMapping = GH_DataMapping.Flatten\ndoc.NewSolution(True)\nprint('ok')"
+}
+---
+{
+  "success": true,
+  "output": "ok\nok\n"
+}

@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\ndoc = Grasshopper.Instances.ActiveCanvas.Document\ndoc.FindObject(System.Guid('b6ac9bd4-5b8d-4f72-82ad-7dbd06137462'), True).SetSliderValue(System.Decimal(7))\ndoc.FindObject(System.Guid('4ef1ab05-7da0-4837-ae68-a4ce3767205f'), True).SetSliderValue(System.Decimal(24))\ndoc.NewSolution(False)\nprint('ok')"
+}
+---
+{"stdout":"ok\n","error":null}

@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nn = 0\nfor o in doc.Objects.FindByLayer('Mullions'):\n    if (o.Attributes.Name or '').startswith('MS'):\n        doc.Objects.Delete(o, True); n += 1\nprint('deleted', n)"
+}
+---
+{"stdout":"deleted 105\n","error":null}

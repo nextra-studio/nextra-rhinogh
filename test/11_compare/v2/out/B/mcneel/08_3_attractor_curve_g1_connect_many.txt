@@ -1,0 +1,43 @@
+{
+ "wires": [
+  {
+   "SrcId": "6302c20a-47ec-44d2-8a32-a0bbd0069137",
+   "Src": "0",
+   "DstId": "9a01d769-b881-47e0-bb50-0f4b835f5447",
+   "Dst": "Z"
+  },
+  {
+   "SrcId": "8ff04f67-4d06-4294-92af-32f44f28f8f9",
+   "Src": "0",
+   "DstId": "77b1ca1a-a42d-4e4a-a7dd-b2f772477343",
+   "Dst": "X"
+  },
+  {
+   "SrcId": "b0f92ce7-9b8b-4ce6-bb89-6ff89ed98f45",
+   "Src": "0",
+   "DstId": "77b1ca1a-a42d-4e4a-a7dd-b2f772477343",
+   "Dst": "Z"
+  },
+  {
+   "SrcId": "de5d2b68-f33f-44b0-94c0-e0391ae75c5c",
+   "Src": "C",
+   "DstId": "3cc5305a-2f45-4814-9384-8b1e9e101fc4",
+   "Dst": "P"
+  },
+  {
+   "SrcId": "3cc5305a-2f45-4814-9384-8b1e9e101fc4",
+   "Src": "D",
+   "DstId": "b968ca59-8b33-4519-9d4c-917c2b3cf1d6",
+   "Dst": "N"
+  },
+  {
+   "SrcId": "3cc5305a-2f45-4814-9384-8b1e9e101fc4",
+   "Src": "D",
+   "DstId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Dst": "V"
+  }
+ ],
+ "solve": false
+}
+---
+{"Count":6,"OkCount":6,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"6302c20a-47ec-44d2-8a32-a0bbd0069137","Param":"Number Slider"},"Dst":{"Id":"9a01d769-b881-47e0-bb50-0f4b835f5447","Param":"Z coordinate"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"8ff04f67-4d06-4294-92af-32f44f28f8f9","Param":"Number Slider"},"Dst":{"Id":"77b1ca1a-a42d-4e4a-a7dd-b2f772477343","Param":"X coordinate"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"b0f92ce7-9b8b-4ce6-bb89-6ff89ed98f45","Param":"Number Slider"},"Dst":{"Id":"77b1ca1a-a42d-4e4a-a7dd-b2f772477343","Param":"Z coordinate"},"Error":null},{"Index":3,"Ok":true,"Src":{"Id":"de5d2b68-f33f-44b0-94c0-e0391ae75c5c","Param":"Centroid"},"Dst":{"Id":"3cc5305a-2f45-4814-9384-8b1e9e101fc4","Param":"Point"},"Error":null},{"Index":4,"Ok":true,"Src":{"Id":"3cc5305a-2f45-4814-9384-8b1e9e101fc4","Param":"Distance"},"Dst":{"Id":"b968ca59-8b33-4519-9d4c-917c2b3cf1d6","Param":"Numbers"},"Error":null},{"Index":5,"Ok":true,"Src":{"Id":"3cc5305a-2f45-4814-9384-8b1e9e101fc4","Param":"Distance"},"Dst":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Value"},"Error":null}]}

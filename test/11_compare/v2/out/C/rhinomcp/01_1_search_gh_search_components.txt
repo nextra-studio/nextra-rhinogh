@@ -1,0 +1,52 @@
+{
+ "query": "Addition",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Addition",
+  "category": null,
+  "components": [
+    {
+      "name": "Addition",
+      "nickname": "Add",
+      "category": "Complex",
+      "subcategory": "Operators",
+      "guid": "58669268-a825-4688-8072-7d3508fcf91c",
+      "description": "Add two complex numbers."
+    },
+    {
+      "name": "Addition",
+      "nickname": "Add",
+      "category": "Display",
+      "subcategory": "Colour",
+      "guid": "60327ca4-c548-40e6-a11f-3c6759582f13",
+      "description": "Perform colour addition."
+    },
+    {
+      "name": "Addition",
+      "nickname": "A+B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "guid": "a0d62394-a118-422d-abb3-6af115c75b25",
+      "description": "Mathematical addition"
+    },
+    {
+      "name": "Addition",
+      "nickname": "Add",
+      "category": "Scalar",
+      "subcategory": "Operators",
+      "guid": "cae37d1c-8146-4e0b-9cf1-14cb3e337b94",
+      "description": "Add two numbers."
+    },
+    {
+      "name": "Addition",
+      "nickname": "A+B",
+      "category": "Maths",
+      "subcategory": "Operators",
+      "guid": "d18db32b-7099-4eea-85c4-8ba675ee8ec3",
+      "description": "Mathematical addition"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+ "sliders": [
+  {
+   "Key": "k",
+   "Min": 0.2,
+   "Value": 1,
+   "Max": 1.5,
+   "Type": "float",
+   "Name": "Open scale",
+   "X": 0,
+   "Y": 700
+  }
+ ],
+ "components": [
+  {
+   "Key": "mul",
+   "Selector": "ce46b74e-00c9-43c4-805a-193b69ea4a11",
+   "X": 1100,
+   "Y": 300
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "k",
+   "Src": "0",
+   "DstKey": "mul",
+   "Dst": "B"
+  }
+ ],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"k","Id":"c9eefd04-6f3b-43b6-8657-60cabab1b2ab","Kind":"Slider"},{"Key":"mul","Id":"0a103884-f621-41f1-9ee6-320db516e27c","Kind":"Component"}],"PlaceErrors":[],"Wires":[{"Index":0,"Ok":true,"Error":null}],"WiresOk":1}

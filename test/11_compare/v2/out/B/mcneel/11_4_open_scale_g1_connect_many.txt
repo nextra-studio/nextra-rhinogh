@@ -1,0 +1,19 @@
+{
+ "wires": [
+  {
+   "SrcId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Src": "R",
+   "DstId": "0a103884-f621-41f1-9ee6-320db516e27c",
+   "Dst": "A"
+  },
+  {
+   "SrcId": "0a103884-f621-41f1-9ee6-320db516e27c",
+   "Src": "R",
+   "DstId": "92f2f010-a498-4663-a5de-b16703dcb058",
+   "Dst": "F"
+  }
+ ],
+ "solve": false
+}
+---
+{"Count":2,"OkCount":2,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Mapped"},"Dst":{"Id":"0a103884-f621-41f1-9ee6-320db516e27c","Param":"A"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"0a103884-f621-41f1-9ee6-320db516e27c","Param":"Result"},"Dst":{"Id":"92f2f010-a498-4663-a5de-b16703dcb058","Param":"Factor"},"Error":null}]}

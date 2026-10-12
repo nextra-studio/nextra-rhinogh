@@ -1,0 +1,9 @@
+{
+ "ops": "## Inputs\nk = Number Slider {v=1, r=0.2..1.5} \"Open scale\"\n## Attractor\nmul = Multiplication (A=g20.R, B=k)\ng21 (F=mul)"
+}
+---
+ok: 3/3 lines applied (+2 nodes, 3 wires), checkpoint c16
+ids: k=g37 mul=g38
+groups: Inputs=g28 Attractor=g30
+solved 5ms, no errors/warnings on affected nodes
+results: g25.E: 90 Brep 90 branches

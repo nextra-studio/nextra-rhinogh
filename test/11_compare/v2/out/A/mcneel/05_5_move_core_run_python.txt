@@ -1,0 +1,5 @@
+{
+ "script": "import Rhino, System\nimport Rhino.Geometry as rg\ndoc = __rhino_doc__\nxf = rg.Transform.Translation(3600, 0, 0)\nn = 0\nfor o in doc.Objects.FindByLayer('Core'):\n    doc.Objects.Transform(o, xf, True); n += 1\nprint('moved', n)"
+}
+---
+{"stdout":"moved 20\n","error":null}

@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\ndoc = Grasshopper.Instances.ActiveCanvas.Document\nobjs = [o for o in doc.Objects if o.GetType().Name != 'GH_Group']\nrank = {}\ndef up(o):\n    ps = o.Params.Input if hasattr(o, 'Params') else ([o] if hasattr(o, 'Sources') else [])\n    return [s.Attributes.GetTopLevel.DocObject for p in ps for s in p.Sources]\nfor _ in range(len(objs)):\n    for o in objs:\n        rank[o.InstanceGuid] = 1 + max([rank.get(u.InstanceGuid, 0) for u in up(o)] or [-1])\ncols = {}\nfor o in sorted(objs, key=lambda o: rank[o.InstanceGuid]):\n    c = rank[o.InstanceGuid]; r = cols.get(c, 0); cols[c] = r + 1\n    o.Attributes.Pivot = System.Drawing.PointF(c * 220, r * 90); o.Attributes.ExpireLayout()\nfor g in [o for o in doc.Objects if o.GetType().Name == 'GH_Group']: g.ExpireCaches()\nGrasshopper.Instances.ActiveCanvas.Refresh()\nprint('ok')"
+}
+---
+{"stdout":"ok\n","error":null}

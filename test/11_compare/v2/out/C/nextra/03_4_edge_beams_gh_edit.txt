@@ -1,0 +1,10 @@
+{
+ "ops": "## Members\nbe = Brep Edges (B=g21)\nep = Pipe (C=be.En, R=0.25)"
+}
+---
+ok: 2/2 lines applied (+2 nodes, 2 wires, 1 values), checkpoint c23
+ids: be=g32 ep=g33
+groups: Members=g31
+note: L2: 'Brep Edges' is ambiguous; used Surface/Analysis (others: NGon)
+solved 5ms, no errors/warnings on affected nodes
+results: g33.P: 4 Brep 4 branches

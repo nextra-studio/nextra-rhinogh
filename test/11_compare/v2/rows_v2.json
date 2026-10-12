@@ -1,0 +1,833 @@
+{
+ "fixed": {
+  "nextra": {
+   "schema": 1406,
+   "instructions": 91,
+   "skill": 1260
+  },
+  "mcneel": {
+   "schema": 4779,
+   "instructions": 0,
+   "skill": 0
+  },
+  "rhinomcp": {
+   "schema": 22935,
+   "instructions": 94,
+   "skill": 0
+  }
+ },
+ "rows": [
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "0_session",
+   "n": 1,
+   "tool": "memory",
+   "out": 4,
+   "in": 193,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "1_build",
+   "n": 2,
+   "tool": "run",
+   "out": 891,
+   "in": 171,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "2_look",
+   "n": 3,
+   "tool": "view",
+   "out": 3,
+   "in": 735,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "3_inspect_core",
+   "n": 4,
+   "tool": "query",
+   "out": 6,
+   "in": 341,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "4_add_storey",
+   "n": 5,
+   "tool": "run",
+   "out": 13,
+   "in": 191,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "5_move_core",
+   "n": 6,
+   "tool": "run",
+   "out": 28,
+   "in": 61,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "6_delete_south",
+   "n": 7,
+   "tool": "run",
+   "out": 19,
+   "in": 24,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "A",
+   "task": "7_undo",
+   "n": 8,
+   "tool": "undo",
+   "out": 5,
+   "in": 12,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "0_docs",
+   "n": 1,
+   "tool": "query",
+   "out": 10,
+   "in": 1514,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "1_build",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 270,
+   "in": 191,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "3_attractor_curve",
+   "n": 3,
+   "tool": "gh_edit",
+   "out": 49,
+   "in": 76,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "4_open_scale",
+   "n": 4,
+   "tool": "gh_edit",
+   "out": 34,
+   "in": 49,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "5_tidy",
+   "n": 5,
+   "tool": "gh_edit",
+   "out": 4,
+   "in": 25,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "B",
+   "task": "9_look",
+   "n": 6,
+   "tool": "view",
+   "out": 4,
+   "in": 417,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "C",
+   "task": "1_build",
+   "n": 1,
+   "tool": "gh_edit",
+   "out": 250,
+   "in": 225,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "C",
+   "task": "3_params",
+   "n": 2,
+   "tool": "gh_edit",
+   "out": 7,
+   "in": 31,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 3,
+   "tool": "gh_edit",
+   "out": 18,
+   "in": 67,
+   "ok": true
+  },
+  {
+   "system": "nextra",
+   "scenario": "C",
+   "task": "9_look",
+   "n": 4,
+   "tool": "view",
+   "out": 4,
+   "in": 416,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "1_build",
+   "n": 1,
+   "tool": "run_python",
+   "out": 934,
+   "in": 49,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "2_look",
+   "n": 2,
+   "tool": "get_viewport_image",
+   "out": 19,
+   "in": 774,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "3_inspect_core",
+   "n": 3,
+   "tool": "list_objects",
+   "out": 4,
+   "in": 374,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "4_add_storey",
+   "n": 4,
+   "tool": "run_python",
+   "out": 940,
+   "in": 49,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "5_move_core",
+   "n": 5,
+   "tool": "run_python",
+   "out": 61,
+   "in": 9,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "6_delete_south",
+   "n": 6,
+   "tool": "run_python",
+   "out": 64,
+   "in": 9,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "A",
+   "task": "7_undo",
+   "n": 7,
+   "tool": "run_command",
+   "out": 5,
+   "in": 5,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_search",
+   "n": 1,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 326,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_build",
+   "n": 2,
+   "tool": "g1_apply_graph",
+   "out": 956,
+   "in": 1101,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_recover",
+   "n": 3,
+   "tool": "g1_apply_graph",
+   "out": 100,
+   "in": 89,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_recover",
+   "n": 4,
+   "tool": "g1_connect_many",
+   "out": 378,
+   "in": 537,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_fix",
+   "n": 5,
+   "tool": "run_python",
+   "out": 610,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "1_verify",
+   "n": 6,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 5274,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "3_attractor_curve",
+   "n": 7,
+   "tool": "g1_apply_graph",
+   "out": 141,
+   "in": 115,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "3_attractor_curve",
+   "n": 8,
+   "tool": "g1_connect_many",
+   "out": 192,
+   "in": 278,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "3_attractor_curve",
+   "n": 9,
+   "tool": "run_python",
+   "out": 71,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "4_open_scale",
+   "n": 10,
+   "tool": "g1_apply_graph",
+   "out": 77,
+   "in": 58,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "4_open_scale",
+   "n": 11,
+   "tool": "g1_connect_many",
+   "out": 68,
+   "in": 93,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "4_open_scale",
+   "n": 12,
+   "tool": "run_python",
+   "out": 107,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "5_tidy",
+   "n": 13,
+   "tool": "run_python",
+   "out": 218,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "B",
+   "task": "9_look",
+   "n": 14,
+   "tool": "get_viewport_image",
+   "out": 19,
+   "in": 771,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 1,
+   "tool": "g1_search_components",
+   "out": 8,
+   "in": 257,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 2,
+   "tool": "g1_search_components",
+   "out": 9,
+   "in": 103,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 3,
+   "tool": "g1_search_components",
+   "out": 7,
+   "in": 244,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_build",
+   "n": 4,
+   "tool": "g1_apply_graph",
+   "out": 974,
+   "in": 1558,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_recover",
+   "n": 5,
+   "tool": "g1_apply_graph",
+   "out": 230,
+   "in": 203,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_recover",
+   "n": 6,
+   "tool": "g1_connect_many",
+   "out": 720,
+   "in": 1015,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_fix",
+   "n": 7,
+   "tool": "run_python",
+   "out": 742,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "1_verify",
+   "n": 8,
+   "tool": "g1_get_canvas_graph",
+   "out": 10,
+   "in": 5932,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "3_params",
+   "n": 9,
+   "tool": "run_python",
+   "out": 86,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 10,
+   "tool": "g1_apply_graph",
+   "out": 73,
+   "in": 59,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 11,
+   "tool": "g1_connect_many",
+   "out": 37,
+   "in": 50,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 12,
+   "tool": "run_python",
+   "out": 93,
+   "in": 7,
+   "ok": true
+  },
+  {
+   "system": "mcneel",
+   "scenario": "C",
+   "task": "9_look",
+   "n": 13,
+   "tool": "get_viewport_image",
+   "out": 19,
+   "in": 771,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "1_build",
+   "n": 1,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 937,
+   "in": 65,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "2_look",
+   "n": 2,
+   "tool": "capture_viewport",
+   "out": 14,
+   "in": 642,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "3_inspect_core",
+   "n": 3,
+   "tool": "get_objects",
+   "out": 6,
+   "in": 1682,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "4_add_storey",
+   "n": 4,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 943,
+   "in": 66,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "5_move_core",
+   "n": 5,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 64,
+   "in": 16,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "6_delete_south",
+   "n": 6,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 67,
+   "in": 18,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "A",
+   "task": "7_undo",
+   "n": 7,
+   "tool": "undo",
+   "out": 3,
+   "in": 5,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "1_search",
+   "n": 1,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 354,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "1_build",
+   "n": 2,
+   "tool": "gh_build_graph",
+   "out": 1080,
+   "in": 11477,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "3_attractor_curve",
+   "n": 3,
+   "tool": "gh_mutate_graph",
+   "out": 320,
+   "in": 4236,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "4_open_scale",
+   "n": 4,
+   "tool": "gh_mutate_graph",
+   "out": 156,
+   "in": 1751,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "5_tidy",
+   "n": 5,
+   "tool": "gh_layout_components",
+   "out": 0,
+   "in": 1482,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "B",
+   "task": "9_look",
+   "n": 6,
+   "tool": "gh_capture_preview",
+   "out": 0,
+   "in": 642,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 1,
+   "tool": "gh_search_components",
+   "out": 8,
+   "in": 301,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 2,
+   "tool": "gh_search_components",
+   "out": 9,
+   "in": 145,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "1_search",
+   "n": 3,
+   "tool": "gh_search_components",
+   "out": 7,
+   "in": 318,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "1_build",
+   "n": 4,
+   "tool": "gh_build_graph",
+   "out": 1134,
+   "in": 11667,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "1_fix",
+   "n": 5,
+   "tool": "execute_rhinoscript_python_code",
+   "out": 147,
+   "in": 11,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "3_params",
+   "n": 6,
+   "tool": "gh_set_parameter_value",
+   "out": 8,
+   "in": 41,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "3_params",
+   "n": 7,
+   "tool": "gh_set_parameter_value",
+   "out": 7,
+   "in": 40,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 8,
+   "tool": "gh_mutate_graph",
+   "out": 92,
+   "in": 1247,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "4_edge_beams",
+   "n": 9,
+   "tool": "gh_set_parameter_value",
+   "out": 22,
+   "in": 37,
+   "ok": true
+  },
+  {
+   "system": "rhinomcp",
+   "scenario": "C",
+   "task": "9_look",
+   "n": 10,
+   "tool": "gh_capture_preview",
+   "out": 0,
+   "in": 642,
+   "ok": true
+  }
+ ],
+ "checks": {
+  "A/nextra": {
+   "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+   "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+  },
+  "B/nextra": {
+   "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+   "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+   "ambiguous": [
+    "Rectangle"
+   ]
+  },
+  "C/nextra": {
+   "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+   "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+   "ambiguous": [
+    "Addition",
+    "Loft Options",
+    "Merge"
+   ]
+  },
+  "A/mcneel": {
+   "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+   "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+  },
+  "B/mcneel": {
+   "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+   "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+   "ambiguous": [
+    "Rectangle"
+   ]
+  },
+  "C/mcneel": {
+   "built": "objects 31 groups 4 sink {'Pipe': 32} errors 0",
+   "after_edits": "objects 33 groups 4 sink {'Pipe': 42} errors 0",
+   "ambiguous": [
+    "Addition",
+    "Loft Options",
+    "Merge"
+   ]
+  },
+  "A/rhinomcp": {
+   "after_edits": "{'Core': 20, 'Mullions': 235, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 0",
+   "after_undo": "{'Mullions': 340, 'Core': 20, 'Stairs': 10, 'Slabs': 5, 'Beams': 190, 'Columns': 120} core x [17750, 18000] MS 105"
+  },
+  "B/rhinomcp": {
+   "built": "objects 32 groups 5 sink {'Extrude': 90} errors 0",
+   "after_edits": "objects 36 groups 5 sink {'Extrude': 90} errors 0",
+   "ambiguous": [
+    "Rectangle"
+   ]
+  },
+  "C/rhinomcp": {
+   "built": "objects 32 groups 4 sink {'Pipe': 32} errors 0",
+   "after_edits": "objects 34 groups 4 sink {'Pipe': 42} errors 0",
+   "ambiguous": [
+    "Addition",
+    "Loft Options",
+    "Merge"
+   ]
+  }
+ }
+}

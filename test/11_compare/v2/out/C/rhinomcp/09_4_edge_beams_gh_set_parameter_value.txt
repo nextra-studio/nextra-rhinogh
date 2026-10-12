@@ -1,0 +1,12 @@
+{
+ "instance_id": "ec1a7c10-fe1f-4bff-b683-17f1f55b6c07",
+ "input_index": 1,
+ "value": 0.25
+}
+---
+{
+  "instance_id": "ec1a7c10-fe1f-4bff-b683-17f1f55b6c07",
+  "nickname": "Pipe",
+  "param_name": "Radius",
+  "message": "Set value on Pipe.Radius"
+}

@@ -1,0 +1,13 @@
+{
+ "wires": [
+  {
+   "SrcId": "57532a07-e1fd-4abb-b391-e45fa0904e0b",
+   "Src": "L",
+   "DstId": "9761398d-ffcc-47e1-bf91-aca2678d206f",
+   "Dst": "B"
+  }
+ ],
+ "solve": false
+}
+---
+{"Count":1,"OkCount":1,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"57532a07-e1fd-4abb-b391-e45fa0904e0b","Param":"Loft"},"Dst":{"Id":"9761398d-ffcc-47e1-bf91-aca2678d206f","Param":"Brep"},"Error":null}]}

@@ -1,0 +1,6 @@
+{
+ "layout": "tidy"
+}
+---
+tidied 31 objects (2894x983 → 3205x398 canvas units)
+solved 7ms, no errors/warnings on affected nodes

@@ -1,0 +1,7 @@
+{
+ "code": "for o in q('layer:Mullions name:MS*'): doc.Objects.Delete(o, True)"
+}
+---
+ok py 64ms, checkpoint c9
+rhino delta -105:
+- r270-r290 r338-r358 r406-r426 r474-r494 r620-r640

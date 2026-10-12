@@ -1,0 +1,79 @@
+{
+ "wires": [
+  {
+   "SrcId": "d786dde2-552c-4cda-be88-42637af8710a",
+   "Src": "S",
+   "DstId": "de5d2b68-f33f-44b0-94c0-e0391ae75c5c",
+   "Dst": "G"
+  },
+  {
+   "SrcId": "aa07655b-3756-4f89-aa13-a97fff2c760c",
+   "Src": "0",
+   "DstId": "c780443c-caf9-4bd6-af79-fd46edbfcdef",
+   "Dst": "X"
+  },
+  {
+   "SrcId": "6302c20a-47ec-44d2-8a32-a0bbd0069137",
+   "Src": "0",
+   "DstId": "c780443c-caf9-4bd6-af79-fd46edbfcdef",
+   "Dst": "Z"
+  },
+  {
+   "SrcId": "de5d2b68-f33f-44b0-94c0-e0391ae75c5c",
+   "Src": "C",
+   "DstId": "f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7",
+   "Dst": "A"
+  },
+  {
+   "SrcId": "c780443c-caf9-4bd6-af79-fd46edbfcdef",
+   "Src": "Pt",
+   "DstId": "f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7",
+   "Dst": "B"
+  },
+  {
+   "SrcId": "f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7",
+   "Src": "D",
+   "DstId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Dst": "V"
+  },
+  {
+   "SrcId": "b968ca59-8b33-4519-9d4c-917c2b3cf1d6",
+   "Src": "I",
+   "DstId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Dst": "S"
+  },
+  {
+   "SrcId": "4ce5543e-3647-466a-bbde-3954a0d3eaa7",
+   "Src": "I",
+   "DstId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Dst": "T"
+  },
+  {
+   "SrcId": "d786dde2-552c-4cda-be88-42637af8710a",
+   "Src": "S",
+   "DstId": "92f2f010-a498-4663-a5de-b16703dcb058",
+   "Dst": "G"
+  },
+  {
+   "SrcId": "de5d2b68-f33f-44b0-94c0-e0391ae75c5c",
+   "Src": "C",
+   "DstId": "92f2f010-a498-4663-a5de-b16703dcb058",
+   "Dst": "C"
+  },
+  {
+   "SrcId": "9f8be3c9-07a2-4b77-a342-6b663bc149d8",
+   "Src": "R",
+   "DstId": "92f2f010-a498-4663-a5de-b16703dcb058",
+   "Dst": "F"
+  },
+  {
+   "SrcId": "92f2f010-a498-4663-a5de-b16703dcb058",
+   "Src": "G",
+   "DstId": "ddd30d89-372e-4d84-b22c-d279948d5ab6",
+   "Dst": "B"
+  }
+ ],
+ "solve": true
+}
+---
+{"Count":12,"OkCount":12,"Wires":[{"Index":0,"Ok":true,"Src":{"Id":"d786dde2-552c-4cda-be88-42637af8710a","Param":"Surface"},"Dst":{"Id":"de5d2b68-f33f-44b0-94c0-e0391ae75c5c","Param":"Geometry"},"Error":null},{"Index":1,"Ok":true,"Src":{"Id":"aa07655b-3756-4f89-aa13-a97fff2c760c","Param":"Number Slider"},"Dst":{"Id":"c780443c-caf9-4bd6-af79-fd46edbfcdef","Param":"X coordinate"},"Error":null},{"Index":2,"Ok":true,"Src":{"Id":"6302c20a-47ec-44d2-8a32-a0bbd0069137","Param":"Number Slider"},"Dst":{"Id":"c780443c-caf9-4bd6-af79-fd46edbfcdef","Param":"Z coordinate"},"Error":null},{"Index":3,"Ok":true,"Src":{"Id":"de5d2b68-f33f-44b0-94c0-e0391ae75c5c","Param":"Centroid"},"Dst":{"Id":"f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7","Param":"Point A"},"Error":null},{"Index":4,"Ok":true,"Src":{"Id":"c780443c-caf9-4bd6-af79-fd46edbfcdef","Param":"Point"},"Dst":{"Id":"f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7","Param":"Point B"},"Error":null},{"Index":5,"Ok":true,"Src":{"Id":"f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7","Param":"Distance"},"Dst":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Value"},"Error":null},{"Index":6,"Ok":true,"Src":{"Id":"b968ca59-8b33-4519-9d4c-917c2b3cf1d6","Param":"Domain"},"Dst":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Source"},"Error":null},{"Index":7,"Ok":true,"Src":{"Id":"4ce5543e-3647-466a-bbde-3954a0d3eaa7","Param":"Domain"},"Dst":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Target"},"Error":null},{"Index":8,"Ok":true,"Src":{"Id":"d786dde2-552c-4cda-be88-42637af8710a","Param":"Surface"},"Dst":{"Id":"92f2f010-a498-4663-a5de-b16703dcb058","Param":"Geometry"},"Error":null},{"Index":9,"Ok":true,"Src":{"Id":"de5d2b68-f33f-44b0-94c0-e0391ae75c5c","Param":"Centroid"},"Dst":{"Id":"92f2f010-a498-4663-a5de-b16703dcb058","Param":"Center"},"Error":null},{"Index":10,"Ok":true,"Src":{"Id":"9f8be3c9-07a2-4b77-a342-6b663bc149d8","Param":"Mapped"},"Dst":{"Id":"92f2f010-a498-4663-a5de-b16703dcb058","Param":"Factor"},"Error":null},{"Index":11,"Ok":true,"Src":{"Id":"92f2f010-a498-4663-a5de-b16703dcb058","Param":"Geometry"},"Dst":{"Id":"ddd30d89-372e-4d84-b22c-d279948d5ab6","Param":"Brep"},"Error":null}]}

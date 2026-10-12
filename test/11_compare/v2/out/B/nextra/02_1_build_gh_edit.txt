@@ -1,0 +1,13 @@
+{
+ "ops": "## Inputs #DBABFF\nW = Number Slider {v=30, r=10..60} \"Width\"\nH = Number Slider {v=12, r=3..30} \"Height\"\nU = Number Slider {v=15, r=2..40, int} \"U\"\nV = Number Slider {v=6, r=2..20, int} \"V\"\nAx = Number Slider {v=10, r=0..60} \"Attr x\"\nAz = Number Slider {v=6, r=0..30} \"Attr z\"\nRmin = Number Slider {v=0.15, r=0.05..1} \"Open min\"\nRmax = Number Slider {v=0.85, r=0.05..1} \"Open max\"\nD = Number Slider {v=0.3, r=0.05..2} \"Depth\"\n## Panels #ABDBFF\npl = XZ Plane\nrc = Rectangle (P=pl, X=W, Y=H)\nbs = Boundary Surfaces (E=rc.R)\ndv = Divide Domain² (I=bs, U=U, V=V)\niso = Isotrim (S=bs, D=dv)\nar = Area (G=iso)\n## Attractor #FFD6AB\nap = Construct Point (X=Ax, Z=Az)\nds = Distance (A=ar.C, B=ap)\nbnd = Bounds (N=ds)\ndom = Construct Domain (A=Rmin, B=Rmax)\nrm = Remap Numbers (V=ds, S=bnd, T=dom)\n## Openings #FFD6AB\nsc = Scale (G=iso, C=ar.C, F=rm.R)\ned = Brep Edges (B=sc.G)\njn = Join Curves (C=ed.En)\nuy = Unit Y (F=D)\nex = Extrude (B=jn, D=uy)\n## Display #B2FAB4\ncs = Colour Swatch {c=#5A8CB4}\npv = Custom Preview (G=ex, M=cs)"
+}
+---
+ok: 27/27 lines applied (+27 nodes, 30 wires, +5 groups), checkpoint c13
+ids: W=g1 H=g2 U=g3 V=g4 Ax=g5 Az=g6 Rmin=g7 Rmax=g8 D=g9 pl=g10 rc=g11 bs=g12 dv=g13 iso=g14 ar=g15 ap=g16 ds=g17 bnd=g18 dom=g19 rm=g20 sc=g21 ed=g22 jn=g23 uy=g24 ex=g25 cs=g26 pv=g27
+groups: Inputs=g28 Panels=g29 Attractor=g30 Openings=g31 Display=g32
+note: L13: 'Rectangle' is ambiguous; used Curve/Primitive because its ports match P,X,Y
+note: L15: 'Divide Domain²' is ambiguous; used Maths/Domain because its ports match I,U,V
+note: L22: 'Construct Domain' is ambiguous; used Maths/Domain because its ports match A,B
+note: L26: 'Brep Edges' is ambiguous; used Surface/Analysis (others: NGon)
+solved 7ms, no errors/warnings on affected nodes
+results: g25.E: 90 Brep 90 branches

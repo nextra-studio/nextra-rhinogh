@@ -1,0 +1,52 @@
+{
+ "query": "Merge",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Merge",
+  "category": null,
+  "components": [
+    {
+      "name": "Merge",
+      "nickname": "Merge",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "guid": "3cadddef-1e2b-4c09-9390-0e8f78f7609f",
+      "description": "Merge a bunch of data streams"
+    },
+    {
+      "name": "Merge",
+      "nickname": "Merge",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "guid": "86866576-6cc0-485a-9cd2-6f7d493f57f7",
+      "description": "Merge two streams into one."
+    },
+    {
+      "name": "Merge Multiple",
+      "nickname": "Merge",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "guid": "0b6c5dac-6c93-4158-b8d1-ca3187d45f25",
+      "description": "Merge multiple input streams into one"
+    },
+    {
+      "name": "ggIFC MergeFiles",
+      "nickname": "ggIFCMF",
+      "category": "GeomGymIFC",
+      "subcategory": "IFC Utils",
+      "guid": "f7a02700-4f19-4360-95ab-c1ef16239e6a",
+      "description": "Merge IFC files, should have consistent base points, units etc"
+    },
+    {
+      "name": "Merge 03",
+      "nickname": "M3",
+      "category": "Sets",
+      "subcategory": "Tree",
+      "guid": "481f0339-1299-43ba-b15c-c07891a8f822",
+      "description": "Merge three streams into one."
+    }
+  ]
+}

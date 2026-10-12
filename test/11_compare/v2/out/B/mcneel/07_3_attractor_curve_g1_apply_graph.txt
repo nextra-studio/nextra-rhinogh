@@ -1,0 +1,52 @@
+{
+ "sliders": [],
+ "components": [
+  {
+   "Key": "p1",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 600,
+   "Y": 500
+  },
+  {
+   "Key": "p2",
+   "Selector": "3581f42a-9592-4549-bd6b-1c0fc39d067b",
+   "X": 600,
+   "Y": 570
+  },
+  {
+   "Key": "ln",
+   "Selector": "4c4e56eb-2f04-43f9-95a3-cc46a14f495a",
+   "X": 770,
+   "Y": 530
+  },
+  {
+   "Key": "cc",
+   "Selector": "Curve Closest Point",
+   "X": 940,
+   "Y": 530
+  }
+ ],
+ "wires": [
+  {
+   "SrcKey": "p1",
+   "Src": "Pt",
+   "DstKey": "ln",
+   "Dst": "A"
+  },
+  {
+   "SrcKey": "p2",
+   "Src": "Pt",
+   "DstKey": "ln",
+   "Dst": "B"
+  },
+  {
+   "SrcKey": "ln",
+   "Src": "L",
+   "DstKey": "cc",
+   "Dst": "C"
+  }
+ ],
+ "solve": false
+}
+---
+{"Placed":[{"Key":"p1","Id":"9a01d769-b881-47e0-bb50-0f4b835f5447","Kind":"Component"},{"Key":"p2","Id":"77b1ca1a-a42d-4e4a-a7dd-b2f772477343","Kind":"Component"},{"Key":"ln","Id":"b22d6beb-e825-4514-adea-e95a2858e2fd","Kind":"Component"},{"Key":"cc","Id":"3cc5305a-2f45-4814-9384-8b1e9e101fc4","Kind":"Component"}],"PlaceErrors":[],"Wires":[{"Index":0,"Ok":true,"Error":null},{"Index":1,"Ok":true,"Error":null},{"Index":2,"Ok":true,"Error":null}],"WiresOk":3}

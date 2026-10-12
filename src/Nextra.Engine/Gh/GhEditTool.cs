@@ -121,7 +121,8 @@ namespace Nextra.Engine.Gh
                 if (br.Deleted > 0) parts.Add($"-{br.Deleted} deleted");
                 var status = br.Errors.Count == 0 ? "ok" : br.LinesOk == 0 ? "FAILED" : "partial";
                 r.Ok = br.Errors.Count == 0;
-                r.Line($"{status}: {br.LinesOk}/{br.Lines} lines applied ({string.Join(", ", parts)}){(ck != null ? ", checkpoint " + ck["id"] : "")}");
+                bool nothing = br.LinesOk == 0 && br.Deleted == 0 && !hasScript && !layout.StartsWith("tidy");   // checkpoint is dropped below
+                r.Line($"{status}: {br.LinesOk}/{br.Lines} lines applied ({string.Join(", ", parts)}){(ck != null && !nothing ? ", checkpoint " + ck["id"] : "")}");
                 var ids = br.IdMap.Where(kv => !kv.Key.StartsWith("## ")).Select(kv => $"{kv.Key}={kv.Value}").ToList();
                 if (ids.Count > 0) r.Line("ids: " + string.Join(" ", ids));
                 var gids = br.IdMap.Where(kv => kv.Key.StartsWith("## ")).Select(kv => $"{kv.Key.Substring(3)}={kv.Value}").ToList();
@@ -170,7 +171,7 @@ namespace Nextra.Engine.Gh
                     if (outs.Count > 0) r.Line("results: " + string.Join(" · ", outs));
                 }
                 if (a.Bool("echo", false) && touched.Count > 0) r.Line(Writer.Write(d, touched.Distinct(), new WriteOptions { Messages = false }));
-                if (ck != null && br != null && br.LinesOk == 0 && br.Deleted == 0 && scriptComp == null) Checkpoints.Discard(ck);
+                if (ck != null && br != null && br.LinesOk == 0 && br.Deleted == 0 && !hasScript && !layout.StartsWith("tidy")) Checkpoints.Discard(ck);
             }
 
             // plug-in guides: categories of touched nodes + categories named in the ops (@Karamba3D)
@@ -195,7 +196,9 @@ namespace Nextra.Engine.Gh
             if (r.Length == 0) r.Line("nothing to do: give ops, script, layout:'tidy', open, new, save or bake");
         }
 
-        static bool IsDisplay(IGH_DocumentObject o) => o is GH_Panel || o is GH_Scribble || o is GH_Group;
+        /// Panels, scribbles, groups and output-less components (Custom Preview, Bake…) only show data: the result
+        /// worth reporting is what flows into them.
+        static bool IsDisplay(IGH_DocumentObject o) => o is GH_Panel || o is GH_Scribble || o is GH_Group || (o is IGH_Component c && c.Params.Output.Count == 0);
         static bool IsInput(IGH_DocumentObject o) => o is GH_NumberSlider || o is GH_BooleanToggle || o is GH_ValueList || o is GH_ColourSwatch || o is GH_Panel;
 
         /// Where to show the effect of an edit: the touched nodes whose data goes nowhere else that was touched

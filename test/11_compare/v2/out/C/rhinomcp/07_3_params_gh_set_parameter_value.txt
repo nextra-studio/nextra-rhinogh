@@ -1,0 +1,13 @@
+{
+ "nickname": "U",
+ "value": 24
+}
+---
+{
+  "instance_id": "428ce3e2-16eb-4efc-a0b0-4cf852b273b6",
+  "nickname": "U",
+  "value": 24.0,
+  "min": 4.0,
+  "max": 60.0,
+  "message": "Set slider 'U' to 24"
+}

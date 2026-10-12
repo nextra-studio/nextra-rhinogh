@@ -1,0 +1,21 @@
+{
+ "filter": "layer:Core"
+}
+---
+16 object(s); units millimeters
+r261 polysurface solid [Core] "W3_L4" 3600x3300x250 planar n+x @(21725,9000,12450)
+r260 polysurface solid [Core] "W2_L4" 3600x3300x250 planar n+x @(14275,9000,12450)
+r269 polysurface solid [Core] "W1_L4" 7200x3300x250 planar n+y @(18000,10925,12450)
+r268 polysurface solid [Core] "W0_L4" 7200x3300x250 planar n+y @(18000,7075,12450)
+r259 polysurface solid [Core] "W3_L3" 3600x3300x250 planar n+x @(21725,9000,8850)
+r258 polysurface solid [Core] "W2_L3" 3600x3300x250 planar n+x @(14275,9000,8850)
+r267 polysurface solid [Core] "W1_L3" 7200x3300x250 planar n+y @(18000,10925,8850)
+r266 polysurface solid [Core] "W0_L3" 7200x3300x250 planar n+y @(18000,7075,8850)
+r257 polysurface solid [Core] "W3_L2" 3600x3300x250 planar n+x @(21725,9000,5250)
+r256 polysurface solid [Core] "W2_L2" 3600x3300x250 planar n+x @(14275,9000,5250)
+r265 polysurface solid [Core] "W1_L2" 7200x3300x250 planar n+y @(18000,10925,5250)
+r264 polysurface solid [Core] "W0_L2" 7200x3300x250 planar n+y @(18000,7075,5250)
+r255 polysurface solid [Core] "W3_L1" 3600x3300x250 planar n+x @(21725,9000,1650)
+r254 polysurface solid [Core] "W2_L1" 3600x3300x250 planar n+x @(14275,9000,1650)
+r263 polysurface solid [Core] "W1_L1" 7200x3300x250 planar n+y @(18000,10925,1650)
+r262 polysurface solid [Core] "W0_L1" 7200x3300x250 planar n+y @(18000,7075,1650)

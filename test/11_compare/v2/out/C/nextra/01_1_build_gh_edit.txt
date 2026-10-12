@@ -1,0 +1,15 @@
+{
+ "ops": "## Inputs #DBABFF\nL = Number Slider {v=36, r=10..80} \"Length\"\nWd = Number Slider {v=24, r=6..60} \"Width\"\nHc = Number Slider {v=6, r=1..20} \"Crown\"\nAm = Number Slider {v=4, r=0..12} \"Wave\"\nNu = Number Slider {v=18, r=4..60, int} \"U\"\nNv = Number Slider {v=12, r=4..40, int} \"V\"\nRp = Number Slider {v=0.08, r=0.02..0.5} \"Member r\"\n## Arches #ABDBFF\ndy = Construct Domain (B=Wd, A=0)\nys = Range (D=dy, N=2)\nyw = Division (A=ys, B=Wd)\npi = Pi (N=yw)\nsn = Sine (x=pi)\namp = Multiplication (A=sn, B=Am)\nzc = Addition (A=amp, B=Hc)\nhalf = Division (A=L, B=2)\npa = Construct Point (Y=ys)\npb = Construct Point (X=half, Y=ys, Z=zc)\npc = Construct Point (X=L, Y=ys)\narc = Arc 3Pt (A=pa, B=pb, C=pc)\n## Shell #FFD6AB\nlo = Loft Options (Rbd=12)\nlf = Loft (C=arc, O=lo)\nsp = Divide Surface (S=lf, U=Nu, V=Nv)\niu = Interpolate (V=sp.P)\nfm = Flip Matrix (D=sp.P)\niv = Interpolate (V=fm)\nmg = Merge (D1=iu.C^f, D2=iv.C^f)\n## Members #B2FAB4\npp = Pipe (C=mg, R=Rp)"
+}
+---
+ok: 27/27 lines applied (+27 nodes, 32 wires, 4 values, +4 groups), checkpoint c20
+ids: L=g1 Wd=g2 Hc=g3 Am=g4 Nu=g5 Nv=g6 Rp=g7 dy=g8 ys=g9 yw=g10 pi=g11 sn=g12 amp=g13 zc=g14 half=g15 pa=g16 pb=g17 pc=g18 arc=g19 lo=g20 lf=g21 sp=g22 iu=g23 fm=g24 iv=g25 mg=g26 pp=g27
+groups: Inputs=g28 Arches=g29 Shell=g30 Members=g31
+note: L10: 'Construct Domain' is ambiguous; used Maths/Domain because its ports match B,A
+note: L16: 'Addition': 2 versions installed; used the visible one (Maths/Operators)
+note: L23: 'Loft Options' is ambiguous; used Surface/Freeform because its ports match Rbd
+note: L26: 'Interpolate': 2 identical entries in Curve; used the first
+note: L28: 'Interpolate': 2 identical entries in Curve; used the first
+note: L29: 'Merge' is ambiguous; used Sets/Tree because its ports match D1,D2
+solved 4ms, no errors/warnings on affected nodes
+results: g27.P: 32 Brep 32 branches

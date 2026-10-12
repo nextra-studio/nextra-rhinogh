@@ -1,0 +1,8 @@
+{
+ "view": "iso"
+}
+---
+rhino view 'Perspective' 777x600, zoom extents. Grid A-H x 1-8.
+548 object(s) in frame.
+cells (count): C1:3 D1:6 B2:4 C2:12 D2:13 E2:10 A3:6 B3:14 C3:23 D3:18 E3:17 F3:13 G3:2 A4:9 B4:24 C4:24 D4:17 E4:26 F4:24 G4:14 H4:5 A5:5 B5:12 C5:17 D5:22 E5:18 F5:17 G5:21 H5:9 B6:2 C6:13 D6:16 E6:20 F6:23 G6:15 H6:6 D7:8 E7:16 F7:13 G7:4 E8:5 F8:2
+Too many to tag (548 > 30). Next: view focus:'C3:E5' (region), or focus:'layer:X', or query filter:'cells:C3:E5'.

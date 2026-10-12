@@ -1,0 +1,52 @@
+{
+ "query": "Rectangle",
+ "limit": 5
+}
+---
+{
+  "count": 5,
+  "query": "Rectangle",
+  "category": null,
+  "components": [
+    {
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "guid": "0ca0a214-396c-44ea-b22f-d3a1757c32d6",
+      "description": "Create a rectangle on a plane"
+    },
+    {
+      "name": "Rectangle",
+      "nickname": "Rectangle",
+      "category": "Curve",
+      "subcategory": "Primitive",
+      "guid": "d93100b6-d50b-40b2-831a-814659dc38e3",
+      "description": "Create a rectangle on a plane"
+    },
+    {
+      "name": "Rectangle",
+      "nickname": "Rec",
+      "category": "Params",
+      "subcategory": "Geometry",
+      "guid": "abf9c670-5462-4cd8-acb3-f1ab0256dbf3",
+      "description": "Contains a collection of rectangles"
+    },
+    {
+      "name": "Bounding Rectangle",
+      "nickname": "BRec",
+      "category": "Pufferfish",
+      "subcategory": "Curve",
+      "guid": "22f0d53c-5673-456d-bdef-1c7085693481",
+      "description": "Create a plane oriented union bounding rectangle or separate bounding rectangles for geometry."
+    },
+    {
+      "name": "Bounding Rectangle",
+      "nickname": "BRec",
+      "category": "Pufferfish",
+      "subcategory": "Curve",
+      "guid": "a361126c-3cc6-4772-8da5-30ac59e4ee53",
+      "description": "Create a plane oriented union bounding rectangle or separate bounding rectangles for geometry."
+    }
+  ]
+}

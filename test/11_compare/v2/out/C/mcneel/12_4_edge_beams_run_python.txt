@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\nfrom Grasshopper.Kernel.Types import GH_Number\ndoc = Grasshopper.Instances.ActiveCanvas.Document\nr = [p for p in doc.FindObject(System.Guid('87606912-a18c-4c08-a034-dd88f08e6f1d'), True).Params.Input if p.NickName == 'R'][0]\nr.PersistentData.Clear(); r.PersistentData.Append(GH_Number(0.25))\ndoc.NewSolution(False)\nprint('ok')"
+}
+---
+{"stdout":"ok\n","error":null}

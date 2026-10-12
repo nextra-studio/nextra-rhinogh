@@ -1,0 +1,72 @@
+===== gh_build_graph
+Create and wire a Grasshopper graph in one batched canvas operation.
+
+Each component needs an alias plus component_name or component_guid. Use
+aliases in connections, values, groups, and preview_policy; the response
+returns aliases mapped to generated instance IDs.
+
+Use gh_mutate_graph for follow-up edits and rewires involving existing
+components by persisted alias, Grasshopper instance GUID, or nickname.
+
+Number Slider components support value/min/max/decimals. Layout supports
+max_columns to wrap long dataflow chains into a compact readable canvas.
+
+Minimal shape:
+components=[
+    {"alias": "a", "component_name": "Number Slider", "value": 3.5, "min": 0, "max": 10},
+    {"alias": "add", "component_name": "Addition"},
+],
+connections=[{"source": "a", "target": "add", "target_input_index": 0}],
+layout={"enabled": True, "max_columns": 6}
+
+===== gh_mutate_graph
+Batch edit, rewire, and verify an existing or new Grasshopper graph.
+
+Use this after gh_build_graph for follow-up edits: insert components,
+disconnect/reconnect wires, update values/preview/nicknames, delete objects,
+group/layout the changed graph, recompute, and verify outputs in one
+rollback-safe call. Selectors in source, target, layout targets, groups, and
+preview_policy can be request-local aliases, persisted aliases, Grasshopper
+instance GUIDs, or nicknames.
+
+Port selection supports indices or names/nicknames:
+source_output_name="R", target_input_name="L".
+
+Insert a component between two existing components by GUID:
+operations=[
+    {
+        "op": "disconnect",
+        "source": "source-guid",
+        "source_output_name": "G",
+        "target": "target-guid",
+        "target_input_name": "L",
+    },
+    {"op": "create", "alias": "flatten", "component_name": "Flatten Tree"},
+    {"op": "connect", "source": "source-guid", "source_output_name": "G", "target": "flatten"},
+    {"op": "connect", "source": "flatten", "target": "target-guid", "target_input_name": "L"},
+    {"op": "recompute"},
+]
+
+Use layout={"enabled": True, "targets": ["source-guid", "flatten", "target-guid"], "max_columns": 4}
+to keep the edited area readable.
+
+===== gh_layout_components
+Lay out Grasshopper canvas objects using wires as a left-to-right graph.
+===== gh_set_parameter_value
+Set a slider, toggle, panel, value list, or regular input parameter value.
+===== gh_get_canvas_state
+Return a structured snapshot of the active Grasshopper canvas.
+===== gh_create_document
+Create or activate a Grasshopper document for subsequent canvas commands.
+===== gh_search_components
+Search the installed Grasshopper component library.
+===== undo
+
+Undo the last operation(s) in the Rhino document.
+
+Parameters:
+- steps: Number of operations to undo (default: 1)
+
+Returns:
+A message indicating how many operations were undone.
+

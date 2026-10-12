@@ -1,0 +1,10 @@
+{
+ "ops": "- g16 g17\n## Attractor\np1 = Construct Point (X=0, Z=g6)\np2 = Construct Point (X=g1, Z=g2)\nln = Line (A=p1, B=p2)\ncc = Curve Closest Point (P=g15.C, C=ln)\ng18 (N=cc.D)\ng20 (V=cc.D)"
+}
+---
+ok: 7/7 lines applied (+4 nodes, 9 wires, 1 values, -2 deleted), checkpoint c15
+ids: p1=g33 p2=g34 ln=g35 cc=g36
+groups: Attractor=g30
+note: L5: 'Line' is ambiguous; used Curve/Primitive because its ports match A,B
+solved 4ms, no errors/warnings on affected nodes
+results: g25.E: 90 Brep 90 branches

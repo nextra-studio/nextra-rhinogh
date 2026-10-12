@@ -13,3 +13,5 @@ test/regress/_mem/
 test/regress/_tmp/
 test/regress/*.log
 .claude/scheduled_tasks.lock
+test/11_compare/v2/_resolve*.json
+test/11_compare/v2/*.log

@@ -1,0 +1,311 @@
+{
+ "operations": [
+  {
+   "op": "create",
+   "alias": "k",
+   "component_name": "Number Slider",
+   "value": 1,
+   "min": 0.2,
+   "max": 1.5,
+   "nickname": "Open scale"
+  },
+  {
+   "op": "create",
+   "alias": "mul",
+   "component_guid": "ce46b74e-00c9-43c4-805a-193b69ea4a11"
+  },
+  {
+   "op": "disconnect",
+   "source": "rm",
+   "source_output_name": "R",
+   "target": "sc",
+   "target_input_name": "F"
+  },
+  {
+   "op": "connect",
+   "source": "rm",
+   "source_output_name": "R",
+   "target": "mul",
+   "target_input_name": "A"
+  },
+  {
+   "op": "connect",
+   "source": "k",
+   "target": "mul",
+   "target_input_name": "B"
+  },
+  {
+   "op": "connect",
+   "source": "mul",
+   "target": "sc",
+   "target_input_name": "F"
+  },
+  {
+   "op": "recompute"
+  }
+ ]
+}
+---
+{
+  "success": true,
+  "graph_id": "MCPGraph_20261012030138019",
+  "operation_count": 7,
+  "created_count": 2,
+  "created_component_count": 2,
+  "created_group_count": 0,
+  "deleted_count": 0,
+  "deleted_component_count": 0,
+  "deleted_group_count": 0,
+  "recomputed": true,
+  "rollback_on_error": true,
+  "fail_on_verification_error": false,
+  "verified": null,
+  "mutation_duration_ms": 242,
+  "solution_duration_ms": 5,
+  "verification_duration_ms": 0,
+  "duration_ms": 628,
+  "operations": [
+    {
+      "op": "create",
+      "alias": "k",
+      "instance_id": "d38cbfed-a31a-46be-94c5-e55f5fb569c7",
+      "name": "Number Slider",
+      "nickname": "Open scale"
+    },
+    {
+      "op": "create",
+      "alias": "mul",
+      "instance_id": "0361907a-eedc-4b53-9d57-0832f002986e",
+      "name": "Multiplication",
+      "nickname": "A×B"
+    },
+    {
+      "op": "disconnect",
+      "target_id": "1dd681bf-1953-4964-9c43-8c1bc8da43b7",
+      "disconnected_count": 1
+    },
+    {
+      "op": "connect",
+      "source_id": "c8e98615-f73b-4132-bafe-a8c6f595c828",
+      "target_id": "0361907a-eedc-4b53-9d57-0832f002986e",
+      "source_param": "Mapped",
+      "target_param": "A"
+    },
+    {
+      "op": "connect",
+      "source_id": "d38cbfed-a31a-46be-94c5-e55f5fb569c7",
+      "target_id": "0361907a-eedc-4b53-9d57-0832f002986e",
+      "source_param": "Number Slider",
+      "target_param": "B"
+    },
+    {
+      "op": "connect",
+      "source_id": "0361907a-eedc-4b53-9d57-0832f002986e",
+      "target_id": "1dd681bf-1953-4964-9c43-8c1bc8da43b7",
+      "source_param": "Result",
+      "target_param": "Factor"
+    },
+    {
+      "op": "recompute"
+    }
+  ],
+  "groups": [],
+  "layout": null,
+  "preview_policy": null,
+  "verification": null,
+  "diagnostics": {
+    "object_count": 4,
+    "output_count": 6,
+    "outputs_with_data": 6,
+    "total_output_data_count": 451,
+    "warning_count": 0,
+    "error_count": 0,
+    "objects": [
+      {
+        "instance_id": "d38cbfed-a31a-46be-94c5-e55f5fb569c7",
+        "alias": "k",
+        "graph_id": "MCPGraph_20261012030138019",
+        "role": "",
+        "name": "Number Slider",
+        "nickname": "Open scale",
+        "category": "Params",
+        "subcategory": "Input",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Number Slider",
+            "nickname": "Open scale",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 1,
+            "branch_count": 1
+          }
+        ],
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.0,
+        "min": 0.2,
+        "max": 1.5,
+        "decimals": 2,
+        "expression": null
+      },
+      {
+        "instance_id": "0361907a-eedc-4b53-9d57-0832f002986e",
+        "alias": "mul",
+        "graph_id": "MCPGraph_20261012030138019",
+        "role": "",
+        "name": "Multiplication",
+        "nickname": "A×B",
+        "category": "Maths",
+        "subcategory": "Operators",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 1,
+        "outputs_with_data": 1,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Result",
+            "nickname": "R",
+            "type": "Generic Data",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "1dd681bf-1953-4964-9c43-8c1bc8da43b7",
+        "alias": "sc",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Scale",
+        "nickname": "Scale",
+        "category": "Transform",
+        "subcategory": "Affine",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Geometry",
+            "nickname": "G",
+            "type": "Geometry",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Transform",
+            "nickname": "X",
+            "type": "Transform",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      },
+      {
+        "instance_id": "c8e98615-f73b-4132-bafe-a8c6f595c828",
+        "alias": "rm",
+        "graph_id": "MCPGraph_20261012030133990",
+        "role": "",
+        "name": "Remap Numbers",
+        "nickname": "ReMap",
+        "category": "Maths",
+        "subcategory": "Domain",
+        "runtime_message_level": "Blank",
+        "runtime_messages": [],
+        "output_count": 2,
+        "outputs_with_data": 2,
+        "outputs": [
+          {
+            "index": 0,
+            "name": "Mapped",
+            "nickname": "R",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          },
+          {
+            "index": 1,
+            "name": "Clipped",
+            "nickname": "C",
+            "type": "Number",
+            "access": "item",
+            "has_data": true,
+            "data_count": 90,
+            "branch_count": 1
+          }
+        ],
+        "preview": true,
+        "enabled": true
+      }
+    ]
+  },
+  "visibility": {
+    "canvas_open": true,
+    "active_canvas_document": true,
+    "preview_capable_object_count": 20,
+    "preview_enabled_object_count": 20,
+    "preview_disabled_object_count": 0,
+    "has_preview_enabled_objects": true,
+    "rhino_document_object_count": 2080,
+    "has_baked_rhino_objects": true,
+    "viewport_warning": null
+  },
+  "summary": {
+    "graph_id": "MCPGraph_20261012030138019",
+    "object_count": 4,
+    "controls": [
+      {
+        "alias": "k",
+        "name": "Number Slider",
+        "nickname": "Open scale",
+        "instance_id": "d38cbfed-a31a-46be-94c5-e55f5fb569c7",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.0,
+        "min": 0.2,
+        "max": 1.5,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "adjustable_parameters": [
+      {
+        "alias": "k",
+        "name": "Number Slider",
+        "nickname": "Open scale",
+        "instance_id": "d38cbfed-a31a-46be-94c5-e55f5fb569c7",
+        "enabled": true,
+        "special_type": "number_slider",
+        "value": 1.0,
+        "min": 0.2,
+        "max": 1.5,
+        "decimals": 2,
+        "expression": null
+      }
+    ],
+    "outputs": [],
+    "verification": null
+  },
+  "message": "Mutated Grasshopper graph with 7 operation(s)"
+}

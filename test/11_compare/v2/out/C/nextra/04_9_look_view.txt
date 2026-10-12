@@ -1,0 +1,7 @@
+{
+ "target": "gh"
+}
+---
+gh canvas 1000x260, whole canvas, zoom 0.32 (gh). Grid A-H x 1-8. 29 object(s) visible.
+cells (count): A3:1 A4:3 B4:2 D4:3 E4:1 F4:2 G4:2 H4:2 A5:2 B5:1 C5:3 D5:2 E5:1 F5:1 G5:1 H5:1 A6:1
+zoomed out (text unreadable); next: view {target:'gh', focus:'C3:E5'} or focus a group handle

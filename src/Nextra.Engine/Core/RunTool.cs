@@ -144,7 +144,9 @@ namespace Nextra.Engine
             if (failure == null && !string.IsNullOrWhiteSpace(errText) && !Regex.IsMatch(errText, "Error|Exception|Traceback")) ok = true;
 
             r.Ok = ok;
-            r.Line($"{(ok ? "ok" : "FAILED")} {lang} {sw.ElapsedMilliseconds}ms, checkpoint {ck["id"]}");
+            // a run that changed nothing keeps no checkpoint: do not hand out an id that undo would not find
+            bool keep = !(delta.Empty && (ghBefore == null || !GhCore.Changed(ghBefore)) && ok);
+            r.Line($"{(ok ? "ok" : "FAILED")} {lang} {sw.ElapsedMilliseconds}ms" + (keep ? $", checkpoint {ck["id"]}" : ""));
             if (!string.IsNullOrWhiteSpace(outText)) r.Line("stdout:\n" + Clip(outText, 2500));
             if (!ok)
             {
@@ -157,7 +159,7 @@ namespace Nextra.Engine
             }
             delta.Report(r);
             if (ghBefore != null) GhCore.ReportDelta(ghBefore, r);
-            if (delta.Empty && (ghBefore == null || !GhCore.Changed(ghBefore)) && ok) Checkpoints.Discard(ck);
+            if (!keep) Checkpoints.Discard(ck);
             var hint = Memory.RecurringHint();
             if (hint != null) r.Line(hint);
             return new Result { ok = ok, output = outText };

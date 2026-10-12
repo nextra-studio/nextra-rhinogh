@@ -1,0 +1,7 @@
+{
+ "ops": "g4 {v=7}\ng5 {v=24}"
+}
+---
+ok: 2/2 lines applied (), checkpoint c22
+solved 6ms, no errors/warnings on affected nodes
+results: g27.P: 38 Brep 38 branches

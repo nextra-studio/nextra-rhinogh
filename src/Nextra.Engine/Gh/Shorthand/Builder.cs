@@ -465,21 +465,20 @@ namespace Nextra.Engine.Gh.Shorthand
             }
         }
 
+        static readonly HashSet<string> Scalars = new HashSet<string> { "Number", "Integer", "Boolean" };
+        static readonly HashSet<string> Shapes = new HashSet<string> { "Curve", "Line", "Arc", "Circle", "Rectangle", "Polyline", "Surface", "Brep", "Mesh", "Box", "SubD", "Extrusion" };
+
+        /// Static hint only for wirings that are almost always mistakes (geometry into a number input, or a number
+        /// into a geometry input). Grasshopper converts most other pairs (Surface→Domain², Colour→Shader, …), and
+        /// real conversion failures come back as runtime errors after the solve.
         static void TypeCheck(IGH_Param target, List<IGH_Param> srcs, BuildResult res, NodeOp n)
         {
-            // cheap static hint; real conversion errors come back after the solve
             var tt = target.TypeName;
-            if (tt == "Generic Data" || tt == "Data") return;
             foreach (var s in srcs)
             {
                 var st = s.TypeName;
-                if (st == tt || st == "Generic Data" || st == "Data" || st == "Geometry") continue;
-                if ((tt == "Domain" || tt == "Interval") && (st == "Number" || st == "Integer")) continue;
-                bool okPair = (tt == "Number" && st == "Integer") || (tt == "Integer" && st == "Number") || (tt == "Geometry") ||
-                              (tt == "Curve" && (st == "Line" || st == "Arc" || st == "Circle" || st == "Rectangle" || st == "Polyline")) ||
-                              (tt == "Brep" && (st == "Surface" || st == "Box")) || (tt == "Surface" && st == "Brep") ||
-                              (tt == "Point" && st == "Vector") || (tt == "Vector" && st == "Point") || (tt == "Text") || (tt == "Plane" && st == "Point");
-                if (!okPair) res.Notes.Add($"L{n.Line}: {s.NickName}({st}) → {target.NickName}({tt}) may need conversion");
+                bool bad = (Scalars.Contains(tt) && Shapes.Contains(st)) || (Shapes.Contains(tt) && Scalars.Contains(st));
+                if (bad) res.Notes.Add($"L{n.Line}: {s.NickName}({st}) → {target.NickName}({tt}) is probably the wrong wire");
             }
         }
 

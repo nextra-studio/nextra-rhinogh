@@ -1,0 +1,6 @@
+{
+ "query": "Rectangle",
+ "limit": 5
+}
+---
+[{"Guid":"0ca0a214-396c-44ea-b22f-d3a1757c32d6","Name":"Rectangle","NickName":"Rectangle","Category":"Curve","SubCategory":"Primitive","Kind":"Component","Description":"Create a rectangle on a plane"},{"Guid":"16a07609-615d-47d0-ba98-5a067b9ce39a","Name":"Parameter Curve Divide Rectangle","NickName":"ParamCrvDivRec","Category":"Pufferfish","SubCategory":"Curve","Kind":"Component","Description":"Generate a grid of curves on a rectangle from domain dividing {x} and {y} parameters, or generate a rectangle isocurve."},{"Guid":"17d40004-489e-42d9-ad10-857f7b436801","Name":"Rectangle Mapping","NickName":"RecMap","Category":"Transform","SubCategory":"Affine","Kind":"Component","Description":"Transform geometry from one rectangle into another."},{"Guid":"20beb40d-2f50-4cdf-83c7-289dec05ab47","Name":"Parameter Rectangle Grid","NickName":"ParamRecGrid","Category":"Pufferfish","SubCategory":"Curve","Kind":"Component","Description":"Generate a grid of rectangular cells in a rectangle from domain dividing {x} and {y} parameters."},{"Guid":"22f0d53c-5673-456d-bdef-1c7085693481","Name":"Bounding Rectangle","NickName":"BRec","Category":"Pufferfish","SubCategory":"Curve","Kind":"Component","Description":"Create a plane oriented union bounding rectangle or separate bounding rectangles for geometry."}]

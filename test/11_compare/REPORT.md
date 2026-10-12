@@ -1,65 +1,188 @@
-# Case 11 — Nextra vs existing Rhino/GH AI tools (token cost and capability)
+# Nextra vs other Rhino / Grasshopper AI tools: tokens and capability
 
-Date: 2026-10-11 · Rhino 8 SR35 · all three MCP servers running **live in the same Rhino session on the same documents**.
-Token estimate: text = chars / 4, image = width × height / 750 (Anthropic's image formula). Raw requests/responses: `out/`, harness: `bench_*.py`.
+Date: 2026-10-12 · Rhino 8 SR35 · all three MCP servers running live in the same Rhino.
+Systems:
+- **Nextra:** this repo.
+- **McNeel Rhino-MCP-Platform 0.1.5:** McNeel's own server.
+- **RhinoMCP 0.4.1:** jingcheng-chen's server.
 
-## 1. Fixed cost per session (tool definitions loaded before any work)
+Raven V2 is covered in the capability table only (§4), because it is not an MCP server.
 
-| System | Tools | Schema tokens (measured from `tools/list`) |
-|---|---|---|
-| **Nextra** (this repo) | 6 | **≈ 1,300** |
-| McNeel Rhino-MCP-Platform 0.1.5 | 29 | ≈ 4,780 |
-| RhinoMCP 0.4.1 (jingcheng-chen) | 70 | ≈ 22,900 |
+## 1. Method (v2, detailed tasks)
 
-## 2. Same tasks, minimal call sequence on each system (in + out tokens)
+**What is counted**
+- **Output tokens:** what the model writes, i.e. the arguments of every tool call (code, shorthand, graph JSON).
+- **Input tokens from results:** what the model reads back, i.e. the tool results (text and images).
+- **Fixed context:** what the model holds in every request: tool schemas plus server instructions, plus the skill document for Nextra (loaded once). Nextra also pays for reading the shorthand guide (1.5k tokens) in scenario B, counted as a normal call.
+- **Billed input:** each request re-sends the whole conversation, so the input billed across a scenario is far larger than its unique tokens. Two estimates are given:
+  - without prompt caching;
+  - with prompt caching, where the repeated prefix costs 10%.
 
-Each task is done the way an LLM must do it on that system **to reach the same information** (e.g. if a create call does not say what it created, the follow-up listing is counted).
+**How it was run**
+- **Same work on every system.** Each scenario is described once, neutrally. Every system receives it in its own format (shorthand, McNeel's graph JSON, RhinoMCP's graph JSON), so all carry the same content.
+- **Minimal working path.** Each system uses the fewest calls a competent model would need.
+- **Competitors are helped, not penalised:**
+  - Their scripts print a compact "what was made" summary themselves, so they never pay for a full object listing.
+  - Formats their schemas do not document were used correctly from the start, without failed attempts. Examples: RhinoMCP's group colours as integer arrays, its slider-instead-of-literal for generic inputs, and its separate value call.
+- **Real costs are kept.** Recovery calls an API forces are counted. Example: McNeel rejects ambiguous component names and lists candidate GUIDs, so re-placing those components and re-wiring them is counted.
+- **Correctness is checked neutrally after every scenario.** Object counts, positions, groups, the final geometry count and the undo result are checked for each system, outside the token count. **All 9 system × scenario runs produced the correct model.**
 
-| Task | Nextra | McNeel | RhinoMCP |
+**Estimation and evidence**
+- Tokens are estimated as text ÷ 4 characters and image width × height ÷ 750, the same for every system. One run.
+- Harness: [v2/bench_v2.py](v2/bench_v2.py) and [v2/ghspec.py](v2/ghspec.py). Raw requests and replies: `v2/out/<scenario>/<system>/`. Numbers: `v2/rows_v2.json`.
+
+## 2. Results
+
+### Whole session (A + B + C in one conversation)
+
+| | tool calls | output tokens | input tokens from results | fixed context | **total** | billed input, no cache |
+|---|---|---|---|---|---|---|
+| **Nextra** | 18 | 1,619 | 4,739 | 2,757 | **9,115** | 121,565 |
+| McNeel Rhino-MCP-Platform | 34 | 7,990 | 20,152 | 4,779 | **32,921** (3.6×) | 625,202 (5.1×) |
+| RhinoMCP | 23 | 5,032 | 36,885 | 23,029 | **64,946** (7.1×) | 1,059,397 (8.7×) |
+
+### Fixed context, paid in every request
+
+| | tool schemas | server instructions | skill | total |
+|---|---|---|---|---|
+| Nextra | 1,406 | 91 | 1,260 | **2,757** |
+| McNeel | 4,779 | 0 | — | **4,779** |
+| RhinoMCP | 22,935 | 94 | — | **23,029** |
+
+### A · Rhino: 4-storey office with 548 objects, then edits
+
+The office has a column grid, beams, slabs with a core opening, core walls, stairs and facade mullions. The edits are: add a storey, move the core 3.6 m, delete the south facade, undo.
+
+| | calls | output | input from results | fixed | **total** | billed, no cache | billed, prompt cache |
+|---|---|---|---|---|---|---|---|
+| Nextra | 8 | 969 | 1,728 | 2,757 | **5,454** | 41,172 | 9,025 |
+| McNeel | 7 | 2,027 | 1,269 | 4,779 | **8,075** | 56,083 | 12,875 |
+| RhinoMCP | 7 | 2,034 | 2,494 | 23,029 | **27,557** | 208,076 | 45,608 |
+
+| task: output / input (calls) | Nextra | McNeel | RhinoMCP |
 |---|---|---|---|
-| T1 model overview (36 objects) | **106** | 929 (GUID list, no sizes) | 876 |
-| T2 one member in depth | **97** (oriented box, topology, faces by normal, area, volume) | 48 name/GUID only → + `run_python` for sizes ≈ 170 *(est.)* | failed (duplicate names); by id ≈ 75, world bbox only |
-| T3 image 800 px | 683 (grid + object tags, occlusion-aware) | 610 (no tags) | 480 (no tags) |
-| T4 build 3-storey frame by code **and know what was made** | **586** (delta: 3 lines by layer/type/size, handles) | 533 + listing ≈ 3,250 *(est. from T1 rate)* ≈ 3,780 | 533 + `get_objects` 3,758 (only 50 of 90) ≈ 4,290 |
-| T5 add one storey | **121** (library script + args) | 533 (resend code) | 533 (resend code) |
-| G1 GH twisting tower, built & verified | **261, 1 call** | 7,423, 7 calls (2 searches, ambiguity recovery, python for flatten/groups, canvas read) | 7,899, 2 calls (first failed); no flatten/groups |
-| G2 modify: rectangle → circle | **92, 1 call** | 2,681, 2 calls (python: no delete/expression tool) | ≥ 7,400 *(est.: mutate + read-back)* |
-| G3 read GH canvas back | **164** (shorthand) | 3,037 (JSON) | 7,423 (JSON) |
+| session start (prefs, rules, library) | 4 / 193 | — | — |
+| build the office (same script everywhere) | 891 / 171 | 934 / 49 | 937 / 65 |
+| look (image) | 3 / 735 | 19 / 774 | 14 / 642 |
+| inspect the core walls | 6 / 341 | 4 / 374 | 6 / 1,682 |
+| add a storey | **13** / 191 (saved script + args) | 940 / 49 (resend code) | 943 / 66 (resend code) |
+| move the core | 28 / 61 | 61 / 9 | 64 / 16 |
+| delete the south mullions | 19 / 24 | 64 / 9 | 67 / 18 |
+| undo | 5 / 12 | 5 / 5 | 3 / 5 |
 
-### Whole scenario (schema + T1–T5 + G1–G3)
+**Reading it honestly.** For plain Rhino scripting the gap is moderate, and comes from three things:
+- **Smaller fixed context.**
+- **Library reuse.** Re-running a saved script costs 13 output tokens instead of ~940 for resending it.
+- **Selection helpers.** `q('layer:Core')` replaces hand-written loops.
 
-| | Nextra | McNeel | RhinoMCP |
+Nextra reads *more* after the build (171 vs 49 tokens). Its reply describes what was made: counts by layer, type and size, plus handles. The competitors' scripts only printed per-layer counts.
+
+### B · Grasshopper: attractor facade, then edits
+
+The facade has 27 components in 5 groups. The edits are: replace the attractor point with a line, add a slider scaling the openings, tidy the canvas.
+
+| | calls | output | input from results | fixed | **total** | billed, no cache | billed, prompt cache |
+|---|---|---|---|---|---|---|---|
+| Nextra | 6 | 371 | 2,272 | 2,757 | **5,400** | 31,976 | 8,057 |
+| McNeel | 14 | 2,955 | 8,670 | 4,779 | **16,404** | 177,868 | 32,550 |
+| RhinoMCP | 6 | 1,564 | 19,942 | 23,029 | **44,535** | 253,711 | 65,452 |
+
+| task: output / input (calls) | Nextra | McNeel | RhinoMCP |
 |---|---|---|---|
-| Total tokens | **≈ 3,400** | ≈ 24,000 | ≈ 52,000 |
-| Ratio | 1× | **≈ 7×** | **≈ 15×** |
-| Tool calls | 10 | 17 | ≈ 13 (+ failures) |
+| read the GH grammar once | 10 / 1,514 | — | — |
+| find ambiguous components | — | 8 / 326 | 8 / 354 |
+| build, all 27 components wired and grouped | **270 / 191** (1) | 956 / 1,101 | 1,080 / 11,477 |
+| recover from ambiguous names | — | 478 / 626 (2) | — |
+| literals, groups, colours by script | — | 610 / 7 | — |
+| read the result back | — (in the build reply) | 10 / 5,274 | — (in the build reply) |
+| attractor point → line | **49 / 76** (1) | 404 / 400 (3) | 320 / 4,236 (1) |
+| add opening-scale slider | **34 / 49** (1) | 252 / 158 (3) | 156 / 1,751 (1) |
+| tidy | **4 / 25** | 218 / 7 (hand-written layout script) | 0 / 1,482 |
+| look | 4 / 417 | 19 / 771 | 0 / 642 |
 
-Where the difference comes from:
-- **Handles instead of GUIDs** (`r12`, `g4`): every McNeel/RhinoMCP listing repeats 36-character GUIDs.
-- **Deltas instead of re-listing**: Nextra's `run`/`gh_edit` reply says what changed (aggregated by layer/type/size), so no verification listing is needed.
-- **Shorthand both ways**: the same 16-node GH graph is 138 tokens of shorthand to write and 156 to read back, versus 3,000–7,400 tokens of JSON.
-- **Library + patches**: repeated work is `run {lib, args}` (14 tokens), fixes are `patch` (≈ 20 tokens), not resends.
+### C · Grasshopper: organic gridshell, then edits
 
-## 3. Capability comparison
+The gridshell is built from three arches with a wave crown, lofted, divided into a U×V grid of members and piped (27 components). The edits are: change the wave height and grid density, add edge beams.
+
+| | calls | output | input from results | fixed | **total** | billed, no cache | billed, prompt cache |
+|---|---|---|---|---|---|---|---|
+| Nextra | 4 | 279 | 739 | 2,757 | **3,775** | 16,389 | 5,036 |
+| McNeel | 13 | 3,008 | 10,213 | 4,779 | **18,000** | 160,692 | 32,269 |
+| RhinoMCP | 10 | 1,434 | 14,449 | 23,029 | **38,912** | 356,160 | 70,636 |
+
+| task: output / input (calls) | Nextra | McNeel | RhinoMCP |
+|---|---|---|---|
+| find ambiguous components | — | 24 / 604 (3) | 24 / 764 (3) |
+| build | **250 / 225** (1) | 974 / 1,558 | 1,134 / 11,667 |
+| recover / fix / read back | — | 1,702 / 7,157 (4) | 147 / 11 (1) |
+| change wave and density | **7 / 31** | 86 / 7 | 15 / 81 (2) |
+| add edge beams | **18 / 67** (1) | 203 / 116 (3) | 114 / 1,284 (2) |
+| look | 4 / 416 | 19 / 771 | 0 / 642 |
+
+### Why the gap is largest in Grasshopper
+
+1. **Shorthand instead of graph JSON.** The same 27-component graph is about 250 tokens of shorthand versus 950–1,130 tokens of JSON. JSON repeats keys, GUIDs, port indices and canvas positions.
+2. **The reply already says what happened, briefly.**
+   - **Nextra:** about 200 tokens with ids, problems and results.
+   - **McNeel:** its build reply has no data, so the model must read the canvas back (5–6k tokens).
+   - **RhinoMCP:** its reply contains everything (11k tokens per build).
+3. **Ambiguity is resolved by the engine.** Nextra picks between same-named components using the ports on the line, for example Rectangle, Merge or Addition. McNeel rejects the name and makes the model search and re-place the component. RhinoMCP needs GUIDs, which means a search call per ambiguous name.
+4. **Edits are diffs.** A change is a few lines. Literal values, flatten flags, groups, colours and layout are part of the same grammar instead of follow-up scripts.
+5. **Fixed context.** RhinoMCP's 70 tool schemas (23k tokens) ride along in every request. That is why its billed input reaches a million tokens over one session.
+
+### Results of the earlier, simpler benchmark (v1)
+
+The v1 tasks were a 36-object frame and a 16-node twisting tower, with output and input counted together and without billing estimates. Nextra came to about 3.4k tokens, McNeel about 24k and RhinoMCP about 52k. The raw data is in `out/` and `rows_*.json`.
+
+## 3. Things that went wrong on the way (all systems)
+
+**McNeel**
+- `g1_apply_graph` rejected `Construct Point`, `Area`, `Scale`, `Remap Numbers`, `Division` and others as ambiguous and placed nothing for them. The model has to re-place them by GUID and re-wire them by instance id.
+- Literal inputs, flatten flags and groups need a Python script. That script must call `NewSolution(True)`, or changed inputs are not recomputed.
+
+**RhinoMCP**
+- Undocumented details: group colours must be integer arrays, and literal values are refused on generic-type inputs.
+- `gh_mutate_graph` has no value operation, and `gh_set_parameter_value` ignored `input_name` (the index worked).
+- These were not charged to RhinoMCP; the benchmark used the working form from the start.
+
+**Undo, McNeel and RhinoMCP**
+- Both use Rhino's own undo stack. In one long-lived Rhino session it answered "Nothing to undo" for both.
+- In a fresh session both undid correctly. That is the run reported above.
+- A separate probe ([v2/undo_probe.py](v2/undo_probe.py)) showed that Nextra's activity (queries, runs, GH edits) does not disturb other tools' undo.
+- Nextra's own `undo` restores from its checkpoints, so it does not depend on that stack.
+
+**Nextra**
+- The benchmark found and fixed four Nextra bugs:
+  - `results:` was hidden when the definition ended in a Custom Preview.
+  - "may need conversion" notes appeared for wires that Grasshopper converts fine.
+  - `run` printed a checkpoint id it had just discarded, in both `run` and `gh_edit`.
+  - A loft through rational arcs produced a polysurface. This was a modelling issue, fixed in the spec with Loft Options for every system.
+
+## 4. Capability comparison
 
 | | Nextra | McNeel Rhino-MCP-Platform | RhinoMCP | Raven V2* |
 |---|---|---|---|---|
-| Interface | MCP (6 tools) + skill docs | MCP (29 tools) | MCP (70 tools) | in-GH chat panel, own cloud LLM |
-| Undo of agent changes | **checkpoint per call, exact Rhino + GH restore** | — | undo/redo of Rhino stack | — |
-| Rhino geometry understanding | **oriented box + shape class, levels summary→verts** | name/type/layer | world bbox | n/a |
-| Vision | **grid + handle tags, region zoom, occlusion, GH canvas render, GH preview in Rhino** | viewport JPG + camera metadata | viewport PNG | reference image input |
-| GH build | shorthand, auto-resolve ambiguous names by ports | graph JSON (explicit X/Y) | graph JSON + layout | natural language |
-| GH component settings | **inputs, flags, expressions, `$state` (dropdowns, on-component check-boxes), right-click `menu=`, `click=`** | sliders only | values (failed for generic inputs) | partial |
-| Script components | create/edit Py3/C#/IronPython, **ports from C# signature**, errors with lines | — | — | generates |
-| Layout | Sugiyama micro/macro, in-place group re-layout, tidy, interface relays | caller positions | max_columns wrap | auto |
-| Plug-in knowledge | live ComponentServer + **plug-in guides auto-attached** (Karamba3D) | search | search | trained |
-| Robustness | timeout + late result, dialog text + dismiss, per-line errors, headless guard, instance binding | per-step status | errors as text | — |
-| Learning | prefs, mistakes log → approved rules, script library | — | — | — |
+| Interface | MCP (6 tools) + skill | MCP (29 tools) | MCP (70 tools) | in-GH chat panel, own cloud model |
+| Undo of agent changes | **checkpoint per call; exact Rhino + GH restore, independent of Rhino's undo stack** | Rhino `_Undo` via run_command | undo/redo of Rhino's stack | — |
+| Says what changed | **Rhino delta (by layer, type and size, with handles) + GH delta + GH results** | script stdout only | script stdout; GH replies list everything | — |
+| Rhino geometry understanding | **oriented box + shape class; summary → list → detail → vertices** | name, type, layer | world bbox, full geometry dump | n/a |
+| Vision | **grid + handle tags, region zoom, occlusion, GH canvas render, GH preview in Rhino** | viewport image + camera | viewport image, GH preview capture | reference image input |
+| GH build | shorthand; ambiguous names resolved by ports | graph JSON (explicit X/Y); ambiguous names rejected | graph JSON + layout, aliases | natural language |
+| GH edit | shorthand diff (delete, rewire, insert into group) | place/connect, plus Python for removals | `gh_mutate_graph` ops | — |
+| Component settings | **literals, flags, expressions, `$state` (dropdowns, on-component check-boxes), right-click `menu=`, `click=`** | sliders | values (not on generic inputs) | partial |
+| Script components | Py3 / C# / IronPython; ports from the C# signature; errors with lines | — | — | generates |
+| Layout | Sugiyama micro/macro, in-place group re-layout, tidy, interface relays | caller positions | wire-based layout | auto |
+| API reference | **`query scope:'api'`: RhinoCommon + Grasshopper SDK + rhinoscriptsyntax from the installed version, ranked, cleaned** | — | rhinoscriptsyntax docs | trained |
+| Plug-in knowledge | live component search + **plug-in guides auto-attached** (Karamba3D) | component search | component search | trained |
+| User instructions | **user folder: preferences, workflows (`when:`), plug-in guides, scripts; works with an uploaded skill** | — | modeling guidance topics | — |
+| Robustness | timeout + late result; dialog text + verified dismiss; per-line errors; headless guard; instance binding | per-step status | errors as text, rollback | — |
+| Learning | prefs, mistakes log → user-approved rules, script library | — | — | — |
 
-\* Raven V2 is not an MCP server (chat UI inside Grasshopper with its own model and per-day token quota), so it cannot be driven by Claude and token cost is not comparable; its row is from public descriptions ([datadrivenaec](https://datadrivenaec.com/tools/raven), [iarchway tutorial](https://iarchway.com/en/grasshopper_ai_ra/), [myarchitectai review](https://www.myarchitectai.com/blog/grasshopper-ai)).
+\* Raven V2 is not an MCP server: it is a chat UI inside Grasshopper with its own model and a per-day token quota. It cannot be driven by Claude, so its token cost is not comparable. Its row comes from public descriptions: [datadrivenaec](https://datadrivenaec.com/tools/raven), [iarchway tutorial](https://iarchway.com/en/grasshopper_ai_ra/), [myarchitectai review](https://www.myarchitectai.com/blog/grasshopper-ai).
 
-## 4. Honest caveats
-- One run per task, one document; numbers are representative, not statistical.
-- Images: Nextra's default (800×600) is slightly larger than the others' (800×450); per pixel the cost is the same.
-- RhinoMCP G2 is an estimate (its build already cost 6.5k; a mutate + read-back cannot be smaller than the read-back measured in G3).
-- McNeel/RhinoMCP may improve with prompt tricks (e.g. smaller listing limits); the comparison uses their documented defaults.
+## 5. Caveats
+
+- **One run per task.** Numbers are representative, not statistical. The model's own reasoning text is not counted; it would be similar across systems.
+- **Token estimates.** chars/4 approximates Claude's tokenizer and is applied equally to everyone.
+- **The competitors' minimal paths were written by me.** A model might find shorter ones, for example smaller verify reads. It might also need longer ones: trial and error on undocumented formats was not charged.
+- **The billing estimates are simple models** of request re-sending. Real bills depend on the client, cache lifetime and how much the model writes between calls.

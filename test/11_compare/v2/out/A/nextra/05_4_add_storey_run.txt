@@ -1,0 +1,21 @@
+{
+ "lib": "office",
+ "args": {
+  "storeys": 1,
+  "z0": 14400
+ }
+}
+---
+ok py 116ms, checkpoint c7
+stdout:
+office storeys 5..5 done
+rhino delta +137:
++ [Beams] polysurface 7200x600x400 linear horizontal ×38 r554-r591 z 17100..17700
++ [Columns] polysurface 3300x500x500 linear vertical ×24 r592-r615 z 14400..17700
++ [Core] polysurface 3600x3300x250 planar ×2 r616 r617 z 14400..17700
++ [Core] polysurface 7200x3300x250 planar ×2 r618 r619 z 14400..17700
++ [Mullions] line 3600x0x0 linear vertical ×68 r620-r687 z 14400..18000
++ [Slabs] polysurface 36800x22400x300 planar ×1 r688 z 17700..18000
++ [Stairs] polysurface 5500x1200x200 linear inclined ×2 r689 r690 z 14211..18000
+(details: query filter:'r12 r13' or 'layer:X')
+(library C:\Users\tatsu\OneDrive\Digitalization\nextra.zero\RhinoGh\test\regress\_mem\library\office.py)

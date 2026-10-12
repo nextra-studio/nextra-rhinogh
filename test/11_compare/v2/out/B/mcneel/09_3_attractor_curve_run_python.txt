@@ -1,0 +1,5 @@
+{
+ "script": "import Grasshopper, System\ndoc = Grasshopper.Instances.ActiveCanvas.Document\nfor k in ['c780443c-caf9-4bd6-af79-fd46edbfcdef', 'f0f9f8e1-8bb1-428f-87f1-9378a0f5fca7']:\n    doc.RemoveObject(doc.FindObject(System.Guid(k), True), False)\ndoc.NewSolution(False)\nprint('ok')"
+}
+---
+{"stdout":"ok\n","error":null}

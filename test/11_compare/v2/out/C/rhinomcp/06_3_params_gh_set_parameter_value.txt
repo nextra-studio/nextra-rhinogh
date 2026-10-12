@@ -1,0 +1,13 @@
+{
+ "nickname": "Wave",
+ "value": 7
+}
+---
+{
+  "instance_id": "df8c030a-e0c0-4cc4-9b7f-6a0bc5b9ca29",
+  "nickname": "Wave",
+  "value": 7.0,
+  "min": 0.0,
+  "max": 12.0,
+  "message": "Set slider 'Wave' to 7"
+}

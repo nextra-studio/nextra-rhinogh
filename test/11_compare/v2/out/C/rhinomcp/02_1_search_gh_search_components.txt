@@ -1,0 +1,28 @@
+{
+ "query": "Loft Options",
+ "limit": 5
+}
+---
+{
+  "count": 2,
+  "query": "Loft Options",
+  "category": null,
+  "components": [
+    {
+      "name": "Loft Options",
+      "nickname": "Loft Opt",
+      "category": "Surface",
+      "subcategory": "Freeform",
+      "guid": "45f19d16-1c9f-4b0f-a9a6-45a77f3d206c",
+      "description": "Create loft options from atomic inputs"
+    },
+    {
+      "name": "Loft Options",
+      "nickname": "Loft",
+      "category": "Surface",
+      "subcategory": "Util",
+      "guid": "a8da9901-f5fb-49ec-9cd1-dfa7b788263e",
+      "description": "Contains a collection of lofting options"
+    }
+  ]
+}

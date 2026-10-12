@@ -1,0 +1,9 @@
+{
+ "code": "xf = rg.Transform.Translation(3600, 0, 0)\nfor o in q('layer:Core'): doc.Objects.Transform(o, xf, True)"
+}
+---
+ok py 82ms, checkpoint c8
+rhino delta ~20:
+~ [Core] polysurface 3600x3300x250 planar ×10 r254-r261 r616 r617 z 0..17700
+~ [Core] polysurface 7200x3300x250 planar ×10 r262-r269 r618 r619 z 0..17700
+(details: query filter:'r12 r13' or 'layer:X')
