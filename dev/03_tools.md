@@ -25,6 +25,7 @@ Image of Rhino (`target:'rhino'`), the GH canvas (`gh`) or the unbaked GH geomet
 - *Tags are text next to the element*, rotated along linear members and placed beside planar/blocky ones, with a white halo. They are not dots. A candidate-position search plus an overlap test keeps labels from colliding.
 - *Occlusion.* An object hidden behind others gets a faded tag ending in `*` (the camera ray is cast against the other objects' meshes).
 - The user's viewport is always restored. Capture uses `RhinoView.CaptureToBitmap` at the viewport's own aspect ratio, so the frustum is unchanged and image ↔ world mapping is exact.
+- Lowercase `g1`–`g8` means a GH handle in `focus`; uppercase `G1`–`G8` means a grid cell. Cell ranges such as `C3:E5` are unambiguous. Frame/cell inclusion uses projected bounds, including long geometry whose centre is outside the crop.
 - GH canvas: rendered by GH's own painter on a private viewport (`GH_Canvas.GenerateHiResImageTile`), so the user's canvas is untouched; a schematic drawing is the fallback. Errors (red components) are listed.
 
 **Reply example**
@@ -158,6 +159,7 @@ results: g14.B: 1 Brep {0}
 
 `undo {list:true}` · `undo {checkpoint:'c4'}` · `undo {steps:2}`.
 Reverts from that checkpoint to now, newest first. See 05 §4.
+Includes Rhino objects and layer/current-layer changes plus GH document archives. Script effects on external files, arbitrary document settings, materials, and other tables are outside the checkpoint contract.
 
 ```
 reverted:

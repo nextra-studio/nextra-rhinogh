@@ -1,0 +1,107 @@
+[
+  {
+    "ok": true,
+    "title": "docs shorthand",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs workflows",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs api/gh-python",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs plugins/Karamba3D",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "missing doc explained",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "installed component exact search",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "installed plugin category",
+    "detail": ""
+  },
+  {
+    "ok": false,
+    "title": "component typo search",
+    "detail": "Curve @Params/Geometry: param (Curve)\r\n.C# @Nextra.Code/Script: in: x?:Any y?:Any | out: out:Any a:Any"
+  },
+  {
+    "ok": false,
+    "title": "unrelated search returns no matches",
+    "detail": ".C# @Nextra.Code/Script: in: x?:Any y?:Any | out: out:Any a:Any"
+  },
+  {
+    "ok": true,
+    "title": "build GH definition",
+    "detail": ""
+  },
+  {
+    "ok": false,
+    "title": "GH handle is not a grid cell",
+    "detail": "rhino view 'Top' 777x600, region g2 of previous view (x8). Grid A-H x 1-8.\r\nno room for tags:  (zoom with focus:cells)\r\nGH preview of 1 component(s): g2"
+  },
+  {
+    "ok": false,
+    "title": "canvas handle is not a grid cell",
+    "detail": "gh canvas 824x750, region g2, zoom 1.6 (gh). Grid A-H x 1-8. 1 object(s) visible.\r\ntagged: g2"
+  },
+  {
+    "ok": false,
+    "title": "world-plane XY literal",
+    "detail": "atomic: rolled back, 1 error(s):\r\n L1 `g2 (P=XY)`: unknown id 'XY' \u2014 use a handle (g12) or an id defined with `id = Type`; strings need quotes"
+  },
+  {
+    "ok": true,
+    "title": "GH slider undo",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "atomic failure rollback",
+    "detail": ""
+  },
+  {
+    "ok": false,
+    "title": "viewport name/camera/target/CPlane restored",
+    "detail": "ok py 64ms\r\nstdout:\ncamera_equal False\nbefore ('Top', <Rhino.Geometry.Point3d object at 0x00000286196598C0>, <Rhino.Geometry.Vector3d object at 0x0000028619659800>, <Rhino.Geometry.Vector3d object at 0x0000028619659A00>, <Rhino.Geometry.Point3d object at 0x0000028619659F40>, 'Rhino.DocObjects.ConstructionPlane', True)\nafter ('Right', <Rhino.Geometry.Point3d object at 0x00000286196540C0>, <Rhino.Geometry.Vector3d object at 0x0000028619654500>, <Rhino.Geometry.Vector3d object at 0x0000028619654600>, <Rhino.Geometry.Point3d object at 0x0000028619654DC0>, 'Rhino.DocObjects.ConstructionPlane', True"
+  },
+  {
+    "ok": false,
+    "title": "visible crossing line counted and tagged",
+    "detail": "rhino view 'Top' 777x400, region A4:C5 of previous view (x3), isolated. Grid A-H x 1-8.\r\n0 object(s) in frame, tagged:"
+  },
+  {
+    "ok": false,
+    "title": "tags off has no false crowd warning",
+    "detail": "rhino view 'Top' 777x600, focus 1 object(s). Grid A-H x 1-8.\r\n1 object(s) in frame.\r\ncells (count): E5:1\r\nToo many to tag (1 > 30). Next: view focus:'C3:E5' (region), or focus:'layer:X', or query filter:'cells:C3:E5'."
+  },
+  {
+    "ok": false,
+    "title": "layer-only edit gets checkpoint and undoes",
+    "detail": ""
+  },
+  {
+    "ok": false,
+    "title": "undo removes added layer with objects",
+    "detail": ""
+  },
+  {
+    "ok": false,
+    "title": "ask mode rejects direct run",
+    "detail": "{'content': [{'type': 'text', 'text': 'ok py 68ms\\r\\nstdout:\\nask bypass\\r\\nrhino: no changes'}], 'isError': False}"
+  }
+]

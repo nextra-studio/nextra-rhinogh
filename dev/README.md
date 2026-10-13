@@ -15,6 +15,7 @@ The user-facing docs are elsewhere: `README.md` covers install and the tool over
 | [Nextra.zero_RhinoGh_Plan.md](Nextra.zero_RhinoGh_Plan.md) | the original plan the build started from |
 | [BUILD_PLAN.md](BUILD_PLAN.md) | checklist of every requested item and its status |
 | [reference/](reference/) | earlier code the design learned from: old nextra.gh, rhino_tools vision/OBB, Shiba Tidy |
+| [reports/2026-10-13-tool-audit.md](reports/2026-10-13-tool-audit.md) | reproduced tool bugs, repairs, before/after images, verification, and remaining limits |
 
 This folder is information only. It is not part of the skill: the skill is `skill/nextra/`, synced to `.claude/skills/`, and served by `query {scope:'docs'}`. Nothing here is loaded by the LLM or the plug-in.
 

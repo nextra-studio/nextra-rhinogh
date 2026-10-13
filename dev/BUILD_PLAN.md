@@ -107,3 +107,12 @@ User request: a new file format that is the shorthand of a definition, documente
 - [x] J2 Round trips identical + same results: kshell, mixed scripts test, v1 house FE, messy, tidy, relays (first save of an old-Karamba file normalises port names once)
 - [x] J3 Found on the way: `pos` must move Karamba's hidden params (stretched components); component search preferred `Domain` over `Domain²` (verbatim names now win)
 - [x] J4 Repo uses it: test/v3/scripts/*.ghs, regress/scripts/ghs_mix.ghs, .ghs next to the v1 .gh files; dev/04_shorthand.md §7, skill shorthand.md, bridge schema; regression c28
+
+## K. Tool audit and repair (2026-10-13)
+- [x] K1 Reproduced prior findings with `test/regress/edge_cases.py`; retained original failing images/assertions.
+- [x] K2 Bridge: enforce Ask-mode call restrictions, pin implicit instance selection, health heartbeat preserves late output; deterministic bridge checks.
+- [x] K3 Vision: GH handle/cell disambiguation, viewport name/target/CPlane restoration, projected-bounds crop and cell inclusion, tags-off diagnostics.
+- [x] K4 Shorthand/search: XY/XZ/YZ literals before references; spelling-based component ranking, no unrelated category-only matches.
+- [x] K5 Undo: layer-only checkpoints; layer name/colour, nested/current layer and bake-created layer restoration; dialog popup selection and close verification.
+- [x] K6 Full regression 239/239 twice in one session; focused audit 26/26; both builds and generated plugin/archive checks pass. User-docs and learned memory isolated during regression, config restored.
+- [x] K7 Detailed [report with before/after images](reports/2026-10-13-tool-audit.md); focused commits pushed to main; no release publication.

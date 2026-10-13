@@ -9,4 +9,6 @@
 
 Scratch (git-ignored): `test/_tmp/`, `test/captures/`, `test/calls.jsonl` (written by `tools/nx.py`).
 
+**Tool edge cases (2026-10-13):** [edge_cases.py](regress/edge_cases.py) checks framing, handle/cell focus, docs and loaded-component search, plane literals, layer undo and bridge Ask mode. [bridge_checks.js](regress/bridge_checks.js) checks access restrictions, heartbeat and sticky binding without editing Rhino. The [audit report](../dev/reports/2026-10-13-tool-audit.md) includes before/after images and the full verification results.
+
 **Full regression** ([regress/regress.py](regress/regress.py)): all cases in one Rhino session, in order, with checks — **238/238 steps pass** (2026-10-12, after v3 and the .ghs format). It also covers things added after the first round: API reference search, the user folder, selection safety, cases 17–20, dangling-wire checks and .ghs files.

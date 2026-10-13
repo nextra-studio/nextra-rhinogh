@@ -33,7 +33,7 @@ So even raw Python edits come back to the LLM in the shorthand it already reads.
 - `Complete(c, delta)` attaches the Rhino delta: added ids plus before-copies.
 - `Discard(c)` drops a checkpoint when nothing changed.
 - `RevertTo(id, steps)` reverts every checkpoint from `id` to now, **newest first**:
-  - Rhino part: `DeltaTracker.Revert` per checkpoint.
+  - Rhino part: restore original layers/current layer, `DeltaTracker.Revert` objects per checkpoint, then remove layers added by that call. Layer snapshots are serialized JSON and CRCs; layer-only edits also retain checkpoints.
   - GH part: the **oldest** archive per GH document among the reverted checkpoints is restored (`GhCore.Restore`), because that archive is the state before all of them.
 
 ## 5. Geometry understanding (`Rh/Geo.cs`)

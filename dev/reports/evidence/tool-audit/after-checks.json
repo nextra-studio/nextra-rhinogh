@@ -1,0 +1,132 @@
+[
+  {
+    "ok": true,
+    "title": "docs shorthand",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs workflows",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs api/gh-python",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "docs plugins/Karamba3D",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "missing doc explained",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "installed component exact search",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "installed plugin category",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "component typo search",
+    "detail": "Divide Curve @Curve/Division: in: C(Curve:Curve) N(Count:Int) K(Kinks:Bool) | out: P(Points[]:Point) T(Tangents[]:Vector) t(Parameters[]:Number)\r\nParameter Curve Divide Rectangle @"
+  },
+  {
+    "ok": true,
+    "title": "unrelated search returns no matches",
+    "detail": "'zzzxxyy_no_component': nothing found"
+  },
+  {
+    "ok": true,
+    "title": "build GH definition",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "GH handle is not a grid cell",
+    "detail": "rhino view 'Top' 777x600, zoom to GH preview. Grid A-H x 1-8.\r\nGH preview of 1 component(s): g2"
+  },
+  {
+    "ok": true,
+    "title": "canvas handle is not a grid cell",
+    "detail": "gh canvas 901x750, focus 1 object(s), zoom 1.6 (gh). Grid A-H x 1-8. 2 object(s) visible.\r\ntagged: g2"
+  },
+  {
+    "ok": true,
+    "title": "world-plane XY literal",
+    "detail": "ok: 1/1 lines applied (1 values), checkpoint c264\r\nsolved 6ms, no errors/warnings on affected nodes\r\nresults: g2.C: 1 Circle {0}"
+  },
+  {
+    "ok": true,
+    "title": "GH slider undo",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "atomic failure rollback",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "viewport name/camera/target/CPlane restored",
+    "detail": "ok py 78ms\r\nstdout:\ncamera_equal True\nbefore ('Perspective', <Rhino.Geometry.Point3d object at 0x00000155F1D06540>, <Rhino.Geometry.Vector3d object at 0x00000155F1D06580>, <Rhino.Geometry.Vector3d object at 0x00000155F1D06780>, <Rhino.Geometry.Point3d object at 0x00000155F1D067C0>, <Rhino.Geometry.Plane object at 0x00000155F1D06400>, True)\nafter ('Perspective', <Rhino.Geometry.Point3d object at 0x00000155F1D02EC0>, <Rhino.Geometry.Vector3d object at 0x00000155F1D02F80>, <Rhino.Geometry.Vector3d object at 0x00000155F1D029C0>, <Rhino.Geometry.Point3d object at 0x00000155F1D02780>, <Rhino.Geometr"
+  },
+  {
+    "ok": true,
+    "title": "visible crossing line counted and tagged",
+    "detail": "rhino view 'Perspective' 777x400, region A4:C5 of previous view (x3), isolated. Grid A-H x 1-8.\r\n1 object(s) in frame, tagged: r4328"
+  },
+  {
+    "ok": true,
+    "title": "cell query includes crossing line",
+    "detail": "1 object(s); units millimeters\r\nr4328 line [Default] len 10000 (0,0,0)->(10000,0,0)"
+  },
+  {
+    "ok": true,
+    "title": "tags off has no false crowd warning",
+    "detail": "rhino view 'Top' 777x600, focus 1 object(s). Grid A-H x 1-8.\r\n1 object(s) in frame."
+  },
+  {
+    "ok": true,
+    "title": "layer-only edit gets checkpoint and undoes",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "undo removes added layer with objects",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "undo restores layer name and colour",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "nested layer/current-layer undo",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "bake undo removes created layer",
+    "detail": ""
+  },
+  {
+    "ok": true,
+    "title": "ask mode rejects direct run",
+    "detail": "{'content': [{'type': 'text', 'text': \"Tool/action 'run' is not available in ask mode.\"}], 'isError': True}"
+  },
+  {
+    "ok": true,
+    "title": "audit cleanup restores the empty session",
+    "detail": ""
+  }
+]
