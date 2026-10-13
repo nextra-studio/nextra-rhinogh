@@ -74,7 +74,7 @@ Status legend: [ ] todo · [~] in progress · [x] done & verified live in Rhino
 ## F. Packaging
 - [x] F1 Yak-style package folder (`.rhp` + engine), install script
 - [x] F2 README (setup, tools, token comparison summary)
-- [x] F3 GitHub push — private repo https://github.com/Tatsuki0123/nextra-rhinogh (2026-10-12)
+- [x] F3 GitHub push — public repo https://github.com/nextra-studio/nextra-rhinogh (moved 2026-10-13 with commit history and releases)
 
 ## H. Re-verification + additions (2026-10-12) — resume point after a usage-limit pause
 State: Rhino running with dev build; old Nextra-gh/-rhino packages are in %APPDATA%/Nextra/disabled_packages (restore at the end);
