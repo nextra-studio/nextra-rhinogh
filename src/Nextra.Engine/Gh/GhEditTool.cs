@@ -279,6 +279,8 @@ namespace Nextra.Engine.Gh
         static void Bake(GH_Document d, Args a, Reply r)
         {
             var doc = RhinoDoc.ActiveDoc;
+            var ck = Checkpoints.Begin("bake " + string.Join(" ", a.List("bake")), false);
+            using var delta = new DeltaTracker(doc);
             var layer = a.Str("layer", null);
             var attrs = new Rhino.DocObjects.ObjectAttributes();
             if (layer != null)
@@ -287,8 +289,6 @@ namespace Nextra.Engine.Gh
                 if (li < 0) li = doc.Layers.Add(layer, System.Drawing.Color.Black);
                 attrs.LayerIndex = li;
             }
-            var ck = Checkpoints.Begin("bake " + string.Join(" ", a.List("bake")), false);
-            using var delta = new DeltaTracker(doc);
             foreach (var spec in a.List("bake"))
             {
                 var parts = spec.Split('.');

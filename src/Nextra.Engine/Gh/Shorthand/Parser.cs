@@ -371,6 +371,8 @@ namespace Nextra.Engine.Gh.Shorthand
             var iv = Regex.Match(s, @"^([-+]?[\d.eE+-]+)\s*\.\.\s*([-+]?[\d.eE+-]+)$");
             if (iv.Success) return new Val { Kind = VK.Interval, Xyz = new[] { double.Parse(iv.Groups[1].Value, C), double.Parse(iv.Groups[2].Value, C) } };
             if (NumRx.IsMatch(s)) return new Val { Kind = VK.Num, Num = double.Parse(s, C) };
+            // Reserved plane literals must be recognised before general node references.
+            if (s == "XY" || s == "XZ" || s == "YZ") return new Val { Kind = VK.Ident, Str = s };
             // references: a, a.0, a.R, a+b.1, r3+r4, and symbol ports like Smaller Than's `g10.<` / `g10.<=`
             if (Regex.IsMatch(s, @"^[A-Za-z_][\w]*(\.(?:[\w ]+|[<>=!|&*/%^~-]+))?(\s*\+\s*[A-Za-z_][\w]*(\.(?:[\w ]+|[<>=!|&*/%^~-]+))?)*$") && !configMode)
             {

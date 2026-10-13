@@ -21,7 +21,8 @@ namespace Nextra.Engine
     public static class ViewTool
     {
         static readonly Regex CellRx = new Regex(@"^[A-Ha-h][1-8](:[A-Ha-h][1-8])?$");
-        public static bool IsCells(string s) => s != null && CellRx.IsMatch(s.Trim());
+        // Lowercase g1..g8 are handles; uppercase G1..G8 are grid cells.
+        public static bool IsCells(string s) => s != null && !(s.Trim().StartsWith("g", StringComparison.Ordinal) && Handles.IsGhHandle(s.Trim())) && CellRx.IsMatch(s.Trim());
 
         public static void Run(Args a, Reply r)
         {
@@ -139,8 +140,8 @@ namespace Nextra.Engine
             set => Entry.State["view.rhino"] = value;
         }
 
-        /// Point test for a cell range of the LAST rhino image (used by query filter "cells:C3:E5").
-        public static Func<Point3d, bool> CellTest(string cells, string target)
+        /// Projected bounds test for a cell range of the LAST Rhino image.
+        public static Func<BoundingBox, bool> CellTest(string cells, string target)
         {
             if (target == "gh") return null;
             var rec = Record ?? throw new NxError("no previous rhino view", "call view first, then use cells from its grid");
@@ -149,16 +150,17 @@ namespace Nextra.Engine
             var crop = (RectangleF)rec["crop"];
             var c = GridOverlay.Parse(cells);
             var reg = new RectangleF(crop.X + c.X * crop.Width, crop.Y + c.Y * crop.Height, c.Width * crop.Width, c.Height * crop.Height);
-            return p =>
+            return box =>
             {
-                var s = p; s.Transform(xf);
-                return reg.Contains((float)(s.X / bw), (float)(s.Y / bh));
+                var points = box.GetCorners().Select(p => { p.Transform(xf); return new PointF((float)(p.X / bw), (float)(p.Y / bh)); }).ToList();
+                return points.Min(p => p.X) <= reg.Right && points.Max(p => p.X) >= reg.Left &&
+                       points.Min(p => p.Y) <= reg.Bottom && points.Max(p => p.Y) >= reg.Top;
             };
         }
 
-        static RhinoView PickView(RhinoDoc doc, string name, out DefinedViewportProjection? proj, out bool iso)
+        static RhinoView PickView(RhinoDoc doc, string name, out DefinedViewportProjection? proj, out bool iso, out int named)
         {
-            proj = null; iso = false;
+            proj = null; iso = false; named = -1;
             var active = doc.Views.ActiveView ?? doc.Views.GetViewList(Rhino.Display.ViewTypeFilter.Model).FirstOrDefault();
             if (active == null) throw new NxError("no Rhino view available", "open a viewport in Rhino");
             if (string.IsNullOrEmpty(name) || name == "current" || name == "active") return active;
@@ -177,7 +179,7 @@ namespace Nextra.Engine
                     var v = doc.Views.Find(name, false);
                     if (v != null) return v;
                     var nv = doc.NamedViews.FindByName(name);
-                    if (nv >= 0) { doc.NamedViews.Restore(nv, active.ActiveViewport); return active; }
+                    if (nv >= 0) { named = nv; return active; }
                     throw new NxError($"view '{name}' not found", "view: current | top | front | right | left | back | persp | iso | <viewport name>");
             }
             return active;
@@ -204,10 +206,13 @@ namespace Nextra.Engine
             bool isolate = a.Bool("isolate", false);
             bool grid = a.Bool("grid", true);
             int tagLimit = a.Int("tag_limit", 30);
-            var view = PickView(doc, a.Str("view", null), out var proj, out bool iso);
+            var view = PickView(doc, a.Str("view", null), out var proj, out bool iso, out int named);
             var vp = view.ActiveViewport;
             var saved = new ViewportInfo(vp);
             var savedMode = vp.DisplayMode;
+            var savedName = vp.Name;
+            var savedTarget = vp.CameraTarget;
+            var savedPlane = vp.GetConstructionPlane();
             var rec = Record;
             var conduit = new CaptureConduit();
             RectangleF crop = new RectangleF(0, 0, 1, 1);
@@ -238,6 +243,7 @@ namespace Nextra.Engine
                 }
                 else
                 {
+                    if (named >= 0) doc.NamedViews.Restore(named, vp);
                     if (proj.HasValue) vp.SetProjection(proj.Value, null, false);
                     if (iso)
                     {
@@ -324,8 +330,8 @@ namespace Nextra.Engine
                     if (conduit.Show != null && !conduit.Show.Contains(o.Id)) continue;
                     var bb = o.Geometry.GetBoundingBox(true);
                     if (!bb.IsValid) continue;
-                    var cp = toImg(bb.Center);
-                    if (cp == null || !frame.Contains(cp.Value)) continue;
+                    var cp = FrameAnchor(bb, toImg, frame);
+                    if (cp == null) continue;
                     inFrame.Add((o, cp.Value));
                     var cell = GridOverlay.CellOf(cp.Value.X / iw, cp.Value.Y / ih);
                     cellCount[cell] = cellCount.TryGetValue(cell, out var k) ? k + 1 : 1;
@@ -364,9 +370,9 @@ namespace Nextra.Engine
                 r.Line($"rhino view '{view.ActiveViewport.Name}' {iw}x{ih}, {how}{(conduit.Show != null ? ", isolated" : "")}. Grid A-H x 1-8.");
                 if (ctx.SkipRhinoTags) { doTags = true; placed = new List<string>(); }   // GH preview: Rhino object stats are noise
                 else r.Line($"{inFrame.Count} object(s) in frame" + (doTags ? $", tagged: {Ranges(placed.Where(Handles.IsRhHandle))}" : "."));
-                if (behind.Count > 0) r.Line($"behind other geometry (faded, '*'): {Ranges(behind.Where(Handles.IsRhHandle))}");
-                if (unplaced.Count > 0) r.Line($"no room for tags: {Ranges(unplaced.Where(Handles.IsRhHandle))} (zoom with focus:cells)");
-                if (!doTags && inFrame.Count > 0)
+                if (behind.Count > 0) r.Line($"behind other geometry (faded, '*'): {Ranges(behind)}");
+                if (unplaced.Count > 0) r.Line($"no room for tags: {Ranges(unplaced)} (zoom with focus:cells)");
+                if (!doTags && inFrame.Count > 0 && tagMode == "auto")
                 {
                     r.Line("cells (count): " + string.Join(" ", cellCount.OrderBy(kv => kv.Key[1]).ThenBy(kv => kv.Key[0]).Select(kv => $"{kv.Key}:{kv.Value}")));
                     r.Line($"Too many to tag ({toTag.Count} > {tagLimit}). Next: view focus:'C3:E5' (region), or focus:'layer:X', or query filter:'cells:C3:E5'.");
@@ -378,6 +384,9 @@ namespace Nextra.Engine
                 try
                 {
                     vp.SetViewProjection(saved, true);
+                    vp.Name = savedName;
+                    vp.SetCameraTarget(savedTarget, false);
+                    vp.SetConstructionPlane(savedPlane);
                     if (vp.DisplayMode.Id != savedMode.Id) vp.DisplayMode = savedMode;
                     view.Redraw();
                 }
@@ -392,6 +401,20 @@ namespace Nextra.Engine
             public BoundingBox? ZoomBox;
             public bool SkipRhinoTags;
             public List<GeometryBase> Geometry;
+        }
+
+        // Include geometry crossing a crop even when its centre lies outside it.
+        // Projected bounds are conservative for curved/solid objects.
+        static PointF? FrameAnchor(BoundingBox box, Func<Point3d, PointF?> project, RectangleF frame)
+        {
+            var centre = project(box.Center);
+            if (centre.HasValue && frame.Contains(centre.Value)) return centre;
+            var points = box.GetCorners().Select(project).Where(p => p.HasValue).Select(p => p.Value).ToList();
+            if (points.Count == 0) return null;
+            float left = Math.Max(frame.Left, points.Min(p => p.X)), right = Math.Min(frame.Right, points.Max(p => p.X));
+            float top = Math.Max(frame.Top, points.Min(p => p.Y)), bottom = Math.Min(frame.Bottom, points.Max(p => p.Y));
+            if (left > right || top > bottom) return null;
+            return new PointF((left + right) / 2, (top + bottom) / 2);
         }
 
         static Color ColorFor(GeometryBase g) => g switch

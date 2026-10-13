@@ -58,7 +58,20 @@ namespace Nextra.Host
                 if (!IsWindowEnabled(h))
                 {
                     var pop = GetLastActivePopup(h);
-                    if (pop != IntPtr.Zero && pop != h && IsWindowVisible(pop) && !res.Contains(pop)) res.Add(pop);
+                    // Eto/WinForms can insert a disabled owner between Rhino and the real
+                    // dialog. Only the enabled terminal popup can answer a close request.
+                    var seen = new HashSet<IntPtr> { h };
+                    while (pop != IntPtr.Zero && seen.Add(pop) && !IsWindowEnabled(pop))
+                    {
+                        var next = GetLastActivePopup(pop);
+                        if (next == pop) break;
+                        pop = next;
+                    }
+                    if (pop != IntPtr.Zero && pop != h && IsWindowVisible(pop) && IsWindowEnabled(pop) && !res.Contains(pop))
+                    {
+                        GetWindowThreadProcessId(pop, out uint ownerPid);
+                        if (ownerPid == me) res.Add(pop);
+                    }
                     return true;
                 }
                 if (h == main || res.Contains(h)) return true;
@@ -176,7 +189,9 @@ namespace Nextra.Host
             for (int i = 0; i < 10; i++)
             {
                 Thread.Sleep(150);
-                stuck = m.Where(h => IsWindow(h) && IsWindowVisible(h)).Select(Text).ToList();
+                // Re-scan: disappearance of an intermediate window is not proof that
+                // the dialog blocking the document has closed.
+                stuck = Modals().Select(h => Text(h).Length > 0 ? Text(h) : Cls(h)).ToList();
                 if (stuck.Count == 0) break;
             }
             return stuck.Count == 0 ? $"closed {m.Count} dialog(s): " + string.Join(", ", names)

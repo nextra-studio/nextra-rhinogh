@@ -24,6 +24,7 @@ The bridge binds a session to one Rhino. If more than one is open it refuses unt
 
 ## Handles & regions
 - Rhino objects are `r12`, GH objects `g4`, GH groups `g9` too. Session-stable; new objects get new numbers. Use them everywhere (filters, `h('r12')` in code, shorthand refs).
+- Focus uses lowercase `g1`–`g8` for GH handles and uppercase `G1`–`G8` for grid cells. Cell ranges such as `C3:E5` are unambiguous.
 - `view` returns an image with an 8×8 grid: columns A–H, rows 1–8. Crowded images come **without tags** and list per-cell counts → zoom: `view {focus:'C3:E5'}` (same camera, that region at higher resolution, tagged). Never compute coordinates from images; use cells, handles or `query`.
 - Faded tags with `*` = object is behind other geometry.
 

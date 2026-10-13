@@ -552,8 +552,11 @@ def c20():
     c = Case("20_bridge", "MCP bridge over stdio: tools/list, call, binding refusal")
     node = shutil.which("node")
     def mcp(msgs, env=None):
+        launch_env = dict(os.environ, **(env or {}))
+        if env and "NEXTRA_FILE" in env and "NEXTRA_PID" not in env:
+            launch_env.pop("NEXTRA_PID", None)   # test the explicit file selector, not an inherited PID pin
         p = subprocess.run([node, os.path.join(REPO, "bridge", "server", "index.js")], input="\n".join(json.dumps(m) for m in msgs) + "\n",
-                           capture_output=True, text=True, encoding="utf-8", timeout=60, env=dict(os.environ, **(env or {})))
+                           capture_output=True, text=True, encoding="utf-8", timeout=60, env=launch_env)
         return [json.loads(l) for l in p.stdout.splitlines() if l.strip()]
     init = {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18"}}
     r = mcp([init, {"jsonrpc": "2.0", "id": 2, "method": "tools/list"}, {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "query", "arguments": {"scope": "status"}}}])
@@ -767,7 +770,9 @@ def fresh_memory():
     with open(cfgp, encoding="utf-8-sig") as f:
         cfg = json.load(f)
     old = cfg.get("memory_dir")
+    old_user = cfg.get("user_dir")
     cfg["memory_dir"] = os.path.join(HERE, "_mem", time.strftime("run-%Y%m%d-%H%M%S"))
+    cfg["user_dir"] = os.path.join(cfg["memory_dir"], "user")
     os.makedirs(cfg["memory_dir"], exist_ok=True)
     with open(cfgp, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=1)
@@ -779,6 +784,10 @@ def fresh_memory():
             c.pop("memory_dir", None)
         else:
             c["memory_dir"] = old
+        if old_user is None:
+            c.pop("user_dir", None)
+        else:
+            c["user_dir"] = old_user
         with open(cfgp, "w", encoding="utf-8") as f:
             json.dump(c, f, indent=1)
     return restore

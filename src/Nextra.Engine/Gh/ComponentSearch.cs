@@ -118,16 +118,44 @@ namespace Nextra.Engine.Gh
 
         static int Score(IGH_ObjectProxy p, string q)
         {
-            var n = p.Desc.Name; var nn = Norm(n); var nq = Norm(q);
+            var n = StripSuffix(p.Desc.Name); var nn = Norm(n); var nq = Norm(q);
             if (nn.Length == 0 || nq.Length == 0) return 0;
             int s = 0;
-            if (nn.Contains(nq)) s += 50 - Math.Abs(nn.Length - nq.Length);
-            else if (nq.Contains(nn)) s += 30;
-            var words = q.Split(new[] { ' ', '_', '-' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var w in words) if (n.IndexOf(w, StringComparison.OrdinalIgnoreCase) >= 0) s += 10;
-            foreach (var w in words) if ((p.Desc.Description ?? "").IndexOf(w, StringComparison.OrdinalIgnoreCase) >= 0) s += 2;
-            if (Builtin.Contains(p.Desc.Category)) s += 3;
-            return s;
+            if (nn.Contains(nq)) s = 100 - Math.Min(30, nn.Length - nq.Length);
+            else if (nq.Length >= 4 && nn.Length >= 4)
+            {
+                int distance = EditDistance(nn, nq);
+                if (distance <= Math.Max(1, nq.Length / 5)) s = 85 - distance * 5;
+            }
+            var words = Words(q);
+            var nameWords = Words(n);
+            if (s == 0 && words.Length > 0 && words.All(w => nameWords.Any(nw =>
+                nw == w || (w.Length >= 3 && nw.StartsWith(w, StringComparison.Ordinal)) ||
+                (w.Length >= 4 && nw.Length >= 4 && EditDistance(nw, w) <= Math.Max(1, w.Length / 5))))) s = 60;
+            // Descriptions are a fallback only when every meaningful search word matches.
+            var description = Words(p.Desc.Description ?? "");
+            if (s == 0 && words.Length > 0 && words.All(w => w.Length >= 3 && description.Contains(w))) s = 15;
+            // A category preference must never manufacture a match for unrelated text.
+            return s > 0 ? s + (Builtin.Contains(p.Desc.Category) ? 1 : 0) : 0;
+        }
+
+        static string[] Words(string s) => System.Text.RegularExpressions.Regex.Matches(s.ToLowerInvariant(), @"[\p{L}\p{N}]+")
+            .Select(m => m.Value).ToArray();
+
+        static int EditDistance(string a, string b)
+        {
+            var row = Enumerable.Range(0, b.Length + 1).ToArray();
+            for (int i = 1; i <= a.Length; i++)
+            {
+                int diagonal = row[0]; row[0] = i;
+                for (int j = 1; j <= b.Length; j++)
+                {
+                    int old = row[j];
+                    row[j] = Math.Min(Math.Min(row[j] + 1, row[j - 1] + 1), diagonal + (a[i - 1] == b[j - 1] ? 0 : 1));
+                    diagonal = old;
+                }
+            }
+            return row[b.Length];
         }
 
         /// "in: B(Base Geometry) D(Direction Vector) | out: E(Extrusion Geometry)"

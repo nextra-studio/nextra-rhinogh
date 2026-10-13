@@ -51,9 +51,14 @@ namespace Nextra.Engine
         public static void Complete(Dictionary<string, object> c, DeltaTracker d)
         {
             if (d == null) return;
-            c["rh_doc"] = RhinoDoc.ActiveDoc?.RuntimeSerialNumber ?? 0;
+            c["rh_doc"] = d.DocumentSerial;
             c["rh_added"] = d.Added.ToList();
             c["rh_before"] = new Dictionary<Guid, object[]>(d.Before);
+            if (d.LayersChanged)
+            {
+                c["rh_layers"] = d.LayersBefore;
+                c["rh_current_layer"] = d.CurrentLayerBefore;
+            }
         }
 
         /// Drop a checkpoint that turned out to change nothing.
@@ -89,7 +94,12 @@ namespace Nextra.Engine
             {
                 var c = l[i];
                 if (c.ContainsKey("rh_added") && doc != null && Equals(c["rh_doc"], doc.RuntimeSerialNumber))
+                {
+                    var layers = c.TryGetValue("rh_layers", out var ls) ? (Dictionary<Guid, object[]>)ls : null;
+                    if (layers != null) DeltaTracker.RestoreLayers(doc, layers, (int)c["rh_current_layer"]);
                     lines.Add($"{c["id"]}: " + DeltaTracker.Revert(doc, (List<Guid>)c["rh_added"], (Dictionary<Guid, object[]>)c["rh_before"]));
+                    if (layers != null) { DeltaTracker.RemoveAddedLayers(doc, layers); lines.Add("layers restored"); }
+                }
                 if (c.ContainsKey("gh")) ghRestore[(Guid)c["ghdoc"]] = ((byte[])c["gh"], (string)c["id"]);   // iterating newest→oldest: oldest wins
             }
             foreach (var kv in ghRestore) lines.Add($"{kv.Value.from}: " + GhCore.Restore(kv.Value.data, kv.Key));

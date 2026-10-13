@@ -106,7 +106,7 @@ namespace Nextra.Engine.Rh
                 src = doc.Objects.GetObjectList(es);
             }
             var list = new List<RhinoObject>();
-            Func<Point3d, bool> inCells = null;
+            Func<BoundingBox, bool> inCells = null;
             if (Cells != null) inCells = ViewTool.CellTest(Cells, "rhino");
             foreach (var o in src)
             {
@@ -122,7 +122,7 @@ namespace Nextra.Engine.Rh
                 {
                     var bb = o.Geometry.GetBoundingBox(true);
                     if (Box != null && (Inside ? !(Box.Value.Contains(bb.Min) && Box.Value.Contains(bb.Max)) : !BoundingBox.Intersection(bb, Box.Value).IsValid)) continue;
-                    if (inCells != null && !inCells(bb.Center)) continue;
+                    if (inCells != null && !inCells(bb)) continue;
                 }
                 list.Add(o);
             }

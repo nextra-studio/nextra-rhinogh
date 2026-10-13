@@ -18,10 +18,16 @@ namespace Nextra.Engine.Rh
         public readonly HashSet<Guid> Deleted = new HashSet<Guid>();
         public readonly Dictionary<Guid, object[]> Before = new Dictionary<Guid, object[]>(); // id → {geometry, attributes, RhinoObject}
         readonly RhinoDoc _doc;
+        public uint DocumentSerial => _doc.RuntimeSerialNumber;
+        public readonly Dictionary<Guid, object[]> LayersBefore;
+        public readonly int CurrentLayerBefore;
 
         public DeltaTracker(RhinoDoc doc)
         {
             _doc = doc;
+            CurrentLayerBefore = doc.Layers.CurrentLayerIndex;
+            LayersBefore = doc.Layers.Where(l => !l.IsDeleted).ToDictionary(l => l.Id,
+                l => new object[] { l.ToJSON(new Rhino.FileIO.SerializationOptions()), l.Index, l.DataCRC(0) });
             RhinoDoc.AddRhinoObject += OnAdd;
             RhinoDoc.UndeleteRhinoObject += OnAdd;
             RhinoDoc.DeleteRhinoObject += OnDelete;
@@ -95,12 +101,18 @@ namespace Nextra.Engine.Rh
 
         static double R(double v) { double m = Math.Pow(10, Math.Floor(Math.Log10(Math.Max(Math.Abs(v), 1e-9))) - 2); return Math.Round(v / m) * m; }
 
-        public bool Empty => Added.Count == 0 && Modified.Count == 0 && Deleted.Count == 0;
+        public bool LayersChanged => _doc.Layers.CurrentLayerIndex != CurrentLayerBefore ||
+            _doc.Layers.Count(l => !l.IsDeleted) != LayersBefore.Count ||
+            _doc.Layers.Where(l => !l.IsDeleted).Any(l => !LayersBefore.TryGetValue(l.Id, out var old) || (uint)old[2] != l.DataCRC(0));
+
+        public bool Empty => Added.Count == 0 && Modified.Count == 0 && Deleted.Count == 0 && !LayersChanged;
 
         /// Compact delta text: one line per object (handles + description), capped.
         public void Report(Reply r, int max = 40)
         {
             if (Empty) { r.Line("rhino: no changes"); return; }
+            if (LayersChanged) r.Line("rhino layers changed (included in checkpoint)");
+            if (Added.Count == 0 && Modified.Count == 0 && Deleted.Count == 0) return;
             var parts = new List<string>();
             if (Added.Count > 0) parts.Add($"+{Added.Count}");
             if (Modified.Count > 0) parts.Add($"~{Modified.Count}");
@@ -170,6 +182,33 @@ namespace Nextra.Engine.Rh
                 case SubD s: return doc.Objects.Replace(id, s);
                 default: return false;
             }
+        }
+
+        /// Restore original layers before restoring objects that refer to their indices.
+        public static void RestoreLayers(RhinoDoc doc, Dictionary<Guid, object[]> before, int current)
+        {
+            foreach (var kv in before.OrderBy(kv => (int)kv.Value[1]))
+            {
+                int index = (int)kv.Value[1];
+                using var saved = (Layer)Rhino.Runtime.CommonObject.FromJSON((string)kv.Value[0]);
+                if (index >= doc.Layers.Count || doc.Layers[index].Id != kv.Key)
+                    throw new NxError("cannot restore layer " + saved.Name + ": layer table was replaced");
+                if (doc.Layers[index].IsDeleted && !doc.Layers.Undelete(index))
+                    throw new NxError("cannot undelete layer " + saved.Name);
+                if (doc.Layers[index].DataCRC(0) != (uint)kv.Value[2] && !doc.Layers.Modify(saved, index, true))
+                    throw new NxError("cannot restore layer " + saved.Name);
+            }
+            if (doc.Layers.CurrentLayerIndex != current && !doc.Layers.SetCurrentLayerIndex(current, true))
+                throw new NxError("cannot restore the current layer");
+        }
+
+        public static void RemoveAddedLayers(RhinoDoc doc, Dictionary<Guid, object[]> before)
+        {
+            // Children are removed first, including children added under existing parents.
+            var added = doc.Layers.Where(l => !l.IsDeleted && !before.ContainsKey(l.Id))
+                .OrderByDescending(l => l.FullPath.Count(c => c == ':')).ThenByDescending(l => l.Index).ToList();
+            foreach (var l in added)
+                if (!doc.Layers.Delete(l.Index, true)) throw new NxError("cannot remove added layer '" + l.FullPath + "' (it may contain later user objects)");
         }
     }
 }
