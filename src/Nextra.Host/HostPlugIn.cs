@@ -4,7 +4,7 @@ using Rhino.Commands;
 using Rhino.PlugIns;
 
 [assembly: System.Runtime.InteropServices.Guid("6b1f5f0e-8f0a-4c51-9d1e-3a7c2b9e4a11")]
-[assembly: PlugInDescription(DescriptionType.Organization, "Nextra")]
+[assembly: PlugInDescription(DescriptionType.Organization, "NextraRhinoGh")]
 [assembly: PlugInDescription(DescriptionType.WebSite, "https://github.com/nextra-studio/nextra-rhinogh")]
 
 namespace Nextra.Host
@@ -24,8 +24,10 @@ namespace Nextra.Host
             var proc = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
             if (RhinoApp.IsRunningHeadless || !proc.StartsWith("Rhino", StringComparison.OrdinalIgnoreCase))
                 return LoadReturnCode.Success;
+            try { AppDataMigration.Ensure(); }
+            catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: old settings were not copied: " + e.Message); }
             if (Config.GetBool("enabled", true)) RhinoApp.Idle += StartOnce;
-            else RhinoApp.WriteLine("Nextra: off (run NextraOn to start)");
+            else RhinoApp.WriteLine("NextraRhinoGh: off (run NextraRhinoGhOn to start)");
             return LoadReturnCode.Success;
         }
 
@@ -39,11 +41,11 @@ namespace Nextra.Host
         {
             try { DialogProbe.MainHandle = RhinoApp.MainWindowHandle(); } catch { }   // cached: the probe runs off the UI thread
             try { Server.Start(); }
-            catch (Exception e) { RhinoApp.WriteLine("Nextra: server failed to start: " + e.Message); }
-            try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("Nextra: status dot failed: " + ex.Message); }
+            catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: server failed to start: " + e.Message); }
+            try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("NextraRhinoGh: status dot failed: " + ex.Message); }
             GhDotHook.Start();
             var userFolder = InitUserFolder();
-            if (userFolder != null) RhinoApp.WriteLine("Nextra: user folder " + userFolder + " (preferences and workflows persist across updates)");
+            if (userFolder != null) RhinoApp.WriteLine("NextraRhinoGh: user folder " + userFolder + " (preferences and workflows persist across updates)");
             InstallBridge();
         }
 
@@ -62,7 +64,7 @@ namespace Nextra.Host
                 System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(BridgePath));
                 System.IO.File.Copy(src, BridgePath, true);
             }
-            catch (Exception e) { RhinoApp.WriteLine("Nextra: bridge not copied: " + e.Message); }
+            catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: bridge not copied: " + e.Message); }
         }
 
         /// Creates the user folder with its default files right after install (first start), via the engine.
@@ -76,7 +78,7 @@ namespace Nextra.Host
                 var text = (string)res?["text"];
                 return text != null && text.StartsWith("user folder ") ? text.Substring(12).Trim() : null;
             }
-            catch (Exception e) { RhinoApp.WriteLine("Nextra: user folder not created: " + e.Message); return null; }
+            catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: user folder not created: " + e.Message); return null; }
         }
 
         public static void TurnOff()
@@ -92,12 +94,12 @@ namespace Nextra.Host
 
     public class NextraCommand : Command
     {
-        public override string EnglishName => "Nextra";
+        public override string EnglishName => "NextraRhinoGh";
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             var go = new Rhino.Input.Custom.GetOption();
-            go.SetCommandPrompt($"Nextra {(Server.IsListening ? "on 127.0.0.1:" + Server.Port : "off")} (engine: {EngineLoader.Describe()})");
+            go.SetCommandPrompt($"NextraRhinoGh {(Server.IsListening ? "on 127.0.0.1:" + Server.Port : "off")} (engine: {EngineLoader.Describe()})");
             int iOn = go.AddOption("On");
             int iOff = go.AddOption("Off");
             int iReload = go.AddOption("ReloadEngine");
@@ -111,53 +113,53 @@ namespace Nextra.Host
                 var p = NextraHostPlugIn.BridgePath;
                 try { System.Windows.Clipboard.SetText(p); } catch { }
                 RhinoApp.WriteLine(System.IO.File.Exists(p)
-                    ? "Nextra: bridge path copied to the clipboard: " + p + "  (MCP server: command node, argument this path)"
-                    : "Nextra: no bridge at " + p + " (it is copied there when the Yak package starts)");
+                    ? "NextraRhinoGh: bridge path copied to the clipboard: " + p + "  (MCP server: command node, argument this path)"
+                    : "NextraRhinoGh: no bridge at " + p + " (it is copied there when the Yak package starts)");
                 return Result.Success;
             }
             if (i == iOn) NextraOnCommand.Do();
             else if (i == iOff) NextraOffCommand.Do();
-            else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("Nextra: engine reloaded: " + EngineLoader.Describe()); }
+            else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("NextraRhinoGh: engine reloaded: " + EngineLoader.Describe()); }
             else if (i == iRestart) { Server.Stop(); Server.Start(); }
             return Result.Success;
         }
     }
 
-    /// Opens the user's Nextra folder (preferences.md, workflows/, plugins/, scripts/) in Explorer;
+    /// Opens the user's NextraRhinoGh folder (preferences.md, workflows/, plugins/, scripts/) in Explorer;
     /// the engine creates it with default files on first use.
     public class NextraFolderCommand : Command
     {
-        public override string EnglishName => "NextraFolder";
+        public override string EnglishName => "NextraRhinoGhFolder";
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             var dir = NextraHostPlugIn.InitUserFolder() ?? System.IO.Path.Combine(Server.AppDir, "user");
             System.IO.Directory.CreateDirectory(dir);
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", "\"" + dir + "\"") { UseShellExecute = true });
-            RhinoApp.WriteLine("Nextra: your folder " + dir + " (preferences.md, workflows, plugins, scripts — see README.md there)");
+            RhinoApp.WriteLine("NextraRhinoGh: your folder " + dir + " (preferences.md, workflows, plugins, scripts — see README.md there)");
             return Result.Success;
         }
     }
 
     public class NextraOnCommand : Command
     {
-        public override string EnglishName => "NextraOn";
+        public override string EnglishName => "NextraRhinoGhOn";
         public static void Do()
         {
             Config.Set("enabled", true);
             NextraHostPlugIn.TurnOn();
-            RhinoApp.WriteLine("Nextra: on");
+            RhinoApp.WriteLine("NextraRhinoGh: on");
         }
         protected override Result RunCommand(RhinoDoc doc, RunMode mode) { Do(); return Result.Success; }
     }
 
     public class NextraOffCommand : Command
     {
-        public override string EnglishName => "NextraOff";
+        public override string EnglishName => "NextraRhinoGhOff";
         public static void Do()
         {
             Config.Set("enabled", false);
             NextraHostPlugIn.TurnOff();
-            RhinoApp.WriteLine("Nextra: off (server stopped, dots removed; NextraOn to start again)");
+            RhinoApp.WriteLine("NextraRhinoGh: off (server stopped, dots removed; NextraRhinoGhOn to start again)");
         }
         protected override Result RunCommand(RhinoDoc doc, RunMode mode) { Do(); return Result.Success; }
     }

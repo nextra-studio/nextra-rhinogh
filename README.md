@@ -1,4 +1,4 @@
-# Nextra for Rhino 8 + Grasshopper
+# NextraRhinoGh — Rhino 8 + Grasshopper
 
 Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say what changed, images carry tags the model can point at, and model and definition edits receive undo checkpoints.
 
@@ -12,7 +12,7 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 
 Open **PackageManager** in Rhino → search **Nextra-RhinoGh** → **Install** → restart Rhino.
 
-![Install Nextra in Rhino Package Manager](docs/img/install/rhino-package-manager.svg)
+![Install NextraRhinoGh in Rhino Package Manager](docs/img/install/rhino-package-manager.svg)
 
 ### 2. Your AI app
 
@@ -38,7 +38,7 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 1. Choose **+ Add → Add marketplace → Add from a repository**.
 2. Enter `nextra-studio/nextra-rhinogh` in the **URL** field, then click **Sync**.
-3. Open the **Nextra** marketplace, select **nextra-rhinogh**, and click **Install**.
+3. Open the **NextraRhinoGh** marketplace, select **nextra-rhinogh**, and click **Install**.
 
 ![Claude marketplace installation: Add marketplace, Add from a repository, enter the repository, Sync, then Install](docs/img/install/claude-marketplace.svg)
 
@@ -62,17 +62,17 @@ Start a new **Cowork** session with Rhino open to use the local Rhino tools.
 
 1. Open **Add → Create plugin → Add a marketplace** where available.
 2. Enter the repository URL below, then add or sync the marketplace.
-3. Open **Nextra**, select **Nextra for Rhino**, and click **Install** (or **+**).
+3. Open **NextraRhinoGh**, select **NextraRhinoGh**, and click **Install** (or **+**).
 
 ```text
 https://github.com/nextra-studio/nextra-rhinogh
 ```
 
-![OpenAI marketplace installation: open marketplace setup, enter the repository, install Nextra, then start a new chat](docs/img/install/openai-marketplace.svg)
+![OpenAI marketplace installation: open marketplace setup, enter the repository, install NextraRhinoGh, then start a new chat](docs/img/install/openai-marketplace.svg)
 
 For a managed workspace, an admin can use **Admin → Plugins → Add → Import marketplace** with the same repository URL; leave **Path** empty. See [OpenAI's marketplace import guide](https://learn.chatgpt.com/docs/enterprise/plugin-management). Desktop local marketplaces are also supported; see [OpenAI's package and marketplace guide](https://developers.openai.com/plugins/build/plugins).
 
-Both ZIPs include the **Rhino tools and Nextra skill**. After installing, keep Rhino open and start a new chat in **Work or Codex** on the desktop app.
+Both ZIPs include the **Rhino tools and NextraRhinoGh skill**. After installing, keep Rhino open and start a new chat in **Work or Codex** on the desktop app.
 
 ### Try it
 
@@ -93,7 +93,7 @@ Both ZIPs include the **Rhino tools and Nextra skill**. After installing, keep R
 | Problem | Fix |
 |---|---|
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
-| No status dot in Rhino | Restart Rhino, then enable Nextra with `NextraOn`. |
+| No status dot in Rhino | Restart Rhino, then enable NextraRhinoGh with `NextraRhinoGhOn`. |
 | Red dot | Click the dot to restart the connection. |
 | Multiple Rhino windows | Specify the file, for example “Use house.3dm.” |
 
@@ -121,7 +121,7 @@ Both ZIPs include the **Rhino tools and Nextra skill**. After installing, keep R
 - Karamba beam, house FE and shell
 - data trees, a messy canvas, a freeform canopy, and a 1,224-object model
 
-| one session | Nextra | McNeel Rhino-MCP-Platform | RhinoMCP |
+| one session | NextraRhinoGh | McNeel Rhino-MCP-Platform | RhinoMCP |
 |---|---|---|---|
 | tool calls (Python fallbacks) | **43 (0)** | 108 (34) | 96 (32) |
 | total tokens | **≈ 16.2k** | ≈ 77.0k (4.8×) | ≈ 237.7k (14.7×) |
@@ -155,7 +155,7 @@ Keep the plugin ZIP filenames stable so the download links above keep working. R
 
 ## Your own instructions
 
-The plug-in creates a folder at first start, `%APPDATA%\Nextra\user`; the Rhino command `NextraFolder` opens it. It holds:
+The plug-in creates a folder at first start, `%APPDATA%\NextraRhinoGh\user`; the Rhino command `NextraRhinoGhFolder` opens it. It holds:
 
 | file / folder | what the AI does with it |
 |---|---|
@@ -164,9 +164,9 @@ The plug-in creates a folder at first start, `%APPDATA%\Nextra\user`; the Rhino 
 | `plugins/<Category>.md` | Your guide takes priority over the bundled one; only short rules attach automatically when its components are used. |
 | `scripts/` | Your scripts, available to `run`. |
 
-The AI can save a lasting preference or a verified reusable workflow in this folder. It works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file. `memory {action:'list'}` reports its path. `NextraOff` persists across Rhino restarts; `NextraOn` starts the bridge again and checks the folder.
+The AI can save a lasting preference or a verified reusable workflow in this folder. It works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file. `memory {action:'list'}` reports its path. `NextraRhinoGhOff` persists across Rhino restarts; `NextraRhinoGhOn` starts the bridge again and checks the folder. On first start after upgrading, the plug-in copies its old `%APPDATA%\Nextra` settings and user files into the new folder without deleting the originals.
 
-**Config** is in `%APPDATA%/Nextra/config.json`:
+**Config** is in `%APPDATA%/NextraRhinoGh/config.json`:
 
 | key | meaning |
 |---|---|
@@ -185,14 +185,14 @@ The folder names serve different roles:
 
 | Folder | Purpose |
 |---|---|
-| `.claude-plugin/` | Claude's marketplace catalog, with Nextra's plugin settings inline. This is the only `.claude-plugin` folder in the repository. |
+| `.claude-plugin/` | Claude's marketplace catalog, with NextraRhinoGh's plugin settings inline. This is the only `.claude-plugin` folder in the repository. |
 | `.agents/` | Shared agent resources. OpenAI also discovers `.agents/plugins/marketplace.json` here. |
 | `plugin/nextra-rhinogh/.codex-plugin/` | OpenAI's native plugin manifest inside the installable package. |
 | `.codex/config.toml` | Optional local Codex workspace configuration for MCP. This is separate from a plugin manifest. |
 
 The marketplace catalog tells the app where to find plugins. `.codex-plugin/plugin.json` describes an installable plugin and its bundled skills and MCP configuration. `.codex/config.toml` configures a particular Codex workspace; the general agent kit includes it so that workspace can connect directly to the MCP server. [OpenAI package format](https://developers.openai.com/plugins/build/plugins).
 
-Claude reads Nextra's manifest fields directly from the marketplace entry when the plugin directory has no separate manifest. The packaging script adds `.claude-plugin/plugin.json` inside standalone plugin ZIPs for direct import. [Claude marketplace manifest rules](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
+Claude reads NextraRhinoGh's manifest fields directly from the marketplace entry when the plugin directory has no separate manifest. The packaging script adds `.claude-plugin/plugin.json` inside standalone plugin ZIPs for direct import. [Claude marketplace manifest rules](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
 
 
 ```

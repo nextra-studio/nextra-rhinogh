@@ -37,7 +37,7 @@ namespace Nextra.Host
                 if (_attached) { GhDot.Refresh(); return; }
                 _attached = GhDot.Attach();
             }
-            catch (Exception e) { RhinoApp.WriteLine("Nextra: GH dot failed: " + e.Message); _timer?.Stop(); }
+            catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: GH dot failed: " + e.Message); _timer?.Stop(); }
         }
     }
 

@@ -29,7 +29,7 @@ namespace Nextra.Host
         {
             get
             {
-                var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Nextra");
+                var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NextraRhinoGh");
                 Directory.CreateDirectory(d);
                 return d;
             }
@@ -53,7 +53,7 @@ namespace Nextra.Host
             // keep the published file name current so clients can bind to "the Rhino that has house.3dm open"
             if (!_hooked)
             {
-                _hooked = true;   // once per Rhino session, not again on every NextraOn / restart
+                _hooked = true;   // once per Rhino session, not again on every NextraRhinoGhOn / restart
                 RhinoDoc.EndOpenDocument += (s, e) => WriteInfo();
                 RhinoDoc.EndSaveDocument += (s, e) => WriteInfo();
                 RhinoDoc.NewDocument += (s, e) => WriteInfo();
@@ -61,9 +61,9 @@ namespace Nextra.Host
             }
 
             _running = true;
-            _thread = new Thread(AcceptLoop) { IsBackground = true, Name = "NextraServer" };
+            _thread = new Thread(AcceptLoop) { IsBackground = true, Name = "NextraRhinoGhServer" };
             _thread.Start();
-            RhinoApp.WriteLine($"Nextra: listening on 127.0.0.1:{Port}");
+            RhinoApp.WriteLine($"NextraRhinoGh: listening on 127.0.0.1:{Port}");
         }
 
         static string _started;
@@ -126,7 +126,7 @@ namespace Nextra.Host
                     if (!req.Headers.TryGetValue("x-nextra-token", out var tok) || tok != Token)
                     {
                         code = 401;
-                        body = "{\"ok\":false,\"text\":\"bad token: read %APPDATA%/Nextra/server-<pid>.json (Rhino was restarted?)\"}";
+                        body = "{\"ok\":false,\"text\":\"bad token: read %APPDATA%/NextraRhinoGh/server-<pid>.json (Rhino was restarted?)\"}";
                     }
                     else { LastClientCall = DateTime.Now; body = Route(req); }
                 }

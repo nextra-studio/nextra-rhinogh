@@ -281,7 +281,7 @@ namespace Nextra.Engine
 
         public static void Query(Args a, Reply r)
         {
-            var dir = Dir() ?? throw new NxError("docs folder not found", "set skill_dir in %APPDATA%/Nextra/config.json");
+            var dir = Dir() ?? throw new NxError("docs folder not found", "set skill_dir in %APPDATA%/NextraRhinoGh/config.json");
             var files = Directory.EnumerateFiles(dir, "*.md", SearchOption.AllDirectories).ToList();
             // the user's folder (Documents\Nextra) comes first: its plug-in guides shadow the bundled ones
             var user = new List<(string file, string rel)>();

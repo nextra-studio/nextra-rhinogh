@@ -1,4 +1,4 @@
-"""Test client for the Nextra server (same wire protocol as the MCP bridge).
+"""Test client for the NextraRhinoGh server (same wire protocol as the MCP bridge).
 
 usage:  python tools/nx.py <tool> '<json args>' [--timeout 60]
         python tools/nx.py health | reload
@@ -7,7 +7,7 @@ Every call is appended to test/calls.jsonl for later token accounting.
 """
 import json, os, sys, time, urllib.request
 
-APP = os.path.join(os.environ["APPDATA"], "Nextra")
+APP = os.path.join(os.environ["APPDATA"], "NextraRhinoGh")
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 

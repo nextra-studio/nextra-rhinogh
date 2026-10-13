@@ -29,7 +29,7 @@ namespace Nextra.Engine
     /// Cleaned, searchable API reference for RhinoCommon, the Grasshopper SDK and rhinoscriptsyntax.
     /// Built once per installed Rhino/GH version from the assemblies (reflection: real signatures and return
     /// types) and the XML docs that ship with Rhino; rhinoscriptsyntax from its Python sources. Cached as JSON in
-    /// %APPDATA%/Nextra/api/, with tidy per-namespace Markdown next to it. Served by query {scope:'api'}.
+    /// %APPDATA%/NextraRhinoGh/api/, with tidy per-namespace Markdown next to it. Served by query {scope:'api'}.
     public static class ApiDocs
     {
         const int Format = 3;

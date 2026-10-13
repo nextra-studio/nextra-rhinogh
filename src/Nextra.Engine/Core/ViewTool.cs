@@ -568,7 +568,7 @@ namespace Nextra.Engine
         static float Dist(PointF a, PointF b) => (float)Math.Sqrt((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y));
     }
 
-    /// Reads %APPDATA%/Nextra/config.json (shared with the host).
+    /// Reads %APPDATA%/NextraRhinoGh/config.json (shared with the host).
     public static class EngineConfig
     {
         public static System.Text.Json.Nodes.JsonObject Load()

@@ -1,9 +1,9 @@
 ---
 name: nextra-rhinogh
-description: Drive Rhino 8 and Grasshopper through the Nextra MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts.
+description: Drive Rhino 8 and Grasshopper through the NextraRhinoGh MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts.
 ---
 
-# Nextra — Rhino + Grasshopper
+# NextraRhinoGh — Rhino + Grasshopper
 
 Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints, layout, errors); you decide *what* and *where*.
 
@@ -11,10 +11,10 @@ Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints,
 The bridge binds a session to one Rhino. If more than one is open it refuses until you choose: `query {scope:'instances'}` → `query {instance:'house.3dm'}` (file name or pid; sticky). Or set `NEXTRA_FILE` in the MCP config. It never falls back to another instance.
 
 ## Session start
-1. `memory {action:'list'}` → the user's own preferences and workflow list (from their Nextra folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
+1. `memory {action:'list'}` → the user's own preferences and workflow list (from their NextraRhinoGh folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
 2. Look before you edit: `query` (text, cheap) then `view` only when shape/position matters.
 3. **Keep preferences current**: when the user states a lasting preference (units, layers, naming, colours, style, "always/never …") or corrects the same thing twice, use `memory {action:'save_pref', text:'key: value'}`. The same key replaces the old line in the persistent user folder. Keep active preferences within 1500 characters; use `set_prefs` to merge stale lines. Mention a saved preference briefly.
-4. **Capture reusable workflows**: after a workflow succeeds and is likely to be reused, save a short `when:` trigger, steps and checks with `memory {action:'save_workflow', name, when, text}`. Read an existing workflow before updating it. Keep one-off details out. These files live in the persistent user folder; `NextraFolder` opens it.
+4. **Capture reusable workflows**: after a workflow succeeds and is likely to be reused, save a short `when:` trigger, steps and checks with `memory {action:'save_workflow', name, when, text}`. Read an existing workflow before updating it. Keep one-off details out. These files live in the persistent user folder; `NextraRhinoGhFolder` opens it.
 5. **Plug-in knowledge**: keep the bundled `plugins/<Category>.md` guides as reference. Save new or user-specific plug-in rules through `memory {action:'save_guide', name:<Category>, text}` in the user's folder, so reinstalling the skill or plug-in does not erase them. Read the current guide before replacing it; its previous version is backed up.
 
 ## Priority (always)

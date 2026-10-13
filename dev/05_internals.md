@@ -113,7 +113,7 @@ Entry points:
 
 ## 9. Memory (`Core/Memory.cs`)
 
-In `%APPDATA%/Nextra/memory/` (or config `memory_dir`):
+In `%APPDATA%/NextraRhinoGh/memory/` (or config `memory_dir`):
 
 | file | cap | content |
 |---|---|---|
@@ -165,12 +165,12 @@ What it does with them:
   - RhinoCommon and Grasshopper / GH_IO by reflection on the loaded assemblies — real signatures, return types, static/instance, obsolete flags, enum values — joined with the XML docs Rhino ships next to them (`RhinoCommon.xml`, `Grasshopper.xml`, `GH_IO.XML`) by documentation id;
   - rhinoscriptsyntax from its Python sources (`~/.rhinocode/py39-rh8/site-rhinopython/rhinoscript/*.py`, docstrings split into description / returns / parameters / example).
 - **Cleaning:** `<see cref>` → short names, paragraphs kept, wrapped lines joined, short type names (`IEnumerable<Curve>`, `int?`), operators as `operator +`, property accessors and `EditorBrowsable(Never)` dropped. Obsolete members stay in the index but rank last and are labelled.
-- **Cache:** `%APPDATA%/Nextra/api/index.json` + `stamp.txt` (Rhino version + GH version + format number; bump `Format` when the cleaning changes). First query builds it (~2 s, ~31k items). Tidy per-namespace Markdown in `api/md/<rc|gh|rs>/<Namespace>.md` for humans.
+- **Cache:** `%APPDATA%/NextraRhinoGh/api/index.json` + `stamp.txt` (Rhino version + GH version + format number; bump `Format` when the cleaning changes). First query builds it (~2 s, ~31k items). Tidy per-namespace Markdown in `api/md/<rc|gh|rs>/<Namespace>.md` for humans.
 - **Search:** every query word must match somewhere (name, camel-case word of the name, type, or summary); name matches weigh most; everyday types (Brep, Curve, Mesh, Point3d, RhinoDoc, GH_Document…) and namespaces (Rhino.Geometry, Grasshopper.Kernel) rank up, interop/UI namespaces down. Overloads collapse into one line (`+2 overloads`). Detail output prints each doc line once across overloads.
 
 ## 13. The user's folder (`Core/UserDocs.cs`)
 
-- Default `%APPDATA%/Nextra/user` (config `user_dir`), created at Rhino start through `memory {action:'init'}` from the host, seeded with README.md, preferences.md and `_TEMPLATE.md` files — **never overwritten**. Outside the Yak package folder, so plug-in updates do not touch it.
+- Default `%APPDATA%/NextraRhinoGh/user` (config `user_dir`), created at Rhino start through `memory {action:'init'}` from the host, seeded with README.md, preferences.md and `_TEMPLATE.md` files — **never overwritten**. Outside the Yak package folder, so plug-in updates do not touch it. The host copies this plug-in's old `%APPDATA%/Nextra` settings and user files once without removing them.
 - AI `save_pref` and `set_prefs` write here too, to `preferences.md` (1500 active-character cap); old `memory/prefs.md` entries are imported once. `memory list` reports the folder path and a compact view.
 - `memory list` shows preferences (comment lines stripped, capped), the workflow index (file name + `when:` line) and the list of the user's plug-in guides. `query scope:'docs'` reads `preferences`, `workflows/<name>`, `plugins/<name>` (marked "yours").
 - Plug-in guides: user folder first, then the old `memory/plugins`, then the bundled `skill/plugins`; the first guide claiming a category wins. Front matter is read by `UserDocs.Meta` (`plugin:`, `when:`, `description:`).

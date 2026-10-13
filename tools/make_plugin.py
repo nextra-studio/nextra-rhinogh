@@ -37,13 +37,13 @@ if os.path.isdir(old_claude_dir):
 
 # ---- Claude Code
 claude_manifest = {
-    "name": name, "displayName": "Nextra for Rhino + Grasshopper", "version": ver, "description": desc,
+    "name": name, "displayName": "NextraRhinoGh", "version": ver, "description": desc,
     "author": author, "homepage": url, "repository": url, "license": "Apache-2.0",
     "keywords": ["rhino", "grasshopper", "mcp", "karamba"],
     "mcpServers": {name: {"command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/server/index.js"], "env": {"NEXTRA_MODE": "full"}}},
 }
 write("/.claude-plugin/marketplace.json", {
-    "name": "nextra", "owner": author, "description": "Nextra: Rhino 8 + Grasshopper tools and skill for AI agents",
+    "name": "nextra-rhinogh", "owner": author, "description": "NextraRhinoGh: Rhino 8 + Grasshopper tools and skill for AI agents",
     "plugins": [{**claude_manifest, "source": f"./plugin/{name}"}],
 })
 
@@ -55,7 +55,7 @@ write(".codex-plugin/plugin.json", {
     "license": "Apache-2.0", "keywords": ["rhino", "grasshopper", "mcp", "karamba"],
     "skills": "./skills/", "mcpServers": "./codex.mcp.json",
     "interface": {
-        "displayName": "Nextra for Rhino", "shortDescription": "Rhino + Grasshopper tools",
+        "displayName": "NextraRhinoGh", "shortDescription": "Rhino + Grasshopper tools",
         "longDescription": desc + " Needs Rhino 8 running with the Nextra-RhinoGh plug-in (Rhino Package Manager).",
         "developerName": "Tatsuki", "category": "Design", "capabilities": ["Read", "Write"], "websiteURL": url,
         "defaultPrompt": ["Create a  timber skyscraper in Rhino", "Create a parametric skyscraper in Grasshopper"],
@@ -63,7 +63,7 @@ write(".codex-plugin/plugin.json", {
     },
 })
 write("/.agents/plugins/marketplace.json", {
-    "name": "nextra", "interface": {"displayName": "Nextra"},
+    "name": "nextra-rhinogh", "interface": {"displayName": "NextraRhinoGh"},
     "plugins": [{"name": name, "source": {"source": "local", "path": f"./plugin/{name}"},
                  "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"}, "category": "Design"}],
 })
@@ -105,7 +105,7 @@ def kwrite(rel, text):
 
 kwrite(".mcp.json", json.dumps({"mcpServers": {name: {"command": "node", "args": ["server/index.js"], "env": {"NEXTRA_MODE": "full"}}}}, indent=2) + "\n")
 kwrite(".codex/config.toml", f'[mcp_servers.{name}]\ncommand = "node"\nargs = ["server/index.js"]\n\n[mcp_servers.{name}.env]\nNEXTRA_MODE = "full"\n')
-AGENTS = f"""# Nextra for Rhino 8 + Grasshopper (agent kit {ver})
+AGENTS = f"""# NextraRhinoGh for Rhino 8 + Grasshopper (agent kit {ver})
 
 This folder lets an AI agent drive Rhino 8 and Grasshopper. Everything is already here.
 
@@ -118,8 +118,8 @@ This folder lets an AI agent drive Rhino 8 and Grasshopper. Everything is alread
 4. Six tools: view, query, run, gh_edit, undo, memory. Start with `memory {{action:'list'}}`, then `query` / `view`.
 
 ChatGPT / Codex desktop: open this folder as a Codex project, trust it when prompted, restart the desktop
-app, then open Plugins Directory > Nextra > Nextra for Rhino > Install. Keep this folder on your computer.
-Claude Code: `/plugin marketplace add <this folder>` then `/plugin install {name}@nextra`.
+app, then open Plugins Directory > NextraRhinoGh > NextraRhinoGh > Install. Keep this folder on your computer.
+Claude Code: `/plugin marketplace add <this folder>` then `/plugin install {name}@nextra-rhinogh`.
 """
 kwrite("AGENTS.md", AGENTS)
 kwrite("CLAUDE.md", "@AGENTS.md\n")

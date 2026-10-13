@@ -112,7 +112,7 @@ namespace Nextra.Engine
             var output = new MemoryStream();
             var error = new MemoryStream();
             Exception failure = null;
-            uint undoSn = doc.BeginUndoRecord("Nextra " + label);
+            uint undoSn = doc.BeginUndoRecord("NextraRhinoGh " + label);
             var delta = new DeltaTracker(doc);
             var sw = System.Diagnostics.Stopwatch.StartNew();
             try

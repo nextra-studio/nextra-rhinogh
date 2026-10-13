@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Nextra MCP bridge: stdio JSON-RPC (MCP) <-> Nextra server inside Rhino (127.0.0.1, token auth).
+// NextraRhinoGh MCP bridge: stdio JSON-RPC (MCP) <-> Rhino server (127.0.0.1, token auth).
 // Zero dependencies so it runs on the Node that ships with Claude Desktop (.mcpb) or any Node >= 18.
 // NEXTRA_MODE=ask exposes only view + query (read-only).
 "use strict";
@@ -8,9 +8,9 @@ const path = require("path");
 const http = require("http");
 const readline = require("readline");
 
-const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "Nextra");
+const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "NextraRhinoGh");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
-const VERSION = "0.1.3";
+const VERSION = "0.1.4";
 
 const TOOLS = [
   {
@@ -98,7 +98,7 @@ const fileMatch = (c, f) => { f = String(f).toLowerCase(); return String(c.file 
 const describe = list => list.map(c => `pid ${c.pid}: ${c.file || "untitled"}${c.path ? " (" + c.path + ")" : ""}`).join("; ");
 function serverInfo() {
   const all = instances();
-  if (all.length === 0) throw new Error("no running Rhino with Nextra");
+  if (all.length === 0) throw new Error("no running Rhino with NextraRhinoGh");
   if (BOUND) {
     const hit = all.filter(c => BOUND.pid ? String(c.pid) === String(BOUND.pid) : fileMatch(c, BOUND.file));
     if (hit.length === 1) { BOUND = { pid: hit[0].pid, file: hit[0].file }; return hit[0]; }
@@ -126,7 +126,7 @@ function post(urlPath, body, timeoutMs) {
   });
 }
 
-const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 with the Nextra plug-in (a green/amber dot sits at the bottom-right of the Rhino window; red = click it to restart; command NextraOn if it is off). Do not retry in a loop.";
+const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 with the NextraRhinoGh plug-in (a green/amber dot sits at the bottom-right of the Rhino window; red = click it to restart; command NextraRhinoGhOn if it is off). Do not retry in a loop.";
 
 async function callTool(name, args) {
   args = args || {};
@@ -141,7 +141,7 @@ async function callTool(name, args) {
   if (name === "query" && args.scope === "instances") {
     const all = instances();
     let cur = null; try { cur = serverInfo(); } catch {}
-    return { content: [{ type: "text", text: (all.length ? describe(all) : "no Rhino with Nextra running") + (cur ? `\nbound: pid ${cur.pid} ${cur.file}` : "\nnot bound") }] };
+    return { content: [{ type: "text", text: (all.length ? describe(all) : "no Rhino with NextraRhinoGh running") + (cur ? `\nbound: pid ${cur.pid} ${cur.file}` : "\nnot bound") }] };
   }
   const timeout = Math.min(Math.max(Number(args && args.timeout) || 90, 5), 1800);
   if (args) delete args.timeout;

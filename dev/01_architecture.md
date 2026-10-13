@@ -17,7 +17,7 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 
 1. **MCP client → bridge.** The client writes a JSON-RPC `tools/call` line on stdin, and `index.js` reads it (`rl.on("line")`).
 2. **Bridge chooses the Rhino.**
-   - `serverInfo()` reads every `%APPDATA%/Nextra/server-<pid>.json` and keeps the ones whose pid is still alive.
+   - `serverInfo()` reads every `%APPDATA%/NextraRhinoGh/server-<pid>.json` and keeps the ones whose pid is still alive.
    - It then applies the binding rules (§5).
 3. **Bridge → host.** It sends `POST http://127.0.0.1:<port>/call`.
    - The header is `X-Nextra-Token: <token>`.
@@ -35,7 +35,7 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 7. **Engine** (`Core/Entry.cs`):
    - Parses the args (`Args`) and creates a `Reply`.
    - Switches on the tool name.
-   - Catches `NxError`, which becomes `ERROR: msg` plus `hint: …`, and any other exception, which becomes an "internal engine error" with a fallback hint and is logged to `%APPDATA%/Nextra/logs/`.
+   - Catches `NxError`, which becomes `ERROR: msg` plus `hint: …`, and any other exception, which becomes an "internal engine error" with a fallback hint and is logged to `%APPDATA%/NextraRhinoGh/logs/`.
    - Reports unknown arguments ("ignored args: …"), so the LLM learns the real parameter names.
 8. **Reply** is `{ok, text, images:[png paths]}`. The bridge reads each PNG, base64-encodes it and returns MCP `content` as text plus images. `isError` is set to `!ok`.
 
@@ -99,13 +99,14 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 
   | command | effect |
   |---|---|
-  | `Nextra` | status |
-  | `NextraOn` | start the server, show both dots, persist `enabled:true` |
-  | `NextraOff` | stop the server, remove both dots, persist `enabled:false` |
+  | `NextraRhinoGh` | status |
+  | `NextraRhinoGhOn` | start the server, show both dots, persist `enabled:true` |
+  | `NextraRhinoGhOff` | stop the server, remove both dots, persist `enabled:false` |
+  | `NextraRhinoGhFolder` | open the persistent user folder |
 
 ## 7. Files outside the repo (runtime)
 
-`%APPDATA%/Nextra/`:
+`%APPDATA%/NextraRhinoGh/` (first run copies this plug-in's settings and user files from the old `%APPDATA%/Nextra/` folder):
 
 | path | written by | content |
 |---|---|---|

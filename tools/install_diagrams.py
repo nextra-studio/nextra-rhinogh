@@ -87,7 +87,7 @@ def openai_nav():
     body += text(60, 36, 'Customize', 22, '', 600)
     body += rect(53, 57, 172, 34, 'selected', 8)+plugin_icon(68, 74)+text(86, 80, 'Plugins', 15)
     body += text(86, 116, 'Skills', 15, 'muted')+text(61, 159, 'Installed', 14, 'muted')
-    body += rect(61, 177, 18, 18, 'dark', 4)+text(65, 191, 'N', 13, 'white', 700)+text(86, 191, 'Nextra for Rhino', 14)
+    body += rect(61, 177, 18, 18, 'dark', 4)+text(65, 191, 'N', 13, 'white', 700)+text(86, 191, 'NextraRhinoGh', 14)
     body += text(86, 225, 'GitHub', 14, 'muted')+text(86, 256, 'Plugin Creator', 14, 'muted')
     body += text(260, 49, 'Plugins', 28, '', 600)+search(503, 27, 210, 'Search plugins')
     body += text(731, 51, '↻', 22, 'muted')+button(760, 26, 73, 'Add')
@@ -131,9 +131,9 @@ def repository(openai=False):
 
 
 def install(openai=False):
-    return (rect(0, 0, 852, 180)+text(28, 43, 'Nextra marketplace', 25, '', 600)
+    return (rect(0, 0, 852, 180)+text(28, 43, 'NextraRhinoGh marketplace', 25, '', 600)
             +rect(28, 65, 796, 90)+rect(48, 87, 44, 44, 'dark')+text(60, 117, 'N', 26, 'white', 700)
-            +text(111, 101, 'Nextra for Rhino' if openai else 'nextra-rhinogh', 19, '', 600)
+            +text(111, 101, 'NextraRhinoGh' if openai else 'nextra-rhinogh', 19, '', 600)
             +text(111, 128, 'Rhino + Grasshopper tools and skill', 15, 'muted')
             +button(705, 90, 96, 'Install')+focus(701, 86, 104, 46))
 
@@ -174,7 +174,7 @@ def generate(out):
         ('Open the archive uploader', uploader_menu(), 160), ('Choose the GPT ZIP → Upload', upload(True), 245)])
     write(out, 'claude-marketplace.svg', 'Claude · B — Install from marketplace', [
         ('Add → Add marketplace', claude_nav('marketplace'), 260), ('Choose Add from a repository', marketplace_choice(), 240),
-        ('Enter the repository → Sync', repository(), 230), ('Select Nextra → Install', install(), 180)])
+        ('Enter the repository → Sync', repository(), 230), ('Select NextraRhinoGh → Install', install(), 180)])
     write(out, 'openai-marketplace.svg', 'OpenAI · B — Install from marketplace', [
         ('Open marketplace setup', marketplace_menu(), 160), ('Enter the repository → Add / sync', repository(True), 230),
-        ('Select Nextra → Install', install(True), 180)])
+        ('Select NextraRhinoGh → Install', install(True), 180)])

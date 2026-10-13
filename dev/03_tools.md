@@ -179,6 +179,6 @@ c4: gh: document restored (5 objects)
 | `set_rules {text}` | write the rules file, **only after the user approves** |
 | `save_script {name, code, doc, lang}` / `read_script` / `delete_script` | script library |
 | `save_workflow {name, when, text}` / `save_guide {name = plug-in category, text}` | save verified reusable workflows and user-specific plug-in rules in the persistent user folder; the model reads full files on demand |
-| `init` | creates the user folder (the host calls it at Rhino start; `NextraFolder` opens it) |
+| `init` | creates the user folder (the host calls it at Rhino start; `NextraRhinoGhFolder` opens it) |
 
 Details in 05 §9.

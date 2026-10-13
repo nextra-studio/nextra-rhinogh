@@ -105,7 +105,7 @@ namespace Nextra.Host
             catch (Exception e)
             {
                 if (_call == null) throw;
-                Rhino.RhinoApp.WriteLine($"Nextra: new engine at {path} failed to load ({e.Message}); still using gen {_generation}");
+                Rhino.RhinoApp.WriteLine($"NextraRhinoGh: new engine at {path} failed to load ({e.Message}); still using gen {_generation}");
                 _stamp = stamp;   // do not retry on every call; the next rebuild changes the stamp
                 return;
             }

@@ -5,7 +5,7 @@ param([switch]$Release)
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $cfg = if ($Release) { "Release" } else { "Debug" }
-$ver = "0.1.3"
+$ver = "0.1.4"
 $pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-RhinoGh"
 # the package was called Nextra-zero before; two copies of the same plug-in would clash
 Remove-Item (Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero") -Recurse -Force -ErrorAction SilentlyContinue
@@ -23,16 +23,23 @@ name: Nextra-RhinoGh
 version: $ver
 authors:
 - Tatsuki
-description: Nextra for Rhino + Grasshopper - 6-tool LLM bridge (view, query, run, gh_edit, undo, memory)
+description: NextraRhinoGh - 6-tool LLM bridge (view, query, run, gh_edit, undo, memory)
 url: https://github.com/nextra-studio/nextra-rhinogh
 keywords: [mcp, llm, grasshopper]
 "@ | Set-Content -Encoding utf8 "$pkg\manifest.yml"
 Set-Content -Encoding ascii "$pkgRoot\manifest.txt" $ver
 
 # config shared by host + engine
-$appdir = Join-Path $env:APPDATA "Nextra"
+$appdir = Join-Path $env:APPDATA "NextraRhinoGh"
 New-Item -ItemType Directory -Force $appdir | Out-Null
 $cfgPath = Join-Path $appdir "config.json"
+$oldCfgPath = Join-Path (Join-Path $env:APPDATA "Nextra") "config.json"
+if (-not (Test-Path $cfgPath) -and (Test-Path $oldCfgPath)) {
+    $oldCfg = Get-Content $oldCfgPath -Raw | ConvertFrom-Json
+    if ($oldCfg.engine_path -like "*Nextra.Engine.dll" -or $oldCfg.skill_dir -like "*skill*nextra") {
+        Copy-Item -LiteralPath $oldCfgPath -Destination $cfgPath
+    }
+}
 $conf = @{}
 if (Test-Path $cfgPath) { (Get-Content $cfgPath -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $conf[$_.Name] = $_.Value } }
 $conf["engine_path"] = "$repo\src\Nextra.Engine\bin\$cfg\Nextra.Engine.dll"

@@ -81,9 +81,9 @@ namespace Nextra.Host
 
         public static void CurrentState(out Color c, out string t)
         {
-            if (!Server.IsListening) { c = Color.FromArgb(220, 50, 50); t = "Nextra: server down. Click to restart."; }
-            else if ((DateTime.Now - Server.LastClientCall).TotalSeconds < 90) { c = Color.FromArgb(40, 190, 80); t = $"Nextra: connected (127.0.0.1:{Server.Port})"; }
-            else { c = Color.FromArgb(240, 170, 30); t = $"Nextra: ready on 127.0.0.1:{Server.Port}, no LLM client yet"; }
+            if (!Server.IsListening) { c = Color.FromArgb(220, 50, 50); t = "NextraRhinoGh: server down. Click to restart."; }
+            else if ((DateTime.Now - Server.LastClientCall).TotalSeconds < 90) { c = Color.FromArgb(40, 190, 80); t = $"NextraRhinoGh: connected (127.0.0.1:{Server.Port})"; }
+            else { c = Color.FromArgb(240, 170, 30); t = $"NextraRhinoGh: ready on 127.0.0.1:{Server.Port}, no LLM client yet"; }
             var busy = Dispatcher.BusyText();
             if (busy != null) t += "\nbusy: " + busy;
         }
@@ -131,9 +131,9 @@ namespace Nextra.Host
         {
             if (!Server.IsListening)
             {
-                try { Server.Stop(); Server.Start(); } catch (Exception ex) { RhinoApp.WriteLine("Nextra: restart failed: " + ex.Message); }
+                try { Server.Stop(); Server.Start(); } catch (Exception ex) { RhinoApp.WriteLine("NextraRhinoGh: restart failed: " + ex.Message); }
             }
-            RhinoApp.WriteLine($"Nextra: {(Server.IsListening ? "listening on 127.0.0.1:" + Server.Port : "server down")}, engine {EngineLoader.Describe()}, last client call {(Server.LastClientCall == DateTime.MinValue ? "never" : Server.LastClientCall.ToString("HH:mm:ss"))}");
+            RhinoApp.WriteLine($"NextraRhinoGh: {(Server.IsListening ? "listening on 127.0.0.1:" + Server.Port : "server down")}, engine {EngineLoader.Describe()}, last client call {(Server.LastClientCall == DateTime.MinValue ? "never" : Server.LastClientCall.ToString("HH:mm:ss"))}");
         }
 
         static string PosFile => Path.Combine(Server.AppDir, "dot.txt");

@@ -47,7 +47,8 @@ These files are also served to any non-Claude LLM through `query {scope:'docs'}`
 
 | file | lines | what |
 |---|---|---|
-| `HostPlugIn.cs` | 100 | plug-in class, headless guard, `TurnOn`/`TurnOff`, commands `Nextra`, `NextraOn`, `NextraOff` |
+| `HostPlugIn.cs` | 100 | plug-in class, headless guard, `TurnOn`/`TurnOff`, commands `NextraRhinoGh`, `NextraRhinoGhOn`, `NextraRhinoGhOff`, `NextraRhinoGhFolder` |
+| `AppDataMigration.cs` | — | imports this plug-in's old `%APPDATA%/Nextra` settings and user files into `%APPDATA%/NextraRhinoGh` |
 | `Server.cs` | 250 | `TcpListener`, tiny HTTP parser (`HttpLite`), token check, routes, `WriteInfo` (server-pid.json), `Config` get/set |
 | `Dispatcher.cs` | 205 | UI-thread execution, queue, timeouts, late results, status/dismiss |
 | `DialogProbe.cs` | 190 | finds, reads (Win32 + UI Automation for WPF/Eto) and closes blocking dialogs, never touching the UI thread |
@@ -70,7 +71,7 @@ These files are also served to any non-Claude LLM through `query {scope:'docs'}`
 | `Checkpoints.cs` | 115 | checkpoint list + the `undo` tool |
 | `Memory.cs` | 350 | `Memory` (prefs/rules/mistakes), `MemoryTool`, `Library`, `DocsStore` |
 | `ApiDocs.cs` | 560 | API reference: builds a cleaned index of RhinoCommon + Grasshopper SDK (reflection + shipped XML docs) + rhinoscriptsyntax (Python sources), cached per Rhino version; ranked search for `query {scope:'api'}` |
-| `UserDocs.cs` | 230 | the user's folder (`%APPDATA%/Nextra/user`): preferences, workflows, plug-in guides, scripts; seeded with README + templates |
+| `UserDocs.cs` | 230 | the user's folder (`%APPDATA%/NextraRhinoGh/user`): preferences, workflows, plug-in guides, scripts; seeded with README + templates |
 
 ### Rh/ — Rhino side
 | file | lines | what |

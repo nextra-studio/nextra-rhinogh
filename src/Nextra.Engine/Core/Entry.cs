@@ -12,7 +12,7 @@ namespace Nextra.Engine
     {
         public static IDictionary<string, object> State;
         public static string AppDir => State != null && State.TryGetValue("host.appdir", out var d) ? (string)d
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Nextra");
+            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NextraRhinoGh");
 
         public static void Init(IDictionary<string, object> state)
         {

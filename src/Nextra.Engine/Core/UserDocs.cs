@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace Nextra.Engine
 {
-    /// The user's own instructions, in a folder the plug-in creates on first start (default %APPDATA%\Nextra\user,
-    /// config "user_dir"; Rhino command NextraFolder opens it). They reach the LLM through the tools, so they work however the skill was installed
+    /// The user's own instructions, in a folder the plug-in creates on first start (default %APPDATA%\NextraRhinoGh\user,
+    /// config "user_dir"; Rhino command NextraRhinoGhFolder opens it). They reach the LLM through the tools, so they work however the skill was installed
     /// (uploaded .zip on claude.ai, Claude Code folder, any other MCP client):
     ///   preferences.md      always shown at session start (memory list)
     ///   workflows/*.md      index (file name + `when:` line) at session start; full text on demand
     ///   plugins/*.md        plug-in guides: `## Rules` attached automatically when that plug-in is used
     ///   scripts/            script library folder (run {lib:'name'})
-    /// Files starting with "_" are templates and ignored. Nextra never overwrites user files.
+    /// Files starting with "_" are templates and ignored. NextraRhinoGh never overwrites user files.
     public static class UserDocs
     {
         public const int PrefsShowCap = 1500;
@@ -219,11 +219,11 @@ namespace Nextra.Engine
 
         // ------------------------------------------------------------------ seeded files
 
-        const string Readme = @"# Nextra — your folder
+        const string Readme = @"# NextraRhinoGh — your folder
 
-Everything here is **yours**: Nextra (the Rhino plug-in) reads it and hands it to the AI through its tools.
-It works the same whether the Nextra skill was uploaded as a .zip on claude.ai, installed in Claude Code,
-or used from another AI app. Nextra never overwrites your files. Files whose name starts with `_` are templates
+Everything here is **yours**: NextraRhinoGh (the Rhino plug-in) reads it and hands it to the AI through its tools.
+It works the same whether the NextraRhinoGh skill was uploaded as a .zip on claude.ai, installed in Claude Code,
+or used from another AI app. NextraRhinoGh never overwrites your files. Files whose name starts with `_` are templates
 and are ignored.
 
 | file / folder | what the AI does with it |
@@ -256,9 +256,9 @@ Plain lines, e.g. `- units: mm for architecture, m for structural work`. Lines s
 The AI saves lasting preferences here. After a successful reusable procedure, it can save a short workflow;
 it can also save user-specific plug-in rules. Previous versions are kept as `.bak`.
 
-This folder is created by the Nextra plug-in the first time Rhino starts after installing it. Open it any time
-with the Rhino command `NextraFolder`. It lives outside the plug-in's install folder, so updates never touch it.
-To use another folder (e.g. a synced or shared one for your team), set `user_dir` in %APPDATA%\Nextra\config.json.
+This folder is created by the NextraRhinoGh plug-in the first time Rhino starts after installing it. Open it any time
+with the Rhino command `NextraRhinoGhFolder`. It lives outside the plug-in's install folder, so updates never touch it.
+To use another folder (e.g. a synced or shared one for your team), set `user_dir` in %APPDATA%\NextraRhinoGh\config.json.
 ";
 
         const string PrefsStarter = @"# My preferences
