@@ -65,7 +65,7 @@ const TOOLS = [
   },
   {
     name: "undo",
-    description: "Revert to before a checkpoint (from run / gh_edit replies) or the last N steps. Rhino objects are restored exactly; GH document from its archive.",
+    description: "Revert to before a checkpoint (from run / gh_edit replies) or the last N steps. Rhino objects and layer changes are restored; GH document from its archive.",
     inputSchema: { type: "object", properties: { checkpoint: { type: "string" }, steps: { type: "integer" }, list: { type: "boolean" } } },
   },
   {
@@ -105,7 +105,7 @@ function serverInfo() {
     if (hit.length > 1) throw new Error(`"${BOUND.file}" matches several Rhino instances (${describe(hit)}); pass instance:"<pid>"`);
     throw new Error(`bound Rhino (${BOUND.file || "pid " + BOUND.pid}) is not running. Open instances: ${describe(all)}. Pass instance:"<file or pid>" to rebind.`);
   }
-  if (all.length === 1) return all[0];
+  if (all.length === 1) { BOUND = { pid: all[0].pid, file: all[0].file }; return all[0]; }
   throw new Error(`${all.length} Rhino instances are open — choose one with instance:"<file name or pid>" (sticky for this session): ${describe(all)}`);
 }
 
@@ -130,6 +130,10 @@ const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 wit
 
 async function callTool(name, args) {
   args = args || {};
+  // Advertising fewer tools is not an access check: clients can call any name.
+  if (!TOOLS.some(t => t.name === name) || (MODE === "ask" && args.dismiss_dialog)) {
+    return { content: [{ type: "text", text: `Tool/action '${name}' is not available in ${MODE} mode.` }], isError: true };
+  }
   if (args.instance !== undefined) {           // (re)bind this session to one Rhino instance
     const v = String(args.instance); delete args.instance;
     BOUND = /^\d+$/.test(v) ? { pid: v } : { file: v };
@@ -157,7 +161,8 @@ async function callTool(name, args) {
 }
 
 // heartbeat: keeps the status dot green while this bridge is alive
-setInterval(() => { post("/call", { tool: "query", args: { scope: "status" }, timeout: 5 }, 8000).catch(() => {}); }, 45000).unref();
+// Status consumes late results; a background heartbeat must never discard them.
+setInterval(() => { post("/health", {}, 8000).catch(() => {}); }, 45000).unref();
 
 function send(msg) { process.stdout.write(JSON.stringify(msg) + "\n"); }
 
@@ -166,6 +171,7 @@ rl.on("line", async line => {
   if (!line.trim()) return;
   let msg;
   try { msg = JSON.parse(line); } catch { return; }
+  if (!msg || typeof msg !== "object" || Array.isArray(msg)) return;
   const { id, method, params } = msg;
   try {
     if (method === "initialize") {
