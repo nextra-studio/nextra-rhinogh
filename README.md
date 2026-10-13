@@ -35,10 +35,19 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 <summary><strong>Install from marketplace (recommended)</strong></summary>
 
 1. Open **Add → Create plugin → Add a marketplace** where available.
-2. Enter `https://github.com/nextra-studio/nextra-rhinogh`, then add or sync the marketplace.
+2. In **Add plugin marketplace**, fill in the fields exactly as follows, then click **Add marketplace**:
+
+   | Field | Enter |
+   |---|---|
+   | **Source** | `https://github.com/nextra-studio/nextra-rhinogh` |
+   | **Git ref** | `main` |
+   | **Sparse paths** | Leave empty |
+
+   Leave **Sparse paths** empty so the marketplace catalog and the plugin folder are both included.
+
 3. Open **NextraRhinoGh**, select **NextraRhinoGh**, and click **Install** (or **+**).
 
-![OpenAI marketplace installation: open marketplace setup, enter the repository, install NextraRhinoGh, then start a new chat](docs/img/install/openai-marketplace.svg)
+![ChatGPT Desktop marketplace setup with Source URL, Git ref main, empty Sparse paths, and Add marketplace](docs/img/install/openai-marketplace.svg)
 
 If your desktop app does not show **Add a marketplace**, run `codex plugin marketplace add nextra-studio/nextra-rhinogh` in a terminal, restart the desktop app, then install **NextraRhinoGh** from that marketplace in the Plugins Directory. [OpenAI marketplace guide](https://developers.openai.com/plugins/build/plugins).
 

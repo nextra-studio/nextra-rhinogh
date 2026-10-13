@@ -121,12 +121,24 @@ def marketplace_choice():
 
 
 def repository(openai=False):
-    value = 'https://github.com/nextra-studio/nextra-rhinogh' if openai else 'nextra-studio/nextra-rhinogh'
-    return (rect(0, 0, 852, 230)+text(28, 43, 'Add a marketplace' if openai else 'Add marketplace', 25, '', 600)
-            +text(28, 83, 'Repository URL' if openai else 'URL', 15, '', 600)
-            +rect(28, 95, 796, 44, 'blue')+text(45, 123, value, 17)
+    if openai:
+        return (rect(0, 0, 852, 420)+text(28, 43, 'Add plugin marketplace', 25, '', 600)
+                +text(28, 77, 'Add from a GitHub repo, Git URL, or local folder.', 15, 'muted')
+                +text(28, 112, 'Source', 15, '', 600)
+                +rect(28, 123, 796, 42, 'blue')+text(45, 150, 'https://github.com/nextra-studio/nextra-rhinogh', 17)
+                +text(28, 196, 'Git ref', 15, '', 600)
+                +rect(28, 207, 796, 42, 'blue')+text(45, 234, 'main', 17)
+                +text(28, 280, 'Sparse paths', 15, '', 600)
+                +rect(28, 291, 796, 50, 'blue')
+                +text(28, 369, 'Leave Sparse paths empty.', 14, 'muted')
+                +button(646, 365, 178, 'Add marketplace')
+                +focus(24, 119, 804, 50, 1)+focus(24, 203, 804, 50, 2)
+                +focus(24, 287, 804, 58, 3)+focus(642, 361, 186, 46, 4))
+    return (rect(0, 0, 852, 230)+text(28, 43, 'Add marketplace', 25, '', 600)
+            +text(28, 83, 'URL', 15, '', 600)
+            +rect(28, 95, 796, 44, 'blue')+text(45, 123, 'nextra-studio/nextra-rhinogh', 17)
             +text(28, 164, 'Use the repository root, without a branch or folder URL.', 14, 'muted')
-            +button(708, 180, 116, 'Add / sync' if openai else 'Sync')
+            +button(708, 180, 116, 'Sync')
             +focus(24, 91, 804, 52, 1)+focus(704, 176, 124, 46, 2))
 
 
@@ -176,5 +188,5 @@ def generate(out):
         ('Add → Add marketplace', claude_nav('marketplace'), 260), ('Choose Add from a repository', marketplace_choice(), 240),
         ('Enter the repository → Sync', repository(), 230), ('Select NextraRhinoGh → Install', install(), 180)])
     write(out, 'openai-marketplace.svg', 'OpenAI · B — Install from marketplace', [
-        ('Open marketplace setup', marketplace_menu(), 160), ('Enter the repository → Add / sync', repository(True), 230),
+        ('Open marketplace setup', marketplace_menu(), 160), ('Enter the form → Add marketplace', repository(True), 420),
         ('Select NextraRhinoGh → Install', install(True), 180)])
