@@ -87,8 +87,8 @@ namespace Nextra.Engine.Gh
             {
                 if (!g.Categories.Any(cats.Contains) || Shown.Contains(g.Name)) continue;
                 Shown.Add(g.Name);
-                if (mode == "hint" || string.IsNullOrEmpty(g.Rules))
-                    r.Line($"plugin guide: {g.Name} → query {{scope:'docs', filter:'plugins/{g.Name}'}}");
+                if (mode == "hint" || string.IsNullOrEmpty(g.Rules) || g.Rules.Length > 1800)
+                    r.Line($"plugin guide: {g.Name} → query {{scope:'docs', filter:'plugins/{g.Name}'}}" + (g.Rules?.Length > 1800 ? " (rules exceed auto-load cap)" : ""));
                 else
                     r.Line($"plugin rules ({g.Name}, shown once; full guide: query {{scope:'docs', filter:'plugins/{g.Name}'}}):\n{g.Rules}");
             }

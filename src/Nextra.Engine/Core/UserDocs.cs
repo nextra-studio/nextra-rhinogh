@@ -17,7 +17,7 @@ namespace Nextra.Engine
     /// Files starting with "_" are templates and ignored. Nextra never overwrites user files.
     public static class UserDocs
     {
-        public const int PrefsShowCap = 2500;
+        public const int PrefsShowCap = 1500;
 
         public static string Dir
         {
@@ -26,7 +26,7 @@ namespace Nextra.Engine
                 // local, not synced, never touched by plug-in updates (the Yak package folder is replaced on update)
                 var d = EngineConfig.Str("user_dir", null);
                 if (string.IsNullOrEmpty(d)) d = Path.Combine(Entry.AppDir, "user");
-                try { Ensure(d); } catch { }
+                Ensure(d);
                 return d;
             }
         }
@@ -45,6 +45,73 @@ namespace Nextra.Engine
             Seed("preferences.md", PrefsStarter);
             Seed(Path.Combine("workflows", "_TEMPLATE.md"), WorkflowTemplate);
             Seed(Path.Combine("plugins", "_TEMPLATE.md"), PluginTemplate);
+            ImportLegacyPreferences(d);
+        }
+
+        static void ImportLegacyPreferences(string d)
+        {
+            var marker = Path.Combine(d, ".legacy-prefs-imported");
+            if (File.Exists(marker)) return;
+            var old = Path.Combine(Memory.Dir, "prefs.md");
+            if (!File.Exists(old)) return;
+            var target = Path.Combine(d, "preferences.md");
+            var existing = File.ReadAllText(target);
+            var lines = existing.Replace("\r", "").Split('\n').ToList();
+            bool added = false;
+            foreach (var line in File.ReadAllLines(old).Where(l => !string.IsNullOrWhiteSpace(l)))
+            {
+                var key = PreferenceKey(line);
+                if (key != null && lines.Any(l => string.Equals(PreferenceKey(l), key, StringComparison.OrdinalIgnoreCase))) continue;
+                lines.Add(line);
+                added = true;
+            }
+            if (added)
+            {
+                var backup = Path.Combine(d, "preferences.before-legacy-import.md.bak");
+                if (!File.Exists(backup)) File.Copy(target, backup);
+                File.WriteAllText(target, string.Join("\n", lines).TrimEnd() + "\n");
+            }
+            File.WriteAllText(marker, old + "\n");
+        }
+
+        static string PreferenceKey(string line)
+        {
+            var match = Regex.Match(line.TrimStart('-', ' '), @"^([\w \-/]{1,30}):");
+            return match.Success ? match.Groups[1].Value : null;
+        }
+
+        public static string SavePreference(string text)
+        {
+            text = text.Trim().TrimStart('-', ' ');
+            var path = Preferences;
+            var lines = File.ReadAllText(path).Replace("\r", "").TrimEnd('\n').Split('\n').ToList();
+            var key = PreferenceKey(text);
+            if (key == null) throw new NxError("preference needs a short `key: value` line", "example: units: millimetres for architecture");
+            var index = lines.FindIndex(l => string.Equals(PreferenceKey(l), key, StringComparison.OrdinalIgnoreCase));
+            if (index >= 0) lines[index] = "- " + text;
+            else lines.Add("- " + text);
+            var updated = string.Join("\n", lines).TrimEnd() + "\n";
+            CheckPreferenceCap(updated);
+            File.Copy(path, path + ".bak", true);
+            File.WriteAllText(path, updated);
+            return (index >= 0 ? "pref updated in " : "pref added to ") + path;
+        }
+
+        public static string SetPreferences(string text)
+        {
+            var updated = (text ?? "").Trim() + "\n";
+            CheckPreferenceCap(updated);
+            var path = Preferences;
+            File.Copy(path, path + ".bak", true);
+            File.WriteAllText(path, updated);
+            return $"preferences.md saved in {Dir}";
+        }
+
+        static void CheckPreferenceCap(string text)
+        {
+            var active = ActivePreferences(text);
+            if (active.Length > PrefsShowCap)
+                throw new NxError($"preferences.md would be {active.Length} chars (cap {PrefsShowCap})", "merge or shorten preferences with memory {action:'set_prefs', text:'…full new preferences…'}");
         }
 
         // ------------------------------------------------------------------ reading
@@ -64,7 +131,13 @@ namespace Nextra.Engine
         public static string PreferencesText()
         {
             if (!File.Exists(Preferences)) return "";
-            var t = File.ReadAllText(Preferences).Replace("\r", "");
+            var t = File.ReadAllText(Preferences);
+            return ActivePreferences(t);
+        }
+
+        static string ActivePreferences(string t)
+        {
+            t = t.Replace("\r", "");
             t = Regex.Replace(t, @"<!--.*?-->", "", RegexOptions.Singleline);
             var lines = t.Split('\n').Where(l => !l.TrimStart().StartsWith("//") && !l.StartsWith("# ")).ToList();
             t = Regex.Replace(string.Join("\n", lines), @"\n{3,}", "\n\n").Trim();
@@ -82,6 +155,7 @@ namespace Nextra.Engine
         {
             var sb = new StringBuilder();
             var prefs = PreferencesText();
+            sb.AppendLine($"user folder: {Dir} (persistent; read workflows and guides on demand)");
             sb.AppendLine($"## your preferences ({Preferences})");
             sb.AppendLine(prefs.Length == 0 ? "(none yet)" : prefs.Length > PrefsShowCap ? prefs.Substring(0, PrefsShowCap) + $"\n…(cut; full file {prefs.Length} chars: query {{scope:'docs', filter:'preferences'}})" : prefs);
             var wf = WorkflowFiles().ToList();
@@ -93,10 +167,11 @@ namespace Nextra.Engine
                     var text = SafeRead(f);
                     sb.AppendLine($"- {Path.GetFileNameWithoutExtension(f)}: {Fmt.Trunc(Meta(text, "when") ?? Meta(text, "description") ?? FirstLine(text), 110)}");
                 }
+                if (wf.Count > 40) sb.AppendLine($"…(+{wf.Count - 40} more; query docs to list)");
             }
             var pg = PluginFiles().ToList();
             if (pg.Count > 0)
-                sb.AppendLine("## your plug-in guides (rules attach automatically when used): " + string.Join(", ", pg.Select(f => Meta(SafeRead(f), "plugin") ?? Path.GetFileNameWithoutExtension(f))));
+                sb.AppendLine("## your plug-in guides (rules attach automatically when used): " + string.Join(", ", pg.Take(40).Select(f => Meta(SafeRead(f), "plugin") ?? Path.GetFileNameWithoutExtension(f))) + (pg.Count > 40 ? $" …(+{pg.Count - 40} more; query docs to list)" : ""));
             return sb.ToString().TrimEnd();
         }
 
@@ -105,7 +180,7 @@ namespace Nextra.Engine
         static string FirstLine(string text) =>
             text.Replace("\r", "").Split('\n').Select(l => l.Trim().TrimStart('#', ' ')).FirstOrDefault(l => l.Length > 0 && l != "---" && !l.Contains(':')) ?? "";
 
-        // ------------------------------------------------------------------ writing (only when the user asks)
+        // ------------------------------------------------------------------ writing concise reusable user knowledge
 
         public static string SaveWorkflow(string name, string text, string when)
         {
@@ -117,6 +192,7 @@ namespace Nextra.Engine
                 if (string.IsNullOrWhiteSpace(when)) throw new NxError("a workflow needs a `when` line (one sentence: when should it be used?)", "memory {action:'save_workflow', name, when:'…', text}");
                 text = $"---\nwhen: {when.Trim()}\n---\n" + text;
             }
+            if (text.Length > 4000) throw new NxError("workflow exceeds 4000 chars", "keep the steps and checks concise; put long examples in a script or guide");
             return Write(p, text + "\n");
         }
 
@@ -127,6 +203,7 @@ namespace Nextra.Engine
             text = (text ?? "").Replace("\r\n", "\n").Trim();
             if (Meta(text, "plugin") == null) text = $"---\nplugin: {plugin.Trim()}\nwhen: {plugin.Trim()} components are used\n---\n" + text;
             if (!Regex.IsMatch(text, @"^##\s+Rules", RegexOptions.Multiline)) text += "\n\n## Rules\n- (add short rules here; they are attached automatically)";
+            if (text.Length > 6000) throw new NxError("plug-in guide exceeds 6000 chars", "keep the rules short; put long examples in separate docs");
             return Write(p, text + "\n");
         }
 
@@ -176,8 +253,8 @@ See `plugins/_TEMPLATE.md`.
 Plain lines, e.g. `- units: mm for architecture, m for structural work`. Lines starting with `//` and
 `<!-- comments -->` are ignored.
 
-You can also ask the AI: ""save this as my workflow"" / ""save these as my Karamba rules"" — it writes here
-(the previous version is kept as `.bak`).
+The AI saves lasting preferences here. After a successful reusable procedure, it can save a short workflow;
+it can also save user-specific plug-in rules. Previous versions are kept as `.bak`.
 
 This folder is created by the Nextra plug-in the first time Rhino starts after installing it. Open it any time
 with the Rhino command `NextraFolder`. It lives outside the plug-in's install folder, so updates never touch it.

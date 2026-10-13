@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Nextra.Engine
 {
-    /// Local, per-user memory. prefs.md and rules.md are small (hard caps) and meant to be read every session;
+    /// Local, per-user memory. UserDocs/preferences.md and rules.md are small and read every session;
     /// mistakes.log is raw and append-only; library/ holds good scripts. Rules only change through
     /// `compact` → user approval → `set_rules`; the shorthand grammar itself is never self-modified.
     public static class Memory
@@ -70,10 +70,8 @@ namespace Nextra.Engine
         public static string Session()
         {
             var sb = new StringBuilder();
-            var prefs = Read("prefs.md").Trim();
             var rules = Read("rules.md").Trim();
             try { sb.AppendLine(UserDocs.Session()); } catch (Exception e) { sb.AppendLine("(user folder unreadable: " + e.Message + ")"); }
-            sb.AppendLine("## prefs saved by the AI\n" + (prefs.Length > 0 ? prefs : "(none)"));
             sb.AppendLine("## rules (learned, user-approved)\n" + (rules.Length > 0 ? rules : "(none)"));
             sb.AppendLine("## library");
             sb.AppendLine(Library.Index(null, 40));
@@ -88,16 +86,7 @@ namespace Nextra.Engine
 
         public static string SavePref(string text)
         {
-            text = text.Trim().TrimStart('-', ' ');
-            var lines = Read("prefs.md").Split('\n').Select(l => l.TrimEnd()).Where(l => l.Length > 0).ToList();
-            // "key: value" replaces an existing "key:" line
-            var m = Regex.Match(text, @"^([\w \-/]{1,30}):");
-            int idx = m.Success ? lines.FindIndex(l => l.TrimStart('-', ' ').StartsWith(m.Groups[1].Value + ":", StringComparison.OrdinalIgnoreCase)) : -1;
-            if (idx >= 0) lines[idx] = "- " + text; else lines.Add("- " + text);
-            var all = string.Join("\n", lines) + "\n";
-            if (all.Length > PrefsCap) throw new NxError($"prefs.md would be {all.Length} chars (cap {PrefsCap})", "merge or shorten prefs: memory {action:'set_prefs', text:'…full new prefs…'}");
-            File.WriteAllText(P("prefs.md"), all);
-            return idx >= 0 ? "pref updated" : "pref added";
+            return UserDocs.SavePreference(text);
         }
 
         public static string SetFile(string file, string text, int cap)
@@ -139,7 +128,7 @@ namespace Nextra.Engine
                     r.Line(Memory.Session());
                     break;
                 case "save_pref": r.Line(Memory.SavePref(Req(a, "text"))); break;
-                case "set_prefs": r.Line(Memory.SetFile("prefs.md", Req(a, "text"), Memory.PrefsCap)); break;
+                case "set_prefs": r.Line(UserDocs.SetPreferences(Req(a, "text"))); break;
                 case "set_rules": r.Line(Memory.SetFile("rules.md", Req(a, "text"), Memory.RulesCap)); break;
                 case "log_mistake":
                     Memory.AutoLog(a.Str("kind", "manual"), Fmt.Trunc(Req(a, "text"), 160), null, a.Str("fix", null));

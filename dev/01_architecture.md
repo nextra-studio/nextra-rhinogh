@@ -111,7 +111,8 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 |---|---|---|
 | `server-<pid>.json` | host | port, token, pid, start time, open file |
 | `config.json` | user, deploy script, host | `port`, `enabled`, `engine_path`, `skill_dir`, `plugin_docs`, `library_dirs`, `memory_dir`, `auto_dismiss`, `capture_copy_dir` |
-| `memory/prefs.md`, `rules.md`, `mistakes.log`, `library/`, `plugins/` | engine (`Memory.cs`) | user memory (see 05 §9) |
+| `user/preferences.md`, `workflows/`, `plugins/`, `scripts/` | engine (`UserDocs.cs`) | persistent user instructions, outside the plug-in package |
+| `memory/rules.md`, `mistakes.log`, `library/`, `plugins/` | engine (`Memory.cs`) | learned rules, error log, scripts, and legacy guides (see 05 §9) |
 | `captures/*.png` | engine | images returned by `view` (also copied to `capture_copy_dir` in dev) |
 | `logs/engine-YYYYMMDD.log` | engine | internal errors with full stack traces (never sent to the LLM) |
 | `dot.txt` | host | remembered dot offset |

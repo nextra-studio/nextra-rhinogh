@@ -10,7 +10,7 @@ const readline = require("readline");
 
 const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "Nextra");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
-const VERSION = "0.1.2";
+const VERSION = "0.1.3";
 
 const TOOLS = [
   {
@@ -70,7 +70,7 @@ const TOOLS = [
   },
   {
     name: "memory",
-    description: "User memory. list (user's preferences + workflows, learned rules, library, recurring mistakes: call at session start) | save_pref {text:'key: value'} (also unasked, whenever the user states a lasting preference; same key replaces) | log_mistake {text, fix} | compact (then ask the user, then set_rules {text}) | save_script {name, code, doc} | read_script {name} | save_workflow {name, when, text} / save_guide {name=plug-in category, text}: only when the user asks (save_guide = when the skill folder is read-only; otherwise write plugins/<Category>.md in the skill).",
+    description: "User memory in a persistent folder outside the plug-in. list (compact preferences, workflow triggers, learned rules and library; call at session start; includes folder path) | save_pref {text:'key: value'} (lasting preferences; same key replaces) | save_workflow {name, when, text} (short verified reusable procedure; read existing first) | save_guide {name=plug-in category, text} (user-specific plug-in rules; read existing first) | log_mistake {text, fix} | compact (show proposal to user, then set_rules) | save_script {name, code, doc} | read_script {name}. Read full workflows and guides through query docs only when needed.",
     inputSchema: { type: "object", properties: {
       action: { type: "string", enum: ["list", "save_pref", "set_prefs", "log_mistake", "compact", "set_rules", "save_script", "read_script", "delete_script", "save_workflow", "save_guide"] },
       text: { type: "string" }, fix: { type: "string" }, name: { type: "string" }, code: { type: "string" }, doc: { type: "string" }, lang: { type: "string" }, when: { type: "string" },

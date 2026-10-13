@@ -159,12 +159,12 @@ The plug-in creates a folder at first start, `%APPDATA%\Nextra\user`; the Rhino 
 
 | file / folder | what the AI does with it |
 |---|---|
-| `preferences.md` | Read at the start of every session. |
-| `workflows/<name>.md` | Each starts with a `when:` line; the AI opens the one matching your request. |
-| `plugins/<Category>.md` | Rules attached automatically when that plug-in's components are used. |
+| `preferences.md` | AI-saved and manually edited preferences; a compact version is read at the start of every session. |
+| `workflows/<name>.md` | Each starts with a `when:` line; only the index loads at session start, then the AI opens a matching workflow. |
+| `plugins/<Category>.md` | Your guide takes priority over the bundled one; only short rules attach automatically when its components are used. |
 | `scripts/` | Your scripts, available to `run`. |
 
-The folder works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file.
+The AI can save a lasting preference or a verified reusable workflow in this folder. It works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file. `memory {action:'list'}` reports its path. `NextraOff` persists across Rhino restarts; `NextraOn` starts the bridge again and checks the folder.
 
 **Config** is in `%APPDATA%/Nextra/config.json`:
 

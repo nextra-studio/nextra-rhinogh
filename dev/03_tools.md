@@ -173,12 +173,12 @@ c4: gh: document restored (5 objects)
 | `action` | effect |
 |---|---|
 | `list` | prefs, learned rules, library index, recurring mistakes. Call at session start |
-| `save_pref {text}` / `set_prefs` | add / replace user preferences (`key: value` replaces an existing key) |
+| `save_pref {text}` / `set_prefs` | add / replace compact `user/preferences.md` entries (`key: value` replaces an existing key) |
 | `log_mistake {text, fix}` | manual lesson (errors are also auto-logged) |
 | `compact` | groups the mistake log by signature, for the LLM to propose rules |
 | `set_rules {text}` | write the rules file, **only after the user approves** |
 | `save_script {name, code, doc, lang}` / `read_script` / `delete_script` | script library |
-| `save_workflow {name, when, text}` / `save_guide {name = plug-in category, text}` | write to the user's folder — only when the user asks ("save this as my workflow") |
+| `save_workflow {name, when, text}` / `save_guide {name = plug-in category, text}` | save verified reusable workflows and user-specific plug-in rules in the persistent user folder; the model reads full files on demand |
 | `init` | creates the user folder (the host calls it at Rhino start; `NextraFolder` opens it) |
 
 Details in 05 §9.

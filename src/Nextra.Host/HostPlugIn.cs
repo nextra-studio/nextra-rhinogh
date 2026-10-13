@@ -42,7 +42,8 @@ namespace Nextra.Host
             catch (Exception e) { RhinoApp.WriteLine("Nextra: server failed to start: " + e.Message); }
             try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("Nextra: status dot failed: " + ex.Message); }
             GhDotHook.Start();
-            InitUserFolder();
+            var userFolder = InitUserFolder();
+            if (userFolder != null) RhinoApp.WriteLine("Nextra: user folder " + userFolder + " (preferences and workflows persist across updates)");
             InstallBridge();
         }
 

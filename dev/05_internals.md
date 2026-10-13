@@ -117,11 +117,10 @@ In `%APPDATA%/Nextra/memory/` (or config `memory_dir`):
 
 | file | cap | content |
 |---|---|---|
-| `prefs.md` | 1500 chars | user preferences, `key: value` lines replace by key |
 | `rules.md` | 2000 chars | learned rules. Changed **only** via `compact` → user approves → `set_rules` |
 | `mistakes.log` | none | JSON lines, auto-logged on every tool error plus manual `log_mistake` |
 | `library/` | — | saved scripts with a docstring (the first line is the index summary) |
-| `plugins/` | — | user plug-in guides, which override the bundled ones |
+| `plugins/` | — | legacy plug-in guides, still read after the new user folder |
 
 - `RecurringHint`: when the error just logged has occurred 3+ times and no rule mentions it, the reply says "recurring mistake…" once, prompting the LLM to log and later compact.
 - `Compact`: groups the log by signature with counts and the latest fix. The LLM turns that into rule proposals for the user.
@@ -130,7 +129,7 @@ In `%APPDATA%/Nextra/memory/` (or config `memory_dir`):
 
 ## 10. Plug-in guides (`Gh/PluginDocs.cs`)
 
-- Sources: `memory/plugins/*.md` (user, checked first, wins) then `<skill_dir>/plugins/*.md`. Files starting with `_` are ignored.
+- Sources: `user/plugins/*.md` first, then legacy `memory/plugins/*.md`, then `<skill_dir>/plugins/*.md`. Files starting with `_` are ignored.
 - The `plugin:` front-matter line lists the GH categories it covers; without it, the file name is the category.
 - `Check(categories, reply)` is called by `gh_edit` (categories of touched nodes and `@Category` names in the ops) and by GH `query`. A guide appears **once per session**:
 
@@ -172,6 +171,7 @@ What it does with them:
 ## 13. The user's folder (`Core/UserDocs.cs`)
 
 - Default `%APPDATA%/Nextra/user` (config `user_dir`), created at Rhino start through `memory {action:'init'}` from the host, seeded with README.md, preferences.md and `_TEMPLATE.md` files — **never overwritten**. Outside the Yak package folder, so plug-in updates do not touch it.
+- AI `save_pref` and `set_prefs` write here too, to `preferences.md` (1500 active-character cap); old `memory/prefs.md` entries are imported once. `memory list` reports the folder path and a compact view.
 - `memory list` shows preferences (comment lines stripped, capped), the workflow index (file name + `when:` line) and the list of the user's plug-in guides. `query scope:'docs'` reads `preferences`, `workflows/<name>`, `plugins/<name>` (marked "yours").
 - Plug-in guides: user folder first, then the old `memory/plugins`, then the bundled `skill/plugins`; the first guide claiming a category wins. Front matter is read by `UserDocs.Meta` (`plugin:`, `when:`, `description:`).
 - `save_workflow` requires a `when` line; `save_guide` adds front matter and a `## Rules` stub if missing; both keep a `.bak` of the previous version.
