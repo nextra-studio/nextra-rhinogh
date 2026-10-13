@@ -24,7 +24,7 @@ version: $ver
 authors:
 - Tatsuki
 description: Nextra for Rhino + Grasshopper - 6-tool LLM bridge (view, query, run, gh_edit, undo, memory)
-url: https://github.com/Tatsuki0123/nextra-rhinogh
+url: https://github.com/nextra-studio/nextra-rhinogh
 keywords: [mcp, llm, grasshopper]
 "@ | Set-Content -Encoding utf8 "$pkg\manifest.yml"
 Set-Content -Encoding ascii "$pkgRoot\manifest.txt" $ver

@@ -2,7 +2,7 @@
 
 Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say what changed, images carry tags the model can point at, and model and definition edits receive undo checkpoints.
 
-**[Installation guide](#install)** · **[Claude plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[GPT plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
+**[Installation guide](#install)** · **[Claude plugin ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[GPT plugin ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
 
 ## Install
 
@@ -28,7 +28,7 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 **A · Upload ZIP (recommended)**
 
-1. **[Download the Claude plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)**. Keep it zipped.
+1. **[Download the Claude plugin ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)**. Keep it zipped.
 2. Choose **+ Add → Upload plugin**.
 3. Browse for `nextra-rhinogh-plugin.zip` (or drag it into the file area), then click **Upload** and finish installation.
 
@@ -37,7 +37,7 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 **B · Add marketplace (alternative)**
 
 1. Choose **+ Add → Add marketplace → Add from a repository**.
-2. Enter `Tatsuki0123/nextra-rhinogh` in the **URL** field, then click **Sync**.
+2. Enter `nextra-studio/nextra-rhinogh` in the **URL** field, then click **Sync**.
 3. Open the **Nextra** marketplace, select **nextra-rhinogh**, and click **Install**.
 
 ![Claude marketplace installation: Add marketplace, Add from a repository, enter the repository, Sync, then Install](docs/img/install/claude-marketplace.svg)
@@ -52,7 +52,7 @@ Start a new **Cowork** session with Rhino open to use the local Rhino tools.
 
 **A · Upload ZIP (recommended)**
 
-1. **[Download the GPT plugin ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**. Keep it zipped.
+1. **[Download the GPT plugin ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**. Keep it zipped.
 2. From **Add**, open **Create plugin → Upload plugin archive**. If your version shows **Upload plugin** directly, choose it.
 3. Select `nextra-rhinogh-gpt-plugin.zip`, then complete the upload and installation.
 
@@ -65,7 +65,7 @@ Start a new **Cowork** session with Rhino open to use the local Rhino tools.
 3. Open **Nextra**, select **Nextra for Rhino**, and click **Install** (or **+**).
 
 ```text
-https://github.com/Tatsuki0123/nextra-rhinogh
+https://github.com/nextra-studio/nextra-rhinogh
 ```
 
 ![OpenAI marketplace installation: open marketplace setup, enter the repository, install Nextra, then start a new chat](docs/img/install/openai-marketplace.svg)
@@ -83,7 +83,7 @@ Both ZIPs include the **Rhino tools and Nextra skill**. After installing, keep R
 <details>
 <summary>Other AI agents</summary>
 
-**[⬇ General agent kit ZIP](https://github.com/Tatsuki0123/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip)** — shared skills, MCP server, and workspace configuration. Extract it and open the kit as your agent's workspace. Setup information is in `AGENTS.md`.
+**[⬇ General agent kit ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-agent-kit.zip)** — shared skills, MCP server, and workspace configuration. Extract it and open the kit as your agent's workspace. Setup information is in `AGENTS.md`.
 
 </details>
 
@@ -134,7 +134,7 @@ The earlier v2 benchmark (office, facade and gridshell) is in [test/v2/REPORT.md
 <details>
 <summary>Maintainers: publish from this public repository</summary>
 
-Source, marketplaces, and release downloads live together in **`Tatsuki0123/nextra-rhinogh`**.
+Source, marketplaces, and release downloads live together in **`nextra-studio/nextra-rhinogh`**.
 
 Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifest.json`, `bridge/server/index.js`, and both `.csproj` files. Then build:
 
@@ -146,7 +146,7 @@ Commit the generated `plugin/`, `.claude-plugin/marketplace.json`, and `.agents/
 
 ```powershell
 yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
-gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo Tatsuki0123/nextra-rhinogh
+gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo nextra-studio/nextra-rhinogh
 ```
 
 Keep the plugin ZIP filenames stable so the download links above keep working. Regenerate the simplified app diagrams with `python tools/make_install_images.py`.

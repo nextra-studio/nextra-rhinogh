@@ -121,7 +121,7 @@ def marketplace_choice():
 
 
 def repository(openai=False):
-    value = 'https://github.com/Tatsuki0123/nextra-rhinogh' if openai else 'Tatsuki0123/nextra-rhinogh'
+    value = 'https://github.com/nextra-studio/nextra-rhinogh' if openai else 'nextra-studio/nextra-rhinogh'
     return (rect(0, 0, 852, 230)+text(28, 43, 'Add a marketplace' if openai else 'Add marketplace', 25, '', 600)
             +text(28, 83, 'Repository URL' if openai else 'URL', 15, '', 600)
             +rect(28, 95, 796, 44, 'blue')+text(45, 123, value, 17)

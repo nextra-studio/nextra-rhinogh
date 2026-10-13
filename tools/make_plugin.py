@@ -10,7 +10,7 @@ man = json.load(open(os.path.join(repo, "bridge", "manifest.json"), encoding="ut
 ver, desc = man["version"], man["description"]
 name = "nextra-rhinogh"
 root = os.path.join(repo, "plugin", name)
-url = "https://github.com/Tatsuki0123/nextra-rhinogh"
+url = "https://github.com/nextra-studio/nextra-rhinogh"
 author = {"name": "Tatsuki", "url": url}
 
 

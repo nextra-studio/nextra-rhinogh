@@ -5,7 +5,7 @@ using Rhino.PlugIns;
 
 [assembly: System.Runtime.InteropServices.Guid("6b1f5f0e-8f0a-4c51-9d1e-3a7c2b9e4a11")]
 [assembly: PlugInDescription(DescriptionType.Organization, "Nextra")]
-[assembly: PlugInDescription(DescriptionType.WebSite, "https://github.com/Tatsuki0123/nextra-rhinogh")]
+[assembly: PlugInDescription(DescriptionType.WebSite, "https://github.com/nextra-studio/nextra-rhinogh")]
 
 namespace Nextra.Host
 {

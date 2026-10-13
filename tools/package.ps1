@@ -23,7 +23,7 @@ version: $ver
 authors:
 - Tatsuki
 description: Nextra for Rhino 8 + Grasshopper. Six token-lean tools (view, query, run, gh_edit, undo, memory) for any MCP client.
-url: https://github.com/Tatsuki0123/nextra-rhinogh
+url: https://github.com/nextra-studio/nextra-rhinogh
 keywords: [mcp, llm, ai, grasshopper]
 "@ | Set-Content -Encoding utf8 (Join-Path $stage "manifest.yml")
 
