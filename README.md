@@ -6,7 +6,7 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 
 ## Install
 
-**Windows · Rhino 8 · [Node.js 18+](https://nodejs.org/en/download).**
+**Windows · Rhino 8.**
 
 ### 1. Rhino
 
