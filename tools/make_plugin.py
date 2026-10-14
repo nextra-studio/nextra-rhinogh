@@ -1,9 +1,9 @@
 """plugin/nextra-rhinogh/: one plug-in folder that installs the bridge (MCP server) AND the skill in one step.
-  - Claude Code marketplace: inline manifest in root .claude-plugin/marketplace.json
-  - Standalone ZIP:          .claude-plugin/plugin.json added only inside the archive
+  - Claude Code / Desktop:   .claude-plugin/plugin.json + .mcp.json (+ catalog .claude-plugin/marketplace.json at the repo root)
+  - Standalone ZIP:          the same folder, zipped
   - Codex / ChatGPT desktop: .codex-plugin/plugin.json   (+ marketplace .agents/plugins/marketplace.json at the repo root)
 Generated from skill/nextra and bridge/server; committed so the GitHub repo works as a marketplace."""
-import json, os, shutil, stat, sys
+import json, os, shutil, sys
 
 repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 man = json.load(open(os.path.join(repo, "bridge", "manifest.json"), encoding="utf-8"))
@@ -27,24 +27,20 @@ shutil.copytree(os.path.join(repo, "skill", "nextra"), os.path.join(root, "skill
 shutil.copytree(os.path.join(repo, "bridge", "server"), os.path.join(root, "server"), dirs_exist_ok=True)
 os.makedirs(os.path.join(root, "assets"), exist_ok=True)
 shutil.copy(os.path.join(repo, "docs", "img", "icon.svg"), os.path.join(root, "assets", "icon.svg"))
-# OneDrive may leave an empty directory after removing the old generated tree.
-old_claude_dir = os.path.join(root, ".claude-plugin")
-if os.path.isdir(old_claude_dir):
-    if os.listdir(old_claude_dir):
-        raise RuntimeError("Unexpected files in obsolete generated Claude manifest directory")
-    os.chmod(old_claude_dir, stat.S_IREAD | stat.S_IWRITE)
-    os.rmdir(old_claude_dir)
 
-# ---- Claude Code
+# ---- Claude Code / Claude Desktop (same shape as anthropics/knowledge-work-plugins: the plug-in folder carries its own
+# .claude-plugin/plugin.json + .mcp.json; the desktop app's server-side marketplace sync rejects manifest-free folders)
 claude_manifest = {
-    "name": name, "displayName": "NextraRhinoGh", "version": ver, "description": desc,
+    "name": name, "version": ver, "description": desc,
     "author": author, "homepage": url, "repository": url, "license": "Apache-2.0",
     "keywords": ["rhino", "grasshopper", "mcp", "karamba"],
-    "mcpServers": {name: {"command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/server/index.js"], "env": {"NEXTRA_MODE": "full"}}},
 }
+write(".claude-plugin/plugin.json", claude_manifest)
+write(".mcp.json", {"mcpServers": {name: {"command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/server/index.js"], "env": {"NEXTRA_MODE": "full"}}}})
 write("/.claude-plugin/marketplace.json", {
-    "name": "nextra-rhinogh", "owner": author, "description": "NextraRhinoGh: Rhino 8 + Grasshopper tools and skill for AI agents",
-    "plugins": [{**claude_manifest, "source": f"./plugin/{name}"}],
+    "name": "nextra-rhinogh", "owner": {"name": "Tatsuki"}, "description": "NextraRhinoGh: Rhino 8 + Grasshopper tools and skill for AI agents",
+    "plugins": [{"name": name, "displayName": "NextraRhinoGh", "description": desc, "version": ver, "category": "design",
+                 "source": f"./plugin/{name}", "homepage": url}],
 })
 
 # ---- Codex / ChatGPT desktop (same shape as OpenAI's bundled plug-ins: cwd "." = this folder)
@@ -72,7 +68,6 @@ import zipfile
 zp = os.path.join(repo, "dist", f"{name}-plugin.zip")
 os.makedirs(os.path.dirname(zp), exist_ok=True)
 with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
-    z.writestr(".claude-plugin/plugin.json", json.dumps(claude_manifest, indent=2) + "\n")
     for d, _, files in os.walk(root):
         for f in sorted(files):
             full = os.path.join(d, f)

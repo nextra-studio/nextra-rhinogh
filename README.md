@@ -243,14 +243,15 @@ The folder names serve different roles:
 
 | Folder | Purpose |
 |---|---|
-| `.claude-plugin/` | Claude's marketplace catalog, with NextraRhinoGh's plugin settings inline. This is the only `.claude-plugin` folder in the repository. |
+| `.claude-plugin/` | Claude's marketplace catalog. |
+| `plugin/nextra-rhinogh/.claude-plugin/` | Claude's plugin manifest inside the installable package (MCP launch in `plugin/nextra-rhinogh/.mcp.json`). |
 | `.agents/` | Shared agent resources. OpenAI also discovers `.agents/plugins/marketplace.json` here. |
 | `plugin/nextra-rhinogh/.codex-plugin/` | OpenAI's native plugin manifest inside the installable package. |
 | `.codex/config.toml` | Optional local Codex workspace configuration for MCP. This is separate from a plugin manifest. |
 
 The marketplace catalog tells the app where to find plugins. `.codex-plugin/plugin.json` describes an installable plugin and its bundled skills and MCP configuration. `.codex/config.toml` configures a particular Codex workspace; the general agent kit includes it so that workspace can connect directly to the MCP server. [OpenAI package format](https://developers.openai.com/plugins/build/plugins).
 
-Claude reads NextraRhinoGh's manifest fields directly from the marketplace entry when the plugin directory has no separate manifest. The packaging script adds `.claude-plugin/plugin.json` inside standalone plugin ZIPs for direct import. [Claude marketplace manifest rules](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
+The plugin folder carries its own `.claude-plugin/plugin.json` and `.mcp.json`, the same shape as Anthropic's own marketplace. Claude Desktop's marketplace sync fails on a manifest-free plugin folder, even though Claude Code accepts one. The standalone ZIPs are the same folder, zipped. [Claude marketplace manifest rules](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
 
 
 ```

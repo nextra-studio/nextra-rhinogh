@@ -1,41 +1,18 @@
 {
   "name": "nextra-rhinogh",
   "owner": {
-    "name": "Tatsuki",
-    "url": "https://github.com/nextra-studio/nextra-rhinogh"
+    "name": "Tatsuki"
   },
   "description": "NextraRhinoGh: Rhino 8 + Grasshopper tools and skill for AI agents",
   "plugins": [
     {
       "name": "nextra-rhinogh",
       "displayName": "NextraRhinoGh",
-      "version": "0.1.4",
       "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
-      "author": {
-        "name": "Tatsuki",
-        "url": "https://github.com/nextra-studio/nextra-rhinogh"
-      },
-      "homepage": "https://github.com/nextra-studio/nextra-rhinogh",
-      "repository": "https://github.com/nextra-studio/nextra-rhinogh",
-      "license": "Apache-2.0",
-      "keywords": [
-        "rhino",
-        "grasshopper",
-        "mcp",
-        "karamba"
-      ],
-      "mcpServers": {
-        "nextra-rhinogh": {
-          "command": "node",
-          "args": [
-            "${CLAUDE_PLUGIN_ROOT}/server/index.js"
-          ],
-          "env": {
-            "NEXTRA_MODE": "full"
-          }
-        }
-      },
-      "source": "./plugin/nextra-rhinogh"
+      "version": "0.1.4",
+      "category": "design",
+      "source": "./plugin/nextra-rhinogh",
+      "homepage": "https://github.com/nextra-studio/nextra-rhinogh"
     }
   ]
 }

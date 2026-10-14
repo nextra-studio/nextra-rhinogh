@@ -12,7 +12,7 @@ Checked on 2026-10-12 against the official documentation, this repository, and g
 
 A marketplace entry points to a plugin root. The plugin contains the skill and MCP server. A ZIP can carry that plugin independently of a marketplace.
 
-Folder names can repeat at different roots because their files have different roles. A root `.claude-plugin/marketplace.json` is a catalog; a plugin's `.claude-plugin/plugin.json` is a manifest. Nextra currently consolidates the Claude manifest into its catalog and injects the separate manifest only when making standalone ZIPs.
+Folder names can repeat at different roots because their files have different roles. A root `.claude-plugin/marketplace.json` is a catalog; a plugin's `.claude-plugin/plugin.json` is a manifest. Nextra keeps the Claude manifest in the plugin folder, so the catalog entry is only a pointer.
 
 ## 2. Claude rules
 
@@ -34,6 +34,7 @@ The supplied Claude upload screenshot accepts a `.zip` or `.plugin` archive with
 ```text
 nextra-rhinogh-plugin.zip
 ├── .claude-plugin/plugin.json   # must be inside the ZIP
+├── .mcp.json                    # Claude MCP launch
 ├── .codex-plugin/plugin.json    # also supports OpenAI
 ├── codex.mcp.json
 ├── skills/nextra-rhinogh/SKILL.md
@@ -47,19 +48,19 @@ The repository's marketplace file is not included in this standalone archive. It
 
 Claude discovers `.claude-plugin/marketplace.json` at the marketplace root. Its `plugins` entries identify each plugin and its `source`; relative sources resolve from that root. Nextra uses `./plugin/nextra-rhinogh`.
 
-Claude Code supports a manifest-free plugin directory: the marketplace entry becomes its manifest, including `mcpServers`. Nextra uses this documented option so the repository contains only one `.claude-plugin` directory. A standalone upload still receives a manifest during packaging. [Claude marketplace reference](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
+Claude Code also accepts a manifest-free plugin directory (the marketplace entry becomes the manifest), but Claude Desktop's server-side marketplace sync fails on one ("Marketplace sync failed"). Nextra therefore follows `anthropics/knowledge-work-plugins`: a slim catalog entry plus `plugin.json` and `.mcp.json` in the plugin folder. [Claude marketplace reference](https://code.claude.com/docs/en/plugins/marketplace-reference#how-an-entry-combines-with-pluginjson).
 
 ```text
 RhinoGh/                         # marketplace root
 ├── .claude-plugin/
-│   └── marketplace.json         # catalog + inline Claude manifest fields
+│   └── marketplace.json         # catalog: name, displayName, description, source
 └── plugin/nextra-rhinogh/        # entry's source
+    ├── .claude-plugin/plugin.json
+    ├── .mcp.json
     ├── skills/
     ├── server/
     └── ...                      # OpenAI metadata and assets
 ```
-
-Do not simply delete an existing nested manifest: first move its required component settings into the catalog and adjust ZIP generation. The ZIP importer cannot obtain missing settings from a catalog outside the uploaded file.
 
 ## 3. OpenAI / Codex rules
 
