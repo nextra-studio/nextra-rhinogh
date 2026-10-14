@@ -1,22 +1,23 @@
 ---
 name: nextra-rhinogh
-description: Drive Rhino 8 and Grasshopper through the NextraRhinoGh MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts.
+description: Drive Rhino 8 and Grasshopper through the NextraRhinoGh MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts. The tools run on the user's computer: in the Claude app, check the computer link (get_device_info) and tool-search "nextra" before concluding they are missing.
 ---
 
 # NextraRhinoGh — Rhino + Grasshopper
 
 Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints, layout, errors); you decide *what* and *where*.
 
+## Step 0 — connect first, every session (before saying anything about Rhino)
+The six tools (`view`, `query`, `run`, `gh_edit`, `undo`, `memory`) run on the user's own computer. In the Claude app the chat runs in the cloud and only receives them after the computer link is checked, so on a first message they are usually missing. That is normal and says nothing about Rhino.
+1. **Check the computer link.** Use tool search for `get_device_info` (also try `device`, `computer status`, `remote-devices`) and call it, or call an `enable__…remote-devices…` tool if that is what exists. Its reply lists "Local MCP server: nextra-rhinogh". Skip this only in apps that run locally (Claude Code, Codex, ChatGPT Work).
+2. **Load the Rhino tools.** Tool search `nextra` (names may be prefixed, e.g. `mcp__…nextra-rhinogh…__query`). Never call a bare `list`.
+3. **First call:** `memory {action:'list'}`.
+4. Still no tools → do steps 1–3 once more. Only then tell the user, in one short message, that the Rhino tools did not attach to this chat, and ask them to make sure the Claude desktop app is running on the Rhino computer and to reply "retry". You retry the same steps when they do.
+- A call that returns "Rhino is not reachable" / "no running Rhino" is different: the tools work but Rhino (or the plug-in) is not running. Ask the user to open Rhino 8 and check the NextraRhinoGh dot at the bottom-right (green/amber; red = click it).
+- Never conclude "I can't reach Rhino" before step 1 and 2 have run. Never switch to a pasted script or command-line instructions on your own; offer them only as an option after asking. Do not search connector directories or use computer use / screenshots to drive Rhino.
+
 ## Several Rhino instances
 The bridge binds a session to one Rhino. If more than one is open it refuses until you choose: `query {scope:'instances'}` → `query {instance:'house.3dm'}` (file name or pid; sticky). Or set `NEXTRA_FILE` in the MCP config. It never falls back to another instance.
-
-## No tools or no Rhino: never fail quietly
-The bridge lists its tools even when Rhino is closed, so "the NextraRhinoGh tools are not in this session" means the AI app has not attached the plug-in's local server yet (often the first message of a new session), not that Rhino is missing.
-- "Tried a tool that isn't available" means the tool name is wrong or the tools are not loaded yet, not that Rhino is closed. The six tools are `view`, `query`, `run`, `gh_edit`, `undo`, `memory`; the app may prefix them (`mcp__nextra-rhinogh__query`, `mcp__plugin_nextra-rhinogh_nextra-rhinogh__query`). Never call a bare `list`: the first call is `memory {action:'list'}` or `query {scope:'instances'}`.
-- In Claude Cowork the chat runs in the cloud and reaches the local Rhino tools through the desktop app's link to the user's computer. Before the first Rhino call of a session, check the computer/device status with the app's own tool (e.g. "check computer status", `get_device_info`, or an `enable__…remote-devices…` tool); this links the session to the computer, and the Rhino tools work afterwards. Do this again before giving up.
-- Tools missing → load them with tool search using the query `nextra` (or `select:` with the prefixed names), then make one call. Do not search connector directories for "rhino", and do not start with computer use.
-- Still missing, or a call returns "Rhino is not reachable" / "no running Rhino" → stop and tell the user in one short message what is wrong and what to do: keep Rhino 8 open with the NextraRhinoGh dot (green/amber) at the bottom-right, open a new session in Cowork (Claude) or Work (ChatGPT, not Chat), then reply "retry". Ask; do not guess the cause, do not retry in a loop, and do not silently switch to writing a script instead of building in Rhino. Offer the script only as an option the user can pick.
-- Never answer "I can't" without saying which of these two it is.
 
 ## Session start
 1. `memory {action:'list'}` → the user's own preferences and workflow list (from their NextraRhinoGh folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
