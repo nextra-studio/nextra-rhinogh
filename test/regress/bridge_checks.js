@@ -52,5 +52,16 @@ function bridge(mode = 'full') {
   assert.equal(full.serverInfo().pid, 2);
   full.setServers([{ pid: 2, file: 'second.3dm' }, { pid: 3, file: 'third.3dm' }]);
   assert.equal(full.serverInfo().pid, 2, 'opening a second Rhino must not change binding');
-  console.log('PASS bridge: denied tools/actions, allowed query, heartbeat, sticky binding and rebind');
+
+  const restart = bridge();
+  assert.equal(restart.serverInfo().pid, 1);
+  restart.setServers([{ pid: 7, port: 8767, file: 'first.3dm' }]);
+  assert.equal(restart.serverInfo().pid, 7, 'auto-binding follows a Rhino restart with the same file');
+  const listed = await restart.callTool('query', { scope: 'instances' });
+  assert.match(listed.content[0].text, /bound: pid 7/);
+  const chosen = bridge();
+  await chosen.callTool('query', { instance: '1', scope: 'status' });
+  chosen.setServers([{ pid: 8, port: 8768, file: 'first.3dm' }]);
+  assert.throws(() => chosen.serverInfo(), /bound Rhino/, 'an explicitly chosen pid is never replaced');
+  console.log('PASS bridge: denied tools/actions, allowed query, heartbeat, sticky binding, rebind, restart follow');
 })().catch(error => { console.error(error); process.exitCode = 1; });

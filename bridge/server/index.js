@@ -81,7 +81,8 @@ const TOOLS = [
 // ---- instance binding (no cross-talk between Rhino instances) ----
 // Every Rhino publishes server-<pid>.json {port, token, pid, started, file, path}. A session is bound to ONE instance:
 // NEXTRA_FILE="house.3dm" (or NEXTRA_PID) in the MCP config, or `instance:"house.3dm"` on any call (sticky afterwards).
-// Several instances and no binding → refuse and list them; bound instance gone → error, never another Rhino.
+// Several instances and no binding → refuse and list them; a chosen instance gone → error, never another Rhino.
+// An instance the bridge picked itself (only one was open) is followed when Rhino restarts with the same file.
 function alive(pid) { try { process.kill(pid, 0); return true; } catch (e) { return e.code === "EPERM"; } }
 function instances() {
   const out = [];
@@ -99,13 +100,17 @@ const describe = list => list.map(c => `pid ${c.pid}: ${c.file || "untitled"}${c
 function serverInfo() {
   const all = instances();
   if (all.length === 0) throw new Error("no running Rhino with NextraRhinoGh");
+  if (BOUND && BOUND.auto && !all.some(c => String(c.pid) === String(BOUND.pid))) {   // auto-picked Rhino restarted with the same file: follow it
+    const same = all.filter(c => String(c.file || "") === String(BOUND.file || ""));
+    if (same.length === 1) BOUND = { pid: same[0].pid, file: same[0].file, auto: true };
+  }
   if (BOUND) {
     const hit = all.filter(c => BOUND.pid ? String(c.pid) === String(BOUND.pid) : fileMatch(c, BOUND.file));
-    if (hit.length === 1) { BOUND = { pid: hit[0].pid, file: hit[0].file }; return hit[0]; }
+    if (hit.length === 1) { BOUND = { pid: hit[0].pid, file: hit[0].file, auto: BOUND.auto }; return hit[0]; }
     if (hit.length > 1) throw new Error(`"${BOUND.file}" matches several Rhino instances (${describe(hit)}); pass instance:"<pid>"`);
     throw new Error(`bound Rhino (${BOUND.file || "pid " + BOUND.pid}) is not running. Open instances: ${describe(all)}. Pass instance:"<file or pid>" to rebind.`);
   }
-  if (all.length === 1) { BOUND = { pid: all[0].pid, file: all[0].file }; return all[0]; }
+  if (all.length === 1) { BOUND = { pid: all[0].pid, file: all[0].file, auto: true }; return all[0]; }
   throw new Error(`${all.length} Rhino instances are open — choose one with instance:"<file name or pid>" (sticky for this session): ${describe(all)}`);
 }
 
@@ -140,8 +145,8 @@ async function callTool(name, args) {
   }
   if (name === "query" && args.scope === "instances") {
     const all = instances();
-    let cur = null; try { cur = serverInfo(); } catch {}
-    return { content: [{ type: "text", text: (all.length ? describe(all) : "no Rhino with NextraRhinoGh running") + (cur ? `\nbound: pid ${cur.pid} ${cur.file}` : "\nnot bound") }] };
+    let cur = null, why = ""; try { cur = serverInfo(); } catch (e) { why = e.message; }
+    return { content: [{ type: "text", text: (all.length ? describe(all) : "no Rhino with NextraRhinoGh running") + (cur ? `\nbound: pid ${cur.pid} ${cur.file}` : `\nnot bound${why ? ": " + why : ""}`) }] };
   }
   const timeout = Math.min(Math.max(Number(args && args.timeout) || 90, 5), 1800);
   if (args) delete args.timeout;
