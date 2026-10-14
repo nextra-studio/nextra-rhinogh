@@ -25,7 +25,7 @@ https://github.com/nextra-studio/nextra-rhinogh
 The pictures are simplified guides based on the app menus. Labels can vary by version.
 
 <details open>
-<summary><strong>ChatGPT / Codex desktop</strong></summary>
+<summary><strong>ChatGPT desktop (work)</strong></summary>
 
 **Find Plugins:** click the **Plugins icon** in the far-left navigation rail (highlighted below), then click **Add** at the top right.
 
