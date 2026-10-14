@@ -54,7 +54,7 @@ write(".codex-plugin/plugin.json", {
         "displayName": "NextraRhinoGh", "shortDescription": "Rhino + Grasshopper tools",
         "longDescription": desc + " Needs Rhino 8 running with the Nextra-RhinoGh plug-in (Rhino Package Manager).",
         "developerName": "Tatsuki", "category": "Design", "capabilities": ["Read", "Write"], "websiteURL": url,
-        "defaultPrompt": ["Create a  timber skyscraper in Rhino", "Create a parametric skyscraper in Grasshopper"],
+        "defaultPrompt": ["Create a timber skyscraper in Rhino", "Create a parametric skyscraper in Grasshopper"],
         "brandColor": "#1A7F37", "composerIcon": "./assets/icon.svg", "logo": "./assets/icon.svg",
     },
 })

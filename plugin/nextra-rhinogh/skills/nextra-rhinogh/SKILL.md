@@ -10,6 +10,14 @@ Six tools. The engine inside Rhino guarantees correctness (handles, checkpoints,
 ## Several Rhino instances
 The bridge binds a session to one Rhino. If more than one is open it refuses until you choose: `query {scope:'instances'}` → `query {instance:'house.3dm'}` (file name or pid; sticky). Or set `NEXTRA_FILE` in the MCP config. It never falls back to another instance.
 
+## No tools or no Rhino: never fail quietly
+The bridge lists its tools even when Rhino is closed, so "the NextraRhinoGh tools are not in this session" means the AI app has not attached the plug-in's local server yet (often the first message of a new session), not that Rhino is missing.
+- "Tried a tool that isn't available" means the tool name is wrong or the tools are not loaded yet, not that Rhino is closed. The six tools are `view`, `query`, `run`, `gh_edit`, `undo`, `memory`; the app may prefix them (`mcp__nextra-rhinogh__query`, `mcp__plugin_nextra-rhinogh_nextra-rhinogh__query`). Never call a bare `list`: the first call is `memory {action:'list'}` or `query {scope:'instances'}`.
+- In Claude Cowork the chat runs in the cloud and reaches the local Rhino tools through the desktop app's link to the user's computer. Before the first Rhino call of a session, check the computer/device status with the app's own tool (e.g. "check computer status", `get_device_info`, or an `enable__…remote-devices…` tool); this links the session to the computer, and the Rhino tools work afterwards. Do this again before giving up.
+- Tools missing → load them with tool search using the query `nextra` (or `select:` with the prefixed names), then make one call. Do not search connector directories for "rhino", and do not start with computer use.
+- Still missing, or a call returns "Rhino is not reachable" / "no running Rhino" → stop and tell the user in one short message what is wrong and what to do: keep Rhino 8 open with the NextraRhinoGh dot (green/amber) at the bottom-right, open a new session in Cowork (Claude) or Work (ChatGPT, not Chat), then reply "retry". Ask; do not guess the cause, do not retry in a loop, and do not silently switch to writing a script instead of building in Rhino. Offer the script only as an option the user can pick.
+- Never answer "I can't" without saying which of these two it is.
+
 ## Session start
 1. `memory {action:'list'}` → the user's own preferences and workflow list (from their NextraRhinoGh folder), learned rules, script library. **Obey them; they override this skill.** If a listed workflow's `when:` matches the request, read it first: `query {scope:'docs', filter:'workflows/<name>'}`.
 2. Look before you edit: `query` (text, cheap) then `view` only when shape/position matters.

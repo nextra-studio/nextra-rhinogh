@@ -66,7 +66,9 @@ If your desktop app does not show **Add a marketplace**, run `codex plugin marke
 
 For a managed workspace, an admin can use **Admin → Plugins → Add → Import marketplace** with the same repository URL; leave **Path** empty. See [OpenAI's marketplace import guide](https://learn.chatgpt.com/docs/enterprise/plugin-management).
 
-After installing, keep Rhino open and start a new chat in **Work or Codex** on the desktop app.
+After installing, keep Rhino open and start a new session in **Work** (or Codex) on the desktop app. **Use Work, not Chat**: plugin tools do not run in Chat. In the message box, type `@NextraRhinoGh` to attach the plugin, then your request.
+
+![ChatGPT desktop: switch the top toggle from Chat to Work](docs/img/install/openai-work.png)
 
 </details>
 
@@ -99,7 +101,7 @@ After installing, keep Rhino open and start a new chat in **Work or Codex** on t
 
 </details>
 
-Start a new **Cowork** session with Rhino open to use the local Rhino tools.
+Start a new **Cowork** session with Rhino open to use the local Rhino tools. In the first message of each session, start with `/nextra-rhinogh` (once per session; later messages do not need it).
 
 </details>
 
@@ -141,7 +143,12 @@ Both plugin ZIPs include the **Rhino tools and NextraRhinoGh skill**.
 
 ### Try it
 
-**“Create a simple timber house in Rhino.”**
+Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the Chat button does not run the plugin, and it is the one people click first. Then send the same example in both apps (it is the plugin's built-in example prompt):
+
+| App | Message |
+|---|---|
+| ChatGPT / Codex desktop (**Work**, not Chat) | `@NextraRhinoGh Create a timber skyscraper in Rhino` |
+| Claude Desktop (Cowork) / Claude Code | `/nextra-rhinogh Create a timber skyscraper in Rhino` (`/nextra-rhinogh` is needed only in the first message of a session) |
 
 ![Green means connected, amber means ready, red means restart](docs/img/dot-states.svg)
 
@@ -151,6 +158,7 @@ Both plugin ZIPs include the **Rhino tools and NextraRhinoGh skill**.
 | Problem | Fix |
 |---|---|
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
+| AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
 | No status dot in Rhino | Restart Rhino, then enable NextraRhinoGh with `NextraRhinoGhOn`. |
 | Red dot | Click the dot to restart the connection. |
 | Multiple Rhino windows | Specify the file, for example “Use house.3dm.” |
