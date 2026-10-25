@@ -5,7 +5,7 @@ param([switch]$Release)
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $cfg = if ($Release) { "Release" } else { "Debug" }
-$ver = "0.1.5"
+$ver = "0.1.6"
 $pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-RhinoGh"
 # the package was called Nextra-zero before; two copies of the same plug-in would clash
 Remove-Item (Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero") -Recurse -Force -ErrorAction SilentlyContinue

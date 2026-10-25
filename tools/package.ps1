@@ -1,7 +1,7 @@
 # Release packaging: Yak package (Rhino) + .mcpb (Claude Desktop). Output in dist/.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
-$ver = "0.1.5"
+$ver = "0.1.6"
 $dist = Join-Path $repo "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue
