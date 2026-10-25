@@ -64,8 +64,8 @@ def main():
     claude = read_json(REPO / ".claude-plugin/marketplace.json")["plugins"][0]
     openai = read_json(REPO / ".agents/plugins/marketplace.json")["plugins"][0]
     require(claude["source"] == openai["source"]["path"] == f"./plugin/{NAME}", "Catalog paths differ")
-    require(not (ROOT / ".claude-plugin").exists(), "Unexpected nested Claude metadata folder")
-    require(claude["mcpServers"][NAME]["args"] == ["${CLAUDE_PLUGIN_ROOT}/server/index.js"],
+    require((ROOT / ".claude-plugin/plugin.json").exists(), "Missing Claude plugin manifest")
+    require(read_json(ROOT / ".mcp.json")["mcpServers"][NAME]["args"] == ["${CLAUDE_PLUGIN_ROOT}/server/index.js"],
             "Claude bridge is not relative to installed plugin root")
     manifest, config = check_openai(ROOT)
     require(manifest["version"] == claude["version"] == read_json(REPO / "bridge/manifest.json")["version"],
@@ -96,7 +96,7 @@ def main():
             else:
                 plugin_root = extracted
                 require(read_json(extracted / ".claude-plugin/plugin.json") ==
-                        {k: v for k, v in claude.items() if k != "source"}, "ZIP Claude manifest differs")
+                        read_json(ROOT / ".claude-plugin/plugin.json"), "ZIP Claude manifest differs")
             _, launch = check_openai(plugin_root)
             check_mcp(plugin_root, launch)
         print(f"PASS {filename}: paths, manifests, archive integrity, MCP initialize + six tools")

@@ -39,6 +39,7 @@ summary → list (oriented box `LxWxH linear|planar|block`, axis) → detail (fa
 ## Scripts
 - Rhino: `run` (py default). GH script component: create with shorthand, edit with `gh_edit {script:{handle, patch}}`; long code: `script:{handle, mirror:true}` writes `.nextra/scripts/<file>_gN.py` (path in the reply), edit lines, then `from_mirror:true`.
 - C# GH: put the `RunScript(...)` signature in code; ports follow it.
+- Rhino commands (export/import, Make2D, plug-in commands without an API): `run` → `Rhino.RhinoApp.RunScript("_-Export \"C:/out.dwg\" _Enter", False)`. Always the dash form with every option inline; a dialog or open prompt blocks the bridge. Prefer RhinoCommon when an API exists.
 
 ## Structural (FE)
 Rhino solids → `query level:'detail'` to classify members → `run` to make centre lines (columns/beams) and mid-surfaces (slabs/walls) on layer `FE` → GH: `ref` those curves → Karamba (`plugins/Karamba3D.md` auto-loads) → check `Mass`, `Info`, `MaxDisp` → `view gh_preview`.
