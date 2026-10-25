@@ -10,7 +10,7 @@ const readline = require("readline");
 
 const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "NextraRhinoGh");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
-const VERSION = "0.1.4";
+const VERSION = "0.1.5";
 
 const TOOLS = [
   {

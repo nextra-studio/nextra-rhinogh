@@ -10,8 +10,9 @@ man = json.load(open(os.path.join(repo, "bridge", "manifest.json"), encoding="ut
 ver, desc = man["version"], man["description"]
 name = "nextra-rhinogh"
 root = os.path.join(repo, "plugin", name)
-url = "https://github.com/nextra-studio/nextra-rhinogh"
-author = {"name": "Tatsuki", "url": url}
+url = "https://github.com/nextra-studio/nextra-rhinogh"   # repository
+site = "https://nextra.studio/"                            # homepage
+author = {"name": "Tatsuki", "url": site}
 
 
 def write(rel, obj):
@@ -32,7 +33,7 @@ shutil.copy(os.path.join(repo, "docs", "img", "icon.svg"), os.path.join(root, "a
 # .claude-plugin/plugin.json + .mcp.json; the desktop app's server-side marketplace sync rejects manifest-free folders)
 claude_manifest = {
     "name": name, "version": ver, "description": desc,
-    "author": author, "homepage": url, "repository": url, "license": "Apache-2.0",
+    "author": author, "homepage": site, "repository": url, "license": "Apache-2.0",
     "keywords": ["rhino", "grasshopper", "mcp", "karamba"],
 }
 write(".claude-plugin/plugin.json", claude_manifest)
@@ -40,20 +41,20 @@ write(".mcp.json", {"mcpServers": {name: {"command": "node", "args": ["${CLAUDE_
 write("/.claude-plugin/marketplace.json", {
     "name": "nextra-rhinogh", "owner": {"name": "Tatsuki"}, "description": "NextraRhinoGh: Rhino 8 + Grasshopper tools and skill for AI agents",
     "plugins": [{"name": name, "displayName": "NextraRhinoGh", "description": desc, "version": ver, "category": "design",
-                 "source": f"./plugin/{name}", "homepage": url}],
+                 "source": f"./plugin/{name}", "homepage": site}],
 })
 
 # ---- Codex / ChatGPT desktop (same shape as OpenAI's bundled plug-ins: cwd "." = this folder)
 write("codex.mcp.json", {"mcpServers": {name: {"command": "node", "args": ["server/index.js"], "cwd": ".", "env": {"NEXTRA_MODE": "full"},
                                               "startup_timeout_sec": 30, "tool_timeout_sec": 300}}})
 write(".codex-plugin/plugin.json", {
-    "name": name, "version": ver, "description": desc, "author": author, "homepage": url, "repository": url,
+    "name": name, "version": ver, "description": desc, "author": author, "homepage": site, "repository": url,
     "license": "Apache-2.0", "keywords": ["rhino", "grasshopper", "mcp", "karamba"],
     "skills": "./skills/", "mcpServers": "./codex.mcp.json",
     "interface": {
         "displayName": "NextraRhinoGh", "shortDescription": "Rhino + Grasshopper tools",
         "longDescription": desc + " Needs Rhino 8 running with the Nextra-RhinoGh plug-in (Rhino Package Manager).",
-        "developerName": "Tatsuki", "category": "Design", "capabilities": ["Read", "Write"], "websiteURL": url,
+        "developerName": "Tatsuki", "category": "Design", "capabilities": ["Read", "Write"], "websiteURL": site,
         "defaultPrompt": ["Create a timber skyscraper in Rhino", "Create a parametric skyscraper in Grasshopper"],
         "brandColor": "#1A7F37", "composerIcon": "./assets/icon.svg", "logo": "./assets/icon.svg",
     },

@@ -9,10 +9,10 @@
       "name": "nextra-rhinogh",
       "displayName": "NextraRhinoGh",
       "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "category": "design",
       "source": "./plugin/nextra-rhinogh",
-      "homepage": "https://github.com/nextra-studio/nextra-rhinogh"
+      "homepage": "https://nextra.studio/"
     }
   ]
 }

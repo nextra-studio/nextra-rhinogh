@@ -1,7 +1,7 @@
 # Release packaging: Yak package (Rhino) + .mcpb (Claude Desktop). Output in dist/.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
-$ver = "0.1.4"
+$ver = "0.1.5"
 $dist = Join-Path $repo "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue
@@ -23,7 +23,7 @@ version: $ver
 authors:
 - Tatsuki
 description: NextraRhinoGh for Rhino 8 + Grasshopper. Six token-lean tools (view, query, run, gh_edit, undo, memory) for any MCP client.
-url: https://github.com/nextra-studio/nextra-rhinogh
+url: https://nextra.studio/
 keywords: [mcp, llm, ai, grasshopper]
 "@ | Set-Content -Encoding utf8 (Join-Path $stage "manifest.yml")
 

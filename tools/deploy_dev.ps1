@@ -5,7 +5,7 @@ param([switch]$Release)
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $cfg = if ($Release) { "Release" } else { "Debug" }
-$ver = "0.1.4"
+$ver = "0.1.5"
 $pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-RhinoGh"
 # the package was called Nextra-zero before; two copies of the same plug-in would clash
 Remove-Item (Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero") -Recurse -Force -ErrorAction SilentlyContinue
@@ -24,7 +24,7 @@ version: $ver
 authors:
 - Tatsuki
 description: NextraRhinoGh - 6-tool LLM bridge (view, query, run, gh_edit, undo, memory)
-url: https://github.com/nextra-studio/nextra-rhinogh
+url: https://nextra.studio/
 keywords: [mcp, llm, grasshopper]
 "@ | Set-Content -Encoding utf8 "$pkg\manifest.yml"
 Set-Content -Encoding ascii "$pkgRoot\manifest.txt" $ver

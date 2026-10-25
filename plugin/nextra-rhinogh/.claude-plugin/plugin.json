@@ -1,12 +1,12 @@
 {
   "name": "nextra-rhinogh",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
   "author": {
     "name": "Tatsuki",
-    "url": "https://github.com/nextra-studio/nextra-rhinogh"
+    "url": "https://nextra.studio/"
   },
-  "homepage": "https://github.com/nextra-studio/nextra-rhinogh",
+  "homepage": "https://nextra.studio/",
   "repository": "https://github.com/nextra-studio/nextra-rhinogh",
   "license": "Apache-2.0",
   "keywords": [
