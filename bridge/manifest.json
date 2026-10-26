@@ -2,7 +2,7 @@
   "manifest_version": "0.2",
   "name": "nextra-rhinogh",
   "display_name": "NextraRhinoGh",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Six token-lean tools (view, query, run, gh_edit, undo, memory) for Rhino 8 and Grasshopper.",
   "long_description": "Talks to the NextraRhinoGh plug-in running inside Rhino 8 over 127.0.0.1 with a per-session token. Install the Nextra-RhinoGh Yak package in Rhino first.",
   "author": { "name": "Tatsuki" },

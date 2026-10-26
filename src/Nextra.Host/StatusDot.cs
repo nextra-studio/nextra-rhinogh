@@ -27,6 +27,8 @@ namespace Nextra.Host
         Point _down;
         bool _dragged;
         readonly ToolTip _tip = new ToolTip();
+        string _tipText;
+        bool _hover;
 
         public static void Show(IntPtr owner)
         {
@@ -66,13 +68,17 @@ namespace Nextra.Host
         void Follow()
         {
             if (_owner == IntPtr.Zero || Capture) return;
-            if (IsIconic(_owner)) { if (Visible) Hide(); return; }
+            if (IsIconic(_owner)) { if (Visible) { _tip.Hide(this); _hover = false; Hide(); } return; }
             if (!Visible) Show();
             if (!GetWindowRect(_owner, out var r)) return;
             // above Rhino AND the Grasshopper editor while either is the active app; never above other programs
             GetWindowThreadProcessId(GetForegroundWindow(), out uint fg);
             bool ours = fg == (uint)Environment.ProcessId;
             if (TopMost != ours) TopMost = ours;
+            // tooltips are topmost: pop it once the cursor leaves the dot or another app takes focus, so it never lingers over other programs
+            bool hover = ours && Bounds.Contains(Cursor.Position);
+            if (_hover && !hover) _tip.Hide(this);
+            _hover = hover;
             var p = new Point(r.R + _offset.X, r.B + _offset.Y);
             if (p != Location) Location = p;
         }
@@ -92,7 +98,7 @@ namespace Nextra.Host
         {
             CurrentState(out var c, out var t);
             if (c != _color) { _color = c; Invalidate(); }
-            _tip.SetToolTip(this, t);
+            if (t != _tipText) { _tipText = t; _tip.SetToolTip(this, t); }   // re-setting every tick revives a stuck tooltip
         }
 
         protected override void OnPaint(PaintEventArgs e)
