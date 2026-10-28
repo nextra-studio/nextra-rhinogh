@@ -9,3 +9,7 @@ Requires Rhino 8 with the Nextra-RhinoGh plug-in installed and running. The plug
 Follow the [installation instructions](https://github.com/nextra-studio/nextra-rhinogh#readme) for application setup. Start with inspection of your open model before asking the assistant to modify it. The tools act on the model you have open and can modify local files through supported workflows and scripts.
 
 This is an independent project, distributed under Apache-2.0. See the [source repository](https://github.com/nextra-studio/nextra-rhinogh) for documentation, source code, support through GitHub issues, and license details.
+
+## Privacy
+
+See [the privacy policy](PRIVACY.md) for local storage, information returned to your AI client, retention, and deletion choices.
