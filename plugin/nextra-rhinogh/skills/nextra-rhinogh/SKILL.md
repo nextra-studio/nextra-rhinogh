@@ -1,6 +1,6 @@
 ---
 name: nextra-rhinogh
-description: Drive Rhino 8 and Grasshopper through the NextraRhinoGh MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts. The tools run on the user's computer: in the Claude app, check the computer link (get_device_info) and tool-search "nextra" before concluding they are missing.
+description: "Drive Rhino 8 and Grasshopper through the NextraRhinoGh MCP tools (view, query, run, gh_edit, undo, memory). Use for any Rhino modelling, geometry inspection, Grasshopper definition building/editing/tidying, GH script components, Karamba models, or running/saving Rhino Python scripts. The tools run on the user's computer: in the Claude app, check the computer link (get_device_info) and tool-search \"nextra\" before concluding they are missing."
 ---
 
 # NextraRhinoGh — Rhino + Grasshopper
