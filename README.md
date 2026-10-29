@@ -2,19 +2,31 @@
 
 Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say what changed, images carry tags the model can point at, and model and definition edits receive undo checkpoints.
 
-**[Install from the marketplace](#install)** · **[Download Claude ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[Download ChatGPT/Codex ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
+**[Install from the marketplace](#install)** · **[Download Setup (Node.js)](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat)** · **[Download Claude ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[Download ChatGPT/Codex ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
 
 ## Install
 
-**Windows · Rhino 8.**
+**Windows · Rhino 8 · Node.js 18 or newer.**
 
-### 1. Rhino
+### 1. Node.js
+
+The AI apps start the Rhino connection with Node.js. Setup installs it for you:
+
+1. **[Download NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat)**.
+2. Double-click it. If your browser asks, choose **Keep**. If Windows asks whether to run it, click **Run** (or **More info → Run anyway**). Allow the Node.js installer when Windows asks.
+3. Restart your AI app when it finishes.
+
+Setup does nothing if Node.js 18 or newer is already installed. It installs Node.js LTS with winget, or downloads the official installer from nodejs.org if winget is missing.
+
+**If setup cannot install it:** download the **LTS** Windows Installer (.msi) from **<https://nodejs.org/en/download>**, run it with the default options, then restart your AI app.
+
+### 2. Rhino
 
 Open **PackageManager** in Rhino → search **Nextra-RhinoGh** → **Install** → restart Rhino.
 
 ![Install NextraRhinoGh in Rhino Package Manager](docs/img/install/rhino-package-manager.svg)
 
-### 2. Your AI app
+### 3. Your AI app
 
 Choose your AI app below. For ChatGPT/Codex and Claude, **install from this GitHub marketplace** for the easiest update path, or **download the ZIP**. These are two ways to install the same plugin; choose one.
 
@@ -158,6 +170,7 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 | Problem | Fix |
 |---|---|
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
+| “node” not found, or the plugin fails to start | Node.js is missing. Run [NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat) (or install the LTS from <https://nodejs.org/en/download>), then restart the AI app. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
 | No status dot in Rhino | Restart Rhino, then enable NextraRhinoGh with `NextraRhinoGhOn`. |
 | Red dot | Click the dot to restart the connection. |
@@ -212,10 +225,10 @@ Commit the generated `plugin/`, `.claude-plugin/marketplace.json`, and `.agents/
 
 ```powershell
 yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
-gh release create v<ver> dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo nextra-studio/nextra-rhinogh
+gh release create v<ver> NextraRhinoGh-Setup.bat dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo nextra-studio/nextra-rhinogh
 ```
 
-Keep the plugin ZIP filenames stable so the download links above keep working. Regenerate the simplified app diagrams with `python tools/make_install_images.py`.
+Keep the plugin ZIP and `NextraRhinoGh-Setup.bat` filenames stable so the download links above keep working. Regenerate the simplified app diagrams with `python tools/make_install_images.py`.
 
 </details>
 
