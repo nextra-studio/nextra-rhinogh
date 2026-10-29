@@ -174,7 +174,8 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
 | “node” not found, or the plugin fails to start | Node.js is missing. Run [NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat) (or install the LTS from <https://nodejs.org/en/download>), then restart the AI app. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
-| No status dot in Rhino | Restart Rhino, then enable NextraRhinoGh with `NextraRhinoGhOn`. |
+| No status dot in Rhino | Restart Rhino, then enable it with `NextraRhinoGh` → `On`. |
+| “Transport closed” in Codex/ChatGPT | The app dropped its link to the plugin; retrying in the same chat won't help. Start a new chat (or restart the app); Rhino can stay open. |
 | Red dot | Click the dot to restart the connection. |
 | Multiple Rhino windows | Specify the file, for example “Use house.3dm.” |
 
@@ -245,7 +246,7 @@ The plug-in creates a folder at first start, `%APPDATA%\NextraRhinoGh\user`; the
 | `plugins/<Category>.md` | Your guide takes priority over the bundled one; only short rules attach automatically when its components are used. |
 | `scripts/` | Your scripts, available to `run`. |
 
-The AI can save a lasting preference or a verified reusable workflow in this folder. It works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file. `memory {action:'list'}` reports its path. `NextraRhinoGhOff` persists across Rhino restarts; `NextraRhinoGhOn` starts the bridge again and checks the folder. On first start after upgrading, the plug-in copies its old `%APPDATA%\Nextra` settings and user files into the new folder without deleting the originals.
+The AI can save a lasting preference or a verified reusable workflow in this folder. It works however the skill is installed, including as a zip uploaded to claude.ai, because the plug-in serves it through the tools. Plug-in updates never touch it. The README in the folder explains how to write each file. `memory {action:'list'}` reports its path. `NextraRhinoGh` → `Off` persists across Rhino restarts; `NextraRhinoGh` → `On` starts the bridge again and checks the folder. All Rhino commands: [wiki](https://github.com/nextra-studio/nextra-rhinogh/wiki/Rhino-commands). On first start after upgrading, the plug-in copies its old `%APPDATA%\Nextra` settings and user files into the new folder without deleting the originals.
 
 **Config** is in `%APPDATA%/NextraRhinoGh/config.json`:
 

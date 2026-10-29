@@ -27,7 +27,7 @@ namespace Nextra.Host
             try { AppDataMigration.Ensure(); }
             catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: old settings were not copied: " + e.Message); }
             if (Config.GetBool("enabled", true)) RhinoApp.Idle += StartOnce;
-            else RhinoApp.WriteLine("NextraRhinoGh: off (run NextraRhinoGhOn to start)");
+            else RhinoApp.WriteLine("NextraRhinoGh: off (run NextraRhinoGh > On to start)");
             return LoadReturnCode.Success;
         }
 
@@ -117,11 +117,26 @@ namespace Nextra.Host
                     : "NextraRhinoGh: no bridge at " + p + " (it is copied there when the Yak package starts)");
                 return Result.Success;
             }
-            if (i == iOn) NextraOnCommand.Do();
-            else if (i == iOff) NextraOffCommand.Do();
+            if (i == iOn) On();
+            else if (i == iOff) Off();
             else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("NextraRhinoGh: engine reloaded: " + EngineLoader.Describe()); }
             else if (i == iRestart) { Server.Stop(); Server.Start(); }
             return Result.Success;
+        }
+
+        /// On/Off are remembered across Rhino restarts.
+        static void On()
+        {
+            Config.Set("enabled", true);
+            NextraHostPlugIn.TurnOn();
+            RhinoApp.WriteLine("NextraRhinoGh: on");
+        }
+
+        static void Off()
+        {
+            Config.Set("enabled", false);
+            NextraHostPlugIn.TurnOff();
+            RhinoApp.WriteLine("NextraRhinoGh: off (server stopped, dots removed; NextraRhinoGh > On to start again)");
         }
     }
 
@@ -138,29 +153,5 @@ namespace Nextra.Host
             RhinoApp.WriteLine("NextraRhinoGh: your folder " + dir + " (preferences.md, workflows, plugins, scripts — see README.md there)");
             return Result.Success;
         }
-    }
-
-    public class NextraOnCommand : Command
-    {
-        public override string EnglishName => "NextraRhinoGhOn";
-        public static void Do()
-        {
-            Config.Set("enabled", true);
-            NextraHostPlugIn.TurnOn();
-            RhinoApp.WriteLine("NextraRhinoGh: on");
-        }
-        protected override Result RunCommand(RhinoDoc doc, RunMode mode) { Do(); return Result.Success; }
-    }
-
-    public class NextraOffCommand : Command
-    {
-        public override string EnglishName => "NextraRhinoGhOff";
-        public static void Do()
-        {
-            Config.Set("enabled", false);
-            NextraHostPlugIn.TurnOff();
-            RhinoApp.WriteLine("NextraRhinoGh: off (server stopped, dots removed; NextraRhinoGhOn to start again)");
-        }
-        protected override Result RunCommand(RhinoDoc doc, RunMode mode) { Do(); return Result.Success; }
     }
 }

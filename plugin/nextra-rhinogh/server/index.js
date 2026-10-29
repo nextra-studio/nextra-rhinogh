@@ -10,7 +10,7 @@ const readline = require("readline");
 
 const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "NextraRhinoGh");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
-const VERSION = "0.1.7";
+const VERSION = "0.1.8";
 
 const TOOLS = [
   {
@@ -92,7 +92,11 @@ function instances() {
       try { const c = JSON.parse(fs.readFileSync(path.join(APPDIR, f), "utf8")); if (alive(c.pid)) out.push(c); } catch {}
     }
   } catch {}
-  return out.sort((a, b) => String(b.started).localeCompare(String(a.started)));
+  out.sort((a, b) => String(b.started).localeCompare(String(a.started)));
+  // Files left by a killed Rhino survive, and Windows reuses their pids for other programs. Two live servers never share
+  // a port, so per port only the newest file can be real.
+  const seen = new Set();
+  return out.filter(c => !seen.has(c.port) && seen.add(c.port));
 }
 let BOUND = process.env.NEXTRA_PID ? { pid: process.env.NEXTRA_PID } : process.env.NEXTRA_FILE ? { file: process.env.NEXTRA_FILE } : null;
 const fileMatch = (c, f) => { f = String(f).toLowerCase(); return String(c.file || "").toLowerCase() === f || String(c.file || "").toLowerCase().includes(f) || String(c.path || "").toLowerCase().includes(f); };
@@ -131,7 +135,7 @@ function post(urlPath, body, timeoutMs) {
   });
 }
 
-const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 with the NextraRhinoGh plug-in (a green/amber dot sits at the bottom-right of the Rhino window; red = click it to restart; command NextraRhinoGhOn if it is off). Do not retry in a loop.";
+const NOT_REACHABLE = "Rhino is not reachable. Ask the user to start Rhino 8 with the NextraRhinoGh plug-in (a green/amber dot sits at the bottom-right of the Rhino window; red = click it to restart; command NextraRhinoGh > On if it is off). Do not retry in a loop.";
 
 async function callTool(name, args) {
   args = args || {};

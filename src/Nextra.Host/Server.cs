@@ -49,11 +49,12 @@ namespace Nextra.Host
             if (_listener == null) throw new Exception("no free port in " + basePort + ".." + (basePort + 19));
 
             _started = DateTime.Now.ToString("s");
+            PruneStaleInfo();
             WriteInfo();
             // keep the published file name current so clients can bind to "the Rhino that has house.3dm open"
             if (!_hooked)
             {
-                _hooked = true;   // once per Rhino session, not again on every NextraRhinoGhOn / restart
+                _hooked = true;   // once per Rhino session, not again on every NextraRhinoGh On / restart
                 RhinoDoc.EndOpenDocument += (s, e) => WriteInfo();
                 RhinoDoc.EndSaveDocument += (s, e) => WriteInfo();
                 RhinoDoc.NewDocument += (s, e) => WriteInfo();
@@ -68,6 +69,22 @@ namespace Nextra.Host
 
         static string _started;
         static bool _hooked;
+
+        /// Delete server-<pid>.json files of Rhinos that were killed (Stop never ran); their pids get reused by other programs.
+        static void PruneStaleInfo()
+        {
+            try
+            {
+                foreach (var f in Directory.GetFiles(AppDir, "server-*.json"))
+                {
+                    if (!int.TryParse(Path.GetFileNameWithoutExtension(f).Substring(7), out int pid) || pid == Environment.ProcessId) continue;
+                    bool rhino = false;
+                    try { using var p = System.Diagnostics.Process.GetProcessById(pid); rhino = p.ProcessName.StartsWith("Rhino", StringComparison.OrdinalIgnoreCase); } catch { }
+                    if (!rhino) try { File.Delete(f); } catch { }
+                }
+            }
+            catch { }
+        }
 
         /// server-<pid>.json: port, token, pid, start time and the open file (name + path) of this Rhino.
         public static void WriteInfo()
