@@ -2,9 +2,11 @@
 
 Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say what changed, images carry tags the model can point at, and model and definition edits receive undo checkpoints.
 
-**[Install from the marketplace](#install)** · **[Download Setup (Node.js)](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat)** · **[Download Claude ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[Download ChatGPT/Codex ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
+**[Install in about 3 minutes](#install)** · **[Download Setup (Node.js)](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat)** · **[Download Claude ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-plugin.zip)** · **[Download ChatGPT/Codex ZIP](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/nextra-rhinogh-gpt-plugin.zip)**
 
 ## Install
+
+**About 3 minutes, no hassle:** run one setup file, install from Rhino’s PackageManager, add the plugin to your AI app. Nothing to host, no extra subscription.
 
 **Windows · Rhino 8 · Node.js 18 or newer.**
 
