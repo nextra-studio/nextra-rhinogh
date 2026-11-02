@@ -6,8 +6,9 @@
     <Version>0.1.8</Version>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  <!-- Yak tags the package from the RhinoCommon the .rhp is built against: pin the first Rhino 8 release so any 8.x can install it -->
   <ItemGroup>
-    <Reference Include="Grasshopper"><HintPath>$(RhinoDir)\Plug-ins\Grasshopper\Grasshopper.dll</HintPath><Private>false</Private></Reference>
-    <Reference Include="GH_IO"><HintPath>$(RhinoDir)\Plug-ins\Grasshopper\GH_IO.dll</HintPath><Private>false</Private></Reference>
+    <PackageReference Include="RhinoCommon" Version="8.0.23304.9001" ExcludeAssets="runtime" />
+    <PackageReference Include="Grasshopper" Version="8.0.23304.9001" ExcludeAssets="runtime" />
   </ItemGroup>
 </Project>

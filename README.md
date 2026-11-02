@@ -236,8 +236,8 @@ Bump the version in `tools/package.ps1`, `tools/deploy_dev.ps1`, `bridge/manifes
 Commit the generated `plugin/`, `.claude-plugin/marketplace.json`, and `.agents/plugins/marketplace.json` along with the source changes. Both marketplaces must list `nextra-rhinogh`. Publish the packages to this repository (replace `<ver>`):
 
 ```powershell
-yak push dist/nextra-rhinogh-<ver>-rh8_35-win.yak
-gh release create v<ver> NextraRhinoGh-Setup.bat dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_35-win.yak --repo nextra-studio/nextra-rhinogh
+yak push dist/nextra-rhinogh-<ver>-rh8_0-win.yak
+gh release create v<ver> NextraRhinoGh-Setup.bat dist/nextra-rhinogh-plugin.zip dist/nextra-rhinogh-gpt-plugin.zip dist/nextra-rhinogh-agent-kit.zip dist/nextra-rhinogh-<ver>.mcpb dist/nextra-rhinogh-<ver>-rh8_0-win.yak --repo nextra-studio/nextra-rhinogh
 ```
 
 Keep the plugin ZIP and `NextraRhinoGh-Setup.bat` filenames stable so the download links above keep working. Regenerate the simplified app diagrams with `python tools/make_install_images.py`.
