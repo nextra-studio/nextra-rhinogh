@@ -6,7 +6,7 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 
 ## Install
 
-**About 3 minutes, no hassle:** run one setup file, install from Rhino’s PackageManager, add the plugin to your AI app. Nothing to host, no extra subscription.
+**About 3 minutes, no hassle:** run one setup file, install from Rhino’s PackageManager, add the plugin to your AI app. Nothing to host, no extra subscription: ChatGPT works on any plan, also the free one; Claude needs a paid plan (Pro or higher), because plug-ins run in Cowork.
 
 **Windows · Rhino 8 · Node.js 18 or newer.**
 
@@ -40,6 +40,8 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 <details open>
 <summary><strong>ChatGPT desktop (work)</strong></summary>
+
+**Plan:** any ChatGPT plan works, also the free one.
 
 **Find Plugins:** click the **Plugins icon** in the far-left navigation rail (highlighted below), then click **Add** at the top right.
 
@@ -89,6 +91,8 @@ After installing, keep Rhino open and start a new session in **Work** (or Codex)
 <details>
 <summary><strong>Claude Desktop</strong></summary>
 
+**Plan:** needs a paid Claude plan (Pro, Max, Team or Enterprise). Plug-ins run in **Cowork**, which the free plan does not have. No paid plan? Use ChatGPT.
+
 **Find Plugins:** open **Customize** in the left sidebar → **Plugins** → **+ Add**.
 
 ![Claude: find Customize in the sidebar, select Plugins, then Add](docs/img/install/claude-plugins.svg)
@@ -121,6 +125,8 @@ Start a new **Cowork** session with Rhino open to use the local Rhino tools. In 
 
 <details>
 <summary><strong>Claude Code</strong></summary>
+
+**Plan:** Claude Code needs a paid Claude plan (Pro or higher) or an API key.
 
 <details open>
 <summary><strong>Install from marketplace (recommended)</strong></summary>
