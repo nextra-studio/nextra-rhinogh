@@ -67,6 +67,8 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 ![ChatGPT Desktop marketplace setup with Source URL, Git ref main, empty Sparse paths, and Add marketplace](docs/img/install/openai-marketplace.svg)
 
+**Add marketplace fails or says it cannot clone from Git?** This sometimes happens in ChatGPT. Close ChatGPT completely: open **Task Manager** (type it in the Windows search), search **ChatGPT**, select it and click **End task**. Then start ChatGPT again and add the marketplace again.
+
 If your desktop app does not show **Add a marketplace**, run `codex plugin marketplace add nextra-studio/nextra-rhinogh` in a terminal, restart the desktop app, then install **NextraRhinoGh** from that marketplace in the Plugins Directory. [OpenAI marketplace guide](https://developers.openai.com/plugins/build/plugins).
 
 </details>
@@ -179,6 +181,7 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 
 | Problem | Fix |
 |---|---|
+| Add marketplace fails in ChatGPT, or it says it cannot clone from Git | Close ChatGPT completely: open **Task Manager** (type it in the Windows search), search **ChatGPT**, click **End task**. Start ChatGPT again and add the marketplace again. |
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
 | “node” not found, or the plugin fails to start | Node.js is missing. Run [NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat) (or install the LTS from <https://nodejs.org/en/download>), then restart the AI app. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
