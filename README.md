@@ -26,8 +26,6 @@ Setup does nothing if Node.js 18 or newer is already installed. It installs Node
 
 Open **PackageManager** in Rhino → search **Nextra-RhinoGh** → **Install** → restart Rhino.
 
-Can't find **PackageManager** or **Nextra-RhinoGh**? Check your Rhino version: you need **Rhino 8**. Type `About` in Rhino to see it.
-
 ![Install NextraRhinoGh in Rhino Package Manager](docs/img/install/rhino-package-manager.svg)
 
 ### 3. Your AI app
@@ -183,7 +181,7 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
 | “node” not found, or the plugin fails to start | Node.js is missing. Run [NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat) (or install the LTS from <https://nodejs.org/en/download>), then restart the AI app. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
-| PackageManager or Nextra-RhinoGh not found | Check your Rhino version with `About`: you need Rhino 8 (any service release). |
+| PackageManager or Nextra-RhinoGh not found | Try updating Rhino 8: **Help → Check for Updates**. Restart Rhino, then search again. |
 | No status dot in Rhino | Restart Rhino, then enable it with `NextraRhinoGh` → `On`. |
 | “Transport closed” in Codex/ChatGPT | The app dropped its link to the plugin; retrying in the same chat won't help. Start a new chat (or restart the app); Rhino can stay open. |
 | Red dot | Click the dot to restart the connection. |
