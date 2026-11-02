@@ -69,8 +69,6 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 **Add marketplace fails or says it cannot clone from Git?** This sometimes happens in ChatGPT. Close ChatGPT completely: open **Task Manager** (type it in the Windows search), search **ChatGPT**, select it and click **End task**. Then start ChatGPT again and add the marketplace again.
 
-If your desktop app does not show **Add a marketplace**, run `codex plugin marketplace add nextra-studio/nextra-rhinogh` in a terminal, restart the desktop app, then install **NextraRhinoGh** from that marketplace in the Plugins Directory. [OpenAI marketplace guide](https://developers.openai.com/plugins/build/plugins).
-
 </details>
 
 <details>
