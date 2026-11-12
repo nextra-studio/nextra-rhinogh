@@ -3,7 +3,7 @@
 # use to start the Rhino bridge. Re-running is safe: if Node.js 18 or newer is already installed, nothing is changed.
 #
 # Easiest way to run it: open Terminal and paste
-#   curl -fsSL https://raw.githubusercontent.com/nextra-studio/nextra-rhinogh/mac/NextraRhinoGh-Setup.command | bash
+#   curl -fsSL https://raw.githubusercontent.com/nextra-studio/nextra-rhinogh/main/NextraRhinoGh-Setup.command | bash
 # or, after downloading this file:  bash ~/Downloads/NextraRhinoGh-Setup.command
 # (Double-clicking a downloaded .command file is often blocked by macOS: no "execute" permission, unidentified developer.)
 #

@@ -8,15 +8,13 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 
 **About 3 minutes, no hassle:** run one setup file, install from Rhino’s PackageManager, add the plugin to your AI app. Nothing to host, no extra subscription: ChatGPT works on any plan, also the free one; Claude needs a paid plan (Pro or higher), because plug-ins run in Cowork.
 
-**Windows · Rhino 8 · Node.js 18 or newer.**
-
-> **Mac (beta, in testing):** a Mac build of the plug-in lives on this `mac` branch. It builds and passes automated
-> portability checks but has not been confirmed in Rhino for Mac yet, so it is not on the PackageManager. See
-> [mac/README.md](mac/README.md) for what works, what is missing, and a 10-minute test if you have a Mac.
+**Windows or Mac · Rhino 8 · Node.js 18 or newer.** Mac support is new (beta); see [On a Mac](#on-a-mac-beta) for the differences.
 
 ### 1. Node.js
 
-The AI apps start the Rhino connection with Node.js. Setup installs it for you:
+The AI apps start the Rhino connection with Node.js. Setup installs it for you.
+
+**Windows**
 
 1. **[Download NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat)**.
 2. Double-click it. If your browser asks, choose **Keep**. If Windows asks whether to run it, click **Run** (or **More info → Run anyway**). Allow the Node.js installer when Windows asks.
@@ -26,11 +24,25 @@ Setup does nothing if Node.js 18 or newer is already installed. It installs Node
 
 **If setup cannot install it:** download the **LTS** Windows Installer (.msi) from **<https://nodejs.org/en/download>**, run it with the default options, then restart your AI app.
 
+**Mac**
+
+1. Open **Terminal**: press **⌘ Space**, type `Terminal`, press **Return**.
+2. Paste this line and press **Return**:
+
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/nextra-studio/nextra-rhinogh/main/NextraRhinoGh-Setup.command | bash
+   ```
+
+3. When it asks for your **Mac password**, type it and press **Return**. Nothing shows while you type; that is normal.
+4. Quit your AI app (**⌘ Q**) and open it again.
+
+Setup ([NextraRhinoGh-Setup.command](NextraRhinoGh-Setup.command)) does nothing if Node.js 18 or newer is already installed. Otherwise it downloads the official Node.js LTS installer from nodejs.org and runs it.
+
+**If setup cannot install it:** download the **LTS** macOS Installer (.pkg) from **<https://nodejs.org/en/download>**, open it and click through with the default options, then quit and reopen your AI app.
+
 ### 2. Rhino
 
-Open **PackageManager** in Rhino → search **Nextra-RhinoGh** → **Install** → restart Rhino.
-
-Can't find **PackageManager** or **Nextra-RhinoGh**? Check your Rhino version: you need **Rhino 8**. Type `About` in Rhino to see it.
+Open **PackageManager** in Rhino → search **Nextra-RhinoGh** → **Install** → restart Rhino. This is the same on Windows and Mac; Rhino picks the right version for your computer.
 
 ![Install NextraRhinoGh in Rhino Package Manager](docs/img/install/rhino-package-manager.svg)
 
@@ -71,7 +83,7 @@ The pictures are simplified guides based on the app menus. Labels can vary by ve
 
 ![ChatGPT Desktop marketplace setup with Source URL, Git ref main, empty Sparse paths, and Add marketplace](docs/img/install/openai-marketplace.svg)
 
-If your desktop app does not show **Add a marketplace**, run `codex plugin marketplace add nextra-studio/nextra-rhinogh` in a terminal, restart the desktop app, then install **NextraRhinoGh** from that marketplace in the Plugins Directory. [OpenAI marketplace guide](https://developers.openai.com/plugins/build/plugins).
+**Add marketplace fails or says it cannot clone from Git?** This sometimes happens in ChatGPT. Close ChatGPT completely. On Windows, open **Task Manager** (type it in the Windows search), search **ChatGPT**, select it and click **End task**. On a Mac, press **⌘ Q** in ChatGPT; if it does not quit, use **Apple menu → Force Quit → ChatGPT**. Then start ChatGPT again and add the marketplace again.
 
 </details>
 
@@ -183,14 +195,33 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 
 | Problem | Fix |
 |---|---|
+| Add marketplace fails in ChatGPT, or it says it cannot clone from Git | Close ChatGPT completely. Windows: open **Task Manager** (type it in the Windows search), search **ChatGPT**, click **End task**. Mac: **⌘ Q**, or **Apple menu → Force Quit**. Start ChatGPT again and add the marketplace again. |
 | No Rhino tools | Confirm the plugin is installed, then restart the AI app and start a new session. |
-| “node” not found, or the plugin fails to start | Node.js is missing. Run [NextraRhinoGh-Setup.bat](https://github.com/nextra-studio/nextra-rhinogh/releases/latest/download/NextraRhinoGh-Setup.bat) (or install the LTS from <https://nodejs.org/en/download>), then restart the AI app. |
+| “node” not found, or the plugin fails to start | Node.js is missing. Run the setup from [step 1](#1-nodejs) (Windows: NextraRhinoGh-Setup.bat; Mac: the Terminal line), or install the LTS from <https://nodejs.org/en/download>, then restart the AI app. |
+| Mac: Rhino is open but the AI says it is not reachable | Type `NextraRhinoGh` in Rhino: it shows whether the connection is on. Choose **On** if it is off. Then start a new chat. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
-| PackageManager or Nextra-RhinoGh not found | Check your Rhino version with `About`: you need Rhino 8 (any service release). |
+| PackageManager or Nextra-RhinoGh not found | Try updating Rhino 8: **Help → Check for Updates**. Restart Rhino, then search again. |
 | No status dot in Rhino | Restart Rhino, then enable it with `NextraRhinoGh` → `On`. |
 | “Transport closed” in Codex/ChatGPT | The app dropped its link to the plugin; retrying in the same chat won't help. Start a new chat (or restart the app); Rhino can stay open. |
 | Red dot | Click the dot to restart the connection. |
 | Multiple Rhino windows | Specify the file, for example “Use house.3dm.” |
+
+</details>
+
+### On a Mac (beta)
+
+The Mac version is new. Everything above works the same, with these differences:
+
+- **No status dot.** When Rhino starts, the command line shows `NextraRhinoGh: ready on 127.0.0.1:8765`. Type `NextraRhinoGh` any time to see the state.
+- **Dialogs.** If a Rhino dialog is open, the AI cannot see or close it. It may just wait. Answer the dialog in Rhino yourself.
+- **Your folder** is `~/Library/Application Support/NextraRhinoGh` (Windows: `%APPDATA%\NextraRhinoGh`). The `NextraRhinoGhFolder` command opens it in Finder.
+
+Something not working on your Mac? Please [open an issue](https://github.com/nextra-studio/nextra-rhinogh/issues). Include what the `NextraRhinoGh` command shows.
+
+<details>
+<summary>Mac build details</summary>
+
+The Mac plug-in is built from the same source code as the Windows one. Its build files are on the [`mac` branch](https://github.com/nextra-studio/nextra-rhinogh/tree/mac/mac).
 
 </details>
 
