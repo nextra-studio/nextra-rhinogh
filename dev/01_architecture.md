@@ -9,6 +9,8 @@
 | **Host** | `src/Nextra.Host/` → `Nextra.Host.rhp` | Rhino plug-in, loaded at Rhino start | localhost server, UI-thread dispatcher, timeouts, dialog probe, status dots, engine loader |
 | **Engine** | `src/Nextra.Engine/` → `Nextra.Engine.dll` | loaded by the host, reloaded whenever the dll changes | all Rhino/GH logic: the 6 tools |
 
+Windows and Mac: the same host and engine sources are built twice: the Windows `.rhp` from `src/`, the Mac `.rhp` from the `mac/` overlay on branch `mac`. On Mac, three Windows-only host files (status dot, GH dot, dialog probe) are swapped for stand-ins. See [08_mac.md](08_mac.md).
+
 The split between host and engine is the main architectural choice. A `.rhp` cannot be replaced while Rhino runs, so the host does only what must never change: networking, threading and loading. Everything else is in the engine, which can be rebuilt and picked up on the next call.
 
 ## 2. Life of one call
@@ -84,6 +86,8 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 
 ## 6. Status dots and commands
 
+Windows only. On Mac there are no dots: the state is printed on the command line at start, and the `NextraRhinoGh` command shows it (08_mac §3).
+
 - **Rhino dot** (`StatusDot.cs`) is a tiny borderless WinForms form owned by the Rhino main window.
   - It sits just inside the bottom-right corner (near the status bar) and follows the window.
   - It can be dragged; the offset is remembered.
@@ -106,7 +110,8 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 
 ## 7. Files outside the repo (runtime)
 
-`%APPDATA%/NextraRhinoGh/` (first run copies this plug-in's settings and user files from the old `%APPDATA%/Nextra/` folder):
+`%APPDATA%/NextraRhinoGh/` (first run copies this plug-in's settings and user files from the old `%APPDATA%/Nextra/` folder).
+On Mac the same files are in `~/Library/Application Support/NextraRhinoGh/`, a fixed path that host and bridge share (08_mac §4):
 
 | path | written by | content |
 |---|---|---|

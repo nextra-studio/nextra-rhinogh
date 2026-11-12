@@ -116,3 +116,14 @@ User request: a new file format that is the shorthand of a definition, documente
 - [x] K5 Undo: layer-only checkpoints; layer name/colour, nested/current layer and bake-created layer restoration; dialog popup selection and close verification.
 - [x] K6 Full regression 239/239 twice in one session; focused audit 26/26; both builds and generated plugin/archive checks pass. User-docs and learned memory isolated during regression, config restored.
 - [x] K7 Detailed [report with before/after images](reports/2026-10-13-tool-audit.md); focused commits pushed to main; no release publication.
+
+## L. Mac version (2026-11-12)
+User request: make RhinoGh work on Mac without affecting Windows; prove as much as possible without a Mac; publish. Details: [08_mac.md](08_mac.md).
+- [x] L1 Overlay build on branch `mac`: `mac/` net7.0 host + engine from the shared `src/`. 3 Windows-only host files get Mac stand-ins (`MacPlatform.cs`); `#if NEXTRA_MAC` in `Server.cs` / `HostPlugIn.cs`
+- [x] L2 Data-folder trap found and fixed: .NET 8 on macOS → `~/Library/Application Support`; host path fixed, bridge looks there on darwin (on `main` too; Windows path unchanged)
+- [x] L3 Evidence: Linux Docker build 0/0, PortScan (no P/Invokes), bridge e2e as macOS (Node 20 + 24), Windows build byte-identical to `main` (+ negative control)
+- [x] L4 `NextraRhinoGh-Setup.command` (Mac Node.js setup, curl | bash) + README Windows/Mac install docs on `main`
+- [x] L5 Yak 0.1.8 `rh8_0-mac` published next to the Windows distributions (user's choice: PackageManager, beta)
+- [ ] L6 Website (nextra-site branch `rhinogh-mac-beta`: Windows/Mac chooser, Mac guide in `ai_install.mac`): merge + run `scripts/update-rhinogh-mac.mjs` (user, needs `.env.local`)
+- [ ] L7 First run on a real Mac (smoke test in `mac/README.md`); then fix what it finds (top risk: plain `.rhp` from Yak on Mac)
+- [ ] L8 Later: Mac status dot / GH dot / dialog detection; fold the Mac build into `main` once proven
