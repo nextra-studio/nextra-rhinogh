@@ -10,6 +10,10 @@ Six token-lean tools let an LLM build and change Rhino models and Grasshopper de
 
 **Windows · Rhino 8 · Node.js 18 or newer.**
 
+> **Mac (beta, in testing):** a Mac build of the plug-in lives on this `mac` branch. It builds and passes automated
+> portability checks but has not been confirmed in Rhino for Mac yet, so it is not on the PackageManager. See
+> [mac/README.md](mac/README.md) for what works, what is missing, and a 10-minute test if you have a Mac.
+
 ### 1. Node.js
 
 The AI apps start the Rhino connection with Node.js. Setup installs it for you:
