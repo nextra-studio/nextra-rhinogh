@@ -1,4 +1,4 @@
-# NextraRhinoGh on Mac (branch `mac`)
+# NextraRhinoGh on Mac
 
 The Mac build is an **overlay**: the folder `mac/` holds its own projects, which compile the shared sources in `src/`.
 The Windows projects, build settings, packaging and version files are untouched.
@@ -7,7 +7,7 @@ The Windows projects, build settings, packaging and version files are untouched.
 |---|---|---|
 | Host `.rhp` | `src/Nextra.Host` (net8.0-windows, WinForms/WPF) | `mac/Nextra.Host.Mac`: same sources (net7.0) minus 3 Windows-only files |
 | Engine | `src/Nextra.Engine` | `mac/Nextra.Engine.Mac`: **all** engine sources, unchanged |
-| Bridge (Node) | `bridge/server/index.js` | same file; **on this branch only** it looks in `~/Library/Application Support/NextraRhinoGh` on macOS |
+| Bridge (Node) | `bridge/server/index.js` | same file: looks in `~/Library/Application Support/NextraRhinoGh` on macOS |
 | Yak package | `tools/package.ps1` → `-rh8_0-win.yak` | `mac/package_mac.ps1` → `-rh8_0-mac.yak` |
 
 ## What changed in shared files
@@ -42,16 +42,13 @@ reload, and all six tools.
 | WinForms / Drawing the engine needs exist on Mac | engine refs `System.Windows.Forms 7.0.0.0` and `System.Drawing.Common 7.0.0.0`, the exact identities the cross-platform RhinoCommon (net7.0, the same binary Rhino Mac runs) references | match |
 | Bridge finds a Mac Rhino and relays calls | `node mac/tests/bridge_mac.js`: real bridge process, macOS platform, fake home and fake Rhino host, MCP over stdio. Run on Windows Node 24 and Linux Node 20 (Docker) | PASS (also for the `plugin/` copy) |
 | Windows bridge unchanged | same test with `APPDATA` set, plus `node test/regress/bridge_checks.js` | PASS |
-| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from `main` and from this branch, compares bytes | **byte-identical** (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT) |
+| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from a base commit and from the current checkout, compares bytes (run before and after the merge into `main`) | **byte-identical** (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT) |
 | Mac Yak package | `mac/package_mac.ps1` | `nextra-rhinogh-0.1.8-rh8_0-mac.yak` |
 
-## Known gap until the bridge change reaches `main`
+## Bridge
 
-The Claude Code / Codex marketplace plug-in and the `.mcpb` are built from `main`. Their bridge still looks in
-`~/.config` on a Mac, so a Mac user who installs them that way gets "no Rhino running". The bridge the Mac Yak
-package copies to `~/Library/Application Support/NextraRhinoGh/bridge/index.js` does have the fix, and the smoke test
-below uses that one. Merging only the 6-line bridge change into `main` closes the gap. Its Windows path is unchanged
-(see the tests).
+The bridge fix is on `main`, so the Claude / ChatGPT marketplace plug-in finds a Mac Rhino too. Note that the `.mcpb`
+release asset only gets the fix with the next release that rebuilds it.
 
 ## Not proven yet (needs a real Mac)
 

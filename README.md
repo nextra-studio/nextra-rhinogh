@@ -221,7 +221,7 @@ Something not working on your Mac? Please [open an issue](https://github.com/nex
 <details>
 <summary>Mac build details</summary>
 
-The Mac plug-in is built from the same source code as the Windows one. Its build files are on the [`mac` branch](https://github.com/nextra-studio/nextra-rhinogh/tree/mac/mac).
+The Mac plug-in is built from the same source code as the Windows one. Its build files are in [mac/](mac/); see [mac/README.md](mac/README.md).
 
 </details>
 

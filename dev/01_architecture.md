@@ -9,7 +9,7 @@
 | **Host** | `src/Nextra.Host/` → `Nextra.Host.rhp` | Rhino plug-in, loaded at Rhino start | localhost server, UI-thread dispatcher, timeouts, dialog probe, status dots, engine loader |
 | **Engine** | `src/Nextra.Engine/` → `Nextra.Engine.dll` | loaded by the host, reloaded whenever the dll changes | all Rhino/GH logic: the 6 tools |
 
-Windows and Mac: the same host and engine sources are built twice: the Windows `.rhp` from `src/`, the Mac `.rhp` from the `mac/` overlay on branch `mac`. On Mac, three Windows-only host files (status dot, GH dot, dialog probe) are swapped for stand-ins. See [08_mac.md](08_mac.md).
+Windows and Mac: the same host and engine sources are built twice: the Windows `.rhp` from `src/`, the Mac `.rhp` from the `mac/` overlay. On Mac, three Windows-only host files (status dot, GH dot, dialog probe) are swapped for stand-ins. See [08_mac.md](08_mac.md).
 
 The split between host and engine is the main architectural choice. A `.rhp` cannot be replaced while Rhino runs, so the host does only what must never change: networking, threading and loading. Everything else is in the engine, which can be rebuilt and picked up on the next call.
 

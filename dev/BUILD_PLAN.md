@@ -126,4 +126,5 @@ User request: make RhinoGh work on Mac without affecting Windows; prove as much 
 - [x] L5 Yak 0.1.8 `rh8_0-mac` published next to the Windows distributions (user's choice: PackageManager, beta)
 - [ ] L6 Website (nextra-site branch `rhinogh-mac-beta`: Windows/Mac chooser, Mac guide in `ai_install.mac`): merge + run `scripts/update-rhinogh-mac.mjs` (user, needs `.env.local`)
 - [ ] L7 First run on a real Mac (smoke test in `mac/README.md`); then fix what it finds (top risk: plain `.rhp` from Yak on Mac)
-- [ ] L8 Later: Mac status dot / GH dot / dialog detection; fold the Mac build into `main` once proven
+- [x] L8 Merged into `main` (2026-11-12); Windows build byte-identical before and after (`windows_unchanged.ps1 -Base 9300ecc`)
+- [ ] L9 Later: Mac status dot / GH dot / dialog detection; one multi-targeted host project once proven

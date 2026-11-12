@@ -13,7 +13,7 @@ Paths are relative to the repo root. Line counts are approximate.
 | `dist/` | build output: `.yak` (Rhino) and `.mcpb` (Claude Desktop). Git-ignored |
 | `NextraRhinoGh-Setup.bat` | Windows: installs Node.js LTS (winget or the nodejs.org .msi). Released as a download |
 | `NextraRhinoGh-Setup.command` | Mac: installs Node.js LTS (nodejs.org .pkg). Run via `curl …/main/NextraRhinoGh-Setup.command \| bash`, so keep it on `main` at this path. `.gitattributes` keeps it LF + executable |
-| `mac/` (**branch `mac` only**) | Mac build overlay: projects, Mac stand-ins, tests, `package_mac.ps1`. Full map in [08_mac.md](08_mac.md) §2 |
+| `mac/` | Mac build overlay: projects, Mac stand-ins, tests, `package_mac.ps1`. Full map in [08_mac.md](08_mac.md) §2 |
 
 ## dev/ (information only, not part of the skill)
 
@@ -135,5 +135,5 @@ Each holds the images the LLM received and the produced `.3dm` / `.gh` / scripts
 | image tags overlap or are missing | `Labels.cs`, `ViewTool.RhinoLabel`, `GhView.cs` |
 | dialog hangs Rhino | `Dispatcher.cs` (`DialogProbe`) |
 | a plug-in needs special rules | add `skill/nextra/plugins/<Category>.md` |
-| dots | `StatusDot.cs`, `GhDot.cs` (Windows); Mac stand-ins in `mac/Nextra.Host.Mac/MacPlatform.cs` (branch `mac`) |
-| something Mac-only | branch `mac`: `mac/`, the `#if NEXTRA_MAC` blocks in `Server.cs` / `HostPlugIn.cs`; see 08_mac |
+| dots | `StatusDot.cs`, `GhDot.cs` (Windows); Mac stand-ins in `mac/Nextra.Host.Mac/MacPlatform.cs` |
+| something Mac-only | `mac/`, the `#if NEXTRA_MAC` blocks in `Server.cs` / `HostPlugIn.cs`; see 08_mac |

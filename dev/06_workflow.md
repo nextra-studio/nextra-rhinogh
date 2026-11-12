@@ -81,9 +81,9 @@ Produces in `dist/`:
 
 Bump the version in `deploy_dev.ps1`, `package.ps1`, `bridge/server/index.js` (`VERSION`) and `bridge/manifest.json` together.
 
-**Mac:** every release also needs the Mac distribution of the same version. Build it from branch `mac` with
-`mac/package_mac.ps1` and `yak push` it too, or Mac users stay on the old version. The steps (merge `main` into `mac`,
-bump the 3 Mac version spots, run the checks, package, push) are in [08_mac.md](08_mac.md) §7.
+**Mac:** every release also needs the Mac distribution of the same version. Build it with `mac/package_mac.ps1` and
+`yak push` it too, or Mac users stay on the old version. Also bump the 3 Mac version spots. Steps:
+[08_mac.md](08_mac.md) §7.
 
 ## Debugging
 

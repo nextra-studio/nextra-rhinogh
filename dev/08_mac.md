@@ -9,7 +9,7 @@ real-Mac report decides what to fix (see §8).
 ```
                  same source code (src/)
                 /                       \
-  Windows build (src/*.csproj)       Mac build (mac/*.csproj, branch `mac`)
+  Windows build (src/*.csproj)       Mac build (mac/*.csproj)
   net8.0-windows, WinForms/WPF       net7.0, no UI framework
   Nextra.Host.rhp + Nextra.Engine    Nextra.Host.rhp + Nextra.Engine
   -> Nextra-RhinoGh-<v>-rh8_0-win.yak  -> Nextra-RhinoGh-<v>-rh8_0-mac.yak
@@ -27,19 +27,22 @@ real-Mac report decides what to fix (see §8).
 
 ## 2. Where the code lives
 
-| what | branch | notes |
+Everything is on `main`; it was merged in on 2026-11-12. The `mac` branch was the staging layer and is kept only for
+history; do new work on `main`.
+
+| what | where | notes |
 |---|---|---|
-| plug-in code shared by both | `main` and `mac` (`src/`) | `mac` adds 3 `#if NEXTRA_MAC` blocks in `src/Nextra.Host/Server.cs` + `HostPlugIn.cs` |
-| Mac build overlay `mac/` | **`mac` only** | projects, Mac stand-ins, tests, packaging, `mac/README.md` |
-| bridge Mac path fix | `main` and `mac` | `bridge/server/index.js` + `plugin/nextra-rhinogh/server/index.js` |
-| `NextraRhinoGh-Setup.command` (Mac Node.js setup) | `main` and `mac` | Mac counterpart of `NextraRhinoGh-Setup.bat` |
-| README install docs (Windows + Mac) | `main` and `mac` | the "On a Mac (beta)" section |
+| plug-in code shared by both | `src/` | 3 `#if NEXTRA_MAC` blocks in `src/Nextra.Host/Server.cs` + `HostPlugIn.cs` |
+| Mac build overlay | `mac/` | projects, Mac stand-ins, tests, packaging, `mac/README.md` |
+| bridge Mac path fix | `bridge/server/index.js` + `plugin/nextra-rhinogh/server/index.js` | one file for both systems |
+| Mac Node.js setup | `NextraRhinoGh-Setup.command` | Mac counterpart of `NextraRhinoGh-Setup.bat` |
+| install docs (Windows + Mac) | `README.md` | the "On a Mac (beta)" section |
 
 `NEXTRA_MAC` is defined only in `mac/Directory.Build.props`. The Windows compiler never sees those blocks.
-`mac/tests/windows_unchanged.ps1` proves this: it builds the Windows host and engine from `main` and from the branch,
-and the bytes are identical.
+`mac/tests/windows_unchanged.ps1 -Base <ref>` proves this: it builds the Windows host and engine from `<ref>` and from
+the current checkout, and the bytes are identical. It was run before and after the merge into `main`.
 
-### mac/ folder (branch `mac`)
+### mac/ folder
 
 | path | what |
 |---|---|
@@ -99,24 +102,26 @@ with these reference assemblies.
 4. RhinoCode Python 3 / C# (`run`); `~/.rhinocode` exists on Mac too.
 5. The process-name guard: the Mac executable is `Rhinoceros`, which passes `StartsWith("Rhino")`.
 
-The smoke test is in `mac/README.md` (branch `mac`). Logs: `~/Library/Application Support/NextraRhinoGh/logs/`.
+The smoke test is in `mac/README.md`. Logs: `~/Library/Application Support/NextraRhinoGh/logs/`.
 
 ## 7. Release: always push BOTH distributions
 
 Each new version needs the Windows and the Mac `.yak`, or Mac users stay on the old version.
 
-1. **Windows (on `main`)**: bump the version everywhere (06_workflow, Packaging) → `powershell tools/package.ps1` →
-   `yak push dist\nextra-rhinogh-<v>-rh8_0-win.yak` → GitHub release as usual.
-2. **Mac (on `mac`)**:
+Both are built from `main`:
+
+1. **Version**: bump it everywhere (06_workflow, Packaging) **plus** the 3 Mac spots: `<Version>` in
+   `mac/Nextra.Host.Mac/Nextra.Host.Mac.csproj` and `mac/Nextra.Engine.Mac/Nextra.Engine.Mac.csproj`, and `$ver` in
+   `mac/package_mac.ps1`.
+2. **Windows**: `powershell tools/package.ps1` → `yak push dist\nextra-rhinogh-<v>-rh8_0-win.yak` → GitHub release as usual.
+3. **Mac**:
    ```powershell
-   git switch mac; git merge main            # brings src/, bridge, docs; conflicts only if main edited next to an #if block
-   # bump <Version> in mac/Nextra.Host.Mac/*.csproj and mac/Nextra.Engine.Mac/*.csproj, $ver in mac/package_mac.ps1
-   powershell -File mac/tests/windows_unchanged.ps1 -Base main   # must PASS
    node mac/tests/bridge_mac.js                                  # must PASS
    powershell -File mac/package_mac.ps1                          # runs PortScan, builds mac/dist/*.yak
    & "C:\Program Files\Rhino 8\System\Yak.exe" push mac\dist\nextra-rhinogh-<v>-rh8_0-mac.yak
-   git push
    ```
+   If you edited `src/Nextra.Host/Server.cs` or `HostPlugIn.cs` near an `#if NEXTRA_MAC` block, also build the Mac
+   projects once to make sure both variants still compile.
 3. Check that both are listed: `curl https://yak.rhino3d.com/versions/Nextra-RhinoGh` → the version has `platform: win` and `platform: mac`.
 
 New engine source files are picked up automatically (wildcard). A **new host file** is also compiled on Mac. If it uses
@@ -126,20 +131,21 @@ to match.
 
 ## 8. Website and docs
 
-- `README.md` (both branches): Windows/Mac install steps and an "On a Mac (beta)" section. Mac Node.js setup:
+- `README.md`: Windows/Mac install steps and an "On a Mac (beta)" section. Mac Node.js setup:
   `curl -fsSL https://raw.githubusercontent.com/nextra-studio/nextra-rhinogh/main/NextraRhinoGh-Setup.command | bash`.
   Keep that file on `main` at that path, or the link breaks.
-- nextra.studio (private repo `nextra-studio/nextra-site`, content in Supabase `catalog_tools`), branch
-  `rhinogh-mac-beta`:
+- nextra.studio (private repo `nextra-studio/nextra-site`, content in Supabase `catalog_tools`); merged into its
+  `main` on 2026-11-12:
   - `InstallGuide.js` shows a Windows / Mac chooser when `install.mac` exists. Mac visitors start on Mac.
   - The Mac guide text is `install.mac` in `src/content/tools/rhino-gh.js`.
   - It is stored in the database as `ai_install.mac`. The admin form and save route pass it through unchanged.
   - `scripts/update-rhinogh-mac.mjs` writes it (needs `.env.local`).
-  - **Live only after** the branch is merged/deployed **and** the script has been run (as of 2026-11-12: not yet).
+  - **The Mac tab appears only after that script has run once** (as of 2026-11-12: not yet). Until then the page looks
+    as before. To change the Mac text later: edit `rhino-gh.js` and run the script again.
 
 ## 9. Ideas for later
 
 - Mac status dot: an Eto floating window, or a Rhino status-bar pane.
 - GH canvas dot on Mac: needs testing of WinForms events on GH for Mac.
 - Dialog detection on Mac: macOS Accessibility API (needs a permission prompt).
-- Fold the Mac build into `main` (multi-target) once it is proven on a real Mac. The `mac` branch is only a staging layer.
+- Once proven on a real Mac: one multi-targeted host project instead of `src/` + `mac/` projects.
