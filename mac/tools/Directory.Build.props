@@ -1,0 +1,3 @@
+<Project>
+  <!-- Stops mac/Directory.Build.props (plug-in settings) from applying to the stand-alone tools in this folder. -->
+</Project>

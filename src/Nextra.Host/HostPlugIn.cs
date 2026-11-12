@@ -111,7 +111,11 @@ namespace Nextra.Host
             if (i == iBridge)
             {
                 var p = NextraHostPlugIn.BridgePath;
+#if NEXTRA_MAC
+                try { MacShell.CopyText(p); } catch { }
+#else
                 try { System.Windows.Clipboard.SetText(p); } catch { }
+#endif
                 RhinoApp.WriteLine(System.IO.File.Exists(p)
                     ? "NextraRhinoGh: bridge path copied to the clipboard: " + p + "  (MCP server: command node, argument this path)"
                     : "NextraRhinoGh: no bridge at " + p + " (it is copied there when the Yak package starts)");
@@ -149,7 +153,11 @@ namespace Nextra.Host
         {
             var dir = NextraHostPlugIn.InitUserFolder() ?? System.IO.Path.Combine(Server.AppDir, "user");
             System.IO.Directory.CreateDirectory(dir);
+#if NEXTRA_MAC
+            try { MacShell.Reveal(dir); } catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: Finder did not open: " + e.Message); }
+#else
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", "\"" + dir + "\"") { UseShellExecute = true });
+#endif
             RhinoApp.WriteLine("NextraRhinoGh: your folder " + dir + " (preferences.md, workflows, plugins, scripts — see README.md there)");
             return Result.Success;
         }

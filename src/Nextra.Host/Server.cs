@@ -29,7 +29,12 @@ namespace Nextra.Host
         {
             get
             {
+#if NEXTRA_MAC
+                // fixed path: ApplicationData is ~/.config on .NET 7 but ~/Library/Application Support on .NET 8 (the bridge looks here)
+                var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Application Support", "NextraRhinoGh");
+#else
                 var d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "NextraRhinoGh");
+#endif
                 Directory.CreateDirectory(d);
                 return d;
             }

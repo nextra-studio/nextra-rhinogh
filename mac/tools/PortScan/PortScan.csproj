@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Stand-alone checker, not part of the plug-in. Kept out of src/Directory.Build.props on purpose. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+</Project>

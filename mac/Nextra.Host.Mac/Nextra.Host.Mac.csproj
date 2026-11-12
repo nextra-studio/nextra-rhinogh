@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Mac build of the host plug-in. Uses the shared sources in src/Nextra.Host, minus the three Windows-only files
+       (floating status dot, GH canvas dot, Win32 dialog probe), which MacPlatform.cs replaces. Same assembly name and
+       plug-in GUID as Windows, so it is the same plug-in to Rhino and Yak. -->
+  <PropertyGroup>
+    <AssemblyName>Nextra.Host</AssemblyName>
+    <RootNamespace>Nextra.Host</RootNamespace>
+    <TargetExt>.rhp</TargetExt>
+    <Version>0.1.8</Version>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\src\Nextra.Host\*.cs" Exclude="..\..\src\Nextra.Host\StatusDot.cs;..\..\src\Nextra.Host\GhDot.cs;..\..\src\Nextra.Host\DialogProbe.cs" LinkBase="shared" />
+    <Compile Include="MacPlatform.cs" />
+  </ItemGroup>
+  <!-- same pin as the Windows host: first Rhino 8 release, so Yak tags it rh8_0 -->
+  <ItemGroup>
+    <PackageReference Include="RhinoCommon" Version="8.0.23304.9001" ExcludeAssets="runtime" />
+  </ItemGroup>
+</Project>

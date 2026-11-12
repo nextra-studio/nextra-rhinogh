@@ -1,0 +1,25 @@
+<Project>
+  <!-- Mac build settings. Replaces src/Directory.Build.props for projects under mac/ only; the Windows build never reads this file. -->
+  <PropertyGroup>
+    <!-- net7.0, no "-windows": runs on Rhino 8 for Mac with the .NET 7 or the .NET 8 runtime; no WPF / WinForms framework -->
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <DefineConstants>$(DefineConstants);NEXTRA_MAC</DefineConstants>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <!-- host + engine land side by side: the host loads Nextra.Engine.dll from its own folder -->
+    <OutputPath>$(MSBuildThisFileDirectory)out\$(Configuration)\</OutputPath>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <!-- CS1591 docs, NU1701 net48 RhinoCommon in a net7.0 project (same as the Windows host), CS0618 obsolete Rhino APIs.
+         CA1416 (Windows-only API) is NOT hidden here: mac/build.py reports every call site. -->
+    <NoWarn>CS1591;NU1701;CS0618;NETSDK1138</NoWarn>
+    <!-- Rhino.Runtime.Code.dll is not on NuGet: compile against a local Rhino 8 copy (compile-only, never shipped).
+         Windows: the default below. Mac: pass -p:RhinoCodeDll=".../Rhino.Runtime.Code.dll" from the Rhino app bundle. -->
+    <RhinoCodeDll Condition="'$(RhinoCodeDll)' == '' And '$(OS)' == 'Windows_NT'">C:\Program Files\Rhino 8\System\Rhino.Runtime.Code.dll</RhinoCodeDll>
+    <RhinoCodeDll Condition="'$(RhinoCodeDll)' == ''">$(MSBuildThisFileDirectory)refs/Rhino.Runtime.Code.dll</RhinoCodeDll>
+  </PropertyGroup>
+</Project>

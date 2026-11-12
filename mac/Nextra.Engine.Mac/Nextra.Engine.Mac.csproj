@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Mac build of the engine: every source file of src/Nextra.Engine, unchanged. Hot reload works the same way. -->
+  <PropertyGroup>
+    <AssemblyName>Nextra.Engine</AssemblyName>
+    <RootNamespace>Nextra.Engine</RootNamespace>
+    <Version>0.1.8</Version>
+    <DebugType>portable</DebugType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DesktopRef>$(NuGetPackageRoot)microsoft.windowsdesktop.app.ref/7.0.20/ref/net7.0/</DesktopRef>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\src\Nextra.Engine\**\*.cs" Exclude="..\..\src\Nextra.Engine\obj\**;..\..\src\Nextra.Engine\bin\**" LinkBase="shared" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- RhinoCommon/Grasshopper: the version installed with the Windows build, net7.0 lib = the cross-platform RhinoCommon -->
+    <PackageReference Include="RhinoCommon" Version="8.36.26296.17001" ExcludeAssets="runtime" />
+    <PackageReference Include="Grasshopper" Version="8.36.26296.17001" ExcludeAssets="runtime" />
+    <Reference Include="Rhino.Runtime.Code"><HintPath>$(RhinoCodeDll)</HintPath><Private>false</Private></Reference>
+    <!-- Compile-only: Grasshopper's API exposes WinForms types (component menus, canvas) and System.Drawing.
+         Rhino for Mac supplies both at run time (RhinoCommon itself references System.Windows.Forms 7.0 and
+         System.Drawing.Common 7.0). Nothing from this pack is copied to the output. -->
+    <PackageDownload Include="Microsoft.WindowsDesktop.App.Ref" Version="[7.0.20]" />
+    <Reference Include="System.Windows.Forms"><HintPath>$(DesktopRef)System.Windows.Forms.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Windows.Forms.Primitives"><HintPath>$(DesktopRef)System.Windows.Forms.Primitives.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing.Common"><HintPath>$(DesktopRef)System.Drawing.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing"><HintPath>$(DesktopRef)System.Drawing.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
