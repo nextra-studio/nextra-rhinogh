@@ -46,12 +46,16 @@ def badge(x, y, n):
     return f'<circle class="badge" cx="{x}" cy="{y}" r="11"/><text class="bn" x="{x}" y="{y+4.5}" text-anchor="middle">{n}</text>'
 
 
+# the plug-in icon (Nextra N, tools/make_icon.py), taken from the data URI inside docs/img/icon.svg
+with open(os.path.join(repo, "docs", "img", "icon.svg"), encoding="utf-8") as _f:
+    ICON = _f.read().split('href="', 1)[1].split('"', 1)[0]
+
 # 1 Rhino Package Manager
 svg("rhino-package-manager.svg", 720, 250,
     window(20, 16, 680, 218, "Rhino — Package Manager")
     + field(44, 72, 300, "Search", "Nextra-RhinoGh") + badge(352, 98, 1)
     + '<rect class="f" x="44" y="128" width="632" height="76" rx="8"/>'
-    + '<rect x="60" y="142" width="48" height="48" rx="10" fill="#1A7F37"/><path d="M73 180v-28l22 22v-22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
+    + f'<image x="60" y="142" width="48" height="48" href="{ICON}"/>'
     + '<text class="t" x="124" y="162">Nextra-RhinoGh</text><text class="s" x="124" y="184">by Tatsuki · AI tools for Rhino 8 + Grasshopper</text>'
     + button(560, 150, 96, "Install", n=2))
 

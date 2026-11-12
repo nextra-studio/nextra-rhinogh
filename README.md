@@ -1,3 +1,5 @@
+<img src="docs/img/icon.png" alt="" width="64" align="right">
+
 # NextraRhinoGh — Rhino 8 + Grasshopper
 
 Six token-lean tools let an LLM build and change Rhino models and Grasshopper definitions. It works from ChatGPT desktop / Codex, Claude Desktop, Claude Code, or any MCP client. Replies say what changed, images carry tags the model can point at, and model and definition edits receive undo checkpoints.

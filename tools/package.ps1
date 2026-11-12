@@ -16,6 +16,8 @@ Copy-Item "$repo\skill\nextra" (Join-Path $stage "skill") -Recurse
 # plug-in guides (plugins/Karamba3D.md, _TEMPLATE.md …) belong to the skill only, not to the Rhino plug-in
 Remove-Item (Join-Path $stage "skill\plugins") -Recurse -Force -ErrorAction SilentlyContinue
 Copy-Item "$repo\bridge" (Join-Path $stage "bridge") -Recurse
+# Package Manager icon (Nextra N; made by tools/make_icon.py)
+Copy-Item "$repo\docs\img\icon.png" (Join-Path $stage "icon.png")
 @"
 ---
 name: Nextra-RhinoGh
@@ -24,6 +26,7 @@ authors:
 - Tatsuki
 description: NextraRhinoGh for Rhino 8 + Grasshopper. Six token-lean tools (view, query, run, gh_edit, undo, memory) for any MCP client.
 url: https://nextra.studio/
+icon: icon.png
 keywords: [mcp, llm, ai, grasshopper]
 "@ | Set-Content -Encoding utf8 (Join-Path $stage "manifest.yml")
 

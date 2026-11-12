@@ -9,12 +9,13 @@ out = os.path.join(repo, "dist", f"nextra-rhinogh-{ver}.mcpb")
 os.makedirs(os.path.dirname(out), exist_ok=True)
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     z.write(os.path.join(src, "manifest.json"), "manifest.json")
+    z.write(os.path.join(repo, "docs", "img", "icon-256.png"), "icon.png")   # manifest "icon" (tools/make_icon.py)
     for root, _, files in os.walk(os.path.join(src, "server")):
         for f in sorted(files):
             full = os.path.join(root, f)
             z.write(full, os.path.relpath(full, src).replace(os.sep, "/"))
 with zipfile.ZipFile(out) as z:
     names = z.namelist()
-assert "manifest.json" in names and "server/index.js" in names, names
+assert "manifest.json" in names and "server/index.js" in names and "icon.png" in names, names
 print(f"{out}: {len(names)} files")
 sys.exit(0)
