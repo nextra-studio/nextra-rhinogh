@@ -15,7 +15,7 @@
     <OutputPath>$(MSBuildThisFileDirectory)out\$(Configuration)\</OutputPath>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <!-- CS1591 docs, NU1701 net48 RhinoCommon in a net7.0 project (same as the Windows host), CS0618 obsolete Rhino APIs.
-         CA1416 (Windows-only API) is NOT hidden here: mac/build.py reports every call site. -->
+         Portability is checked on the built output instead: mac/tools/PortScan (refs + P/Invokes). -->
     <NoWarn>CS1591;NU1701;CS0618;NETSDK1138</NoWarn>
     <!-- Rhino.Runtime.Code.dll is not on NuGet: compile against a local Rhino 8 copy (compile-only, never shipped).
          Windows: the default below. Mac: pass -p:RhinoCodeDll=".../Rhino.Runtime.Code.dll" from the Rhino app bundle. -->

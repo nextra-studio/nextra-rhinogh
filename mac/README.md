@@ -7,7 +7,7 @@ The Windows projects, build settings, packaging and version files are untouched.
 |---|---|---|
 | Host `.rhp` | `src/Nextra.Host` (net8.0-windows, WinForms/WPF) | `mac/Nextra.Host.Mac`: same sources (net7.0) minus 3 Windows-only files |
 | Engine | `src/Nextra.Engine` | `mac/Nextra.Engine.Mac`: **all** engine sources, unchanged |
-| Bridge (Node) | `bridge/server/index.js` | same file: looks in `~/Library/Application Support/NextraRhinoGh` on macOS |
+| Bridge (Node) | `bridge/server/index.js` | same file; **on this branch only** it looks in `~/Library/Application Support/NextraRhinoGh` on macOS |
 | Yak package | `tools/package.ps1` → `-rh8_0-win.yak` | `mac/package_mac.ps1` → `-rh8_0-mac.yak` |
 
 ## What changed in shared files
@@ -40,11 +40,18 @@ reload, and all six tools.
 | Builds without any Windows SDK | `mac/tests/linux_build.sh` in `mcr.microsoft.com/dotnet/sdk:8.0` (Linux) | 0 warnings, 0 errors |
 | No Windows-only dependencies | `mac/tools/PortScan check`: assembly refs + P/Invokes read from metadata | PASS: no P/Invokes at all; host references only BCL + RhinoCommon |
 | WinForms / Drawing the engine needs exist on Mac | engine refs `System.Windows.Forms 7.0.0.0` and `System.Drawing.Common 7.0.0.0`, the exact identities the cross-platform RhinoCommon (net7.0, the same binary Rhino Mac runs) references | match |
-| Windows-only API calls (CA1416 analyzer, enabled in the Mac build) | `dotnet build` of both Mac projects | 0 warnings |
 | Bridge finds a Mac Rhino and relays calls | `node mac/tests/bridge_mac.js`: real bridge process, macOS platform, fake home and fake Rhino host, MCP over stdio. Run on Windows Node 24 and Linux Node 20 (Docker) | PASS (also for the `plugin/` copy) |
 | Windows bridge unchanged | same test with `APPDATA` set, plus `node test/regress/bridge_checks.js` | PASS |
-| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from `main` and from this branch, compares bytes | **byte-identical** |
+| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from `main` and from this branch, compares bytes | **byte-identical** (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT) |
 | Mac Yak package | `mac/package_mac.ps1` | `nextra-rhinogh-0.1.8-rh8_0-mac.yak` |
+
+## Known gap until the bridge change reaches `main`
+
+The Claude Code / Codex marketplace plug-in and the `.mcpb` are built from `main`. Their bridge still looks in
+`~/.config` on a Mac, so a Mac user who installs them that way gets "no Rhino running". The bridge the Mac Yak
+package copies to `~/Library/Application Support/NextraRhinoGh/bridge/index.js` does have the fix, and the smoke test
+below uses that one. Merging only the 6-line bridge change into `main` closes the gap. Its Windows path is unchanged
+(see the tests).
 
 ## Not proven yet (needs a real Mac)
 
@@ -58,8 +65,10 @@ reload, and all six tools.
 
 ## 10-minute smoke test on a Mac
 
-1. Copy `nextra-rhinogh-0.1.8-rh8_0-mac.yak` to the Mac. In Rhino 8, run `_PackageManager` and install from file,
-   or run `"/Applications/Rhino 8.app/Contents/Resources/bin/yak" install <file>`. Then restart Rhino.
+1. Copy `nextra-rhinogh-0.1.8-rh8_0-mac.yak` to the Mac. Install it with Rhino's Package Manager or the `yak` CLI
+   inside the Rhino app bundle (exact steps not verified; e.g. `find "/Applications/Rhino 8.app" -name yak` then
+   `<that path> install <file>`), then restart Rhino. If neither works, unzip the `.yak` (it is a zip) and drag
+   `Nextra.Host.rhp` onto Rhino. `Nextra.Engine.dll` must sit next to it.
 2. The command line should say `NextraRhinoGh: ready on 127.0.0.1:8765 …`. If it doesn't, run `NextraRhinoGh` and copy
    the message.
 3. `ls ~/Library/Application\ Support/NextraRhinoGh/` should show `server-<pid>.json` and `bridge/index.js`.
