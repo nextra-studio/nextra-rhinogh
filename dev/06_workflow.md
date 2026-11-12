@@ -81,11 +81,16 @@ Produces in `dist/`:
 
 Bump the version in `deploy_dev.ps1`, `package.ps1`, `bridge/server/index.js` (`VERSION`) and `bridge/manifest.json` together.
 
+**Mac:** every release also needs the Mac distribution of the same version. Build it from branch `mac` with
+`mac/package_mac.ps1` and `yak push` it too, or Mac users stay on the old version. The steps (merge `main` into `mac`,
+bump the 3 Mac version spots, run the checks, package, push) are in [08_mac.md](08_mac.md) §7.
+
 ## Debugging
 
 | symptom | look at |
 |---|---|
-| "Rhino is not reachable" | Is Rhino running? Dot colour? `%APPDATA%/Nextra/server-*.json` exists and the pid is alive? `NextraOn` |
+| "Rhino is not reachable" | Is Rhino running? Dot colour? `%APPDATA%/NextraRhinoGh/server-*.json` exists and the pid is alive? `NextraRhinoGh` → `On` |
+| Mac: "Rhino is not reachable" | no dot on Mac: run `NextraRhinoGh` in Rhino. `~/Library/Application Support/NextraRhinoGh/server-*.json` exists? A bridge older than the Mac fix looks in `~/.config` (08_mac §4) |
 | several instances refused | expected: pass `instance:"file.3dm"` |
 | `timeout` / `busy` | `query {scope:'status'}`: a dialog name and its text. The late result comes with the next call |
 | internal engine error | `%APPDATA%/Nextra/logs/engine-YYYYMMDD.log` has the full stack |

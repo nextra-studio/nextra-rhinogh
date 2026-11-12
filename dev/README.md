@@ -12,6 +12,7 @@ The user-facing docs are elsewhere: `README.md` covers install and the tool over
 | [05_internals.md](05_internals.md) | the subsystems behind the tools: handles, deltas, checkpoints, oriented boxes, vision, layout, component state, scripts, memory, plug-in guides |
 | [06_workflow.md](06_workflow.md) | building, hot reload, testing with `nx.py`, packaging, adding features, debugging, known pitfalls |
 | [07_plugins_and_marketplaces.md](07_plugins_and_marketplaces.md) | Claude and OpenAI folder rules, marketplace discovery, ZIP layout, workspace settings, and implementation audit |
+| [08_mac.md](08_mac.md) | the Mac version (beta): one plug-in with two `.rhp` builds, the `mac` branch overlay, what differs on a Mac, evidence, open risks, and how to release both distributions |
 | [Nextra.zero_RhinoGh_Plan.md](Nextra.zero_RhinoGh_Plan.md) | the original plan the build started from |
 | [BUILD_PLAN.md](BUILD_PLAN.md) | checklist of every requested item and its status |
 | [reference/](reference/) | earlier code the design learned from: old nextra.gh, rhino_tools vision/OBB, Shiba Tidy |
@@ -27,7 +28,8 @@ This folder is information only. It is not part of the skill: the skill is `skil
       ▼
  bridge/server/index.js          Node, zero dependencies
       │  HTTP POST 127.0.0.1:<port>/call  + X-Nextra-Token
-      │  (port/token read from %APPDATA%/Nextra/server-<pid>.json)
+      │  (port/token read from %APPDATA%/NextraRhinoGh/server-<pid>.json;
+      │   Mac: ~/Library/Application Support/NextraRhinoGh/)
       ▼
  Nextra.Host.rhp  (inside Rhino)  server thread → Dispatcher → Rhino UI thread
       │  reflection call Entry.Call(tool, argsJson, state)
