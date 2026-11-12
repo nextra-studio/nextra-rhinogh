@@ -81,6 +81,13 @@ Produces in `dist/`:
 
 Bump the version in `deploy_dev.ps1`, `package.ps1`, `bridge/server/index.js` (`VERSION`) and `bridge/manifest.json` together.
 
+**Icon** (one source, `docs/img/icon-source.png` → `tools/make_icon.py`), used by:
+- Yak (`icon: icon.png` in both package scripts): shows in Rhino PackageManager. A Yak version is immutable, so a new icon appears with the next version.
+- the Claude/ChatGPT plug-in: `assets/icon.svg`, brand colour `#32D5A0`
+- `.mcpb`: `icon.png` + manifest `icon`
+- README title and the PackageManager install diagram
+- website: the nextra-site copy `public/media/tools/rhino-gh/icon.png` is the 256 px version. Copy it again when the icon changes.
+
 **Mac:** every release also needs the Mac distribution of the same version. Build it with `mac/package_mac.ps1` and
 `yak push` it too, or Mac users stay on the old version. Also bump the 3 Mac version spots. Steps:
 [08_mac.md](08_mac.md) §7.

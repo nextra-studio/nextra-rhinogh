@@ -111,6 +111,7 @@ Project files: `Nextra.Engine.csproj`, `Nextra.Host.csproj`, and `src/Directory.
 | `deploy_dev.ps1` | **Rhino closed.** Builds both projects, installs the dev package folder, points `config.json` at the build output so hot reload works, syncs `.claude/skills` |
 | `package.ps1` | release: Yak package + `.mcpb` + claude.ai skill zip into `dist/` |
 | `make_skill_zip.py` | `dist/nextra-rhinogh-skill.zip` (folder `nextra-rhinogh/` with SKILL.md, forward-slash entries) |
+| `make_icon.py` | plug-in icon from `docs/img/icon-source.png` (the Nextra N, transparent, 1254 px): trims, squares, writes `docs/img/icon.png` (512), `icon-256.png`, `icon.svg` (128 px PNG inside). To change the icon: replace the source, run this, then `make_plugin.py` and `make_install_images.py` |
 | `nx.py` | test client: `python tools/nx.py <tool> '<json>'`, `--code file.py`, `health`, `reload`; logs to `test/calls.jsonl` with token estimates |
 | `mcp_http.py` | helper for the benchmark: talks MCP to other servers over HTTP/stdio |
 
