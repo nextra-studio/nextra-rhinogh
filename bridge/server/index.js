@@ -8,7 +8,11 @@ const path = require("path");
 const http = require("http");
 const readline = require("readline");
 
-const APPDIR = path.join(process.env.APPDATA || path.join(require("os").homedir(), ".config"), "NextraRhinoGh");
+// Windows: %APPDATA% (always set there, so the lines below never change Windows). macOS: the Mac plug-in writes to
+// ~/Library/Application Support (fixed path in the host, same as .NET 8's ApplicationData on macOS). Other: ~/.config.
+const APPDIR = path.join(process.env.APPDATA || (process.platform === "darwin"
+  ? path.join(require("os").homedir(), "Library", "Application Support")
+  : path.join(require("os").homedir(), ".config")), "NextraRhinoGh");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
 const VERSION = "0.1.8";
 
