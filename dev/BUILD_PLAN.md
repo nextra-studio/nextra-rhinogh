@@ -136,4 +136,5 @@ User rule: consistency, so Windows and Mac share code wherever possible. Details
 - [x] M3 Found + fixed live: Windows minimum window size (size re-applied after Show) and Eto.Wpf DWM blur-behind (grey square; switched off in `WindowsQuirks.cs`). PortScan gained `members`, `callers`, `il`, `field` for reading APIs/IL without a decompiler
 - [x] M4 Live check in Rhino 8.36 (Windows): size, transparency, red/amber/green, click restart, drag + saved offset, minimise/restore, focus, not over other apps, over GH editor, GH canvas dot, clipboard
 - [x] M5 Full regression suite on this branch: 238/239. The one failure (`00_session #2`: `memory list` reply no longer contains "prefs") is an out-of-date test expectation in the unchanged engine, not caused by this branch
-- [ ] M6 User review → merge into `main`; next release ships it (both .yak); then update the website's Mac text ("no status dot" → same dot)
+- [x] M6 Merged into `main` (2026-11-13, fast-forward c2e78db) after user review
+- [ ] M7 Next release ships it (both .yak); then change the website Mac text ("no status dot" → same dot)
