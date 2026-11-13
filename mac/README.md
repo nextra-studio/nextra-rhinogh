@@ -41,7 +41,7 @@ the server, token, per-instance `server-<pid>.json`, engine hot reload, and all 
 | Bridge finds a Mac Rhino and relays calls | `node mac/tests/bridge_mac.js`: real bridge process, macOS platform, fake home and fake Rhino host, MCP over stdio. Run on Windows Node 24 and Linux Node 20 (Docker) | PASS (also for the `plugin/` copy) |
 | Windows bridge unchanged | same test with `APPDATA` set, plus `node test/regress/bridge_checks.js` | PASS |
 | **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from a base commit and from the current checkout, compares bytes (run before and after the merge into `main`) | **byte-identical** up to the Eto UI change (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT). The Eto change alters the Windows host on purpose and was verified live in Rhino instead (`dev/08_mac.md` §10) |
-| Mac Yak package | `mac/package_mac.ps1` | `nextra-rhinogh-0.1.8-rh8_0-mac.yak` |
+| Mac Yak package | `mac/package_mac.ps1` | `nextra-rhinogh-0.1.9-rh8_0-mac.yak` |
 
 ## Bridge
 
@@ -60,7 +60,7 @@ release asset only gets the fix with the next release that rebuilds it.
 
 ## 10-minute smoke test on a Mac
 
-1. Copy `nextra-rhinogh-0.1.8-rh8_0-mac.yak` to the Mac. Install it with Rhino's Package Manager or the `yak` CLI
+1. Copy `nextra-rhinogh-0.1.9-rh8_0-mac.yak` to the Mac. Install it with Rhino's Package Manager or the `yak` CLI
    inside the Rhino app bundle (exact steps not verified; e.g. `find "/Applications/Rhino 8.app" -name yak` then
    `<that path> install <file>`), then restart Rhino. If neither works, unzip the `.yak` (it is a zip) and drag
    `Nextra.Host.rhp` onto Rhino. `Nextra.Engine.dll` must sit next to it.

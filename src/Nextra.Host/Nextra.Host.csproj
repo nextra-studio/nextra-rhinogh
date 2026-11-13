@@ -3,7 +3,7 @@
     <AssemblyName>Nextra.Host</AssemblyName>
     <RootNamespace>Nextra.Host</RootNamespace>
     <TargetExt>.rhp</TargetExt>
-    <Version>0.1.8</Version>
+    <Version>0.1.9</Version>
     <!-- WPF only for DialogProbe.cs (Windows UI Automation). The dots and the clipboard are Eto, shared with Mac. -->
     <UseWPF>true</UseWPF>
   </PropertyGroup>

@@ -3,7 +3,7 @@
 $ErrorActionPreference = "Stop"
 $mac = $PSScriptRoot
 $repo = Split-Path -Parent $mac
-$ver = "0.1.8"
+$ver = "0.1.9"
 $dist = Join-Path $mac "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue

@@ -111,7 +111,7 @@ def reset(c):
 def c00():
     c = Case("00_session", "session start, status, docs, memory empty")
     c.call("query", {"scope": "status"}, expect=[r"engine", r"idle"])
-    c.call("memory", {"action": "list"}, expect=[r"prefs", r"library"])
+    c.call("memory", {"action": "list"}, expect=[r"preferences", r"library"])   # reply says "your preferences" since the user folder (was "prefs")
     c.call("query", {"scope": "docs"}, expect=[r"shorthand", r"workflows"])
     c.call("query", {"scope": "docs", "filter": "shorthand"}, expect=[r"## Create", r"\^f"])
     c.call("query", {"scope": "components", "filter": "loft, divide curve"}, expect=[r"Loft", r"Divide Curve.*in:"])
