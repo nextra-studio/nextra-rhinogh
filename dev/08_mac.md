@@ -1,6 +1,6 @@
 # 08 — Mac version
 
-Status (2026-11-12): **beta, published.** Yak `Nextra-RhinoGh 0.1.8` has a `rh8_0-mac` distribution next to the
+Status (2026-11-13): **beta, published.** Yak `Nextra-RhinoGh 0.1.9` (Eto status dot, icon) has a `rh8_0-mac` distribution next to the
 Windows ones. It builds and passes the automated checks below, but **nobody has run it on a real Mac yet**. The first
 real-Mac report decides what to fix (see §8).
 

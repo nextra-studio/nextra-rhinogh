@@ -138,5 +138,6 @@ User rule: consistency, so Windows and Mac share code wherever possible. Details
 - [x] M5 Full regression suite on this branch: 238/239. The one failure (`00_session #2`: `memory list` reply no longer contains "prefs") is an out-of-date test expectation in the unchanged engine, not caused by this branch
 - [x] M6 Merged into `main` (2026-11-13, fast-forward c2e78db) after user review
 - [x] M7a Release 0.1.9 built: dist/nextra-rhinogh-0.1.9-rh8_0-win.yak + mac/dist/nextra-rhinogh-0.1.9-rh8_0-mac.yak (icon, Eto dot), plug-in ZIPs, .mcpb; versions bumped; regress test fixed (6/6 case 00)
-- [ ] M7b Publish (user): yak push both, gh release v0.1.9 (Yak push was blocked for the assistant: public, irreversible)
-- [ ] M7c After M7b: merge nextra-site branch `rhinogh-0.1.9-mac-dot`, run scripts/update-rhinogh-mac.mjs (needs .env.local, not on this PC)
+- [x] M7b Published 2026-11-13 (user asked explicitly): Yak 0.1.9 win + mac, GitHub release v0.1.9 (Latest, 8 assets incl. Setup.command and the Mac .yak)
+- [x] M7c nextra-site branch `rhinogh-0.1.9-mac-dot` merged into its main
+- [ ] M7d Run nextra-site `node --env-file=.env.local scripts/update-rhinogh-mac.mjs` once (user; .env.local not on this PC): makes the Mac tab live
