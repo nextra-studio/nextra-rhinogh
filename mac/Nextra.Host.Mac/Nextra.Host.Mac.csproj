@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Mac build of the host plug-in. Uses the shared sources in src/Nextra.Host, minus the three Windows-only files
-       (floating status dot, GH canvas dot, Win32 dialog probe), which MacPlatform.cs replaces. Same assembly name and
-       plug-in GUID as Windows, so it is the same plug-in to Rhino and Yak. -->
+  <!-- Mac build of the host plug-in: the shared sources in src/Nextra.Host, the same files as Windows except
+       DialogProbe.cs (reads other windows through Windows UI Automation) and WindowsQuirks.cs (undoes an Eto.Wpf
+       blur-behind on Windows); MacPlatform.cs has their Mac stand-ins.
+       The status dot, the GH canvas dot and the clipboard are Eto / Grasshopper API and compile unchanged.
+       Same assembly name and plug-in GUID as Windows, so it is the same plug-in to Rhino and Yak. -->
+  <Import Project="..\GrasshopperApiRefs.props" />
   <PropertyGroup>
     <AssemblyName>Nextra.Host</AssemblyName>
     <RootNamespace>Nextra.Host</RootNamespace>
@@ -10,11 +13,13 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\src\Nextra.Host\*.cs" Exclude="..\..\src\Nextra.Host\StatusDot.cs;..\..\src\Nextra.Host\GhDot.cs;..\..\src\Nextra.Host\DialogProbe.cs" LinkBase="shared" />
+    <Compile Include="..\..\src\Nextra.Host\*.cs" Exclude="..\..\src\Nextra.Host\DialogProbe.cs;..\..\src\Nextra.Host\WindowsQuirks.cs" LinkBase="shared" />
     <Compile Include="MacPlatform.cs" />
   </ItemGroup>
-  <!-- same pin as the Windows host: first Rhino 8 release, so Yak tags it rh8_0 -->
+  <!-- same pin as the Windows host: first Rhino 8 release, so Yak tags it rh8_0. The package also brings the Eto and
+       Rhino.UI that Rhino 8.0 shipped (Eto 2.7), so both hosts compile against the same Eto. -->
   <ItemGroup>
     <PackageReference Include="RhinoCommon" Version="8.0.23304.9001" ExcludeAssets="runtime" />
+    <PackageReference Include="Grasshopper" Version="8.0.23304.9001" ExcludeAssets="runtime" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 | **Host** | `src/Nextra.Host/` → `Nextra.Host.rhp` | Rhino plug-in, loaded at Rhino start | localhost server, UI-thread dispatcher, timeouts, dialog probe, status dots, engine loader |
 | **Engine** | `src/Nextra.Engine/` → `Nextra.Engine.dll` | loaded by the host, reloaded whenever the dll changes | all Rhino/GH logic: the 6 tools |
 
-Windows and Mac: the same host and engine sources are built twice: the Windows `.rhp` from `src/`, the Mac `.rhp` from the `mac/` overlay. On Mac, three Windows-only host files (status dot, GH dot, dialog probe) are swapped for stand-ins. See [08_mac.md](08_mac.md).
+Windows and Mac: the same host and engine sources are built twice: the Windows `.rhp` from `src/`, the Mac `.rhp` from the `mac/` overlay. The UI (status dot, GH canvas dot, clipboard) is Eto, the same code on both. Only the dialog probe and one Eto.Wpf workaround are Windows-only; they have Mac stand-ins. See [08_mac.md](08_mac.md).
 
 The split between host and engine is the main architectural choice. A `.rhp` cannot be replaced while Rhino runs, so the host does only what must never change: networking, threading and loading. Everything else is in the engine, which can be rebuilt and picked up on the next call.
 
@@ -62,7 +62,7 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 |---|---|
 | server thread (`Server.AcceptLoop`) | TCP accept, HTTP parse, token check, `status` / `dismiss`, waiting for the UI thread |
 | Rhino UI thread | every engine call, all RhinoCommon/GH access, status dot painting |
-| WinForms timers (UI thread) | status dot following the Rhino window; GH dot waiting for GH to load |
+| Eto `UITimer`s (UI thread) | status dot following the Rhino window; GH dot waiting for GH to load |
 
 `run` code (Python/C#) executes on the UI thread inside the engine call, which is why a long script can time out. The dispatcher then hands back a late result.
 
@@ -86,14 +86,16 @@ Example: the LLM calls `gh_edit {ops:"c = Circle (R=5)"}`.
 
 ## 6. Status dots and commands
 
-Windows only. On Mac there are no dots: the state is printed on the command line at start, and the `NextraRhinoGh` command shows it (08_mac §3).
+Same code on Windows and Mac (Eto; on Mac not yet seen on real hardware, 08_mac §6).
 
-- **Rhino dot** (`StatusDot.cs`) is a tiny borderless WinForms form owned by the Rhino main window.
-  - It sits just inside the bottom-right corner (near the status bar) and follows the window.
-  - It can be dragged; the offset is remembered.
-  - It is TopMost only while Rhino or the GH editor is the foreground app, so it never covers other programs.
-  - `AutoScaleMode.None` stops DPI scaling from blowing it up.
-- **GH dot** (`GhDot.cs`) is painted on the GH canvas, bottom-right, via the canvas paint event. A timer waits until GH is loaded, so no Grasshopper type is touched earlier.
+- **Rhino dot** (`StatusDot.cs`) is a tiny borderless, transparent Eto form owned by `RhinoEtoApp.MainWindow`.
+  - It sits just inside the bottom-right corner (near the status bar) and follows the window (Eto `UITimer`, 0.3 s).
+  - It can be dragged; the offset is remembered in logical pixels (`dot.txt`: `eto,x,y`).
+  - It is Topmost only while Rhino (or its GH editor) is the active app (`Application.Instance.IsActive`), so it never covers other programs.
+  - `ShowActivated = false`, so it never takes the focus from the command line.
+  - Its 16 x 16 size is set again after `Show()`: Windows enlarges new windows to a minimum size first.
+  - On Windows, `PlatformQuirks.AfterShow` (`WindowsQuirks.cs`) switches off the DWM blur-behind Eto.Wpf adds to transparent windows (otherwise a grey square shows).
+- **GH dot** (`GhDot.cs`) is painted on the GH canvas, bottom-right, via the canvas paint event. An Eto `UITimer` waits until GH is loaded, so no Grasshopper type is touched earlier.
 - **Colours** (`StatusDot.CurrentState`):
   - green = a client called within the last 90 s (the bridge sends a `status` heartbeat every 45 s)
   - amber = server up, no client

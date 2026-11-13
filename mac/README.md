@@ -5,7 +5,7 @@ The Windows projects, build settings, packaging and version files are untouched.
 
 | Part | Windows | Mac |
 |---|---|---|
-| Host `.rhp` | `src/Nextra.Host` (net8.0-windows, WinForms/WPF) | `mac/Nextra.Host.Mac`: same sources (net7.0) minus 3 Windows-only files |
+| Host `.rhp` | `src/Nextra.Host` (net8.0-windows; UI in Eto) | `mac/Nextra.Host.Mac`: same sources (net7.0, same Eto UI) minus 2 Windows-only files (dialog probe, Eto.Wpf fix) |
 | Engine | `src/Nextra.Engine` | `mac/Nextra.Engine.Mac`: **all** engine sources, unchanged |
 | Bridge (Node) | `bridge/server/index.js` | same file: looks in `~/Library/Application Support/NextraRhinoGh` on macOS |
 | Yak package | `tools/package.ps1` → `-rh8_0-win.yak` | `mac/package_mac.ps1` → `-rh8_0-mac.yak` |
@@ -17,8 +17,7 @@ The Windows projects, build settings, packaging and version files are untouched.
   - The Mac data folder is fixed to `~/Library/Application Support/NextraRhinoGh`. On macOS, .NET 7 maps
     `ApplicationData` to `~/.config` and .NET 8 maps it to `~/Library/Application Support`, so a fixed path stops
     host and bridge from looking in different places.
-  - Copying to the clipboard uses `pbcopy`, and opening the folder uses `open`. On Windows these are the WPF clipboard
-    and `explorer.exe`.
+  - Opening the folder uses `open` (Windows: `explorer.exe`). The clipboard is Eto on both systems.
 - `bridge/server/index.js` (+ the copy in `plugin/`): when `APPDATA` is not set and the platform is macOS, it uses the
   folder above. `APPDATA` is always set on Windows, so the Windows path expression is unchanged.
 
@@ -26,23 +25,22 @@ The Windows projects, build settings, packaging and version files are untouched.
 
 | Windows feature | Mac behaviour |
 |---|---|
-| Floating status dot (WinForms + user32) | none; the state is printed on the command line at start, and `NextraRhinoGh` shows it anytime |
-| Status dot on the Grasshopper canvas | none for now |
 | Dialog detection/dismiss (user32 + UI Automation) | not available: a blocked Rhino shows as a timeout, and `dismiss_dialog` asks the user to answer the dialog in Rhino |
+| Switching off Eto.Wpf's blur-behind on the transparent dot (`WindowsQuirks.cs`) | not needed (no-op) |
 
-Everything else is the same code as on Windows: the server, token, per-instance `server-<pid>.json`, engine hot
-reload, and all six tools.
+Everything else is the same code as on Windows: the status dot and the Grasshopper canvas dot (Eto), the clipboard,
+the server, token, per-instance `server-<pid>.json`, engine hot reload, and all six tools.
 
 ## Proof (what has been verified without a Mac)
 
 | Check | How | Result |
 |---|---|---|
 | Builds without any Windows SDK | `mac/tests/linux_build.sh` in `mcr.microsoft.com/dotnet/sdk:8.0` (Linux) | 0 warnings, 0 errors |
-| No Windows-only dependencies | `mac/tools/PortScan check`: assembly refs + P/Invokes read from metadata | PASS: no P/Invokes at all; host references only BCL + RhinoCommon |
+| No Windows-only dependencies | `mac/tools/PortScan check`: assembly refs + P/Invokes read from metadata | PASS: no P/Invokes at all; host references BCL, RhinoCommon, Grasshopper, Eto 2.7 / Rhino.UI and Grasshopper's WinForms/Drawing types |
 | WinForms / Drawing the engine needs exist on Mac | engine refs `System.Windows.Forms 7.0.0.0` and `System.Drawing.Common 7.0.0.0`, the exact identities the cross-platform RhinoCommon (net7.0, the same binary Rhino Mac runs) references | match |
 | Bridge finds a Mac Rhino and relays calls | `node mac/tests/bridge_mac.js`: real bridge process, macOS platform, fake home and fake Rhino host, MCP over stdio. Run on Windows Node 24 and Linux Node 20 (Docker) | PASS (also for the `plugin/` copy) |
 | Windows bridge unchanged | same test with `APPDATA` set, plus `node test/regress/bridge_checks.js` | PASS |
-| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from a base commit and from the current checkout, compares bytes (run before and after the merge into `main`) | **byte-identical** (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT) |
+| **Windows plug-in unchanged** | `mac/tests/windows_unchanged.ps1`: builds host + engine from a base commit and from the current checkout, compares bytes (run before and after the merge into `main`) | **byte-identical** up to the Eto UI change (negative control: run against `-Base 116db1b`, it correctly reports the host as DIFFERENT). The Eto change alters the Windows host on purpose and was verified live in Rhino instead (`dev/08_mac.md` §10) |
 | Mac Yak package | `mac/package_mac.ps1` | `nextra-rhinogh-0.1.8-rh8_0-mac.yak` |
 
 ## Bridge

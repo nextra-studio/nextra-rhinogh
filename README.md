@@ -214,7 +214,7 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 
 The Mac version is new. Everything above works the same, with these differences:
 
-- **No status dot.** When Rhino starts, the command line shows `NextraRhinoGh: ready on 127.0.0.1:8765`. Type `NextraRhinoGh` any time to see the state.
+- **Status dot:** the same as on Windows, but not yet confirmed on a real Mac. Type `NextraRhinoGh` any time to see the state on the command line.
 - **Dialogs.** If a Rhino dialog is open, the AI cannot see or close it. It may just wait. Answer the dialog in Rhino yourself.
 - **Your folder** is `~/Library/Application Support/NextraRhinoGh` (Windows: `%APPDATA%\NextraRhinoGh`). The `NextraRhinoGhFolder` command opens it in Finder.
 

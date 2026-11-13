@@ -136,5 +136,5 @@ Each holds the images the LLM received and the produced `.3dm` / `.gh` / scripts
 | image tags overlap or are missing | `Labels.cs`, `ViewTool.RhinoLabel`, `GhView.cs` |
 | dialog hangs Rhino | `Dispatcher.cs` (`DialogProbe`) |
 | a plug-in needs special rules | add `skill/nextra/plugins/<Category>.md` |
-| dots | `StatusDot.cs`, `GhDot.cs` (Windows); Mac stand-ins in `mac/Nextra.Host.Mac/MacPlatform.cs` |
+| dots | `StatusDot.cs` (Eto), `GhDot.cs` (GH canvas): same code on Windows and Mac; Windows-only Eto.Wpf fix in `WindowsQuirks.cs` |
 | something Mac-only | `mac/`, the `#if NEXTRA_MAC` blocks in `Server.cs` / `HostPlugIn.cs`; see 08_mac |

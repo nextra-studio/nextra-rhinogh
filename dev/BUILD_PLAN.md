@@ -128,3 +128,12 @@ User request: make RhinoGh work on Mac without affecting Windows; prove as much 
 - [ ] L7 First run on a real Mac (smoke test in `mac/README.md`); then fix what it finds (top risk: plain `.rhp` from Yak on Mac)
 - [x] L8 Merged into `main` (2026-11-12); Windows build byte-identical before and after (`windows_unchanged.ps1 -Base 9300ecc`)
 - [ ] L9 Later: Mac status dot / GH dot / dialog detection; one multi-targeted host project once proven
+
+## M. Eto UI, one implementation for Windows and Mac (branch `eto-ui`, 2026-11-13)
+User rule: consistency, so Windows and Mac share code wherever possible. Details: [08_mac.md](08_mac.md) §10.
+- [x] M1 Status dot rewritten in Eto (owned by `RhinoEtoApp.MainWindow`, Topmost only while Rhino is active); GH dot timer → Eto `UITimer`; clipboard → Eto. Both hosts compile against Eto 2.7 (RhinoCommon 8.0 package)
+- [x] M2 Mac host now compiles the dots too; only `DialogProbe.cs` + `WindowsQuirks.cs` stay Windows-only (Mac stand-ins in `MacPlatform.cs`); PortScan PASS
+- [x] M3 Found + fixed live: Windows minimum window size (size re-applied after Show) and Eto.Wpf DWM blur-behind (grey square; switched off in `WindowsQuirks.cs`). PortScan gained `members`, `callers`, `il`, `field` for reading APIs/IL without a decompiler
+- [x] M4 Live check in Rhino 8.36 (Windows): size, transparency, red/amber/green, click restart, drag + saved offset, minimise/restore, focus, not over other apps, over GH editor, GH canvas dot, clipboard
+- [x] M5 Full regression suite on this branch: 238/239. The one failure (`00_session #2`: `memory list` reply no longer contains "prefs") is an out-of-date test expectation in the unchanged engine, not caused by this branch
+- [ ] M6 User review → merge into `main`; next release ships it (both .yak); then update the website's Mac text ("no status dot" → same dot)

@@ -42,7 +42,7 @@ namespace Nextra.Host
             try { DialogProbe.MainHandle = RhinoApp.MainWindowHandle(); } catch { }   // cached: the probe runs off the UI thread
             try { Server.Start(); }
             catch (Exception e) { RhinoApp.WriteLine("NextraRhinoGh: server failed to start: " + e.Message); }
-            try { StatusDot.Show(RhinoApp.MainWindowHandle()); } catch (Exception ex) { RhinoApp.WriteLine("NextraRhinoGh: status dot failed: " + ex.Message); }
+            try { StatusDot.Open(); } catch (Exception ex) { RhinoApp.WriteLine("NextraRhinoGh: status dot failed: " + ex.Message); }
             GhDotHook.Start();
             var userFolder = InitUserFolder();
             if (userFolder != null) RhinoApp.WriteLine("NextraRhinoGh: user folder " + userFolder + " (preferences and workflows persist across updates)");
@@ -111,11 +111,7 @@ namespace Nextra.Host
             if (i == iBridge)
             {
                 var p = NextraHostPlugIn.BridgePath;
-#if NEXTRA_MAC
-                try { MacShell.CopyText(p); } catch { }
-#else
-                try { System.Windows.Clipboard.SetText(p); } catch { }
-#endif
+                try { new Eto.Forms.Clipboard().Text = p; } catch { }   // Eto: same on Windows and Mac
                 RhinoApp.WriteLine(System.IO.File.Exists(p)
                     ? "NextraRhinoGh: bridge path copied to the clipboard: " + p + "  (MCP server: command node, argument this path)"
                     : "NextraRhinoGh: no bridge at " + p + " (it is copied there when the Yak package starts)");

@@ -1,0 +1,16 @@
+<Project>
+  <!-- Compile-only references for Grasshopper's API, imported by both Mac projects (host: GH canvas dot; engine: menus,
+       canvas, views). Grasshopper's API exposes WinForms types (GH_Canvas, ToolStripDropDown) and System.Drawing.
+       Rhino for Mac supplies both at run time (RhinoCommon itself references System.Windows.Forms 7.0 and
+       System.Drawing.Common 7.0). Nothing from this pack is copied to the output. -->
+  <PropertyGroup>
+    <DesktopRef>$(NuGetPackageRoot)microsoft.windowsdesktop.app.ref/7.0.20/ref/net7.0/</DesktopRef>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageDownload Include="Microsoft.WindowsDesktop.App.Ref" Version="[7.0.20]" />
+    <Reference Include="System.Windows.Forms"><HintPath>$(DesktopRef)System.Windows.Forms.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Windows.Forms.Primitives"><HintPath>$(DesktopRef)System.Windows.Forms.Primitives.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing.Common"><HintPath>$(DesktopRef)System.Drawing.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing"><HintPath>$(DesktopRef)System.Drawing.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

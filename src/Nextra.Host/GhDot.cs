@@ -6,24 +6,26 @@ using Rhino;
 
 namespace Nextra.Host
 {
-    /// Waits (via a WinForms timer) until Grasshopper is loaded, then draws the same status dot
+    /// Waits (via an Eto UI timer, same on Windows and Mac) until Grasshopper is loaded, then draws the same status dot
     /// in the bottom-right corner of the GH canvas. No Grasshopper type is touched before GH itself is loaded.
+    /// The canvas itself is Grasshopper's API (GH_Canvas, a WinForms control on both systems), so this part keeps
+    /// System.Drawing / WinForms types: they come from Grasshopper, not from us.
     static class GhDotHook
     {
-        static Timer _timer;
+        static Eto.Forms.UITimer _timer;
         static bool _attached;
 
         public static void Start()
         {
             if (_timer != null) return;
-            _timer = new Timer { Interval = 1500 };
-            _timer.Tick += (s, e) => TryAttach();
+            _timer = new Eto.Forms.UITimer { Interval = 1.5 };
+            _timer.Elapsed += (s, e) => TryAttach();
             _timer.Start();
         }
 
         public static void Stop()
         {
-            try { _timer?.Stop(); _timer?.Dispose(); } catch { }
+            try { _timer?.Stop(); } catch { }
             _timer = null;
             if (_attached) { try { GhDot.Detach(); } catch { } _attached = false; }
         }
@@ -45,6 +47,8 @@ namespace Nextra.Host
     {
         static Grasshopper.GUI.Canvas.GH_Canvas _canvas;
         static Color _last;
+
+        static Color StateColor() { StatusDot.CurrentState(out var argb, out _); return Color.FromArgb(argb); }
 
         static Rectangle DotRect(Control c) => new Rectangle(c.ClientSize.Width - 22, c.ClientSize.Height - 22, 12, 12);
 
@@ -70,7 +74,7 @@ namespace Nextra.Host
 
         public static void Refresh()
         {
-            StatusDot.CurrentState(out var c, out _);
+            var c = StateColor();
             if (c != _last && _canvas != null) { _last = c; _canvas.Invalidate(DotRect(_canvas)); }
         }
 
@@ -80,7 +84,7 @@ namespace Nextra.Host
             if (g == null) return;
             var saved = g.Transform;
             g.ResetTransform();
-            StatusDot.CurrentState(out var c, out _);
+            var c = StateColor();
             _last = c;
             var r = DotRect(sender);
             var sm = g.SmoothingMode;

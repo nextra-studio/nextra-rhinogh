@@ -1,34 +1,15 @@
 #if NEXTRA_MAC
 using System;
 using System.Diagnostics;
-using Rhino;
 
 namespace Nextra.Host
 {
-    /// Mac stand-ins for the Windows-only host parts (StatusDot.cs, GhDot.cs, DialogProbe.cs are not compiled on Mac).
-    /// Same type and member names, so the shared host code compiles unchanged.
+    /// The only Mac stand-ins left. The status dot, the Grasshopper canvas dot and the clipboard are shared code (Eto)
+    /// and compile on Mac unchanged; only DialogProbe.cs is excluded from the Mac build.
 
-    /// Windows shows a floating WinForms light over the Rhino window. Mac: the state goes to the command line instead
-    /// (also on demand: run NextraRhinoGh).
-    static class StatusDot
-    {
-        public static void Show(IntPtr owner) =>
-            RhinoApp.WriteLine(Server.IsListening
-                ? $"NextraRhinoGh: ready on 127.0.0.1:{Server.Port} (Mac: no status dot; run NextraRhinoGh for the state)"
-                : "NextraRhinoGh: server down; run NextraRhinoGh > RestartServer");
-
-        public static void CloseDot() { }
-    }
-
-    /// The Grasshopper canvas dot is drawn through WinForms events; left out on Mac for now.
-    static class GhDotHook
-    {
-        public static void Start() { }
-        public static void Stop() { }
-    }
-
-    /// Windows reads blocking dialogs through user32 / UI Automation. No equivalent on Mac yet: report nothing, so a
-    /// busy Rhino shows up as a plain timeout instead of a dialog description.
+    /// Windows reads blocking dialogs of Rhino through user32 / UI Automation; no UI library can read another window's
+    /// contents, and macOS would need the Accessibility API (with a permission prompt). Until then: report nothing, so a
+    /// busy Rhino shows up as a plain timeout instead of a dialog description. Deliberate, documented exception.
     static class DialogProbe
     {
         public static IntPtr MainHandle;
@@ -37,17 +18,15 @@ namespace Nextra.Host
         public static string Dismiss() => "dialog detection is not available on Mac — ask the user to answer the dialog in Rhino";
     }
 
-    /// Clipboard and Finder through the standard macOS command-line tools (no UI framework needed).
+    /// Windows undoes an Eto.Wpf blur-behind here (src/Nextra.Host/WindowsQuirks.cs). Eto on Mac has no such quirk.
+    static class PlatformQuirks
+    {
+        public static void AfterShow(Eto.Forms.Window w) { }
+    }
+
+    /// Opening a folder: Finder on Mac (explorer.exe on Windows, HostPlugIn.cs). Not a UI-library task.
     static class MacShell
     {
-        public static void CopyText(string text)
-        {
-            using var p = Process.Start(new ProcessStartInfo("/usr/bin/pbcopy") { RedirectStandardInput = true, UseShellExecute = false });
-            p.StandardInput.Write(text);
-            p.StandardInput.Close();
-            p.WaitForExit(3000);
-        }
-
         public static void Reveal(string dir)
         {
             var psi = new ProcessStartInfo("/usr/bin/open") { UseShellExecute = false };

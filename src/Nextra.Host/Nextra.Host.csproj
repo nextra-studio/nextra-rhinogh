@@ -4,8 +4,14 @@
     <RootNamespace>Nextra.Host</RootNamespace>
     <TargetExt>.rhp</TargetExt>
     <Version>0.1.8</Version>
+    <!-- WPF only for DialogProbe.cs (Windows UI Automation). The dots and the clipboard are Eto, shared with Mac. -->
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  <!-- Eto comes from the RhinoCommon 8.0 package below (the Eto Rhino 8.0 shipped), the same as the Mac host;
+       drop the newer Eto.dll of the local Rhino install that src/Directory.Build.props adds for the engine -->
+  <ItemGroup>
+    <Reference Remove="Eto" />
+  </ItemGroup>
   <!-- Yak tags the package from the RhinoCommon the .rhp is built against: pin the first Rhino 8 release so any 8.x can install it -->
   <ItemGroup>
     <PackageReference Include="RhinoCommon" Version="8.0.23304.9001" ExcludeAssets="runtime" />
