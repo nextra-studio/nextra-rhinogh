@@ -137,4 +137,6 @@ User rule: consistency, so Windows and Mac share code wherever possible. Details
 - [x] M4 Live check in Rhino 8.36 (Windows): size, transparency, red/amber/green, click restart, drag + saved offset, minimise/restore, focus, not over other apps, over GH editor, GH canvas dot, clipboard
 - [x] M5 Full regression suite on this branch: 238/239. The one failure (`00_session #2`: `memory list` reply no longer contains "prefs") is an out-of-date test expectation in the unchanged engine, not caused by this branch
 - [x] M6 Merged into `main` (2026-11-13, fast-forward c2e78db) after user review
-- [ ] M7 Next release ships it (both .yak); then change the website Mac text ("no status dot" → same dot)
+- [x] M7a Release 0.1.9 built: dist/nextra-rhinogh-0.1.9-rh8_0-win.yak + mac/dist/nextra-rhinogh-0.1.9-rh8_0-mac.yak (icon, Eto dot), plug-in ZIPs, .mcpb; versions bumped; regress test fixed (6/6 case 00)
+- [ ] M7b Publish (user): yak push both, gh release v0.1.9 (Yak push was blocked for the assistant: public, irreversible)
+- [ ] M7c After M7b: merge nextra-site branch `rhinogh-0.1.9-mac-dot`, run scripts/update-rhinogh-mac.mjs (needs .env.local, not on this PC)
