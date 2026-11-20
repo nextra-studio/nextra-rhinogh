@@ -98,6 +98,26 @@ namespace Nextra.Host
             catch { return Environment.GetEnvironmentVariable("PATH"); }
         }
 
+        /// the pictures as files in the run folder (data: URLs only; at most 6, 8 MB each)
+        static List<string> WritePictures(string dir, List<string> images)
+        {
+            var files = new List<string>();
+            foreach (var url in images ?? new List<string>())
+            {
+                if (files.Count >= 6) break;
+                var mt = System.Text.RegularExpressions.Regex.Match(url ?? "", @"^data:image/(png|jpeg|jpg|webp|gif);base64,(.+)$", System.Text.RegularExpressions.RegexOptions.Singleline);
+                if (!mt.Success) continue;
+                byte[] bytes;
+                try { bytes = Convert.FromBase64String(mt.Groups[2].Value); } catch { continue; }
+                if (bytes.Length > 8 * 1024 * 1024) continue;
+                var ext = mt.Groups[1].Value == "jpeg" ? "jpg" : mt.Groups[1].Value;
+                var f = Path.Combine(dir, $"pic{files.Count + 1}.{ext}");
+                File.WriteAllBytes(f, bytes);
+                files.Add(f);
+            }
+            return files;
+        }
+
         // ---- running ---------------------------------------------------------------------------------------------------------
         /// MCP servers for the CLI: the NextraRhinoGh bridge, then the person's connectors
         static List<(string name, string command, List<string> args, Dictionary<string, string> env)> Servers()
@@ -109,7 +129,8 @@ namespace Nextra.Host
             return list;
         }
 
-        public static string Start(string cli, string prompt, string model)
+        /// `images`: data URLs of the pictures the person added (written next to the run as pic1.png …; each CLI is pointed at them)
+        public static string Start(string cli, string prompt, string model, List<string> images = null)
         {
             var found = Detect();
             if (!found.TryGetValue(cli, out var path)) throw new InvalidOperationException($"{Label(cli)} is not installed (or not on the PATH)");
@@ -118,6 +139,9 @@ namespace Nextra.Host
             var (file, args) = Launcher(path);
             var tmp = Path.Combine(Path.GetTempPath(), "nexiy-cli-" + Guid.NewGuid().ToString("N").Substring(0, 8));
             Directory.CreateDirectory(tmp);
+            var pics = WritePictures(tmp, images);
+            if (pics.Count > 0 && cli != "codex")
+                prompt = $"The person added {pics.Count} picture(s): {string.Join(", ", pics.Select(Path.GetFileName))} in the working folder. Look at them first; they show what the request is about.\n\n" + prompt;
             var psi = new ProcessStartInfo(file) { UseShellExecute = false, RedirectStandardInput = true, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true, WorkingDirectory = tmp,
                 StandardOutputEncoding = Encoding.UTF8, StandardErrorEncoding = Encoding.UTF8 };
             foreach (var a in args) psi.ArgumentList.Add(a);
@@ -136,6 +160,7 @@ namespace Nextra.Host
                 foreach (var a in new[] { "-p", "--output-format", "stream-json", "--verbose", "--mcp-config", cfgPath, "--strict-mcp-config" }) psi.ArgumentList.Add(a);
                 psi.ArgumentList.Add("--allowedTools");
                 foreach (var n in allowed) psi.ArgumentList.Add("mcp__" + n);
+                if (pics.Count > 0) psi.ArgumentList.Add("Read");     // to look at the pictures (read-only, in the run folder)
                 if (!string.IsNullOrWhiteSpace(model)) { psi.ArgumentList.Add("--model"); psi.ArgumentList.Add(model); }
             }
             else if (cli == "codex")
@@ -149,6 +174,7 @@ namespace Nextra.Host
                     foreach (var kv in s.env) { psi.ArgumentList.Add("-c"); psi.ArgumentList.Add($"mcp_servers.{s.name}.env.{kv.Key}={Toml(kv.Value)}"); }
                 }
                 if (!string.IsNullOrWhiteSpace(model)) { psi.ArgumentList.Add("-m"); psi.ArgumentList.Add(model); }
+                foreach (var f in pics) { psi.ArgumentList.Add("-i"); psi.ArgumentList.Add(f); }    // pictures go along with the prompt
                 psi.ArgumentList.Add("-");
             }
             else if (cli == "gemini")
@@ -164,7 +190,7 @@ namespace Nextra.Host
                     settings["security"] = new JsonObject { ["auth"] = new JsonObject { ["selectedType"] = "gemini-api-key" } };
                 }
                 File.WriteAllText(Path.Combine(tmp, ".gemini", "settings.json"), settings.ToJsonString());
-                foreach (var a in new[] { "-o", "stream-json", "-m", string.IsNullOrWhiteSpace(model) ? "gemini-3.8-flash" : model, "-p", "Do what the message above asks." }) psi.ArgumentList.Add(a);
+                foreach (var a in new[] { "-o", "stream-json", "-m", string.IsNullOrWhiteSpace(model) ? "gemini-3.8-flash" : model, "-p", string.Concat(pics.Select(f => "@" + Path.GetFileName(f) + " ")) + "Do what the message above asks." }) psi.ArgumentList.Add(a);
                 psi.ArgumentList.Add("--allowed-mcp-server-names");
                 foreach (var n in allowed) psi.ArgumentList.Add(n);
             }

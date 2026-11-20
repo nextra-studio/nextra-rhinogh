@@ -50,6 +50,29 @@ namespace Nextra.Host
         {
             try { w.Opacity = 0.94; return "alpha"; } catch { return "none"; }
         }
+
+        /// The assistant's snip on Mac: the system's own interactive capture (crosshair, drag a box, Esc cancels), as the
+        /// Windows overlay does it (Snip.cs). Blocks until the person is done (a few seconds). null = cancelled.
+        public static byte[] NativeSnip(out bool handled)
+        {
+            handled = true;
+            var file = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "nexiy-snip-" + Guid.NewGuid().ToString("N").Substring(0, 8) + ".png");
+            try
+            {
+                using var p = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("/usr/sbin/screencapture", $"-i -x \"{file}\"") { UseShellExecute = false });
+                p?.WaitForExit(120000);
+                return System.IO.File.Exists(file) ? System.IO.File.ReadAllBytes(file) : null;
+            }
+            catch { return null; }
+            finally { try { System.IO.File.Delete(file); } catch { } }
+        }
+        public static (byte[] png, System.Drawing.Rectangle phys)? GrabScreen(IntPtr rhinoWindow) => null;
+        public static System.Collections.Generic.List<(byte[] png, System.Drawing.Rectangle phys, System.Drawing.Rectangle rhino)> GrabScreens() => new System.Collections.Generic.List<(byte[], System.Drawing.Rectangle, System.Drawing.Rectangle)>();
+        public static void Foreground(Eto.Forms.Window w) { try { w.BringToFront(); } catch { } }
+        public static System.Drawing.Point? CursorScreen() => null;
+        public static bool EscDown() => false;
+        public static void PlaceOn(Eto.Forms.Window w, System.Drawing.Rectangle r) { }
+        public static byte[] CropPng(byte[] png, int x, int y, int w, int h) => null;
     }
 
     /// Secret store for KeyStore (the person's AI keys): the login Keychain, service "NextraRhinoGh", via /usr/bin/security.

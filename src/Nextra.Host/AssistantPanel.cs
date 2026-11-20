@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Nodes;
@@ -263,9 +264,81 @@ namespace Nextra.Host
                     Reply(id, new JsonObject { ["hints"] = KeyHints() }.ToJsonString());
                     break;
                 case "cliStart":
-                    try { Reply(id, new JsonObject { ["id"] = CliRunner.Start((string)m["cli"], (string)m["prompt"], (string)m["model"]) }.ToJsonString()); }
+                    try
+                    {
+                        var pics = (m["images"] as JsonArray)?.Select(x => (string)x).Where(x => !string.IsNullOrEmpty(x)).ToList() ?? new List<string>();
+                        Reply(id, new JsonObject { ["id"] = CliRunner.Start((string)m["cli"], (string)m["prompt"], (string)m["model"], pics) }.ToJsonString());
+                    }
                     catch (Exception e) { Reply(id, new JsonObject { ["error"] = e.Message }.ToJsonString()); }
                     break;
+                case "snip":
+                {
+                    // the panel steps aside, the person snips a part of the screen, the panel comes back with the picture and
+                    // (Windows) the Rhino objects in it
+                    var form = this;
+                    form.Visible = false;
+                    var t = new UITimer { Interval = 0.22 };
+                    t.Elapsed += (s, e) =>
+                    {
+                        t.Stop();
+                        Snip.Start(res =>
+                        {
+                            form.Visible = true;
+                            try { form.BringToFront(); } catch { }
+                            if (res?.Png == null) { Reply(id, new JsonObject { ["ok"] = false, ["cancelled"] = true }.ToJsonString()); return; }
+                            var data = "data:image/png;base64," + Convert.ToBase64String(res.Png);
+                            if (res.Screen == null) { Reply(id, new JsonObject { ["ok"] = true, ["data"] = data }.ToJsonString()); return; }
+                            var r = res.Screen.Value;
+                            Task.Run(() =>
+                            {
+                                string map = "";
+                                try
+                                {
+                                    var args = new JsonObject { ["screenmap"] = new JsonArray(r.X, r.Y, r.Width, r.Height), ["quiet"] = true };
+                                    var j = JsonNode.Parse(Dispatcher.Call("view", args.ToJsonString(), 15000)) as JsonObject;
+                                    if ((bool?)j?["ok"] == true) map = (string)j["text"] ?? "";
+                                }
+                                catch { }
+                                Reply(id, new JsonObject { ["ok"] = true, ["data"] = data, ["map"] = map }.ToJsonString());
+                            });
+                        });
+                    };
+                    t.Start();
+                    break;
+                }
+                case "ghOpen":
+                {
+                    // is the Grasshopper window open (the panel shows its capture button only then); never loads Grasshopper
+                    bool open = false;
+                    try { open = AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "Grasshopper") && GhWindowOpen(); } catch { }
+                    Reply(id, new JsonObject { ["open"] = open }.ToJsonString());
+                    break;
+                }
+                case "capture":
+                {
+                    // a clean picture of the Rhino view or the Grasshopper canvas (no handle tags, no grid) for the chat: the
+                    // view tool renders it, the page gets it as a data URL to draw on and send
+                    var target = (string)m["target"] == "gh" ? "gh" : "rhino";
+                    Task.Run(() =>
+                    {
+                        JsonObject r;
+                        try
+                        {
+                            var args = new JsonObject { ["target"] = target, ["tags"] = "none", ["grid"] = false, ["size"] = new JsonArray(1600, 1000), ["quiet"] = true };
+                            var res = JsonNode.Parse(Dispatcher.Call("view", args.ToJsonString(), 60000)) as JsonObject;
+                            var path = (res?["images"] as JsonArray)?.FirstOrDefault()?.GetValue<string>();
+                            if (path == null || !File.Exists(path)) r = new JsonObject { ["ok"] = false, ["text"] = (string)res?["text"] ?? "no picture" };
+                            else
+                            {
+                                var mime = path.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ? "image/jpeg" : "image/png";
+                                r = new JsonObject { ["ok"] = true, ["data"] = $"data:{mime};base64," + Convert.ToBase64String(File.ReadAllBytes(path)) };
+                            }
+                        }
+                        catch (Exception e) { r = new JsonObject { ["ok"] = false, ["text"] = e.Message }; }
+                        Reply(id, r.ToJsonString());
+                    });
+                    break;
+                }
                 case "cliPoll":
                     Reply(id, CliRunner.Poll((string)m["run"]).ToJsonString());
                     break;
@@ -437,6 +510,14 @@ namespace Nextra.Host
         }
 
         /// the answer to message `id` (any thread): runs window.__nxReply on the UI thread
+        /// in its own method so the Grasshopper types are only touched once Grasshopper is loaded
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        static bool GhWindowOpen()
+        {
+            var ed = Grasshopper.Instances.DocumentEditor;
+            return ed != null && ed.Visible && ed.WindowState != System.Windows.Forms.FormWindowState.Minimized;
+        }
+
         void Reply(int id, string json)
         {
             Application.Instance.AsyncInvoke(() =>

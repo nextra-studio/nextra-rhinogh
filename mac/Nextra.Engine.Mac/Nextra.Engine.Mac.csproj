@@ -4,7 +4,7 @@
   <PropertyGroup>
     <AssemblyName>Nextra.Engine</AssemblyName>
     <RootNamespace>Nextra.Engine</RootNamespace>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <DebugType>portable</DebugType>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>

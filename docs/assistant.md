@@ -14,6 +14,7 @@ The same guide, with more pictures, is on the website:
   - [CLI (your own AI command-line tool)](#2-cli)
   - [Desktop app](#3-desktop-app)
 - [Use the assistant](#use-the-assistant)
+- [Pictures](#pictures)
 - [Settings](#settings)
 - [Skills, connectors and Nextra Design](#skills-connectors-and-nextra-design)
 - [Keys and privacy](#keys-and-privacy)
@@ -167,6 +168,22 @@ Examples:
 | ![](img/assistant/tidy-panel.png) | ![](img/assistant/massing-panel.png) | ![](img/assistant/gh-panel.png) |
 
 ![The Grasshopper definition it built](img/assistant/gh-canvas.png)
+
+## Pictures
+
+Show what you mean (0.2.1 and later):
+
+- **Snip:** click the camera next to the text box. The panel steps aside and every screen freezes and dims. Drag a box
+  over the part you mean, on any monitor. Esc or a right click cancels. If the snip covers a Rhino view, the Rhino
+  objects in it come along with their handles, so a box drawn around one object tells the model exactly which one.
+- **Draw on it:** the editor opens with the picture: pen, arrow, box, text, crop, six colours, undo (Ctrl+Z). **Use
+  picture** puts it above the text box; click it there to draw again, × to remove it.
+- **Paste, attach, drop:** Ctrl+V of a screenshot, the clip button, or drop an image file onto the panel. Up to 6
+  pictures per message.
+
+Pictures need a model that sees: in API key mode the chat model (OpenAI, Gemini or Claude), in CLI mode your CLI. A
+request with a picture always goes to the chat model, also in Quick mode. On a Mac the camera uses the system's own
+snip (without the object names).
 
 ## Settings
 

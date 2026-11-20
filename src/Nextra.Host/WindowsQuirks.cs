@@ -158,6 +158,136 @@ namespace Nextra.Host
             catch { }
         }
 
+        // ---- snips for the assistant's chat (Snip.cs) ----
+        [StructLayout(LayoutKind.Sequential)] struct RECT { public int L, T, R, B; }
+        [StructLayout(LayoutKind.Sequential)] struct MONITORINFO { public int cbSize; public RECT rcMonitor, rcWork; public int dwFlags; }
+        [DllImport("user32.dll")] static extern IntPtr MonitorFromWindow(IntPtr h, int flags);
+        [DllImport("user32.dll")] static extern bool GetMonitorInfo(IntPtr mon, ref MONITORINFO mi);
+
+        [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr h);
+        [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr h, IntPtr pid);
+        [DllImport("kernel32.dll")] static extern uint GetCurrentThreadId();
+        [DllImport("user32.dll")] static extern bool AttachThreadInput(uint a, uint b, bool attach);
+
+        /// the window in front with the keyboard (the snip overlay: Esc must reach it without a click first)
+        public static void Foreground(Eto.Forms.Window w)
+        {
+            try
+            {
+                var h = w.NativeHandle;
+                if (h == IntPtr.Zero) return;
+                var fg = GetForegroundWindow();
+                uint other = fg == IntPtr.Zero ? 0 : GetWindowThreadProcessId(fg, IntPtr.Zero), me = GetCurrentThreadId();
+                bool attached = other != 0 && other != me && AttachThreadInput(me, other, true);
+                SetForegroundWindow(h);
+                if (attached) AttachThreadInput(me, other, false);
+            }
+            catch { }
+        }
+
+        [DllImport("user32.dll")] static extern bool GetCursorPos(out POINT p);
+        [StructLayout(LayoutKind.Sequential)] struct POINT { public int X, Y; }
+        [DllImport("user32.dll")] static extern bool SetWindowPos(IntPtr h, IntPtr after, int x, int y, int cx, int cy, uint flags);
+
+        /// the mouse on the screen, in the same pixels as GrabScreen (the snip's corners: Eto's window coordinates do not line
+        /// up with them on monitors with different scaling)
+        public static System.Drawing.Point? CursorScreen() => Physical(() => GetCursorPos(out var p) ? new System.Drawing.Point(p.X, p.Y) : (System.Drawing.Point?)null);
+
+        [DllImport("user32.dll")] static extern IntPtr SetThreadDpiAwarenessContext(IntPtr c);
+        /// Rhino runs "system DPI aware": on a monitor with another scale than the main one Windows stretches its coordinates,
+        /// so a screen grab there lands in the wrong place. The snip works in real pixels (per-monitor aware) instead.
+        static T Physical<T>(Func<T> f)
+        {
+            IntPtr old = IntPtr.Zero;
+            try { old = SetThreadDpiAwarenessContext(new IntPtr(-4) /* per monitor v2 */); } catch { }
+            try { return f(); }
+            finally { if (old != IntPtr.Zero) try { SetThreadDpiAwarenessContext(old); } catch { } }
+        }
+
+        /// the window exactly over a rectangle of the screen, in GrabScreen's pixels (the snip overlay over its monitor)
+        public static void PlaceOn(Eto.Forms.Window w, System.Drawing.Rectangle r)
+        {
+            try { var h = w.NativeHandle; if (h != IntPtr.Zero) Physical(() => SetWindowPos(h, new IntPtr(-1) /* topmost */, r.X, r.Y, r.Width, r.Height, 0x0040 /* show */)); } catch { }
+        }
+
+        /// Esc held down, wherever the keyboard focus is (the snip overlay may not get it when another program had the front)
+        public static bool EscDown() => (GetAsyncKeyState(0x1B) & 0x8000) != 0;
+
+        /// Windows draws the snip overlay itself (Snip.cs): no system snip
+        public static byte[] NativeSnip(out bool handled) { handled = false; return null; }
+
+        delegate bool MonitorEnum(IntPtr mon, IntPtr dc, ref RECT r, IntPtr data);
+        [DllImport("user32.dll")] static extern bool EnumDisplayMonitors(IntPtr dc, IntPtr clip, MonitorEnum f, IntPtr data);
+
+        /// a picture of every monitor and where each one is (the snip covers all screens)
+        static System.Collections.Generic.List<System.Drawing.Rectangle> Monitors()
+        {
+            var rects = new System.Collections.Generic.List<System.Drawing.Rectangle>();
+            try { EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, (IntPtr m, IntPtr dc, ref RECT r, IntPtr d) => { rects.Add(new System.Drawing.Rectangle(r.L, r.T, r.R - r.L, r.B - r.T)); return true; }, IntPtr.Zero); } catch { }
+            return rects;
+        }
+
+        /// a picture of every monitor (real pixels), where it is in real pixels, and where Rhino thinks it is (Rhino's own,
+        /// possibly stretched, coordinates: the engine places Rhino's views in those)
+        public static System.Collections.Generic.List<(byte[] png, System.Drawing.Rectangle phys, System.Drawing.Rectangle rhino)> GrabScreens()
+        {
+            var list = new System.Collections.Generic.List<(byte[], System.Drawing.Rectangle, System.Drawing.Rectangle)>();
+            var mine = Monitors();                 // Rhino's coordinates (same order as below)
+            return Physical(() =>
+            {
+                var real = Monitors();
+                for (int i = 0; i < real.Count; i++)
+                {
+                    var r = real[i];
+                    try
+                    {
+                        using var bmp = new System.Drawing.Bitmap(r.Width, r.Height);
+                        using (var g = System.Drawing.Graphics.FromImage(bmp)) g.CopyFromScreen(r.X, r.Y, 0, 0, r.Size);
+                        using var ms = new System.IO.MemoryStream();
+                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        list.Add((ms.ToArray(), r, i < mine.Count ? mine[i] : r));
+                    }
+                    catch { }
+                }
+                return list;
+            });
+        }
+
+        /// a picture of the whole monitor Rhino is on (physical pixels) and where that monitor is
+        public static (byte[] png, System.Drawing.Rectangle phys)? GrabScreen(IntPtr rhinoWindow)
+        {
+            try
+            {
+                var mon = MonitorFromWindow(rhinoWindow, 2 /* nearest */);
+                var mi = new MONITORINFO { cbSize = Marshal.SizeOf<MONITORINFO>() };
+                if (!GetMonitorInfo(mon, ref mi)) return null;
+                var r = new System.Drawing.Rectangle(mi.rcMonitor.L, mi.rcMonitor.T, mi.rcMonitor.R - mi.rcMonitor.L, mi.rcMonitor.B - mi.rcMonitor.T);
+                using var bmp = new System.Drawing.Bitmap(r.Width, r.Height);
+                using (var g = System.Drawing.Graphics.FromImage(bmp)) g.CopyFromScreen(r.X, r.Y, 0, 0, r.Size);
+                using var ms = new System.IO.MemoryStream();
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return (ms.ToArray(), r);
+            }
+            catch { return null; }
+        }
+
+        /// a part of a PNG, as PNG
+        public static byte[] CropPng(byte[] png, int x, int y, int w, int h)
+        {
+            try
+            {
+                using var src = new System.Drawing.Bitmap(new System.IO.MemoryStream(png));
+                var r = System.Drawing.Rectangle.Intersect(new System.Drawing.Rectangle(x, y, w, h), new System.Drawing.Rectangle(0, 0, src.Width, src.Height));
+                if (r.Width < 2 || r.Height < 2) return null;
+                using var part = src.Clone(r, src.PixelFormat);
+                using var ms = new System.IO.MemoryStream();
+                part.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+            catch { return null; }
+        }
+
         public static void AfterShow(Eto.Forms.Window w)
         {
             try

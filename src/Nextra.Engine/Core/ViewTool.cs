@@ -26,11 +26,62 @@ namespace Nextra.Engine
 
         public static void Run(Args a, Reply r)
         {
+            if (a.Has("screenmap")) { ScreenMap(a, r); return; }
             var target = (a.Str("target", "rhino") ?? "rhino").ToLowerInvariant();
             if (target == "gh" || target == "grasshopper") { GhView.Run(a, r); return; }
             if (target == "gh_preview" || target == "preview") { GhPreviewView.Run(a, r); return; }
             if (target != "rhino") throw new NxError($"target '{target}' unknown", "target: rhino | gh | gh_preview");
             RhinoCapture(a, r, null);
+        }
+
+        /// The Rhino objects seen in a part of the screen (the assistant panel's snip): screenmap [x, y, w, h] in physical screen
+        /// pixels. One line per object: handle|type|name|layer|x|y|w|h, the box in pixels of the snip (clipped to it), from
+        /// every Rhino view the snip covers, nearest views first. Not for the AI clients: the panel writes it into the request.
+        static void ScreenMap(Args a, Reply r)
+        {
+            var n = a.Nums("screenmap");
+            if (n == null || n.Length < 4) throw new NxError("screenmap needs [x, y, w, h]");
+            var snip = new System.Drawing.RectangleF((float)n[0], (float)n[1], (float)n[2], (float)n[3]);
+            var doc = RhinoDoc.ActiveDoc;
+            if (doc == null) { r.Line("no document"); return; }
+            var seen = new Dictionary<Guid, System.Drawing.RectangleF>();
+            foreach (var view in doc.Views.GetViewList(Rhino.Display.ViewTypeFilter.Model))
+            {
+                System.Drawing.Rectangle sr;
+                try { sr = view.ScreenRectangle; } catch { continue; }
+                var vr = System.Drawing.RectangleF.Intersect(snip, new System.Drawing.RectangleF(sr.X, sr.Y, sr.Width, sr.Height));
+                if (vr.Width < 4 || vr.Height < 4) continue;
+                var vp = view.ActiveViewport;
+                var xf = vp.GetTransform(CoordinateSystem.World, CoordinateSystem.Screen);
+                foreach (var o in doc.Objects.GetObjectList(new ObjectEnumeratorSettings { VisibleFilter = true, HiddenObjects = false, NormalObjects = true, LockedObjects = true }))
+                {
+                    if (seen.ContainsKey(o.Id) || !o.Visible) continue;
+                    var bb = o.Geometry.GetBoundingBox(true);
+                    if (!bb.IsValid) continue;
+                    float x0 = float.MaxValue, y0 = float.MaxValue, x1 = float.MinValue, y1 = float.MinValue;
+                    bool behind = false;
+                    foreach (var c in bb.GetCorners())
+                    {
+                        var p = c; p.Transform(xf);
+                        if (double.IsNaN(p.X) || double.IsInfinity(p.X)) { behind = true; break; }
+                        float sx = sr.X + (float)p.X, sy = sr.Y + (float)p.Y;
+                        x0 = Math.Min(x0, sx); y0 = Math.Min(y0, sy); x1 = Math.Max(x1, sx); y1 = Math.Max(y1, sy);
+                    }
+                    if (behind) continue;
+                    var box = System.Drawing.RectangleF.Intersect(new System.Drawing.RectangleF(x0, y0, Math.Max(1, x1 - x0), Math.Max(1, y1 - y0)), vr);
+                    if (box.Width < 1 || box.Height < 1) continue;
+                    seen[o.Id] = box;
+                }
+            }
+            r.Line($"{seen.Count} object(s) in the snip");
+            foreach (var kv in seen.OrderBy(k => k.Value.Width * k.Value.Height).Take(300))
+            {
+                var o = doc.Objects.FindId(kv.Key);
+                var b = kv.Value;
+                var layer = o.Attributes.LayerIndex >= 0 && o.Attributes.LayerIndex < doc.Layers.Count ? doc.Layers[o.Attributes.LayerIndex].FullPath : "";
+                string clean(string s) => (s ?? "").Replace("|", "/").Replace("\n", " ");
+                r.Line($"{Handles.Rh(o.Id)}|{o.ObjectType}|{clean(o.Attributes.Name)}|{clean(layer)}|{(int)(b.X - snip.X)}|{(int)(b.Y - snip.Y)}|{(int)b.Width}|{(int)b.Height}");
+            }
         }
 
         // ---------- shared output helpers ----------
