@@ -55,17 +55,17 @@ coffee, dances. It celebrates when a job is done and cries for a moment when a j
 
 | You | Nexiy |
 |---|---|
-| **left click**, assistant not set up yet | shows the menu: **Set up the assistant…**, the connection, Size, Liveliness, Speed, Hide |
+| **left click**, assistant not set up yet (or Desktop app mode) | opens the panel with the settings only: the connection and Nexiy's liveliness and speed, no chat |
 | **left click**, assistant set up | opens the assistant panel straight away. Click again to close it |
 | **right click** | always shows the menu |
 | click while the connection is down | shows the menu with **Restart server** |
 
 "Set up" means: a key saved in **API key** mode, or a CLI chosen in **CLI** mode. In **Desktop app** mode you chat in Claude or
-ChatGPT, so a left click shows the menu.
+ChatGPT, so the panel shows only the settings.
 
 The panel grows out of Nexiy and shrinks back into it when you close it (the **×**, Esc, or a click on Nexiy).
 
-*Version 0.2.0 shows the menu on every click; choose **Open assistant** there.*
+*Version 0.2.0 shows the menu on every click; choose **Open assistant** there. In 0.2.1, a click before setup shows the menu.*
 
 ## Set up the assistant
 

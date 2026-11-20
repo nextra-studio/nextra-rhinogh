@@ -626,9 +626,9 @@ namespace Nextra.Host
                 return;
             }
             _lastActivity = DateTime.Now;
-            bool setUp = false;
-            try { setUp = AssistantSettings.SetUp; } catch { }
-            if (setUp && CurrentLink() != Link.Down) AssistantPanel.Toggle();   // one click opens / closes the assistant
+            // one click opens / closes the panel: the chat once the assistant is set up, before that (and in desktop-app mode)
+            // the panel shows only the settings (Nexiy's liveliness and speed, the connection). Server down: the menu.
+            if (CurrentLink() != Link.Down) AssistantPanel.Toggle();
             else ShowMenu();
         }
 
