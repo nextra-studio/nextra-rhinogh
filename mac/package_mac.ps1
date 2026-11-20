@@ -3,7 +3,7 @@
 $ErrorActionPreference = "Stop"
 $mac = $PSScriptRoot
 $repo = Split-Path -Parent $mac
-$ver = "0.1.9"
+$ver = "0.2.0"
 $dist = Join-Path $mac "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue
@@ -19,6 +19,10 @@ Copy-Item "$mac\out\Release\Nextra.Engine.dll" $stage
 Copy-Item "$repo\skill\nextra" (Join-Path $stage "skill") -Recurse
 Remove-Item (Join-Path $stage "skill\plugins") -Recurse -Force -ErrorAction SilentlyContinue
 Copy-Item "$repo\bridge" (Join-Path $stage "bridge") -Recurse
+# the decision-API assistant page (closed source: built by nextra-assistant-rhino into assistant/, git-ignored here)
+if (-not (Test-Path "$repo\assistant\assistant.html")) { throw "assistant/assistant.html missing: run 'node build.mjs' in nextra-assistant-rhino first" }
+New-Item -ItemType Directory -Force (Join-Path $stage "assistant") | Out-Null
+Copy-Item "$repo\assistant\assistant.html" (Join-Path $stage "assistant\assistant.html")
 # Package Manager icon (Nextra N; made by tools/make_icon.py)
 Copy-Item "$repo\docs\img\icon.png" (Join-Path $stage "icon.png")
 @"

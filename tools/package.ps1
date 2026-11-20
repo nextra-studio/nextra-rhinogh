@@ -1,7 +1,7 @@
 # Release packaging: Yak package (Rhino) + .mcpb (Claude Desktop). Output in dist/.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
-$ver = "0.1.9"
+$ver = "0.2.0"
 $dist = Join-Path $repo "dist"
 $stage = Join-Path $dist "yak"
 Remove-Item $stage -Recurse -Force -ErrorAction SilentlyContinue
@@ -16,6 +16,10 @@ Copy-Item "$repo\skill\nextra" (Join-Path $stage "skill") -Recurse
 # plug-in guides (plugins/Karamba3D.md, _TEMPLATE.md …) belong to the skill only, not to the Rhino plug-in
 Remove-Item (Join-Path $stage "skill\plugins") -Recurse -Force -ErrorAction SilentlyContinue
 Copy-Item "$repo\bridge" (Join-Path $stage "bridge") -Recurse
+# the decision-API assistant page (closed source: built by nextra-assistant-rhino into assistant/, git-ignored here)
+if (-not (Test-Path "$repo\assistant\assistant.html")) { throw "assistant/assistant.html missing: run 'node build.mjs' in nextra-assistant-rhino first" }
+New-Item -ItemType Directory -Force (Join-Path $stage "assistant") | Out-Null
+Copy-Item "$repo\assistant\assistant.html" (Join-Path $stage "assistant\assistant.html")
 # Package Manager icon (Nextra N; made by tools/make_icon.py)
 Copy-Item "$repo\docs\img\icon.png" (Join-Path $stage "icon.png")
 @"

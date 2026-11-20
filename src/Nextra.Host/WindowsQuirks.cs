@@ -16,6 +16,96 @@ namespace Nextra.Host
         const int DWM_BB_ENABLE = 1;
         [DllImport("dwmapi.dll")] static extern int DwmEnableBlurBehindWindow(IntPtr hwnd, ref DWM_BLURBEHIND blur);
 
+        [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
+        const int DWMWA_WINDOW_CORNER_PREFERENCE = 33, DWMWCP_ROUND = 2;
+
+        /// Windows 11: rounded corners (and the system's soft shadow) for a borderless window. Older Windows ignores it.
+        public static void RoundCorners(Eto.Forms.Window w)
+        {
+            try
+            {
+                var h = w.NativeHandle;
+                if (h == IntPtr.Zero) return;
+                int v = DWMWCP_ROUND;
+                DwmSetWindowAttribute(h, DWMWA_WINDOW_CORNER_PREFERENCE, ref v, sizeof(int));
+            }
+            catch { }
+        }
+
+        [StructLayout(LayoutKind.Sequential)] struct MARGINS { public int L, R, T, B; }
+        [DllImport("dwmapi.dll")] static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS m);
+        const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20, DWMWA_SYSTEMBACKDROP_TYPE = 38, DWMSBT_TRANSIENTWINDOW = 3;
+
+        /// Windows 11 (22H2+): the system's acrylic blur behind the assistant window. The window's WPF background, its
+        /// composition target and the WebView2 default background become transparent so the blur shows through the page
+        /// (no AllowsTransparency: that would stop WebView2 from drawing). Returns "acrylic", or "none" where Windows
+        /// does not support it (the page then stays solid).
+        public static string Backdrop(Eto.Forms.Window w, Eto.Forms.WebView web, bool dark)
+        {
+            try
+            {
+                if (Environment.OSVersion.Version.Build < 22621) return "none";
+                var h = w.NativeHandle;
+                if (h == IntPtr.Zero) return "none";
+                int mode = dark ? 1 : 0;
+                DwmSetWindowAttribute(h, DWMWA_USE_IMMERSIVE_DARK_MODE, ref mode, sizeof(int));
+                var m = new MARGINS { L = -1, R = -1, T = -1, B = -1 };
+                if (DwmExtendFrameIntoClientArea(h, ref m) != 0) return "none";
+                int type = DWMSBT_TRANSIENTWINDOW;
+                if (DwmSetWindowAttribute(h, DWMWA_SYSTEMBACKDROP_TYPE, ref type, sizeof(int)) != 0) return "none";
+                if (w.ControlObject is System.Windows.Window ww)
+                {
+                    ww.Background = System.Windows.Media.Brushes.Transparent;
+                    var src = System.Windows.Interop.HwndSource.FromHwnd(h);
+                    if (src?.CompositionTarget != null) src.CompositionTarget.BackgroundColor = System.Windows.Media.Colors.Transparent;
+                }
+                var prop = web.ControlObject?.GetType().GetProperty("DefaultBackgroundColor");
+                prop?.SetValue(web.ControlObject, System.Drawing.Color.Transparent);
+                return "acrylic";
+            }
+            catch { return "none"; }
+        }
+
+        [DllImport("user32.dll")] static extern bool ReleaseCapture();
+        [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr h, int msg, IntPtr w, IntPtr l);
+        const int WM_NCLBUTTONDOWN = 0xA1, HTCAPTION = 2, HTBOTTOMRIGHT = 17;
+
+        /// A borderless window moved or resized by the system's own loop, started while the mouse button is held on the page's
+        /// header or grip (as if the title bar / frame corner were pressed). Mac: false (the page moves the window by deltas).
+        public static bool SystemDrag(Eto.Forms.Window w, bool resize)
+        {
+            try
+            {
+                var h = w.NativeHandle;
+                if (h == IntPtr.Zero) return false;
+                ReleaseCapture();
+                SendMessage(h, WM_NCLBUTTONDOWN, (IntPtr)(resize ? HTBOTTOMRIGHT : HTCAPTION), IntPtr.Zero);
+                return true;
+            }
+            catch { return false; }
+        }
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLongPtrW")] static extern IntPtr GetWindowLongPtr(IntPtr h, int i);
+        [DllImport("user32.dll", EntryPoint = "SetWindowLongPtrW")] static extern IntPtr SetWindowLongPtr(IntPtr h, int i, IntPtr v);
+        const int GWL_EXSTYLE = -20;
+        const long WS_EX_TRANSPARENT = 0x20, WS_EX_LAYERED = 0x80000;
+
+        /// Clicks pass through the window (Nexiy while it roams over Rhino). Only on a layered window (the transparent Eto
+        /// window is one): adding the layered style here would make a window invisible.
+        public static void ClickThrough(Eto.Forms.Window w, bool on)
+        {
+            try
+            {
+                var h = w.NativeHandle;
+                if (h == IntPtr.Zero) return;
+                long ex = GetWindowLongPtr(h, GWL_EXSTYLE).ToInt64();
+                if ((ex & WS_EX_LAYERED) == 0) return;
+                long want = on ? ex | WS_EX_TRANSPARENT : ex & ~WS_EX_TRANSPARENT;
+                if (want != ex) SetWindowLongPtr(h, GWL_EXSTYLE, new IntPtr(want));
+            }
+            catch { }
+        }
+
         public static void AfterShow(Eto.Forms.Window w)
         {
             try

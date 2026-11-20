@@ -45,6 +45,7 @@ namespace Nextra.Engine
                     case "gh_edit": GhEditTool.Run(a, r); break;
                     case "undo": UndoTool.Run(a, r); break;
                     case "memory": MemoryTool.Run(a, r); break;
+                    case "ops": OpsTool.Run(a, r); break;     // typed function menu (decision-API assistant; any client may use it)
                     default:
                         r.Fail($"unknown tool '{tool}'. Tools: view, query, run, gh_edit, undo, memory.");
                         break;

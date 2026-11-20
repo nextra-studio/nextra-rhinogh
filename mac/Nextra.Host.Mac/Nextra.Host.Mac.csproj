@@ -9,11 +9,11 @@
     <AssemblyName>Nextra.Host</AssemblyName>
     <RootNamespace>Nextra.Host</RootNamespace>
     <TargetExt>.rhp</TargetExt>
-    <Version>0.1.9</Version>
+    <Version>0.2.0</Version>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\src\Nextra.Host\*.cs" Exclude="..\..\src\Nextra.Host\DialogProbe.cs;..\..\src\Nextra.Host\WindowsQuirks.cs" LinkBase="shared" />
+    <Compile Include="..\..\src\Nextra.Host\*.cs" Exclude="..\..\src\Nextra.Host\DialogProbe.cs;..\..\src\Nextra.Host\WindowsQuirks.cs;..\..\src\Nextra.Host\WindowsSecrets.cs" LinkBase="shared" />
     <Compile Include="MacPlatform.cs" />
   </ItemGroup>
   <!-- same pin as the Windows host: first Rhino 8 release, so Yak tags it rh8_0. The package also brings the Eto and

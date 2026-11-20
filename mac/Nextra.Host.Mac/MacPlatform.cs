@@ -22,6 +22,65 @@ namespace Nextra.Host
     static class PlatformQuirks
     {
         public static void AfterShow(Eto.Forms.Window w) { }
+        public static void RoundCorners(Eto.Forms.Window w) { }   // macOS rounds windows itself
+
+        /// Windows hands the drag to the system (WindowsQuirks.cs); on Mac the page moves the window by deltas (moveBy).
+        public static bool SystemDrag(Eto.Forms.Window w, bool resize) => false;
+
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.dylib")] static extern IntPtr sel_registerName(string name);
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")] static extern void SendBool(IntPtr receiver, IntPtr selector, bool value);
+
+        /// Clicks pass through the window (Nexiy while it roams): NSWindow setIgnoresMouseEvents:.
+        public static void ClickThrough(Eto.Forms.Window w, bool on)
+        {
+            try
+            {
+                var h = w.NativeHandle;       // Eto.Mac: the NSWindow
+                if (h != IntPtr.Zero) SendBool(h, sel_registerName("setIgnoresMouseEvents:"), on);
+            }
+            catch { }
+        }
+
+        /// The assistant window's translucency on Mac: the window's own alpha (NSWindow.alphaValue through Eto), which
+        /// WKWebView draws with. Windows uses the acrylic backdrop instead (WindowsQuirks.cs). "alpha": the page stays solid.
+        public static string Backdrop(Eto.Forms.Window w, Eto.Forms.WebView web, bool dark)
+        {
+            try { w.Opacity = 0.94; return "alpha"; } catch { return "none"; }
+        }
+    }
+
+    /// Secret store for KeyStore (the person's AI keys): the login Keychain, service "NextraRhinoGh", via /usr/bin/security.
+    /// Windows uses DPAPI (src/Nextra.Host/WindowsSecrets.cs). Same three calls on both.
+    static class PlatformSecrets
+    {
+        const string Service = "NextraRhinoGh";
+
+        public static string Read(string name)
+        {
+            var (code, output) = Security("find-generic-password", "-s", Service, "-a", name, "-w");
+            return code == 0 ? output.TrimEnd('\n', '\r') : null;
+        }
+
+        public static void Write(string name, string value)
+        {
+            // -U updates an existing item. The value is an argument of the security tool (briefly visible to this user's own
+            // processes); the Keychain then holds it encrypted.
+            var (code, output) = Security("add-generic-password", "-U", "-s", Service, "-a", name, "-w", value);
+            if (code != 0) throw new InvalidOperationException("the Keychain refused the key: " + output.Trim());
+        }
+
+        public static void Delete(string name) => Security("delete-generic-password", "-s", Service, "-a", name);
+
+        static (int, string) Security(params string[] args)
+        {
+            var psi = new ProcessStartInfo("/usr/bin/security") { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true };
+            foreach (var a in args) psi.ArgumentList.Add(a);
+            using var p = Process.Start(psi);
+            var o = p.StandardOutput.ReadToEnd();
+            p.StandardError.ReadToEnd();
+            p.WaitForExit(10000);
+            return (p.ExitCode, o);
+        }
     }
 
     /// Opening a folder: Finder on Mac (explorer.exe on Windows, HostPlugIn.cs). Not a UI-library task.

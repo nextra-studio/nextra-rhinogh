@@ -18,6 +18,7 @@ namespace Nextra.Host
         class Pending
         {
             public string Tool;
+            public bool Quiet;    // a test probe ({"quiet":true}): not shown as activity (Nexiy)
             public DateTime Start = DateTime.Now;
             public string Result;
             public volatile bool Done, TimedOut;
@@ -27,6 +28,16 @@ namespace Nextra.Host
         static readonly object Gate = new object();
         static Pending _running;
         static readonly List<string> Late = new List<string>();
+
+        /// the tool running now (any client: MCP or the assistant panel), or null — Nexiy acts it out
+        public static string BusyTool()
+        {
+            lock (Gate) return _running == null || _running.Done || _running.Quiet ? null : _running.Tool;
+        }
+
+        /// the last finished call: when, and whether it worked (Nexiy cheers or cries)
+        public static DateTime LastEnd = DateTime.MinValue;
+        public static volatile bool LastOk = true;
 
         public static string BusyText()
         {
@@ -39,6 +50,8 @@ namespace Nextra.Host
 
         public static string Call(string tool, string argsJson, int timeoutMs)
         {
+            bool quiet = argsJson != null && argsJson.Contains("\"quiet\":true");
+            if (quiet) argsJson = argsJson.Replace(",\"quiet\":true", "").Replace("\"quiet\":true,", "").Replace("\"quiet\":true", "");
             // status is answered from the server thread so it works while the UI thread is blocked
             if (tool == "query" && IsStatusQuery(argsJson, out bool dismiss)) return Status(dismiss);
 
@@ -54,7 +67,7 @@ namespace Nextra.Host
                     prev = _running;
                     if (prev == null || prev.Done)
                     {
-                        p = new Pending { Tool = tool };
+                        p = new Pending { Tool = tool, Quiet = quiet };
                         _running = p;
                         break;
                     }
@@ -87,6 +100,11 @@ namespace Nextra.Host
                 {
                     p.Result = res;
                     p.Done = true;
+                    if (!p.Quiet)
+                    {
+                        LastOk = res != null && res.Contains("\"ok\":true");
+                        LastEnd = DateTime.Now;
+                    }
                     if (p.TimedOut)
                         Late.Add($"[late] '{tool}' finished after {(DateTime.Now - p.Start).TotalSeconds:0}s:\n" + TextOf(res, 6000));
                 }

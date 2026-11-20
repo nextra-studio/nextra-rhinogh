@@ -5,7 +5,7 @@ param([switch]$Release)
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $cfg = if ($Release) { "Release" } else { "Debug" }
-$ver = "0.1.9"
+$ver = "0.2.0"
 $pkgRoot = Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-RhinoGh"
 # the package was called Nextra-zero before; two copies of the same plug-in would clash
 Remove-Item (Join-Path $env:APPDATA "McNeel\Rhinoceros\packages\8.0\Nextra-zero") -Recurse -Force -ErrorAction SilentlyContinue
@@ -17,6 +17,11 @@ dotnet build "$repo\src\Nextra.Engine\Nextra.Engine.csproj" -c $cfg -v q -nologo
 
 Copy-Item "$repo\src\Nextra.Host\bin\$cfg\Nextra.Host.rhp" $pkg -Force
 Copy-Item "$repo\src\Nextra.Engine\bin\$cfg\Nextra.Engine.dll" $pkg -Force
+# the decision-API assistant page (built by the closed-source nextra-assistant-rhino project into assistant/, git-ignored)
+if (Test-Path "$repo\assistant\assistant.html") {
+    New-Item -ItemType Directory -Force "$pkg\assistant" | Out-Null
+    Copy-Item "$repo\assistant\assistant.html" "$pkg\assistant\" -Force
+}
 @"
 ---
 name: Nextra-RhinoGh

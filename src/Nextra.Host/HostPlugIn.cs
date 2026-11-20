@@ -105,9 +105,11 @@ namespace Nextra.Host
             int iReload = go.AddOption("ReloadEngine");
             int iRestart = go.AddOption("RestartServer");
             int iBridge = go.AddOption("CopyBridgePath");
+            int iNexiy = go.AddOption("Nexiy");
             go.AcceptNothing(true);
             if (go.Get() != Rhino.Input.GetResult.Option) return Result.Success;
             int i = go.Option().Index;
+            if (i == iNexiy) return NexiyOptions();
             if (i == iBridge)
             {
                 var p = NextraHostPlugIn.BridgePath;
@@ -121,6 +123,33 @@ namespace Nextra.Host
             else if (i == iOff) Off();
             else if (i == iReload) { EngineLoader.ForceReload(); RhinoApp.WriteLine("NextraRhinoGh: engine reloaded: " + EngineLoader.Describe()); }
             else if (i == iRestart) { Server.Stop(); Server.Start(); }
+            return Result.Success;
+        }
+
+        /// Nexiy (the status figure): show, hide, size. All remembered across Rhino restarts.
+        static Result NexiyOptions()
+        {
+            var go = new Rhino.Input.Custom.GetOption();
+            go.SetCommandPrompt($"Nexiy ({(StatusDot.IsHidden ? "hidden" : "shown")}, {StatusDot.CurrentSize} px)");
+            int iShow = go.AddOption("Show");
+            int iHide = go.AddOption("Hide");
+            int first = -1;
+            for (int k = 0; k < StatusDot.Sizes.Length; k++)
+            {
+                int idx = go.AddOption(StatusDot.SizeNames[k]);
+                if (k == 0) first = idx;
+            }
+            go.AcceptNothing(true);
+            if (go.Get() != Rhino.Input.GetResult.Option) return Result.Success;
+            int i = go.Option().Index;
+            if (i == iShow) { StatusDot.SetHidden(false); RhinoApp.WriteLine("NextraRhinoGh: Nexiy shown"); }
+            else if (i == iHide) { StatusDot.SetHidden(true); RhinoApp.WriteLine("NextraRhinoGh: Nexiy hidden (NextraRhinoGh > Nexiy > Show brings it back)"); }
+            else if (i >= first && i < first + StatusDot.Sizes.Length)
+            {
+                int px = StatusDot.Sizes[i - first];
+                StatusDot.SetSize(px);
+                RhinoApp.WriteLine($"NextraRhinoGh: Nexiy size {StatusDot.SizeNames[i - first]} ({px} px)");
+            }
             return Result.Success;
         }
 
