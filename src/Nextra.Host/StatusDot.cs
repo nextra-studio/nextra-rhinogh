@@ -124,6 +124,9 @@ namespace Nextra.Host
             _instance.Play(level == 0 ? Act.Blink : Act.Jump);
         }
 
+        /// Nexiy's window on screen (the assistant panel opens out of it and closes back into it), or null when it is hidden
+        public static Rectangle? ScreenBounds => _instance != null && !_instance._hidden && _instance.Visible ? new Rectangle(_instance.Location, _instance.Size) : (Rectangle?)null;
+
         public static int CurrentSize => _instance?._size ?? Config.GetInt("nexiy_size", DefaultSize);
         public static bool IsHidden => _instance?._hidden ?? Config.GetBool("nexiy_hidden", false);
 

@@ -36,7 +36,7 @@ namespace Nextra.Host
 
         public static void Toggle()
         {
-            if (_instance != null) { _instance.Close(); return; }
+            if (_instance != null) { _instance.AnimatedClose(); return; }
             var html = FindPage();
             if (html == null)
             {
@@ -44,9 +44,20 @@ namespace Nextra.Host
                 return;
             }
             _instance = new AssistantPanel(html);
-            _instance.Show();
-            PlatformQuirks.RoundCorners(_instance);
-            _instance._backdrop = PlatformQuirks.Backdrop(_instance, _instance._web, _instance._dark);
+            var p = _instance;
+            var target = p.Target();
+            var from = StatusDot.ScreenBounds;
+            if (from is Rectangle nx)
+            {
+                // grow out of Nexiy: start at Nexiy's spot and size, open to the panel's place
+                p.MinimumSize = new Size(1, 1);
+                p.Bounds = nx;
+            }
+            else p.Bounds = target;
+            p.Show();
+            PlatformQuirks.RoundCorners(p);
+            p._backdrop = PlatformQuirks.Backdrop(p, p._web, p._dark);
+            if (from is Rectangle nx2) p.Animate(nx2, target, 0.2, () => p.MinimumSize = new Size(320, 380));
         }
 
         /// the page shipped next to the .rhp (Yak package), or config assistant_html (development)
@@ -93,7 +104,53 @@ namespace Nextra.Host
             _web.LoadHtml(File.ReadAllText(page).Replace("<html lang=\"en\">", $"<html lang=\"en\" data-theme=\"{(_dark ? "dark" : "light")}\">"));
             _poll.Elapsed += async (s, e) => await Drain();
             _poll.Start();
-            Shown += (s, e) => Place();
+        }
+
+        // ---- open out of Nexiy, close back into it ------------------------------------------------------------------------
+        UITimer _anim;
+        bool _closing;
+
+        /// where the panel opens: above Nexiy's corner of the Rhino window
+        Rectangle Target()
+        {
+            var size = new Size(420, 640);
+            try
+            {
+                var b = Owner?.Bounds ?? Rectangle.Empty;
+                if (b.Width > 0) return new Rectangle(new Point(b.X + b.Width - size.Width - 60, Math.Max(b.Y + 80, b.Y + b.Height - size.Height - 90)), size);
+            }
+            catch { }
+            return new Rectangle(new Point(200, 200), size);
+        }
+
+        /// the window's bounds from `a` to `b` over `sec` seconds (eased), then `done`
+        void Animate(Rectangle a, Rectangle b, double sec, Action done)
+        {
+            _anim?.Stop();
+            var t0 = DateTime.Now;
+            _anim = new UITimer { Interval = 0.015 };
+            _anim.Elapsed += (s, e) =>
+            {
+                double t = Math.Min(1, (DateTime.Now - t0).TotalSeconds / sec);
+                double k = 1 - Math.Pow(1 - t, 3);      // ease out
+                int L(int x, int y) => (int)Math.Round(x + (y - x) * k);
+                try { Bounds = new Rectangle(L(a.X, b.X), L(a.Y, b.Y), Math.Max(1, L(a.Width, b.Width)), Math.Max(1, L(a.Height, b.Height))); } catch { }
+                if (t >= 1) { _anim.Stop(); _anim = null; done?.Invoke(); }
+            };
+            _anim.Start();
+        }
+
+        /// shrink back into Nexiy, then close (straight away when Nexiy is hidden)
+        public void AnimatedClose()
+        {
+            if (_closing) return;
+            _closing = true;
+            if (StatusDot.ScreenBounds is Rectangle nx)
+            {
+                MinimumSize = new Size(1, 1);
+                Animate(Bounds, nx, 0.16, () => { try { Close(); } catch { } });
+            }
+            else Close();
         }
 
         /// the setup guide on the website (the panel's "How to set up" button)
@@ -271,7 +328,7 @@ namespace Nextra.Host
                     break;
                 case "close":
                     Reply(id, "{}");
-                    Application.Instance.AsyncInvoke(Close);
+                    Application.Instance.AsyncInvoke(AnimatedClose);
                     break;
                 case "drag":
                 case "resize":
