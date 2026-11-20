@@ -57,6 +57,7 @@ namespace Nextra.Host
             p.Show();
             PlatformQuirks.RoundCorners(p);
             p._backdrop = PlatformQuirks.Backdrop(p, p._web, p._dark);
+            PlatformQuirks.KeepEditKeys(p._web);     // Ctrl+C / V / X / A / Z in the page are the page's, not Rhino's
             if (from is Rectangle nx2) p.Animate(nx2, target, 0.2, () => p.MinimumSize = new Size(320, 380));
         }
 

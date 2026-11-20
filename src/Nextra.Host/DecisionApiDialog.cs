@@ -27,6 +27,11 @@ namespace Nextra.Host
         /// ready to open: switched on and the decider's key saved
         public static bool Ready => Enabled && KeyStore.Has(Decider);
         public static bool ChatReady => KeyStore.Has(Chat);
+        /// the person has set the assistant up (a key saved in API mode, a CLI picked in CLI mode): a left click on Nexiy
+        /// then opens the panel straight away. Desktop mode / nothing set up: the click shows Nexiy's menu.
+        public static bool SetUp =>
+            Mode == "cli" ? Cli != ""
+            : Mode == "api" && (KeyStore.Has("openai") || KeyStore.Has("gemini") || KeyStore.Has("anthropic") || KeyStore.Has("jev"));
     }
 
     /// NextraDecisionApi: the setup popup. Paste your own OpenAI / Gemini / Jev key, check it, pick the decider.

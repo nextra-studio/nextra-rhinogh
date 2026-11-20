@@ -190,7 +190,14 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 | ChatGPT / Codex desktop (**Work**, not Chat) | `@NextraRhinoGh Create a timber skyscraper in Rhino` |
 | Claude Desktop (Cowork) / Claude Code | `/nextra-rhinogh Create a timber skyscraper in Rhino` (`/nextra-rhinogh` is needed only in the first message of a session) |
 
-![Green means connected, amber means ready, red means restart](docs/img/dot-states.svg)
+### Nexiy and the assistant
+
+**Nexiy**, the small figure in the bottom-right corner of Rhino, shows the connection: green = an AI app is working in Rhino,
+amber = ready, red = down (click it to restart). Nexiy also opens an **optional assistant panel** inside Rhino, with your own
+AI key (OpenAI, Gemini, Claude, Jev) or your own AI command-line tool (Claude Code, Codex, Gemini CLI). It is off until you set
+it up. How to set it up and use it: **[docs/assistant.md](docs/assistant.md)**.
+
+![The assistant panel in Rhino](docs/img/assistant/panel-hello.png)
 
 <details>
 <summary>Troubleshooting</summary>
@@ -203,9 +210,9 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 | Mac: Rhino is open but the AI says it is not reachable | Type `NextraRhinoGh` in Rhino: it shows whether the connection is on. Choose **On** if it is off. Then start a new chat. |
 | AI says the tools are missing or Rhino is not reachable, though Rhino is open | The app had not linked the session to your computer yet. Make sure the Claude desktop app is open on the computer running Rhino, then reply “check computer status and retry” (Claude: start it with `/nextra-rhinogh`). ChatGPT: make sure you are in **Work**, not Chat. |
 | PackageManager or Nextra-RhinoGh not found | Try updating Rhino 8: **Help → Check for Updates**. Restart Rhino, then search again. |
-| No status dot in Rhino | Restart Rhino, then enable it with `NextraRhinoGh` → `On`. |
+| No Nexiy in Rhino | Restart Rhino, then enable the connection with `NextraRhinoGh` → `On`. Hidden? `NextraRhinoGh` → `Nexiy` → `Show`. |
 | “Transport closed” in Codex/ChatGPT | The app dropped its link to the plugin; retrying in the same chat won't help. Start a new chat (or restart the app); Rhino can stay open. |
-| Red dot | Click the dot to restart the connection. |
+| Nexiy is red | Click Nexiy, then **Restart server**. |
 | Multiple Rhino windows | Specify the file, for example “Use house.3dm.” |
 
 </details>
@@ -214,7 +221,7 @@ Keep Rhino 8 open first. In ChatGPT make sure the top toggle is on **Work**: the
 
 The Mac version is new. Everything above works the same, with these differences:
 
-- **Status dot:** the same as on Windows, but not yet confirmed on a real Mac. Type `NextraRhinoGh` any time to see the state on the command line.
+- **Nexiy and the assistant:** the same as on Windows (keys in the Keychain), but not yet confirmed on a real Mac. Type `NextraRhinoGh` any time to see the state on the command line.
 - **Dialogs.** If a Rhino dialog is open, the AI cannot see or close it. It may just wait. Answer the dialog in Rhino yourself.
 - **Your folder** is `~/Library/Application Support/NextraRhinoGh` (Windows: `%APPDATA%\NextraRhinoGh`). The `NextraRhinoGhFolder` command opens it in Finder.
 

@@ -626,15 +626,21 @@ namespace Nextra.Host
                 return;
             }
             _lastActivity = DateTime.Now;
-            ShowMenu();
+            bool setUp = false;
+            try { setUp = AssistantSettings.SetUp; } catch { }
+            if (setUp && CurrentLink() != Link.Down) AssistantPanel.Toggle();   // one click opens / closes the assistant
+            else ShowMenu();
         }
 
-        /// Click (left or right): the assistant (once set up), connection status, size, liveliness, hide.
+        /// Right click (or a left click before the assistant is set up): the assistant, connection status, size,
+        /// liveliness, speed, hide.
         void ShowMenu()
         {
             var menu = new ContextMenu();
             {     // always there: the panel itself walks the person through the setup (API key, CLI or desktop app)
-                var open = new ButtonMenuItem { Text = AssistantPanel.IsOpen ? "Close assistant" : "Open assistant" };
+                bool setUp = false;
+                try { setUp = AssistantSettings.SetUp; } catch { }
+                var open = new ButtonMenuItem { Text = AssistantPanel.IsOpen ? "Close assistant" : setUp ? "Open assistant" : "Set up the assistant…" };
                 open.Click += (s, e) => AssistantPanel.Toggle();
                 menu.Items.Add(open);
                 menu.Items.Add(new SeparatorMenuItem());

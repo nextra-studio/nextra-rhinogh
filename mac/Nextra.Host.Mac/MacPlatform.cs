@@ -27,6 +27,9 @@ namespace Nextra.Host
         /// Windows hands the drag to the system (WindowsQuirks.cs); on Mac the page moves the window by deltas (moveBy).
         public static bool SystemDrag(Eto.Forms.Window w, bool resize) => false;
 
+        /// Windows only: Rhino took Ctrl+C / V from WebView2 there. WKWebView gets Cmd+C / V through the menu as usual.
+        public static void KeepEditKeys(Eto.Forms.WebView web) { }
+
         [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.dylib")] static extern IntPtr sel_registerName(string name);
         [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")] static extern void SendBool(IntPtr receiver, IntPtr selector, bool value);
 

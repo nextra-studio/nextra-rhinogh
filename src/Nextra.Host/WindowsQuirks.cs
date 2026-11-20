@@ -106,6 +106,58 @@ namespace Nextra.Host
             catch { }
         }
 
+        [DllImport("user32.dll")] static extern short GetAsyncKeyState(int vk);
+        const System.Reflection.BindingFlags Any = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
+        static bool CtrlDown => (GetAsyncKeyState(0x11) & 0x8000) != 0;
+        static readonly uint[] EditKeys = { 0x43, 0x56, 0x58, 0x41, 0x5A, 0x59 };   // C V X A Z Y
+
+        /// Ctrl+C / V / X / A / Z / Y inside the assistant page are the page's own (copy, paste, cut, select all, undo, redo).
+        /// WebView2 hands Ctrl shortcuts to its host first, and Rhino takes them as its own Copy / Paste, so text never got
+        /// pasted. The page keeps these keys: WPF does not pass them on (PreviewKeyDown handled) and the browser runs them
+        /// (AcceleratorKeyPressed: Handled = false). Reflection, so the plug-in needs no WebView2 reference.
+        public static void KeepEditKeys(Eto.Forms.WebView web)
+        {
+            try
+            {
+                if (!(web.ControlObject is System.Windows.UIElement el)) return;
+                bool IsEdit(uint vk) => CtrlDown && Array.IndexOf(EditKeys, vk) >= 0;
+                el.PreviewKeyDown += (s, e) =>
+                {
+                    var vk = (uint)System.Windows.Input.KeyInterop.VirtualKeyFromKey(e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
+                    if (IsEdit(vk)) e.Handled = true;
+                };
+                void Hook()
+                {
+                    var ctl = el.GetType().GetProperty("CoreWebView2Controller", Any)?.GetValue(el);
+                    var ev = ctl?.GetType().GetEvent("AcceleratorKeyPressed");
+                    if (ev == null) return;
+                    var mi = typeof(PlatformQuirks).GetMethod(nameof(OnAccelerator), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+                    ev.AddEventHandler(ctl, Delegate.CreateDelegate(ev.EventHandlerType, mi));
+                }
+                // the controller (a non-public property of the WPF WebView2) exists once WebView2 has started
+                if (el.GetType().GetProperty("CoreWebView2Controller", Any)?.GetValue(el) != null) Hook();
+                else
+                {
+                    var init = el.GetType().GetEvent("CoreWebView2InitializationCompleted");
+                    EventHandler done = null;
+                    done = (s, e) => { try { Hook(); } catch { } };
+                    if (init != null) init.AddEventHandler(el, Delegate.CreateDelegate(init.EventHandlerType, done.Target, done.Method));
+                }
+            }
+            catch { }
+        }
+
+        static void OnAccelerator(object sender, EventArgs e)
+        {
+            try
+            {
+                var t = e.GetType();
+                var vk = Convert.ToUInt32(t.GetProperty("VirtualKey")?.GetValue(e) ?? 0u);
+                if (CtrlDown && Array.IndexOf(EditKeys, vk) >= 0) t.GetProperty("Handled")?.SetValue(e, false);
+            }
+            catch { }
+        }
+
         public static void AfterShow(Eto.Forms.Window w)
         {
             try
