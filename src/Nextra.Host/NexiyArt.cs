@@ -140,9 +140,18 @@ namespace Nextra.Host
                     break;
                 }
                 case NexiyProp.Snack:
-                    Circle(g, Color.FromArgb(0xd9, 0xa0, 0x4f), 36, 60, 6);
-                    if (detail) { g.FillEllipse(Color.FromArgb(0x6b, 0x3d, 0x1a), 33, 57, 2, 2); g.FillEllipse(Color.FromArgb(0x6b, 0x3d, 0x1a), 37, 60, 2, 2); }
+                {
+                    // a piece of salmon nigiri, lifted to the mouth for each bite (rice, salmon with white stripes, nori band)
+                    float up = (float)Math.Max(0, Math.Sin(k.Phase * Math.PI * 2)) * 4;
+                    float y0 = 58 - up;
+                    g.FillRectangle(White, 25, y0 + 4, 22, 6);                                   // rice
+                    using (var p = new Pen(Ink, 1.2f)) g.DrawRectangle(p, 25, y0 + 4, 22, 6);
+                    g.FillRectangle(Color.FromArgb(0xff, 0x8a, 0x5b), 24, y0, 24, 5);          // salmon
+                    using (var p = new Pen(Ink, 1.2f)) g.DrawRectangle(p, 24, y0, 24, 5);
+                    if (detail) using (var p = new Pen(Color.FromArgb(0xff, 0xd8, 0xc4), 1.1f)) { g.DrawLine(p, 29, y0 + 1, 31, y0 + 4); g.DrawLine(p, 36, y0 + 1, 38, y0 + 4); g.DrawLine(p, 43, y0 + 1, 45, y0 + 4); }
+                    g.FillRectangle(Color.FromArgb(0x1f, 0x33, 0x27), 34, y0, 4, 10);            // nori
                     break;
+                }
                 case NexiyProp.Glasses:
                     using (var p = new Pen(Ink, 2)) { g.DrawEllipse(p, 16.8f, 34, 13, 13); g.DrawEllipse(p, 42.2f, 34, 13, 13); g.DrawLine(p, 29.8f, 40.5f, 42.2f, 40.5f); }
                     break;

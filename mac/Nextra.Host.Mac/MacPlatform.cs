@@ -71,6 +71,7 @@ namespace Nextra.Host
         public static void Foreground(Eto.Forms.Window w) { try { w.BringToFront(); } catch { } }
         public static System.Drawing.Point? CursorScreen() => null;
         public static bool EscDown() => false;
+        public static bool AppInFront() => Eto.Forms.Application.Instance.IsActive;
         public static void PlaceOn(Eto.Forms.Window w, System.Drawing.Rectangle r) { }
         public static byte[] CropPng(byte[] png, int x, int y, int w, int h) => null;
     }

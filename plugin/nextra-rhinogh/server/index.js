@@ -14,7 +14,7 @@ const APPDIR = path.join(process.env.APPDATA || (process.platform === "darwin"
   ? path.join(require("os").homedir(), "Library", "Application Support")
   : path.join(require("os").homedir(), ".config")), "NextraRhinoGh");
 const MODE = (process.env.NEXTRA_MODE || "full").toLowerCase();
-const VERSION = "0.2.1";
+const VERSION = "0.2.2";
 
 const TOOLS = [
   {

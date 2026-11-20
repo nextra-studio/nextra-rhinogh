@@ -202,7 +202,7 @@ namespace Nextra.Host
             if (_hidden || _owner.WindowState == WindowState.Minimized) { if (Visible) Visible = false; return; }
             if (!Visible) Visible = true;
             KeepSize();
-            bool active = Application.Instance.IsActive;     // Rhino (or its GH editor) is the app in front
+            bool active = PlatformQuirks.AppInFront();     // Rhino (or its GH editor) is the window in front, not another program
             if (Topmost != active) Topmost = active;
             if (_roaming || _blend > 0) return;
             var p = Home();

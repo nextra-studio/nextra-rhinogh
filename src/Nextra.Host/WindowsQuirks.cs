@@ -211,6 +211,15 @@ namespace Nextra.Host
             try { var h = w.NativeHandle; if (h != IntPtr.Zero) Physical(() => SetWindowPos(h, new IntPtr(-1) /* topmost */, r.X, r.Y, r.Width, r.Height, 0x0040 /* show */)); } catch { }
         }
 
+        [DllImport("user32.dll", EntryPoint = "GetWindowThreadProcessId")] static extern uint WindowProcess(IntPtr h, out uint pid);
+        /// a window of Rhino (the main window, Grasshopper, a panel) is the one in front: Nexiy floats on top only then, never
+        /// over other programs
+        public static bool AppInFront()
+        {
+            try { var fg = GetForegroundWindow(); if (fg == IntPtr.Zero) return false; WindowProcess(fg, out var pid); return pid == (uint)Environment.ProcessId; }
+            catch { return Eto.Forms.Application.Instance.IsActive; }
+        }
+
         /// Esc held down, wherever the keyboard focus is (the snip overlay may not get it when another program had the front)
         public static bool EscDown() => (GetAsyncKeyState(0x1B) & 0x8000) != 0;
 
